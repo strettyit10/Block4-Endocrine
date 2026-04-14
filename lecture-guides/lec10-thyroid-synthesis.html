@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 10 - Thyroid Hormone Synthesis and Action</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f8f9fa;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 220px;
+            background: #0f172a;
+            color: #e5e7eb;
+            padding: 20px 15px;
+            overflow-y: auto;
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            border-right: 3px solid #7c3aed;
+        }
+
+        .sidebar h2 {
+            font-size: 14px;
+            margin-bottom: 15px;
+            color: #7c3aed;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin: 8px 0;
+        }
+
+        .sidebar-nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 13px;
+            display: block;
+            padding: 8px 10px;
+            border-radius: 4px;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            background: rgba(124, 58, 237, 0.15);
+            color: #7c3aed;
+            border-left-color: #7c3aed;
+            padding-left: 14px;
+        }
+
+        .main-content {
+            margin-left: 220px;
+            flex: 1;
+            overflow-y: auto;
+            padding: 40px;
+            max-width: 1200px;
+        }
+
+        .header {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #7c3aed;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            color: #7c3aed;
+            margin-bottom: 10px;
+        }
+
+        .header .meta {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .lo-section {
+            background: white;
+            border-left: 5px solid #7c3aed;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .lo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            padding: 10px;
+            margin: -10px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .lo-header:hover {
+            background: #f3f4f6;
+        }
+
+        .lo-header h2 {
+            font-size: 20px;
+            color: #7c3aed;
+            margin-bottom: 0;
+        }
+
+        .lo-header .toggle-icon {
+            font-size: 20px;
+            transition: transform 0.3s;
+            color: #7c3aed;
+        }
+
+        .lo-section.collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+
+        .lo-content {
+            display: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .lo-section:not(.collapsed) .lo-content {
+            display: block;
+        }
+
+        .lo-summary-box {
+            background: #f0f4ff;
+            border-left: 4px solid #7c3aed;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .lo-summary-box strong {
+            color: #7c3aed;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .lo-summary-box .tag {
+            display: inline-block;
+            margin-right: 10px;
+            margin-bottom: 8px;
+            padding: 3px 8px;
+            background: white;
+            border: 1px solid #7c3aed;
+            border-radius: 3px;
+            font-size: 12px;
+            color: #7c3aed;
+        }
+
+        .content-text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #374151;
+            margin: 15px 0;
+        }
+
+        .content-list {
+            margin: 15px 0 15px 20px;
+            font-size: 15px;
+        }
+
+        .content-list li {
+            margin: 10px 0;
+            color: #374151;
+        }
+
+        .flip-card {
+            background: #fff;
+            border: 2px solid #7c3aed;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .flip-card:hover {
+            background: #f8f6ff;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+        }
+
+        .flip-card.flipped {
+            background: #f0f4ff;
+        }
+
+        .flip-card-inner {
+            width: 100%;
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+            font-weight: 600;
+            color: #7c3aed;
+        }
+
+        .flip-card-front {
+            display: block;
+        }
+
+        .flip-card.flipped .flip-card-front {
+            display: none;
+        }
+
+        .flip-card-back {
+            display: none;
+            font-size: 14px;
+            color: #374151;
+            font-weight: 400;
+        }
+
+        .flip-card.flipped .flip-card-back {
+            display: block;
+        }
+
+        .mnemonic-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            font-size: 15px;
+            color: #92400e;
+        }
+
+        .mnemonic-box strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #b45309;
+        }
+
+        .mcq-section {
+            background: white;
+            border: 2px solid #7c3aed;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .mcq-section h2 {
+            color: #7c3aed;
+            margin-bottom: 25px;
+            font-size: 22px;
+        }
+
+        .mcq-question {
+            background: #f9fafb;
+            border-left: 4px solid #7c3aed;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+
+        .mcq-q-number {
+            font-weight: 700;
+            color: #7c3aed;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .mcq-q-stem {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #1f2937;
+            font-size: 15px;
+        }
+
+        .mcq-options {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .mcq-options li {
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 4px;
+            background: white;
+            border: 1px solid #d1d5db;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .mcq-options li:hover {
+            background: #f0f4ff;
+            border-color: #7c3aed;
+        }
+
+        .mcq-reveal-btn {
+            background: #7c3aed;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.3s;
+            margin-top: 15px;
+        }
+
+        .mcq-reveal-btn:hover {
+            background: #6d28d9;
+        }
+
+        .mcq-answer {
+            display: none;
+            background: #d1fae5;
+            border-left: 4px solid #10b981;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #065f46;
+        }
+
+        .mcq-answer.revealed {
+            display: block;
+        }
+
+        .mcq-answer strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #047857;
+        }
+
+        .checkbox-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .checkbox-list li {
+            margin: 12px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .checkbox-list input[type="checkbox"] {
+            margin-right: 12px;
+            margin-top: 2px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #7c3aed;
+        }
+
+        .checkbox-list label {
+            cursor: pointer;
+            flex: 1;
+            font-size: 15px;
+            color: #374151;
+        }
+
+        .checkbox-list input[type="checkbox"]:checked + label {
+            color: #9ca3af;
+            text-decoration: line-through;
+        }
+
+        .mindmap-container {
+            background: white;
+            border: 2px solid #7c3aed;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .mindmap-container h3 {
+            color: #7c3aed;
+            margin-bottom: 20px;
+        }
+
+        .mindmap-svg {
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #7c3aed;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+            z-index: 100;
+        }
+
+        .scroll-to-top:hover {
+            background: #6d28d9;
+            transform: translateY(-5px);
+        }
+
+        .scroll-to-top.visible {
+            display: flex;
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 180px;
+            }
+
+            .main-content {
+                margin-left: 180px;
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 150px;
+                padding: 15px 10px;
+            }
+
+            .sidebar h2 {
+                font-size: 12px;
+            }
+
+            .sidebar-nav a {
+                font-size: 12px;
+                padding: 6px 8px;
+            }
+
+            .main-content {
+                margin-left: 150px;
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .lo-section {
+                padding: 15px;
+            }
+
+            .lo-header h2 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <h2>Lecture 10</h2>
+            <ul class="sidebar-nav">
+                <li><a href="#lo1" class="nav-link">LO1: Anatomy</a></li>
+                <li><a href="#lo2" class="nav-link">LO2: Synthesis</a></li>
+                <li><a href="#lo3" class="nav-link">LO3: Transport</a></li>
+                <li><a href="#lo4" class="nav-link">LO4: Mechanism</a></li>
+                <li><a href="#lo5" class="nav-link">LO5: Development</a></li>
+                <li><a href="#lo6" class="nav-link">LO6: Iodine</a></li>
+                <li><a href="#mindmap" class="nav-link">Mind Map</a></li>
+                <li><a href="#mcqs" class="nav-link">Practice MCQs</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <h1>Lecture 10: Thyroid Hormone Synthesis and Action</h1>
+                <div class="meta">
+                    <strong>Subject:</strong> Biochemistry | <strong>Color:</strong> Purple | <strong>Level:</strong> USMLE Step 1
+                </div>
+            </div>
+
+            <!-- LO1: Thyroid Anatomy & Histology -->
+            <div class="lo-section" id="lo1">
+                <div class="lo-header">
+                    <h2>LO1: Thyroid Anatomy & Histology</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="lo-content">
+                    <div class="content-text">
+                        The thyroid is the <strong>largest endocrine gland</strong> in the human body. Structurally, it consists of two lobes connected by an isthmus, giving it a characteristic butterfly shape. Understanding thyroid anatomy is essential for both physiology and clinical medicine.
+                    </div>
+
+                    <ul class="content-list">
+                        <li><strong>Thyroid Structure:</strong> Butterfly-shaped gland with 2 lobes + isthmus; largest endocrine gland</li>
+                        <li><strong>Follicular Cells (Thyrocytes):</strong> Produce T3/T4; appear columnar when active (increased production), flat/cuboidal when inactive (quiescent)</li>
+                        <li><strong>Colloid:</strong> Stored thyroglobulin in follicle lumen; PAS-positive due to carbohydrate content. Scalloping of colloid indicates active resorption</li>
+                        <li><strong>Parafollicular C Cells:</strong> Located between follicles; neural crest origin; produce CALCITONIN (not related to thyroid hormones T3/T4)</li>
+                        <li><strong>Thyroglossal Duct Cyst:</strong> Midline neck mass; moves with swallowing AND tongue protrusion (classic exam finding); embryologic remnant</li>
+                        <li><strong>Recurrent Laryngeal Nerve:</strong> Runs in tracheoesophageal groove; at risk during thyroidectomy → injury causes hoarseness/voice changes</li>
+                        <li><strong>Parathyroids:</strong> Four small glands embedded in posterior thyroid capsule; MUST be preserved during thyroid surgery</li>
+                    </ul>
+
+                    <div class="lo-summary-box">
+                        <strong>🎯 Tested Concepts:</strong>
+                        <div class="tag">Follicular cell morphology = activity level</div>
+                        <div class="tag">Thyroglossal duct midline + movement</div>
+                        <div class="tag">Recurrent laryngeal nerve risk</div>
+                        <br>
+                        <strong>⚠️ Common Traps:</strong>
+                        <div class="tag">C cells → Calcitonin (NOT T3/T4)</div>
+                        <div class="tag">Parathyroid preservation in surgery</div>
+                    </div>
+
+                    <div class="flip-card" data-card="1">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">Click to reveal: What defines an "active" follicular cell on histology?</div>
+                            <div class="flip-card-back">Columnar morphology + presence of scalloped colloid (indicating active resorption). Inactive cells are flat/cuboidal with smooth colloid margins.</div>
+                        </div>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        <strong>Anatomy Mnemonic: "FLAT vs TALL"</strong>
+                        Inactive = FLAT cells; Active = TALL (columnar) cells. Colloid scalloping = active resorption happening.
+                    </div>
+                </div>
+            </div>
+
+            <!-- LO2: Thyroid Hormone Synthesis -->
+            <div class="lo-section" id="lo2">
+                <div class="lo-header">
+                    <h2>LO2: Thyroid Hormone Synthesis (Step-by-Step)</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="lo-content">
+                    <div class="content-text">
+                        Thyroid hormone synthesis is a highly regulated, multi-step process. <strong>T4 is the prohormone; T3 is the active form; rT3 is inactive.</strong> Each step can be targeted by different drugs.
+                    </div>
+
+                    <ol class="content-list">
+                        <li><strong>NIS (Na/I Symporter):</strong> Basolateral membrane; actively transports I⁻ INTO thyroid cell. Inhibited by perchlorate and thiocyanate (competitive antagonists). Rate-limiting step.</li>
+                        <li><strong>Pendrin (Apical Transporter):</strong> Moves I⁻ from intracellular space to follicle lumen</li>
+                        <li><strong>TPO (Thyroid Peroxidase) + H₂O₂:</strong> Oxidizes I⁻ to reactive form</li>
+                        <li><strong>Organification:</strong> TPO attaches iodine to tyrosine residues on thyroglobulin → MIT (mono-iodotyrosine) + DIT (di-iodotyrosine). Hypothyroidism from iodine deficiency or TPO deficiency presents with goiter due to ↑ TSH.</li>
+                        <li><strong>Coupling (Condensation):</strong> TPO couples organified residues: MIT+DIT→T3 (or DIT+DIT→T4). Stored in colloid</li>
+                        <li><strong>Storage:</strong> Thyroglobulin + T3/T4 stored in colloid lumen</li>
+                        <li><strong>TSH-Stimulated Release:</strong> TSH → endocytosis of colloid droplets into cell; lysosomal enzymes cleave thyroglobulin → T3/T4 released into bloodstream</li>
+                        <li><strong>Peripheral Conversion:</strong> T4 → T3 by 5'-deiodinase (Type 1: liver, kidney; Type 2: pituitary, brain). This is why T4 is prodrug—must be converted to active T3</li>
+                    </ol>
+
+                    <div class="lo-summary-box">
+                        <strong>🎯 Tested Concepts:</strong>
+                        <div class="tag">NIS = rate-limiting step</div>
+                        <div class="tag">TPO organifies + couples</div>
+                        <div class="tag">T4 = prohormone; T3 = active</div>
+                        <div class="tag">Peripheral conversion in liver</div>
+                        <br>
+                        <strong>⚠️ Common Traps:</strong>
+                        <div class="tag">rT3 is INACTIVE (not just "different")</div>
+                        <div class="tag">PTU blocks TPO AND peripheral conversion</div>
+                        <div class="tag">Methimazole blocks TPO only</div>
+                    </div>
+
+                    <div class="flip-card" data-card="2">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">Which drug blocks BOTH thyroid synthesis AND peripheral T4→T3 conversion?</div>
+                            <div class="flip-card-back">PTU (propylthiouracil). Methimazole only blocks TPO (thyroid synthesis). This makes PTU preferred in thyroid storm.</div>
+                        </div>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        <strong>Synthesis Mnemonic: "NIS Takes, Pendrin Pushes, TPO Oxidizes-Organifies-Couples, Store-Secrete-Convert"</strong>
+                        1) NIS brings I⁻ in (rate-limiting)
+                        2) Pendrin pushes to lumen
+                        3) TPO oxidizes, organifies (adds to tyrosine), couples (MIT+DIT)
+                        4) Stored in colloid as thyroglobulin
+                        5) Endocytosis + lysosomal cleavage releases T3/T4
+                        6) Peripheral conversion (liver/kidney)
+                    </div>
+
+                    <div class="flip-card" data-card="3">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">What is Wolff-Chaikoff Effect?</div>
+                            <div class="flip-card-back">Acute exposure to large iodine dose → transient DECREASE in thyroid hormone organification (TPO inhibition). "Escape" occurs in 1-2 weeks as cells adapt. Used pre-operatively to suppress hormone release (Lugol's solution, SSKI) but must give antithyroid drug first.</div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card" data-card="4">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">What is Jod-Basedow Phenomenon?</div>
+                            <div class="flip-card-back">Iodine excess given to patient with autonomous thyroid tissue (e.g., nodule, Graves, amiodarone) → results in HYPERTHYROIDISM. Opposite of Wolff-Chaikoff (which is hypothyroidism). The autonomous tissue produces MORE hormone when given substrate (iodine).</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LO3: Thyroid Hormone Transport -->
+            <div class="lo-section" id="lo3">
+                <div class="lo-header">
+                    <h2>LO3: Thyroid Hormone Transport</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="lo-content">
+                    <div class="content-text">
+                        Thyroid hormones are <strong>lipophilic</strong> and cannot travel freely in blood. They require carrier proteins. Only the FREE (unbound) hormone is biologically active.
+                    </div>
+
+                    <ul class="content-list">
+                        <li><strong>TBG (Thyroxine-Binding Globulin):</strong> ~70-75% of total T4 binding; main carrier. HIGH affinity but limited capacity</li>
+                        <li><strong>Transthyretin (TTR):</strong> ~15% of binding; also binds retinol-binding protein</li>
+                        <li><strong>Albumin:</strong> ~10% of binding; lowest affinity but high capacity</li>
+                        <li><strong>Free Hormone = Active:</strong> FT4 ~0.03% of total T4; FT3 ~0.3% of total T3. Only free hormone enters cells</li>
+                    </ul>
+
+                    <div class="content-text">
+                        <strong>KEY PATHOLOGY: TBG Changes ↑ Total T4 but NOT FT4</strong>
+                    </div>
+
+                    <div class="flip-card" data-card="5">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">A pregnant woman at 8 weeks has: Total T4 HIGH, FT4 normal, TSH normal. What is happening?</div>
+                            <div class="flip-card-back">Estrogen from pregnancy increases TBG production. More hormone is bound, so total T4 rises, but free T4 (the active form) remains normal. TSH is normal because the pituitary senses FREE hormone. She is EUTHYROID (clinically normal). This is the classic trap.</div>
+                        </div>
+                    </div>
+
+                    <ul class="content-list">
+                        <li><strong>TBG Increases (↑ Total T4, normal FT4, euthyroid):</strong>
+                            <ul style="margin-top: 10px;">
+                                <li>Estrogen (pregnancy, OCPs, HRT)</li>
+                                <li>Acute hepatitis</li>
+                                <li>Tamoxifen</li>
+                            </ul>
+                        </li>
+                        <li><strong>TBG Decreases (↓ Total T4, normal FT4, euthyroid):</strong>
+                            <ul style="margin-top: 10px;">
+                                <li>Androgens</li>
+                                <li>Glucocorticoids</li>
+                                <li>Nephrotic syndrome (protein loss)</li>
+                                <li>Liver failure</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div class="lo-summary-box">
+                        <strong>🎯 Tested Concepts:</strong>
+                        <div class="tag">TBG = main carrier protein</div>
+                        <div class="tag">Only FREE hormone is active</div>
+                        <div class="tag">TBG ↑ by estrogen/pregnancy</div>
+                        <br>
+                        <strong>⚠️ Common Traps:</strong>
+                        <div class="tag">HIGH total T4 with normal FT4 = euthyroid, NOT hyperthyroid</div>
+                        <div class="tag">Must use FREE hormone levels in pregnancy</div>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        <strong>Transport Mnemonic: "TBG is BIG, TBG changes = Total changes (not Free)"</strong>
+                        TBG binds ~70-75% of hormone. When TBG changes, total T4 changes proportionally, but FREE T4 stays normal (patient is euthyroid). This is why pregnant women can have high total T4 but be perfectly healthy.
+                    </div>
+                </div>
+            </div>
+
+            <!-- LO4: Thyroid Hormone Mechanism of Action -->
+            <div class="lo-section" id="lo4">
+                <div class="lo-header">
+                    <h2>LO4: Thyroid Hormone Mechanism of Action</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="lo-content">
+                    <div class="content-text">
+                        <strong>T3 is the active form at the cellular level.</strong> It binds nuclear thyroid hormone receptors (TR), which are ligand-activated transcription factors. T3-TR complexes regulate gene expression, leading to the characteristic "turbo-charged" effects of thyroid hormone.
+                    </div>
+
+                    <ul class="content-list">
+                        <li><strong>Nuclear Receptors:</strong> TRα (heart, bone, brain) and TRβ (liver, pituitary). Both bind T3</li>
+                        <li><strong>Mechanism:</strong> T3 binds TR → forms heterodimer with RXR → binds TRE (thyroid hormone response element) on gene promoters</li>
+                        <li><strong>Without T3:</strong> Co-repressor proteins silence genes (chromatin condensed)</li>
+                        <li><strong>With T3:</strong> Co-activator proteins recruited → gene transcription (chromatin open)</li>
+                    </ul>
+
+                    <div class="content-text">
+                        <strong>METABOLIC EFFECTS ("T3 = TURBOCHARGER: everything Up")</strong>
+                    </div>
+
+                    <ul class="content-list">
+                        <li><strong>Basal Metabolic Rate (BMR):</strong> ↑ O₂ consumption, ↑ cellular respiration</li>
+                        <li><strong>Thermogenesis:</strong> ↑ Na/K-ATPase activity (ATP consumer), ↑ UCP-1 (mitochondrial uncoupling proteins in brown adipose tissue) → heat production</li>
+                        <li><strong>Cardiovascular:</strong> ↑ HR, ↑ contractility (↑ β1-adrenergic receptors), ↓ SVR → widened pulse pressure. Hyperthyroid: tachycardia, palpitations. Hypothyroid: bradycardia, decreased contractility</li>
+                        <li><strong>GI Motility:</strong> ↑ (hyperthyroid → diarrhea; hypothyroid → constipation)</li>
+                        <li><strong>Lipid Metabolism:</strong> ↑ LDL receptors on hepatocytes → ↓ LDL (hypothyroid → ↑ LDL, ↑ cholesterol)</li>
+                        <li><strong>Growth & Development:</strong> Synergizes with GH; required for GH receptor expression. T3 needed for normal skeletal growth</li>
+                        <li><strong>Neurological:</strong> ↑ alertness, anxiety, tremor (from ↑ catecholamine sensitivity)</li>
+                    </ul>
+
+                    <div class="lo-summary-box">
+                        <strong>🎯 Tested Concepts:</strong>
+                        <div class="tag">T3 (not T4) binds nuclear TR</div>
+                        <div class="tag">↑ BMR, ↑ O₂ consumption</div>
+                        <div class="tag">↑ HR, ↑ cardiac contractility</div>
+                        <div class="tag">↓ LDL via ↑ LDL receptors</div>
+                        <br>
+                        <strong>⚠️ Common Traps:</strong>
+                        <div class="tag">T4 is PRO-hormone; T3 is active</div>
+                        <div class="tag">Hypothyroid → ↑ cholesterol (fewer LDL receptors)</div>
+                        <div class="tag">Hyperthyroid tachycardia from T3, not from epinephrine</div>
+                    </div>
+
+                    <div class="flip-card" data-card="6">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">A patient on levothyroxine (T4 replacement) is clinically hypothyroid despite normal TSH. What might explain this?</div>
+                            <div class="flip-card-back">Impaired peripheral T4→T3 conversion (T4 is prohormone). Possible causes: Type 1 5'-deiodinase deficiency, amiodarone use, beta-blockers, propranolol, selenium deficiency, or systemic illness. May need T3 supplementation or switching to combination T4/T3.</div>
+                        </div>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        <strong>Action Mnemonic: "T3 TURBO = Thermogenesis, Up everything (HR, BMR), Responsive to stress, Bone loss (↑ turnover), Oxygen use"</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LO5: Thyroid Hormone in Development -->
+            <div class="lo-section" id="lo5">
+                <div class="lo-header">
+                    <h2>LO5: Thyroid Hormone in Development — Cretinism & Neonatal Screening</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="lo-content">
+                    <div class="content-text">
+                        Thyroid hormone is <strong>absolutely essential for fetal and neonatal brain development.</strong> Deficiency causes cretinism, the most preventable cause of intellectual disability worldwide. Neonatal screening catches most cases early.
+                    </div>
+
+                    <ul class="content-list">
+                        <li><strong>Fetal Development:</strong> Maternal T4 crosses placenta and is essential in first trimester. Fetal thyroid becomes functional ~12 weeks gestation. Critical for myelination, neuronal migration, synaptogenesis</li>
+                        <li><strong>Congenital Hypothyroidism (Most Common Cause of Preventable Intellectual Disability):</strong>
+                            <ul style="margin-top: 10px;">
+                                <li>Thyroid dysgenesis (~85%): agenesis, aplasia, ectopic thyroid</li>
+                                <li>Dyshormonogenesis: TPO deficiency, iodine deficiency, transport defects</li>
+                                <li>TSH receptor defects</li>
+                            </ul>
+                        </li>
+                        <li><strong>Paradoxical Finding:</strong> Newborns appear COMPLETELY NORMAL at birth (maternal T4 protected them in utero); symptoms appear over weeks to months</li>
+                        <li><strong>Clinical Features if Untreated (Cretinism):</strong>
+                            <ul style="margin-top: 10px;">
+                                <li>Intellectual disability (most devastating, irreversible if delayed treatment)</li>
+                                <li>Short stature (growth retardation)</li>
+                                <li>Coarse facies, puffy (myxedematous) appearance</li>
+                                <li>Macroglossia (enlarged tongue)</li>
+                                <li>Umbilical hernia (common in congenital hypothyroidism)</li>
+                                <li>Constipation</li>
+                                <li>Prolonged jaundice (↓ metabolism)</li>
+                                <li>Hoarse cry</li>
+                                <li>Developmental delay, hypotonia</li>
+                            </ul>
+                        </li>
+                        <li><strong>Neonatal Screening:</strong> TSH or T4 measured at 24-48 hours (heel prick). Early levothyroxine replacement → NORMAL neurodevelopment (100% preventable if caught early!)</li>
+                        <li><strong>Van Wyk-Grumbach Syndrome:</strong> PARADOXICAL precocious puberty in severe long-standing primary hypothyroidism. Mechanism: ↑↑ TSH (trying to stimulate thyroid) cross-reacts with FSH receptors → premature sexual development. Resolves with levothyroxine</li>
+                    </ul>
+
+                    <div class="lo-summary-box">
+                        <strong>🎯 Tested Concepts:</strong>
+                        <div class="tag">T3/T4 essential for brain development</div>
+                        <div class="tag">Newborns appear NORMAL at birth</div>
+                        <div class="tag">Intellectual disability = most devastating effect</div>
+                        <div class="tag">Van Wyk-Grumbach = TSH cross-reacts FSH</div>
+                        <br>
+                        <strong>⚠️ Common Traps:</strong>
+                        <div class="tag">Baby looks fine at birth ≠ no problem</div>
+                        <div class="tag">Neonatal screening is PREVENTIVE, not diagnostic</div>
+                        <div class="tag">Early levothyroxine = normal development</div>
+                    </div>
+
+                    <div class="flip-card" data-card="7">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">A newborn has congenital hypothyroidism detected on screening at 48h. Mom notices the baby looks perfectly healthy. Why?</div>
+                            <div class="flip-card-back">Maternal T4 crossed the placenta during pregnancy and protected fetal development. Newborn thyroid is non-functional but not yet showing effects. Symptoms (constipation, feeding difficulty, developmental delay) appear over weeks to months if untreated. Screening catches it EARLY—before irreversible brain damage occurs.</div>
+                        </div>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        <strong>Cretinism Mnemonic: "CRETINS = Cognitive delay, Retarded growth, Edema/Myxedema, Tongue (macro-), Intestinal constipation, Newborn screening (preventive!), Short stature"</strong>
+                    </div>
+
+                    <div class="flip-card" data-card="8">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">A 12-year-old with long-standing untreated hypothyroidism presents with breast development and pubic hair. TSH is >100. What syndrome is this?</div>
+                            <div class="flip-card-back">Van Wyk-Grumbach syndrome. The massively elevated TSH (trying to stimulate the non-functional thyroid) cross-reacts with FSH receptors on the ovaries/testes → precocious puberty. Paradoxically, it's TREATED by giving levothyroxine (which suppresses TSH), not by treating puberty. When TSH drops, FSH cross-activation stops.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LO6: Iodine Metabolism & Amiodarone -->
+            <div class="lo-section" id="lo6">
+                <div class="lo-header">
+                    <h2>LO6: Iodine Metabolism & Amiodarone Effects</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="lo-content">
+                    <div class="content-text">
+                        Iodine is an <strong>essential micronutrient</strong> for thyroid hormone synthesis. Its metabolism intersects with drug effects (especially amiodarone), creating complex clinical scenarios.
+                    </div>
+
+                    <ul class="content-list">
+                        <li><strong>Iodine Requirements:</strong>
+                            <ul style="margin-top: 10px;">
+                                <li>Adults: 150 μg/day</li>
+                                <li>Pregnancy: 220 μg/day</li>
+                                <li>Lactation: 290 μg/day</li>
+                            </ul>
+                        </li>
+                        <li><strong>Iodine Deficiency:</strong> Most common preventable cause of intellectual disability worldwide. Leads to goiter (↑ TSH → ↑ thyroid mass trying to compensate) + hypothyroidism</li>
+                        <li><strong>Wolff-Chaikoff Effect (HYPOTHYROID):</strong> Acute high-dose iodine (e.g., Lugol's solution, SSKI, contrast dye) → transient DECREASE in organification. TSH rises; goiter may form. "Escape" occurs in 1-2 weeks as cells adapt by decreasing NIS expression</li>
+                        <li><strong>Jod-Basedow (HYPERTHYROID):</strong> Iodine given to patient with autonomous thyroid tissue → ↑ hormone synthesis → hyperthyroidism. Risk factors: toxic nodule, Graves disease, amiodarone</li>
+                    </ul>
+
+                    <div class="content-text">
+                        <strong>AMIODARONE (37% iodine by weight; also T3/T4 analog)</strong>
+                    </div>
+
+                    <ul class="content-list">
+                        <li><strong>Amiodarone Effects on Thyroid:</strong>
+                            <ul style="margin-top: 10px;">
+                                <li>Blocks peripheral T4→T3 conversion (via 5'-deiodinase inhibition) → ↑ T4, ↑ rT3, ↓ T3. Patient may initially appear hypothyroid on labs but clinically euthyroid (because T4 is high)</li>
+                                <li>Provides massive exogenous iodine → Wolff-Chaikoff effect (inhibited organification, initially → low free T4 then escape)</li>
+                                <li>Acts as T3/T4 analog itself</li>
+                            </ul>
+                        </li>
+                        <li><strong>Amiodarone-Induced Thyroiditis (AIT) Type 1 (Jod-Basedow mechanism):</strong>
+                            <ul style="margin-top: 10px;">
+                                <li>Occurs in patients with pre-existing autonomous tissue (nodules, Graves)</li>
+                                <li>Iodine load → ↑ synthesis in autonomous tissue → HYPERTHYROIDISM</li>
+                                <li>Labs: ↑ T4, ↑ T3, ↓ TSH, often low uptake on iodine scan (iodine saturating thyroid)</li>
+                                <li>Treatment: PTU (blocks synthesis AND peripheral conversion)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Amiodarone-Induced Thyroiditis Type 2 (Destructive):</strong>
+                            <ul style="margin-top: 10px;">
+                                <li>Direct amiodarone toxicity → thyroiditis, follicular damage, hormone leakage</li>
+                                <li>Labs: ↑ T4, ↑ T3, ↑ ESR, ↑ CRP, low TSH, low iodine uptake</li>
+                                <li>Treatment: Glucocorticoids (suppress inflammation), not antithyroid drugs</li>
+                            </ul>
+                        </li>
+                        <li><strong>Amiodarone-Induced Hypothyroidism:</strong>
+                            <ul style="margin-top: 10px;">
+                                <li>Wolff-Chaikoff "escape" fails (impaired NIS downregulation)</li>
+                                <li>Amiodarone as T3 analog actually suppresses TSH (mimics thyroid hormone action)</li>
+                                <li>Labs: ↑ TSH, ↓ FT4</li>
+                                <li>Treatment: Levothyroxine replacement</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div class="lo-summary-box">
+                        <strong>🎯 Tested Concepts:</strong>
+                        <div class="tag">Iodine requirements vary by life stage</div>
+                        <div class="tag">Wolff-Chaikoff = transient (escape 1-2 wks)</div>
+                        <div class="tag">Jod-Basedow in autonomous tissue only</div>
+                        <div class="tag">Amiodarone = 37% iodine</div>
+                        <div class="tag">Amiodarone blocks T4→T3 conversion</div>
+                        <br>
+                        <strong>⚠️ Common Traps:</strong>
+                        <div class="tag">Amiodarone: ↑ T4 + ↓ T3 ≠ hypothyroid</div>
+                        <div class="tag">AIT Type 1 = PTU (blocks synthesis)</div>
+                        <div class="tag">AIT Type 2 = Steroids (suppresses inflammation)</div>
+                    </div>
+
+                    <div class="flip-card" data-card="9">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">A patient on amiodarone has TSH 0.5 (normal), T4 18 (high), T3 50 (low), rT3 high. Is the patient hypothyroid?</div>
+                            <div class="flip-card-back">NO. Amiodarone blocks peripheral T4→T3 conversion. The high T4 compensates for the low T3, and TSH is normal (pituitary senses adequate T3 levels via paracrine conversion). This is NOT hypothyroidism and does NOT require levothyroxine. If TSH rises to >5 mIU/L, then consider hypothyroidism.</div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card" data-card="10">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">What is the difference between Wolff-Chaikoff and Jod-Basedow?</div>
+                            <div class="flip-card-back">Wolff-Chaikoff: high-dose iodine → ↓ organification → HYPOthyroidism (transient, 1-2 weeks escape). Occurs in normal thyroid. Jod-Basedow: high-dose iodine in autonomous tissue (nodule, Graves) → ↑ synthesis → HYPERthyroidism (does NOT escape). Opposite effects!</div>
+                        </div>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        <strong>Iodine Mnemonic: "WAJA = Wolff-Chaikoff (transient hypothyroid), Jod-Basedow (persistent hyperthyroid in autonomous tissue)"</strong>
+                        "If thyroid is normal: Wolff-Chaikoff → escape in weeks. If thyroid is autonomous: Jod-Basedow → no escape."
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mind Map -->
+            <div class="mindmap-container" id="mindmap">
+                <h3>Thyroid Hormone Synthesis & Action — Mind Map</h3>
+                <svg class="mindmap-svg" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Central circle -->
+                    <circle cx="500" cy="300" r="60" fill="#7c3aed" opacity="0.2" stroke="#7c3aed" stroke-width="3"/>
+                    <text x="500" y="305" text-anchor="middle" font-weight="bold" font-size="14">THYROID HORMONE</text>
+
+                    <!-- Anatomy branch -->
+                    <line x1="440" y1="260" x2="200" y2="100" stroke="#7c3aed" stroke-width="2"/>
+                    <circle cx="200" cy="100" r="40" fill="#e0e7ff" stroke="#7c3aed" stroke-width="2"/>
+                    <text x="200" y="100" text-anchor="middle" font-size="12" font-weight="bold">Anatomy</text>
+                    <text x="200" y="115" text-anchor="middle" font-size="10">Follicles, C cells</text>
+
+                    <!-- Synthesis branch -->
+                    <line x1="500" y1="360" x2="500" y2="480" stroke="#7c3aed" stroke-width="2"/>
+                    <circle cx="500" cy="530" r="40" fill="#e0e7ff" stroke="#7c3aed" stroke-width="2"/>
+                    <text x="500" y="535" text-anchor="middle" font-size="12" font-weight="bold">Synthesis</text>
+                    <text x="500" y="550" text-anchor="middle" font-size="10">NIS→TPO→T4/T3</text>
+
+                    <!-- Transport branch -->
+                    <line x1="560" y1="260" x2="800" y2="100" stroke="#7c3aed" stroke-width="2"/>
+                    <circle cx="800" cy="100" r="40" fill="#e0e7ff" stroke="#7c3aed" stroke-width="2"/>
+                    <text x="800" y="100" text-anchor="middle" font-size="12" font-weight="bold">Transport</text>
+                    <text x="800" y="115" text-anchor="middle" font-size="10">TBG, Free hormone</text>
+
+                    <!-- Action branch -->
+                    <line x1="560" y1="340" x2="800" y2="500" stroke="#7c3aed" stroke-width="2"/>
+                    <circle cx="800" cy="530" r="40" fill="#e0e7ff" stroke="#7c3aed" stroke-width="2"/>
+                    <text x="800" y="535" text-anchor="middle" font-size="12" font-weight="bold">Action</text>
+                    <text x="800" y="550" text-anchor="middle" font-size="10">TR-RXR, Gene expr.</text>
+
+                    <!-- Development branch -->
+                    <line x1="440" y1="340" x2="200" y2="500" stroke="#7c3aed" stroke-width="2"/>
+                    <circle cx="200" cy="530" r="40" fill="#e0e7ff" stroke="#7c3aed" stroke-width="2"/>
+                    <text x="200" y="535" text-anchor="middle" font-size="12" font-weight="bold">Development</text>
+                    <text x="200" y="550" text-anchor="middle" font-size="10">Brain, cretinism</text>
+
+                    <!-- Iodine branch -->
+                    <line x1="520" y1="250" x2="650" y2="150" stroke="#7c3aed" stroke-width="2"/>
+                    <circle cx="700" cy="120" r="40" fill="#e0e7ff" stroke="#7c3aed" stroke-width="2"/>
+                    <text x="700" y="125" text-anchor="middle" font-size="12" font-weight="bold">Iodine</text>
+                    <text x="700" y="140" text-anchor="middle" font-size="10">WC, JB, Amiodarone</text>
+                </svg>
+            </div>
+
+            <!-- Practice MCQs -->
+            <div class="mcq-section" id="mcqs">
+                <h2>Practice MCQs (USMLE-Style)</h2>
+
+                <!-- MCQ 1 -->
+                <div class="mcq-question">
+                    <div class="mcq-q-number">Question 1</div>
+                    <div class="mcq-q-stem">A 32-year-old woman at 10 weeks of pregnancy presents for routine labs. Serum total T4 is 15.2 μg/dL (normal 4.5-11), serum TSH is 1.2 mIU/L (normal 0.4-4), and free T4 is 1.1 ng/dL (normal 0.8-1.8). Which of the following best explains these findings?</div>
+                    <ul class="mcq-options">
+                        <li>A) Graves disease with compensatory increase in TSH</li>
+                        <li>B) Increased TBG from pregnancy-induced estrogen elevation</li>
+                        <li>C) Primary hypothyroidism with elevated free T4</li>
+                        <li>D) Thyroiditis with hormone leakage into bloodstream</li>
+                        <li>E) Amiodarone-induced hypothyroidism</li>
+                    </ul>
+                    <button class="mcq-reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
+                    <div class="mcq-answer">
+                        <strong>Answer: B) Increased TBG from pregnancy-induced estrogen elevation</strong>
+                        Pregnancy increases estrogen → increases TBG production → more T4 binds to TBG → total T4 rises. However, FREE T4 and TSH remain normal because the pituitary responds to FREE hormone. The patient is EUTHYROID (clinically normal). This is the classic "pregnant woman with high total T4" trap—many students think this is hyperthyroidism, but it's not.
+                    </div>
+                </div>
+
+                <!-- MCQ 2 -->
+                <div class="mcq-question">
+                    <div class="mcq-q-number">Question 2</div>
+                    <div class="mcq-q-stem">A 45-year-old man with atrial fibrillation has been on amiodarone for 3 months. Current labs: TSH 0.8 mIU/L (normal), T4 18 μg/dL (high), T3 60 ng/dL (low), reverse T3 2.5 ng/dL (high). Which of the following mechanisms best explains the elevated T4 and low T3?</div>
+                    <ul class="mcq-options">
+                        <li>A) Primary hypothyroidism with compensatory TSH elevation</li>
+                        <li>B) Amiodarone-induced thyroiditis with hormone leakage</li>
+                        <li>C) Inhibition of peripheral T4→T3 conversion by amiodarone</li>
+                        <li>D) TSH-secreting pituitary tumor</li>
+                        <li>E) Iodine deficiency</li>
+                    </ul>
+                    <button class="mcq-reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
+                    <div class="mcq-answer">
+                        <strong>Answer: C) Inhibition of peripheral T4→T3 conversion by amiodarone</strong>
+                        Amiodarone (which is a T3/T4 analog and contains 37% iodine) inhibits 5'-deiodinase, the enzyme that converts T4→T3. This leads to ↑ T4, ↑ rT3, and ↓ T3. TSH is normal because the pituitary still has adequate thyroid hormone effect from the high T4. This is NOT hypothyroidism and does NOT require levothyroxine at this point. If TSH rises >5 mIU/L, then consider true amiodarone-induced hypothyroidism.
+                    </div>
+                </div>
+
+                <!-- MCQ 3 -->
+                <div class="mcq-question">
+                    <div class="mcq-q-number">Question 3</div>
+                    <div class="mcq-q-stem">A 28-year-old woman with Graves disease is being prepared for thyroidectomy. Which antithyroid drug should be given first BEFORE iodine (Lugol's solution) to prevent thyroid storm?</div>
+                    <ul class="mcq-options">
+                        <li>A) Levothyroxine</li>
+                        <li>B) Methimazole</li>
+                        <li>C) PTU (propylthiouracil)</li>
+                        <li>D) Levothyroxine followed by T3</li>
+                        <li>E) Calcium channel blocker</li>
+                    </ul>
+                    <button class="mcq-reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
+                    <div class="mcq-answer">
+                        <strong>Answer: C) PTU (propylthiouracil)</strong>
+                        PTU is the drug of choice pre-operatively because it (1) blocks thyroid hormone synthesis via TPO inhibition AND (2) blocks peripheral T4→T3 conversion. This dual action rapidly reduces circulating T3 (the active form) and prevents thyroid storm. Methimazole only blocks TPO, so if iodine is given first, it can increase hormone synthesis in autonomous tissue (Jod-Basedow phenomenon) and precipitate thyroid storm. Always give antithyroid drug BEFORE iodine.
+                    </div>
+                </div>
+
+                <!-- MCQ 4 -->
+                <div class="mcq-question">
+                    <div class="mcq-q-number">Question 4</div>
+                    <div class="mcq-q-stem">A 2-day-old newborn has a TSH of 48 mIU/L on neonatal screening. Further testing shows total T4 of 2.5 μg/dL (normal >7) and free T4 of 0.4 ng/dL (normal >0.7). The infant appears healthy with no obvious abnormalities. What is the most important clinical implication of delaying levothyroxine treatment?</div>
+                    <ul class="mcq-options">
+                        <li>A) Acute risk of thyroid storm</li>
+                        <li>B) Irreversible intellectual disability if treatment delayed >1-2 weeks</li>
+                        <li>C) Immediate cardiovascular collapse</li>
+                        <li>D) Permanent hoarseness from laryngeal nerve damage</li>
+                        <li>E) Neonatal jaundice will persist indefinitely</li>
+                    </ul>
+                    <button class="mcq-reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
+                    <div class="mcq-answer">
+                        <strong>Answer: B) Irreversible intellectual disability if treatment delayed >1-2 weeks</strong>
+                        This is congenital hypothyroidism (most likely thyroid dysgenesis). The infant appears NORMAL at birth because maternal T4 protected fetal development. However, T3/T4 are essential for postnatal brain myelination and neuronal maturation. Delaying levothyroxine > 1-2 weeks allows irreversible neuronal damage. Early treatment (within days) prevents intellectual disability entirely. This is why neonatal screening for congenital hypothyroidism is SO important—it's 100% preventable with early diagnosis and replacement.
+                    </div>
+                </div>
+
+                <!-- MCQ 5 -->
+                <div class="mcq-question">
+                    <div class="mcq-q-number">Question 5</div>
+                    <div class="mcq-q-stem">A 14-year-old boy with long-standing untreated congenital hypothyroidism presents with breast tissue enlargement and early pubic hair development. TSH is >150 mIU/L, total T4 is 1.8 μg/dL, and testosterone is elevated for age. Which syndrome explains the premature sexual development in this severely hypothyroid patient?</div>
+                    <ul class="mcq-options">
+                        <li>A) Klinefelter syndrome with secondary hypothyroidism</li>
+                        <li>B) Primary testicular failure causing elevated FSH</li>
+                        <li>C) Van Wyk-Grumbach syndrome (TSH cross-reactivity with FSH receptor)</li>
+                        <li>D) Ectopic hCG production from germ cell tumor</li>
+                        <li>E) Central precocious puberty from hypothalamic hamartoma</li>
+                    </ul>
+                    <button class="mcq-reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
+                    <div class="mcq-answer">
+                        <strong>Answer: C) Van Wyk-Grumbach syndrome (TSH cross-reactivity with FSH receptor)</strong>
+                        In severe primary hypothyroidism, the pituitary produces massive amounts of TSH (trying to stimulate the non-functional thyroid). TSH shares structural homology with FSH and can cross-react with FSH receptors on gonadal cells, stimulating gonadal development and sex hormone production. This paradoxical precocious puberty is treated by giving levothyroxine (which suppresses TSH), NOT by treating the puberty itself. Once TSH decreases, FSH cross-activation stops and puberty regresses.
+                    </div>
+                </div>
+
+                <!-- MCQ 6 -->
+                <div class="mcq-question">
+                    <div class="mcq-q-number">Question 6</div>
+                    <div class="mcq-q-stem">Thyroid hormone synthesis is inhibited by both methimazole and PTU, but PTU has an additional clinical advantage in which scenario?</div>
+                    <ul class="mcq-options">
+                        <li>A) Radioactive iodine ablation of Graves disease</li>
+                        <li>B) Thyroid storm management (blocks peripheral T4→T3 conversion)</li>
+                        <li>C) Postpartum thyroiditis</li>
+                        <li>D) Iodine-deficiency hypothyroidism</li>
+                        <li>E) Amiodarone-induced hyperthyroidism</li>
+                    </ul>
+                    <button class="mcq-reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
+                    <div class="mcq-answer">
+                        <strong>Answer: B) Thyroid storm management (blocks peripheral T4→T3 conversion)</strong>
+                        PTU inhibits both TPO (thyroid synthesis) AND 5'-deiodinase (peripheral T4→T3 conversion). In thyroid storm, rapid reduction of circulating T3 (the most active form) is critical. Methimazole only blocks TPO, so it doesn't reduce T3 as quickly. Additionally, in pre-surgical Graves patients, PTU is preferred because it combines synthesis inhibition with rapid T3 reduction, preventing thyroid storm when iodine is given post-operatively.
+                    </div>
+                </div>
+
+                <!-- MCQ 7 -->
+                <div class="mcq-question">
+                    <div class="mcq-q-number">Question 7</div>
+                    <div class="mcq-q-stem">A 55-year-old woman with hypothyroidism on levothyroxine replacement has a TSH of 2.1 mIU/L (goal range). However, she reports persistent fatigue, cold intolerance, and dry skin. What might explain her continued symptoms despite normal TSH?</div>
+                    <ul class="mcq-options">
+                        <li>A) Levothyroxine is ineffective and should be switched to T3</li>
+                        <li>B) Impaired peripheral T4→T3 conversion; consider combination T4/T3 therapy or assess for selenium deficiency, beta-blockers, or amiodarone</li>
+                        <li>C) Graves disease superimposed on Hashimoto thyroiditis</li>
+                        <li>D) Central hypothyroidism with pituitary insufficiency</li>
+                        <li>E) Patient non-adherence to levothyroxine</li>
+                    </ul>
+                    <button class="mcq-reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
+                    <div class="mcq-answer">
+                        <strong>Answer: B) Impaired peripheral T4→T3 conversion; consider combination T4/T3 therapy or assess for selenium deficiency, beta-blockers, or amiodarone</strong>
+                        T4 (levothyroxine) is a prohormone. It must be converted to T3 (the active form) peripherally via 5'-deiodinase, especially in tissues like liver, kidney, and pituitary. If conversion is impaired (selenium deficiency, propranolol/other beta-blockers, amiodarone, systemic illness, aging), the patient may have normal TSH but inadequate T3 effect and persistent hypothyroid symptoms. Some patients benefit from combination T4/T3 therapy (or T3 monotherapy in special cases). This is a common exam trap—TSH normal ≠ symptoms resolved.
+                    </div>
+                </div>
+
+                <!-- MCQ 8 -->
+                <div class="mcq-question">
+                    <div class="mcq-q-number">Question 8</div>
+                    <div class="mcq-q-stem">A patient with a toxic thyroid nodule is started on a large dose of iodine (Lugol's solution) to suppress hormone release. Over the first 3-5 days, the patient's symptoms of hyperthyroidism paradoxically WORSEN. Which of the following best explains this scenario?</div>
+                    <ul class="mcq-options">
+                        <li>A) Iodine allergy causing anaphylaxis</li>
+                        <li>B) Jod-Basedow phenomenon: iodine acts as a substrate for hormone synthesis in autonomous tissue</li>
+                        <li>C) Wolff-Chaikoff effect: iodine inhibits hormone synthesis, causing acute TSH surge</li>
+                        <li>D) Amiodarone-induced thyroiditis from iodine content</li>
+                        <li>E) Radiation thyroiditis from radioactive contaminants</li>
+                    </ul>
+                    <button class="mcq-reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
+                    <div class="mcq-answer">
+                        <strong>Answer: B) Jod-Basedow phenomenon: iodine acts as a substrate for hormone synthesis in autonomous tissue</strong>
+                        In a toxic nodule (autonomous tissue), giving iodine provides substrate for MORE hormone synthesis and release, causing acute hyperthyroidism exacerbation. This is called the Jod-Basedow phenomenon. To prevent this, an antithyroid drug (methimazole or PTU) should be given FIRST to block synthesis, then iodine can be safely given to suppress hormone release (via Wolff-Chaikoff effect). The Wolff-Chaikoff effect (transient synthesis inhibition) requires the thyroid to be unable to produce hormone; autonomous tissue ignores this inhibition and keeps synthesizing.
+                    </div>
+                </div>
+
+                <!-- MCQ 9 -->
+                <div class="mcq-question">
+                    <div class="mcq-q-number">Question 9</div>
+                    <div class="mcq-q-stem">A 68-year-old man on levothyroxine for primary hypothyroidism develops atrial fibrillation. Amiodarone is started. After 2 months on amiodarone, his TSH is 3.2 mIU/L (goal range 0.5-2.5 on levothyroxine), T4 is 14.5 μg/dL (above normal range), and T3 is 70 ng/dL (low). His heart rate is 62 bpm (normal), and he has no symptoms of hyperthyroidism. What is the most appropriate clinical action?</div>
+                    <ul class="mcq-options">
+                        <li>A) Increase levothyroxine dose to lower TSH further</li>
+                        <li>B) Start PTU to block amiodarone effects</li>
+                        <li>C) Continue current levothyroxine dose; this is expected amiodarone effect (blocks T4→T3 conversion)</li>
+                        <li>D) Switch to liothyronine (T3) monotherapy</li>
+                        <li>E) Discontinue amiodarone due to thyroid dysfunction</li>
+                    </ul>
+                    <button class="mcq-reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
+                    <div class="mcq-answer">
+                        <strong>Answer: C) Continue current levothyroxine dose; this is expected amiodarone effect (blocks T4→T3 conversion)</strong>
+                        Amiodarone inhibits 5'-deiodinase → blocks T4→T3 conversion → ↑ T4, ↓ T3, ↑ rT3. This is an EXPECTED pharmacodynamic effect, not hypothyroidism or hyperthyroidism. TSH is at goal (3.2 is acceptable). The patient is clinically euthyroid (normal heart rate, no symptoms). No intervention needed. If TSH were to rise >5 mIU/L with symptoms, then levothyroxine could be titrated up. This is a common clinical scenario with amiodarone that causes confusion—don't over-treat based on T3/T4 numbers alone.
+                    </div>
+                </div>
+
+                <!-- MCQ 10 -->
+                <div class="mcq-question">
+                    <div class="mcq-q-number">Question 10</div>
+                    <div class="mcq-q-stem">Which of the following correctly matches the cellular site of action for thyroid hormone mechanisms?</div>
+                    <ul class="mcq-options">
+                        <li>A) T4 binds thyroid hormone receptor on cell surface; T3 binds intracellular receptors</li>
+                        <li>B) T3 binds nuclear thyroid hormone receptors (TRα/TRβ) forming TR-RXR heterodimers on TRE promoter sequences</li>
+                        <li>C) Both T3 and T4 have equal affinity for nuclear receptors and are equally active</li>
+                        <li>D) T3 acts exclusively in mitochondria to increase ATP synthesis</li>
+                        <li>E) Thyroid hormone acts on cell surface receptors coupled to G-protein signaling</li>
+                    </ul>
+                    <button class="mcq-reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
+                    <div class="mcq-answer">
+                        <strong>Answer: B) T3 binds nuclear thyroid hormone receptors (TRα/TRβ) forming TR-RXR heterodimers on TRE promoter sequences</strong>
+                        T3 (not T4) is the physiologically active form at the cellular level. T3 binds nuclear thyroid hormone receptors (TRα in heart/bone/brain; TRβ in liver/pituitary) to form heterodimers with retinoid X receptor (RXR). This complex binds thyroid hormone response elements (TRE) on gene promoters, recruiting co-activators and driving gene transcription. Without T3, co-repressors keep genes silenced. T4 is a prohormone that must be converted to T3 peripherally (liver, kidney) via 5'-deiodinase. This is why T4 monotherapy works despite being "inactive"—it's converted to active T3.
+                    </div>
+                </div>
+
+                <!-- MCQ 11 -->
+                <div class="mcq-question">
+                    <div class="mcq-q-number">Question 11</div>
+                    <div class="mcq-q-stem">A 38-year-old woman with Hashimoto thyroiditis on levothyroxine presents to the clinic. She has been feeling well with TSH 1.5 mIU/L. However, her recent lipid panel shows LDL 185 mg/dL (elevated) and total cholesterol 320 mg/dL (elevated). She has no other risk factors for dyslipidemia. What is the most likely explanation for her elevated cholesterol?</div>
+                    <ul class="mcq-options">
+                        <li>A) Primary familial hypercholesterolemia unrelated to thyroid status</li>
+                        <li>B) Levothyroxine is not being absorbed due to celiac disease</li>
+                        <li>C) Her levothyroxine dose is too HIGH, causing hyperthyroidism</li>
+                        <li>D) Her levothyroxine dose is too LOW; she is still functionally hypothyroid with inadequate T3 levels, leading to decreased LDL receptors</li>
+                        <li>E) Medication interaction between levothyroxine and statin</li>
+                    </ul>
+                    <button class="mcq-reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
+                    <div class="mcq-answer">
+                        <strong>Answer: D) Her levothyroxine dose is too LOW; she is still functionally hypothyroid with inadequate T3 levels, leading to decreased LDL receptors</strong>
+                        T3 upregulates LDL receptors on hepatocytes → ↓ LDL (normal thyroid effect). In hypothyroidism (even mild/compensated with TSH in range), there is reduced T3 effect → fewer LDL receptors → ↑ LDL/cholesterol. This patient has TSH 1.5 (technically "normal" per lab range) but may benefit from slightly higher T4 replacement or combination T4/T3 to increase T3 effect. TSH "normal" does NOT always mean "optimal" symptomatically. Her lipid profile suggests inadequate thyroid hormone effect. Consider optimizing thyroid hormone replacement and rechecking lipids in 6-8 weeks before starting statins.
+                    </div>
+                </div>
+
+                <!-- MCQ 12 -->
+                <div class="mcq-question">
+                    <div class="mcq-q-number">Question 12</div>
+                    <div class="mcq-q-stem">A 52-year-old woman on levothyroxine 100 mcg daily for Hashimoto thyroiditis is started on phenobarbital for seizure management. Three months later, her TSH is elevated at 6.5 mIU/L (previously 2.0). Which mechanism explains the rise in TSH?</div>
+                    <ul class="mcq-options">
+                        <li>A) Phenobarbital competes for hepatic protein binding, increasing free T4 and suppressing TSH</li>
+                        <li>B) Phenobarbital induces hepatic metabolism of levothyroxine, decreasing bioavailability</li>
+                        <li>C) Phenobarbital inhibits thyroid peroxidase, reducing endogenous hormone synthesis</li>
+                        <li>D) Phenobarbital causes direct thyroid toxicity and gland atrophy</li>
+                        <li>E) Phenobarbital increases TBG production, causing compensatory TSH elevation</li>
+                    </ul>
+                    <button class="mcq-reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
+                    <div class="mcq-answer">
+                        <strong>Answer: B) Phenobarbital induces hepatic metabolism of levothyroxine, decreasing bioavailability</strong>
+                        Phenobarbital (and other hepatic enzyme inducers like rifampin, carbamazepine, St. John's Wort) increase metabolism and clearance of levothyroxine. This reduces circulating T4 → pituitary senses lower T4/T3 → increases TSH to compensate. Patients on both levothyroxine and enzyme inducers typically need higher doses of levothyroxine (can increase by 20-50%) and should have TSH monitored closely. This is a common drug interaction in neurology and psychiatry patients.
+                    </div>
+                </div>
+
+                <!-- MCQ 13 -->
+                <div class="mcq-question">
+                    <div class="mcq-q-number">Question 13</div>
+                    <div class="mcq-q-stem">A 16-year-old female with a history of inadequately treated hypothyroidism presents with secondary amenorrhea, delayed menarche, and short stature (3rd percentile). TSH is severely elevated at >100 mIU/L, and total T4 is 1.2 μg/dL (critically low). After reviewing her chart, you note she had normal growth and puberty until age 13, when compliance with levothyroxine became poor. What is the most important intervention for this patient?</div>
+                    <ul class="mcq-options">
+                        <li>A) Start estrogen/progesterone to induce menses</li>
+                        <li>B) Start growth hormone to increase height</li>
+                        <li>C) Initiate levothyroxine replacement and monitor TSH; thyroid hormone is essential for growth and pubertal progression</li>
+                        <li>D) Obtain MRI pituitary for central hypothyroidism</li>
+                        <li>E) Screen for eating disorder or anorexia nervosa</li>
+                    </ul>
+                    <button class="mcq-reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
+                    <div class="mcq-answer">
+                        <strong>Answer: C) Initiate levothyroxine replacement and monitor TSH; thyroid hormone is essential for growth and pubertal progression</strong>
+                        T3/T4 are essential for normal growth (synergizes with GH, required for GH receptor expression) and pubertal progression. Untreated primary hypothyroidism in adolescence → growth arrest and delayed/halted puberty. The solution is NOT to give estrogen, progesterone, or GH, but to replace the missing thyroid hormone. Once levothyroxine is started and TSH normalizes, growth and pubertal progression typically resume. This patient likely has secondary growth failure and secondary amenorrhea due to hypothyroidism, which are both reversible with hormone replacement.
+                    </div>
+                </div>
+
+                <!-- MCQ 14 -->
+                <div class="mcq-question">
+                    <div class="mcq-q-number">Question 14</div>
+                    <div class="mcq-q-stem">During thyroidectomy for Graves disease, the surgeon notes difficulty visualizing the inferior laryngeal nerve in the tracheoesophageal groove. Which structure should be preserved at all costs to avoid postoperative hoarseness?</div>
+                    <ul class="mcq-options">
+                        <li>A) Superior laryngeal nerve (external branch)</li>
+                        <li>B) Recurrent laryngeal nerve</li>
+                        <li>C) Vagus nerve trunk</li>
+                        <li>D) Phrenic nerve</li>
+                        <li>E) Hypoglossal nerve</li>
+                    </ul>
+                    <button class="mcq-reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
+                    <div class="mcq-answer">
+                        <strong>Answer: B) Recurrent laryngeal nerve</strong>
+                        The recurrent laryngeal nerve (a branch of the vagus nerve) runs in the tracheoesophageal groove alongside the thyroid gland. It innervates the intrinsic laryngeal muscles needed for phonation. Injury during thyroidectomy causes ipsilateral vocal cord paralysis → hoarseness, voice changes, and (if bilateral) airway compromise. The surgeon must carefully identify and preserve this nerve throughout the dissection. This is why thyroidectomy is a surgery requiring specialized training—the RLN is at constant risk.
+                    </div>
+                </div>
+
+                <!-- MCQ 15 -->
+                <div class="mcq-question">
+                    <div class="mcq-q-number">Question 15</div>
+                    <div class="mcq-q-stem">A patient with Graves disease is scheduled for thyroidectomy. Four weeks before surgery, the patient is started on methimazole. At the two-week pre-operative visit, the patient is switched to Lugol's solution (iodine) to suppress hormone release. What is the physiologic rationale for the sequence of medications?</div>
+                    <ul class="mcq-options">
+                        <li>A) Lugol's iodine should be given first because it works faster than methimazole</li>
+                        <li>B) Methimazole must be given first to block TPO and prevent synthesis; then iodine can be given (which works in days) to suppress pre-formed hormone release without causing Jod-Basedow</li>
+                        <li>C) Iodine and methimazole are interchangeable; order does not matter</li>
+                        <li>D) Lugol's iodine alone is sufficient; methimazole is unnecessary</li>
+                        <li>E) The sequence prevents iodine deficiency in the thyroid gland</li>
+                    </ul>
+                    <button class="mcq-reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
+                    <div class="mcq-answer">
+                        <strong>Answer: B) Methimazole must be given first to block TPO and prevent synthesis; then iodine can be given (which works in days) to suppress pre-formed hormone release without causing Jod-Basedow</strong>
+                        Methimazole blocks TPO → blocks new hormone synthesis. Once synthesis is blocked, the gland's autonomous function is suppressed, and iodine can be given. Iodine (via Wolff-Chaikoff effect) suppresses release of pre-formed hormone from colloid—this works in 24-48 hours (faster than methimazole's weeks-long effect). If iodine is given FIRST (before synthesis is blocked), the autonomous thyroid tissue will use iodine as substrate and paradoxically synthesize MORE hormone (Jod-Basedow), worsening hyperthyroidism and increasing risk of thyroid storm. Correct sequence: (1) methimazole/PTU for weeks, (2) iodine 10 days before surgery.
+                    </div>
+                </div>
+
+                <!-- MCQ 16 -->
+                <div class="mcq-question">
+                    <div class="mcq-q-number">Question 16</div>
+                    <div class="mcq-q-stem">A 7-year-old child with congenital hypothyroidism diagnosed on neonatal screening was treated with levothyroxine starting at age 3 days. He is now in school with normal height (50th percentile), normal intelligence (IQ 105), and normal pubertal development for age. What does this case demonstrate about congenital hypothyroidism?</div>
+                    <ul class="mcq-options">
+                        <li>A) Congenital hypothyroidism always causes severe disability if not treated</li>
+                        <li>B) Early neonatal diagnosis and levothyroxine replacement completely prevents the neurologic complications of congenital hypothyroidism</li>
+                        <li>C) Levothyroxine can reverse intellectual disability if started within the first year of life</li>
+                        <li>D) Congenital hypothyroidism does not affect brain development if the child is tall</li>
+                        <li>E) Neonatal screening is unnecessary because most infants with congenital hypothyroidism appear normal</li>
+                    </ul>
+                    <button class="mcq-reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
+                    <div class="mcq-answer">
+                        <strong>Answer: B) Early neonatal diagnosis and levothyroxine replacement completely prevents the neurologic complications of congenital hypothyroidism</strong>
+                        This is the key success story of neonatal screening. Congenital hypothyroidism (mostly thyroid dysgenesis) would cause cretinism (intellectual disability, short stature, developmental delay) if untreated. However, when diagnosed at 24-48 hours and levothyroxine is started immediately, the neurologic damage is completely prevented, and the child develops normally. This child's normal intelligence and growth prove the point: early diagnosis + early replacement = normal outcome. This is why congenital hypothyroidism screening is a cornerstone of neonatal medicine—it's 100% preventable.
+                    </div>
+                </div>
+
+                <!-- MCQ 17 -->
+                <div class="mcq-question">
+                    <div class="mcq-q-number">Question 17</div>
+                    <div class="mcq-q-stem">Which of the following drugs is MOST likely to cause amiodarone-induced thyroiditis Type 2 (destructive thyroiditis) as opposed to Type 1 (Jod-Basedow)?</div>
+                    <ul class="mcq-options">
+                        <li>A) Amiodarone in a patient with a toxic nodule</li>
+                        <li>B) Amiodarone in a patient with Graves disease</li>
+                        <li>C) Amiodarone in a patient with normal baseline thyroid function and no autonomous tissue</li>
+                        <li>D) Amiodarone combined with PTU</li>
+                        <li>E) Amiodarone combined with methimazole</li>
+                    </ul>
+                    <button class="mcq-reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
+                    <div class="mcq-answer">
+                        <strong>Answer: C) Amiodarone in a patient with normal baseline thyroid function and no autonomous tissue</strong>
+                        Amiodarone-induced thyroiditis Type 1 (Jod-Basedow) occurs when amiodarone is given to patients with PRE-EXISTING autonomous tissue (toxic nodule, Graves, toxic multinodular goiter). The iodine load acts as substrate for increased synthesis in autonomous tissue.
+
+                        Type 2 (destructive thyroiditis) occurs in patients with NORMAL baseline thyroid function. Amiodarone is directly toxic to normal thyroid follicles → inflammation, follicular destruction, hormone leakage → acute hyperthyroidism. Labs show ↑ T4, ↑ T3, high ESR, low iodine uptake. Treatment is glucocorticoids (suppress inflammation), NOT antithyroid drugs.
+
+                        Type 2 is basically amiodarone chemical thyroiditis—it can happen to anyone, but is more common in those with normal thyroid baseline.
+                    </div>
+                </div>
+
+                <!-- MCQ 18 -->
+                <div class="mcq-question">
+                    <div class="mcq-q-number">Question 18</div>
+                    <div class="mcq-q-stem">A newborn screening test returns elevated TSH and low T4. Confirmatory testing confirms congenital hypothyroidism. However, ultrasound shows the thyroid gland is PRESENT and of normal size. Which is the MOST common cause of congenital hypothyroidism in this clinical scenario?</div>
+                    <ul class="mcq-options">
+                        <li>A) Thyroid dysgenesis (agenesis/hypoplasia)</li>
+                        <li>B) Dyshormonogenesis (TPO deficiency, iodine deficiency, or organification defect)</li>
+                        <li>C) Central hypothyroidism from pituitary/hypothalamic disease</li>
+                        <li>D) Congenital iodine deficiency endemic goiter</li>
+                        <li>E) Maternal propylthiouracil use during pregnancy</li>
+                    </ul>
+                    <button class="mcq-reveal-btn" onclick="revealAnswer(this)">Reveal Answer</button>
+                    <div class="mcq-answer">
+                        <strong>Answer: B) Dyshormonogenesis (TPO deficiency, iodine deficiency, or organification defect)</strong>
+                        Thyroid dysgenesis (agenesis, hypoplasia, ectopic) accounts for ~85% of congenital hypothyroidism overall and typically presents with ABSENT or very small thyroid on ultrasound. This case describes a NORMAL-sized thyroid gland with elevated TSH and low T4, which indicates the gland is present but functionally impaired. This is dyshormonogenesis—the gland cannot properly synthesize hormones despite being morphologically present. Causes include TPO deficiency (enzyme missing), organification defects, iodine transporter defects, or iodine deficiency (if endemic). Dyshormonogenesis accounts for ~10-15% of congenital hypothyroidism, and this case is classic for it.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spacer for scroll to top button -->
+            <div style="height: 100px;"></div>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTopBtn" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // Initialize localStorage
+        const STORAGE_KEY = 'endo_lec10';
+
+        // Collapsible LO sections
+        document.querySelectorAll('.lo-header').forEach(header => {
+            header.addEventListener('click', function() {
+                const section = this.closest('.lo-section');
+                section.classList.toggle('collapsed');
+                saveState();
+            });
+        });
+
+        // Flip cards
+        document.querySelectorAll('.flip-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.classList.toggle('flipped');
+                saveState();
+            });
+        });
+
+        // MCQ reveal buttons
+        function revealAnswer(button) {
+            const answer = button.nextElementSibling;
+            answer.classList.toggle('revealed');
+            saveState();
+        }
+
+        // Checkbox tracking
+        document.querySelectorAll('.checkbox-list input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', saveState);
+        });
+
+        // Sidebar navigation
+        document.querySelectorAll('.sidebar-nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+                this.classList.add('active');
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Scroll to top button
+        window.addEventListener('scroll', function() {
+            const btn = document.getElementById('scrollToTopBtn');
+            if (window.pageYOffset > 300) {
+                btn.classList.add('visible');
+            } else {
+                btn.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // State management
+        function saveState() {
+            const state = {
+                collapsed: Array.from(document.querySelectorAll('.lo-section.collapsed')).map(el => el.id),
+                flipped: Array.from(document.querySelectorAll('.flip-card.flipped')).map((el, i) => i),
+                revealed: Array.from(document.querySelectorAll('.mcq-answer.revealed')).map((el, i) => i),
+                checked: Array.from(document.querySelectorAll('.checkbox-list input[type="checkbox"]:checked')).map((el, i) => i)
+            };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }
+
+        function loadState() {
+            const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+
+            // Restore collapsed sections
+            if (state.collapsed) {
+                state.collapsed.forEach(id => {
+                    const section = document.getElementById(id);
+                    if (section) section.classList.add('collapsed');
+                });
+            }
+
+            // Restore flipped cards
+            if (state.flipped) {
+                const cards = document.querySelectorAll('.flip-card');
+                state.flipped.forEach(i => {
+                    if (cards[i]) cards[i].classList.add('flipped');
+                });
+            }
+
+            // Restore revealed answers
+            if (state.revealed) {
+                const answers = document.querySelectorAll('.mcq-answer');
+                state.revealed.forEach(i => {
+                    if (answers[i]) answers[i].classList.add('revealed');
+                });
+            }
+
+            // Restore checked boxes
+            if (state.checked) {
+                const checkboxes = document.querySelectorAll('.checkbox-list input[type="checkbox"]');
+                state.checked.forEach(i => {
+                    if (checkboxes[i]) checkboxes[i].checked = true;
+                });
+            }
+        }
+
+        // Load state on page load
+        document.addEventListener('DOMContentLoaded', loadState);
+    </script>
+</body>
+</html>

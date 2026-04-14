@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEC 22: Stress Hormones - Study Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 200px;
+            background: #0f172a;
+            padding: 20px;
+            border-right: 2px solid #2563eb;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar h1 {
+            color: #2563eb;
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .sidebar p {
+            color: #94a3b8;
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .nav-tab {
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: #cbd5e1;
+            padding: 10px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav-tab:hover {
+            background: #2d3a4a;
+            border-color: #2563eb;
+        }
+
+        .nav-tab.active {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+
+        .content {
+            margin-left: 200px;
+            padding: 30px;
+            flex: 1;
+            max-width: 100%;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .section {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .section-header {
+            background: #2d3a4a;
+            padding: 15px;
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid #334155;
+        }
+
+        .section-header h3 {
+            color: #2563eb;
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .section-header::after {
+            content: '▼';
+            color: #2563eb;
+            font-size: 12px;
+            transition: transform 0.3s;
+        }
+
+        .section.collapsed .section-header::after {
+            transform: rotate(-90deg);
+        }
+
+        .section-body {
+            padding: 20px;
+            background: #eff6ff;
+            color: #1e293b;
+            max-height: 2000px;
+            overflow: hidden;
+            transition: max-height 0.3s, padding 0.3s;
+            border-left: 4px solid #2563eb;
+        }
+
+        .section.collapsed .section-body {
+            max-height: 0;
+            padding: 0 20px;
+        }
+
+        .section-body h4 {
+            color: #2563eb;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .section-body h4:first-child {
+            margin-top: 0;
+        }
+
+        .section-body p, .section-body li {
+            color: #1e293b;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .section-body ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .summary-box {
+            display: inline-block;
+            background: white;
+            border-left: 4px solid;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .summary-box.test {
+            border-color: #16a34a;
+            background: #f0fdf4;
+        }
+
+        .summary-box.test h5 {
+            color: #16a34a;
+        }
+
+        .summary-box.trap {
+            border-color: #dc2626;
+            background: #fef2f2;
+        }
+
+        .summary-box.trap h5 {
+            color: #dc2626;
+        }
+
+        .summary-box.highlight {
+            border-color: #ca8a04;
+            background: #fefce8;
+        }
+
+        .summary-box.highlight h5 {
+            color: #ca8a04;
+        }
+
+        .summary-box.memory {
+            border-color: #2563eb;
+            background: #eff6ff;
+        }
+
+        .summary-box.memory h5 {
+            color: #2563eb;
+        }
+
+        .summary-box h5 {
+            margin: 0 0 8px 0;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .summary-box p {
+            margin: 0;
+            font-size: 13px;
+            color: #1e293b;
+        }
+
+        .flip-card {
+            perspective: 1000px;
+            width: 100%;
+            height: 200px;
+            margin: 15px 0;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .flip-card-front {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+        }
+
+        .flip-card-back {
+            background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .mastery-checkbox {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: #2d3a4a;
+            border-radius: 6px;
+            margin: 8px 0;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .mastery-checkbox input[type="checkbox"] {
+            margin-right: 10px;
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+        }
+
+        .mastery-checkbox label {
+            color: #e2e8f0;
+            cursor: pointer;
+            flex: 1;
+            font-size: 13px;
+        }
+
+        .mastery-checkbox input[type="checkbox"]:checked + label {
+            color: #2563eb;
+            text-decoration: line-through;
+        }
+
+        .mcq-container {
+            background: #2d3a4a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .mcq-question {
+            color: #e2e8f0;
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .mcq-option {
+            background: #1e293b;
+            border: 1px solid #334155;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #cbd5e1;
+            font-size: 13px;
+        }
+
+        .mcq-option:hover {
+            background: #334155;
+            border-color: #2563eb;
+        }
+
+        .mcq-option input[type="radio"] {
+            margin-right: 8px;
+            cursor: pointer;
+        }
+
+        .mcq-answer {
+            display: none;
+            margin-top: 12px;
+            padding: 10px;
+            background: #0f172a;
+            border-left: 3px solid #2563eb;
+            border-radius: 4px;
+        }
+
+        .mcq-answer.show {
+            display: block;
+        }
+
+        .mcq-answer p {
+            color: #cbd5e1;
+            font-size: 13px;
+            margin: 0;
+        }
+
+        .mcq-answer strong {
+            color: #2563eb;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        table th {
+            background: #2563eb;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #e5e7eb;
+            color: #374151;
+            font-size: 13px;
+        }
+
+        table tr:hover {
+            background: #f3f4f6;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 2px solid #2563eb;
+            }
+
+            .content {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .nav-tabs {
+                flex-direction: row;
+                overflow-x: auto;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h1>LEC 22</h1>
+            <p>Stress Hormones</p>
+            <div class="nav-tabs">
+                <button class="nav-tab active" onclick="switchTab('lo1')">LO1</button>
+                <button class="nav-tab" onclick="switchTab('lo2')">LO2</button>
+                <button class="nav-tab" onclick="switchTab('lo3')">LO3</button>
+                <button class="nav-tab" onclick="switchTab('lo4')">LO4</button>
+                <button class="nav-tab" onclick="switchTab('lo5')">LO5</button>
+                <button class="nav-tab" onclick="switchTab('lo6')">LO6</button>
+                <button class="nav-tab" onclick="switchTab('practice')">Practice Qs</button>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- LO1: Fight-or-Flight Response -->
+            <div id="lo1" class="tab-content active">
+                <div class="section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h3>LO1: Fight-or-Flight Response & Acute Stress Physiology</h3>
+                    </div>
+                    <div class="section-body">
+                        <h4>Overview</h4>
+                        <p>The body mounts rapid hormonal responses to stress through two coordinated systems: the <strong>sympathetic nervous system (SNS)</strong> for immediate effects and the <strong>hypothalamic-pituitary-adrenal (HPA) axis</strong> for sustained responses.</p>
+
+                        <div class="summary-box memory">
+                            <h5>Memory Aid</h5>
+                            <p>SNS = Fast (seconds to minutes), HPA = Slow (minutes to hours). Both ensure energy mobilization and cardiovascular support.</p>
+                        </div>
+
+                        <h4>Neural Pathway: Hypothalamus to SNS</h4>
+                        <p><strong>Stressor detected</strong> → Hypothalamus activates SNS → Preganglionic fibers to adrenal medulla → Chromaffin cells (neural crest origin) release catecholamines within <strong>seconds</strong>.</p>
+
+                        <h4>Adrenal Medulla Hormone Synthesis & Release</h4>
+                        <p><strong>Composition:</strong></p>
+                        <ul>
+                            <li><strong>80% Epinephrine (Epi)</strong> — acts on β1, β2, α1 receptors</li>
+                            <li><strong>20% Norepinephrine (NE)</strong> — predominantly α1 activity</li>
+                        </ul>
+
+                        <h4>Adrenergic Receptor Effects</h4>
+                        <div class="table-wrapper">
+                            <table>
+                                <tr>
+                                    <th>Receptor</th>
+                                    <th>Primary Ligand</th>
+                                    <th>Key Effects</th>
+                                </tr>
+                                <tr>
+                                    <td>β1 (Heart)</td>
+                                    <td>Epi > NE</td>
+                                    <td>↑ HR, ↑ contractility (inotrope)</td>
+                                </tr>
+                                <tr>
+                                    <td>β2 (Airways, vessels)</td>
+                                    <td>Epi >> NE</td>
+                                    <td>Bronchodilation, peripheral vasodilation, ↑ glucose</td>
+                                </tr>
+                                <tr>
+                                    <td>α1 (Skin, gut, splanchnic)</td>
+                                    <td>NE > Epi</td>
+                                    <td>Vasoconstriction, shunting blood to muscles</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">Why is epinephrine 80% of adrenal medulla output?</div>
+                                <div class="flip-card-back">PNMT (phenylethanolamine N-methyltransferase) converts NE → Epi, requiring cortisol as cofactor. High cortisol in adrenal cortex → high Epi production.</div>
+                            </div>
+                        </div>
+
+                        <h4>Metabolic Effects of Catecholamines</h4>
+                        <ul>
+                            <li><strong>Glycogenolysis (hepatic):</strong> β2 → ↑ glucose release (minutes)</li>
+                            <li><strong>Lipolysis (adipose):</strong> β3-mediated → ↑ free fatty acids</li>
+                            <li><strong>Gluconeogenesis:</strong> Supported by epi + cortisol + glucagon</li>
+                        </ul>
+
+                        <h4>HPA Axis: Slower Component</h4>
+                        <p><strong>CRH</strong> (hypothalamus) → <strong>ACTH</strong> (pituitary) → <strong>Cortisol</strong> (adrenal cortex)</p>
+                        <p><strong>Peak cortisol:</strong> 15-30 minutes after acute stress (slower than catecholamines but more sustained).</p>
+
+                        <div class="summary-box highlight">
+                            <h5>Hyperglycemia Hormone Axis</h5>
+                            <p>Epi + Cortisol + Glucagon + GH all ↑ glucose. Epi is fastest (glycogenolysis), cortisol is most sustained (gluconeogenesis + proteolysis).</p>
+                        </div>
+
+                        <h4>Other Stress Hormones</h4>
+                        <ul>
+                            <li><strong>ADH (Vasopressin):</strong> ↑ in stress, maintains vascular tone + osmolality</li>
+                            <li><strong>Renin-Aldosterone:</strong> Activated by ↓ volume/BP, promotes Na+ retention + vasoconstriction</li>
+                            <li><strong>GH:</strong> Anti-insulin effect; mobilizes energy substrates</li>
+                        </ul>
+
+                        <div class="summary-box test">
+                            <h5>Test Concept</h5>
+                            <p><strong>Cortisol is "permissive"</strong> for catecholamine action. Low cortisol → cardiovascular collapse despite high catecholamines (Addisonian crisis).</p>
+                        </div>
+
+                        <h4>Mastery Checklist</h4>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m1">
+                            <label for="m1">Distinguish SNS (fast) vs HPA (slow) timing</label>
+                        </div>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m2">
+                            <label for="m2">Identify β1, β2, α1 receptor distribution and effects</label>
+                        </div>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m3">
+                            <label for="m3">Explain why adrenal is 80% epi, 20% NE</label>
+                        </div>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m4">
+                            <label for="m4">Describe cortisol's permissive role in catecholamine action</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LO2: Catecholamine Biochemistry & Pheochromocytoma -->
+            <div id="lo2" class="tab-content">
+                <div class="section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h3>LO2: Catecholamine Biochemistry & Pheochromocytoma</h3>
+                    </div>
+                    <div class="section-body">
+                        <h4>Catecholamine Synthesis Pathway</h4>
+                        <p><strong>Tyrosine</strong> → (Tyrosine Hydroxylase: RATE-LIMITING) → <strong>L-DOPA</strong> → (DOPA Decarboxylase) → <strong>Dopamine</strong> → (Dopamine β-Hydroxylase) → <strong>Norepinephrine</strong> → (PNMT: requires cortisol as cofactor) → <strong>Epinephrine</strong></p>
+
+                        <div class="summary-box test">
+                            <h5>Key Fact: Tyrosine Hydroxylase</h5>
+                            <p><strong>Tyrosine hydroxylase is the rate-limiting enzyme.</strong> This step controls overall catecholamine production. It requires tetrahydrofolate (BH4) as cofactor.</p>
+                        </div>
+
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">Why is PNMT activity only high in the adrenal medulla?</div>
+                                <div class="flip-card-back">PNMT (phenylethanolamine N-methyltransferase) requires cortisol as a cofactor. The adrenal cortex sits atop the medulla, providing high local cortisol concentrations → abundant Epi production.</div>
+                            </div>
+                        </div>
+
+                        <h4>Catecholamine Metabolism</h4>
+                        <ul>
+                            <li><strong>MAO</strong> (monoamine oxidase): mitochondrial enzyme; breaks down catecholamines</li>
+                            <li><strong>COMT</strong> (catechol-O-methyltransferase): methylates catecholamines</li>
+                            <li><strong>Final urinary metabolite:</strong> <strong>VMA (vanillylmandelic acid)</strong> — detects catecholamine excess</li>
+                            <li><strong>Most specific plasma test:</strong> <strong>Plasma free metanephrines</strong> (higher sensitivity/specificity than VMA)</li>
+                        </ul>
+
+                        <h4>Pheochromocytoma: Rule of 10s</h4>
+                        <ul>
+                            <li>10% bilateral (catecholamine-secreting tumors in both adrenals)</li>
+                            <li>10% extra-adrenal (paragangliomas along sympathetic chain)</li>
+                            <li>10% malignant (can metastasize)</li>
+                            <li>10% in children</li>
+                            <li>10% familial (VHL, RET, NF1, SDH mutations)</li>
+                        </ul>
+
+                        <div class="summary-box highlight">
+                            <h5>Hereditary Syndromes</h5>
+                            <p>~40% of pheos are hereditary: VHL (von Hippel-Lindau), RET (MEN2A/B), NF1 (neurofibromatosis), SDH (succinate dehydrogenase). Screen first-degree relatives.</p>
+                        </div>
+
+                        <h4>Clinical Presentation: "5 P's"</h4>
+                        <ul>
+                            <li><strong>Palpitations</strong> (tachycardia, pounding chest)</li>
+                            <li><strong>Perspiration</strong> (profuse sweating, often nocturnal)</li>
+                            <li><strong>Pressure</strong> (hypertension, often paroxysmal)</li>
+                            <li><strong>Pain</strong> (headache, chest/abdominal pain)</li>
+                            <li><strong>Pallor</strong> (vasoconstriction, then flushing)</li>
+                        </ul>
+
+                        <div class="summary-box trap">
+                            <h5>Common Pitfall</h5>
+                            <p>Pheo attacks are <strong>episodic</strong> and spontaneous. Between attacks, BP and HR may be normal. Don't miss diagnosis because a single office BP is normal.</p>
+                        </div>
+
+                        <h4>Diagnosis Algorithm</h4>
+                        <ol>
+                            <li><strong>Plasma free metanephrines</strong> (lying 30 min) — most sensitive & specific screening test</li>
+                            <li>If elevated: <strong>CT abdomen/pelvis</strong> or <strong>MRI</strong> to localize tumor</li>
+                            <li>If imaging negative: <strong>MIBG scan</strong> (I-123 metaiodobenzylguanidine) — detects extra-adrenal/ectopic pheos</li>
+                            <li>Confirm MIBG positivity with PET (F-18 DOPA or F-18 FDG) if needed</li>
+                        </ol>
+
+                        <h4>Management: Alpha-BEFORE-Beta Rule</h4>
+                        <div class="summary-box test">
+                            <h5>CRITICAL RULE</h5>
+                            <p><strong>ALWAYS start alpha-blockers FIRST.</strong> Phenoxybenzamine is traditional choice. THEN add beta-blocker after alpha-blockade established. <strong>Never beta-block first</strong> (unopposed alpha → hypertensive crisis, MI, stroke).</p>
+                        </div>
+
+                        <ul>
+                            <li><strong>Alpha-blocker:</strong> Phenoxybenzamine (non-selective, irreversible; preferred for preop) or Doxazosin (reversible, shorter half-life)</li>
+                            <li><strong>Beta-blocker:</strong> Propranolol or Labetalol (after alpha-blockade); prevents tachycardia/arrhythmias from unopposed beta effects</li>
+                            <li><strong>Surgical resection:</strong> Definitive cure after adequate medical prep</li>
+                        </ul>
+
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">Why must you give alpha-blocker BEFORE beta-blocker in pheo?</div>
+                                <div class="flip-card-back">Beta-blockers without alpha blockade leave α1-mediated vasoconstriction unopposed → severe hypertension, MI, stroke. Alpha blockade first allows vasodilation; then beta-blocker prevents reflex tachycardia.</div>
+                            </div>
+                        </div>
+
+                        <h4>Mastery Checklist</h4>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m5">
+                            <label for="m5">Recall full catecholamine synthesis pathway</label>
+                        </div>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m6">
+                            <label for="m6">Identify rate-limiting enzyme and cofactors</label>
+                        </div>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m7">
+                            <label for="m7">List Rule of 10s for pheochromocytoma</label>
+                        </div>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m8">
+                            <label for="m8">Describe diagnostic algorithm: metanephrines → imaging → MIBG</label>
+                        </div>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m9">
+                            <label for="m9">Explain alpha-before-beta rule and why it's critical</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LO3: Cortisol in Stress & Cushing's -->
+            <div id="lo3" class="tab-content">
+                <div class="section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h3>LO3: Cortisol in Stress Response & Cushing's Syndrome</h3>
+                    </div>
+                    <div class="section-body">
+                        <h4>Cortisol's Permissive Role in Acute Stress</h4>
+                        <p><strong>Critical concept:</strong> Cortisol is not the primary driver of acute stress responses but is absolutely required for catecholamine effectiveness.</p>
+
+                        <ul>
+                            <li>Cortisol <strong>↑ adrenergic receptor expression</strong> on target tissues (heart, blood vessels, adipose)</li>
+                            <li>Without cortisol: Catecholamines present but ineffective → cardiovascular collapse (Addisonian crisis)</li>
+                            <li>Cortisol also mobilizes substrates (glucose, FFA) to support prolonged stress response</li>
+                        </ul>
+
+                        <div class="summary-box test">
+                            <h5>Test Pearl</h5>
+                            <p>A patient in Addisonian crisis may have high catecholamines but low cortisol → cannot mount adequate cardiovascular response. Cortisol replacement → restoration of hemodynamics.</p>
+                        </div>
+
+                        <h4>Chronic Stress: Allostatic Load</h4>
+                        <p>Prolonged HPA activation leads to <strong>allostatic load</strong> — chronic elevation of cortisol and catecholamines causes end-organ damage:</p>
+
+                        <ul>
+                            <li><strong>Hypertension:</strong> Cortisol + NE → Na+ retention, vasoconstriction</li>
+                            <li><strong>Hyperglycemia/T2DM:</strong> Cortisol → ↑ gluconeogenesis, ↓ insulin sensitivity</li>
+                            <li><strong>Immune dysfunction:</strong> Chronic cortisol → ↓ cell-mediated immunity, ↑ infections</li>
+                            <li><strong>Hippocampal atrophy:</strong> Hippocampus rich in glucocorticoid receptors (GR). Chronic cortisol → neurotoxicity → ↓ memory, mood regulation, depression risk</li>
+                        </ul>
+
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">Why does chronic stress cause hippocampal atrophy?</div>
+                                <div class="flip-card-back">The hippocampus has high density of glucocorticoid receptors. Chronic elevated cortisol → excitotoxicity → neuronal death → atrophy. This impairs memory and mood regulation (depression).</div>
+                            </div>
+                        </div>
+
+                        <h4>Cushing's Syndrome: Classic Features</h4>
+                        <p><strong>Result of excessive glucocorticoid exposure (from any source).</strong></p>
+
+                        <div class="summary-box highlight">
+                            <h5>Cushing's Classic Presentation</h5>
+                            <p><strong>Central obesity + buffalo hump + moon face + proximal myopathy + violaceous striae + easy bruising + hypertension + hyperglycemia + osteoporosis + psychiatric symptoms</strong></p>
+                        </div>
+
+                        <ul>
+                            <li><strong>Central obesity/Buffalo hump:</strong> Redistribution from cortisol's lipogenic effects</li>
+                            <li><strong>Moon facies:</strong> Facial fat deposition + mild edema</li>
+                            <li><strong>Proximal myopathy:</strong> Cortisol → ↑ muscle protein breakdown</li>
+                            <li><strong>Violaceous striae:</strong> Thinned skin from collagen loss; striae >1cm wide = Cushing's</li>
+                            <li><strong>Easy bruising/skin fragility:</strong> Collagen breakdown</li>
+                            <li><strong>Hypertension:</strong> Mineralocorticoid effect (especially ectopic ACTH)</li>
+                            <li><strong>Hyperglycemia/new-onset DM:</strong> Anti-insulin effects</li>
+                            <li><strong>Osteoporosis:</strong> ↓ bone formation, ↑ resorption</li>
+                            <li><strong>Psychiatric:</strong> Depression, anxiety, mood lability, psychosis in severe cases</li>
+                        </ul>
+
+                        <h4>Diagnosis Algorithm</h4>
+                        <ol>
+                            <li><strong>1-mg overnight dexamethasone suppression test (DST):</strong> Screening test. Normal cortisol suppresses to <1.8 ng/dL. If ≥1.8 → likely Cushing's.</li>
+                            <li><strong>Confirm excess:</strong> 24-hour urinary free cortisol (UFC) + late-night salivary cortisol (most physiologic). Both elevated = ↑↑ specificity</li>
+                            <li><strong>Determine etiology:</strong> Measure ACTH
+                                <ul>
+                                    <li><strong>ACTH high/normal:</strong> ACTH-dependent (pituitary or ectopic)</li>
+                                    <li><strong>ACTH low (<5):</strong> ACTH-independent (adrenal tumor)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Localize source:</strong>
+                                <ul>
+                                    <li>High ACTH → CRH test (pituitary Cushing's: ACTH↑; ectopic: no response) or IPSS (inferior petrosal sinus sampling)</li>
+                                    <li>Low ACTH → CT adomen/pelvis to image tumor</li>
+                                </ul>
+                            </li>
+                        </ol>
+
+                        <div class="summary-box trap">
+                            <h5>Diagnostic Pitfall</h5>
+                            <p>Mild cortisol elevations in depressed patients: depression itself can cause mild HPA activation and abnormal DST. Not all abnormal DST = Cushing's. Ensure clinical features support diagnosis.</p>
+                        </div>
+
+                        <h4>Mastery Checklist</h4>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m10">
+                            <label for="m10">Explain cortisol's permissive role in catecholamine action</label>
+                        </div>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m11">
+                            <label for="m11">Describe allostatic load and chronic stress complications</label>
+                        </div>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m12">
+                            <label for="m12">List Cushing's syndrome clinical features</label>
+                        </div>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m13">
+                            <label for="m13">Master diagnostic algorithm: DST → UFC/salivary cortisol → ACTH → localization</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LO4: Metabolic Integration & Glucose Counterregulation -->
+            <div id="lo4" class="tab-content">
+                <div class="section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h3>LO4: Metabolic Integration & Glucose Counterregulation</h3>
+                    </div>
+                    <div class="section-body">
+                        <h4>Fuel Mobilization Timeline in Fasting/Stress</h4>
+                        <div class="table-wrapper">
+                            <table>
+                                <tr>
+                                    <th>Timeframe</th>
+                                    <th>Primary Hormone</th>
+                                    <th>Mechanism</th>
+                                </tr>
+                                <tr>
+                                    <td>Minutes</td>
+                                    <td>Epinephrine</td>
+                                    <td>Hepatic glycogenolysis (breaks down stored glucose)</td>
+                                </tr>
+                                <tr>
+                                    <td>Hours</td>
+                                    <td>Glucagon</td>
+                                    <td>Hepatic gluconeogenesis + ketogenesis (makes new glucose + ketones)</td>
+                                </tr>
+                                <tr>
+                                    <td>Hours-Days</td>
+                                    <td>Cortisol + GH</td>
+                                    <td>↑ Gluconeogenesis + proteolysis + lipolysis; GH provides anti-insulin effect</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="summary-box memory">
+                            <h5>Memory Tip</h5>
+                            <p><strong>Epi is fastest, glucagon is most important for sustained response, cortisol provides permissive support.</strong></p>
+                        </div>
+
+                        <h4>Glucose Counterregulation in Hypoglycemia</h4>
+                        <p>When blood glucose drops, hormones activate in strict order to restore glucose:</p>
+
+                        <ol>
+                            <li><strong>↓ Insulin</strong> (stops glucose consumption, fastest response)</li>
+                            <li><strong>↑ Glucagon</strong> (MOST IMPORTANT; stimulates hepatic glucose production)</li>
+                            <li><strong>↑ Epinephrine</strong> (glycogenolysis, lipolysis; also causes warning symptoms: tremor, sweating, palpitations)</li>
+                            <li><strong>↑ Cortisol + GH</strong> (gluconeogenesis, delayed but sustained)</li>
+                        </ol>
+
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">Which hormone is most important for counterregulating hypoglycemia?</div>
+                                <div class="flip-card-back">Glucagon is the single most important counterregulatory hormone. It directly stimulates hepatic glucose output. Epinephrine provides warning symptoms and glycogenolysis but is secondary to glucagon.</div>
+                            </div>
+                        </div>
+
+                        <div class="summary-box test">
+                            <h5>Key Concept</h5>
+                            <p><strong>Epinephrine causes warning symptoms (tremor, anxiety, palpitations, sweating)</strong> of hypoglycemia. Without epi → hypoglycemia unawareness (patient unaware until severe cognitive dysfunction).</p>
+                        </div>
+
+                        <h4>Type 1 Diabetes: Hypoglycemia Unawareness</h4>
+                        <p><strong>Problem:</strong> After ~5 years of T1DM, glucagon counterregulation becomes blunted. Patients lose early epinephrine-mediated warning symptoms → hypoglycemia unawareness → severe hypoglycemia, seizures, DKA from overcorrection.</p>
+
+                        <p><strong>Management:</strong></p>
+                        <ul>
+                            <li><strong>Strict hypoglycemia avoidance</strong> — avoid low BG episodes to preserve remaining glucagon response</li>
+                            <li>Continuous glucose monitoring (CGM) to detect early lows</li>
+                            <li>Adjust insulin: fewer injections, use long-acting agents less aggressively</li>
+                            <li>Glucagon emergency kit for family</li>
+                        </ul>
+
+                        <div class="summary-box trap">
+                            <h5>Common Mistake</h5>
+                            <p>Overly tight glycemic control in T1DM patients with hypoglycemia unawareness → more hypoglycemic episodes → worsens unawareness. Safer to run slightly higher BG.</p>
+                        </div>
+
+                        <h4>Diabetic Sick Day: Management Pearls</h4>
+                        <p>Acute illness (infection, surgery, trauma) → stress hyperglycemia even in well-controlled T1DM.</p>
+
+                        <ul>
+                            <li><strong>NEVER stop insulin</strong> — it's needed more, not less, during illness</li>
+                            <li><strong>Increase monitoring:</strong> Check BG q2-4h, ketones if BG >250</li>
+                            <li><strong>Check ketones:</strong> If BG >250 + nausea/vomiting → check urine or serum ketones (DKA risk)</li>
+                            <li><strong>Hydrate:</strong> Free water or sugar-free fluids; IV fluids if severe illness</li>
+                            <li><strong>Adjust insulin:</strong> May need 10-20% more during acute illness</li>
+                        </ul>
+
+                        <h4>Metabolic Effects of Counter-Regulatory Hormones</h4>
+                        <ul>
+                            <li><strong>Insulin (fed state):</strong> Glucose uptake, glycogen storage, lipogenesis</li>
+                            <li><strong>Glucagon (fasting/stress):</strong> Glycogenolysis + gluconeogenesis</li>
+                            <li><strong>Cortisol + GH:</strong> Antagonize insulin (anti-insulin hormones)</li>
+                            <li><strong>Epinephrine:</strong> ↑ glucose + FFA availability</li>
+                        </ul>
+
+                        <h4>Mastery Checklist</h4>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m14">
+                            <label for="m14">Understand timeline: epi (minutes) → glucagon (hours) → cortisol/GH (sustained)</label>
+                        </div>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m15">
+                            <label for="m15">Recall order of glucose counterregulation: ↓insulin → glucagon → epi → cortisol/GH</label>
+                        </div>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m16">
+                            <label for="m16">Identify most important counterregulatory hormone (glucagon)</label>
+                        </div>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m17">
+                            <label for="m17">Explain hypoglycemia unawareness in T1DM and management</label>
+                        </div>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m18">
+                            <label for="m18">Master sick day rules: never stop insulin, increase monitoring</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LO5: Stress, Immune Response & Sepsis -->
+            <div id="lo5" class="tab-content">
+                <div class="section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h3>LO5: Immune-Endocrine Axis & Sepsis Adrenal Insufficiency</h3>
+                    </div>
+                    <div class="section-body">
+                        <h4>Bidirectional Immune-Endocrine Axis</h4>
+                        <p><strong>Inflammation signals HPA activation:</strong> IL-1, IL-6, TNF-α produced during infection/inflammation → stimulate hypothalamic CRH → ↑ ACTH → ↑ cortisol → anti-inflammatory feedback.</p>
+
+                        <div class="summary-box memory">
+                            <h5>Key Loop</h5>
+                            <p><strong>Infection/Inflammation → Cytokines → HPA ↑ Cortisol → Anti-inflammation (negative feedback loop)</strong></p>
+                        </div>
+
+                        <h4>Cortisol's Anti-Inflammatory Mechanisms</h4>
+                        <ul>
+                            <li><strong>↓ NF-κB:</strong> Master transcription factor for pro-inflammatory genes (blocked by cortisol)</li>
+                            <li><strong>↓ COX-2, PLA2:</strong> Reduces prostaglandin/leukotriene synthesis (via annexin-1)</li>
+                            <li><strong>↓ Cytokines:</strong> ↓ IL-1, IL-2, IL-6, TNF-α, IFN-γ (Th1 response suppressed)</li>
+                            <li><strong>↑ Neutrophil demargination:</strong> Paradoxically, neutrophils released from vessel walls → peripheral blood neutrophilia (but dysfunction)</li>
+                            <li><strong>↓ Lymphocytes, eosinophils:</strong> Lymphocyte apoptosis, eosinopenia</li>
+                            <li><strong>↓ Mast cells:</strong> Reduced local inflammation</li>
+                        </ul>
+
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">Cortisol causes lymphopenia, so why is it anti-inflammatory?</div>
+                                <div class="flip-card-back">Cortisol reduces adaptive (Th1/Th2) immune response but increases innate immunity (neutrophil demargination). The ↓ IL-2, TNF-α far outweighs the lymphopenia in terms of reducing inflammatory damage. This is adaptive for acute infection but problematic in chronic excess (immunosuppression).</div>
+                            </div>
+                        </div>
+
+                        <h4>Classic Stress Leukogram</h4>
+                        <p><strong>Result of cortisol + catecholamine excess during acute stress:</strong></p>
+                        <ul>
+                            <li><strong>Neutrophilia:</strong> Demargination + ↓ apoptosis</li>
+                            <li><strong>Lymphopenia:</strong> Apoptosis + redistribution to tissues</li>
+                            <li><strong>Eosinopenia:</strong> Sequestration in tissues (cortisol effect)</li>
+                            <li><strong>Monocytopenia:</strong> Redistribution</li>
+                        </ul>
+
+                        <h4>Sepsis: Relative Adrenal Insufficiency (CIRCI)</h4>
+                        <p><strong>Critical-Illness Related Corticosteroid Insufficiency:</strong> Some septic patients cannot produce adequate cortisol relative to their illness severity → refractory hypotension despite vasopressors.</p>
+
+                        <p><strong>Diagnosis:</strong> Hemodynamic instability (MAP <65 despite fluids + vasopressors) + inadequate cortisol response to ACTH stimulation (< 9 mcg/dL rise in cortisol or absolute level <18-20 mcg/dL).</p>
+
+                        <p><strong>Treatment:</strong> <strong>Hydrocortisone 200 mg IV daily</strong> (often as 50 mg q6h) → restores vasopressor responsiveness, improves hemodynamics.</p>
+
+                        <div class="summary-box test">
+                            <h5>Key Trial Findings</h5>
+                            <p><strong>CORTICUS & ADRENAL trials:</strong> Low-dose hydrocortisone in septic shock improves hemodynamics and reduces vasopressor requirements. In non-responders to ACTH (e.g., baseline cortisol >34 mcg/dL), steroids don't help and may increase mortality (don't treat responders).</p>
+                        </div>
+
+                        <h4>Excess Cortisol/Steroids: Immunosuppression Complications</h4>
+                        <p><strong>Paradox:</strong> While acute cortisol is adaptive, excess → immunosuppression → opportunistic infections.</p>
+
+                        <ul>
+                            <li><strong>PCP (Pneumocystis jirovecii):</strong> Risk if CD4 <200 in HIV or prolonged steroids</li>
+                            <li><strong>Cryptococcus:</strong> CNS meningitis in immunocompromised</li>
+                            <li><strong>CMV:</strong> Disseminated disease in severe immunosuppression</li>
+                            <li><strong>TB reactivation:</strong> Increased risk with chronic steroids</li>
+                            <li><strong>Candida:</strong> Mucosal + systemic infections</li>
+                        </ul>
+
+                        <div class="summary-box trap">
+                            <h5>Clinical Pearl</h5>
+                            <p>Patient on chronic steroids presenting with fever + hypoxia + PCP-like presentation? Consider PCP prophylaxis if CD4 equivalent low or steroid dose high.</p>
+                        </div>
+
+                        <h4>Waterhouse-Friderichsen Syndrome</h4>
+                        <p><strong>Meningococcal (Neisseria meningitidis) sepsis → disseminated intravascular coagulation (DIC) → bilateral adrenal hemorrhage → acute adrenal insufficiency + septic shock.</strong></p>
+
+                        <ul>
+                            <li>Fulminant meningococcemia: petechial rash → shock</li>
+                            <li>Adrenal hemorrhage visible at autopsy/imaging</li>
+                            <li>High mortality if not recognized early (sepsis + adrenal crisis)</li>
+                        </ul>
+
+                        <h4>Mastery Checklist</h4>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m19">
+                            <label for="m19">Explain bidirectional immune-endocrine axis</label>
+                        </div>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m20">
+                            <label for="m20">List cortisol's anti-inflammatory mechanisms</label>
+                        </div>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m21">
+                            <label for="m21">Describe classic stress leukogram</label>
+                        </div>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m22">
+                            <label for="m22">Diagnose and treat sepsis-related adrenal insufficiency (CIRCI)</label>
+                        </div>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m23">
+                            <label for="m23">Recognize Waterhouse-Friderichsen syndrome</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LO6: Integrative Cases -->
+            <div id="lo6" class="tab-content">
+                <div class="section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h3>LO6: Integrative Cases & Clinical Scenarios</h3>
+                    </div>
+                    <div class="section-body">
+                        <h4>Case 1: Surgical Stress in Addison's Patient</h4>
+                        <p><strong>Scenario:</strong> Patient with known Addison's disease scheduled for elective surgery. Takes replacement hydrocortisone 20 mg daily.</p>
+
+                        <p><strong>Problem:</strong> Surgical stress exceeds baseline cortisol needs. Without stress dosing → intraoperative hypotension, cardiovascular collapse, adrenal crisis.</p>
+
+                        <p><strong>Management:</strong></p>
+                        <ul>
+                            <li><strong>Stress-dose steroids:</strong> Hydrocortisone <strong>50-100 mg IV q6-8h</strong> perioperatively</li>
+                            <li>Continue stress dosing for 24-48 hours postop, then taper back to maintenance</li>
+                            <li>Maintain IV access; monitor vitals closely</li>
+                        </ul>
+
+                        <div class="summary-box test">
+                            <h5>Critical Pearl</h5>
+                            <p><strong>Any patient with adrenal insufficiency facing major stress (surgery, sepsis, severe illness) requires stress-dose steroids to prevent adrenal crisis.</strong></p>
+                        </div>
+
+                        <h4>Case 2: Stress Hyperglycemia in ICU/Trauma</h4>
+                        <p><strong>Scenario:</strong> Post-trauma ICU patient with no prior diabetes now has BG 250-400 mg/dL. Insulin requirements surge.</p>
+
+                        <p><strong>Mechanism:</strong> Catecholamines + cortisol + glucagon → hepatic glucose overproduction; stress hyperglycemia universal in critical illness.</p>
+
+                        <p><strong>Historic vs. Modern Management:</strong></p>
+                        <ul>
+                            <li><strong>Old approach (Van den Berghe):</strong> Tight control (target 80-110 mg/dL) with intensive insulin</li>
+                            <li><strong>NICE-SUGAR trial:</strong> Tight control ↑ mortality (hypoglycemia, increased infections). <strong>New target: 140-180 mg/dL</strong></li>
+                            <li><strong>Lesson:</strong> Avoid excessive insulin in ICU. Stress hyperglycemia is adaptive; treat cautiously</li>
+                        </ul>
+
+                        <div class="summary-box test">
+                            <h5>NICE-SUGAR Key Finding</h5>
+                            <p>Tight glucose control (80-110) in ICU → increased mortality. Target 140-180 is safer. Stress hyperglycemia serves a purpose.</p>
+                        </div>
+
+                        <h4>Case 3: Non-Thyroidal Illness (NTIS) in ICU</h4>
+                        <p><strong>Scenario:</strong> Critically ill patient: ↓ T3, ↑ rT3, ↓ TSH. Concern for thyroid dysfunction.</p>
+
+                        <p><strong>Mechanism:</strong> Stress hormones (cortisol, TNF-α) → ↓ D1 (converts T4 → T3), ↑ D3 (converts T4 → rT3, inactive). <strong>This is adaptive, not pathologic.</strong></p>
+
+                        <p><strong>Management:</strong> <strong>DO NOT TREAT.</strong> Don't give thyroid hormone. It's a normal stress response. Hormone levels normalize as patient recovers.</p>
+
+                        <div class="summary-box trap">
+                            <h5>Common Pitfall</h5>
+                            <p>Seeing ↓ T3/↑ rT3/↓ TSH in ICU and treating with levothyroxine → worsens outcomes. It's sick euthyroid, not hypothyroidism. Watch and wait for recovery.</p>
+                        </div>
+
+                        <h4>Case 4: Psychological Stress & Depression</h4>
+                        <p><strong>Scenario:</strong> Depressed patient: chronic HPA activation → persistent cortisol elevation.</p>
+
+                        <p><strong>Mechanism:</strong> Depressed mood → ↑ CRH → sustained cortisol. Chronic cortisol → hippocampal atrophy (↓ memory, mood regulation) → worsens depression (vicious cycle).</p>
+
+                        <p><strong>Lab findings:</strong> Dexamethasone suppression test (DST) may be abnormal (non-suppression of cortisol). But abnormal DST ≠ Cushing's in depression — clinical features distinguish.</p>
+
+                        <p><strong>Management:</strong> Treat depression (SSRIs, psychotherapy) → normalizes HPA axis → cortisol normalizes.</p>
+
+                        <h4>Case 5: Anorexia Nervosa</h4>
+                        <p><strong>Scenario:</strong> Young female with severe restrictive eating: elevated cortisol, amenorrhea, hypothermia.</p>
+
+                        <p><strong>Hormonal findings:</strong></p>
+                        <ul>
+                            <li><strong>↑ Cortisol:</strong> Functional hypercortisolism from chronic starvation stress</li>
+                            <li><strong>↓ GnRH → ↓ LH/FSH:</strong> Amenorrhea (hypothalamic hypogonadism)</li>
+                            <li><strong>↓ T3, ↑ rT3:</strong> Non-thyroidal illness (euthyroid sick syndrome)</li>
+                            <li><strong>↑ Ghrelin:</strong> Hunger hormone (paradoxically high but overridden by psychological restriction)</li>
+                        </ul>
+
+                        <p><strong>Management:</strong> Nutritional rehabilitation. Hormones normalize with weight restoration.</p>
+
+                        <h4>Case 6: Pheochromocytoma Crisis Intraoperatively</h4>
+                        <p><strong>Scenario:</strong> Patient undergoing pheo resection. Intraoperatively, BP surges to 240/140, HR 140, SVT. Surgeon squeezed tumor releasing catecholamines.</p>
+
+                        <p><strong>Immediate management:</strong></p>
+                        <ul>
+                            <li><strong>IV phentolamine (alpha-blocker) immediately</strong> — dilates vessels, drops BP acutely</li>
+                            <li>Only THEN use esmolol IV (beta-blocker) if tachycardic</li>
+                            <li><strong>Never give beta-blocker alone</strong> — unopposed alpha → worse hypertension, MI</li>
+                            <li>Once tumor removed: catecholamine levels drop → maintain fluid support (dilated vessels)</li>
+                        </ul>
+
+                        <div class="summary-box test">
+                            <h5>Intraoperative Pheo Rule</h5>
+                            <p><strong>IV Phentolamine immediately for hypertensive crisis. No beta-blockers first.</strong></p>
+                        </div>
+
+                        <h4>Case 7: Ectopic ACTH (Small Cell Lung Cancer)</h4>
+                        <p><strong>Scenario:</strong> 60-year-old smoker, hoarseness, weight loss. Labs: hypokalemia (K 2.8), metabolic alkalosis, hyperglycemia, ↑↑ cortisol (100+ ng/dL), ↑↑ ACTH.</p>
+
+                        <p><strong>Diagnosis:</strong> Ectopic ACTH syndrome (usually SCLC). Rapid Cushing's presentation (not gradual).</p>
+
+                        <p><strong>Distinguishing features from pituitary Cushing's:</strong></p>
+                        <ul>
+                            <li><strong>Severe hypokalemia:</strong> Ectopic ACTH causes extreme cortisol → mineralocorticoid effect → Na+ reabsorption, K+ loss</li>
+                            <li><strong>Hyperpigmentation:</strong> ↑↑ ACTH stimulates melanocytes (MSH co-secreted)</li>
+                            <li><strong>NO fat redistribution:</strong> Onset too acute; no time for central obesity/buffalo hump</li>
+                            <li><strong>Rapid clinical decline:</strong> Weight loss, weakness, infections</li>
+                        </ul>
+
+                        <p><strong>Management:</strong></p>
+                        <ul>
+                            <li><strong>Treat underlying malignancy:</strong> Chemotherapy if possible</li>
+                            <li><strong>Urgent steroid inhibition:</strong> Ketoconazole (inhibits 11β-hydroxylase) or metyrapone (inhibits 11β-hydroxylase) to lower cortisol acutely</li>
+                            <li>Correct hypokalemia (K replacement, K-sparing diuretics)</li>
+                            <li>Control hyperglycemia (insulin)</li>
+                        </ul>
+
+                        <h4>Mastery Checklist</h4>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m24">
+                            <label for="m24">Manage surgical stress in Addison's (stress-dose steroids)</label>
+                        </div>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m25">
+                            <label for="m25">Understand stress hyperglycemia and NICE-SUGAR lesson</label>
+                        </div>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m26">
+                            <label for="m26">Recognize NTIS and know not to treat it</label>
+                        </div>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m27">
+                            <label for="m27">Understand hippocampal atrophy in chronic stress/depression</label>
+                        </div>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m28">
+                            <label for="m28">Manage pheo intraoperative crisis (phentolamine first, no beta first)</label>
+                        </div>
+                        <div class="mastery-checkbox">
+                            <input type="checkbox" id="m29">
+                            <label for="m29">Diagnose and treat ectopic ACTH (SCLC)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Practice Questions -->
+            <div id="practice" class="tab-content">
+                <h2>Practice Questions</h2>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">Q1: A 45-year-old man with pheochromocytoma is scheduled for surgical resection. Which of the following is the CORRECT sequence of preoperative medications?</div>
+                    <label class="mcq-option">
+                        <input type="radio" name="q1"> A) Propranolol, then phentolamine
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q1"> B) Phentolamine, then propranolol
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q1"> C) Esmolol monotherapy
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q1"> D) Phenoxybenzamine, then labetalol
+                    </label>
+                    <div class="mcq-answer">
+                        <p><strong>Answer: B & D are both correct.</strong> Alpha-blocker FIRST (phentolamine acutely or phenoxybenzamine for chronic prep), THEN beta-blocker. Beta-blocker monotherapy or first is contraindicated (unopposed alpha → hypertensive crisis).</p>
+                    </div>
+                    <button onclick="toggleAnswer(this)" style="margin-top: 10px; padding: 8px 15px; background: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer;">Show Answer</button>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">Q2: PNMT (phenylethanolamine N-methyltransferase) catalyzes the final step of epinephrine synthesis (NE → Epi). Why is PNMT activity highest in the adrenal medulla?</div>
+                    <label class="mcq-option">
+                        <input type="radio" name="q2"> A) PNMT gene is only expressed in chromaffin cells
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q2"> B) PNMT requires cortisol as a cofactor; the adrenal medulla sits atop the cortex with high local cortisol
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q2"> C) Norepinephrine is only produced in the adrenal medulla
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q2"> D) PNMT is inhibited everywhere except the adrenal by MAO
+                    </label>
+                    <div class="mcq-answer">
+                        <p><strong>Answer: B</strong> PNMT requires cortisol as a cofactor. The adrenal medulla has high local cortisol concentration from the adjacent cortex → high PNMT activity → abundant epinephrine production. This is why cortical disease can affect medullary hormone production.</p>
+                    </div>
+                    <button onclick="toggleAnswer(this)" style="margin-top: 10px; padding: 8px 15px; background: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer;">Show Answer</button>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">Q3: A 30-year-old woman presents with episodic palpitations, sweating, and headaches. Elevated plasma free metanephrines confirmed. CT abdomen is normal. What is the NEXT appropriate test?</div>
+                    <label class="mcq-option">
+                        <input type="radio" name="q3"> A) Repeat CT with higher resolution
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q3"> B) 24-hour urine VMA
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q3"> C) I-123 MIBG scan
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q3"> D) Genetic testing for VHL/RET/NF1
+                    </label>
+                    <div class="mcq-answer">
+                        <p><strong>Answer: C</strong> MIBG (metaiodobenzylguanidine) scan detects extra-adrenal pheos and ectopic tumors that imaging misses. It's the next step after normal CT/MRI. VMA is less sensitive than plasma free metanephrines (outdated for diagnosis). Genetic testing comes after tumor localization.</p>
+                    </div>
+                    <button onclick="toggleAnswer(this)" style="margin-top: 10px; padding: 8px 15px; background: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer;">Show Answer</button>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">Q4: The first counterregulatory response to hypoglycemia is:</div>
+                    <label class="mcq-option">
+                        <input type="radio" name="q4"> A) ↑ Epinephrine causing tremor and palpitations
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q4"> B) ↓ Insulin (removal of the glucose-lowering effect)
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q4"> C) ↑ Glucagon stimulating hepatic glucose production
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q4"> D) ↑ Cortisol promoting gluconeogenesis
+                    </label>
+                    <div class="mcq-answer">
+                        <p><strong>Answer: B</strong> The FIRST response is decreased insulin (removes suppression of glucose production). Glucagon follows and is the MOST IMPORTANT counterregulatory hormone. Epinephrine comes 3rd (warning symptoms). Cortisol is 4th (delayed).</p>
+                    </div>
+                    <button onclick="toggleAnswer(this)" style="margin-top: 10px; padding: 8px 15px; background: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer;">Show Answer</button>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">Q5: Which hormone is MOST IMPORTANT for counteracting hypoglycemia?</div>
+                    <label class="mcq-option">
+                        <input type="radio" name="q5"> A) Epinephrine (provides warning symptoms)
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q5"> B) Glucagon (directly stimulates hepatic glucose output)
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q5"> C) Cortisol (sustains gluconeogenesis)
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q5"> D) Growth hormone (anti-insulin effect)
+                    </label>
+                    <div class="mcq-answer">
+                        <p><strong>Answer: B</strong> Glucagon is the MOST IMPORTANT counterregulatory hormone. It directly stimulates hepatic glucose production. In Type 1 diabetes, glucagon response becomes blunted → hypoglycemia unawareness.</p>
+                    </div>
+                    <button onclick="toggleAnswer(this)" style="margin-top: 10px; padding: 8px 15px; background: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer;">Show Answer</button>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">Q6: A 58-year-old ICU patient on mechanical ventilation has T3=40 (low), rT3=35 (high), TSH=1.2 (normal). What is the most appropriate management?</div>
+                    <label class="mcq-option">
+                        <input type="radio" name="q6"> A) Start levothyroxine to correct T3
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q6"> B) Start liothyronine (T3 replacement)
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q6"> C) Observe; this is euthyroid sick syndrome (NTIS) — do not treat
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q6"> D) Check pituitary MRI for secondary hypothyroidism
+                    </label>
+                    <div class="mcq-answer">
+                        <p><strong>Answer: C</strong> Non-thyroidal illness (NTIS/euthyroid sick syndrome) is an adaptive stress response: ↓ D1, ↑ D3 → ↓ T3, ↑ rT3, normal TSH. Treatment with thyroid hormone worsens outcomes. Wait for recovery.</p>
+                    </div>
+                    <button onclick="toggleAnswer(this)" style="margin-top: 10px; padding: 8px 15px; background: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer;">Show Answer</button>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">Q7: An ICU patient post-trauma has persistent hyperglycemia (250-350 mg/dL) despite insulin infusion. The previous approach of tight glucose control (80-110 mg/dL) is now avoided because:</div>
+                    <label class="mcq-option">
+                        <input type="radio" name="q7"> A) Tight control is difficult to achieve in ICU
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q7"> B) The NICE-SUGAR trial showed tight control increases mortality (hypoglycemia, immunosuppression)
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q7"> C) Hyperglycemia prevents DKA in ICU patients
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q7"> D) Insulin is contraindicated in stress hyperglycemia
+                    </label>
+                    <div class="mcq-answer">
+                        <p><strong>Answer: B</strong> NICE-SUGAR trial (2009) showed intensive glucose control (80-110) in ICU → increased mortality from hypoglycemia and infections. Target now 140-180 mg/dL. Stress hyperglycemia is adaptive and shouldn't be overcorrected.</p>
+                    </div>
+                    <button onclick="toggleAnswer(this)" style="margin-top: 10px; padding: 8px 15px; background: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer;">Show Answer</button>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">Q8: Waterhouse-Friderichsen syndrome is caused by which organism?</div>
+                    <label class="mcq-option">
+                        <input type="radio" name="q8"> A) Staphylococcus aureus
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q8"> B) Streptococcus pneumoniae
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q8"> C) Neisseria meningitidis
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q8"> D) Escherichia coli
+                    </label>
+                    <div class="mcq-answer">
+                        <p><strong>Answer: C</strong> Neisseria meningitidis (meningococcus) causes fulminant meningococcemia → DIC → bilateral adrenal hemorrhage → acute adrenal insufficiency. Presents with petechial rash, shock, high mortality if not recognized.</p>
+                    </div>
+                    <button onclick="toggleAnswer(this)" style="margin-top: 10px; padding: 8px 15px; background: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer;">Show Answer</button>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">Q9: A septic patient with refractory hypotension (MAP 62 on norepinephrine 20 mcg/min + 6L fluids) has cortisol 18 mcg/dL and inadequate response to ACTH stimulation test. What is the most appropriate next step?</div>
+                    <label class="mcq-option">
+                        <input type="radio" name="q9"> A) Increase vasopressor dose
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q9"> B) Give IV hydrocortisone 200 mg/day (treat sepsis-related adrenal insufficiency, CIRCI)
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q9"> C) Switch vasopressor to phenylephrine
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q9"> D) Obtain MRI of pituitary
+                    </label>
+                    <div class="mcq-answer">
+                        <p><strong>Answer: B</strong> CIRCI (Critical-Illness Related Corticosteroid Insufficiency): inadequate cortisol relative to illness severity → refractory hypotension. Hydrocortisone 200 mg/day IV restores vasopressor responsiveness. CORTICUS/ADRENAL trials support this approach.</p>
+                    </div>
+                    <button onclick="toggleAnswer(this)" style="margin-top: 10px; padding: 8px 15px; background: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer;">Show Answer</button>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">Q10: Tyrosine hydroxylase catalyzes which step in catecholamine synthesis?</div>
+                    <label class="mcq-option">
+                        <input type="radio" name="q10"> A) Dopamine → Norepinephrine
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q10"> B) Tyrosine → L-DOPA (rate-limiting)
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q10"> C) Norepinephrine → Epinephrine
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q10"> D) L-DOPA → Dopamine
+                    </label>
+                    <div class="mcq-answer">
+                        <p><strong>Answer: B</strong> Tyrosine hydroxylase catalyzes Tyrosine → L-DOPA and is the RATE-LIMITING step of catecholamine synthesis. It requires tetrahydrofolate (BH4) as cofactor.</p>
+                    </div>
+                    <button onclick="toggleAnswer(this)" style="margin-top: 10px; padding: 8px 15px; background: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer;">Show Answer</button>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">Q11: VMA (vanillylmandelic acid) is the:</div>
+                    <label class="mcq-option">
+                        <input type="radio" name="q11"> A) Rate-limiting enzyme in catecholamine synthesis
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q11"> B) Most specific plasma test for pheochromocytoma
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q11"> C) Final urinary metabolite of catecholamines (via MAO/COMT)
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q11"> D) Cofactor required for PNMT function
+                    </label>
+                    <div class="mcq-answer">
+                        <p><strong>Answer: C</strong> VMA is the final urinary metabolite of catecholamines after breakdown by MAO and COMT. However, plasma free metanephrines have higher sensitivity/specificity for pheo diagnosis than VMA.</p>
+                    </div>
+                    <button onclick="toggleAnswer(this)" style="margin-top: 10px; padding: 8px 15px; background: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer;">Show Answer</button>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">Q12: A 28-year-old with Type 1 diabetes has recurrent severe hypoglycemia with minimal warning symptoms. Glucose is found at 35 mg/dL during sleep. What is the BEST management strategy?</div>
+                    <label class="mcq-option">
+                        <input type="radio" name="q12"> A) Intensify insulin therapy to achieve tight control (target BG 80-110)
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q12"> B) Relax glycemic targets and strictly avoid hypoglycemic episodes to preserve remaining glucagon response
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q12"> C) Switch to sulfonylureas
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q12"> D) Start pancreatic transplant evaluation
+                    </label>
+                    <div class="mcq-answer">
+                        <p><strong>Answer: B</strong> T1DM with hypoglycemia unawareness = blunted glucagon response. Intensive insulin worsens hypoglycemia frequency. Strict hypoglycemia avoidance preserves remaining counterregulatory response. Higher BG targets, CGM, and glucagon kit are safer.</p>
+                    </div>
+                    <button onclick="toggleAnswer(this)" style="margin-top: 10px; padding: 8px 15px; background: #2563eb; color: white; border: none; border-rgba-4px; cursor: pointer;">Show Answer</button>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">Q13: Cortisol's anti-inflammatory mechanism includes which of the following? (Select all that apply)</div>
+                    <label class="mcq-option">
+                        <input type="checkbox" name="q13"> A) ↓ NF-κB activation
+                    </label>
+                    <label class="mcq-option">
+                        <input type="checkbox" name="q13"> B) ↑ Mast cell degranulation
+                    </label>
+                    <label class="mcq-option">
+                        <input type="checkbox" name="q13"> C) ↓ COX-2 and PLA2 (via annexin-1)
+                    </label>
+                    <label class="mcq-option">
+                        <input type="checkbox" name="q13"> D) ↑ IL-1, IL-2, TNF-α production
+                    </label>
+                    <label class="mcq-option">
+                        <input type="checkbox" name="q13"> E) ↑ Neutrophil demargination (↑ peripheral count)
+                    </label>
+                    <div class="mcq-answer">
+                        <p><strong>Answer: A, C, E</strong> Cortisol ↓ NF-κB (transcription factor for pro-inflammatory genes), ↓ COX-2/PLA2 (prostaglandins), and ↑ neutrophil demargination. It does NOT ↑ mast cells or cytokines; those are ↓.</p>
+                    </div>
+                    <button onclick="toggleAnswer(this)" style="margin-top: 10px; padding: 8px 15px; background: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer;">Show Answer</button>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">Q14: Classic stress leukogram includes all of the following EXCEPT:</div>
+                    <label class="mcq-option">
+                        <input type="radio" name="q14"> A) Neutrophilia
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q14"> B) Lymphopenia
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q14"> C) Eosinophilia
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q14"> D) Monocytopenia
+                    </label>
+                    <div class="mcq-answer">
+                        <p><strong>Answer: C</strong> Stress leukogram: neutrophilia (demargination), lymphopenia, <strong>eosinopenia</strong> (NOT eosinophilia), monocytopenia. All are cortisol/catecholamine effects from acute stress.</p>
+                    </div>
+                    <button onclick="toggleAnswer(this)" style="margin-top: 10px; padding: 8px 15px; background: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer;">Show Answer</button>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">Q15: A 40-year-old woman with known Addison's disease is in the OR for abdominal surgery. Standard maintenance hydrocortisone is 20 mg daily. What is the appropriate perioperative steroid dosing?</div>
+                    <label class="mcq-option">
+                        <input type="radio" name="q15"> A) Continue 20 mg daily; surgery doesn't require dose adjustment
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q15"> B) Hydrocortisone 50-100 mg IV q6-8h perioperatively, then taper back to maintenance
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q15"> C) High-dose methylprednisolone 1 g IV
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q15"> D) Dexamethasone 8 mg IV once
+                    </label>
+                    <div class="mcq-answer">
+                        <p><strong>Answer: B</strong> Surgical stress requires stress-dose steroids: hydrocortisone 50-100 mg IV q6-8h. Maintain stress dosing 24-48h postop, then taper back to 20 mg daily. Failure to stress-dose → adrenal crisis, cardiovascular collapse.</p>
+                    </div>
+                    <button onclick="toggleAnswer(this)" style="margin-top: 10px; padding: 8px 15px; background: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer;">Show Answer</button>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">Q16: An ectopic ACTH-secreting small cell lung cancer presents with cortisol 95 ng/dL, ACTH 180 pg/mL (markedly elevated), K 2.8, metabolic alkalosis, and BP 165/95. Which of the following DISTINGUISHES this from pituitary Cushing's?</div>
+                    <label class="mcq-option">
+                        <input type="radio" name="q16"> A) Presence of central obesity and buffalo hump
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q16"> B) Severe hypokalemia, absence of classic fat redistribution, rapid onset
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q16"> C) Elevated cortisol level
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q16"> D) Elevated ACTH level
+                    </label>
+                    <div class="mcq-answer">
+                        <p><strong>Answer: B</strong> Ectopic ACTH is fulminant: extreme cortisol → severe hypokalemia (mineralocorticoid effect), NO time for fat redistribution, hyperpigmentation (high ACTH → MSH). Pituitary Cushing's is gradual (central obesity, buffalo hump develop over months).</p>
+                    </div>
+                    <button onclick="toggleAnswer(this)" style="margin-top: 10px; padding: 8px 15px; background: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer;">Show Answer</button>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">Q17: Which of the following statements about cortisol's permissive role in acute stress is TRUE?</div>
+                    <label class="mcq-option">
+                        <input type="radio" name="q17"> A) High cortisol directly increases heart rate and blood pressure
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q17"> B) Cortisol is the primary driver of acute fight-or-flight; catecholamines are secondary
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q17"> C) Without cortisol, catecholamines cannot effectively act because cortisol upregulates adrenergic receptors
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q17"> D) Cortisol levels peak within seconds of acute stress, similar to catecholamines
+                    </label>
+                    <div class="mcq-answer">
+                        <p><strong>Answer: C</strong> Cortisol is permissive, not primary. It ↑ adrenergic receptor expression. Without cortisol (Addison's), high catecholamines are ineffective → cardiovascular collapse despite catecholamine presence.</p>
+                    </div>
+                    <button onclick="toggleAnswer(this)" style="margin-top: 10px; padding: 8px 15px; background: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer;">Show Answer</button>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">Q18: A 35-year-old with severe depression has an abnormal 1-mg dexamethasone suppression test (cortisol 2.1 ng/dL at 8 AM). What is the MOST appropriate next step?</div>
+                    <label class="mcq-option">
+                        <input type="radio" name="q18"> A) Diagnose Cushing's syndrome and order imaging
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q18"> B) Reassess the clinical context: depression itself causes mild HPA activation; confirm with UFC and late-night salivary cortisol
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q18"> C) Start high-dose dexamethasone suppression test
+                    </label>
+                    <label class="mcq-option">
+                        <input type="radio" name="q18"> D) Measure ACTH and order pituitary MRI
+                    </label>
+                    <div class="mcq-answer">
+                        <p><strong>Answer: B</strong> Abnormal DST in depression is NOT diagnostic of Cushing's. Depression causes mild HPA activation. Distinguish with clinical features (no striae, HTN, myopathy) and confirmatory tests (UFC, late-night salivary cortisol). Treat depression; reassess HPA after mood improves.</p>
+                    </div>
+                    <button onclick="toggleAnswer(this)" style="margin-top: 10px; padding: 8px 15px; background: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer;">Show Answer</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabId) {
+            const tabs = document.querySelectorAll('.tab-content');
+            const buttons = document.querySelectorAll('.nav-tab');
+
+            tabs.forEach(tab => tab.classList.remove('active'));
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+
+            localStorage.setItem('endo_lec22', tabId);
+        }
+
+        function toggleSection(header) {
+            const section = header.closest('.section');
+            section.classList.toggle('collapsed');
+
+            const isCollapsed = section.classList.contains('collapsed');
+            const tabId = document.querySelector('.tab-content.active').id;
+            const sectionKey = `endo_lec22_${tabId}_${header.textContent.trim().substring(0, 20)}`;
+            localStorage.setItem(sectionKey, isCollapsed);
+        }
+
+        function toggleAnswer(button) {
+            const answer = button.previousElementSibling;
+            answer.classList.toggle('show');
+            button.textContent = answer.classList.contains('show') ? 'Hide Answer' : 'Show Answer';
+        }
+
+        // Load saved tab
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTab = localStorage.getItem('endo_lec22') || 'lo1';
+            const button = document.querySelector(`[onclick="switchTab('${savedTab}')"]`);
+            if (button) {
+                button.click();
+            }
+        });
+    </script>
+</body>
+</html>

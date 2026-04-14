@@ -1,0 +1,2280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 9: Hypothalamic-Pituitary-GH Axis | Endocrine Block</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-light: #dbeafe;
+            --primary-dark: #1d4ed8;
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --dark: #0f172a;
+            --text: #1e293b;
+            --muted: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: system-ui, -apple-system, sans-serif;
+            color: var(--text);
+            background-color: var(--bg);
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            width: 220px;
+            background-color: var(--dark);
+            color: white;
+            padding: 1.5rem 0;
+            border-right: 1px solid var(--border);
+            overflow-y: auto;
+            position: fixed;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-title {
+            padding: 0 1.25rem 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 1.5rem;
+            color: var(--primary-light);
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .sidebar-nav-item {
+            padding: 0.75rem 1.25rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+            transition: all 0.2s ease;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .sidebar-nav-item:hover {
+            background-color: rgba(37,99,235,0.1);
+            color: white;
+        }
+
+        .sidebar-nav-item.active {
+            border-left-color: var(--primary);
+            background-color: rgba(37,99,235,0.15);
+            color: var(--primary-light);
+            font-weight: 600;
+        }
+
+        .progress-tracker {
+            margin-top: 2rem;
+            padding: 1rem 1.25rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .progress-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 0.75rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            border-radius: 3px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .progress-text {
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.7);
+            text-align: center;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main {
+            margin-left: 220px;
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem;
+            border-bottom: 3px solid var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-text h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .header-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .badge {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .content {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .mind-map-container {
+            background-color: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .mind-map-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .mind-map-svg {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* ===== LO SECTIONS ===== */
+        .lo-section {
+            background-color: var(--surface);
+            border-left: 4px solid var(--primary);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            scroll-margin-top: 80px;
+        }
+
+        .lo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .lo-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            flex: 1;
+        }
+
+        .lo-checkbox {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            accent-color: var(--primary);
+            margin-left: 1rem;
+            flex-shrink: 0;
+        }
+
+        .lo-content {
+            display: none;
+        }
+
+        .lo-section.active .lo-content {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .lo-toggle {
+            color: var(--primary);
+            font-size: 1.25rem;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .lo-section.active .lo-toggle {
+            transform: rotate(180deg);
+        }
+
+        /* ===== CONTENT STYLES ===== */
+        h3 {
+            color: var(--dark);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h4 {
+            color: var(--primary-dark);
+            font-size: 1rem;
+            font-weight: 700;
+            margin-top: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        strong {
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+
+        em {
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        /* ===== TABLES ===== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        thead {
+            background-color: var(--primary-light);
+        }
+
+        th {
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 700;
+            color: var(--dark);
+            border: 1px solid var(--border);
+        }
+
+        td {
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: rgba(37,99,235,0.02);
+        }
+
+        tbody tr:hover {
+            background-color: rgba(37,99,235,0.05);
+        }
+
+        /* ===== FLIP CARDS ===== */
+        .flip-card {
+            background-color: var(--surface);
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            perspective: 1000px;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            min-height: 120px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .flip-card-front {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .flip-card-back {
+            background-color: var(--primary-light);
+            color: var(--dark);
+            transform: rotateY(180deg);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* ===== SUMMARY BOX ===== */
+        .summary-box {
+            background: linear-gradient(135deg, rgba(37,99,235,0.05), rgba(219,238,254,0.5));
+            border-left: 4px solid var(--primary);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .summary-title {
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+
+        .summary-title span {
+            margin-right: 0.5rem;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .summary-item {
+            padding: 1rem;
+            background-color: white;
+            border-radius: 6px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .summary-item-title {
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .summary-item-content {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text);
+        }
+
+        /* ===== MCQ ===== */
+        .mcq {
+            background-color: white;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mcq-stem {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .mcq-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .mcq-option {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background-color: white;
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+
+        .mcq-option:hover {
+            background-color: var(--primary-light);
+            border-color: var(--primary);
+        }
+
+        .mcq-option.selected {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        .mcq-reveal-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .mcq-reveal-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .mcq-explanation {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: rgba(16,185,129,0.05);
+            border-left: 4px solid var(--success);
+            border-radius: 6px;
+        }
+
+        .mcq-explanation.show {
+            display: block;
+        }
+
+        .explanation-title {
+            font-weight: 700;
+            color: var(--success);
+            margin-bottom: 0.5rem;
+        }
+
+        .explanation-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+        /* ===== DIAGRAMS ===== */
+        .diagram {
+            background-color: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            line-height: 1.4;
+        }
+
+        /* ===== MNEMONICS ===== */
+        .mnemonic {
+            background: linear-gradient(135deg, #fef08a, #fcd34d);
+            border-left: 4px solid #f59e0b;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-weight: 600;
+            color: #78350f;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 180px;
+                font-size: 0.8rem;
+            }
+
+            .main {
+                margin-left: 180px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header-text h1 {
+                font-size: 1.5rem;
+            }
+
+            .content {
+                padding: 1rem;
+            }
+
+            .lo-section {
+                padding: 1.5rem;
+            }
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            .sidebar {
+                display: none;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .header {
+                page-break-after: avoid;
+            }
+
+            .lo-section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <div class="sidebar-title">Lec 09: GH Axis</div>
+            <nav class="sidebar-nav" id="sidebar-nav"></nav>
+
+            <div class="progress-tracker">
+                <div class="progress-label">Progress</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="progress-text"><span id="progress-pct">0</span>% Complete</div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="main">
+            <!-- HEADER -->
+            <div class="header">
+                <div class="header-content">
+                    <div class="header-text">
+                        <h1>Lecture 9: GH Axis</h1>
+                        <p style="color: rgba(255,255,255,0.8); margin: 0;">Hypothalamic-Pituitary-Growth Hormone Axis</p>
+                    </div>
+                    <div class="header-meta">
+                        <span class="badge">Physiology</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTENT -->
+            <div class="content">
+                <!-- MIND MAP -->
+                <div class="mind-map-container">
+                    <div class="mind-map-title">GH Axis Overview</div>
+                    <svg class="mind-map-svg" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Central node -->
+                        <circle cx="300" cy="200" r="35" fill="#2563eb" stroke="#1d4ed8" stroke-width="2"/>
+                        <text x="300" y="205" text-anchor="middle" font-size="14" font-weight="bold" fill="white">GH Axis</text>
+
+                        <!-- Left branch: Hypothalamus -->
+                        <line x1="265" y1="185" x2="100" y2="100" stroke="#64748b" stroke-width="2"/>
+                        <circle cx="100" cy="100" r="25" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+                        <text x="100" y="105" text-anchor="middle" font-size="11" font-weight="bold">Hypothalamus</text>
+
+                        <!-- Sub-branches from Hypothalamus -->
+                        <line x1="75" y1="80" x2="30" y2="40" stroke="#64748b" stroke-width="1.5"/>
+                        <text x="25" y="35" font-size="9" fill="#1e293b">GHRH (↑)</text>
+
+                        <line x1="100" y1="75" x2="100" y2="30" stroke="#64748b" stroke-width="1.5"/>
+                        <text x="105" y="35" font-size="9" fill="#1e293b">SST (↓)</text>
+
+                        <line x1="125" y1="80" x2="170" y2="40" stroke="#64748b" stroke-width="1.5"/>
+                        <text x="165" y="35" font-size="9" fill="#1e293b">Ghrelin</text>
+
+                        <!-- Right branch: Anterior Pituitary -->
+                        <line x1="335" y1="185" x2="500" y2="100" stroke="#64748b" stroke-width="2"/>
+                        <circle cx="500" cy="100" r="25" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+                        <text x="500" y="105" text-anchor="middle" font-size="11" font-weight="bold">Ant. Pituitary</text>
+
+                        <!-- GH output -->
+                        <line x1="500" y1="125" x2="500" y2="170" stroke="#64748b" stroke-width="1.5"/>
+                        <text x="510" y="150" font-size="9" fill="#1e293b">GH</text>
+
+                        <!-- Down branch: Liver/IGF-1 -->
+                        <line x1="300" y1="235" x2="300" y2="300" stroke="#64748b" stroke-width="2"/>
+                        <circle cx="300" cy="325" r="25" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+                        <text x="300" y="330" text-anchor="middle" font-size="11" font-weight="bold">Liver/IGF-1</text>
+
+                        <!-- Effects -->
+                        <line x1="275" y1="340" x2="180" y2="360" stroke="#64748b" stroke-width="1.5"/>
+                        <text x="175" y="375" font-size="9" fill="#1e293b">↑Growth</text>
+
+                        <line x1="325" y1="340" x2="420" y2="360" stroke="#64748b" stroke-width="1.5"/>
+                        <text x="410" y="375" font-size="9" fill="#1e293b">↑Metabolism</text>
+
+                        <!-- Feedback loop -->
+                        <path d="M 330 305 Q 380 250 370 210" stroke="#ef4444" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+                        <text x="375" y="260" font-size="9" fill="#ef4444">Negative feedback</text>
+                    </svg>
+                </div>
+
+                <!-- LOs CONTAINER -->
+                <div id="los-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== DATA =====
+        const LOs = [
+            {
+                id: 'lo1',
+                title: 'LO 1: GH Structure, Secretion & Regulation',
+                content: `
+                    <h3>Growth Hormone (GH) Basics</h3>
+                    <p>Growth hormone is a <strong>191-amino acid polypeptide</strong> secreted by <strong>somatotrophs</strong> in the anterior pituitary, making up ~20% of anterior pituitary cells.</p>
+
+                    <h4>Pulsatile Secretion Pattern</h4>
+                    <p>GH is released in <strong>6–10 pulses per day</strong>, with the largest pulse occurring during <strong>slow-wave sleep (Stage 3/4 NREM)</strong>. This pulsatility is critical for maintaining normal physiology and distinguishes GH from steady-state hormones.</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Factor</th>
+                                <th>Effect</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Sleep (slow-wave)</strong></td>
+                                <td>↑↑ GH (maximal pulse)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Exercise</strong></td>
+                                <td>↑ GH (within 10–15 min)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Hypoglycemia</strong></td>
+                                <td>↑ GH (counter-regulatory)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fasting / Low protein</strong></td>
+                                <td>↑ GH</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Estrogen, Testosterone</strong></td>
+                                <td>↑ GH (amplify response)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Stress, Dopamine, α2-agonists</strong></td>
+                                <td>↑ GH</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Oral glucose load</strong></td>
+                                <td>↓ GH (suppression test)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Hyperglycemia, obesity</strong></td>
+                                <td>↓ GH</td>
+                            </tr>
+                            <tr>
+                                <td><strong>IGF-1 (negative feedback)</strong></td>
+                                <td>↓ GH (long-loop)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Glucocorticoids (chronic)</strong></td>
+                                <td>↓ GH</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Hypothalamic Control: Dual Regulation</h4>
+                    <p>The hypothalamus controls GH via <strong>two opposing signals</strong>:</p>
+                    <ul>
+                        <li><strong>GHRH (Growth Hormone-Releasing Hormone)</strong>: secreted by neurons in the <strong>arcuate nucleus</strong>
+                            <ul>
+                                <li>Stimulates GH via <strong>Gs/cAMP</strong> pathway</li>
+                                <li>Released pulsatilely</li>
+                            </ul>
+                        </li>
+                        <li><strong>Somatostatin (SST or SRIF)</strong>: secreted by neurons in the <strong>periventricular nucleus</strong>
+                            <ul>
+                                <li>Inhibits GH via <strong>Gi pathway</strong></li>
+                                <li>Released pulsatilely (opposite GHRH)</li>
+                                <li>Also inhibits TSH, ACTH, insulin (pan-inhibitor)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p><strong>Key insight:</strong> The pulsatile <em>alternation</em> between GHRH and somatostatin drives GH pulses. When GHRH rises, somatostatin falls, and vice versa.</p>
+
+                    <h4>Ghrelin: "The Hunger Hormone"</h4>
+                    <ul>
+                        <li>Produced by <strong>stomach (X cells)</strong> in response to fasting</li>
+                        <li>Acts via <strong>GHS-R (Growth Hormone Secretagogue Receptor)</strong> on pituitary somatotrophs and hypothalamic neurons</li>
+                        <li>Stimulates <strong>both GH release and appetite</strong></li>
+                        <li>Also stimulates GHRH neurons in the hypothalamus</li>
+                    </ul>
+
+                    <h4>Feedback Loops (Critical for Exams!)</h4>
+                    <div class="diagram">Long-loop negative feedback:
+GH → Liver → IGF-1 ↑
+  ↓
+  Inhibits GHRH (hypothalamus)
+  Stimulates somatostatin (hypothalamus)
+  Directly inhibits GH secretion (pituitary) — SHORT-LOOP feedback
+
+Short-loop negative feedback:
+GH ↑ → Directly inhibits own GHRH release (hypothalamus)
+                    </div>
+
+                    <h4>GH Stimulators Mnemonic: "SLEEP FEST"</h4>
+                    <div class="mnemonic">
+                        🧠 <strong>S</strong>leep | <strong>L</strong>ow glucose | <strong>E</strong>xercise | <strong>E</strong>strogen | <strong>P</strong>rotein | <strong>F</strong>asting | <strong>E</strong>xcitement (stress) | <strong>S</strong>omatostatin ↓ | <strong>T</strong>estosterone
+                    </div>
+
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">Why is GH pulsatile?</div>
+                            <div class="flip-card-back">Pulsatile GHRH and somatostatin create GH pulses. This pulsatility is crucial for target tissue responsiveness and maintaining physiologic signaling.</div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">What stimulates GH during fasting?</div>
+                            <div class="flip-card-back">Ghrelin (from stomach) and decreased somatostatin (from hypothalamus). Hypoglycemia directly stimulates GHRH.</div>
+                        </div>
+                    </div>
+
+                    <div class="summary-box">
+                        <div class="summary-title">
+                            <span>🎯</span> How This LO Is Tested
+                        </div>
+                        <div class="summary-grid">
+                            <div class="summary-item">
+                                <div class="summary-item-title">Clinical Pearl</div>
+                                <div class="summary-item-content">Single random GH level = USELESS (too pulsatile). Must use IGF-1 screening or GH stimulation test.</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-item-title">Sleep Physiology</div>
+                                <div class="summary-item-content">Largest GH pulse occurs 60–90 min after sleep onset (Stage 3/4 NREM). Used to explain childhood growth during sleep.</div>
+                            </div>
+                        </div>
+                        <div class="summary-title" style="margin-top: 1rem;">
+                            <span>⚠️</span> Common Exam Traps
+                        </div>
+                        <div class="summary-grid">
+                            <div class="summary-item">
+                                <div class="summary-item-title">Random GH Trap</div>
+                                <div class="summary-item-content">"Patient has low GH level" — This is meaningless without context (time of day, sleep state). Use IGF-1 instead.</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-item-title">Somatostatin Ubiquity</div>
+                                <div class="summary-item-content">Somatostatin inhibits TSH, ACTH, insulin, AND GH. Somatostatin-secreting tumors cause "pan-endocrine hyposecretion."</div>
+                            </div>
+                        </div>
+                        <div class="summary-title" style="margin-top: 1rem;">
+                            <span>⭐</span> HY Bullet Points
+                        </div>
+                        <ul style="margin-top: 0.5rem;">
+                            <li>GH is 191-aa polypeptide secreted pulsatilely (~6–10 pulses/day)</li>
+                            <li>GHRH (↑) and somatostatin (↓) drive pulsatility via hypothalamus</li>
+                            <li>Ghrelin (stomach) stimulates GH and appetite during fasting</li>
+                            <li>GH stimulators: sleep, exercise, hypoglycemia, fasting, protein, stress, dopamine</li>
+                            <li>GH inhibitors: hyperglycemia, obesity, IGF-1, glucocorticoids</li>
+                            <li>IGF-1 provides long-loop negative feedback (↓GHRH, ↑somatostatin)</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                id: 'lo2',
+                title: 'LO 2: GH Mechanism of Action & IGF-1',
+                content: `
+                    <h3>GH Receptor Signaling</h3>
+                    <p>The GH receptor is a <strong>single-pass transmembrane receptor</strong> that does <strong>NOT</strong> use G proteins; instead, it activates the <strong>JAK2-STAT5 pathway</strong>.</p>
+
+                    <h4>JAK2-STAT5 Mechanism</h4>
+                    <ol>
+                        <li>GH binds to one GH receptor</li>
+                        <li>Receptor recruits a <strong>second GH receptor</strong> → dimerization</li>
+                        <li>JAK2 (Janus kinase 2) is recruited and autophosphorylates</li>
+                        <li>JAK2 phosphorylates STAT5 (Signal Transducer and Activator of Transcription 5)</li>
+                        <li>Phosphorylated STAT5 translocates to nucleus → gene transcription</li>
+                    </ol>
+
+                    <div class="mnemonic">
+                        🧬 <strong>GH → JAK STAT:</strong> Just A Kinase Signal To Act on Transcription
+                    </div>
+
+                    <h4>Direct vs. Indirect Effects of GH</h4>
+                    <p>GH has <strong>biphasic metabolic effects</strong> depending on concentration and context:</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Phase / Concentration</th>
+                                <th>Effect</th>
+                                <th>Mechanism</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Acute / Low levels</strong></td>
+                                <td>Insulin-like (anabolic)</td>
+                                <td>↑ glucose uptake, ↑ protein synthesis, ↑ amino acid uptake</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Chronic / High levels</strong></td>
+                                <td>Anti-insulin (catabolic)</td>
+                                <td>↑ lipolysis, ↑ FFA, ↑ gluconeogenesis, ↑ glucose (diabetogenic)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Growth / Protein</strong></td>
+                                <td>↑ muscle mass, ↑ lean body mass</td>
+                                <td>Direct + IGF-1 mediated</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Bone</strong></td>
+                                <td>↑ chondrocyte proliferation → linear growth</td>
+                                <td>Direct (GH) + indirect (IGF-1)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>IGF-1: The Central Growth Factor</h4>
+                    <p><strong>Insulin-Like Growth Factor 1 (IGF-1)</strong>, also called <strong>somatomedin C</strong>, is the primary mediator of GH's growth effects.</p>
+
+                    <h4>Source & Regulation</h4>
+                    <ul>
+                        <li><strong>Primary source:</strong> Liver (70–80% of circulating IGF-1)</li>
+                        <li><strong>Local production:</strong> Muscle, bone, cartilage, skin, adipose tissue (autocrine/paracrine)</li>
+                        <li><strong>GH-dependent:</strong> Chronic GH exposure increases hepatic IGF-1 synthesis</li>
+                        <li><strong>Stimulated by:</strong> Insulin, amino acids, zinc, iodine</li>
+                    </ul>
+
+                    <h4>IGF-1 Receptor & Mechanism</h4>
+                    <ul>
+                        <li><strong>Receptor type:</strong> Tyrosine kinase receptor (like insulin receptor)</li>
+                        <li><strong>Signaling:</strong> Autophosphorylation → PI3K/Akt and MAPK pathways</li>
+                        <li><strong>Cellular effects:</strong> ↑ protein synthesis, ↑ glucose uptake, ↑ cell proliferation, ↑ cell survival</li>
+                    </ul>
+
+                    <h4>IGF-1 Binding Proteins (IGFBPs)</h4>
+                    <p>IGF-1 circulates bound to <strong>IGF-binding proteins (IGFBPs)</strong>:</p>
+                    <ul>
+                        <li><strong>IGFBP-3:</strong> Main carrier (~90% of circulating IGF-1); GH-dependent; increases IGF-1 half-life</li>
+                        <li><strong>Other IGFBPs:</strong> IGFBP-1, -2, -4, -5, -6 (tissue-specific, regulate local IGF-1 bioavailability)</li>
+                    </ul>
+
+                    <h4>Physiologic Actions of IGF-1</h4>
+                    <ul>
+                        <li>↑ Linear bone growth (epiphyseal plate chondrocytes)</li>
+                        <li>↑ Protein synthesis in muscle and other tissues</li>
+                        <li>↑ Cell proliferation and differentiation</li>
+                        <li>↑ Organ size and function</li>
+                        <li>↓ Protein breakdown (anti-catabolic)</li>
+                    </ul>
+
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">Why is IGF-1 better than GH for diagnosis?</div>
+                            <div class="flip-card-back">IGF-1 is stable with a longer half-life (~12–15 hours) and reflects integrated GH secretion over days. GH is pulsatile and changes minute-to-minute.</div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">What's the "anti-insulin" effect of GH?</div>
+                            <div class="flip-card-back">Chronic high GH levels promote lipolysis, gluconeogenesis, and insulin resistance. GH is diabetogenic at high levels.</div>
+                        </div>
+                    </div>
+
+                    <div class="diagram">GH Signaling Cascade:
+GH ↓
+├─ Binds GH receptor (1st molecule)
+├─ Recruits 2nd GH receptor → dimerization
+├─ JAK2 autophosphorylation
+├─ JAK2 phosphorylates STAT5
+└─ pSTAT5 → nucleus → gene transcription
+                    </div>
+
+                    <h4>Age-Related Decline: Somatopause</h4>
+                    <p>Both GH and IGF-1 decline progressively with age (roughly 10% per decade after age 30):</p>
+                    <ul>
+                        <li>↓ GH pulse amplitude and frequency</li>
+                        <li>↓ IGF-1 levels</li>
+                        <li>Result: "sarcopenic obesity" (↓muscle, ↑visceral fat, ↓bone density)</li>
+                        <li><em>Note:</em> GH replacement in aged patients is controversial and not routinely recommended due to potential cancer risk</li>
+                    </ul>
+
+                    <div class="summary-box">
+                        <div class="summary-title">
+                            <span>🎯</span> How This LO Is Tested
+                        </div>
+                        <div class="summary-grid">
+                            <div class="summary-item">
+                                <div class="summary-item-title">Signal Pathway</div>
+                                <div class="summary-item-content">"JAK-STAT" questions: GH does NOT use G-proteins; it's a receptor dimerization → tyrosine kinase pathway.</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-item-title">IGF-1 Production</div>
+                                <div class="summary-item-content">Liver is the primary source of circulating IGF-1. GH stimulates hepatic IGF-1 synthesis.</div>
+                            </div>
+                        </div>
+                        <div class="summary-title" style="margin-top: 1rem;">
+                            <span>⚠️</span> Common Exam Traps
+                        </div>
+                        <div class="summary-grid">
+                            <div class="summary-item">
+                                <div class="summary-item-title">GH Biphasic Action</div>
+                                <div class="summary-item-content">Don't memorize GH as "always anabolic." High chronic GH is diabetogenic and catabolic (lipolysis, FFA).</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-item-title">IGF-1 vs. GH</div>
+                                <div class="summary-item-content">IGF-1 is the diagnostic marker (stable). GH is the signaling hormone (pulsatile, short half-life).</div>
+                            </div>
+                        </div>
+                        <div class="summary-title" style="margin-top: 1rem;">
+                            <span>⭐</span> HY Bullet Points
+                        </div>
+                        <ul style="margin-top: 0.5rem;">
+                            <li>GH receptor: JAK2-STAT5 pathway (NOT G-protein)</li>
+                            <li>Direct effects: acute = insulin-like; chronic = anti-insulin/diabetogenic</li>
+                            <li>Indirect effects: mediated by IGF-1 (produced mainly in liver)</li>
+                            <li>IGF-1: tyrosine kinase receptor; ↑growth, protein synthesis, organ size</li>
+                            <li>IGFBP-3: main IGF-1 carrier (GH-dependent); increases half-life</li>
+                            <li>IGF-1 is best test for GH excess/deficiency (stable, reflects integrated GH)</li>
+                            <li>Somatopause: age-related ↓GH and ↓IGF-1; contributes to sarcopenic obesity</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                id: 'lo3',
+                title: 'LO 3: GH Deficiency — Causes, Features & Diagnosis',
+                content: `
+                    <h3>Clinical Presentation of GH Deficiency</h3>
+
+                    <h4>In Children</h4>
+                    <ul>
+                        <li><strong>Growth failure:</strong> Height < 2 SD below mean for age; may be first sign</li>
+                        <li><strong>Short stature:</strong> Progressive if untreated</li>
+                        <li><strong>Delayed bone age:</strong> Bone age < chronological age (on wrist X-ray)</li>
+                        <li><strong>Delayed puberty:</strong> If also GnRH deficient (CPHD)</li>
+                        <li><strong>Increased visceral adiposity:</strong> "Baby fat" appearance, truncal obesity</li>
+                        <li><strong>Hypoglycemia:</strong> GH is counter-regulatory; deficiency → impaired fasting glucose recovery</li>
+                        <li><strong>Normal birth size:</strong> GH NOT required for fetal growth (insulin and IGF-2 are fetal growth factors)</li>
+                        <li><strong>Decreased muscle mass</strong></li>
+                    </ul>
+
+                    <h4>In Adults</h4>
+                    <ul>
+                        <li><strong>Decreased muscle mass and strength</strong></li>
+                        <li><strong>Increased visceral fat and dyslipidemia</strong></li>
+                        <li><strong>Reduced bone mineral density (osteoporosis)</strong></li>
+                        <li><strong>Fatigue and reduced quality of life</strong></li>
+                        <li><strong>Impaired cardiac function</strong> (GH deficiency → ↓ cardiac output)</li>
+                        <li><strong>Increased cardiovascular risk</strong></li>
+                    </ul>
+
+                    <h3>Causes of GH Deficiency</h3>
+
+                    <h4>Congenital Causes</h4>
+                    <ul>
+                        <li><strong>GHRH receptor mutations:</strong> Rare; inability to respond to GHRH</li>
+                        <li><strong>Pituitary transcription factor mutations:</strong>
+                            <ul>
+                                <li><strong>Pit-1 mutations:</strong> Combined pituitary hormone deficiency (GH, TSH, prolactin ↓)</li>
+                                <li><strong>PROP-1 mutations:</strong> CPHD (GH, TSH, prolactin, ACTH, sometimes LH/FSH ↓)</li>
+                            </ul>
+                        </li>
+                        <li><strong>GH gene deletions/mutations:</strong> Rare isolated GH deficiency</li>
+                        <li><strong>Laron syndrome (GH insensitivity):</strong> GH receptor mutation
+                            <ul>
+                                <li>↑↑ GH (no feedback inhibition)</li>
+                                <li>↓↓ IGF-1 (cannot produce due to receptor defect)</li>
+                                <li>Phenotype: severe short stature, GH resistance</li>
+                                <li>Treatment: recombinant IGF-1 (mecasermin), NOT GH</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>Acquired Causes (More Common)</h4>
+                    <ul>
+                        <li><strong>Pituitary tumors:</strong> Secreting (prolactinoma, ACTH) or non-secreting mass effect
+                            <ul>
+                                <li>Compress pituitary → ↓ GH (and other hormones)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Craniopharyngioma:</strong> Tumor near pituitary/hypothalamus; damages pituitary stalk</li>
+                        <li><strong>Head trauma:</strong> Shearing injury to pituitary stalk → hypopituitarism</li>
+                        <li><strong>Radiation therapy:</strong> To brain/hypothalamus; delayed GH deficiency (most radiosensitive axis)</li>
+                        <li><strong>Infiltrative disease:</strong>
+                            <ul>
+                                <li>Sarcoidosis</li>
+                                <li>Hemochromatosis (iron deposition in pituitary)</li>
+                                <li>Tuberculosis</li>
+                            </ul>
+                        </li>
+                        <li><strong>Sheehan's syndrome:</strong> Postpartum pituitary necrosis → hypopituitarism (GH usually first affected)</li>
+                        <li><strong>Idiopathic:</strong> Most common in children (no clear etiology)</li>
+                    </ul>
+
+                    <h3>Diagnosis of GH Deficiency</h3>
+
+                    <h4>Step 1: Screening with IGF-1</h4>
+                    <ul>
+                        <li><strong>IGF-1 low for age/sex</strong> → suggests GH deficiency (or malnutrition, hypothyroidism, liver disease)</li>
+                        <li>Age-matched normative values essential (IGF-1 changes with age, sex, puberty)</li>
+                        <li><strong>Single most useful screening test</strong></li>
+                    </ul>
+
+                    <h4>Step 2: GH Stimulation Tests (Definitive)</h4>
+                    <p>When IGF-1 is low, provoke GH secretion to confirm deficiency:</p>
+                    <ul>
+                        <li><strong>Insulin Tolerance Test (ITT):</strong> Gold standard
+                            <ul>
+                                <li>IV regular insulin → hypoglycemia (target: glucose <40 mg/dL)</li>
+                                <li>GH should rise in response (normal: peak GH >10 ng/mL; deficient: <5 ng/mL)</li>
+                                <li>Also tests ACTH/cortisol response (counter-regulatory)</li>
+                                <li>Contraindication: seizure disorder, cardiac disease</li>
+                            </ul>
+                        </li>
+                        <li><strong>GHRH stimulation:</strong> Give synthetic GHRH; measure GH response
+                            <ul>
+                                <li>Differentiates hypothalamic (↑ response) from pituitary (↓ response) deficiency</li>
+                            </ul>
+                        </li>
+                        <li><strong>Arginine stimulation:</strong> Amino acid that stimulates GH; less robust than ITT</li>
+                        <li><strong>Glucagon stimulation:</strong> Alternative to ITT (safer if seizure risk)</li>
+                        <li><strong>Levodopa (L-DOPA):</strong> Stimulates GH via dopamine</li>
+                    </ul>
+
+                    <h4>Diagnostic Criteria</h4>
+                    <ul>
+                        <li><strong>GH peak <10 ng/mL</strong> on stimulation test = deficient (some use <5 ng/mL cutoff)</li>
+                        <li><strong>Low IGF-1</strong> (age-adjusted) + normal prolactin + normal other pituitary hormones = isolated GH deficiency</li>
+                        <li><strong>Multiple hormone deficiencies</strong> → consider CPHD (central hypopituitarism)</li>
+                    </ul>
+
+                    <h4>Additional Tests</h4>
+                    <ul>
+                        <li><strong>Bone age X-ray:</strong> Left wrist radiograph (Greulich-Pyle atlas)
+                            <ul>
+                                <li>Bone age < chronological age = consistent with GH deficiency (or constitutional growth delay, hypothyroidism)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Growth velocity:</strong> Track height over 3–6 months
+                            <ul>
+                                <li>Decreased velocity = pathological</li>
+                            </ul>
+                        </li>
+                        <li><strong>MRI pituitary:</strong> If secondary (acquired) cause suspected to identify tumor or structural lesion</li>
+                    </ul>
+
+                    <h4>Differential: Familial Short Stature vs. GH Deficiency</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Familial Short Stature</th>
+                                <th>GH Deficiency</th>
+                                <th>Constitutional Growth Delay</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Bone age</strong></td>
+                                <td>Normal (= chron. age)</td>
+                                <td>Delayed (&lt; chron. age)</td>
+                                <td>Delayed (&lt; chron. age)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Growth velocity</strong></td>
+                                <td>Normal (tracks curve)</td>
+                                <td>Decreased</td>
+                                <td>Normal (for bone age)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>IGF-1</strong></td>
+                                <td>Normal</td>
+                                <td>Low</td>
+                                <td>Normal</td>
+                            </tr>
+                            <tr>
+                                <td><strong>GH stimulation</strong></td>
+                                <td>Normal response</td>
+                                <td>Blunted (&lt;5–10 ng/mL)</td>
+                                <td>Normal response</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Predicted adult height</strong></td>
+                                <td>= mid-parental height</td>
+                                <td>↓ (below mid-parental)</td>
+                                <td>= mid-parental height (eventual)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Family hx</strong></td>
+                                <td>Positive (short parents)</td>
+                                <td>Negative (or genetic)</td>
+                                <td>May be positive (delayed puberty hx)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Treatment: Recombinant GH (Somatropin)</h3>
+                    <ul>
+                        <li><strong>Route:</strong> Subcutaneous injection (daily or weekly formulations)</li>
+                        <li><strong>Timing:</strong> Continue until epiphyses close (to allow maximum linear growth in children)</li>
+                        <li><strong>Adults:</strong> May continue as lifelong replacement for metabolic and quality-of-life benefits</li>
+                        <li><strong>Monitoring:</strong> Track growth velocity, IGF-1 (target: upper half of normal range)</li>
+                        <li><strong>Contraindications:</strong> Active malignancy (GH could theoretically promote growth of malignant cells)</li>
+                    </ul>
+
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">Why is birth size normal in GH-deficient infants?</div>
+                            <div class="flip-card-back">GH is not required for fetal growth. Fetal growth is driven by insulin and IGF-2. GH becomes important after birth.</div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">How do you differentiate GH deficiency from constitutional growth delay?</div>
+                            <div class="flip-card-back">IGF-1 and GH stimulation tests. Both have delayed bone age, but GH-deficient kids have low IGF-1 and blunted GH response to stimulation. Constitutional delay has normal GH and IGF-1.</div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">What is Laron syndrome, and how is it treated?</div>
+                            <div class="flip-card-back">GH receptor mutation → high GH, low IGF-1. Treat with recombinant IGF-1 (mecasermin), NOT GH (which won't work without receptors).</div>
+                        </div>
+                    </div>
+
+                    <div class="summary-box">
+                        <div class="summary-title">
+                            <span>🎯</span> How This LO Is Tested
+                        </div>
+                        <div class="summary-grid">
+                            <div class="summary-item">
+                                <div class="summary-item-title">Screening Tool</div>
+                                <div class="summary-item-content">IGF-1 is the best screening test (stable, age-adjusted). Always pair with clinical history.</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-item-title">Diagnostic Gold Standard</div>
+                                <div class="summary-item-content">Insulin Tolerance Test (ITT) or GHRH stimulation test. ITT gold standard; GHRH differentiates hypothalamic vs. pituitary cause.</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-item-title">Differential Diagnosis</div>
+                                <div class="summary-item-content">Familial short stature (normal IGF-1) vs. GH deficiency (low IGF-1) vs. constitutional delay (normal IGF-1 + GH).</div>
+                            </div>
+                        </div>
+                        <div class="summary-title" style="margin-top: 1rem;">
+                            <span>⚠️</span> Common Exam Traps
+                        </div>
+                        <div class="summary-grid">
+                            <div class="summary-item">
+                                <div class="summary-item-title">Bone Age = Chron. Age?</div>
+                                <div class="summary-item-content">If bone age = chronological age in a short child, think familial short stature, NOT GH deficiency. GH deficiency = delayed bone age.</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-item-title">Laron Syndrome Paradox</div>
+                                <div class="summary-item-content">HIGH GH + LOW IGF-1 = Laron. Treat with IGF-1, not GH. Many students reflexively give GH without recognizing the receptor problem.</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-item-title">Fetal Growth Myth</div>
+                                <div class="summary-item-content">"GH-deficient babies are small at birth" — WRONG. Birth size is normal because GH not needed prenatally.</div>
+                            </div>
+                        </div>
+                        <div class="summary-title" style="margin-top: 1rem;">
+                            <span>⭐</span> HY Bullet Points
+                        </div>
+                        <ul style="margin-top: 0.5rem;">
+                            <li>Children: growth failure, delayed bone age, increased adiposity, hypoglycemia</li>
+                            <li>Adults: decreased muscle, increased fat, ↓ bone density, fatigue</li>
+                            <li>Congenital: Pit-1/PROP-1 mutations, GHRH-R mutations, Laron syndrome (GH-R defect)</li>
+                            <li>Acquired: pituitary tumor, craniopharyngioma, head trauma, radiation, infiltrative disease</li>
+                            <li>Screening: Low IGF-1 (age-adjusted)</li>
+                            <li>Diagnosis: GH stimulation test (ITT or GHRH); GH peak &lt;5–10 ng/mL = deficient</li>
+                            <li>Bone age &lt; chronological age (delayed)</li>
+                            <li>Laron syndrome: High GH + low IGF-1 → treat with mecasermin, not GH</li>
+                            <li>Treatment: Recombinant GH (somatropin) SC daily</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                id: 'lo4',
+                title: 'LO 4: GH Excess — Acromegaly & Gigantism',
+                content: `
+                    <h3>Definitions</h3>
+                    <ul>
+                        <li><strong>Gigantism:</strong> GH excess <strong>BEFORE</strong> epiphyseal closure (open growth plates)
+                            <ul>
+                                <li>Results in abnormally tall stature (tall and large features)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Acromegaly:</strong> GH excess <strong>AFTER</strong> epiphyseal closure (fused growth plates)
+                            <ul>
+                                <li>Cannot grow taller; instead → soft tissue and organ overgrowth</li>
+                                <li>More common in adults</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>Etiology: Causes of GH Excess</h3>
+
+                    <h4>Primary (Pituitary-Originating)</h4>
+                    <ul>
+                        <li><strong>GH-secreting pituitary adenoma (somatotropinoma):</strong> >95% of acromegaly cases
+                            <ul>
+                                <li>Usually macroadenoma (>10 mm) at diagnosis due to late presentation</li>
+                                <li>Can cause mass effect: bitemporal hemianopsia (compression of optic chiasm), headaches, hypopituitarism (other hormones)</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>Secondary (Ectopic/Hypothalamic)</h4>
+                    <ul>
+                        <li><strong>Ectopic GHRH production:</strong> Rare (~1% of acromegaly)
+                            <ul>
+                                <li>Carcinoid tumors (lungs, thymus, GI tract)</li>
+                                <li>Small-cell lung cancer</li>
+                                <li>Pancreatic endocrine tumors</li>
+                                <li>Mechanism: Ectopic tumor secretes GHRH → stimulates normal pituitary somatotrophs → ↑ GH</li>
+                                <li>Can have elevated GHRH level (diagnostic clue)</li>
+                            </ul>
+                        </li>
+                        <li><strong>GH-secreting ectopic tumors:</strong> Extremely rare (lung, stomach)</li>
+                    </ul>
+
+                    <h4>Genetic Syndromes</h4>
+                    <ul>
+                        <li><strong>McCune-Albright Syndrome (MAS):</strong> GNAS1 mutation (early somatic)
+                            <ul>
+                                <li>Constitutively active Gs protein → autonomous hormone production</li>
+                                <li>Triad: Café-au-lait spots, polyostotic fibrous dysplasia, precocious puberty</li>
+                                <li>↑ GH, ↑ TSH, ↑ ACTH, ↑ prolactin (multiple endocrine cells affected)</li>
+                                <li>Relatively resistant to medical/surgical treatment</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>Clinical Features of Acromegaly</h3>
+
+                    <h4>Acral Enlargement (Most Characteristic)</h4>
+                    <ul>
+                        <li><strong>Hands:</strong> Progressive swelling; rings become tight</li>
+                        <li><strong>Feet:</strong> Shoe size increases (classic early sign)</li>
+                        <li><strong>Measurement:</strong> Compare hand/foot size to old photos</li>
+                    </ul>
+
+                    <h4>Facial Changes (Coarsening)</h4>
+                    <ul>
+                        <li><strong>Frontal bossing:</strong> Prominent forehead</li>
+                        <li><strong>Mandibular prognathism:</strong> Jaw protrusion ("lantern jaw")</li>
+                        <li><strong>Macroglossia:</strong> Enlarged tongue; may interfere with swallowing, contribute to sleep apnea</li>
+                        <li><strong>Widely spaced teeth</strong> (due to maxillary/mandibular growth)</li>
+                        <li><strong>Prominent supraorbital ridges</strong> (brow ridge)</li>
+                        <li><strong>Thickened lips and nose</strong></li>
+                    </ul>
+
+                    <h4>Soft Tissue</h4>
+                    <ul>
+                        <li><strong>Skin tags</strong> (benign skin polyps; increased risk)</li>
+                        <li><strong>Oily, thickened skin</strong> (sebaceous gland hypertrophy)</li>
+                        <li><strong>Hyperhidrosis:</strong> Excessive sweating (night sweats, general)</li>
+                        <li><strong>Skin hyperpigmentation</strong> (sometimes)</li>
+                    </ul>
+
+                    <h4>Cardiovascular</h4>
+                    <ul>
+                        <li><strong>Cardiomegaly:</strong> <strong>Leading cause of death</strong> in acromegaly
+                            <ul>
+                                <li>GH directly stimulates cardiac myocyte hypertrophy</li>
+                                <li>Results in systolic and diastolic dysfunction</li>
+                            </ul>
+                        </li>
+                        <li><strong>Hypertension:</strong> Present in ~50%; mechanisms include ↑ sympathetic tone, ↑ RAAS</li>
+                        <li><strong>Atherosclerosis:</strong> Increased cardiovascular risk</li>
+                    </ul>
+
+                    <h4>Sleep Disorders</h4>
+                    <ul>
+                        <li><strong>Sleep apnea (obstructive):</strong> Due to macroglossia, soft tissue overgrowth in pharynx
+                            <ul>
+                                <li>Exacerbates cardiomegaly burden</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>Metabolic / Endocrine</h4>
+                    <ul>
+                        <li><strong>Diabetes / Glucose intolerance:</strong> GH is diabetogenic (insulin-antagonistic)
+                            <ul>
+                                <li>Present in ~50% of acromegaly patients</li>
+                            </ul>
+                        </li>
+                        <li><strong>Hypercalcemia and hypercalciuria:</strong> GH stimulates renal 1,25-dihydroxyvitamin D synthesis
+                            <ul>
+                                <li>↑ serum Ca²⁺, ↑ urinary Ca²⁺ → risk of nephrolithiasis</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>Musculoskeletal</h4>
+                    <ul>
+                        <li><strong>Carpal tunnel syndrome:</strong> Median nerve compression from soft tissue swelling
+                            <ul>
+                                <li>Bilateral, common presenting symptom</li>
+                                <li>May respond to medical treatment but often requires surgical decompression</li>
+                            </ul>
+                        </li>
+                        <li><strong>Arthralgia and arthritis:</strong> Joint pain and arthritic changes (knees, hips, shoulders)
+                            <ul>
+                                <li>Due to cartilage overgrowth and then degeneration</li>
+                            </ul>
+                        </li>
+                        <li><strong>Kyphosis:</strong> Excessive thoracic kyphosis (forward bending of upper back)</li>
+                        <li><strong>Osteoarthritis:</strong> Accelerated joint degeneration</li>
+                    </ul>
+
+                    <h4>GI and Neoplasia</h4>
+                    <ul>
+                        <li><strong>Colonic polyps and increased colon cancer risk:</strong> 2–4x relative risk
+                            <ul>
+                                <li><strong>Screening recommendation:</strong> Colonoscopy (baseline and surveillance)</li>
+                            </ul>
+                        </li>
+                        <li><strong>GI motility issues:</strong> Constipation common</li>
+                    </ul>
+
+                    <h4>Visual Disturbances</h4>
+                    <ul>
+                        <li><strong>Bitemporal hemianopsia:</strong> If large adenoma compresses optic chiasm
+                            <ul>
+                                <li>Loss of lateral (peripheral) vision in both eyes</li>
+                            </ul>
+                        </li>
+                        <li><strong>Visual field defects</strong> depending on tumor location/direction of growth</li>
+                    </ul>
+
+                    <div class="diagram">Typical Acromegaly Features:
+┌─ Frontal bossing
+├─ Prognathism (jaw)
+├─ Macroglossia
+├─ Spaced teeth
+├─ Acral enlargement (hands, feet)
+├─ Skin tags
+├─ Hyperhidrosis
+│
+├─ ORGAN ENLARGEMENT:
+│  ├─ Cardiomegaly (LEADING CAUSE OF DEATH)
+│  ├─ Hepatomegaly
+│  └─ Nephromegaly
+│
+└─ COMPLICATIONS:
+   ├─ Sleep apnea
+   ├─ Diabetes
+   ├─ HTN
+   ├─ CTS (carpal tunnel)
+   └─ Colon cancer risk
+                    </div>
+
+                    <h3>Diagnosis of Acromegaly</h3>
+
+                    <h4>Screening: IGF-1 Elevated for Age</h4>
+                    <ul>
+                        <li><strong>Best initial screening test:</strong> Elevated IGF-1 (age-and-sex-adjusted)</li>
+                        <li>Sensitivity ~95%; more stable than GH</li>
+                    </ul>
+
+                    <h4>Confirmation: Oral Glucose Tolerance Test (OGTT)</h4>
+                    <ul>
+                        <li><strong>Protocol:</strong> 75g oral glucose; measure GH at baseline and 2 hours</li>
+                        <li><strong>Normal response:</strong> GH suppresses to <0.4–1 ng/mL (exact cutoff varies by lab/assay)</li>
+                        <li><strong>Acromegaly:</strong> GH <strong>FAILS to suppress</strong> below 1 ng/mL
+                            <ul>
+                                <li>Classic finding: GH remains elevated or even paradoxically increases after glucose</li>
+                            </ul>
+                        </li>
+                        <li><strong>Diagnostic criteria:</strong> Elevated IGF-1 + non-suppressing GH on OGTT (>1 ng/mL) = acromegaly</li>
+                    </ul>
+
+                    <h4>Localization: MRI Pituitary</h4>
+                    <ul>
+                        <li><strong>Purpose:</strong> Identify adenoma size, location, relation to surrounding structures (optic chiasm, cavernous sinus)</li>
+                        <li><strong>Typical finding:</strong> Sellar mass with possible suprasellar extension</li>
+                    </ul>
+
+                    <h4>Additional Tests</h4>
+                    <ul>
+                        <li><strong>Baseline hormone panel:</strong> Check other pituitary hormones (TSH, ACTH, LH/FSH, prolactin) to detect CPHD</li>
+                        <li><strong>GHRH level:</strong> If ectopic GHRH suspected (carcinoid, lung tumor)
+                            <ul>
+                                <li>Elevated GHRH + elevated GH + low normal pituitary adenoma imaging = ectopic GHRH</li>
+                            </ul>
+                        </li>
+                        <li><strong>Imaging for malignancy:</strong> If ectopic GHRH suspected (chest CT, octreotide scan)</li>
+                    </ul>
+
+                    <h4>Diagnostic Flowchart</h4>
+                    <div class="diagram">
+Suspect Acromegaly (clinical features)
+         ↓
+     IGF-1 level
+         ↓
+    IGF-1 elevated?
+    ↙            ↘
+   NO           YES
+   ↓             ↓
+Not acro-    OGTT (75g glucose)
+        ↓
+        GH suppresses to <1 ng/mL?
+        ↙                    ↘
+       NO                    YES
+       ↓                     ↓
+   Acromegaly          Likely NOT acromegaly
+   (confirm)           (repeat, check IGF-1)
+   ↓
+   MRI pituitary
+   (adenoma vs. ectopic)
+                    </div>
+
+                    <h3>Treatment of Acromegaly (Overview)</h3>
+                    <p><em>Full treatment covered in Lec 8; brief summary here:</em></p>
+
+                    <h4>First-Line: Transsphenoidal Surgery</h4>
+                    <ul>
+                        <li>Goal: Cure via tumor resection</li>
+                        <li>Success rate: ~70–80% for microadenomas; lower for macroadenomas</li>
+                    </ul>
+
+                    <h4>Medical Management</h4>
+                    <ul>
+                        <li><strong>Somatostatin analogs (SSAs):</strong> Octreotide, lanreotide
+                            <ul>
+                                <li>Inhibit GH and IGF-1; first-line medical therapy</li>
+                                <li>Success in ~50–70% of cases</li>
+                            </ul>
+                        </li>
+                        <li><strong>Dopamine agonists:</strong> Bromocriptine, cabergoline (less effective; ~20–30% response)</li>
+                        <li><strong>GH receptor antagonist:</strong> Pegvisomant
+                            <ul>
+                                <li>Blocks GH receptor; normalizes IGF-1 in ~90% of cases</li>
+                                <li>GH levels rise (due to loss of feedback), but IGF-1 normalized (clinical benefit)</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>Radiation Therapy</h4>
+                    <ul>
+                        <li>For residual disease after surgery or failed medical therapy</li>
+                        <li>Slow response (months to years)</li>
+                    </ul>
+
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">What's the pathognomonic finding of acromegaly on OGTT?</div>
+                            <div class="flip-card-back">Failure of GH to suppress below 1 ng/mL after oral glucose (paradoxical, GH may even increase). Normal: GH suppresses to <0.4–1 ng/mL.</div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">What causes death in acromegaly?</div>
+                            <div class="flip-card-back">Cardiomegaly (from direct GH effect on cardiac myocytes) is the leading cause. Sleep apnea worsens the cardiac burden.</div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">How is McCune-Albright syndrome related to GH?</div>
+                            <div class="flip-card-back">GNAS1 mutation (constitutively active Gs) → autonomous GH secretion. Classic triad: café-au-lait spots, fibrous dysplasia, precocious puberty. Can have acromegaly.</div>
+                        </div>
+                    </div>
+
+                    <div class="summary-box">
+                        <div class="summary-title">
+                            <span>🎯</span> How This LO Is Tested
+                        </div>
+                        <div class="summary-grid">
+                            <div class="summary-item">
+                                <div class="summary-item-title">Clinical Recognition</div>
+                                <div class="summary-item-content">Vignettes: "Ring too tight, shoe size ↑, hand swelling" → acromegaly. Look for facial coarsening + acral enlargement.</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-item-title">OGTT Interpretation</div>
+                                <div class="summary-item-content">"75g glucose → GH doesn't suppress" = acromegaly. Normal: GH suppresses <1 ng/mL. This is pathognomonic.</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-item-title">Complications</div>
+                                <div class="summary-item-content">Cardiomegaly (leading cause of death), sleep apnea, diabetes, HTN, carpal tunnel, colon cancer screening.</div>
+                            </div>
+                        </div>
+                        <div class="summary-title" style="margin-top: 1rem;">
+                            <span>⚠️</span> Common Exam Traps
+                        </div>
+                        <div class="summary-grid">
+                            <div class="summary-item">
+                                <div class="summary-item-title">Gigantism vs. Acromegaly</div>
+                                <div class="summary-item-content">Gigantism = GH excess BEFORE epiphyseal closure (tall). Acromegaly = AFTER closure (cannot grow taller, soft tissue only).</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-item-title">OGTT Paradox</div>
+                                <div class="summary-item-content">In acromegaly, glucose paradoxically may NOT suppress GH (or even ↑ it). This is the opposite of normal physiology.</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-item-title">Ectopic GHRH Rare</div>
+                                <div class="summary-item-content">Only ~1% of acromegaly. Usually pituitary adenoma. But if adenoma imaging negative + high GHRH level → search for carcinoid.</div>
+                            </div>
+                        </div>
+                        <div class="summary-title" style="margin-top: 1rem;">
+                            <span>⭐</span> HY Bullet Points
+                        </div>
+                        <ul style="margin-top: 0.5rem;">
+                            <li>Gigantism: GH excess BEFORE epiphyseal closure (tall stature)</li>
+                            <li>Acromegaly: GH excess AFTER closure (soft tissue overgrowth, cannot grow taller)</li>
+                            <li>Etiology: >95% pituitary GH-secreting adenoma; rare ectopic GHRH (carcinoid) or McCune-Albright</li>
+                            <li>Features: acral enlargement, facial coarsening, cardiomegaly (LEADING CAUSE OF DEATH), sleep apnea, diabetes, HTN, CTS</li>
+                            <li>Screening: High IGF-1 (age-adjusted)</li>
+                            <li>Diagnosis: IGF-1 elevated + GH non-suppressing on OGTT (>1 ng/mL)</li>
+                            <li>Imaging: MRI pituitary (adenoma localization)</li>
+                            <li>Treatment: Surgery (first-line), SSAs, pegvisomant, radiation</li>
+                            <li>Screening: Colonoscopy for colon cancer (↑ risk)</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                id: 'lo5',
+                title: 'LO 5: Physiologic Roles of GH Across the Lifespan',
+                content: `
+                    <h3>Fetal Period</h3>
+                    <ul>
+                        <li><strong>GH is NOT required for fetal growth</strong> (surprise to many!)</li>
+                        <li>Fetal growth drivers: <strong>Insulin and IGF-2</strong></li>
+                        <li>GH-deficient fetuses: <strong>born at normal size</strong></li>
+                        <li>GH becomes important <strong>postnatal</strong></li>
+                        <li>Clinical significance: A newborn with normal birth weight but short parents or family hx of short stature may still have congenital GH deficiency (becomes apparent in first few months/years of life)</li>
+                    </ul>
+
+                    <h3>Childhood (Birth to Puberty)</h3>
+                    <ul>
+                        <li><strong>Essential for linear bone growth</strong> (epiphyseal plate proliferation)</li>
+                        <li><strong>Adequate sleep critical:</strong> Largest GH pulses occur during slow-wave sleep; GH-deficient children sleep normally but GH response diminished</li>
+                        <li><strong>Growth velocity:</strong> Fastest linear growth in infancy/toddlerhood, then slows until puberty</li>
+                        <li><strong>Organ growth:</strong> GH promotes liver, kidney, other organ growth</li>
+                        <li><strong>Metabolic:</strong> Fasting gluconeogenesis, lipolysis (GH counter-regulatory); hypoglycemia risk in GH deficiency</li>
+                    </ul>
+
+                    <h3>Puberty</h3>
+                    <ul>
+                        <li><strong>Growth spurt (peak height velocity):</strong> Driven by sex steroids (testosterone in boys, estrogen in girls) in combination with GH</li>
+                        <li><strong>Mechanism:</strong>
+                            <ul>
+                                <li>Sex steroids → ↑ GHRH secretion (hypothalamus) → ↑ GH pulse amplitude</li>
+                                <li>Sex steroids → ↑ IGF-1 production (liver)</li>
+                                <li>GH + IGF-1 + sex steroids = synergistic growth stimulus</li>
+                            </ul>
+                        </li>
+                        <li><strong>Peak height velocity:</strong> ~10–14 cm/year in girls; ~12–16 cm/year in boys</li>
+                        <li><strong>Epiphyseal plate closure:</strong> Sex steroids (especially <strong>estrogen in both sexes</strong>, via aromatase) → induce growth plate cartilage to hypertrophic chondrocytes → ossify → closure
+                            <ul>
+                                <li>Puberty = period of rapid growth</li>
+                                <li>Post-puberty = epiphyseal closure ends linear growth potential</li>
+                            </ul>
+                        </li>
+                        <li><strong>Clinical note:</strong> Early estrogen exposure (precocious puberty) → early growth spurt but premature closure → shorter final adult height</li>
+                    </ul>
+
+                    <h3>Adulthood</h3>
+                    <ul>
+                        <li><strong>Linear growth ended</strong> (epiphyses fused)</li>
+                        <li><strong>Metabolic role:</strong> Maintain lean body mass, bone density, cardiovascular function</li>
+                        <li><strong>Counter-regulatory hormone:</strong> Fasting, stress, hypoglycemia → ↑ GH → ↑ gluconeogenesis, ↑ lipolysis</li>
+                        <li><strong>Body composition:</strong> GH maintains muscle-to-fat ratio</li>
+                        <li><strong>Bone turnover:</strong> GH maintains bone density and mineralization</li>
+                        <li><strong>Cardiovascular:</strong> Normal GH essential for cardiac function; deficiency → ↑ CV risk</li>
+                    </ul>
+
+                    <h3>Aging (Somatopause)</h3>
+                    <ul>
+                        <li><strong>Progressive age-related decline:</strong> Both GH and IGF-1 decline with age
+                            <ul>
+                                <li>~10% per decade after age 30</li>
+                                <li>↓ GH pulse amplitude (more than frequency)</li>
+                                <li>↓ IGF-1 levels</li>
+                            </ul>
+                        </li>
+                        <li><strong>Somatopause phenotype:</strong> "Sarcopenic obesity"
+                            <ul>
+                                <li>↓ muscle mass (sarcopenia)</li>
+                                <li>↑ visceral fat (obesity)</li>
+                                <li>↓ bone mineral density</li>
+                                <li>↓ exercise capacity</li>
+                            </ul>
+                        </li>
+                        <li><strong>GH replacement in elderly:</strong> Controversial
+                            <ul>
+                                <li>May reverse some sarcopenia and improve quality of life</li>
+                                <li>Concern: potential ↑ cancer risk (GH pro-growth)</li>
+                                <li>Currently NOT recommended as routine anti-aging therapy</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>Other Physiologic Roles (Pan-System)</h3>
+
+                    <h4>Counter-Regulatory (Glucose Homeostasis)</h4>
+                    <ul>
+                        <li>GH is a <strong>counter-regulatory hormone</strong> (like cortisol, glucagon, epinephrine)</li>
+                        <li><strong>Fasting/hypoglycemia:</strong> ↑ GH → ↑ gluconeogenesis + ↑ lipolysis (FFA for brain/muscle fuel)</li>
+                        <li>GH deficiency → impaired fasting glucose recovery, hypoglycemia risk</li>
+                    </ul>
+
+                    <h4>Immune Function</h4>
+                    <ul>
+                        <li>GH receptors present on lymphocytes (T cells, B cells, NK cells)</li>
+                        <li>GH stimulates thymic growth and lymphocyte proliferation</li>
+                        <li>GH deficiency → impaired immune function, ↑ infection risk</li>
+                    </ul>
+
+                    <h4>Renal Function</h4>
+                    <ul>
+                        <li>GH stimulates kidney growth and GFR (glomerular filtration rate)</li>
+                        <li>GH deficiency → ↓ kidney size and function</li>
+                        <li>GH excess → kidney enlargement (nephromegaly)</li>
+                    </ul>
+
+                    <h4>Cardiovascular</h4>
+                    <ul>
+                        <li><strong>GH deficiency:</strong> ↓ cardiac function, ↓ cardiac output, ↑ CV risk</li>
+                        <li><strong>GH excess:</strong> Cardiomegaly (direct hypertrophy), HTN, ↑ atherosclerosis, ↑ CV risk</li>
+                    </ul>
+
+                    <h4>Hepatic Metabolism</h4>
+                    <ul>
+                        <li>Liver is main site of IGF-1 production and IGFBP-3 synthesis</li>
+                        <li>GH stimulates hepatic protein synthesis and metabolism</li>
+                    </ul>
+
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">Why are GH-deficient newborns normal-sized?</div>
+                            <div class="flip-card-back">GH is not required for fetal growth. Insulin and IGF-2 drive fetal growth. GH becomes important after birth for postnatal growth.</div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">How do sex steroids amplify growth during puberty?</div>
+                            <div class="flip-card-back">Sex steroids ↑ GHRH release and ↑ IGF-1 production. Combined with GH, this creates a synergistic growth stimulus → peak height velocity.</div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">Why is early puberty (precocious) associated with short final height?</div>
+                            <div class="flip-chart-back">Early estrogen (via aromatase) induces premature epiphyseal closure. Growth spurt is early and exaggerated, but growth plates fuse early → less total growth time.</div>
+                        </div>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Life Stage</th>
+                                <th>GH Role</th>
+                                <th>IGF-1 Role</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Fetal</strong></td>
+                                <td>Minimal role</td>
+                                <td>Minimal role; IGF-2 drives fetal growth</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Childhood</strong></td>
+                                <td>Essential for linear growth</td>
+                                <td>↑ growth plate proliferation, organ growth</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Puberty</strong></td>
+                                <td>Amplified by sex steroids (peak GH pulses)</td>
+                                <td>↑↑ IGF-1 from ↑ GH + sex steroids</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Adulthood</strong></td>
+                                <td>Metabolic, counter-regulatory, CV support</td>
+                                <td>Maintains lean mass, bone density</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Aging</strong></td>
+                                <td>Declines ~10% per decade; loss → sarcopenia</td>
+                                <td>Declines; loss → ↓ muscle, ↑ visceral fat</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="summary-box">
+                        <div class="summary-title">
+                            <span>🎯</span> How This LO Is Tested
+                        </div>
+                        <div class="summary-grid">
+                            <div class="summary-item">
+                                <div class="summary-item-title">Physiology Logic</div>
+                                <div class="summary-item-content">Understand GH's role varies by age. Fetal: not needed. Childhood: essential for growth. Puberty: synergy with sex steroids. Adult: metabolic.</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-item-title">Sleep & Growth</div>
+                                <div class="summary-item-content">"Children grow while they sleep" = GH peaks during slow-wave sleep. Why sleep is critical in childhood.</div>
+                            </div>
+                        </div>
+                        <div class="summary-title" style="margin-top: 1rem;">
+                            <span>⚠️</span> Common Exam Traps
+                        </div>
+                        <div class="summary-grid">
+                            <div class="summary-item">
+                                <div class="summary-item-title">Fetal Growth Fallacy</div>
+                                <div class="summary-item-content">"GH-deficient babies are small" — WRONG. Normal birth size. Growth failure appears later (postnatal).</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-item-title">Puberty + Sex Steroids</div>
+                                <div class="summary-item-content">Don't separate sex steroids from GH in puberty. They work synergistically. Estrogen AND testosterone both ↑ GH responsiveness.</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-item-title">Epiphyseal Closure Timing</div>
+                                <div class="summary-item-content">Estrogen (in both sexes) is the primary driver of growth plate closure. Early estrogen = early closure = shorter final height.</div>
+                            </div>
+                        </div>
+                        <div class="summary-title" style="margin-top: 1rem;">
+                            <span>⭐</span> HY Bullet Points
+                        </div>
+                        <ul style="margin-top: 0.5rem;">
+                            <li>Fetal: GH NOT required; insulin and IGF-2 drive fetal growth; GH-deficient babies normal size at birth</li>
+                            <li>Childhood: GH essential for linear bone growth and metabolic homeostasis</li>
+                            <li>Sleep: Largest GH pulses during slow-wave sleep; critical for childhood growth</li>
+                            <li>Puberty: Sex steroids ↑ GHRH/GH and ↑ IGF-1; synergistic growth stimulus → peak height velocity</li>
+                            <li>Estrogen (both sexes) drives epiphyseal closure; early estrogen = early closure = shorter adult height</li>
+                            <li>Adulthood: GH maintains lean mass, bone density, CV function, counter-regulatory hormone (fasting/stress)</li>
+                            <li>Somatopause: Age-related ↓GH and ↓IGF-1 (10% per decade after 30)</li>
+                            <li>Sarcopenic obesity: ↓ muscle + ↑ visceral fat + ↓ bone density from aging GH deficiency</li>
+                            <li>Immune & renal: GH stimulates lymphocyte function and kidney GFR</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                id: 'lo6',
+                title: 'LO 6: Growth Charts, Bone Age & Clinical Evaluation of Short Stature',
+                content: `
+                    <h3>Defining Short Stature</h3>
+                    <ul>
+                        <li><strong>Short stature:</strong> Height <2 SD below mean for age/sex/ethnicity
+                            <ul>
+                                <li>Approximately <3rd percentile</li>
+                            </ul>
+                        </li>
+                        <li><strong>Growth velocity:</strong> Rate of height change
+                            <ul>
+                                <li>Normal: ~5–6 cm/year in prepubertal children; >10 cm/year in puberty</li>
+                                <li><strong>Decreased velocity = pathological sign</strong> (even if height currently normal)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Growth curve trajectory:</strong> Assess if height is <em>consistently</em> low or <em>acutely declining</em>
+                            <ul>
+                                <li>Consistently low = likely familial or constitutional</li>
+                                <li>Acutely declining = acquired pathology (GH deficiency, hypothyroidism, malnutrition, etc.)</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>Bone Age Assessment (Greulich-Pyle Method)</h3>
+                    <p><strong>Bone age:</strong> Radiologic maturity of the skeleton (not same as chronological age)</p>
+
+                    <h4>Method</h4>
+                    <ul>
+                        <li><strong>Radiograph:</strong> Left hand/wrist (PA view) — shows all hand bones and wrist cartilage/ossification</li>
+                        <li><strong>Comparison:</strong> Atlas comparison (Greulich-Pyle or Tanner-Whitehouse method)</li>
+                        <li>Assess carpal bones, metacarpals, phalanges, epiphyses, growth plates</li>
+                    </ul>
+
+                    <h4>Interpretation: Bone Age vs. Chronological Age</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Bone Age vs. Chron. Age</th>
+                                <th>Differential Diagnosis</th>
+                                <th>IGF-1 / GH Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Bone age = Chron. age</strong> (normal)</td>
+                                <td>• Familial short stature<br/>• Growth hormone sufficient<br/>• Normal development</td>
+                                <td>Normal IGF-1, normal GH response</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Bone age &lt; Chron. age</strong> (delayed)</td>
+                                <td>• GH deficiency<br/>• Hypothyroidism<br/>• Constitutional growth delay<br/>• Malnutrition<br/>• Chronic disease</td>
+                                <td>LOW IGF-1 (GH def), or normal IGF-1 (const. delay)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Bone age &gt; Chron. age</strong> (advanced)</td>
+                                <td>• Precocious puberty (sex hormone excess)<br/>• Congenital adrenal hyperplasia<br/>• Thyrotoxicosis<br/>• Obesity (mild)</td>
+                                <td>↑ Sex steroids or ↑ thyroid hormone</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Differential Diagnosis of Short Stature</h3>
+
+                    <h4>Familial Short Stature (Most Common Non-Pathological)</h4>
+                    <ul>
+                        <li><strong>Definition:</strong> Short height inherited from short parents; no pathology</li>
+                        <li><strong>Features:</strong>
+                            <ul>
+                                <li>Bone age = chronological age (normal skeletal development)</li>
+                                <li><strong>Normal growth velocity</strong> (tracks curve proportionally)</li>
+                                <li>Normal IGF-1 (for age)</li>
+                                <li>Normal GH response to stimulation</li>
+                                <li><strong>Final adult height = mid-parental height</strong> (±2 inches)</li>
+                                <li>Family history of short stature</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>Constitutional Growth Delay (Common in Boys)</h4>
+                    <ul>
+                        <li><strong>Definition:</strong> Normal variant; delayed puberty + delayed linear growth; eventual normal adult height</li>
+                        <li><strong>Features:</strong>
+                            <ul>
+                                <li><strong>Bone age &lt; chronological age</strong> (delayed)</li>
+                                <li><strong>Normal growth velocity</strong> (appropriate for bone age)</li>
+                                <li>Normal IGF-1 (for bone age)</li>
+                                <li>Normal GH response to stimulation</li>
+                                <li><strong>Delayed puberty</strong> (later than peers)</li>
+                                <li>Final adult height = expected/normal (catches up after pubertal growth spurt)</li>
+                                <li>Family history of delayed puberty common (father delayed puberty)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Reassurance/support:</strong> Growth will catch up; normality expected</li>
+                    </ul>
+
+                    <h4>GH Deficiency (Pathological)</h4>
+                    <ul>
+                        <li><strong>Features:</strong>
+                            <ul>
+                                <li><strong>Bone age &lt; chronological age</strong> (delayed)</li>
+                                <li><strong>Decreased growth velocity</strong> (critical sign)</li>
+                                <li><strong>Low IGF-1</strong> (age-adjusted)</li>
+                                <li><strong>Blunted GH response on stimulation</strong> (peak <5–10 ng/mL)</li>
+                                <li>May have other signs of hypopituitarism (hypothyroidism, hypogonadism, hypocortisolism)</li>
+                                <li>Predicts adult height < mid-parental height</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>Other Pathological Causes</h4>
+                    <ul>
+                        <li><strong>Hypothyroidism:</strong> Delayed bone age, ↓ growth velocity, low T4/elevated TSH</li>
+                        <li><strong>Turner syndrome (XO):</strong> Girls with short stature, bone age may be delayed or normal, elevated FSH, low estrogen</li>
+                        <li><strong>Chronic systemic disease:</strong> Cystic fibrosis, inflammatory bowel disease, celiac disease, chronic kidney disease
+                            <ul>
+                                <li>Malabsorption, chronic inflammation → impaired growth</li>
+                            </ul>
+                        </li>
+                        <li><strong>Cushing's syndrome:</strong> Glucocorticoid excess → ↓ GH, ↓ growth velocity</li>
+                        <li><strong>Skeletal dysplasias:</strong> Genetic bone disorders (achondroplasia, etc.) → characteristic proportions</li>
+                        <li><strong>Psychosocial deprivation / abuse:</strong> Stress-induced GH suppression; reversible with improved environment</li>
+                        <li><strong>Nutritional deficiency:</strong> Malnutrition, protein deficiency</li>
+                    </ul>
+
+                    <h3>Mid-Parental Height Prediction</h3>
+                    <p><strong>Used to assess if child's height is consistent with genetic potential.</strong></p>
+
+                    <h4>Calculation</h4>
+                    <ul>
+                        <li><strong>Boys:</strong> (Father's height + Mother's height + 5 inches) / 2 ± 2 inches</li>
+                        <li><strong>Girls:</strong> (Father's height + Mother's height - 5 inches) / 2 ± 2 inches</li>
+                    </ul>
+
+                    <h4>Interpretation</h4>
+                    <ul>
+                        <li>Child's current height and predicted adult height should track toward mid-parental height</li>
+                        <li>If height &lt; (mid-parental height - 2 SD), investigate pathology</li>
+                    </ul>
+
+                    <h3>Clinical Approach to Short Stature</h3>
+
+                    <h4>History</h4>
+                    <ul>
+                        <li><strong>Birth size:</strong> Normal in GH deficiency; small in intrauterine growth restriction</li>
+                        <li><strong>Growth pattern:</strong> Age of onset; progressive decline in growth velocity?</li>
+                        <li><strong>Nutrition:</strong> Adequate calorie/protein intake? Feeding difficulty?</li>
+                        <li><strong>Systemic symptoms:</strong> Chronic cough (CF), diarrhea (IBD, celiac), fatigue, polydipsia (diabetes)</li>
+                        <li><strong>Family history:</strong> Parental heights, family hx of short stature, delayed puberty, genetic disorders</li>
+                        <li><strong>Medications:</strong> Chronic corticosteroids, stimulant medications</li>
+                        <li><strong>Psychosocial:</strong> Stress, deprivation, abuse history</li>
+                    </ul>
+
+                    <h4>Physical Examination</h4>
+                    <ul>
+                        <li><strong>Height, weight, head circumference:</strong> Plot on standardized growth chart</li>
+                        <li><strong>Growth velocity:</strong> Compare to prior measurements</li>
+                        <li><strong>Proportions:</strong> Check limb:trunk ratio (abnormal in skeletal dysplasias)</li>
+                        <li><strong>Sexual development:</strong> Tanner stage (assess puberty status)</li>
+                        <li><strong>Dysmorphic features:</strong> Syndromic findings, facial features</li>
+                        <li><strong>Signs of systemic disease:</strong> Hepatosplenomegaly, digital clubbing, etc.</li>
+                    </ul>
+
+                    <h4>Laboratory Evaluation</h4>
+                    <ul>
+                        <li><strong>Initial screening:</strong>
+                            <ul>
+                                <li>IGF-1 (GH adequacy)</li>
+                                <li>IGFBP-3 (GH dependency)</li>
+                                <li>Thyroid function (TSH, free T4)</li>
+                                <li>CBC (anemia, infection)</li>
+                                <li>BMP (renal function, electrolytes)</li>
+                                <li>Tissue transglutaminase (tTG) and total IgA (celiac screening)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Conditional (based on history/exam):</strong>
+                            <ul>
+                                <li>Karyotype (girls suspected Turner: short stature, webbed neck, cardiac/renal abnormalities)</li>
+                                <li>GH stimulation tests (if IGF-1 or IGFBP-3 low)</li>
+                                <li>Cortisol, ACTH (if Cushing's suspected)</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>Imaging</h4>
+                    <ul>
+                        <li><strong>Bone age X-ray (left wrist):</strong> Assess skeletal maturity</li>
+                        <li><strong>MRI pituitary:</strong> If GH deficiency confirmed; rule out tumor, structural lesion</li>
+                    </ul>
+
+                    <h3>Growth Charts Interpretation</h3>
+                    <p><strong>Standard WHO/CDC growth charts:</strong> Percentile curves (3rd, 5th, 10th, 25th, 50th, 75th, 90th, 95th, 97th)</p>
+                    <ul>
+                        <li><strong>Short stature:</strong> Height &lt;3rd percentile (or &lt;-2 SD from mean)</li>
+                        <li><strong>Serial measurements:</strong> Plot multiple timepoints to assess velocity and trajectory
+                            <ul>
+                                <li>Normal: child "tracks" along a percentile curve</li>
+                                <li>Abnormal: acute drop-off or crossing percentiles downward</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">How do you distinguish GH deficiency from constitutional delay?</div>
+                            <div class="flip-card-back">Both have delayed bone age. But GH-deficient kids have LOW IGF-1 and blunted GH response on testing. Constitutional delay: normal IGF-1 and normal GH response.</div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">What does "growth velocity" tell you?</div>
+                            <div class="flip-card-back">The rate of height change over time. Decreased velocity = pathology (GH deficiency, hypothyroidism, malnutrition, chronic disease). A key screening marker.</div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">Calculate mid-parental height for a boy: Father 5'10", Mother 5'5"</div>
+                            <div class="flip-card-back">Boys: (70 + 65 + 5) / 2 = 70 inches = 5'10" ± 2". Target: ~5'8" to 6'.</div>
+                        </div>
+                    </div>
+
+                    <div class="summary-box">
+                        <div class="summary-title">
+                            <span>🎯</span> How This LO Is Tested
+                        </div>
+                        <div class="summary-grid">
+                            <div class="summary-item">
+                                <div class="summary-item-title">Clinical Vignette</div>
+                                <div class="summary-item-content">"8-year-old boy, height tracking below 3rd percentile, bone age 6 years, IGF-1 low" → GH deficiency diagnosis and work-up.</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-item-title">Differential Reasoning</div>
+                                <div class="summary-item-content">Given bone age + growth velocity + IGF-1 + family history, differentiate familial vs. constitutional vs. pathological short stature.</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-item-title">Growth Chart Interpretation</div>
+                                <div class="summary-item-content">Serial height measurements plot on curve; acute drop-off in percentile = pathology; tracking curve = likely normal variant.</div>
+                            </div>
+                        </div>
+                        <div class="summary-title" style="margin-top: 1rem;">
+                            <span>⚠️</span> Common Exam Traps
+                        </div>
+                        <div class="summary-grid">
+                            <div class="summary-item">
+                                <div class="summary-item-title">Bone Age = Age</div>
+                                <div class="summary-item-content">If bone age = chronological age in a short child, that RULES OUT GH deficiency (which has delayed bone age). Think familial instead.</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-item-title">Growth Velocity Key</div>
+                                <div class="summary-item-content">A short child with NORMAL growth velocity tracking a percentile is likely familial/normal variant. DECREASED velocity = red flag for pathology.</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-item-title">Mid-Parental Height</div>
+                                <div class="summary-item-content">Always calculate if not provided. Child height should approach mid-parental height. If far below, investigate pathology.</div>
+                            </div>
+                        </div>
+                        <div class="summary-title" style="margin-top: 1rem;">
+                            <span>⭐</span> HY Bullet Points
+                        </div>
+                        <ul style="margin-top: 0.5rem;">
+                            <li>Short stature: Height &lt;2 SD below mean (&lt;3rd percentile)</li>
+                            <li>Growth velocity: Rate of height change; DECREASED = pathologic</li>
+                            <li>Bone age (Greulich-Pyle): Skeletal maturity from left wrist X-ray</li>
+                            <li>Bone age = chron. age: Normal growth, familial short stature</li>
+                            <li>Bone age &lt; chron. age: Delayed (GH deficiency, hypothyroidism, const. delay, malnutrition)</li>
+                            <li>Bone age &gt; chron. age: Advanced (precocious puberty, hyperthyroidism, CAH)</li>
+                            <li>Familial short stature: Normal IGF-1, normal GH, bone age = age, family hx, final height = mid-parental</li>
+                            <li>Constitutional delay: Delayed bone age, normal IGF-1 + GH, delayed puberty, eventually normal adult height</li>
+                            <li>GH deficiency: Low IGF-1, decreased velocity, delayed bone age, blunted GH response, short of predicted adult height</li>
+                            <li>Mid-parental height: Boys = (father + mother + 5) / 2 ± 2"; Girls = (father + mother - 5) / 2 ± 2"</li>
+                            <li>Diagnostic labs: IGF-1, IGFBP-3, TSH, CBC, BMP, celiac screen, karyotype (if Turner suspected), bone age X-ray</li>
+                        </ul>
+                    </div>
+                `
+            }
+        ];
+
+        // ===== STATE MANAGEMENT =====
+        const STORAGE_KEY = 'endo_lec09';
+
+        function loadState() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            return saved ? JSON.parse(saved) : { completedLOs: [], expandedLOs: [] };
+        }
+
+        function saveState(state) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }
+
+        function initializeUI() {
+            const container = document.getElementById('los-container');
+            const sidebarNav = document.getElementById('sidebar-nav');
+            let state = loadState();
+
+            // Render LOs
+            LOs.forEach((lo, idx) => {
+                // Create sidebar nav item
+                const navItem = document.createElement('a');
+                navItem.className = `sidebar-nav-item ${state.expandedLOs.includes(lo.id) ? 'active' : ''}`;
+                navItem.href = `#${lo.id}`;
+                navItem.textContent = `LO ${idx + 1}`;
+                navItem.onclick = (e) => {
+                    e.preventDefault();
+                    const el = document.getElementById(lo.id);
+                    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                };
+                sidebarNav.appendChild(navItem);
+
+                // Create LO section
+                const section = document.createElement('div');
+                section.id = lo.id;
+                section.className = `lo-section ${state.expandedLOs.includes(lo.id) ? 'active' : ''}`;
+
+                const header = document.createElement('div');
+                header.className = 'lo-header';
+                header.innerHTML = `
+                    <span class="lo-title">${lo.title}</span>
+                    <div style="display: flex; gap: 1rem; align-items: center;">
+                        <input type="checkbox" class="lo-checkbox" ${state.completedLOs.includes(lo.id) ? 'checked' : ''}>
+                        <span class="lo-toggle">▼</span>
+                    </div>
+                `;
+
+                header.onclick = () => {
+                    section.classList.toggle('active');
+                    const isActive = section.classList.contains('active');
+                    navItem.classList.toggle('active', isActive);
+                    updateExpandedState(lo.id, isActive);
+                    updateProgress();
+                };
+
+                const checkbox = header.querySelector('.lo-checkbox');
+                checkbox.onclick = (e) => {
+                    e.stopPropagation();
+                    updateCheckedState(lo.id, checkbox.checked);
+                    updateProgress();
+                };
+
+                const content = document.createElement('div');
+                content.className = 'lo-content';
+                content.innerHTML = lo.content;
+
+                section.appendChild(header);
+                section.appendChild(content);
+                container.appendChild(section);
+            });
+
+            // Setup scroll listener
+            setupScrollListener();
+            updateProgress();
+        }
+
+        function updateExpandedState(loId, isActive) {
+            const state = loadState();
+            if (isActive && !state.expandedLOs.includes(loId)) {
+                state.expandedLOs.push(loId);
+            } else if (!isActive && state.expandedLOs.includes(loId)) {
+                state.expandedLOs = state.expandedLOs.filter(id => id !== loId);
+            }
+            saveState(state);
+        }
+
+        function updateCheckedState(loId, isChecked) {
+            const state = loadState();
+            if (isChecked && !state.completedLOs.includes(loId)) {
+                state.completedLOs.push(loId);
+            } else if (!isChecked && state.completedLOs.includes(loId)) {
+                state.completedLOs = state.completedLOs.filter(id => id !== loId);
+            }
+            saveState(state);
+        }
+
+        function setupScrollListener() {
+            const main = document.querySelector('.main');
+            main.addEventListener('scroll', () => {
+                updateActiveNavItem();
+            });
+        }
+
+        function updateActiveNavItem() {
+            const sections = document.querySelectorAll('.lo-section');
+            const navItems = document.querySelectorAll('.sidebar-nav-item');
+            const scrollPos = document.querySelector('.main').scrollTop + 150;
+
+            let currentSection = null;
+            sections.forEach(section => {
+                if (section.offsetTop <= scrollPos) {
+                    currentSection = section.id;
+                }
+            });
+
+            navItems.forEach((item, idx) => {
+                item.classList.remove('active');
+                if (LOs[idx].id === currentSection) {
+                    item.classList.add('active');
+                }
+            });
+        }
+
+        function updateProgress() {
+            const state = loadState();
+            const total = LOs.length;
+            const completed = state.completedLOs.length;
+            const percentage = Math.round((completed / total) * 100);
+
+            document.getElementById('progress-fill').style.width = `${percentage}%`;
+            document.getElementById('progress-pct').textContent = percentage;
+        }
+
+        // ===== INIT =====
+        document.addEventListener('DOMContentLoaded', initializeUI);
+    </script>
+</body>
+</html>

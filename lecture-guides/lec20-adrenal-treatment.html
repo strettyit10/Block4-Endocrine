@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lec 20 - Diagnosis & Treatment of Adrenal Disorders | Endocrine</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8fafc;color:#1e293b;display:flex;height:100vh;overflow:hidden;}
+.sidebar{width:220px;background:#0f172a;color:#e5e7eb;padding:20px 15px;overflow-y:auto;position:fixed;height:100vh;}
+.sidebar h1{font-size:13px;font-weight:700;color:#059669;margin-bottom:16px;text-transform:uppercase;letter-spacing:0.5px;}
+.sidebar-nav{display:flex;flex-direction:column;gap:6px;}
+.nav-link{padding:9px 12px;background:#1e293b;color:#cbd5e1;border-left:3px solid transparent;border-radius:4px;cursor:pointer;font-size:12px;text-decoration:none;display:block;transition:all 0.2s;}
+.nav-link:hover,.nav-link.active{background:#334155;border-left-color:#059669;color:#059669;}
+.sidebar-divider{height:1px;background:#334155;margin:10px 0;}
+.progress-box{margin-top:16px;padding:12px;background:#1e293b;border-radius:6px;border-left:3px solid #059669;}
+.progress-label{font-size:10px;color:#94a3b8;text-transform:uppercase;margin-bottom:6px;}
+.progress-bar{width:100%;height:5px;background:#334155;border-radius:3px;overflow:hidden;}
+.progress-fill{height:100%;background:#059669;border-radius:3px;transition:width 0.3s;width:0%;}
+.progress-text{font-size:11px;color:#94a3b8;margin-top:4px;}
+.main-content{margin-left:220px;flex:1;overflow-y:auto;padding:36px 40px;}
+header{margin-bottom:28px;padding-bottom:18px;border-bottom:2px solid #059669;}
+.subject-badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;color:white;background:#059669;margin-bottom:10px;}
+header h1{font-size:28px;color:#0f172a;margin-bottom:6px;}
+header p{color:#64748b;font-size:14px;}
+.lo-tabs{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap;}
+.lo-tab{padding:9px 16px;background:white;border:2px solid #e2e8f0;border-radius:6px;cursor:pointer;font-weight:500;color:#64748b;font-size:13px;transition:all 0.2s;}
+.lo-tab:hover{border-color:#059669;color:#059669;}
+.lo-tab.active{background:#059669;color:white;border-color:#059669;}
+.lo-section{display:none;animation:fadeIn 0.3s ease;}
+.lo-section.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.lo-title{font-size:22px;color:#0f172a;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid #059669;}
+.collapsible{background:white;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:14px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05);}
+.collapsible-header{padding:14px 16px;background:#f8fafc;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;color:#1e293b;transition:background 0.2s;}
+.collapsible-header:hover{background:#f1f5f9;}
+.collapsible-header.expanded{background:#f0fdf4;border-bottom:1px solid #059669;}
+.collapsible-icon{color:#059669;font-size:12px;transition:transform 0.2s;}
+.collapsible-header.expanded .collapsible-icon{transform:rotate(180deg);}
+.collapsible-body{display:none;padding:18px;background:white;}
+.collapsible-body.expanded{display:block;}
+.content-card{background:#f8fafc;border-left:4px solid #059669;padding:14px;margin-bottom:14px;border-radius:0 6px 6px 0;}
+.content-card h3{color:#0f172a;margin-bottom:8px;font-size:14px;}
+.content-card ul{list-style:none;padding:0;}
+.content-card li{padding:4px 0 4px 18px;position:relative;font-size:13px;color:#475569;line-height:1.5;}
+.content-card li:before{content:"→";position:absolute;left:0;color:#059669;font-weight:bold;}
+.section-subtitle{font-size:16px;font-weight:700;color:#0f172a;margin:20px 0 12px;}
+.flip-card-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:20px;}
+.flip-card{perspective:1000px;cursor:pointer;height:200px;}
+.flip-card-inner{position:relative;width:100%;height:100%;transition:transform 0.5s;transform-style:preserve-3d;}
+.flip-card.flipped .flip-card-inner{transform:rotateY(180deg);}
+.flip-card-front,.flip-card-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;display:flex;align-items:center;justify-content:center;padding:18px;text-align:center;border-radius:8px;}
+.flip-card-front{background:linear-gradient(135deg,#059669,#065f46);color:white;font-weight:600;font-size:14px;}
+.flip-card-back{background:#f8fafc;color:#1e293b;transform:rotateY(180deg);border:2px solid #059669;font-size:12px;line-height:1.5;}
+.lo-check{display:flex;align-items:center;gap:10px;margin:18px 0;padding:12px;background:#f0fdf4;border-radius:6px;cursor:pointer;}
+.lo-check input{width:18px;height:18px;accent-color:#059669;cursor:pointer;}
+.lo-check label{font-size:13px;font-weight:600;color:#065f46;cursor:pointer;}
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:20px;}
+.summary-box{border-radius:8px;padding:16px;}
+.summary-box-title{font-weight:700;margin-bottom:10px;font-size:14px;}
+.summary-box-content{font-size:13px;line-height:1.6;color:#374151;}
+.summary-box-content ul{list-style:none;padding:0;}
+.summary-box-content li{padding:2px 0 2px 16px;position:relative;}
+.summary-box-content li:before{content:"•";position:absolute;left:0;font-weight:bold;}
+.test-box{background:#f0fdf4;border:2px solid #16a34a;}
+.test-box .summary-box-title{color:#15803d;}
+.test-box .summary-box-content li:before{color:#16a34a;}
+.trap-box{background:#fef2f2;border:2px solid #dc2626;}
+.trap-box .summary-box-title{color:#b91c1c;}
+.trap-box .summary-box-content li:before{color:#dc2626;}
+.hy-box{background:#fefce8;border:2px solid #ca8a04;}
+.hy-box .summary-box-title{color:#a16207;}
+.hy-box .summary-box-content li:before{color:#ca8a04;}
+.memory-box{background:#eff6ff;border:2px solid #2563eb;}
+.memory-box .summary-box-title{color:#1d4ed8;}
+.memory-box .summary-box-content li:before{color:#2563eb;}
+.mcq-container{background:white;border:2px solid #e2e8f0;border-radius:8px;padding:20px;margin-bottom:18px;}
+.mcq-question{font-weight:600;color:#0f172a;margin-bottom:14px;font-size:14px;line-height:1.6;}
+.mcq-options{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+.mcq-option{padding:10px 14px;background:#f8fafc;border:2px solid #e2e8f0;border-radius:6px;cursor:pointer;font-size:13px;transition:all 0.2s;display:flex;align-items:flex-start;gap:10px;}
+.mcq-option:hover{border-color:#059669;background:#f0fdf4;}
+.mcq-option input{margin-top:2px;accent-color:#059669;}
+.mcq-button{padding:8px 18px;background:#059669;color:white;border:none;border-radius:6px;cursor:pointer;font-weight:600;font-size:13px;}
+.mcq-button:hover{background:#065f46;}
+.mcq-reveal{padding:12px;background:#f0fdf4;border-left:4px solid #059669;border-radius:4px;margin-top:12px;display:none;}
+.mcq-reveal.visible{display:block;}
+.mcq-reveal-label{font-weight:700;color:#059669;margin-bottom:6px;font-size:13px;}
+.mcq-reveal-text{color:#374151;font-size:13px;line-height:1.6;}
+.mind-map-container{background:white;border:2px solid #e2e8f0;border-radius:8px;padding:20px;margin-bottom:24px;overflow-x:auto;}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+<h1>Lecture 20</h1>
+<div class="sidebar-nav">
+<div class="nav-link active" data-lo="1" onclick="showLO(1)">LO1: Cushing's Dx</div>
+<div class="nav-link" data-lo="2" onclick="showLO(2)">LO2: Cushing's Tx</div>
+<div class="nav-link" data-lo="3" onclick="showLO(3)">LO3: Adrenal Insufficiency</div>
+<div class="nav-link" data-lo="4" onclick="showLO(4)">LO4: Pheochromocytoma</div>
+<div class="nav-link" data-lo="5" onclick="showLO(5)">LO5: Hyperaldosteronism</div>
+<div class="nav-link" data-lo="6" onclick="showLO(6)">LO6: ACC & MEN</div>
+</div>
+<div class="sidebar-divider"></div>
+<div class="progress-box">
+<div class="progress-label">Progress</div>
+<div class="progress-bar">
+<div class="progress-fill" id="progressFill"></div>
+</div>
+<div class="progress-text" id="progressText">0%</div>
+</div>
+</div>
+
+<div class="main-content">
+<header>
+<span class="subject-badge">PHARMACOLOGY</span>
+<h1>Diagnosis & Treatment of Adrenal Disorders</h1>
+<p>Cushing's syndrome, adrenal insufficiency, pheochromocytoma, hyperaldosteronism, ACC & MEN syndromes</p>
+</header>
+
+<div class="lo-tabs">
+<div class="lo-tab active" data-lo="1" onclick="showLO(1)">LO1</div>
+<div class="lo-tab" data-lo="2" onclick="showLO(2)">LO2</div>
+<div class="lo-tab" data-lo="3" onclick="showLO(3)">LO3</div>
+<div class="lo-tab" data-lo="4" onclick="showLO(4)">LO4</div>
+<div class="lo-tab" data-lo="5" onclick="showLO(5)">LO5</div>
+<div class="lo-tab" data-lo="6" onclick="showLO(6)">LO6</div>
+</div>
+
+<!-- ============ LO1: Cushing's Syndrome Diagnostic Workup ============ -->
+<div id="lo-1" class="lo-section active">
+<div class="lo-title">LO1: Cushing's Syndrome — Diagnostic Workup</div>
+
+<div class="collapsible">
+<div class="collapsible-header" onclick="toggleCollapsible(this)">
+Step 1: Confirm Hypercortisolism (Exclude Pseudo-Cushing's) <span class="collapsible-icon">▼</span>
+</div>
+<div class="collapsible-body">
+<div class="content-card">
+<h3>Goal: Use ≥2 tests to confirm</h3>
+<ul>
+<li><strong>24-hour Urinary Free Cortisol (UFC):</strong> >4× upper limit of normal (ULN) = diagnostic; most specific test</li>
+<li><strong>Late-Night Salivary Cortisol:</strong> Requires ≥2 measurements; >97th percentile = abnormal; captures circadian nadir</li>
+<li><strong>1mg Overnight Dexamethasone Suppression Test (DST):</strong> 8am cortisol >1.8 μg/dL = fail to suppress = abnormal</li>
+<li><strong>2-Day Low-Dose DST (LDDST):</strong> Alternative to 1mg overnight; more sensitive but less convenient</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Pseudo-Cushing's (False Positive)</h3>
+<ul>
+<li>Causes: Depression, alcoholism, obesity, poorly controlled diabetes</li>
+<li>Feature: Mildly elevated UFC/DST but normal late-night cortisol or CRH stimulation suppression</li>
+<li>CRH stimulation test: Can help distinguish true Cushing's (↑ ACTH + cortisol >50%) from pseudo-Cushing's</li>
+</ul>
+</div>
+
+<div class="lo-check">
+<input type="checkbox" id="lo0">
+<label for="lo0" onclick="updateProgress()">I understand the 3-step confirmation approach and can distinguish Cushing's from pseudo-Cushing's</label>
+</div>
+</div>
+</div>
+
+<div class="collapsible">
+<div class="collapsible-header" onclick="toggleCollapsible(this)">
+Step 2: Determine ACTH-Dependency <span class="collapsible-icon">▼</span>
+</div>
+<div class="collapsible-body">
+<div class="content-card">
+<h3>Measure Plasma ACTH</h3>
+<ul>
+<li><strong>ACTH <5–10 pg/mL:</strong> ACTH-INDEPENDENT Cushing's → proceed to CT abdomen/pelvis for adrenal mass</li>
+<li><strong>ACTH >20 pg/mL:</strong> ACTH-DEPENDENT Cushing's → proceed to pituitary vs ectopic workup</li>
+<li><strong>ACTH 10–20 pg/mL:</strong> Gray zone; repeat test or proceed cautiously</li>
+</ul>
+</div>
+
+<div class="summary-box memory-box">
+<div class="summary-box-title">Memory Aid: ACTH Value Interpretation</div>
+<div class="summary-box-content">
+<ul>
+<li>LOW ACTH (independent) = adrenal tumor direct cortisol production</li>
+<li>HIGH ACTH (dependent) = pituitary or ectopic ACTH-secreting tumor</li>
+</ul>
+</div>
+</div>
+
+<div class="lo-check">
+<input type="checkbox" id="lo1">
+<label for="lo1" onclick="updateProgress()">I can interpret plasma ACTH and determine if Cushing's is ACTH-dependent or independent</label>
+</div>
+</div>
+</div>
+
+<div class="collapsible">
+<div class="collapsible-header" onclick="toggleCollapsible(this)">
+Step 3: Localize Source (if ACTH-Dependent) <span class="collapsible-icon">▼</span>
+</div>
+<div class="collapsible-body">
+<div class="content-card">
+<h3>Imaging & Dynamic Tests</h3>
+<ul>
+<li><strong>MRI Pituitary:</strong> First-line for suspected pituitary adenoma; BUT only 50% of microadenomas are visible</li>
+<li><strong>High-Dose DST (8mg overnight):</strong> Pituitary adenoma suppresses cortisol >50% from baseline; ectopic does NOT suppress</li>
+<li><strong>CRH Stimulation Test:</strong> Pituitary corticotrophs respond with ↑ ACTH + cortisol >50%; ectopic source does NOT</li>
+<li><strong>IPSS (Inferior Petrosal Sinus Sampling) — GOLD STANDARD:</strong> Invasive, measures ACTH from IPS vs peripheral blood</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>IPSS Interpretation (Critical for Exams!)</h3>
+<ul>
+<li><strong>ACTH Gradient Ratio: IPS/Peripheral (Basal):</strong> >2 = pituitary source; <2 = ectopic source</li>
+<li><strong>After CRH Stimulation:</strong> >3 = pituitary source; <3 = ectopic source</li>
+<li><strong>Bilateral IPS Gradient:</strong> If one side much higher, helps lateralize for transsphenoidal surgery (TSS)</li>
+<li>IPSS also localizes ectopic source location (e.g., lung, pancreas, thyroid)</li>
+</ul>
+</div>
+
+<div class="summary-box trap-box">
+<div class="summary-box-title">TRAP: MRI Limitations</div>
+<div class="summary-box-content">
+<ul>
+<li>MRI pituitary may appear NORMAL in small adenomas (~50% of microadenomas not visible)</li>
+<li>Do NOT rely on MRI alone for localization; use dynamic tests (HD-DST, CRH, IPSS)</li>
+<li>Incidentalomas: 10% of pituitary MRIs show adenomas that may be non-functional</li>
+</ul>
+</div>
+</div>
+
+<div class="lo-check">
+<input type="checkbox" id="lo2">
+<label for="lo2" onclick="updateProgress()">I know IPSS interpretation (>2 basal = pituitary; <2 = ectopic) and understand MRI limitations</label>
+</div>
+</div>
+</div>
+
+<div class="content-card">
+<h3>Cushing's Diagnosis Flow (Summary)</h3>
+<ul>
+<li>Step 1: UFC + late-night cortisol + 1mg DST (confirm hypercortisolism)</li>
+<li>Step 2: Plasma ACTH (low = ACTH-independent; high = ACTH-dependent)</li>
+<li>Step 3: If ACTH-dependent → MRI pituitary + HD-DST/CRH ± IPSS (localize source)</li>
+</ul>
+</div>
+
+<div class="flip-card-container">
+<div class="flip-card" onclick="this.classList.toggle('flipped')">
+<div class="flip-card-inner">
+<div class="flip-card-front">What is the IPSS gradient ratio that indicates pituitary Cushing's?</div>
+<div class="flip-card-back">>2 (basal) or >3 (after CRH); distinguishes pituitary from ectopic source</div>
+</div>
+</div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')">
+<div class="flip-card-inner">
+<div class="flip-card-front">Why is late-night salivary cortisol valuable in Cushing's screening?</div>
+<div class="flip-card-back">Captures the normal circadian nadir; abnormally elevated in true Cushing's; lost in pseudo-Cushing's</div>
+</div>
+</div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')">
+<div class="flip-card-inner">
+<div class="flip-card-front">What percentage of pituitary microadenomas are visible on MRI?</div>
+<div class="flip-card-back">Only ~50%; so negative MRI does NOT rule out pituitary adenoma</div>
+</div>
+</div>
+</div>
+
+</div>
+
+<!-- ============ LO2: Cushing's Treatment ============ -->
+<div id="lo-2" class="lo-section">
+<div class="lo-title">LO2: Cushing's Syndrome Treatment</div>
+
+<div class="collapsible">
+<div class="collapsible-header" onclick="toggleCollapsible(this)">
+Treatment of Pituitary Cushing's Disease <span class="collapsible-icon">▼</span>
+</div>
+<div class="collapsible-body">
+<div class="content-card">
+<h3>First-Line: Transsphenoidal Surgery (TSS)</h3>
+<ul>
+<li>Success rate: 65–90% remission for microadenomas (<10mm)</li>
+<li>Recurrence: 10–25% over 10 years (long-term monitoring needed)</li>
+<li>Failure/recurrence → options: repeat surgery, radiation, medical therapy, bilateral adrenalectomy</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Surgical Bridge & Medical Therapy</h3>
+<ul>
+<li><strong>Pasireotide:</strong> Somatostatin receptor subtype-5 (SST5) agonist → inhibits ACTH secretion from corticotroph adenomas</li>
+<li><strong>Cabergoline:</strong> D2 dopamine agonist; some corticotrophs express D2 receptors; modest efficacy</li>
+<li>Used while awaiting TSS, during surgical recovery, or if surgery not possible</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Radiation Therapy (SRS)</h3>
+<ul>
+<li>Stereotactic radiosurgery (SRS) for residual/recurrent Cushing's after surgery</li>
+<li>Efficacy: Takes 3–5 years for ACTH normalization</li>
+<li>Side effects: Hypopituitarism (cumulative over time)</li>
+</ul>
+</div>
+
+<div class="summary-box hy-box">
+<div class="summary-box-title">High-Yield: Nelson's Syndrome</div>
+<div class="summary-box-content">
+<ul>
+<li>Occurs in ~15–20% of patients after bilateral adrenalectomy for Cushing's disease</li>
+<li>Mechanism: Loss of cortisol → no feedback inhibition on pituitary → ACTH-secreting tumor grows unchecked</li>
+<li>Features: Severely elevated ACTH (>500 pg/mL), hyperpigmentation, pituitary mass, potential visual loss</li>
+<li>Prevention: Pituitary radiation post-adrenalectomy; treatment = pituitary surgery/radiation if severe</li>
+</ul>
+</div>
+</div>
+
+<div class="lo-check">
+<input type="checkbox" id="lo3">
+<label for="lo3" onclick="updateProgress()">I understand TSS outcomes, recurrence rates, and the definition of Nelson's syndrome</label>
+</div>
+</div>
+</div>
+
+<div class="collapsible">
+<div class="collapsible-header" onclick="toggleCollapsible(this)">
+Adrenal Enzyme Inhibitors (All Forms of Cushing's) <span class="collapsible-icon">▼</span>
+</div>
+<div class="collapsible-body">
+<div class="content-card">
+<h3>Ketoconazole</h3>
+<ul>
+<li>Mechanism: Inhibits CYP17 (androgen synthesis), CYP11B1 (11β-hydroxylase), SCC (side-chain cleavage)</li>
+<li>Efficacy: First-line medical option for Cushing's syndrome</li>
+<li>Dosing: 400–600mg/day in divided doses</li>
+<li>Monitoring: Check liver function tests (hepatotoxic); monitor cortisol every 1–2 weeks during titration</li>
+<li>Drug interactions: Strong CYP3A4 inhibitor → ↑ levels of many drugs (warfarin, cyclosporine, etc.)</li>
+<li>Also has antifungal properties</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Metyrapone</h3>
+<ul>
+<li>Mechanism: Inhibits 11β-hydroxylase (final step of cortisol synthesis)</li>
+<li>Efficacy: Well-tolerated; rapid onset (hours to days)</li>
+<li>Side effects: ↑ Deoxycorticosterone (DOC) → ↑ mineralocorticoid effects = hypertension, hypokalemia, fluid retention</li>
+<li>Used diagnostically (metyrapone test) and therapeutically</li>
+<li>Dosing: 750–3000mg/day in divided doses</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Osilodrostat (Newer 11β-Hydroxylase Inhibitor)</h3>
+<ul>
+<li>Mechanism: Inhibits 11β-hydroxylase (same as metyrapone)</li>
+<li>Advantage: Better tolerated than metyrapone; less hypokalemia</li>
+<li>FDA approved for Cushing's syndrome</li>
+<li>Dosing: 2–10mg BID</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Levoketoconazole</h3>
+<ul>
+<li>R-enantiomer of ketoconazole; fewer drug interactions (not as strong CYP3A4 inhibitor)</li>
+<li>FDA approved; alternative for those with drug-drug interactions</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Etomidate (IV, Acute Setting)</h3>
+<ul>
+<li>Mechanism: Inhibits 11β-hydroxylase</li>
+<li>Use: Acute severe hypercortisolism (ICU); rapid cortisol lowering</li>
+<li>Dosing: Continuous IV infusion; requires ICU monitoring</li>
+<li>Short-term bridge (hours to days) while awaiting surgery or other definitive therapy</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Mitotane</h3>
+<ul>
+<li>Mechanism: Adrenolytic (destroys adrenocortical cells) + inhibits multiple steroidogenic enzymes</li>
+<li>Use: Adrenocortical carcinoma (ACC) — see LO6</li>
+<li>Side effects: Severe; requires cortisol + fludrocortisone replacement; narrow therapeutic window</li>
+</ul>
+</div>
+
+<div class="summary-box test-box">
+<div class="summary-box-title">TEST: Enzyme Inhibitor Choice</div>
+<div class="summary-box-content">
+<ul>
+<li>Ketoconazole = first-line medical therapy (monitor LFTs)</li>
+<li>Metyrapone = well-tolerated but watch for hypokalemia (↑ DOC)</li>
+<li>Etomidate = ICU use for acute severe hypercortisolism</li>
+<li>Osilodrostat = newer, better tolerated 11β-hydroxylase inhibitor</li>
+</ul>
+</div>
+</div>
+
+<div class="lo-check">
+<input type="checkbox" id="lo4">
+<label for="lo4" onclick="updateProgress()">I can compare enzyme inhibitors and select appropriate therapy based on clinical context</label>
+</div>
+</div>
+</div>
+
+<div class="collapsible">
+<div class="collapsible-header" onclick="toggleCollapsible(this)">
+Mifepristone & Bilateral Adrenalectomy <span class="collapsible-icon">▼</span>
+</div>
+<div class="collapsible-body">
+<div class="content-card">
+<h3>Mifepristone (RU-486)</h3>
+<ul>
+<li><strong>Mechanism:</strong> Glucocorticoid receptor (GR) antagonist; also progesterone receptor (PR) antagonist (abortifacient)</li>
+<li><strong>Effect:</strong> Blocks glucocorticoid receptor → treats manifestations of Cushing's syndrome (HTN, hypokalemia, hyperglycemia, psychiatric symptoms)</li>
+<li><strong>Unique Feature:</strong> Cortisol levels RISE (not suppressed) because GR is blocked → cannot use cortisol/UFC to monitor!</li>
+<li><strong>Monitoring:</strong> Clinical symptoms (BP, glucose control), secondary markers (ACTH, 17-OH-P), NOT cortisol</li>
+<li><strong>Indication:</strong> Cushing's syndrome with concomitant diabetes (metabolic benefit)</li>
+<li><strong>FDA approved</strong></li>
+<li><strong>Contraindication:</strong> Pregnancy (abortifacient)</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Bilateral Adrenalectomy</h3>
+<ul>
+<li>Guarantees cure of hypercortisolism; eliminates cortisol excess</li>
+<li><strong>Required replacement:</strong> Lifelong hydrocortisone (15–20mg/day) + fludrocortisone (0.1mg/day)</li>
+<li><strong>Risk of Nelson's syndrome:</strong> If performed for Cushing's disease (pituitary adenoma), 15–20% develop Nelson's over time</li>
+<li><strong>Indication:</strong> Recurrent/persistent Cushing's disease after failed TSS, radiation, or medical therapy; or severe inoperable disease</li>
+</ul>
+</div>
+
+<div class="summary-box trap-box">
+<div class="summary-box-title">TRAP: Mifepristone Monitoring</div>
+<div class="summary-box-content">
+<ul>
+<li>CANNOT monitor cortisol levels (GR blocked → false elevation)</li>
+<li>CANNOT use UFC or 1mg DST (GR antagonism interferes)</li>
+<li>USE clinical parameters: BP, glucose, hypokalemia; secondary markers (ACTH)</li>
+</ul>
+</div>
+</div>
+
+<div class="lo-check">
+<input type="checkbox" id="lo5">
+<label for="lo5" onclick="updateProgress()">I understand mifepristone's GR antagonism, monitoring limitations, and bilateral adrenalectomy indications</label>
+</div>
+</div>
+</div>
+
+<div class="flip-card-container">
+<div class="flip-card" onclick="this.classList.toggle('flipped')">
+<div class="flip-card-inner">
+<div class="flip-card-front">What is Nelson's syndrome and when does it occur?</div>
+<div class="flip-card-back">Pituitary tumor growth + ↑↑ ACTH after bilateral adrenalectomy for Cushing's disease (~15-20%); caused by loss of cortisol feedback</div>
+</div>
+</div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')">
+<div class="flip-card-inner">
+<div class="flip-card-front">Why can't you monitor cortisol levels on mifepristone?</div>
+<div class="flip-card-back">Mifepristone blocks the GR → cortisol cannot bind → levels appear elevated artificially; use clinical symptoms + ACTH instead</div>
+</div>
+</div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')">
+<div class="flip-card-inner">
+<div class="flip-card-front">What is the main side effect concern with metyrapone?</div>
+<div class="flip-card-back">↑ Deoxycorticosterone (DOC) → mineralocorticoid effects: hypertension, hypokalemia, fluid retention</div>
+</div>
+</div>
+</div>
+
+</div>
+
+<!-- ============ LO3: Adrenal Insufficiency Treatment ============ -->
+<div id="lo-3" class="lo-section">
+<div class="lo-title">LO3: Adrenal Insufficiency Treatment & Crisis Management</div>
+
+<div class="collapsible">
+<div class="collapsible-header" onclick="toggleCollapsible(this)">
+Maintenance Therapy for Primary Adrenal Insufficiency <span class="collapsible-icon">▼</span>
+</div>
+<div class="collapsible-body">
+<div class="content-card">
+<h3>Hydrocortisone (Cortisol) — First-Line</h3>
+<ul>
+<li><strong>Dosing:</strong> 15–20mg/day in divided doses to mimic circadian rhythm</li>
+<li><strong>Typical regimen:</strong> 10mg in AM (8am) + 5mg at noon + 5mg in early afternoon (4pm)</li>
+<li><strong>Rationale:</strong> Higher AM dose mimics normal diurnal cortisol peak</li>
+<li><strong>Alternative:</strong> Prednisone 5mg once daily (lower pill burden, less physiologic dosing)</li>
+<li><strong>Monitoring:</strong> Clinical response (fatigue, hypotension, hyponatremia); NO cortisol assay (always elevated on replacement)</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Fludrocortisone (Florinef) — PRIMARY AI ONLY</h3>
+<ul>
+<li><strong>Dosing:</strong> 0.1mg once daily (range 0.05–0.2mg)</li>
+<li><strong>Mechanism:</strong> Mineralocorticoid (aldosterone replacement)</li>
+<li><strong>Indication:</strong> PRIMARY adrenal insufficiency only (Addison's disease); replaces lost aldosterone</li>
+<li><strong>NOT needed in SECONDARY AI:</strong> Aldosterone production is intact (RAAS axis works); only cortisol is deficient</li>
+<li><strong>Titration:</strong> Adjust based on blood pressure (goal: normotension) and potassium (goal: normal)</li>
+<li><strong>Monitoring:</strong> K+, renin, renin activity</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>DHEA (Dehydroepiandrosterone)</h3>
+<ul>
+<li><strong>Indication:</strong> Optional in women with primary AI who have persistent fatigue, low libido, or depression despite adequate cortisol + fludrocortisone replacement</li>
+<li><strong>Dosing:</strong> 25–50mg once daily (women); evidence more robust in women</li>
+<li><strong>Rationale:</strong> Women lose significant DHEA production in primary AI (adrenal gland); may improve well-being</li>
+<li><strong>NOT routine; individualize</strong></li>
+</ul>
+</div>
+
+<div class="summary-box trap-box">
+<div class="summary-box-title">TRAP: Fludrocortisone in Secondary AI</div>
+<div class="summary-box-content">
+<ul>
+<li>Do NOT give fludrocortisone in secondary AI (e.g., ACTH deficiency from pituitary disease)</li>
+<li>Reason: Aldosterone production is preserved (RAAS intact); fludrocortisone causes HTN + severe hypokalemia</li>
+<li>Secondary AI only needs glucocorticoid (hydrocortisone), NOT mineralocorticoid</li>
+</ul>
+</div>
+</div>
+
+<div class="lo-check">
+<input type="checkbox" id="lo6">
+<label for="lo6" onclick="updateProgress()">I know hydrocortisone dosing, fludrocortisone indication (PRIMARY ONLY), and DHEA role</label>
+</div>
+</div>
+</div>
+
+<div class="collapsible">
+<div class="collapsible-header" onclick="toggleCollapsible(this)">
+Secondary Adrenal Insufficiency <span class="collapsible-icon">▼</span>
+</div>
+<div class="collapsible-body">
+<div class="content-card">
+<h3>Definition & Etiology</h3>
+<ul>
+<li><strong>Definition:</strong> Deficient ACTH (from pituitary) or CRH (from hypothalamus) → inadequate cortisol stimulation</li>
+<li><strong>Causes:</strong> Pituitary tumors, surgery, radiation, Sheehan's syndrome, hypopituitarism, long-term glucocorticoid suppression</li>
+<li><strong>Feature:</strong> Preserved adrenal function; adrenal glands can produce cortisol IF stimulated by ACTH</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Treatment</h3>
+<ul>
+<li><strong>Hydrocortisone:</strong> 15–20mg/day divided doses (same as primary AI)</li>
+<li><strong>NO Fludrocortisone:</strong> Aldosterone axis is intact (RAAS responsive)</li>
+<li><strong>CRITICAL:</strong> If secondary hypothyroidism also present: REPLACE CORTISOL FIRST, THEN thyroid hormone</li>
+<li><strong>Reason:</strong> Levothyroxine ↑ cortisol metabolism → can precipitate adrenal crisis if cortisol not replaced first</li>
+</ul>
+</div>
+
+<div class="summary-box hy-box">
+<div class="summary-box-title">High-Yield: Cortisol BEFORE Thyroid Hormone</div>
+<div class="summary-box-content">
+<ul>
+<li>In secondary AI with concomitant hypothyroidism: ALWAYS start hydrocortisone before levothyroxine</li>
+<li>If you give levothyroxine first → ↑ cortisol metabolism → cortisol-deficiency symptoms worsen → potential adrenal crisis</li>
+<li>Classic exam trap!</li>
+</ul>
+</div>
+</div>
+
+<div class="lo-check">
+<input type="checkbox" id="lo7">
+<label for="lo7" onclick="updateProgress()">I understand secondary AI treatment and the critical rule: cortisol BEFORE levothyroxine</label>
+</div>
+</div>
+</div>
+
+<div class="collapsible">
+<div class="collapsible-header" onclick="toggleCollapsible(this)">
+Adrenal Crisis (Acute) Management <span class="collapsible-icon">▼</span>
+</div>
+<div class="collapsible-body">
+<div class="content-card">
+<h3>Recognition & Immediate Treatment</h3>
+<ul>
+<li><strong>Presentation:</strong> Hypotension (shock), hyponatremia, hypoglycemia, fever, altered mental status, abdominal pain</li>
+<li><strong>Immediate:</strong> IV hydrocortisone 100mg bolus → then 50–100mg IV q6–8h OR continuous infusion 200mg/24h</li>
+<li><strong>IV Fluids:</strong> 0.9% normal saline ± dextrose 5% (treat hyponatremia cautiously; avoid osmotic demyelination)</li>
+<li><strong>DO NOT DELAY:</strong> Start treatment BEFORE cortisol confirmation if crisis suspected (do not wait for lab results)</li>
+<li><strong>Treat underlying cause:</strong> Infection (antibiotics), surgery (continue stress dosing), etc.</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Recovery & Taper</h3>
+<ul>
+<li>Once stable: Taper hydrocortisone to maintenance (15–20mg/day) over 24–48 hours</li>
+<li><strong>Patient education:</strong> Sick day rules; emergency injection kit; medical alert bracelet</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Sick Day Rules (Critical for Patient Management)</h3>
+<ul>
+<li><strong>Minor illness (fever, vomiting, diarrhea, URI):</strong> DOUBLE or TRIPLE hydrocortisone dose for duration of illness</li>
+<li><strong>If vomiting (cannot take oral):</strong> IM hydrocortisone 100mg (Solu-Cortef) → then go to ER</li>
+<li><strong>Surgery/anesthesia:</strong> 100mg hydrocortisone IV before induction; continue 50–100mg q6–8h post-op × 24–48 hours; taper to maintenance</li>
+<li><strong>Dental procedures:</strong> Often omitted; unnecessary stress dosing for minor dental work</li>
+<li><strong>Medical alert bracelet:</strong> MANDATORY; patient education on when to seek care</li>
+<li><strong>Emergency kit at home:</strong> IM hydrocortisone injection for crisis management</li>
+</ul>
+</div>
+
+<div class="summary-box memory-box">
+<div class="summary-box-title">Memory: Sick Day Rules</div>
+<div class="summary-box-content">
+<ul>
+<li>Fever/vomiting/diarrhea = 2–3× dose</li>
+<li>Cannot swallow = IM 100mg Solu-Cortef + ER</li>
+<li>Surgery = 100mg IV pre-op + 50–100mg q6–8h × 48 hours</li>
+<li>Wear medical alert bracelet</li>
+<li>Carry emergency injection kit</li>
+</ul>
+</div>
+</div>
+
+<div class="lo-check">
+<input type="checkbox" id="lo8">
+<label for="lo8" onclick="updateProgress()">I can manage adrenal crisis acutely and educate patients on sick day rules</label>
+</div>
+</div>
+</div>
+
+<div class="collapsible">
+<div class="collapsible-header" onclick="toggleCollapsible(this)">
+Congenital Adrenal Hyperplasia (CAH) Treatment <span class="collapsible-icon">▼</span>
+</div>
+<div class="collapsible-body">
+<div class="content-card">
+<h3>Goal of Treatment</h3>
+<ul>
+<li><strong>Suppress ACTH → suppress androgen excess</strong> (most common form is 21-OH deficiency = androgen excess)</li>
+<li><strong>Monitor 17-OH progesterone:</strong> Primary marker of enzymatic deficiency</li>
+<li><strong>Goal:</strong> Normalize growth velocity + normalize androgen levels + suppress 17-OH-P to mid-normal range (NOT fully suppressed = risk of undertreatment overtreatment)</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Maintenance Therapy</h3>
+<ul>
+<li><strong>Hydrocortisone:</strong> Higher than typical replacement (suppresses ACTH); 15–20mg/m² body surface area/day in divided doses</li>
+<li><strong>Fludrocortisone (Florinef):</strong> For salt-wasting form of CAH; 0.1mg/day; titrate by BP + electrolytes</li>
+<li><strong>Sodium supplementation:</strong> If salt-wasting form</li>
+<li><strong>Monitoring:</strong> Growth velocity, virilization, blood pressure, K+, 17-OH progesterone levels, ACTH</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Prenatal Treatment (Controversial)</h3>
+<ul>
+<li><strong>Indication:</strong> Prevention of virilization of external genitalia in female fetuses at risk (prior affected female sibling)</li>
+<li><strong>Treatment:</strong> Dexamethasone to mother (crosses placenta) → suppresses fetal ACTH → reduces fetal androgen → prevents virilization</li>
+<li><strong>Controversy:</strong> Involves treating genetically normal fetuses (not all female fetuses are affected); long-term effects unknown; requires early initiation (before 6–7 weeks gestation when external genitalia are developing)</li>
+<li><strong>Ethical concerns:</strong> Prenatal sex determination, potential fetal/childhood side effects</li>
+<li><strong>Current status:</strong> Used in select centers; shared decision-making required</li>
+</ul>
+</div>
+
+<div class="lo-check">
+<input type="checkbox" id="lo9">
+<label for="lo9" onclick="updateProgress()">I understand CAH treatment goals (suppress ACTH, monitor 17-OH-P) and prenatal considerations</label>
+</div>
+</div>
+</div>
+
+</div>
+
+<!-- ============ LO4: Pheochromocytoma Treatment ============ -->
+<div id="lo-4" class="lo-section">
+<div class="lo-title">LO4: Pheochromocytoma Treatment</div>
+
+<div class="collapsible">
+<div class="collapsible-header" onclick="toggleCollapsible(this)">
+Preoperative Pharmacologic Preparation <span class="collapsible-icon">▼</span>
+</div>
+<div class="collapsible-body">
+<div class="content-card">
+<h3>CARDINAL RULE: Alpha-Blockade BEFORE Beta-Blockade</h3>
+<ul>
+<li><strong>MANDATORY:</strong> Minimum 10–14 days of alpha-adrenergic blockade BEFORE surgery</li>
+<li><strong>Reason:</strong> Tumor release of catecholamines during induction/manipulation → unopposed α-adrenergic effects without beta-blockade → HYPERTENSIVE CRISIS (stroke, MI, arrhythmia)</li>
+<li><strong>NEVER:</strong> Start beta-blocker without alpha-blockade first (unopposed α → severe HTN)</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Alpha-Blocker Options</h3>
+<ul>
+<li><strong>Phenoxybenzamine:</strong> Non-selective (α1 + α2), irreversible; long-acting; classic choice</li>
+<li>Dosing: 10mg once daily initially; increase by 10mg every 2–3 days; target 40–80mg/day BID</li>
+<li>Advantages: Profound alpha-blockade; prevents intraoperative surges</li>
+<li>Disadvantages: Orthostatic hypotension, reflex tachycardia, nasal stuffiness; causes prolonged, profound hypotension in OR (need aggressive volume loading)</li>
+<li><strong>Doxazosin (preferred in some centers):</strong> Selective α1-blocker; reversible; easier intraoperative management; may be preferred</li>
+<li>Dosing: 1mg daily; increase to 4–8mg/day as needed</li>
+<li><strong>Prazosin:</strong> Selective α1-blocker; similar to doxazosin</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Beta-Blocker (AFTER adequate alpha-blockade)</h3>
+<ul>
+<li><strong>Indication:</strong> Tachycardia, arrhythmias, angina (reflex tachycardia from alpha-blockade)</li>
+<li><strong>Options:</strong> Propranolol (non-selective), atenolol (β1-selective)</li>
+<li><strong>Dosing:</strong> Titrate to HR <100 bpm, control arrhythmias</li>
+<li><strong>START ONLY AFTER 2–3 days of alpha-blocker</strong> to avoid unopposed α</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Preoperative Volume Expansion</h3>
+<ul>
+<li>Chronic catecholamine excess → vasoconstriction → contracted intravascular volume</li>
+<li><strong>High-sodium diet:</strong> Encourage salt intake (no fluid restriction)</li>
+<li><strong>IV fluid loading:</strong> Days before surgery and perioperatively to expand blood volume</li>
+<li><strong>Rationale:</strong> Prevents severe hypotension upon tumor removal (abrupt catecholamine drop + chronically low volume)</li>
+</ul>
+</div>
+
+<div class="summary-box trap-box">
+<div class="summary-box-title">TRAP: Beta-Blocker Before Alpha-Blocker</div>
+<div class="summary-box-content">
+<ul>
+<li>Giving β-blocker WITHOUT adequate α-blockade → unopposed α-adrenergic effects → HYPERTENSIVE CRISIS</li>
+<li>Remember: Norepinephrine causes vasoconstriction (via α); β-blockade removes β2-vasodilation + β1 heart rate compensation</li>
+</ul>
+</div>
+</div>
+
+<div class="lo-check">
+<input type="checkbox" id="lo10">
+<label for="lo10" onclick="updateProgress()">I know the rule: alpha BEFORE beta; understand why (unopposed α = HTN crisis)</label>
+</div>
+</div>
+</div>
+
+<div class="collapsible">
+<div class="collapsible-header" onclick="toggleCollapsible(this)">
+Intraoperative & Postoperative Management <span class="collapsible-icon">▼</span>
+</div>
+<div class="collapsible-body">
+<div class="content-card">
+<h3>Intraoperative Management</h3>
+<ul>
+<li><strong>Hypertensive surges:</strong> Tumor manipulation/handling → catecholamine release → severe HTN</li>
+<li><strong>Treatment:</strong> IV phentolamine (α-blocker), IV nitroprusside, IV nicardipine</li>
+<li><strong>Anesthetic considerations:</strong> Avoid agents that stimulate catecholamine release (e.g., ketamine, succinylcholine); use etomidate, propofol, or regional anesthesia</li>
+<li><strong>Monitoring:</strong> Continuous BP, EKG, invasive hemodynamic monitoring (central line often used)</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Hypotension After Tumor Removal</h3>
+<ul>
+<li><strong>Mechanism:</strong> Abrupt loss of catecholamine release from tumor + chronic volume depletion</li>
+<li><strong>Management:</strong> Aggressive IV fluid resuscitation (may need several liters); vasopressors if needed (phenylephrine, dopamine)</li>
+<li><strong>Expected course:</strong> Usually resolves within hours to days as catecholamine levels normalize</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Surgical Approach</h3>
+<ul>
+<li><strong>Preferred:</strong> Laparoscopic adrenalectomy (minimally invasive, faster recovery)</li>
+<li><strong>Bilateral involvement:</strong> In hereditary syndromes (MEN2, VHL, SDH mutations) → consider cortical-sparing adrenalectomy to preserve some adrenal function (avoid lifelong hormone replacement if possible)</li>
+<li><strong>En-bloc resection:</strong> If invasion of adjacent organs</li>
+</ul>
+</div>
+
+<div class="lo-check">
+<input type="checkbox" id="lo11">
+<label for="lo11" onclick="updateProgress()">I understand intraoperative catecholamine surge management and postoperative hypotension handling</label>
+</div>
+</div>
+</div>
+
+<div class="collapsible">
+<div class="collapsible-header" onclick="toggleCollapsible(this)">
+Malignant/Metastatic Pheochromocytoma & Paraganglioma <span class="collapsible-icon">▼</span>
+</div>
+<div class="collapsible-body">
+<div class="content-card">
+<h3>Definition & Epidemiology</h3>
+<ul>
+<li><strong>Malignant pheo/paraganglioma:</strong> Presence of metastases; diagnosis is purely histologic (cannot diagnose by light microscopy alone)</li>
+<li><strong>Incidence:</strong> 10–15% of pheochromocytomas; higher in paragangliomas</li>
+<li><strong>Risk factors:</strong> Large tumor size, extra-adrenal location, SDH mutations, higher catecholamine levels</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>MIBG (Metaiodobenzylguanidine) Imaging & Therapy</h3>
+<ul>
+<li><strong>I-123 MIBG scan:</strong> Diagnostic imaging; accumulates in catecholamine-storing vesicles (specific for pheo/paraganglioma)</li>
+<li><strong>I-131 MIBG (Iobenguane):</strong> Therapeutic radioisotope; delivers radiation specifically to pheo/paraganglioma cells</li>
+<li><strong>Mechanism:</strong> Norepinephrine reuptake transporter (NET) → pheo cells take up and store MIBG → radioactive decay damages tumor</li>
+<li><strong>Efficacy:</strong> 30–50% partial response; modest improvement in symptoms/metastatic burden</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>177Lu-DOTATATE (Lutetium)</h3>
+<ul>
+<li><strong>Mechanism:</strong> Somatostatin receptor agonist; targets SSTR-expressing tumors (somatostatin receptor positive)</li>
+<li><strong>Use:</strong> For pheo/paraganglioma with somatostatin receptor expression; emerging therapy</li>
+<li><strong>Advantage:</strong> Personalized approach based on receptor expression</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Chemotherapy</h3>
+<ul>
+<li><strong>CVD regimen:</strong> Cyclophosphamide + Vincristine + Dacarbazine; standard for aggressive metastatic disease</li>
+<li><strong>Indication:</strong> When systemic therapy needed; used with supportive care (MIBG and kinase inhibitors are often preferred first-line)</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Kinase Inhibitors</h3>
+<ul>
+<li><strong>Sunitinib, cabozantinib:</strong> Tyrosine kinase inhibitors for advanced unresectable pheo/paraganglioma</li>
+<li><strong>Rationale:</strong> Target angiogenic and growth pathways</li>
+<li><strong>Efficacy:</strong> Modest; used when other options exhausted</li>
+</ul>
+</div>
+
+<div class="lo-check">
+<input type="checkbox" id="lo12">
+<label for="lo12" onclick="updateProgress()">I understand malignant pheo imaging (MIBG) and systemic therapy options</label>
+</div>
+</div>
+</div>
+
+<div class="flip-card-container">
+<div class="flip-card" onclick="this.classList.toggle('flipped')">
+<div class="flip-card-inner">
+<div class="flip-card-front">Why do you give alpha-blockers before beta-blockers in pheochromocytoma?</div>
+<div class="flip-card-back">β-blockade without α-blockade → unopposed α-adrenergic effects → severe hypertensive crisis (norepinephrine unchecked)</div>
+</div>
+</div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')">
+<div class="flip-card-inner">
+<div class="flip-card-front">What is MIBG and how does it work therapeutically?</div>
+<div class="flip-card-back">Metaiodobenzylguanidine; accumulates in catecholamine vesicles; I-131 MIBG delivers targeted radiation to pheo cells</div>
+</div>
+</div>
+</div>
+
+</div>
+
+<!-- ============ LO5: Primary Hyperaldosteronism Treatment ============ -->
+<div id="lo-5" class="lo-section">
+<div class="lo-title">LO5: Primary Hyperaldosteronism Treatment</div>
+
+<div class="collapsible">
+<div class="collapsible-header" onclick="toggleCollapsible(this)">
+Unilateral Disease (Conn's Adenoma / Unilateral Hyperplasia) <span class="collapsible-icon">▼</span>
+</div>
+<div class="collapsible-body">
+<div class="content-card">
+<h3>Treatment Approach</h3>
+<ul>
+<li><strong>First-line:</strong> Laparoscopic adrenalectomy (curative)</li>
+<li><strong>Outcome:</strong> Normalization of hypokalemia in >95%; blood pressure improvement in 30–60% (some HTN persists due to long-standing vascular/renal remodeling)</li>
+<li><strong>Preoperative management:</strong> Aldosterone antagonist (spironolactone or eplerenone) to normalize K+ and BP before surgery</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Adrenal Vein Sampling (AVS)</h3>
+<ul>
+<li><strong>REQUIRED:</strong> Before surgery in patients >35–40 years old to confirm lateralization of aldosterone excess</li>
+<li><strong>Rationale:</strong> CT imaging can miss bilateral disease or small contralateral adenomas; AVS definitively lateralizes for surgery</li>
+<li><strong>Procedure:</strong> Catheterization of right and left adrenal veins; measure aldosterone:cortisol ratio from each side</li>
+<li><strong>Interpretation:</strong> Aldosterone:cortisol ratio lateralization; high ratio from affected side confirms unilateral source</li>
+<li><strong>Sampling during stimulation:</strong> Some centers use cosyntropin stimulation to increase sensitivity</li>
+</ul>
+</div>
+
+<div class="summary-box hy-box">
+<div class="summary-box-title">High-Yield: AVS Lateralization</div>
+<div class="summary-box-content">
+<ul>
+<li>Unilateral Conn's → AVS shows clear lateralization (high aldosterone:cortisol ratio on affected side)</li>
+<li>AVS is ESSENTIAL before adrenalectomy to confirm anatomy</li>
+<li>Skip AVS in young patients (<35 yrs) with clear CT findings AND biochemical evidence</li>
+</ul>
+</div>
+</div>
+
+<div class="lo-check">
+<input type="checkbox" id="lo13">
+<label for="lo13" onclick="updateProgress()">I understand AVS indication and interpretation for unilateral PHA</label>
+</div>
+</div>
+</div>
+
+<div class="collapsible">
+<div class="collapsible-header" onclick="toggleCollapsible(this)">
+Bilateral Disease (Idiopathic Hyperaldosteronism) <span class="collapsible-icon">▼</span>
+</div>
+<div class="collapsible-body">
+<div class="content-card">
+<h3>Definition & Management</h3>
+<ul>
+<li><strong>Idiopathic hyperaldosteronism (IHA):</strong> Bilateral adrenal involvement; NOT amenable to surgery</li>
+<li><strong>Treatment:</strong> Medical management with mineralocorticoid receptor (MR) antagonists; NOT surgical</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Spironolactone</h3>
+<ul>
+<li><strong>Dosing:</strong> 50–400mg/day (titrate to BP control + K+ normalization)</li>
+<li><strong>Mechanism:</strong> MR antagonist (blocks aldosterone receptor); also blocks androgen receptor (anti-androgen side effect)</li>
+<li><strong>Efficacy:</strong> Most effective of the MR antagonists for HTN + hypokalemia control</li>
+<li><strong>Side effects:</strong> Gynecomastia (anti-androgen), breast tenderness, menstrual irregularities, decreased libido, hyperkalemia</li>
+<li><strong>Drug interaction:</strong> Avoid combining with ACE inhibitors (↑↑ K+)</li>
+<li><strong>Monitoring:</strong> K+, Cr, BP; baseline breast exam</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Eplerenone</h3>
+<ul>
+<li><strong>Dosing:</strong> Twice-daily dosing (e.g., 50mg BID, increase to 100mg BID)</li>
+<li><strong>Mechanism:</strong> Selective MR antagonist (does not block AR)</li>
+<li><strong>Advantage:</strong> Fewer anti-androgenic side effects vs spironolactone</li>
+<li><strong>Disadvantage:</strong> More expensive; twice-daily dosing; slightly less potent</li>
+<li><strong>FDA approved for hypertension + heart failure</strong></li>
+<li><strong>Monitoring:</strong> K+, Cr, BP</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Amiloride</h3>
+<ul>
+<li><strong>Mechanism:</strong> K-sparing diuretic; blocks epithelial sodium channel (ENaC)</li>
+<li><strong>Dosing:</strong> 5–10mg/day</li>
+<li><strong>Use:</strong> Useful adjunct to spironolactone or eplerenone; or alternative if MR antagonists not tolerated</li>
+<li><strong>Advantage:</strong> Different mechanism; can be combined with MR antagonists</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Lifestyle & Adjunctive Therapy</h3>
+<ul>
+<li><strong>Low-sodium diet:</strong> Reduces aldosterone-driven sodium retention; helps BP control</li>
+<li><strong>Other antihypertensives:</strong> Calcium channel blockers (diltiazem, amlodipine), ACE inhibitors (use cautiously with K-sparing drugs)</li>
+<li><strong>Goal:</strong> BP <130/80 mmHg; K+ normal; normal renal function</li>
+</ul>
+</div>
+
+<div class="summary-box test-box">
+<div class="summary-box-title">TEST: MR Antagonist Choice</div>
+<div class="summary-box-content">
+<ul>
+<li>Spironolactone = most potent; risk: gynecomastia, hyperkalemia</li>
+<li>Eplerenone = selective MR; fewer side effects but expensive + BID dosing</li>
+<li>Amiloride = adjunct; different mechanism (ENaC blocker)</li>
+</ul>
+</div>
+</div>
+
+<div class="lo-check">
+<input type="checkbox" id="lo14">
+<label for="lo14" onclick="updateProgress()">I understand bilateral PHA medical management with MR antagonists</label>
+</div>
+</div>
+</div>
+
+<div class="collapsible">
+<div class="collapsible-header" onclick="toggleCollapsible(this)">
+Glucocorticoid-Remediable Aldosteronism (FH-1) <span class="collapsible-icon">▼</span>
+</div>
+<div class="collapsible-body">
+<div class="content-card">
+<h3>Definition & Treatment</h3>
+<ul>
+<li><strong>Glucocorticoid-remediable aldosteronism (GRA / FH-1):</strong> Familial hyperaldosteronism type 1; caused by chimeric 11β-hydroxylase/aldosterone synthase gene</li>
+<li><strong>Pathophysiology:</strong> ACTH stimulates aldosterone synthesis (abnormal; normally ACTH doesn't stimulate aldosterone directly)</li>
+<li><strong>Treatment:</strong> Dexamethasone suppresses ACTH → suppresses abnormal aldosterone production → BP control</li>
+<li><strong>Dosing:</strong> Low-dose dexamethasone (0.5–1mg at bedtime) is often sufficient</li>
+<li><strong>Monitoring:</strong> Aldosterone, renin, BP; watch for glucocorticoid excess side effects</li>
+</ul>
+</div>
+
+<div class="lo-check">
+<input type="checkbox" id="lo15">
+<label for="lo15" onclick="updateProgress()">I know GRA is ACTH-driven and responds to dexamethasone suppression</label>
+</div>
+</div>
+</div>
+
+<div class="flip-card-container">
+<div class="flip-card" onclick="this.classList.toggle('flipped')">
+<div class="flip-card-inner">
+<div class="flip-card-front">When is AVS required in primary hyperaldosteronism?</div>
+<div class="flip-card-back">In patients >35-40 years to confirm lateralization before adrenalectomy; skippable in young patients with clear CT + biochemistry</div>
+</div>
+</div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')">
+<div class="flip-card-inner">
+<div class="flip-card-front">What is the main side effect of spironolactone in men?</div>
+<div class="flip-card-back">Gynecomastia and decreased libido (anti-androgen effect); eplerenone has fewer androgenic side effects</div>
+</div>
+</div>
+</div>
+
+</div>
+
+<!-- ============ LO6: ACC & MEN Syndromes ============ -->
+<div id="lo-6" class="lo-section">
+<div class="lo-title">LO6: Adrenocortical Carcinoma & MEN Syndromes</div>
+
+<div class="collapsible">
+<div class="collapsible-header" onclick="toggleCollapsible(this)">
+Adrenocortical Carcinoma (ACC) <span class="collapsible-icon">▼</span>
+</div>
+<div class="collapsible-body">
+<div class="content-card">
+<h3>Diagnosis & Staging</h3>
+<ul>
+<li><strong>Definition:</strong> Rare malignancy of adrenocortical cells; often hormonally active</li>
+<li><strong>Presentation:</strong> Virilization (adrogens), Cushing's (cortisol), hyperaldosteronism, or combination; can be non-functional</li>
+<li><strong>Prognostic factor:</strong> STAGE AT DIAGNOSIS is most important predictor of survival</li>
+<li><strong>5-year survival:</strong> Overall ~30%; stage I/II ~50%; stage III/IV ~10–15%</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Surgical Management</h3>
+<ul>
+<li><strong>Only curative option:</strong> Complete adrenalectomy with R0 resection (complete tumor removal with negative margins)</li>
+<li><strong>En-bloc resection:</strong> May be necessary if invasion of kidney, liver, or other adjacent organs</li>
+<li><strong>Lymphadenectomy:</strong> Remove ipsilateral lymph nodes</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Mitotane (Adjuvant & Palliative)</h3>
+<ul>
+<li><strong>Mechanism:</strong> Adrenolytic agent (destroys adrenocortical cells) + inhibits steroidogenic enzymes (11β-hydroxylase, 17α-hydroxylase, SCC)</li>
+<li><strong>Indication:</strong> Adjuvant therapy after surgery for high-risk ACC (stage II–IV, poor prognostic features); palliative for unresectable/metastatic disease</li>
+<li><strong>Dosing:</strong> 8–10g/day in divided doses; titrate to plasma level 14–20 mg/L (therapeutic window)</li>
+<li><strong>Side effects:</strong> GI disturbance, neurologic (ataxia, vertigo), hepatotoxicity, hyperlipidemia; severe and often dose-limiting</li>
+<li><strong>Drug interactions:</strong> STRONG CYP3A4 INDUCER → warfarin requires 3–5× dose increase; affects metabolism of many drugs</li>
+<li><strong>Hormone replacement:</strong> Mitotane causes adrenal insufficiency → must give hydrocortisone + fludrocortisone</li>
+<li><strong>Monitoring:</strong> Plasma mitotane levels, LFTs, lipids, neurologic symptoms</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Chemotherapy</h3>
+<ul>
+<li><strong>EDP + Mitotane:</strong> Etoposide + Doxorubicin + Cisplatin + mitotane for advanced/metastatic ACC</li>
+<li><strong>Efficacy:</strong> Modest; prolongation of progression-free survival in some studies</li>
+<li><strong>Used with:</strong> Mitotane as adjuvant</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>Hormone-Excess Control During Treatment</h3>
+<ul>
+<li>Ketoconazole, metyrapone, osilodrostat used to control cortisol/androgen excess while awaiting surgery effect or for inoperable disease</li>
+<li>Improves quality of life; addresses Cushing's symptoms, hyperandrogenism</li>
+</ul>
+</div>
+
+<div class="summary-box trap-box">
+<div class="summary-box-title">TRAP: Mitotane & Warfarin Dosing</div>
+<div class="summary-box-content">
+<ul>
+<li>Mitotane is a STRONG CYP3A4 INDUCER</li>
+<li>Warfarin metabolism ↑ dramatically → INR drops → need to ↑ warfarin dose by 3–5×</li>
+<li>Check INR frequently during mitotane initiation/titration</li>
+</ul>
+</div>
+</div>
+
+<div class="lo-check">
+<input type="checkbox" id="lo16">
+<label for="lo16" onclick="updateProgress()">I understand ACC surgery, mitotane use (therapeutic levels, warfarin interaction), and prognosis</label>
+</div>
+</div>
+</div>
+
+<div class="collapsible">
+<div class="collapsible-header" onclick="toggleCollapsible(this)">
+MEN Syndromes (Summary Table) <span class="collapsible-icon">▼</span>
+</div>
+<div class="collapsible-body">
+<div class="content-card">
+<h3>MEN1 (Wermer Syndrome)</h3>
+<ul>
+<li><strong>Gene:</strong> MEN1 (menin, tumor suppressor)</li>
+<li><strong>Classic 3 Ps:</strong> Parathyroid, Pituitary, Pancreatic</li>
+<li><strong>Parathyroid hyperplasia:</strong> Most common (95%); causes primary hyperparathyroidism + hypercalcemia</li>
+<li><strong>Pituitary adenoma:</strong> ~30%; prolactinoma most common; also non-functional adenomas</li>
+<li><strong>Pancreatic NETs:</strong> Gastrinoma (Zollinger-Ellison) most common functional tumor; also insulinoma, VIPoma, glucagonoma, non-functional</li>
+<li><strong>Associated features:</strong> Adrenal adenomas (usually non-functional, incidentalomas); carcinoid (lung, thymic); skin manifestations (lipomas, collagenomas)</li>
+<li><strong>Screening:</strong> Multiglandular involvement → screen pituitary (MRI), pancreas (CT/MRI/EUS), parathyroid (labs)</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>MEN2A (Sipple Syndrome)</h3>
+<ul>
+<li><strong>Gene:</strong> RET proto-oncogene</li>
+<li><strong>Triad:</strong> Medullary thyroid cancer (MTC, 100%) + Pheochromocytoma (50%) + Hyperparathyroidism (25%)</li>
+<li><strong>RET mutations:</strong> Determine aggressiveness; codon 634 = highest risk for MTC (earliest, most aggressive)</li>
+<li><strong>Management:</strong> Prophylactic thyroidectomy based on RET mutation (age recommendations vary)</li>
+<li><strong>CRITICAL:</strong> Screen for pheochromocytoma BEFORE thyroidectomy (treat pheo first!)</li>
+<li><strong>Hyperparathyroidism:</strong> Less frequent than MEN1; managed surgically when necessary</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>MEN2B</h3>
+<ul>
+<li><strong>Gene:</strong> RET (codon 918 = most common, highly aggressive)</li>
+<li><strong>Features:</strong> MTC (100%, earliest onset) + Pheochromocytoma (50%) + Marfanoid habitus + Mucosal neuromas + Medullated corneal nerve fibers</li>
+<li><strong>NO hyperparathyroidism</strong> (distinguishes from MEN2A)</li>
+<li><strong>Physical findings:</strong> Tall, thin build (Marfan-like); visible mucosal neuromas (lips, tongue, GI tract); corneal nerve thickening on slit-lamp</li>
+<li><strong>Management:</strong> Earliest thyroidectomy (within first year of life) due to aggressive MTC</li>
+<li><strong>Screen for pheo BEFORE thyroidectomy</strong></li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>MEN4</h3>
+<ul>
+<li><strong>Gene:</strong> CDKN1B (p27 mutation, cell cycle inhibitor)</li>
+<li><strong>Features:</strong> Similar to MEN1 (parathyroid, pituitary, pancreatic); rare</li>
+<li><strong>Clinical overlap:</strong> Hyperparathyroidism, pituitary adenoma, pancreatic NETs</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>VHL (Von Hippel-Lindau)</h3>
+<ul>
+<li><strong>Gene:</strong> VHL (tumor suppressor)</li>
+<li><strong>Features:</strong> Hemangioblastoma (CNS, retinal), clear cell renal cell carcinoma (RCC), pheochromocytoma, pancreatic cysts/NETs</li>
+<li><strong>Pheo:</strong> Often bilateral; risk of malignancy</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3>SDH-Related (Hereditary Paraganglioma-Pheochromocytoma Syndrome)</h3>
+<ul>
+<li><strong>Genes:</strong> SDHA, SDHB, SDHC, SDHD, SDHAF2</li>
+<li><strong>Features:</strong> Pheochromocytoma/paraganglioma; high malignancy risk (especially SDHB)</li>
+<li><strong>Extra-adrenal paragangliomas:</strong> More common than adrenal pheo</li>
+<li><strong>Associated tumors:</strong> Renal cancer, GI stromal tumors, pituitary adenomas</li>
+</ul>
+</div>
+
+<div class="summary-box memory-box">
+<div class="summary-box-title">Memory: MEN Syndromes Mnemonic</div>
+<div class="summary-box-content">
+<ul>
+<li><strong>MEN1:</strong> "3 Ps" = Parathyroid, Pituitary, Pancreas (most common = parathyroid hyperplasia)</li>
+<li><strong>MEN2A:</strong> "2 Ms + P" = MTC + pheochromocytoma + Parathyroid (50%, 25%)</li>
+<li><strong>MEN2B:</strong> "2 Ms + M + N" = MTC + pheochromocytoma + Marfan-like + Neuromas (NO parathyroid)</li>
+<li><strong>Key rule:</strong> In MEN2A/2B → SCREEN & TREAT PHEO BEFORE THYROID SURGERY</li>
+</ul>
+</div>
+</div>
+
+<div class="lo-check">
+<input type="checkbox" id="lo17">
+<label for="lo17" onclick="updateProgress()">I can distinguish MEN1, MEN2A, MEN2B, VHL, SDH and know screening/management priorities</label>
+</div>
+</div>
+</div>
+
+<div class="flip-card-container">
+<div class="flip-card" onclick="this.classList.toggle('flipped')">
+<div class="flip-card-inner">
+<div class="flip-card-front">What is the mechanism of mitotane's warfarin interaction?</div>
+<div class="flip-card-back">Mitotane is a strong CYP3A4 inducer → ↑ warfarin metabolism → ↓ INR → need 3-5x dose increase</div>
+</div>
+</div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')">
+<div class="flip-card-inner">
+<div class="flip-card-front">What is the most important prognostic factor in adrenocortical carcinoma?</div>
+<div class="flip-card-back">Stage at diagnosis; overall 5-year survival ~30% but varies dramatically with stage</div>
+</div>
+</div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')">
+<div class="flip-card-inner">
+<div class="flip-card-front">What distinguishes MEN2B from MEN2A?</div>
+<div class="flip-card-back">MEN2B has Marfan-like habitus + mucosal neuromas + NO hyperparathyroidism; MEN2A has parathyroid involvement</div>
+</div>
+</div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')">
+<div class="flip-card-inner">
+<div class="flip-card-front">When screening MEN2A/2B for surgery, which tumor must be evaluated first?</div>
+<div class="flip-card-back">Pheochromocytoma; treat/manage pheo BEFORE thyroidectomy (risk of intraoperative HTN crisis)</div>
+</div>
+</div>
+</div>
+
+<div class="content-card">
+<h3>Quick Reference: MEN Comparison</h3>
+<ul>
+<li><strong>MEN1:</strong> Parathyroid (95%) > Pituitary (30%) > Pancreatic NETs (40%)</li>
+<li><strong>MEN2A:</strong> MTC (100%) + Pheo (50%) + PTH (25%)</li>
+<li><strong>MEN2B:</strong> MTC (100%) + Pheo (50%) + Marfan + Neuromas</li>
+<li><strong>VHL:</strong> Hemangioblastoma + RCC + Pheo + Pancreatic cysts/NETs</li>
+<li><strong>SDH:</strong> Pheo/Paraganglioma + high malignancy risk</li>
+</ul>
+</div>
+
+</div>
+
+<!-- ============ MCQs (18 total) ============ -->
+<div id="mcq-section" style="margin-top: 40px; padding-top: 28px; border-top: 2px solid #059669;">
+<div class="lo-title">Practice MCQs (18 Questions)</div>
+
+<!-- MCQ 1: LO1 IPSS -->
+<div class="mcq-container">
+<div class="mcq-question">1. A 45-year-old woman with Cushing's syndrome has an ACTH level of 65 pg/mL, suggesting an ACTH-dependent source. Inferior petrosal sinus sampling (IPSS) is performed and shows a basal IPS/peripheral ACTH ratio of 2.5. What does this finding suggest?</div>
+<div class="mcq-options">
+<label class="mcq-option"><input type="radio" name="q1"> A) Ectopic ACTH-secreting tumor (lung, pancreas)</label>
+<label class="mcq-option"><input type="radio" name="q1"> B) Pituitary corticotroph adenoma</label>
+<label class="mcq-option"><input type="radio" name="q1"> C) Primary adrenal insufficiency</label>
+<label class="mcq-option"><input type="radio" name="q1"> D) Adrenal carcinoma with ACTH secretion</label>
+<label class="mcq-option"><input type="radio" name="q1"> E) Pseudo-Cushing's syndrome</label>
+</div>
+<button class="mcq-button" onclick="revealMCQ(this)">Reveal Answer</button>
+<div class="mcq-reveal">
+<div class="mcq-reveal-label">Correct Answer: B) Pituitary corticotroph adenoma</div>
+<div class="mcq-reveal-text"><strong>Explanation:</strong> IPSS gradient >2 (basal) indicates pituitary source. A ratio >3 after CRH stimulation also suggests pituitary. The patient has ACTH-dependent Cushing's with a pituitary adenoma confirmed by IPSS. Ectopic sources show ratios <2 and do NOT respond to CRH stimulation (ratios stay <3). This is a high-yield USMLE fact.</div>
+</div>
+</div>
+
+<!-- MCQ 2: LO1 MRI Limitation -->
+<div class="mcq-container">
+<div class="mcq-question">2. A 38-year-old man is being evaluated for Cushing's syndrome. UFC and late-night salivary cortisol are elevated, and plasma ACTH is 55 pg/mL. MRI of the pituitary is performed and shows NO adenoma. Which of the following statements is CORRECT?</div>
+<div class="mcq-options">
+<label class="mcq-option"><input type="radio" name="q2"> A) The patient does NOT have a pituitary adenoma; ectopic source is likely</label>
+<label class="mcq-option"><input type="radio" name="q2"> B) Pituitary adenoma can still be present; microadenomas are not visible on ~50% of MRIs</label>
+<label class="mcq-option"><input type="radio" name="q2"> C) The diagnosis of Cushing's syndrome is excluded by negative MRI</label>
+<label class="mcq-option"><input type="radio" name="q2"> D) High-dose DST is contraindicated now that MRI is negative</label>
+<label class="mcq-option"><input type="radio" name="q2"> E) Plasma ACTH is low; so the source is ACTH-independent</label>
+</div>
+<button class="mcq-button" onclick="revealMCQ(this)">Reveal Answer</button>
+<div class="mcq-reveal">
+<div class="mcq-reveal-label">Correct Answer: B) Pituitary adenoma can still be present; microadenomas are not visible on ~50% of MRIs</div>
+<div class="mcq-reveal-text"><strong>Explanation:</strong> Only ~50% of pituitary microadenomas are visible on MRI. A negative MRI does NOT exclude pituitary Cushing's disease. Proceed with high-dose DST or CRH stimulation to differentiate pituitary from ectopic source. This is a critical concept for avoiding false reassurance from normal imaging.</div>
+</div>
+</div>
+
+<!-- MCQ 3: LO1 Pseudo-Cushing's -->
+<div class="mcq-container">
+<div class="mcq-question">3. A 52-year-old woman on antidepressants for depression presents with slightly elevated 24-hour UFC (2× ULN) and elevated late-night salivary cortisol. The 1mg overnight DST shows cortisol of 2.2 μg/dL (fails to suppress). Which test would BEST differentiate true Cushing's syndrome from pseudo-Cushing's (depression)?</div>
+<div class="mcq-options">
+<label class="mcq-option"><input type="radio" name="q3"> A) 2-day low-dose DST</label>
+<label class="mcq-option"><input type="radio" name="q3"> B) CRH stimulation test</label>
+<label class="mcq-option"><input type="radio" name="q3"> C) Plasma ACTH measurement</label>
+<label class="mcq-option"><input type="radio" name="q3"> D) High-dose DST</label>
+<label class="mcq-option"><input type="radio" name="q3"> E) Dexamethasone levels</label>
+</div>
+<button class="mcq-button" onclick="revealMCQ(this)">Reveal Answer</button>
+<div class="mcq-reveal">
+<div class="mcq-reveal-label">Correct Answer: B) CRH stimulation test</div>
+<div class="mcq-reveal-text"><strong>Explanation:</strong> In true Cushing's, CRH stimulates corticotroph adenoma → ↑ ACTH + cortisol >50% above baseline. In pseudo-Cushing's (depression), the normal feedback loop is intact → CRH does NOT cause abnormal ACTH/cortisol response (suppressibility is preserved). Late-night cortisol is also typically normal in pseudo-Cushing's, making this a useful screening tool.</div>
+</div>
+</div>
+
+<!-- MCQ 4: LO2 Nelson's Syndrome -->
+<div class="mcq-container">
+<div class="mcq-question">4. A 50-year-old man with pituitary Cushing's disease undergoes bilateral adrenalectomy (cortisol cure) but is not given postoperative pituitary radiation. One year later, his ACTH rises to 380 pg/mL, he develops severe hyperpigmentation, and MRI shows growth of a pituitary mass. What syndrome has developed?</div>
+<div class="mcq-options">
+<label class="mcq-option"><input type="radio" name="q4"> A) Secondary adrenal insufficiency from ACTH excess</label>
+<label class="mcq-option"><input type="radio" name="q4"> B) Nelson's syndrome</label>
+<label class="mcq-option"><input type="radio" name="q4"> C) Ectopic ACTH syndrome from metastatic disease</label>
+<label class="mcq-option"><input type="radio" name="q4"> D) Pseudo-hypoparathyroidism</label>
+<label class="mcq-option"><input type="radio" name="q4"> E) Pituitary apoplexy</label>
+</div>
+<button class="mcq-button" onclick="revealMCQ(this)">Reveal Answer</button>
+<div class="mcq-reveal">
+<div class="mcq-reveal-label">Correct Answer: B) Nelson's syndrome</div>
+<div class="mcq-reveal-text"><strong>Explanation:</strong> Nelson's syndrome occurs in ~15–20% of patients after bilateral adrenalectomy for Cushing's disease. Loss of cortisol removes negative feedback on ACTH-secreting pituitary adenoma → tumor grows unchecked → ↑↑ ACTH (>500 pg/mL) → hyperpigmentation (from melanocyte-stimulating hormone—part of ACTH prohormone) + pituitary mass growth + potential visual loss. Prevention with pituitary radiation after adrenalectomy reduces incidence.</div>
+</div>
+</div>
+
+<!-- MCQ 5: LO2 Mifepristone Monitoring -->
+<div class="mcq-container">
+<div class="mcq-question">5. A 55-year-old woman with Cushing's syndrome and diabetes mellitus is started on mifepristone for cortisol-excess symptom management. After 1 week of treatment, her serum cortisol level is 45 μg/dL (elevated). Which of the following is the CORRECT interpretation of this finding?</div>
+<div class="mcq-options">
+<label class="mcq-option"><input type="radio" name="q5"> A) Treatment is failing; cortisol should have decreased</label>
+<label class="mcq-option"><input type="radio" name="q5"> B) Mifepristone dose is inadequate; increase the dose</label>
+<label class="mcq-option"><input type="radio" name="q5"> C) This is expected; cortisol levels RISE on mifepristone because the GR is blocked</label>
+<label class="mcq-option"><input type="radio" name="q5"> D) The patient has developed secondary adrenal insufficiency</label>
+<label class="mcq-option"><input type="radio" name="q5"> E) Measurement error; cortisol assay should be repeated</label>
+</div>
+<button class="mcq-button" onclick="revealMCQ(this)">Reveal Answer</button>
+<div class="mcq-reveal">
+<div class="mcq-reveal-label">Correct Answer: C) This is expected; cortisol levels RISE on mifepristone because the GR is blocked</div>
+<div class="mcq-reveal-text"><strong>Explanation:</strong> Mifepristone is a GR antagonist → blocks glucocorticoid receptor action → cortisol cannot bind effectively → cortisol accumulates (negative feedback broken) → serum cortisol RISES. Monitor clinically (BP, glucose, symptoms), NOT cortisol levels. Use clinical improvement (better glucose control, normalized BP, reduced hirsutism) as markers of efficacy. This is a critical pharmacology concept.</div>
+</div>
+</div>
+
+<!-- MCQ 6: LO2 Enzyme Inhibitor Choice -->
+<div class="mcq-container">
+<div class="mcq-question">6. A 48-year-old woman with uncontrolled Cushing's syndrome is being started on medical therapy while awaiting transsphenoidal surgery. Which medication would be the BEST first-line choice for medical management of hypercortisolism?</div>
+<div class="mcq-options">
+<label class="mcq-option"><input type="radio" name="q6"> A) Metyrapone (monitor for hypokalemia from DOC excess)</label>
+<label class="mcq-option"><input type="radio" name="q6"> B) Ketoconazole (monitor liver function; CYP3A4 inhibitor)</label>
+<label class="mcq-option"><input type="radio" name="q6"> C) Mitotane (adrenolytic agent)</label>
+<label class="mcq-option"><input type="radio" name="q6"> D) Etomidate (only for ICU severe hypercortisolism)</label>
+<label class="mcq-option"><input type="radio" name="q6"> E) Mifepristone (blocks GR antagonist)</label>
+</div>
+<button class="mcq-button" onclick="revealMCQ(this)">Reveal Answer</button>
+<div class="mcq-reveal">
+<div class="mcq-reveal-label">Correct Answer: B) Ketoconazole (monitor liver function; CYP3A4 inhibitor)</div>
+<div class="mcq-reveal-text"><strong>Explanation:</strong> Ketoconazole is first-line medical therapy for Cushing's syndrome. It inhibits multiple steroidogenic enzymes (CYP17, CYP11B1, SCC) → broad suppression of steroid synthesis. Metyrapone is also effective but requires monitoring for hypokalemia (DOC excess). Mitotane is reserved for ACC. Etomidate is ICU-only. Monitor LFTs on ketoconazole; also check for drug interactions (strong CYP3A4 inhibitor).</div>
+</div>
+</div>
+
+<!-- MCQ 7: LO3 Fludrocortisone in AI -->
+<div class="mcq-container">
+<div class="mcq-question">7. A 35-year-old man with secondary adrenal insufficiency from pituitary surgery is prescribed hydrocortisone 15mg/day. His physician wants to ADD fludrocortisone 0.1mg/day as well. Which of the following is CORRECT?</div>
+<div class="mcq-options">
+<label class="mcq-option"><input type="radio" name="q7"> A) Fludrocortisone is appropriate; all AI patients need mineralocorticoid replacement</label>
+<label class="mcq-option"><input type="radio" name="q7"> B) Fludrocortisone is INCORRECT; it is only for primary AI, not secondary AI</label>
+<label class="mcq-option"><input type="radio" name="q7"> C) Fludrocortisone is needed only if the patient develops hyponatremia</label>
+<label class="mcq-option"><input type="radio" name="q7"> D) Fludrocortisone should be combined with ACE inhibitors for synergy</label>
+<label class="mcq-option"><input type="radio" name="q7"> E) Fludrocortisone dose should be doubled in secondary AI</label>
+</div>
+<button class="mcq-button" onclick="revealMCQ(this)">Reveal Answer</button>
+<div class="mcq-reveal">
+<div class="mcq-reveal-label">Correct Answer: B) Fludrocortisone is INCORRECT; it is only for primary AI, not secondary AI</div>
+<div class="mcq-reveal-text"><strong>Explanation:</strong> Fludrocortisone (aldosterone replacement) is ONLY for primary adrenal insufficiency (Addison's disease). In secondary AI (pituitary/hypothalamic ACTH deficiency), the RAAS axis is intact → aldosterone production is preserved → fludrocortisone causes HTN + severe hypokalemia. Secondary AI needs ONLY glucocorticoid (hydrocortisone). This is a classic exam trap and critical for patient safety.</div>
+</div>
+</div>
+
+<!-- MCQ 8: LO3 Cortisol BEFORE Levothyroxine -->
+<div class="mcq-container">
+<div class="mcq-question">8. A 42-year-old woman presents with secondary adrenal insufficiency AND secondary hypothyroidism from pan-hypopituitarism. The physician begins treatment with levothyroxine 50 μg/day. Two days later, the patient develops severe fatigue, hypotension, and hyponatremia. What is the MOST likely explanation?</div>
+<div class="mcq-options">
+<label class="mcq-option"><input type="radio" name="q8"> A) Levothyroxine dose is too high; reduce and recheck TSH</label>
+<label class="mcq-option"><input type="radio" name="q8"> B) The patient has primary hypothyroidism, not secondary; levothyroxine is contraindicated</label>
+<label class="mcq-option"><input type="radio" name="q8"> C) Levothyroxine ↑ cortisol metabolism → worsened adrenal insufficiency; should have started hydrocortisone FIRST</label>
+<label class="mcq-option"><input type="radio" name="q8"> D) The patient has thyroid storm and requires emergency iodine treatment</label>
+<label class="mcq-option"><input type="radio" name="q8"> E) Levothyroxine is contraindicated in secondary hypothyroidism</label>
+</div>
+<button class="mcq-button" onclick="revealMCQ(this)">Reveal Answer</button>
+<div class="mcq-reveal">
+<div class="mcq-reveal-label">Correct Answer: C) Levothyroxine ↑ cortisol metabolism → worsened adrenal insufficiency; should have started hydrocortisone FIRST</div>
+<div class="mcq-reveal-text"><strong>Explanation:</strong> In pan-hypopituitarism with BOTH AI and hypothyroidism, ALWAYS replace cortisol BEFORE thyroid hormone. Levothyroxine ↑ cortisol metabolism → cortisol levels drop further → adrenal crisis symptoms (hypotension, hyponatremia, fatigue). The correct approach: start hydrocortisone 15–20mg/day FIRST, wait 1–2 weeks, THEN add levothyroxine. This is a life-saving principle and common USMLE question.</div>
+</div>
+</div>
+
+<!-- MCQ 9: LO3 Sick Day Rules -->
+<div class="mcq-container">
+<div class="mcq-question">9. A 38-year-old woman on maintenance hydrocortisone 10mg AM + 5mg noon + 5mg afternoon for Addison's disease develops acute gastroenteritis with vomiting and diarrhea. She cannot take oral medications. What is the MOST appropriate immediate management?</div>
+<div class="mcq-options">
+<label class="mcq-option"><input type="radio" name="q9"> A) Skip the dose; resume when vomiting resolves</label>
+<label class="mcq-option"><input type="radio" name="q9"> B) Give IV hydrocortisone 100mg + 0.9% saline; then ER evaluation</label>
+<label class="mcq-option"><input type="radio" name="q9"> C) Give IM hydrocortisone 100mg (Solu-Cortef) + go to ER</label>
+<label class="mcq-option"><input type="radio" name="q9"> D) Double the daily dose at next meal</label>
+<label class="mcq-option"><input type="radio" name="q9"> E) Take acetaminophen and wait 4 hours before retrying oral dose</label>
+</div>
+<button class="mcq-button" onclick="revealMCQ(this)">Reveal Answer</button>
+<div class="mcq-reveal">
+<div class="mcq-reveal-label">Correct Answer: C) Give IM hydrocortisone 100mg (Solu-Cortef) + go to ER</div>
+<div class="mcq-reveal-text"><strong>Explanation:</strong> With inability to swallow, use IM hydrocortisone 100mg (Solu-Cortef) — this is why patients with AI should carry emergency injection kits. Then seek ER care for IV fluids, evaluation of GI illness, and continued IV or IM steroid coverage. Option B (IV hydrocortisone) is correct for hospitalized patients, but the immediate outpatient approach is IM 100mg + ER. Sick day rule: vomiting + cannot swallow = IM injection + emergency department.</div>
+</div>
+</div>
+
+<!-- MCQ 10: LO4 Alpha-Blockade First -->
+<div class="mcq-container">
+<div class="mcq-question">10. A 52-year-old man diagnosed with pheochromocytoma is scheduled for laparoscopic adrenalectomy in 2 weeks. His blood pressure is 165/105 mmHg with frequent palpitations. The surgeon prescribes atenolol 50mg/day. What is WRONG with this approach?</div>
+<div class="mcq-options">
+<label class="mcq-option"><input type="radio" name="q10"> A) Beta-blockade is contraindicated in pheochromocytoma patients</label>
+<label class="mcq-option"><input type="radio" name="q10"> B) Starting beta-blocker without alpha-blockade first → unopposed α → hypertensive crisis</label>
+<label class="mcq-option"><input type="radio" name="q10"> C) Atenolol causes reflex tachycardia worse than propranolol</label>
+<label class="mcq-option"><input type="radio" name="q10"> D) The patient needs phentolamine, not atenolol</label>
+<label class="mcq-option"><input type="radio" name="q10"> E) Beta-blockers should only be given in the OR, not preoperatively</label>
+</div>
+<button class="mcq-button" onclick="revealMCQ(this)">Reveal Answer</button>
+<div class="mcq-reveal">
+<div class="mcq-reveal-label">Correct Answer: B) Starting beta-blocker without alpha-blockade first → unopposed α → hypertensive crisis</div>
+<div class="mcq-reveal-text"><strong>Explanation:</strong> This is the classic pheo trap. Norepinephrine (from tumor) causes vasoconstriction via α-adrenergic receptors. β-blockade removes β2-vasodilation + β1-mediated heart rate increase → unopposed α-adrenergic effects → severe HTN + risk of stroke/MI. ALWAYS start alpha-blocker (phenoxybenzamine or doxazosin) 10–14 days BEFORE beta-blocker. Beta-blocker is added AFTER adequate alpha-blockade (2–3 days later) to control reflex tachycardia.</div>
+</div>
+</div>
+
+<!-- MCQ 11: LO4 MIBG Imaging -->
+<div class="mcq-container">
+<div class="mcq-question">11. A 48-year-old woman with a history of pheochromocytoma now presents with metastatic disease (spine, liver). She is being considered for I-131 MIBG therapy. What is the mechanism by which MIBG accumulates in pheochromocytoma cells?</div>
+<div class="mcq-options">
+<label class="mcq-option"><input type="radio" name="q11"> A) MIBG is an aldosterone antagonist that binds to mineralocorticoid receptors</label>
+<label class="mcq-option"><input type="radio" name="q11"> B) MIBG is taken up via norepinephrine transporter (NET) and stored in catecholamine vesicles</label>
+<label class="mcq-option"><input type="radio" name="q11"> C) MIBG binds to α-adrenergic receptors on tumor cell surface</label>
+<label class="mcq-option"><input type="radio" name="q11"> D) MIBG inhibits 11β-hydroxylase, reducing catecholamine synthesis</label>
+<label class="mcq-option"><input type="radio" name="q11"> E) MIBG is a cortisol analog that competes for plasma cortisol-binding globulin</label>
+</div>
+<button class="mcq-button" onclick="revealMCQ(this)">Reveal Answer</button>
+<div class="mcq-reveal">
+<div class="mcq-reveal-label">Correct Answer: B) MIBG is taken up via norepinephrine transporter (NET) and stored in catecholamine vesicles</div>
+<div class="mcq-reveal-text"><strong>Explanation:</strong> Metaiodobenzylguanidine (MIBG) is a norepinephrine analog. Pheochromocytoma cells have high expression of the norepinephrine transporter (NET) → MIBG is taken up and stored in catecholamine-containing vesicles. I-123 MIBG is diagnostic; I-131 MIBG is therapeutic (radioactive iodine damages tumor cells). This specificity makes MIBG valuable for both detection and treatment of metastatic pheo.</div>
+</div>
+</div>
+
+<!-- MCQ 12: LO5 AVS Requirement -->
+<div class="mcq-container">
+<div class="mcq-question">12. A 45-year-old man with primary hyperaldosteronism is found to have an adrenal nodule on CT suspicious for Conn's adenoma. He is being considered for laparoscopic adrenalectomy. Which of the following studies is REQUIRED before surgery?</div>
+<div class="mcq-options">
+<label class="mcq-option"><input type="radio" name="q12"> A) High-dose dexamethasone suppression test</label>
+<label class="mcq-option"><input type="radio" name="q12"> B) Adrenal vein sampling (AVS) to confirm lateralization</label>
+<label class="mcq-option"><input type="radio" name="q12"> C) PET scan of the adrenal</label>
+<label class="mcq-option"><input type="radio" name="q12"> D) 24-hour urinary metanephrines (to rule out pheo)</label>
+<label class="mcq-option"><input type="radio" name="q12"> E) Adrenal ultrasound with Doppler</label>
+</div>
+<button class="mcq-button" onclick="revealMCQ(this)">Reveal Answer</button>
+<div class="mcq-reveal">
+<div class="mcq-reveal-label">Correct Answer: B) Adrenal vein sampling (AVS) to confirm lateralization</div>
+<div class="mcq-reveal-text"><strong>Explanation:</strong> AVS is REQUIRED in patients >35–40 years before adrenalectomy for suspected unilateral Conn's syndrome. Why? CT imaging can miss bilateral disease or contralateral adenomas. AVS measures aldosterone:cortisol ratio from each adrenal vein → lateralizes the source → confirms that resection of one gland will cure the condition. AVS can be skipped in young patients (<35) with clear CT findings and unambiguous biochemistry, but generally it's considered standard of care. This prevents unnecessary surgery for bilateral disease.</div>
+</div>
+</div>
+
+<!-- MCQ 13: LO5 Spironolactone Side Effect -->
+<div class="mcq-container">
+<div class="mcq-question">13. A 52-year-old man with bilateral primary hyperaldosteronism (idiopathic) is started on spironolactone 100mg/day. After 3 weeks, he complains of breast tenderness and mild erectile dysfunction. What is the mechanism of these side effects?</div>
+<div class="mcq-options">
+<label class="mcq-option"><input type="radio" name="q13"> A) Spironolactone inhibits 5α-reductase, lowering DHT</label>
+<label class="mcq-option"><input type="radio" name="q13"> B) Spironolactone blocks mineralocorticoid receptors on breast tissue</label>
+<label class="mcq-option"><input type="radio" name="q13"> C) Spironolactone blocks androgen receptors (anti-androgen effect)</label>
+<label class="mcq-option"><input type="radio" name="q13"> D) Spironolactone causes hypogonadism via LH suppression</label>
+<label class="mcq-option"><input type="radio" name="q13"> E) Hyperkalemia from spironolactone impairs erectile function</label>
+</div>
+<button class="mcq-button" onclick="revealMCQ(this)">Reveal Answer</button>
+<div class="mcq-reveal">
+<div class="mcq-reveal-label">Correct Answer: C) Spironolactone blocks androgen receptors (anti-androgen effect)</div>
+<div class="mcq-reveal-text"><strong>Explanation:</strong> Spironolactone is a non-selective aldosterone antagonist with anti-androgenic properties. In addition to blocking mineralocorticoid receptors, it ALSO blocks androgen receptors → gynecomastia, breast tenderness, erectile dysfunction, decreased libido, menstrual irregularities in women. Eplerenone is a selective MR antagonist (does not block AR) and has fewer androgenic side effects, but it's more expensive and requires BID dosing. This is why eplerenone is preferred in some patients despite cost.</div>
+</div>
+</div>
+
+<!-- MCQ 14: LO6 Mitotane & Warfarin -->
+<div class="mcq-container">
+<div class="mcq-question">14. A 58-year-old man is diagnosed with adrenocortical carcinoma and undergoes complete adrenalectomy (R0 resection). Pathology shows stage III disease. He is started on adjuvant mitotane, and is also on chronic warfarin for atrial fibrillation (baseline INR goal 2–3). Six weeks after mitotane initiation, his INR drops to 1.1. What explains this finding?</div>
+<div class="mcq-options">
+<label class="mcq-option"><input type="radio" name="q14"> A) Warfarin absorption is impaired by mitotane's GI effects</label>
+<label class="mcq-option"><input type="radio" name="q14"> B) Mitotane competitively binds warfarin, reducing its bioavailability</label>
+<label class="mcq-option"><input type="radio" name="q14"> C) Mitotane is a STRONG CYP3A4 INDUCER → ↑ warfarin metabolism → ↓ INR</label>
+<label class="mcq-option"><input type="radio" name="q14"> D) The patient has developed warfarin resistance (acquired mutation)</label>
+<label class="mcq-option"><input type="radio" name="q14"> E) Mitotane impairs hepatic vitamin K synthesis</label>
+</div>
+<button class="mcq-button" onclick="revealMCQ(this)">Reveal Answer</button>
+<div class="mcq-reveal">
+<div class="mcq-reveal-label">Correct Answer: C) Mitotane is a STRONG CYP3A4 INDUCER → ↑ warfarin metabolism → ↓ INR</div>
+<div class="mcq-reveal-text"><strong>Explanation:</strong> Mitotane is a potent CYP3A4 inducer (also induces other cytochrome P450 enzymes) → dramatically ↑ metabolism of many drugs, including warfarin. Warfarin dose may need to be INCREASED by 3–5×. INR monitoring is CRITICAL during mitotane initiation and titration. Expect baseline warfarin doses to be insufficient; frequent INR checks and warfarin adjustments are necessary. This is a high-risk drug interaction and common exam trap.</div>
+</div>
+</div>
+
+<!-- MCQ 15: LO6 ACC Prognosis -->
+<div class="mcq-container">
+<div class="mcq-question">15. A 44-year-old woman is diagnosed with adrenocortical carcinoma. A complete staging workup is performed (imaging, tumor markers). Which of the following is the MOST important prognostic factor in ACC?</div>
+<div class="mcq-options">
+<label class="mcq-option"><input type="radio" name="q15"> A) Tumor size alone (larger = worse)</label>
+<label class="mcq-option"><input type="radio" name="q15"> B) Presence of hormone production (cortisol excess = worse)</label>
+<label class="mcq-option"><input type="radio" name="q15"> C) Stage at diagnosis (most important predictor of survival)</label>
+<label class="mcq-option"><input type="radio" name="q15"> D) Patient age (younger = better prognosis)</label>
+<label class="mcq-option"><input type="radio" name="q15"> E) Mitotane level at treatment initiation</label>
+</div>
+<button class="mcq-button" onclick="revealMCQ(this)">Reveal Answer</button>
+<div class="mcq-reveal">
+<div class="mcq-reveal-label">Correct Answer: C) Stage at diagnosis (most important predictor of survival)</div>
+<div class="mcq-reveal-text"><strong>Explanation:</strong> Stage is the MOST critical prognostic variable in ACC. Overall 5-year survival is ~30%, but this varies dramatically: stage I/II ~50%, stage III/IV ~10–15%. Early detection (stage I) at adrenalectomy offers the best outcomes. Complete R0 resection is the only curative option. Mitotane is adjuvant therapy for high-risk disease. This emphasizes the importance of screening adrenal incidentalomas for malignancy.</div>
+</div>
+</div>
+
+<!-- MCQ 16: MEN Syndromes -->
+<div class="mcq-container">
+<div class="mcq-question">16. A 28-year-old woman is found to have elevated calcium (primary hyperparathyroidism), a prolactin-secreting pituitary adenoma, and a gastrin-secreting pancreatic neuroendocrine tumor (Zollinger-Ellison). Genetic testing confirms MEN1 gene mutation. Which of the following is MOST common finding in MEN1?</div>
+<div class="mcq-options">
+<label class="mcq-option"><input type="radio" name="q16"> A) Medullary thyroid cancer</label>
+<label class="mcq-option"><input type="radio" name="q16"> B) Pheochromocytoma</label>
+<label class="mcq-option"><input type="radio" name="q16"> C) Primary hyperparathyroidism (95%)</label>
+<label class="mcq-option"><input type="radio" name="q16"> D) Mucosal neuromas</label>
+<label class="mcq-option"><input type="radio" name="q16"> E) Marfanoid habitus</label>
+</div>
+<button class="mcq-button" onclick="revealMCQ(this)">Reveal Answer</button>
+<div class="mcq-reveal">
+<div class="mcq-reveal-label">Correct Answer: C) Primary hyperparathyroidism (95%)</div>
+<div class="mcq-reveal-text"><strong>Explanation:</strong> MEN1 (Wermer syndrome) is characterized by the "3 Ps": Parathyroid (95%, most common), Pituitary (~30%, usually prolactinoma), Pancreatic NETs (~40%, gastrinoma = Zollinger-Ellison most common). Multiglandular endocrine tumors are hallmark. Gene: MEN1 (menin tumor suppressor). Mucosal neuromas + Marfanoid habitus are features of MEN2B, not MEN1. Medullary thyroid cancer is MEN2A/2B, not MEN1.</div>
+</div>
+</div>
+
+<!-- MCQ 17: MEN2A vs MEN2B -->
+<div class="mcq-container">
+<div class="mcq-question">17. A 6-year-old child presents with mucosal neuromas on the lips and tongue, a tall thin habitus with features of Marfan syndrome, and is found to have a thyroid nodule suspicious for medullary thyroid cancer (MTC). RET gene testing shows codon 918 mutation. What syndrome is this?</div>
+<div class="mcq-options">
+<label class="mcq-option"><input type="radio" name="q17"> A) MEN1</label>
+<label class="mcq-option"><input type="radio" name="q17"> B) MEN2A</label>
+<label class="mcq-option"><input type="radio" name="q17"> C) MEN2B</label>
+<label class="mcq-option"><input type="radio" name="q17"> D) VHL syndrome</label>
+<label class="mcq-option"><input type="radio" name="q17"> E) Familial medullary thyroid cancer (FMTC) only</label>
+</div>
+<button class="mcq-button" onclick="revealMCQ(this)">Reveal Answer</button>
+<div class="mcq-reveal">
+<div class="mcq-reveal-label">Correct Answer: C) MEN2B</div>
+<div class="mcq-reveal-text"><strong>Explanation:</strong> MEN2B features: RET mutation (codon 918 most common, most aggressive) → MTC (100%, earliest onset) + Pheochromocytoma (50%) + Marfanoid habitus + Mucosal neuromas (lips, tongue, GI tract) + Medullated corneal nerve fibers. KEY: NO hyperparathyroidism (unlike MEN2A). Codon 918 is highly aggressive → earliest thyroidectomy (within first year of life). This is distinct from MEN2A (which includes hyperparathyroidism). MEN2B is more aggressive; prophylactic thyroidectomy must be done in infancy.</div>
+</div>
+</div>
+
+<!-- MCQ 18: MEN2 Pheo Screening -->
+<div class="mcq-container">
+<div class="mcq-question">18. A 32-year-old man with MEN2A (RET codon 634 mutation) is being prepped for prophylactic thyroidectomy for medullary thyroid cancer prevention. Before the surgery, which of the following MUST be done?</div>
+<div class="mcq-options">
+<label class="mcq-option"><input type="radio" name="q18"> A) MRI of pituitary to screen for prolactinoma</label>
+<label class="mcq-option"><input type="radio" name="q18"> B) Screen for and treat pheochromocytoma if present (CRITICAL)</label>
+<label class="mcq-option"><input type="radio" name="q18"> C) Genetic testing of all first-degree relatives</label>
+<label class="mcq-option"><input type="radio" name="q18"> D) Parathyroid hormone suppression with bisphosphonates</label>
+<label class="mcq-option"><input type="radio" name="q18"> E) Preoperative alpha-blocker + beta-blocker for "routine" thyroid surgery</label>
+</div>
+<button class="mcq-button" onclick="revealMCQ(this)">Reveal Answer</button>
+<div class="mcq-reveal">
+<div class="mcq-reveal-label">Correct Answer: B) Screen for and treat pheochromocytoma if present (CRITICAL)</div>
+<div class="mcq-reveal-text"><strong>Explanation:</strong> In MEN2A/2B, ALWAYS screen for pheochromocytoma BEFORE thyroidectomy. If an undetected pheo is present during thyroid surgery, catecholamine release during manipulation → severe intraoperative HTN + arrhythmias + risk of MI/stroke. Screening: 24-hour urine metanephrines ± imaging. If pheo is found → Alpha-blocker preop + Beta-blocker + Surgery for pheo FIRST, THEN thyroidectomy. This is a critical safety step and common exam question about MEN syndrome management priority.</div>
+</div>
+</div>
+
+<div class="lo-check">
+<input type="checkbox" id="lo18">
+<label for="lo18" onclick="updateProgress()">I have completed the MCQ practice questions and understand the key concepts and traps</label>
+</div>
+
+</div>
+
+</div>
+
+<script>
+function showLO(n){
+  document.querySelectorAll('.lo-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.lo-tab,.nav-link').forEach(t=>t.classList.remove('active'));
+  document.getElementById('lo-'+n)?.classList.add('active');
+  document.querySelectorAll('[data-lo="'+n+'"]').forEach(el=>el.classList.add('active'));
+}
+function showSection(id){
+  document.querySelectorAll('.lo-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+  document.getElementById(id)?.classList.add('active');
+}
+function toggleCollapsible(h){
+  h.classList.toggle('expanded');
+  h.nextElementSibling.classList.toggle('expanded');
+}
+function revealMCQ(btn){
+  btn.nextElementSibling.classList.add('visible');
+  btn.style.display='none';
+}
+function updateProgress(){
+  const all=document.querySelectorAll('.lo-check input');
+  const done=document.querySelectorAll('.lo-check input:checked').length;
+  const pct=all.length?Math.round(done/all.length*100):0;
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('progressText').textContent=pct+'%';
+  const s={};
+  all.forEach((b,i)=>s['lo'+i]=b.checked);
+  localStorage.setItem('endo_lec20',JSON.stringify(s));
+}
+window.addEventListener('load',()=>{
+  const s=JSON.parse(localStorage.getItem('endo_lec20')||'{}');
+  const all=document.querySelectorAll('.lo-check input');
+  Object.entries(s).forEach(([k,v])=>{
+    const i=parseInt(k.replace('lo',''));
+    if(all[i])all[i].checked=v;
+  });
+  updateProgress();
+});
+</script>
+
+</body>
+</html>

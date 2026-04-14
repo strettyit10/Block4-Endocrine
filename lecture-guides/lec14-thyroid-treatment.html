@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 14 — Diagnosis & Treatment of Thyroid Disorders | Endocrine</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 220px;
+            height: 100vh;
+            background: #0f172a;
+            color: white;
+            overflow-y: auto;
+            padding: 20px 15px;
+            z-index: 1000;
+            box-shadow: 2px 0 8px rgba(0,0,0,0.15);
+        }
+
+        .sidebar h1 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #059669;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 8px;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-nav a:hover {
+            background: rgba(5, 150, 105, 0.15);
+            color: #059669;
+            border-left-color: #059669;
+        }
+
+        .sidebar-nav a.active {
+            background: #059669;
+            color: white;
+            border-left-color: #059669;
+            font-weight: 600;
+        }
+
+        .main-content {
+            margin-left: 220px;
+            flex: 1;
+            padding: 40px 60px;
+            overflow-y: auto;
+        }
+
+        .header {
+            margin-bottom: 40px;
+            border-bottom: 3px solid #059669;
+            padding-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 15px;
+            color: #64748b;
+        }
+
+        .lo-section {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .lo-header {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+            padding: 20px 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: all 0.3s ease;
+        }
+
+        .lo-header:hover {
+            box-shadow: inset 0 -3px 8px rgba(0,0,0,0.1);
+        }
+
+        .lo-header h2 {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .lo-toggle {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .lo-toggle.open {
+            transform: rotate(180deg);
+        }
+
+        .lo-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .lo-content.open {
+            max-height: 5000px;
+        }
+
+        .lo-body {
+            padding: 24px;
+            color: #334155;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .lo-body h3 {
+            color: #059669;
+            font-size: 16px;
+            margin-top: 18px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            border-left: 4px solid #059669;
+            padding-left: 12px;
+        }
+
+        .lo-body h3:first-child {
+            margin-top: 0;
+        }
+
+        .lo-body ul, .lo-body ol {
+            margin-left: 20px;
+            margin-bottom: 12px;
+        }
+
+        .lo-body li {
+            margin-bottom: 8px;
+        }
+
+        .lo-body strong {
+            color: #0f172a;
+        }
+
+        .summary-box {
+            background: #f0fdf4;
+            border: 2px solid #059669;
+            border-radius: 6px;
+            padding: 16px;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+
+        .summary-box.tested {
+            border-color: #059669;
+        }
+
+        .summary-box.tested::before {
+            content: "🎯 Tested Concept: ";
+            font-weight: 700;
+            color: #059669;
+        }
+
+        .summary-box.traps {
+            background: #fef3c7;
+            border-color: #f59e0b;
+        }
+
+        .summary-box.traps::before {
+            content: "⚠️ Common Trap: ";
+            font-weight: 700;
+            color: #d97706;
+        }
+
+        .summary-box.hy {
+            background: #fdf2f8;
+            border-color: #ec4899;
+        }
+
+        .summary-box.hy::before {
+            content: "⭐ High-Yield Bullets: ";
+            font-weight: 700;
+            color: #be185d;
+        }
+
+        .flip-card {
+            perspective: 1000px;
+            margin: 12px 0;
+            cursor: pointer;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 120px;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 14px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .flip-card-front {
+            background: #dbeafe;
+            color: #0c4a6e;
+            border: 2px solid #0284c7;
+        }
+
+        .flip-card-back {
+            background: #d1fae5;
+            color: #065f46;
+            border: 2px solid #059669;
+            transform: rotateY(180deg);
+        }
+
+        .mcq-item {
+            background: #f1f5f9;
+            border-left: 4px solid #059669;
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 4px;
+        }
+
+        .mcq-question {
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .mcq-options {
+            margin-left: 16px;
+        }
+
+        .mcq-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .mcq-radio {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #cbd5e1;
+            border-radius: 50%;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        .mcq-option:hover .mcq-radio {
+            border-color: #059669;
+        }
+
+        .mcq-option input[type="radio"]:checked + .mcq-radio {
+            background: #059669;
+            border-color: #059669;
+        }
+
+        .mcq-option input[type="radio"]:checked + .mcq-radio::after {
+            content: "✓";
+            color: white;
+            font-size: 12px;
+        }
+
+        .mcq-option input[type="radio"] {
+            display: none;
+        }
+
+        .mcq-reveal {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            margin-top: 12px;
+        }
+
+        .mcq-reveal.open {
+            max-height: 300px;
+        }
+
+        .mcq-answer {
+            background: white;
+            padding: 12px;
+            border-radius: 4px;
+            border-left: 4px solid #059669;
+            margin-top: 8px;
+        }
+
+        .mcq-answer.correct {
+            background: #f0fdf4;
+            border-left-color: #22c55e;
+        }
+
+        .mcq-answer.incorrect {
+            background: #fef2f2;
+            border-left-color: #ef4444;
+        }
+
+        .mcq-explanation {
+            font-size: 14px;
+            color: #475569;
+            margin-top: 8px;
+            line-height: 1.6;
+        }
+
+        .mnemonic {
+            background: #e0f2fe;
+            border: 2px dashed #0284c7;
+            padding: 14px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-style: italic;
+            color: #0c4a6e;
+            margin: 12px 0;
+            font-weight: 500;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin: 8px 0;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.2s;
+        }
+
+        .checkbox-item:hover {
+            background: #f0fdf4;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 12px;
+            cursor: pointer;
+            accent-color: #059669;
+        }
+
+        .checkbox-item input[type="checkbox"]:checked + label {
+            text-decoration: line-through;
+            color: #94a3b8;
+        }
+
+        .checkbox-item label {
+            flex: 1;
+            cursor: pointer;
+            font-size: 14px;
+            color: #334155;
+        }
+
+        .mindmap-container {
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 24px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            overflow-x: auto;
+        }
+
+        .mindmap-svg {
+            min-width: 100%;
+            height: auto;
+        }
+
+        .content-table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+
+        .content-table th {
+            background: #059669;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 700;
+        }
+
+        .content-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .content-table tr:hover {
+            background: #f0fdf4;
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            font-size: 13px;
+            color: #64748b;
+            text-align: center;
+        }
+
+        @media (max-width: 1200px) {
+            .main-content {
+                padding: 30px 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 180px;
+            }
+            .main-content {
+                margin-left: 180px;
+                padding: 20px 24px;
+            }
+            .header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h1>Lecture 14</h1>
+        <ul class="sidebar-nav">
+            <li><a href="#lo1" class="nav-link active">LO1: Hypothyroidism</a></li>
+            <li><a href="#lo2" class="nav-link">LO2: Antithyroid Drugs</a></li>
+            <li><a href="#lo3" class="nav-link">LO3: RAI/Surgery/Beta-Blockers</a></li>
+            <li><a href="#lo4" class="nav-link">LO4: Thyroid Storm</a></li>
+            <li><a href="#lo5" class="nav-link">LO5: Thyroid Cancer</a></li>
+            <li><a href="#lo6" class="nav-link">LO6: Calcium Disorders</a></li>
+            <li><a href="#mindmap" class="nav-link">Mind Map</a></li>
+            <li><a href="#mcqs" class="nav-link">Practice MCQs</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h1>Lecture 14: Diagnosis & Treatment of Thyroid Disorders</h1>
+            <p><strong>Subject:</strong> Pharmacology | <strong>Focus:</strong> Thyroid & Calcium Treatment</p>
+        </div>
+
+        <!-- LO1: HYPOTHYROIDISM TREATMENT -->
+        <div class="lo-section" id="lo1">
+            <div class="lo-header" onclick="toggleLO(this)">
+                <h2>LO1: Hypothyroidism Treatment — Levothyroxine</h2>
+                <span class="lo-toggle">▼</span>
+            </div>
+            <div class="lo-content">
+                <div class="lo-body">
+                    <h3>Levothyroxine (LT4, Synthroid)</h3>
+                    <ul>
+                        <li><strong>Synthetic T4;</strong> preferred over T3 (liothyronine) for replacement</li>
+                        <li><strong>Why T4 not T3:</strong> T4 has longer half-life (~7 days vs 1 day), more stable levels, peripherally converted to T3 as needed; T3 peaks and troughs</li>
+                        <li><strong>Dosing:</strong> Weight-based ~1.6 μg/kg/day; start low in elderly and cardiac patients, then titrate</li>
+                        <li><strong>Critical: Take on EMPTY STOMACH</strong> (30–60 min before food) — food, calcium, iron, aluminum antacids, PPIs decrease absorption</li>
+                        <li><strong>Monitoring:</strong>
+                            <ul>
+                                <li>TSH (in primary hypothyroidism)</li>
+                                <li>Free T4 (in secondary hypothyroidism — TSH unreliable)</li>
+                                <li>Steady state achieved in 4–6 weeks → recheck TSH 4–8 weeks after dose change</li>
+                            </ul>
+                        </li>
+                        <li><strong>Pregnancy:</strong> Dose needs ↑ ~25–30% immediately (↑ TBG, ↑ T4 clearance, fetal demand)</li>
+                    </ul>
+
+                    <h3>Liothyronine (LT3)</h3>
+                    <ul>
+                        <li>Short-acting; used in: myxedema coma (IV), thyroid cancer monitoring (withdrawal), some patients who feel better on T4+T3 combo</li>
+                    </ul>
+
+                    <h3>Drug Interactions</h3>
+                    <ul>
+                        <li><strong>Warfarin:</strong> ↑ clotting factor metabolism → ↑ INR — may need ↓ warfarin dose when starting T4</li>
+                        <li><strong>Digoxin:</strong> ↑ digoxin requirements</li>
+                    </ul>
+
+                    <h3>Myxedema Coma — Treatment</h3>
+                    <ul>
+                        <li>IV levothyroxine (200–400 μg bolus) + IV hydrocortisone (concurrent adrenal insufficiency common) + supportive (warming, ventilation)</li>
+                    </ul>
+
+                    <h3>Subclinical Hypothyroidism — When to Treat?</h3>
+                    <ul>
+                        <li>Treat if: TSH >10, OR symptomatic, OR pregnant, OR cardiovascular risk factors</li>
+                    </ul>
+
+                    <div class="summary-box tested">
+                        Levothyroxine must be taken on empty stomach; food, calcium, iron, and PPIs all reduce absorption. Monitor TSH in primary hypo; free T4 in secondary hypo. Steady state = 4–6 weeks.
+                    </div>
+
+                    <div class="summary-box traps">
+                        Many students forget that T3 peaks/troughs (less stable), while T4 is preferred because of its longer half-life and gradual release. Also: PPIs decrease absorption — important in patients on both drugs.
+                    </div>
+
+                    <div class="summary-box hy">
+                        <strong>• T4 = TIME-RELEASE (long half-life, stable); T3 = TURBO (fast, short, emergencies)</strong><br>
+                        <strong>• Empty stomach 30–60 min before food</strong><br>
+                        <strong>• Pregnancy: ↑ dose 25–30% immediately</strong><br>
+                        <strong>• Monitor TSH (primary); free T4 (secondary)</strong>
+                    </div>
+
+                    <div class="mnemonic">"T4 = TIME-RELEASE (long half-life, stable); T3 = TURBO (fast, short, used in emergencies)"</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LO2: ANTITHYROID DRUGS -->
+        <div class="lo-section" id="lo2">
+            <div class="lo-header" onclick="toggleLO(this)">
+                <h2>LO2: Hyperthyroidism Treatment — Antithyroid Drugs</h2>
+                <span class="lo-toggle">▼</span>
+            </div>
+            <div class="lo-content">
+                <div class="lo-body">
+                    <h3>Thionamides Overview</h3>
+                    <p>Block thyroid hormone synthesis at TPO level. Two main agents with different profiles:</p>
+
+                    <h3>Propylthiouracil (PTU)</h3>
+                    <ul>
+                        <li><strong>Mechanism:</strong> Blocks TPO (organification + coupling) AND peripheral T4→T3 conversion (5'-deiodinase) — unique advantage</li>
+                        <li><strong>Dosing:</strong> 3x/day (shorter half-life)</li>
+                        <li><strong>Preferred in:</strong>
+                            <ul>
+                                <li>Thyroid storm (FIRST-LINE due to peripheral conversion block)</li>
+                                <li>1st trimester pregnancy (crosses placenta LESS than methimazole)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Side effects:</strong>
+                            <ul>
+                                <li>Agranulocytosis (rare, ~0.5% — fever + sore throat → STOP drug + check WBC)</li>
+                                <li>Hepatotoxicity (BLACK BOX — rare but severe)</li>
+                                <li>Rash, arthralgias</li>
+                                <li>ANCA-vasculitis (PTU-specific)</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>Methimazole (MMI, Tapazole)</h3>
+                    <ul>
+                        <li><strong>Mechanism:</strong> Blocks TPO only (NOT peripheral conversion)</li>
+                        <li><strong>Dosing:</strong> Once daily (longer half-life) → better compliance</li>
+                        <li><strong>Preferred:</strong> Over PTU in most non-pregnant patients (less hepatotoxicity)</li>
+                        <li><strong>TERATOGENIC:</strong> Aplasia cutis (scalp defect), choanal atresia, esophageal atresia, omphalocele → AVOID in 1st trimester</li>
+                        <li><strong>Pregnancy switch:</strong> MMI → PTU in 1st trimester; then PTU → MMI after 1st trimester (PTU more hepatotoxic long-term)</li>
+                        <li><strong>Side effects:</strong> Agranulocytosis (same class warning), rash, urticaria, arthralgias</li>
+                    </ul>
+
+                    <h3>Shared Warnings & Management</h3>
+                    <ul>
+                        <li><strong>Agranulocytosis:</strong> Warn ALL patients to report fever/sore throat immediately; check CBC; ANC <500 → permanently stop drug</li>
+                        <li><strong>Both drugs:</strong> Used to render patient euthyroid BEFORE surgery or radioiodine; can cross placenta → neonatal hypothyroidism risk (use lowest effective dose)</li>
+                    </ul>
+
+                    <table class="content-table">
+                        <tr>
+                            <th>Feature</th>
+                            <th>PTU</th>
+                            <th>Methimazole</th>
+                        </tr>
+                        <tr>
+                            <td>Blocks peripheral conversion</td>
+                            <td>YES ✓ (unique)</td>
+                            <td>NO</td>
+                        </tr>
+                        <tr>
+                            <td>Dosing frequency</td>
+                            <td>3x/day</td>
+                            <td>Once daily</td>
+                        </tr>
+                        <tr>
+                            <td>1st trimester preference</td>
+                            <td>YES ✓</td>
+                            <td>NO — teratogenic</td>
+                        </tr>
+                        <tr>
+                            <td>Hepatotoxicity risk</td>
+                            <td>Higher (black box)</td>
+                            <td>Lower</td>
+                        </tr>
+                        <tr>
+                            <td>Thyroid storm</td>
+                            <td>PREFERRED</td>
+                            <td>No</td>
+                        </tr>
+                    </table>
+
+                    <div class="summary-box tested">
+                        PTU is preferred in 1st trimester pregnancy AND thyroid storm (because it blocks peripheral T4→T3 conversion). Methimazole is teratogenic (aplasia cutis, choanal atresia). Both cause agranulocytosis — counsel patients to report fever/sore throat immediately.
+                    </div>
+
+                    <div class="summary-box traps">
+                        Common mistake: Using methimazole in 1st trimester (it's teratogenic!). Also: Forgetting that PTU has TWO mechanisms (synthesis + peripheral conversion) — this is why it's superior in thyroid storm. Another trap: Continuing drug after agranulocytosis develops — must stop immediately.
+                    </div>
+
+                    <div class="summary-box hy">
+                        <strong>• PTU = 1st trimester + Thyroid Storm + Peripheral conversion block + ANCA-vasculitis</strong><br>
+                        <strong>• Methimazole = Daily dosing, less hepatotoxic, teratogenic (avoid 1st trim)</strong><br>
+                        <strong>• Both: agranulocytosis risk — fever/sore throat = STOP + CBC</strong><br>
+                        <strong>• Switch MMI→PTU→MMI in pregnancy</strong>
+                    </div>
+
+                    <div class="mnemonic">"PTU = Pregnancy (1st trim), Thyroid storm, ANCA-vasculitis, blocks pEripheral conversion"</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LO3: RAI, SURGERY, BETA-BLOCKERS -->
+        <div class="lo-section" id="lo3">
+            <div class="lo-header" onclick="toggleLO(this)">
+                <h2>LO3: Hyperthyroidism — RAI, Surgery, Beta-Blockers</h2>
+                <span class="lo-toggle">▼</span>
+            </div>
+            <div class="lo-content">
+                <div class="lo-body">
+                    <h3>Radioiodine (¹³¹I)</h3>
+                    <ul>
+                        <li><strong>Mechanism:</strong> Follicular cells take up ¹³¹I via NIS → emits beta radiation → destroys thyroid tissue</li>
+                        <li><strong>Indications:</strong> Graves' disease (first-line option in US), toxic MNG, toxic adenoma</li>
+                        <li><strong>Absolute contraindications:</strong>
+                            <ul>
+                                <li>PREGNANCY (causes fetal hypothyroidism/cretinism)</li>
+                                <li>Breastfeeding</li>
+                                <li>Active ophthalmopathy (can WORSEN — use antithyroid drugs or surgery instead)</li>
+                                <li>Large goiter with compressive symptoms</li>
+                            </ul>
+                        </li>
+                        <li><strong>Pre-RAI prep:</strong> Must be euthyroid BEFORE RAI (antithyroid drugs → stop 3–5 days before RAI → restart after to bridge)</li>
+                        <li><strong>Expected outcome:</strong> Hypothyroidism in most (treated with levothyroxine long-term)</li>
+                        <li><strong>Graves' ophthalmopathy:</strong> RAI can worsen (immune response-related); cover with glucocorticoids if mild; severe → prefer surgery</li>
+                        <li><strong>Iodine avoidance:</strong> Must be avoided 4–6 weeks before (IV contrast, iodine-containing foods) — competes with ¹³¹I</li>
+                    </ul>
+
+                    <h3>Thyroidectomy</h3>
+                    <ul>
+                        <li><strong>Indications:</strong>
+                            <ul>
+                                <li>Large goiter with compressive symptoms (dysphagia, tracheal compression)</li>
+                                <li>Failed medical therapy</li>
+                                <li>Malignancy suspected/confirmed</li>
+                                <li>Pregnancy (if needed — 2nd trimester safest)</li>
+                                <li>Severe ophthalmopathy</li>
+                                <li>Patient preference</li>
+                                <li>Children</li>
+                            </ul>
+                        </li>
+                        <li><strong>Types:</strong> Total thyroidectomy (most common), hemithyroidectomy (lobectomy + isthmus)</li>
+                        <li><strong>Complications:</strong>
+                            <ul>
+                                <li>Recurrent laryngeal nerve injury (hoarseness — unilateral; bilateral → respiratory failure, emergent intubation)</li>
+                                <li>Hypoparathyroidism (hypocalcemia — check Ca post-op, usually transient)</li>
+                                <li>Bleeding/hematoma (can compress airway — surgical emergency)</li>
+                                <li>Hypothyroidism (expected → levothyroxine)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Pre-operative:</strong> Must be euthyroid; Lugol's iodine (SSKI) given 10–14 days pre-op → reduces vascularity + hormone secretion (Wolff-Chaikoff effect)</li>
+                    </ul>
+
+                    <h3>Beta-Blockers (Propranolol, Atenolol, Metoprolol)</h3>
+                    <ul>
+                        <li><strong>Mechanism:</strong> Block SYMPTOMS (palpitations, tremor, anxiety, heat intolerance) — do NOT treat the thyroid</li>
+                        <li><strong>Propranolol advantage:</strong> Also blocks peripheral T4→T3 conversion at high doses</li>
+                        <li><strong>When used:</strong> In ALL patients while awaiting definitive therapy and in thyroid storm</li>
+                        <li><strong>Drug choice:</strong> Non-selective (propranolol) contraindicated in asthma → use selective (atenolol)</li>
+                    </ul>
+
+                    <div class="summary-box tested">
+                        RAI is first-line for Graves' in the US. CONTRAINDICATED in pregnancy (causes fetal cretinism) and active ophthalmopathy (can worsen). Surgery preferred for compressive goiter, malignancy, or severe ophthalmopathy. Beta-blockers treat symptoms only, not the disease.
+                    </div>
+
+                    <div class="summary-box traps">
+                        Trap: Giving RAI without making patient euthyroid first — causes thyroid storm risk. Also: Forgetting that Graves' ophthalmopathy can WORSEN with RAI (immune response). Another: Prescribing asthmatic patients non-selective beta-blockers (propranolol) — use atenolol instead. And: Iodine must be avoided 4–6 weeks before RAI (competes with ¹³¹I).
+                    </div>
+
+                    <div class="summary-box hy">
+                        <strong>• RAI contraindicated: pregnancy, active ophthalmopathy, large goiter (compressive)</strong><br>
+                        <strong>• Euthyroid BEFORE RAI; hypothyroidism expected outcome</strong><br>
+                        <strong>• Surgery: compressive goiter, malignancy, severe ophthalmopathy, pregnancy (2nd trim)</strong><br>
+                        <strong>• Pre-op: Lugol's iodine 10–14 days before (Wolff-Chaikoff effect)</strong><br>
+                        <strong>• Beta-blockers: symptom management only; propranolol also ↓ T4→T3 conversion</strong>
+                    </div>
+
+                    <div class="mnemonic">"For Graves: ABC = Antithyroid drugs, Beta-blockers, ¹³¹I/C (RAI or Chop it out = surgery)"</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LO4: THYROID STORM -->
+        <div class="lo-section" id="lo4">
+            <div class="lo-header" onclick="toggleLO(this)">
+                <h2>LO4: Thyroid Storm — Recognition and Management</h2>
+                <span class="lo-toggle">▼</span>
+            </div>
+            <div class="lo-content">
+                <div class="lo-body">
+                    <h3>Overview</h3>
+                    <ul>
+                        <li><strong>Definition:</strong> Life-threatening hyperthyroidism; medical emergency</li>
+                        <li><strong>Mortality:</strong> ~10–30%</li>
+                    </ul>
+
+                    <h3>Precipitants</h3>
+                    <ul>
+                        <li>Infection/sepsis (MOST COMMON)</li>
+                        <li>Surgery, trauma, iodine load (contrast, amiodarone)</li>
+                        <li>MI, labor/delivery, radioiodine</li>
+                        <li>Non-compliance with antithyroid drugs</li>
+                    </ul>
+
+                    <h3>Diagnosis (Clinical)</h3>
+                    <ul>
+                        <li><strong>No single lab diagnostic;</strong> clinical diagnosis based on Burch-Wartofsky Point Scale (BWPS)</li>
+                        <li>Temperature, CNS effects, GI dysfunction, HR, heart failure, precipitant → score >45 = thyroid storm</li>
+                        <li><strong>Labs:</strong> ↑↑ T4/T3, ↓↓ TSH, hyperglycemia, ↑ LFTs, leukocytosis</li>
+                    </ul>
+
+                    <h3>Features of Thyroid Storm</h3>
+                    <ul>
+                        <li>High fever (>40°C), tachycardia (HR >140), A-fib</li>
+                        <li>Hypertension → cardiovascular collapse</li>
+                        <li>Agitation, psychosis, delirium</li>
+                        <li>Nausea/vomiting/diarrhea, jaundice</li>
+                    </ul>
+
+                    <h3>Treatment (SEQUENTIAL — CRITICAL ORDER)</h3>
+                    <ol>
+                        <li><strong>PTU (loading 500–1000 mg, then 250 mg q4–6h):</strong> Blocks synthesis AND peripheral conversion</li>
+                        <li><strong>Propranolol (IV or PO):</strong> Blocks symptoms + peripheral conversion (high dose)</li>
+                        <li><strong>Iodine (Lugol's or SSKI, 1–2h AFTER PTU):</strong> Blocks hormone release (Wolff-Chaikoff); MUST give PTU first (otherwise iodine = substrate for synthesis)</li>
+                        <li><strong>Glucocorticoids (dexamethasone or hydrocortisone):</strong> Blocks peripheral T4→T3 conversion, treats relative adrenal insufficiency</li>
+                        <li><strong>Supportive:</strong> Cooling (acetaminophen PREFERRED over aspirin), fluids, O₂, treat precipitant</li>
+                    </ol>
+
+                    <h3>Critical Drug Interaction</h3>
+                    <ul>
+                        <li><strong>Aspirin CONTRAINDICATED</strong> in thyroid storm — displaces T4 from TBG → ↑ free T4 → WORSENS crisis</li>
+                        <li>Use acetaminophen for fever instead</li>
+                    </ul>
+
+                    <div class="summary-box tested">
+                        Thyroid storm is a medical emergency. Treatment is sequential: PTU FIRST (blocks both synthesis and peripheral conversion), then propranolol, then iodine (1–2h after PTU), then steroids. Aspirin is contraindicated. Know the Burch-Wartofsky Point Scale for diagnosis.
+                    </div>
+
+                    <div class="summary-box traps">
+                        CRITICAL: Iodine AFTER PTU, not before. If iodine given first, it becomes substrate for synthesis → WORSENS. Also: Using aspirin for fever (WRONG — use acetaminophen). Another trap: Forgetting that PTU has two mechanisms (synthesis + peripheral conversion) — this is why it's first-line in thyroid storm, not methimazole.
+                    </div>
+
+                    <div class="summary-box hy">
+                        <strong>• Thyroid storm = medical emergency (10–30% mortality)</strong><br>
+                        <strong>• Treatment order: PTU (synthesis + conversion) → Propranolol → Iodine (1–2h after) → Steroids</strong><br>
+                        <strong>• Iodine AFTER PTU (critical!)</strong><br>
+                        <strong>• Aspirin CONTRAINDICATED (displaces T4 from TBG)</strong><br>
+                        <strong>• Infection is most common precipitant</strong>
+                    </div>
+
+                    <div class="mnemonic">"BIGG treatment = Block synthesis (PTU), Inhibit release (iodine — after PTU!), Give beta-blocker, Glucocorticoids"</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LO5: THYROID CANCER -->
+        <div class="lo-section" id="lo5">
+            <div class="lo-header" onclick="toggleLO(this)">
+                <h2>LO5: Thyroid Cancer Treatment</h2>
+                <span class="lo-toggle">▼</span>
+            </div>
+            <div class="lo-content">
+                <div class="lo-body">
+                    <h3>Papillary Thyroid Carcinoma (PTC)</h3>
+                    <ul>
+                        <li><strong>Surgery:</strong> Total thyroidectomy (for tumors >1 cm or high-risk features); hemithyroidectomy may suffice for microcarcinoma <1 cm, low risk</li>
+                        <li><strong>Radioiodine (¹³¹I):</strong> For remnant ablation and to treat metastases (follicular cells have NIS); NOT effective for MTC or anaplastic</li>
+                        <li><strong>TSH suppression therapy:</strong> Give supraphysiologic LT4 to suppress TSH (→ ↓ TSH-driven tumor growth); target TSH <0.1 mIU/L in high-risk; side effects: A-fib, osteoporosis</li>
+                        <li><strong>Surveillance:</strong> Thyroglobulin (Tg) as tumor marker (if total thyroidectomy → undetectable Tg; rising Tg = recurrence); neck ultrasound; whole-body RAI scan</li>
+                        <li><strong>Prognosis:</strong> Excellent (10-year survival >95%)</li>
+                    </ul>
+
+                    <h3>Follicular Thyroid Carcinoma (FTC)</h3>
+                    <ul>
+                        <li><strong>Treatment:</strong> Total thyroidectomy + RAI ablation</li>
+                        <li><strong>Surveillance:</strong> Thyroglobulin + ultrasound</li>
+                        <li><strong>Metastases:</strong> Blood-borne mets (lung, bone) treated with RAI if iodine-avid</li>
+                    </ul>
+
+                    <h3>Medullary Thyroid Carcinoma (MTC)</h3>
+                    <ul>
+                        <li><strong>Surgery:</strong> Total thyroidectomy + central neck dissection (lymph node-heavy spread)</li>
+                        <li><strong>RAI ineffective:</strong> C cells have NO NIS → does NOT respond to RAI</li>
+                        <li><strong>Tumor markers:</strong>
+                            <ul>
+                                <li>Calcitonin (primary — follow pre/post-op and for recurrence)</li>
+                                <li>CEA (secondary)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Genetics (CRITICAL):</strong> ALL MTC patients → RET mutation testing (germline) → if positive, test family members → prophylactic thyroidectomy for RET+ carriers</li>
+                        <li><strong>MEN2 association:</strong> Screen for pheochromocytoma BEFORE thyroidectomy (must treat pheo first!)</li>
+                        <li><strong>Advanced/metastatic:</strong> Kinase inhibitors: vandetanib (RET + VEGFR inhibitor), cabozantinib</li>
+                    </ul>
+
+                    <h3>Anaplastic Thyroid Carcinoma</h3>
+                    <ul>
+                        <li><strong>Approach:</strong> Palliative intent usually; aggressive multimodal therapy</li>
+                        <li><strong>Targeted therapy:</strong> BRAF V600E+ → dabrafenib + trametinib (FDA approved)</li>
+                        <li><strong>Prognosis:</strong> Poor (median survival ~5 months)</li>
+                    </ul>
+
+                    <h3>Thyroid Nodule Management (Bethesda Classification)</h3>
+                    <ul>
+                        <li><strong>Bethesda I (non-diagnostic):</strong> Repeat FNA</li>
+                        <li><strong>Bethesda II (benign):</strong> Follow with ultrasound</li>
+                        <li><strong>Bethesda III/IV (indeterminate/follicular neoplasm):</strong> Molecular testing (ThyroSeq, Afirma) or lobectomy</li>
+                        <li><strong>Bethesda V/VI (suspicious/malignant):</strong> Surgery</li>
+                    </ul>
+
+                    <div class="summary-box tested">
+                        PTC and FTC respond to RAI (have NIS). MTC does NOT respond to RAI — use RET kinase inhibitors instead. All MTC patients need RET testing (germline); positive → prophylactic thyroidectomy for family. In MTC, monitor calcitonin (not thyroglobulin). Screen for pheo BEFORE thyroidectomy in MEN2.
+                    </div>
+
+                    <div class="summary-box traps">
+                        Trap: Giving RAI to MTC patient (won't work — C cells lack NIS). Another: Forgetting RET genetic testing in MTC (ALL patients need it). Also: Not screening for pheochromocytoma BEFORE MTC surgery (can cause intraop crisis). Another: Using thyroglobulin as tumor marker in MTC (wrong — use calcitonin).
+                    </div>
+
+                    <div class="summary-box hy">
+                        <strong>• PTC/FTC: respond to RAI, follow Tg, surveillance ultrasound, good prognosis</strong><br>
+                        <strong>• MTC: NO RAI, RET testing (all patients!), calcitonin marker, prophylactic thyroidectomy for RET+ family</strong><br>
+                        <strong>• MEN2: Screen for pheo BEFORE thyroidectomy</strong><br>
+                        <strong>• Anaplastic: poor prognosis, dabrafenib+trametinib if BRAF V600E+</strong><br>
+                        <strong>• TSH suppression therapy in PTC: target TSH <0.1 (risks: A-fib, osteoporosis)</strong>
+                    </div>
+
+                    <div class="mnemonic">"PTC and FTC love RAI; MTC = RET + calcitonin + NO RAI; Anaplastic = Run (poor prognosis)"</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LO6: CALCIUM DISORDERS -->
+        <div class="lo-section" id="lo6">
+            <div class="lo-header" onclick="toggleLO(this)">
+                <h2>LO6: Calcium Disorder Treatment — Hypo and Hypercalcemia</h2>
+                <span class="lo-toggle">▼</span>
+            </div>
+            <div class="lo-content">
+                <div class="lo-body">
+                    <h3>Hypocalcemia Treatment</h3>
+                    <ul>
+                        <li><strong>Acute (symptomatic — tetany, seizures):</strong>
+                            <ul>
+                                <li>IV calcium gluconate (preferred over calcium chloride — less tissue damage if extravasation)</li>
+                                <li>If refractory → check/correct Mg first (hypomagnesemia BLOCKS PTH action)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Chronic:</strong>
+                            <ul>
+                                <li>Oral calcium carbonate (with food → needs acid for absorption) or calcium citrate (without food, better in achlorhydria/PPIs)</li>
+                                <li>+ Calcitriol (active vitamin D = 1,25-OH₂ D₃) if hypoparathyroid</li>
+                            </ul>
+                        </li>
+                        <li><strong>Hypoparathyroidism:</strong> Calcium + calcitriol ± recombinant PTH (natpara) for chronic management</li>
+                        <li><strong>DiGeorge:</strong> Calcitriol + calcium; may eventually get parathyroid auto-transplant</li>
+                        <li><strong>Hypomagnesemia-induced:</strong> Treat Mg FIRST (PTH won't work without adequate Mg)</li>
+                    </ul>
+
+                    <h3>Hypercalcemia Treatment</h3>
+                    <ul>
+                        <li><strong>First-line (all patients):</strong>
+                            <ul>
+                                <li>IV normal saline (0.9% NaCl) hydration → ↑ renal Ca²⁺ excretion</li>
+                                <li>NO furosemide anymore (dehydrates → worsens, not proven to help)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Bisphosphonates (zoledronate IV, pamidronate):</strong>
+                            <ul>
+                                <li>Inhibit osteoclasts → ↓ bone resorption → ↓ Ca</li>
+                                <li>Use for malignancy-associated hypercalcemia</li>
+                                <li>Takes 2–4 days for full effect</li>
+                                <li>Nephrotoxic (check Cr first)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Calcitonin (salmon):</strong>
+                            <ul>
+                                <li>Fast-acting (hours), short-lived (tachyphylaxis in 48–72h)</li>
+                                <li>Use for acute severe hypercalcemia while awaiting bisphosphonate effect</li>
+                            </ul>
+                        </li>
+                        <li><strong>Denosumab (RANK-L inhibitor):</strong> For bisphosphonate-refractory malignant hypercalcemia</li>
+                        <li><strong>Glucocorticoids:</strong> For vitamin D toxicity, sarcoidosis, lymphoma (↓ 1α-hydroxylase activity in macrophages)</li>
+                        <li><strong>Cinacalcet (calcimimetic):</strong> For 2° HPT in CKD; mimics Ca at CaSR → ↓ PTH; also for inoperable parathyroid carcinoma</li>
+                        <li><strong>Definitive:</strong> Parathyroidectomy for primary HPT (if indicated); treat underlying malignancy</li>
+                    </ul>
+
+                    <h3>Calcium Correction for Albumin</h3>
+                    <ul>
+                        <li><strong>Corrected Ca = measured Ca + 0.8 × (4 - albumin)</strong></li>
+                        <li>Alternative: Check ionized Ca directly</li>
+                    </ul>
+
+                    <h3>PTHrP (PTH-Related Protein)</h3>
+                    <ul>
+                        <li><strong>From malignancy:</strong> Squamous cell carcinoma lung, breast, renal cell, bladder</li>
+                        <li><strong>Mechanism:</strong> Binds PTH receptor → ↑ Ca²⁺, ↓ phosphate, ↑ ALP</li>
+                        <li><strong>Labs (distinguishes from 1° HPT):</strong>
+                            <ul>
+                                <li>↑ Ca, ↓ phosphate, ↑↑ PTHrP</li>
+                                <li>LOW PTH (vs. HIGH in 1° HPT)</li>
+                                <li>LOW 1,25-OH D (malignancy suppresses 1α-hydroxylase)</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div class="summary-box tested">
+                        Hypercalcemia treatment: IV saline first (increases renal excretion), then bisphosphonates (takes 2–4 days). Calcitonin used for acute severe cases (but tachyphylaxis develops). For hypocalcemia: IV calcium gluconate acutely; check/treat hypomagnesemia first (PTH won't work without Mg). Corrected calcium accounts for albumin.
+                    </div>
+
+                    <div class="summary-box traps">
+                        Trap: Using furosemide for hypercalcemia (outdated — it dehydrates and doesn't help; use saline instead). Another: Forgetting to check Mg in hypocalcemic patients — hypomagnesemia blocks PTH action, so treating Ca alone won't work. Also: Giving calcium carbonate without food (needs acid for absorption — use calcium citrate without food instead). And: Not correcting calcium for low albumin.
+                    </div>
+
+                    <div class="summary-box hy">
+                        <strong>• Hypercalcemia: IV NS (first-line), bisphosphonates (takes 2–4 days), calcitonin (acute, tachyphylaxis)</strong><br>
+                        <strong>• NO furosemide (outdated)</strong><br>
+                        <strong>• Hypocalcemia acute: IV calcium gluconate; check/treat Mg first</strong><br>
+                        <strong>• Calcium carbonate = with food (needs acid); citrate = without food</strong><br>
+                        <strong>• Hypomagnesemia blocks PTH — treat Mg FIRST</strong><br>
+                        <strong>• Correct Ca for albumin or use ionized Ca</strong>
+                    </div>
+
+                    <div class="mnemonic">"Hypercalcemia treatment = FINS = Fluids IV, IV bisphosphonates, No furosemide, Steroids (if sarcoid/lymphoma)"</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MIND MAP -->
+        <div class="mindmap-container" id="mindmap">
+            <h2 style="color: #059669; margin-bottom: 20px;">Mind Map: Thyroid & Calcium Treatment</h2>
+            <svg class="mindmap-svg" viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg">
+                <!-- Central node -->
+                <circle cx="600" cy="200" r="60" fill="#059669" stroke="#0f172a" stroke-width="2"/>
+                <text x="600" y="200" text-anchor="middle" dy="0.3em" fill="white" font-size="12" font-weight="bold">Thyroid &amp;</text>
+                <text x="600" y="215" text-anchor="middle" dy="0.3em" fill="white" font-size="12" font-weight="bold">Calcium</text>
+
+                <!-- Branch 1: Hypothyroidism -->
+                <line x1="560" y1="150" x2="380" y2="80" stroke="#0f172a" stroke-width="2"/>
+                <circle cx="380" cy="80" r="45" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+                <text x="380" y="75" text-anchor="middle" dy="0.3em" fill="#0c4a6e" font-size="11" font-weight="bold">Hypothyroidism</text>
+                <text x="380" y="90" text-anchor="middle" dy="0.3em" fill="#0c4a6e" font-size="10">LT4/LT3</text>
+
+                <!-- Branch 2: Hyperthyroidism -->
+                <line x1="560" y1="250" x2="380" y2="320" stroke="#0f172a" stroke-width="2"/>
+                <circle cx="380" cy="320" r="45" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                <text x="380" y="315" text-anchor="middle" dy="0.3em" fill="#d97706" font-size="11" font-weight="bold">Hyperthyroidism</text>
+                <text x="380" y="330" text-anchor="middle" dy="0.3em" fill="#d97706" font-size="10">PTU/MMI/RAI</text>
+
+                <!-- Branch 3: Thyroid Storm -->
+                <line x1="640" y1="250" x2="820" y2="320" stroke="#0f172a" stroke-width="2"/>
+                <circle cx="820" cy="320" r="45" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+                <text x="820" y="315" text-anchor="middle" dy="0.3em" fill="#b91c1c" font-size="11" font-weight="bold">Thyroid Storm</text>
+                <text x="820" y="330" text-anchor="middle" dy="0.3em" fill="#b91c1c" font-size="10">PTU→Iodine</text>
+
+                <!-- Branch 4: Thyroid Cancer -->
+                <line x1="650" y1="150" x2="850" y2="80" stroke="#0f172a" stroke-width="2"/>
+                <circle cx="850" cy="80" r="45" fill="#f0fdf4" stroke="#059669" stroke-width="2"/>
+                <text x="850" y="75" text-anchor="middle" dy="0.3em" fill="#065f46" font-size="11" font-weight="bold">Thyroid Cancer</text>
+                <text x="850" y="90" text-anchor="middle" dy="0.3em" fill="#065f46" font-size="10">PTC/FTC/MTC</text>
+
+                <!-- Branch 5: Hypocalcemia -->
+                <line x1="570" y1="260" x2="470" y2="360" stroke="#0f172a" stroke-width="2"/>
+                <circle cx="470" cy="360" r="45" fill="#dbeafe" stroke="#0284c7" stroke-width="2"/>
+                <text x="470" y="360" text-anchor="middle" dy="0.3em" fill="#0c4a6e" font-size="11" font-weight="bold">Hypocalcemia</text>
+                <text x="470" y="375" text-anchor="middle" dy="0.3em" fill="#0c4a6e" font-size="10">IV Ca/Calcitriol</text>
+
+                <!-- Branch 6: Hypercalcemia -->
+                <line x1="630" y1="260" x2="730" y2="360" stroke="#0f172a" stroke-width="2"/>
+                <circle cx="730" cy="360" r="45" fill="#f0fdf4" stroke="#059669" stroke-width="2"/>
+                <text x="730" y="360" text-anchor="middle" dy="0.3em" fill="#065f46" font-size="11" font-weight="bold">Hypercalcemia</text>
+                <text x="730" y="375" text-anchor="middle" dy="0.3em" fill="#065f46" font-size="10">NS/Bisphosphonates</text>
+            </svg>
+        </div>
+
+        <!-- PRACTICE MCQs -->
+        <div class="lo-section" id="mcqs">
+            <div class="lo-header" onclick="toggleLO(this)">
+                <h2>Practice MCQs: Thyroid & Calcium Treatment</h2>
+                <span class="lo-toggle">▼</span>
+            </div>
+            <div class="lo-content">
+                <div class="lo-body">
+                    <!-- MCQ 1 -->
+                    <div class="mcq-item">
+                        <div class="mcq-question">1. A 45-year-old woman with primary hypothyroidism is started on levothyroxine 50 μg daily. She returns 4 weeks later complaining of persistent fatigue. Her TSH is still elevated at 8 mIU/L. Which of the following is the most likely explanation for her inadequate response?</div>
+                        <div class="mcq-options">
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq1" value="a">
+                                <div class="mcq-radio"></div>
+                                <label>A) She needs a higher dose; TSH recheck at 4 weeks is appropriate</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq1" value="b">
+                                <div class="mcq-radio"></div>
+                                <label>B) Steady state is not achieved at 4 weeks; recheck at 8 weeks after dose adjustment</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq1" value="c">
+                                <div class="mcq-radio"></div>
+                                <label>C) She likely has poor adherence or absorption issue (food/calcium/PPIs)</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq1" value="d">
+                                <div class="mcq-radio"></div>
+                                <label>D) Switch her to liothyronine (T3) for better symptom relief</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq1" value="e">
+                                <div class="mcq-radio"></div>
+                                <label>E) She has secondary hypothyroidism; TSH monitoring is invalid</label>
+                            </label>
+                        </div>
+                        <button class="reveal-btn" onclick="revealMCQ(this)" style="margin-top: 12px; padding: 10px 16px; background: #059669; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer correct">
+                                <strong>✓ CORRECT: B) Steady state is not achieved at 4 weeks; recheck at 8 weeks after dose adjustment</strong>
+                                <div class="mcq-explanation">Levothyroxine has a half-life of ~7 days. Steady state is achieved in 4–6 weeks, NOT at 4 weeks. You should recheck TSH 4–8 weeks after any dose change. At 4 weeks, the patient is still approaching steady state, so rechecking at 8 weeks is more reliable. Also, assess adherence and absorption (take on empty stomach, 30–60 min before food; avoid calcium, iron, PPIs at same time).</div>
+                            </div>
+                            <div class="mcq-answer incorrect" style="display:none;">
+                                <strong>✗ INCORRECT: A) She needs a higher dose; TSH recheck at 4 weeks is appropriate</strong>
+                                <div class="mcq-explanation">4 weeks is too early; steady state takes 4–6 weeks. Wait until 8 weeks for more reliable TSH level before adjusting dose.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 2 -->
+                    <div class="mcq-item">
+                        <div class="mcq-question">2. A 32-year-old woman in her first trimester of pregnancy presents with Graves' hyperthyroidism. Which antithyroid drug should be started?</div>
+                        <div class="mcq-options">
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq2" value="a">
+                                <div class="mcq-radio"></div>
+                                <label>A) Methimazole, because it has fewer side effects</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq2" value="b">
+                                <div class="mcq-radio"></div>
+                                <label>B) Propylthiouracil (PTU), because it blocks peripheral T4→T3 conversion and crosses placenta less</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq2" value="c">
+                                <div class="mcq-radio"></div>
+                                <label>C) Radioiodine, to permanently cure Graves' disease</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq2" value="d">
+                                <div class="mcq-radio"></div>
+                                <label>D) Thyroidectomy during pregnancy</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq2" value="e">
+                                <div class="mcq-radio"></div>
+                                <label>E) Beta-blockers alone until after delivery</label>
+                            </label>
+                        </div>
+                        <button class="reveal-btn" onclick="revealMCQ(this)" style="margin-top: 12px; padding: 10px 16px; background: #059669; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer correct">
+                                <strong>✓ CORRECT: B) Propylthiouracil (PTU), because it blocks peripheral T4→T3 conversion and crosses placenta less</strong>
+                                <div class="mcq-explanation">In 1st trimester pregnancy, PTU is preferred over methimazole. Methimazole is teratogenic (aplasia cutis, choanal atresia, esophageal atresia, omphalocele). PTU crosses the placenta less and also blocks peripheral conversion, making it superior. After 1st trimester, switch to methimazole (which has lower hepatotoxicity for long-term use).</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 3 -->
+                    <div class="mcq-item">
+                        <div class="mcq-question">3. A 28-year-old man presents to the ED in thyroid storm with HR 160, fever 41°C, and severe agitation. He was diagnosed with Graves' disease 2 months ago but has been non-compliant with medications. What is the correct order of drug administration?</div>
+                        <div class="mcq-options">
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq3" value="a">
+                                <div class="mcq-radio"></div>
+                                <label>A) Lugol's iodine → PTU → propranolol → steroids</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq3" value="b">
+                                <div class="mcq-radio"></div>
+                                <label>B) PTU → propranolol → Lugol's iodine (1–2h after PTU) → steroids</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq3" value="c">
+                                <div class="mcq-radio"></div>
+                                <label>C) Propranolol → PTU → iodine → aspirin for fever</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq3" value="d">
+                                <div class="mcq-radio"></div>
+                                <label>D) Iodine → PTU → methimazole to ensure rapid control</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq3" value="e">
+                                <div class="mcq-radio"></div>
+                                <label>E) Radioiodine immediately to destroy the thyroid</label>
+                            </label>
+                        </div>
+                        <button class="reveal-btn" onclick="revealMCQ(this)" style="margin-top: 12px; padding: 10px 16px; background: #059669; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer correct">
+                                <strong>✓ CORRECT: B) PTU → propranolol → Lugol's iodine (1–2h after PTU) → steroids</strong>
+                                <div class="mcq-explanation">Thyroid storm treatment is sequential and order-dependent. PTU FIRST (blocks both synthesis and peripheral conversion). Then propranolol (blocks symptoms + adds conversion block at high dose). Then iodine 1–2h AFTER PTU (blocks hormone release via Wolff-Chaikoff effect; if given before PTU, iodine becomes substrate for synthesis, WORSENING the crisis). Finally steroids. Critical: Use acetaminophen for fever, NOT aspirin (aspirin displaces T4 from TBG, worsening crisis).</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 4 -->
+                    <div class="mcq-item">
+                        <div class="mcq-question">4. A 52-year-old woman with Graves' disease is being evaluated for radioiodine therapy. She mentions she has had increasing eye discomfort and lid retraction over the past month. What is the most appropriate next step?</div>
+                        <div class="mcq-options">
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq4" value="a">
+                                <div class="mcq-radio"></div>
+                                <label>A) Proceed with radioiodine immediately to cure the underlying disease</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq4" value="b">
+                                <div class="mcq-radio"></div>
+                                <label>B) Start antithyroid drugs to render patient euthyroid before RAI</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq4" value="c">
+                                <div class="mcq-radio"></div>
+                                <label>C) Recommend thyroidectomy rather than RAI (due to active ophthalmopathy)</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq4" value="d">
+                                <div class="mcq-radio"></div>
+                                <label>D) Give glucocorticoids and proceed with RAI</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq4" value="e">
+                                <div class="mcq-radio"></div>
+                                <label>E) Monitor closely with no intervention; ophthalmopathy resolves spontaneously</label>
+                            </label>
+                        </div>
+                        <button class="reveal-btn" onclick="revealMCQ(this)" style="margin-top: 12px; padding: 10px 16px; background: #059669; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer correct">
+                                <strong>✓ CORRECT: C) Recommend thyroidectomy rather than RAI (due to active ophthalmopathy)</strong>
+                                <div class="mcq-explanation">Active/moderate-to-severe Graves' ophthalmopathy is a relative (some say absolute) contraindication to RAI because RAI can WORSEN ophthalmopathy via immune response. In this scenario, thyroidectomy is preferred. If mild ophthalmopathy, RAI can be considered with concurrent glucocorticoid coverage. Surgery avoids the immune-mediated worsening of eye disease.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 5 -->
+                    <div class="mcq-item">
+                        <div class="mcq-question">5. A 24-year-old man with medullary thyroid carcinoma (MTC) is being prepared for total thyroidectomy. Before surgery, which additional screen is ESSENTIAL?</div>
+                        <div class="mcq-options">
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq5" value="a">
+                                <div class="mcq-radio"></div>
+                                <label>A) Whole-body radioiodine scan</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq5" value="b">
+                                <div class="mcq-radio"></div>
+                                <label>B) Thyroglobulin level</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq5" value="c">
+                                <div class="mcq-radio"></div>
+                                <label>C) Plasma metanephrines or 24-h urine catecholamines for pheochromocytoma</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq5" value="d">
+                                <div class="mcq-radio"></div>
+                                <label>D) Parathyroid imaging</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq5" value="e">
+                                <div class="mcq-radio"></div>
+                                <label>E) TSH suppression therapy initiation</label>
+                            </label>
+                        </div>
+                        <button class="reveal-btn" onclick="revealMCQ(this)" style="margin-top: 12px; padding: 10px 16px; background: #059669; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer correct">
+                                <strong>✓ CORRECT: C) Plasma metanephrines or 24-h urine catecholamines for pheochromocytoma</strong>
+                                <div class="mcq-explanation">MTC is part of MEN2 syndrome. BEFORE thyroidectomy, you MUST screen for pheochromocytoma (present in ~50% of MEN2B patients). If a pheo is present and you don't know, induction of anesthesia and surgical manipulation can trigger massive catecholamine release → hypertensive crisis, MI, arrhythmias. Always screen for pheo FIRST, then treat it first if found. Also: All MTC patients need RET genetic testing (germline mutation) and family screening.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 6 -->
+                    <div class="mcq-item">
+                        <div class="mcq-question">6. A 68-year-old woman with chronic kidney disease is hospitalized for acute symptomatic hypocalcemia (Ca 6.8 mg/dL, ionized Ca low). She has tetany and positive Chvostek sign. What is your first management priority?</div>
+                        <div class="mcq-options">
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq6" value="a">
+                                <div class="mcq-radio"></div>
+                                <label>A) Start oral calcium carbonate with meals</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq6" value="b">
+                                <div class="mcq-radio"></div>
+                                <label>B) Give IV calcium gluconate; check serum magnesium level</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq6" value="c">
+                                <div class="mcq-radio"></div>
+                                <label>C) Administer calcitriol (active vitamin D) orally</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq6" value="d">
+                                <div class="mcq-radio"></div>
+                                <label>D) Give phosphate binders to lower phosphate</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq6" value="e">
+                                <div class="mcq-radio"></div>
+                                <label>E) Start recombinant PTH (natpara) immediately</label>
+                            </label>
+                        </div>
+                        <button class="reveal-btn" onclick="revealMCQ(this)" style="margin-top: 12px; padding: 10px 16px; background: #059669; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer correct">
+                                <strong>✓ CORRECT: B) Give IV calcium gluconate; check serum magnesium level</strong>
+                                <div class="mcq-explanation">Acute symptomatic hypocalcemia (tetany, seizures) requires IMMEDIATE IV calcium gluconate. CRITICAL: Check magnesium level. If the patient has hypomagnesemia (common in CKD), PTH secretion and action are blocked — calcium supplementation alone WON'T work. Treat hypomagnesemia FIRST (IV magnesium) before or simultaneously with calcium. Then add calcitriol (active vitamin D) for chronic management. Calcium gluconate is preferred over chloride (less tissue damage if extravasation).</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 7 -->
+                    <div class="mcq-item">
+                        <div class="mcq-question">7. A 62-year-old man with squamous cell lung cancer develops hypercalcemia (Ca 12.8 mg/dL, albumin low at 2.8). He is asymptomatic. Labs show: PTH low, PTHrP elevated, phosphate low, 1,25-OH D low. What is the appropriate first treatment step?</div>
+                        <div class="mcq-options">
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq7" value="a">
+                                <div class="mcq-radio"></div>
+                                <label>A) Bisphosphonates immediately (zoledronate or pamidronate IV)</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq7" value="b">
+                                <div class="mcq-radio"></div>
+                                <label>B) IV normal saline (0.9% NaCl) to enhance renal calcium excretion</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq7" value="c">
+                                <div class="mcq-radio"></div>
+                                <label>C) Calcitonin (salmon) for rapid calcium lowering</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq7" value="d">
+                                <div class="mcq-radio"></div>
+                                <label>D) Furosemide to increase renal calcium wasting</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq7" value="e">
+                                <div class="mcq-radio"></div>
+                                <label>E) Parathyroidectomy</label>
+                            </label>
+                        </div>
+                        <button class="reveal-btn" onclick="revealMCQ(this)" style="margin-top: 12px; padding: 10px 16px; background: #059669; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer correct">
+                                <strong>✓ CORRECT: B) IV normal saline (0.9% NaCl) to enhance renal calcium excretion</strong>
+                                <div class="mcq-explanation">First-line treatment for ANY hypercalcemia is IV normal saline hydration. This increases glomerular filtration and renal calcium excretion. Bisphosphonates and calcitonin are adjunctive (bisphosphonates take 2–4 days). Furosemide is OUTDATED and contraindicated (dehydrates patient, worsens hypercalcemia). Once hydrated, bisphosphonates can be started. This is PTHrP-mediated hypercalcemia from lung cancer. Corrected calcium = 12.8 + 0.8 × (4 – 2.8) = 13.76 mg/dL (still elevated despite low albumin).</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 8 -->
+                    <div class="mcq-item">
+                        <div class="mcq-question">8. A 35-year-old woman with papillary thyroid carcinoma (T4, N1b, M0) undergoes total thyroidectomy and RAI ablation. She is started on TSH suppression therapy with high-dose levothyroxine (target TSH <0.1 mIU/L). Which of the following complications is she at HIGHEST risk for during long-term TSH suppression?</div>
+                        <div class="mcq-options">
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq8" value="a">
+                                <div class="mcq-radio"></div>
+                                <label>A) Hypothyroidism</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq8" value="b">
+                                <div class="mcq-radio"></div>
+                                <label>B) Atrial fibrillation and osteoporosis</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq8" value="c">
+                                <div class="mcq-radio"></div>
+                                <label>C) Agranulocytosis</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq4" value="d">
+                                <div class="mcq-radio"></div>
+                                <label>D) Hepatotoxicity</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq8" value="e">
+                                <div class="mcq-radio"></div>
+                                <label>E) Aplasia cutis</label>
+                            </label>
+                        </div>
+                        <button class="reveal-btn" onclick="revealMCQ(this)" style="margin-top: 12px; padding: 10px 16px; background: #059669; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer correct">
+                                <strong>✓ CORRECT: B) Atrial fibrillation and osteoporosis</strong>
+                                <div class="mcq-explanation">TSH suppression therapy (supraphysiologic thyroid hormone) increases risk of atrial fibrillation (from chronic thyroid hormone excess) and osteoporosis (high thyroid hormone decreases bone density, especially in postmenopausal women). TSH must be suppressed to <0.1 mIU/L in high-risk PTC to prevent TSH-driven tumor growth, but long-term side effects must be monitored. Regular cardiovascular and bone density screening is recommended.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 9 -->
+                    <div class="mcq-item">
+                        <div class="mcq-question">9. A 48-year-old woman is taking levothyroxine 75 μg daily for hypothyroidism. She develops GI symptoms and is started on a proton pump inhibitor for GERD. Her TSH rises to 7.2 mIU/L at follow-up. What is the most likely explanation?</div>
+                        <div class="mcq-options">
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq9" value="a">
+                                <div class="mcq-radio"></div>
+                                <label>A) The levothyroxine dose is too low and needs to be increased</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq9" value="b">
+                                <div class="mcq-radio"></div>
+                                <label>B) PPIs decrease levothyroxine absorption by raising gastric pH</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq9" value="c">
+                                <div class="mcq-radio"></div>
+                                <label>C) She switched to a generic levothyroxine with poor bioavailability</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq9" value="d">
+                                <div class="mcq-radio"></div>
+                                <label>D) GERD itself reduces T4 absorption in the small intestine</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq9" value="e">
+                                <div class="mcq-radio"></div>
+                                <label>E) Levothyroxine interacts with the PPI directly</label>
+                            </label>
+                        </div>
+                        <button class="reveal-btn" onclick="revealMCQ(this)" style="margin-top: 12px; padding: 10px 16px; background: #059669; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer correct">
+                                <strong>✓ CORRECT: B) PPIs decrease levothyroxine absorption by raising gastric pH</strong>
+                                <div class="mcq-explanation">Levothyroxine absorption requires acidic gastric pH. PPIs suppress gastric acid → ↓ levothyroxine dissolution and absorption → ↓ serum T4 → ↑ TSH. Solution: Take levothyroxine at least 30–60 minutes before PPI, or separate by 4+ hours. Other agents that reduce absorption: calcium, iron, aluminum antacids. Since PPI was just started, it's the most likely culprit.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 10 -->
+                    <div class="mcq-item">
+                        <div class="mcq-question">10. A 19-year-old man with newly diagnosed medullary thyroid carcinoma is RET mutation positive. Genetic testing identifies him as part of an MEN2A family. What is the recommendation for his asymptomatic siblings who carry the RET mutation?</div>
+                        <div class="mcq-options">
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq10" value="a">
+                                <div class="mcq-radio"></div>
+                                <label>A) Watchful waiting with annual screening until they develop symptoms</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq10" value="b">
+                                <div class="mcq-radio"></div>
+                                <label>B) Prophylactic (preventive) thyroidectomy because they carry RET mutation</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq10" value="c">
+                                <div class="mcq-radio"></div>
+                                <label>C) Start PTU to prevent thyroid hormone production</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq10" value="d">
+                                <div class="mcq-radio"></div>
+                                <label>D) Radioiodine therapy to destroy thyroid tissue</label>
+                            </label>
+                            <label class="mcq-option">
+                                <input type="radio" name="mcq10" value="e">
+                                <div class="mcq-radio"></div>
+                                <label>E) Screen for pheochromocytoma only, no thyroid intervention</label>
+                            </label>
+                        </div>
+                        <button class="reveal-btn" onclick="revealMCQ(this)" style="margin-top: 12px; padding: 10px 16px; background: #059669; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer correct">
+                                <strong>✓ CORRECT: B) Prophylactic (preventive) thyroidectomy because they carry RET mutation</strong>
+                                <div class="mcq-explanation">RET-positive family members in MEN2A/MEN2B have near 100% penetrance for MTC development. Prophylactic thyroidectomy is recommended in childhood/adolescence (timing depends on RET genotype and penetrance), BEFORE malignancy develops. This is one of the few accepted uses of prophylactic surgery in genetic cancer syndromes. Screening for pheochromocytoma BEFORE thyroidectomy is mandatory (to avoid intraop crisis). RAI won't work in MTC (C cells lack NIS). PTU doesn't prevent MTC development.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Lecture 14 — Diagnosis & Treatment of Thyroid Disorders | Endocrine Pharmacology</p>
+            <p>ADHD-Friendly Interactive Study Guide | All content stored locally in localStorage (key: endo_lec14)</p>
+        </div>
+    </div>
+
+    <script>
+        // Initialize from localStorage
+        const STORAGE_KEY = 'endo_lec14';
+
+        function toggleLO(headerElement) {
+            const loSection = headerElement.parentElement;
+            const loContent = loSection.querySelector('.lo-content');
+            const loToggle = headerElement.querySelector('.lo-toggle');
+            const loId = loSection.id;
+
+            loContent.classList.toggle('open');
+            loToggle.classList.toggle('open');
+
+            // Save state
+            saveState();
+        }
+
+        function revealMCQ(button) {
+            const mcqItem = button.closest('.mcq-item');
+            const reveal = mcqItem.querySelector('.mcq-reveal');
+            const mcqName = mcqItem.querySelector('input[type="radio"]').name;
+            const selectedValue = document.querySelector(`input[name="${mcqName}"]:checked`)?.value;
+
+            if (selectedValue) {
+                // Show correct answer
+                const correctAnswer = mcqItem.querySelector('.mcq-answer.correct');
+                const incorrectAnswers = mcqItem.querySelectorAll('.mcq-answer.incorrect');
+
+                correctAnswer.style.display = 'block';
+                incorrectAnswers.forEach(ans => ans.style.display = 'none');
+            }
+
+            reveal.classList.toggle('open');
+            button.textContent = reveal.classList.contains('open') ? 'Hide Answer' : 'Reveal Answer';
+
+            saveState();
+        }
+
+        function saveState() {
+            const state = {
+                timestamp: new Date().toISOString(),
+                expandedSections: [],
+                mcqResponses: {}
+            };
+
+            // Save expanded sections
+            document.querySelectorAll('.lo-content.open').forEach(content => {
+                const loSection = content.closest('.lo-section');
+                state.expandedSections.push(loSection.id);
+            });
+
+            // Save MCQ responses
+            document.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
+                state.mcqResponses[radio.name] = radio.value;
+            });
+
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }
+
+        function loadState() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                const state = JSON.parse(saved);
+
+                // Restore expanded sections
+                state.expandedSections.forEach(id => {
+                    const section = document.getElementById(id);
+                    if (section) {
+                        const content = section.querySelector('.lo-content');
+                        const toggle = section.querySelector('.lo-toggle');
+                        content.classList.add('open');
+                        toggle.classList.add('open');
+                    }
+                });
+
+                // Restore MCQ responses
+                Object.entries(state.mcqResponses).forEach(([name, value]) => {
+                    const radio = document.querySelector(`input[name="${name}"][value="${value}"]`);
+                    if (radio) radio.checked = true;
+                });
+            }
+        }
+
+        // Sidebar navigation
+        document.querySelectorAll('.sidebar-nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', loadState);
+
+        // Auto-save on any change
+        document.addEventListener('change', saveState);
+    </script>
+</body>
+</html>

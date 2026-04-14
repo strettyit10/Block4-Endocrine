@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEC 24 - Diabetes Clinical Cases</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.6; }
+        .container { display: flex; height: 100vh; }
+
+        .sidebar { width: 260px; background: #0f172a; color: #e2e8f0; padding: 24px 16px; overflow-y: auto; }
+        .sidebar h1 { font-size: 24px; margin-bottom: 8px; }
+        .sidebar .lec-number { color: #059669; font-weight: bold; font-size: 20px; margin-bottom: 24px; }
+        .sidebar .category { color: #94a3b8; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-top: 20px; margin-bottom: 12px; }
+        .tab-list { list-style: none; }
+        .tab-item { margin-bottom: 8px; }
+        .tab-item button { width: 100%; padding: 10px 12px; background: transparent; border: none; color: #cbd5e1; text-align: left; cursor: pointer; border-radius: 6px; font-size: 14px; transition: all 0.2s; }
+        .tab-item button:hover { background: rgba(5, 150, 105, 0.1); color: #059669; }
+        .tab-item button.active { background: #059669; color: #f0fdf4; font-weight: 600; }
+
+        .main { flex: 1; overflow-y: auto; padding: 40px; background: #ffffff; }
+        .content-tab { display: none; }
+        .content-tab.active { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        h2 { color: #0f172a; margin-bottom: 20px; font-size: 28px; }
+        h2 .accent { color: #059669; }
+        h3 { color: #1e293b; margin-top: 24px; margin-bottom: 12px; font-size: 18px; }
+        p { margin-bottom: 12px; color: #475569; }
+
+        .case-header { background: linear-gradient(135deg, #059669 0%, #047857 100%); color: white; padding: 20px; border-radius: 8px; margin-bottom: 24px; }
+        .case-header h3 { color: white; margin: 0; }
+        .case-header p { color: #d1fae5; margin: 8px 0 0 0; }
+
+        .collapsible { margin-bottom: 20px; border: 2px solid #e2e8f0; border-radius: 8px; overflow: hidden; }
+        .collapsible.expanded { border-color: #059669; background: #f0fdf4; }
+        .collapsible-header { background: #f1f5f9; padding: 16px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: #1e293b; user-select: none; transition: all 0.2s; }
+        .collapsible.expanded .collapsible-header { background: #dcfce7; color: #059669; border-bottom: 2px solid #059669; }
+        .collapsible-header:hover { background: #e2e8f0; }
+        .collapsible.expanded .collapsible-header:hover { background: #dcfce7; }
+        .toggle-icon { font-size: 20px; transition: transform 0.3s; }
+        .collapsible.expanded .toggle-icon { transform: rotate(180deg); }
+        .collapsible-content { padding: 20px; display: none; }
+        .collapsible.expanded .collapsible-content { display: block; }
+
+        .flip-card { perspective: 1000px; height: 200px; margin: 16px 0; }
+        .flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; padding: 20px; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-weight: 600; text-align: center; }
+        .flip-card-front { background: linear-gradient(135deg, #059669 0%, #047857 100%); color: white; }
+        .flip-card-back { background: #f0fdf4; color: #047857; border: 2px solid #059669; transform: rotateY(180deg); }
+
+        .summary-box { padding: 16px; border-radius: 8px; margin-bottom: 16px; border-left: 4px solid; }
+        .test-box { background: #ecfdf5; border-left-color: #16a34a; }
+        .trap-box { background: #fef2f2; border-left-color: #dc2626; }
+        .hy-box { background: #fefce8; border-left-color: #ca8a04; }
+        .memory-box { background: #eff6ff; border-left-color: #2563eb; }
+
+        .summary-box strong { display: block; margin-bottom: 6px; }
+        .test-box strong { color: #16a34a; }
+        .trap-box strong { color: #dc2626; }
+        .hy-box strong { color: #ca8a04; }
+        .memory-box strong { color: #2563eb; }
+
+        .mcq-section { margin-top: 40px; padding-top: 40px; border-top: 2px solid #e2e8f0; }
+        .mcq { margin-bottom: 28px; padding: 16px; background: #f8fafc; border-radius: 8px; border-left: 4px solid #059669; }
+        .mcq-stem { font-weight: 600; margin-bottom: 12px; color: #1e293b; }
+        .mcq-option { padding: 8px 0; margin-left: 20px; color: #475569; }
+        .mcq-option input[type="checkbox"] { margin-right: 8px; cursor: pointer; }
+        .answer-key { margin-top: 12px; padding: 12px; background: #dcfce7; border-radius: 6px; display: none; }
+        .answer-key.show { display: block; }
+        .answer-key strong { color: #059669; }
+
+        .mastery-check { display: flex; align-items: center; gap: 12px; margin: 16px 0; padding: 12px; background: #f0fdf4; border-radius: 6px; }
+        .mastery-check input[type="checkbox"] { width: 20px; height: 20px; cursor: pointer; accent-color: #059669; }
+        .mastery-check label { cursor: pointer; flex: 1; }
+
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+        th { background: #f1f5f9; padding: 12px; text-align: left; border-bottom: 2px solid #e2e8f0; font-weight: 600; }
+        td { padding: 12px; border-bottom: 1px solid #e2e8f0; }
+        tr:hover { background: #f8fafc; }
+
+        ul, ol { margin: 12px 0 12px 24px; }
+        li { margin-bottom: 8px; }
+
+        code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', monospace; }
+
+        .scrollbar-styling::-webkit-scrollbar { width: 8px; }
+        .scrollbar-styling::-webkit-scrollbar-track { background: #f1f5f9; }
+        .scrollbar-styling::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .scrollbar-styling::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        @media (max-width: 768px) {
+            .container { flex-direction: column; }
+            .sidebar { width: 100%; height: auto; max-height: 200px; display: flex; gap: 20px; }
+            .main { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar scrollbar-styling">
+            <h1>Diabetes</h1>
+            <div class="lec-number">LEC 24</div>
+            <div class="category">Pharmacology/Clinical</div>
+            <ul class="tab-list">
+                <li class="tab-item"><button class="tab-btn active" data-tab="case1">Case 1: New-Onset T1DM</button></li>
+                <li class="tab-item"><button class="tab-btn" data-tab="case2">Case 2: T2DM + CVD/CKD</button></li>
+                <li class="tab-item"><button class="tab-btn" data-tab="case3">Case 3: HHS (Elderly)</button></li>
+                <li class="tab-item"><button class="tab-btn" data-tab="case4">Case 4: Gestational DM</button></li>
+                <li class="tab-item"><button class="tab-btn" data-tab="case5">Case 5: Insulinoma</button></li>
+                <li class="tab-item"><button class="tab-btn" data-tab="case6">Case 6: Periop CABG</button></li>
+                <li class="tab-item"><button class="tab-btn" data-tab="mcq">Practice Questions</button></li>
+            </ul>
+        </aside>
+
+        <main class="main scrollbar-styling">
+            <!-- CASE 1: NEW-ONSET T1DM -->
+            <div id="case1" class="content-tab active">
+                <h2><span class="accent">LEC 24:</span> New-Onset Type 1 Diabetes</h2>
+                <div class="case-header">
+                    <h3>CASE 1 — 16-Year-Old with DKA</h3>
+                    <p>Polyuria, polydipsia, weight loss × 2 weeks. Glucose 380, HbA1c 11.2%, large ketones, pH 7.32, HCO3 18, AG 14</p>
+                </div>
+
+                <div class="collapsible expanded">
+                    <div class="collapsible-header">Clinical Presentation & Diagnosis <span class="toggle-icon">▼</span></div>
+                    <div class="collapsible-content">
+                        <h3>Symptoms</h3>
+                        <p>Polyuria (osmotic, glucose >180), polydipsia (thirst), weight loss (4–6 kg), fatigue, nausea. Rapid onset over 1–2 weeks suggests autoimmune destruction.</p>
+
+                        <h3>DKA Confirmation</h3>
+                        <table>
+                            <tr><th>Parameter</th><th>Patient</th><th>DKA Criterion</th></tr>
+                            <tr><td>pH</td><td>7.32</td><td>&lt;7.30 mild; &lt;7.25 moderate; &lt;7.15 severe</td></tr>
+                            <tr><td>HCO3</td><td>18</td><td>&lt;18 mild; &lt;15 moderate; &lt;10 severe</td></tr>
+                            <tr><td>AG</td><td>14</td><td>&gt;12 elevated</td></tr>
+                            <tr><td>Ketones</td><td>Large</td><td>Positive (serum β-hydroxybutyrate preferred)</td></tr>
+                        </table>
+                        <p><strong>Diagnosis:</strong> Mild DKA (pH 7.32, HCO3 18, AG 14, large ketones).</p>
+
+                        <h3>T1DM Confirmation</h3>
+                        <ul>
+                            <li><strong>C-peptide:</strong> Undetectable (pancreatic β-cell destruction)</li>
+                            <li><strong>GAD65 antibody:</strong> Positive (most common autoantigen)</li>
+                            <li><strong>IA-2 antibody:</strong> Positive</li>
+                            <li><strong>HLA typing:</strong> DR3/DR4 (highest risk genotype)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="collapsible expanded">
+                    <div class="collapsible-header">Management Protocol <span class="toggle-icon">▼</span></div>
+                    <div class="collapsible-content">
+                        <h3>Fluid Resuscitation</h3>
+                        <ul>
+                            <li><strong>Initial:</strong> 0.9% NS bolus 10–20 mL/kg IV (e.g., 800–1600 mL over 1 hour)</li>
+                            <li><strong>Goal:</strong> Hemodynamic stabilization, urine output ≥0.5 mL/kg/hr</li>
+                            <li><strong>Switch:</strong> After initial bolus, 0.45% NaCl at 250–500 mL/hr (slower correction prevents cerebral edema)</li>
+                        </ul>
+
+                        <h3>Electrolyte Management</h3>
+                        <p><strong>CRITICAL:</strong> Check serum K+ BEFORE insulin!</p>
+                        <ul>
+                            <li>If K+ &lt;3.5 mEq/L: HOLD insulin, give K+ 20–40 mEq IV (diluted)</li>
+                            <li>If K+ 3.5–5.5: Can start insulin (monitor K+ q1–2h)</li>
+                            <li>If K+ &gt;5.5: Monitor, may need insulin + D5W to shift K+ intracellularly</li>
+                        </ul>
+                        <p><strong>Phosphate & magnesium:</strong> Also deplete with acidosis; replace if symptomatic.</p>
+
+                        <h3>Insulin Therapy</h3>
+                        <ul>
+                            <li><strong>Dose:</strong> IV regular insulin 0.1 U/kg/hr (e.g., 8–10 U/hr for 80–100 kg patient)</li>
+                            <li><strong>Target:</strong> Glucose drop 50–75 mg/dL/hr</li>
+                            <li><strong>Dextrose threshold:</strong> Add D5W when glucose &lt;250 mg/dL</li>
+                            <li><strong>CRITICAL:</strong> Continue insulin until anion gap closes (AG &lt;12), even if glucose normalizes. Ketosis resolves slower than hyperglycemia.</li>
+                            <li><strong>Transition:</strong> When eating and gap closed → basal-bolus insulin (e.g., glargine + lispro)</li>
+                        </ul>
+
+                        <h3>Monitoring</h3>
+                        <ul>
+                            <li>Glucose, VBG, electrolytes q1–2h initially</li>
+                            <li>Phosphate, Mg, Ca q4–6h</li>
+                            <li>Urine ketones q4h until negative</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="collapsible expanded">
+                    <div class="collapsible-header">Patient Education & Counseling <span class="toggle-icon">▼</span></div>
+                    <div class="collapsible-content">
+                        <h3>Honeymoon Period</h3>
+                        <p>After initial DKA treatment, partial remission may occur (insulin requirements drop 20–50% over weeks). <strong>CRITICAL:</strong> Educate that this is temporary due to β-cell recovery, NOT cure. Continue insulin—do NOT stop.</p>
+
+                        <h3>Self-Management</h3>
+                        <ul>
+                            <li><strong>Carb counting:</strong> Teach ratio (e.g., 1 U per 10–15 g carbs)</li>
+                            <li><strong>SMBG:</strong> 4× daily (fasting, before meals, bedtime, 3 AM spot check initially)</li>
+                            <li><strong>Glucagon kit:</strong> Prescribe; teach family how to use (hypoglycemia seizure/unconsciousness)</li>
+                            <li><strong>Sick day rules:</strong> NEVER stop insulin, increase monitoring, drink sugar-free fluids, check ketones if glucose &gt;240</li>
+                        </ul>
+
+                        <h3>Associated Autoimmune Screening</h3>
+                        <ul>
+                            <li><strong>Thyroid:</strong> Anti-TPO, TSH (10–30% autoimmune thyroiditis)</li>
+                            <li><strong>Celiac:</strong> TTG-IgA, total IgA (3–5% celiac disease)</li>
+                            <li><strong>Addison:</strong> 21-OH antibody (rare, &lt;1%)</li>
+                        </ul>
+
+                        <h3>Annual Monitoring</h3>
+                        <ul>
+                            <li><strong>HbA1c:</strong> Target &lt;7%; check q3 months initially, then q6 months</li>
+                            <li><strong>Microalbumin/Cr ratio:</strong> Baseline, then annually after 5 years duration</li>
+                            <li><strong>Dilated eye exam:</strong> Baseline (rule out background retinopathy), then annually</li>
+                            <li><strong>Foot exam:</strong> Annual monofilament + vibration testing</li>
+                            <li><strong>Lipids:</strong> Baseline, then q5 years if normal (after age 10 with &gt;5 yr T1DM: annual)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="summary-box test-box">
+                    <strong>TEST INSIGHT:</strong> Always confirm DKA (AG &gt;12, pH &lt;7.30, HCO3 &lt;18, ketones) AND T1DM (C-peptide undetectable, ≥2 autoantibodies, HLA-DR3/4). DKA severity based on pH, not glucose level.
+                </div>
+
+                <div class="summary-box trap-box">
+                    <strong>TRAP:</strong> Starting insulin before checking K+ can cause fatal hyperkalemia shift. Always check K+ first. If &lt;3.5, HOLD insulin and replicate K+.
+                </div>
+
+                <div class="summary-box hy-box">
+                    <strong>HYPER-FOCUS:</strong> Honeymoon period is temporary. Educate families that insulin must continue despite remission. This misunderstanding leads to DKA relapse.
+                </div>
+
+                <div class="summary-box memory-box">
+                    <strong>MEMORY ANCHOR:</strong> "DKA triad = Ketones + Acidosis + Insulin Lack." For T1DM: "3 C's = C-peptide undetectable, Cluster of antibodies, Crash presentation."
+                </div>
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">When do you add D5W in DKA insulin drip?</div>
+                        <div class="flip-card-back">At glucose &lt;250 mg/dL. Continue insulin until AG closed (usually 12–24 hrs), not when glucose normalizes.</div>
+                    </div>
+                </div>
+
+                <div class="mastery-check">
+                    <input type="checkbox" id="case1-check">
+                    <label for="case1-check">I can manage DKA fluid therapy, electrolytes, and insulin, plus educate on honeymoon period.</label>
+                </div>
+            </div>
+
+            <!-- CASE 2: T2DM + CVD/CKD -->
+            <div id="case2" class="content-tab">
+                <h2><span class="accent">LEC 24:</span> Type 2 Diabetes with CVD &amp; CKD</h2>
+                <div class="case-header">
+                    <h3>CASE 2 — 58F with T2DM, CAD, CKD Stage 3a</h3>
+                    <p>T2DM 8 years, HbA1c 8.4% on metformin, recent MI, eGFR 47, BMI 34</p>
+                </div>
+
+                <div class="collapsible expanded">
+                    <div class="collapsible-header">Baseline Assessment <span class="toggle-icon">▼</span></div>
+                    <div class="collapsible-content">
+                        <h3>Current Therapy & Limits</h3>
+                        <ul>
+                            <li><strong>Metformin:</strong> Safe at eGFR 47 (threshold 30 mL/min/1.73m²; absolute CI &lt;30)</li>
+                            <li><strong>HbA1c 8.4%:</strong> Above goal; second agent needed</li>
+                        </ul>
+
+                        <h3>Comorbidities Guiding Drug Choice</h3>
+                        <table>
+                            <tr><th>Condition</th><th>Preferred Agent</th><th>Mechanism</th></tr>
+                            <tr><td>ASCVD (CAD + MI)</td><td>GLP-1 RA or SGLT2i</td><td>CV mortality reduction</td></tr>
+                            <tr><td>CKD Stage 3a</td><td>SGLT2i</td><td>Renoprotective (eGFR &gt;30 effective)</td></tr>
+                            <tr><td>Obesity (BMI 34)</td><td>GLP-1 RA</td><td>Weight loss 3–5 kg, improves CV risk</td></tr>
+                        </table>
+
+                        <h3>Evidence Base</h3>
+                        <ul>
+                            <li><strong>EMPA-REG OUTCOME (SGLT2i):</strong> ↓ CV death 38%, ↓ HF hospitalization 35%</li>
+                            <li><strong>LEADER (GLP-1 RA liraglutide):</strong> ↓ MACE 13%, ↓ CV death 22%</li>
+                            <li><strong>DAPA-HF (SGLT2i dapagliflozin):</strong> Benefits in HFrEF regardless of DM status</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="collapsible expanded">
+                    <div class="collapsible-header">Drug Selection & Monitoring <span class="toggle-icon">▼</span></div>
+                    <div class="collapsible-content">
+                        <h3>Recommended Choice: Empagliflozin (SGLT2i)</h3>
+                        <p><strong>Why:</strong> Addresses all three issues (CVD, CKD, glycemia) in one agent.</p>
+
+                        <h3>SGLT2i Mechanism & Benefits</h3>
+                        <ul>
+                            <li><strong>Mechanism:</strong> Blocks glucose reabsorption in proximal tubule → urinary glucose loss</li>
+                            <li><strong>Glycemic:</strong> ↓ HbA1c 0.5–1%</li>
+                            <li><strong>CV:</strong> ↓ CV death, HF hospitalization (especially dapagliflozin, empagliflozin, canagliflozin)</li>
+                            <li><strong>Renal:</strong> ↓ eGFR decline, proteinuria reduction (effective down to eGFR ~30, some benefit at 20–30)</li>
+                            <li><strong>Weight:</strong> ↓ 2–3 kg (less than GLP-1 but additive)</li>
+                            <li><strong>BP:</strong> ↓ 3–5 mmHg</li>
+                        </ul>
+
+                        <h3>SGLT2i Adverse Effects</h3>
+                        <p><strong>Genital mycotic infection:</strong> 8–13% (educate on hygiene, risk factors). Assess baseline; counsel on symptoms (itching, discharge).</p>
+                        <p><strong>Euglycemic DKA:</strong> Rare but serious. Risk factors: major surgery, acute illness, SGLT2i use. Present with normal glucose (&lt;200) but elevated AG + ketones + altered mental status.</p>
+                        <ul>
+                            <li><strong>Prevention:</strong> Hold SGLT2i 3–5 days before elective surgery, during acute illness</li>
+                            <li><strong>Recognition:</strong> If patient on SGLT2i + AMS + AG elevated but glucose &lt;200 → check β-hydroxybutyrate immediately</li>
+                        </ul>
+
+                        <h3>Dosing & Monitoring</h3>
+                        <ul>
+                            <li><strong>Empagliflozin:</strong> 10 mg daily (max 25 mg/day; higher doses no additional glycemic benefit)</li>
+                            <li><strong>Baseline labs:</strong> eGFR, urine ACR, lipid panel</li>
+                            <li><strong>Ongoing:</strong> eGFR q6–12 months, urine ACR annually, BP target &lt;130/80 on RAAS inhibitor</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="collapsible expanded">
+                    <div class="collapsible-header">Comprehensive CVD/CKD Management <span class="toggle-icon">▼</span></div>
+                    <div class="collapsible-content">
+                        <h3>RAAS Inhibition</h3>
+                        <p>ACE-I or ARB is foundational for CKD + proteinuria + ASCVD. If on ACE-I, monitor K+ and Cr after initiation.</p>
+
+                        <h3>Lipid Management</h3>
+                        <p><strong>High-intensity statin required:</strong> ASCVD diagnosis mandates atorvastatin 40–80 mg or rosuvastatin 20–40 mg daily.</p>
+                        <ul>
+                            <li><strong>Goal LDL:</strong> &lt;70 mg/dL (ASCVD)</li>
+                            <li><strong>Consider ezetimibe or PCSK9i:</strong> If LDL not at goal on high-intensity statin</li>
+                        </ul>
+
+                        <h3>BP Control</h3>
+                        <ul>
+                            <li><strong>Goal:</strong> &lt;130/80 mmHg (ADA/ACC 2017)</li>
+                            <li><strong>First-line:</strong> RAAS inhibitor + diuretic ± CCB</li>
+                            <li><strong>Avoid:</strong> Thiazides (hyperglycemia, hypokalemia); α-blockers (HF risk)</li>
+                        </ul>
+
+                        <h3>HbA1c Target</h3>
+                        <ul>
+                            <li><strong>General goal:</strong> &lt;7% (reduces microvascular complications)</li>
+                            <li><strong>With CKD/CVD:</strong> 7–8% acceptable (hypoglycemia risk, limited life expectancy)</li>
+                            <li><strong>Avoid intensive glycemic control:</strong> No mortality benefit, ↑ hypoglycemia</li>
+                        </ul>
+
+                        <h3>Add-On Therapy If Needed</h3>
+                        <p>If HbA1c remains &gt;8% on metformin + SGLT2i, consider:</p>
+                        <ul>
+                            <li><strong>GLP-1 RA:</strong> Additional weight loss, CV benefit, MACE reduction</li>
+                            <li><strong>Finerenone (FIDELITY):</strong> Non-steroidal mineralocorticoid receptor antagonist; CKD progression ↓</li>
+                            <li><strong>Avoid:</strong> DPP-4i (no CV benefit), sulfonylureas (hypoglycemia, weight gain)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="summary-box test-box">
+                    <strong>TEST INSIGHT:</strong> In T2DM + ASCVD + CKD, SGLT2i and GLP-1 RA are preferred for CV and renal benefits. Metformin safe down to eGFR 30.
+                </div>
+
+                <div class="summary-box trap-box">
+                    <strong>TRAP:</strong> Don't use DPP-4i or sulfonylureas for CV risk reduction—they have no mortality benefit. SGLT2i and GLP-1 RA are evidence-based.
+                </div>
+
+                <div class="summary-box hy-box">
+                    <strong>HYPER-FOCUS:</strong> Euglycemic DKA with SGLT2i: glucose &lt;200 but HIGH AG + ketones. Hold SGLT2i before surgery; restart after oral intake/stable illness.
+                </div>
+
+                <div class="summary-box memory-box">
+                    <strong>MEMORY ANCHOR:</strong> "SGLT2i = CV Kidney Win." GLP-1 = "Weight & Macrovascular." Both trump older agents in ASCVD/CKD context.
+                </div>
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">Euglycemic DKA: What glucose range triggers suspicion?</div>
+                        <div class="flip-card-back">&lt;200 mg/dL with elevated AG + positive ketones + patient on SGLT2i. Normal glucose can mask severe metabolic acidosis.</div>
+                    </div>
+                </div>
+
+                <div class="mastery-check">
+                    <input type="checkbox" id="case2-check">
+                    <label for="case2-check">I can select SGLT2i/GLP-1 RA for ASCVD/CKD, manage comorbidities, and recognize euglycemic DKA.</label>
+                </div>
+            </div>
+
+            <!-- CASE 3: HHS -->
+            <div id="case3" class="content-tab">
+                <h2><span class="accent">LEC 24:</span> Hyperosmolar Hyperglycemic State (HHS)</h2>
+                <div class="case-header">
+                    <h3>CASE 3 — 78M Unresponsive, Glucose 980</h3>
+                    <p>Nursing home resident. BP 88/60, Na 152, HCO3 22, pH 7.38, osm 378, NO ketones</p>
+                </div>
+
+                <div class="collapsible expanded">
+                    <div class="collapsible-header">Diagnosis &amp; Differential <span class="toggle-icon">▼</span></div>
+                    <div class="collapsible-content">
+                        <h3>HHS Diagnostic Criteria</h3>
+                        <table>
+                            <tr><th>Parameter</th><th>HHS Criterion</th><th>This Patient</th></tr>
+                            <tr><td>Glucose</td><td>&gt;600 mg/dL</td><td>980 ✓</td></tr>
+                            <tr><td>Osmolality</td><td>&gt;320 mOsm/kg</td><td>378 ✓</td></tr>
+                            <tr><td>pH</td><td>&gt;7.30 (minimal acidosis)</td><td>7.38 ✓</td></tr>
+                            <tr><td>HCO3</td><td>&gt;18 (minimal acidosis)</td><td>22 ✓</td></tr>
+                            <tr><td>Ketones</td><td>Small/negative</td><td>Negative ✓</td></tr>
+                            <tr><td>AG</td><td>Normal or low</td><td>Not elevated ✓</td></tr>
+                        </table>
+                        <p><strong>Diagnosis: CONFIRMED HHS</strong></p>
+
+                        <h3>Why No DKA?</h3>
+                        <p>T2DM patients retain enough endogenous insulin (insulins can't reach zero in T2DM) to suppress ketogenesis, even though glucose isn't controlled. DKA requires absolute or near-absolute insulin deficiency (T1DM). The residual insulin is insufficient for glucose uptake but enough to prevent lipolysis and ketogenesis.</p>
+
+                        <h3>Precipitating Factors</h3>
+                        <ul>
+                            <li><strong>Infection:</strong> UTI, pneumonia (most common)</li>
+                            <li><strong>Acute illness:</strong> Stroke, MI, sepsis</li>
+                            <li><strong>Medications:</strong> Steroids (hyperglycemia), thiazides (volume loss)</li>
+                            <li><strong>Non-compliance:</strong> Stopped DM medications</li>
+                            <li><strong>Dehydration:</strong> Inadequate fluid intake (elderly, limited access)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="collapsible expanded">
+                    <div class="collapsible-header">Management Protocol <span class="toggle-icon">▼</span></div>
+                    <div class="collapsible-content">
+                        <h3>Fluid Resuscitation (PRIMARY TREATMENT)</h3>
+                        <ul>
+                            <li><strong>Initial:</strong> 0.9% NS 1–1.5 L IV over 1 hour (hemodynamic stabilization, Na repletion)</li>
+                            <li><strong>Rationale:</strong> Severe hypovolemia (often 8–10 L deficit); restore circulating volume first</li>
+                            <li><strong>Monitor:</strong> Urine output goal &gt;0.5 mL/kg/hr</li>
+                            <li><strong>Switch to 0.45% NaCl:</strong> After initial bolus, if serum Na &gt;155 (correct free water deficit slowly)</li>
+                            <li><strong>Add D5W:</strong> When glucose &lt;300 mg/dL to prevent hypoglycemia (don't stop fluid replacement)</li>
+                            <li><strong>Avoid rapid osmolality correction:</strong> Risk of cerebral edema. Target 3–8 mOsm/kg/hr decrease</li>
+                        </ul>
+
+                        <h3>Insulin Therapy (SECONDARY)</h3>
+                        <ul>
+                            <li><strong>Dose:</strong> IV regular insulin 0.05–0.1 U/kg/hr (lower than DKA, e.g., 4–8 U/hr)</li>
+                            <li><strong>Rationale:</strong> Insulin is less critical in HHS (fluids are primary); aggressive insulin causes hypoglycemia</li>
+                            <li><strong>Glucose correction rate:</strong> 50–75 mg/dL/hr (avoid rapid drops)</li>
+                            <li><strong>Target:</strong> Normalize osmolality, not just glucose</li>
+                        </ul>
+
+                        <h3>Electrolyte Management</h3>
+                        <ul>
+                            <li><strong>K+:</strong> Often total body depleted (osmotic diuresis); check before insulin. Fluid alone may increase K+ initially.</li>
+                            <li><strong>Phosphate & Mg:</strong> Also depleted; may need supplementation</li>
+                            <li><strong>Na:</strong> Correct slowly (3–8 mEq/L decrease per 24 hr) to avoid cerebral edema</li>
+                        </ul>
+
+                        <h3>Identify & Treat Precipitant</h3>
+                        <ul>
+                            <li>Obtain blood cultures, urinalysis, CXR (infection)</li>
+                            <li>EKG (MI)</li>
+                            <li>Imaging if altered mental status persistent (stroke)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="collapsible expanded">
+                    <div class="collapsible-header">Prognosis &amp; Complications <span class="toggle-icon">▼</span></div>
+                    <div class="collapsible-content">
+                        <h3>Mortality</h3>
+                        <p><strong>HHS mortality ~15% (vs. DKA 1–2%)</strong></p>
+                        <p>Why higher? Elderly population, delayed presentation (can be insidious), CNS complications (thrombosis, cerebral edema), underlying acute illness (infection, MI).</p>
+
+                        <h3>Common Complications</h3>
+                        <ul>
+                            <li><strong>Cerebral edema:</strong> From rapid osmolality correction; present with altered mental status, seizure, coma</li>
+                            <li><strong>Thromboembolism:</strong> Hypercoagulability from hemoconcentration; VTE, CVA</li>
+                            <li><strong>Acute renal injury:</strong> Pre-renal from dehydration</li>
+                            <li><strong>Rhabdomyolysis:</strong> Rare; muscle damage from osmotic stress</li>
+                        </ul>
+
+                        <h3>ICU Monitoring</h3>
+                        <ul>
+                            <li>Glucose, electrolytes q1–2h initially</li>
+                            <li>Osmolality q4–6h</li>
+                            <li>Neurologic checks (mental status)</li>
+                            <li>Urine output, vital signs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="summary-box test-box">
+                    <strong>TEST INSIGHT:</strong> HHS = glucose &gt;600 + osmolality &gt;320 + NO acidosis/minimal ketones. Fluids are primary treatment; insulin secondary. Mortality ~15%.
+                </div>
+
+                <div class="summary-box trap-box">
+                    <strong>TRAP:</strong> Using aggressive insulin in HHS (like DKA protocol) causes hypoglycemia and cerebral edema. Use LOW-dose insulin + gentle fluid correction.
+                </div>
+
+                <div class="summary-box hy-box">
+                    <strong>HYPER-FOCUS:</strong> Rapid osmolality correction risks cerebral edema. Target 3–8 mOsm/kg/hr decrease. Slow correction = slower recovery but safer.
+                </div>
+
+                <div class="summary-box memory-box">
+                    <strong>MEMORY ANCHOR:</strong> "HHS = Huge glucose, Huge osmolality, Hypo-acidosis (no acidosis)." "Fluids FIRST, insulin gentle."
+                </div>
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">Why no DKA in T2DM-induced HHS?</div>
+                        <div class="flip-card-back">T2DM retains residual endogenous insulin—enough to suppress ketogenesis but NOT enough to lower glucose. DKA needs absolute insulin deficiency (T1DM).</div>
+                    </div>
+                </div>
+
+                <div class="mastery-check">
+                    <input type="checkbox" id="case3-check">
+                    <label for="case3-check">I can diagnose HHS, manage fluid therapy and osmolality correction, and differentiate from DKA.</label>
+                </div>
+            </div>
+
+            <!-- CASE 4: GESTATIONAL DIABETES -->
+            <div id="case4" class="content-tab">
+                <h2><span class="accent">LEC 24:</span> Gestational Diabetes Mellitus</h2>
+                <div class="case-header">
+                    <h3>CASE 4 — 32F at 26 Weeks Gestation</h3>
+                    <p>BMI 29, 1-hr 50g GCT 168 (positive). 3-hr 100g OGTT: fasting 96 / 1hr 192 / 2hr 165 / 3hr 155</p>
+                </div>
+
+                <div class="collapsible expanded">
+                    <div class="collapsible-header">Screening &amp; Diagnosis <span class="toggle-icon">▼</span></div>
+                    <div class="collapsible-content">
+                        <h3>Two-Step Screening (Traditional USA)</h3>
+                        <p><strong>Step 1:</strong> 1-hr 50g glucose challenge test (GCT) at 24–28 weeks (non-fasting, no prior diet restriction).</p>
+                        <ul>
+                            <li>Threshold ≥140 mg/dL → ~80% sensitivity; ≥135 mg/dL → ~90% sensitivity (higher false positive)</li>
+                            <li>This patient: 168 → POSITIVE, proceed to OGTT</li>
+                        </ul>
+                        <p><strong>Step 2:</strong> 3-hr 100g OGTT (fasting, after 3-day unrestricted diet).</p>
+
+                        <h3>Carpenter-Coustan Criteria (3-hr OGTT)</h3>
+                        <table>
+                            <tr><th>Time Point</th><th>Threshold</th><th>Patient</th><th>Status</th></tr>
+                            <tr><td>Fasting</td><td>≥95</td><td>96</td><td>ABNORMAL ✓</td></tr>
+                            <tr><td>1 hour</td><td>≥180</td><td>192</td><td>ABNORMAL ✓</td></tr>
+                            <tr><td>2 hour</td><td>≥155</td><td>165</td><td>ABNORMAL ✓</td></tr>
+                            <tr><td>3 hour</td><td>≥140</td><td>155</td><td>ABNORMAL ✓</td></tr>
+                        </table>
+                        <p><strong>≥2 abnormal values = GDM CONFIRMED</strong> (This patient has ALL 4 abnormal = definite GDM)</p>
+
+                        <h3>Alternative: 1-Step IADPSG (75g OGTT)</h3>
+                        <p>Increasingly adopted. Single 75g OGTT (fasting). ANY 1 abnormal = GDM:</p>
+                        <ul>
+                            <li>Fasting ≥92</li>
+                            <li>1-hour ≥180</li>
+                            <li>2-hour ≥153</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="collapsible expanded">
+                    <div class="collapsible-header">Management: Lifestyle &amp; Monitoring <span class="toggle-icon">▼</span></div>
+                    <div class="collapsible-content">
+                        <h3>First-Line: Dietary Modification</h3>
+                        <ul>
+                            <li><strong>Carbohydrate distribution:</strong> 40–45% of calories (vs. standard 45–65%); avoid simple sugars</li>
+                            <li><strong>Meal composition:</strong> Include protein and fiber to slow absorption</li>
+                            <li><strong>Example:</strong> 3 meals + 2–3 snacks; smaller, frequent meals</li>
+                            <li><strong>Dietitian referral:</strong> Strongly recommended</li>
+                        </ul>
+
+                        <h3>Physical Activity</h3>
+                        <ul>
+                            <li>30 min moderate activity ≥5 days/week (walking, stationary cycling)</li>
+                            <li>Avoid high-impact or strenuous exercise (premature labor risk)</li>
+                        </ul>
+
+                        <h3>Self-Monitoring Blood Glucose (SMBG)</h3>
+                        <ul>
+                            <li><strong>Target:</strong> Fasting &lt;95, 1-hr postprandial &lt;120, 2-hr &lt;100 mg/dL (some use &lt;140 for 2-hr)</li>
+                            <li><strong>Frequency:</strong> Fasting + 1-hr or 2-hr postprandial after each meal (4 times daily minimum)</li>
+                            <li><strong>Log & review:</strong> Weekly trends; adjust diet based on pattern (e.g., post-breakfast high → reduce carbs at breakfast)</li>
+                        </ul>
+
+                        <h3>Initiate Insulin When Lifestyle Fails</h3>
+                        <p><strong>Criteria to start insulin:</strong></p>
+                        <ul>
+                            <li>Fasting glucose persistently &gt;95 mg/dL despite diet (1–2 weeks trial)</li>
+                            <li>1-hr postprandial &gt;120 mg/dL (some guidelines &gt;140)</li>
+                            <li>2-hr postprandial &gt;100 mg/dL (some &gt;120)</li>
+                        </ul>
+                        <p><strong>Insulin is preferred in pregnancy</strong> (safest). Metformin and glyburide cross placenta; long-term fetal effects unknown.</p>
+                    </div>
+                </div>
+
+                <div class="collapsible expanded">
+                    <div class="collapsible-header">Insulin Therapy &amp; Fetal Risks <span class="toggle-icon">▼</span></div>
+                    <div class="collapsible-content">
+                        <h3>Insulin Initiation</h3>
+                        <ul>
+                            <li><strong>Type:</strong> NPH (intermediate-acting) + rapid-acting analogs (lispro, aspart) safest in pregnancy</li>
+                            <li><strong>Dosing:</strong> Start 0.5–1 U/kg/day based on fasting glucose; NPH at bedtime ± NPH in morning ± premeal rapid-acting</li>
+                            <li><strong>Monitoring:</strong> Increase by 2 U every 3–4 days until targets met</li>
+                            <li><strong>Hypoglycemia precautions:</strong> Teach recognition, glucagon kit, avoid driving alone</li>
+                        </ul>
+
+                        <h3>Fetal Risks of Maternal Hyperglycemia</h3>
+                        <p><strong>Mechanism:</strong> Maternal glucose crosses placenta freely. High glucose → fetal hyperglycemia → fetal hyperinsulinism → growth stimulation.</p>
+                        <ul>
+                            <li><strong>Macrosomia (LGA):</strong> Birth weight &gt;4000 g; risk of shoulder dystocia, clavicle fracture, brachial plexus injury</li>
+                            <li><strong>Neonatal hypoglycemia:</strong> Fetal hyperinsulinism → abrupt postnatal drop in glucose; seizure risk</li>
+                            <li><strong>Hyperbilirubinemia:</strong> Increased RBC turnover</li>
+                            <li><strong>Respiratory distress syndrome:</strong> Hyperinsulinemia delays fetal lung maturity</li>
+                            <li><strong>Fetal death:</strong> Rare with modern management but historically associated with poor glycemic control</li>
+                        </ul>
+
+                        <h3>Obstetric Monitoring</h3>
+                        <ul>
+                            <li><strong>Monthly office visits:</strong> SMBG review, weight gain, blood pressure</li>
+                            <li><strong>Ultrasound:</strong> Estimated fetal weight &gt;90th percentile → risk of macrosomia</li>
+                            <li><strong>Fetal heart rate tracing:</strong> NST after 32 weeks (assess fetal well-being)</li>
+                            <li><strong>Delivery timing:</strong> Aim 39 weeks (avoid RDS); earlier if preeclampsia, poor glycemic control</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="collapsible expanded">
+                    <div class="collapsible-header">Postpartum &amp; Pre-Existing T1DM in Pregnancy <span class="toggle-icon">▼</span></div>
+                    <div class="collapsible-content">
+                        <h3>Postpartum Glucose Tolerance</h3>
+                        <ul>
+                            <li><strong>75g OGTT at 6–8 weeks postpartum:</strong> Reassess glucose tolerance (not during lactation if breastfeeding)</li>
+                            <li>Most revert to normal; ~7–10% remain diabetic (overt T2DM)</li>
+                            <li><strong>Long-term risk:</strong> ~50% develop T2DM within 5–10 years; varies by ethnicity/BMI</li>
+                        </ul>
+
+                        <h3>Postpartum Counseling</h3>
+                        <ul>
+                            <li>Repeat OGTT q1–3 years if normal at 6–8 weeks</li>
+                            <li>Lifestyle modification (weight loss, exercise) reduces T2DM progression by ~58% (DPP trial)</li>
+                            <li>Screening in offspring (genetic risk)</li>
+                        </ul>
+
+                        <h3>Pre-Existing T1DM in Pregnancy (If Applicable)</h3>
+                        <p>Different scenario—higher risk.</p>
+                        <ul>
+                            <li><strong>Insulin requirements:</strong> ↑ 2nd and 3rd trimester (up to 2–3× prepregnancy dose)</li>
+                            <li><strong>Tight glycemic control crucial:</strong> Target HbA1c 6–6.5% (intensive, risk of hypoglycemia)</li>
+                            <li><strong>Congenital anomalies:</strong> 2–3× risk (neural tube defects, cardiac, renal) if poor glycemic control in 1st trimester organogenesis</li>
+                            <li><strong>Preeclampsia risk:</strong> ↑↑ (15–20% vs. 5% general population)</li>
+                            <li><strong>Macrosomia risk:</strong> Still high even with good control</li>
+                            <li><strong>Pre-conception counseling:</strong> Optimize glycemic control before pregnancy to reduce birth defect risk</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="summary-box test-box">
+                    <strong>TEST INSIGHT:</strong> GDM diagnosed by ≥2 abnormal values on 3-hr OGTT or ANY 1 abnormal on 1-step IADPSG 75g. First-line is diet + SMBG; insulin if lifestyle fails.
+                </div>
+
+                <div class="summary-box trap-box">
+                    <strong>TRAP:</strong> Metformin and glyburide cross placenta. Insulin is safest in pregnancy. Do NOT use sulfonylureas or other agents without strong justification.
+                </div>
+
+                <div class="summary-box hy-box">
+                    <strong>HYPER-FOCUS:</strong> Macrosomia mechanism: maternal hyperglycemia → fetal hyperinsulinism → growth. Neonatal complications include shoulder dystocia, RDS, hypoglycemia.
+                </div>
+
+                <div class="summary-box memory-box">
+                    <strong>MEMORY ANCHOR:</strong> "GDM = 2+ abnormal on OGTT. Insulin preferred. Fetal risk = hyperinsulinism → LGA + neonatal hypoglycemia."
+                </div>
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">What is the postpartum glucose tolerance test for GDM?</div>
+                        <div class="flip-card-back">75g OGTT at 6–8 weeks. ~50% develop T2DM within 5–10 years. Lifestyle modification reduces risk by ~58%.</div>
+                    </div>
+                </div>
+
+                <div class="mastery-check">
+                    <input type="checkbox" id="case4-check">
+                    <label for="case4-check">I can diagnose GDM, manage dietary and insulin therapy, and counsel on fetal/postpartum risks.</label>
+                </div>
+            </div>
+
+            <!-- CASE 5: INSULINOMA vs FACTITIOUS -->
+            <div id="case5" class="content-tab">
+                <h2><span class="accent">LEC 24:</span> Insulinoma vs. Factitious Hypoglycemia</h2>
+                <div class="case-header">
+                    <h3>CASE 5 — 42F with Recurrent Hypoglycemia</h3>
+                    <p>Morning altered mental status, diaphoresis, glucose 38. Insulin 45 µIU/mL (HIGH), C-peptide 4.2 ng/mL (HIGH), proinsulin elevated</p>
+                </div>
+
+                <div class="collapsible expanded">
+                    <div class="collapsible-header">Whipple's Triad &amp; Initial Workup <span class="toggle-icon">▼</span></div>
+                    <div class="collapsible-content">
+                        <h3>Whipple's Triad (Required for Hypoglycemia)</h3>
+                        <ol>
+                            <li><strong>Documented low glucose:</strong> &lt;55 mg/dL at time of symptoms (this patient: 38)</li>
+                            <li><strong>Symptoms:</strong> Neuroglycopenic (AMS, confusion) or adrenergic (diaphoresis, tremor, palpitations)</li>
+                            <li><strong>Relief with glucose:</strong> Symptoms resolve after glucose/glucagon administration</li>
+                        </ol>
+                        <p><strong>This patient:</strong> All three present → hypoglycemia confirmed.</p>
+
+                        <h3>Differential Diagnosis</h3>
+                        <ul>
+                            <li><strong>Insulinoma:</strong> Endogenous insulin secretion (β-cell tumor)</li>
+                            <li><strong>Factitious hypoglycemia:</strong> Exogenous insulin or sulfonylurea injection</li>
+                            <li><strong>Post-bariatric hypoglycemia:</strong> Reactive hyperinsulinism</li>
+                            <li><strong>Other rare:</strong> Autoimmune insulin syndrome, anti-insulin antibodies</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="collapsible expanded">
+                    <div class="collapsible-header">Diagnostic Labs &amp; Interpretation <span class="toggle-icon">▼</span></div>
+                    <div class="collapsible-content">
+                        <h3>Key Tests at Hypoglycemia</h3>
+                        <table>
+                            <tr><th>Test</th><th>Insulinoma</th><th>Exog. Insulin</th><th>Sulfonylurea</th><th>This Patient</th></tr>
+                            <tr><td>Glucose</td><td>&lt;55</td><td>&lt;55</td><td>&lt;55</td><td>38 ✓</td></tr>
+                            <tr><td>Insulin</td><td>HIGH</td><td>HIGH</td><td>HIGH</td><td>45 ✓ HIGH</td></tr>
+                            <tr><td>C-peptide</td><td>HIGH</td><td>LOW ⚠</td><td>HIGH</td><td>4.2 ✓ HIGH</td></tr>
+                            <tr><td>Proinsulin</td><td>&gt;25% of total</td><td>LOW</td><td>Elevated</td><td>Elevated ✓</td></tr>
+                        </table>
+                        <p><strong>KEY DISCRIMINATOR:</strong> C-peptide HIGH → endogenous source (insulinoma). C-peptide LOW → exogenous insulin (factitious).</p>
+
+                        <h3>Interpretation</h3>
+                        <p><strong>This patient:</strong> Glucose LOW + Insulin HIGH + C-peptide HIGH + Proinsulin elevated → <strong>INSULINOMA likely</strong></p>
+                        <p><strong>BUT:</strong> Sulfonylurea ingestion presents identically! (glucose LOW, insulin HIGH, C-peptide HIGH)</p>
+                    </div>
+                </div>
+
+                <div class="collapsible expanded">
+                    <div class="collapsible-header">Distinguishing Insulinoma from Sulfonylurea <span class="toggle-icon">▼</span></div>
+                    <div class="collapsible-content">
+                        <h3>72-Hour Supervised Fast</h3>
+                        <p><strong>Gold standard diagnostic test.</strong> Patient fasts while closely monitored; glucose and insulin measured serially.</p>
+                        <ul>
+                            <li><strong>Insulinoma:</strong> Glucose falls below 55 mg/dL, insulin remains inappropriately HIGH (detectable), C-peptide HIGH → test POSITIVE</li>
+                            <li><strong>Sulfonylurea:</strong> Glucose falls, but SU wears off during fast → glucose may not drop as far, or if does, insulin level normalizes by 72 hr → pattern different</li>
+                        </ul>
+
+                        <h3>Proinsulin Percentage</h3>
+                        <ul>
+                            <li><strong>Insulinoma:</strong> Proinsulin &gt;25% of total insulin (tumors secrete unprocessed proinsulin)</li>
+                            <li><strong>Normal/Exogenous:</strong> Proinsulin &lt;10%</li>
+                            <li><strong>This patient: Proinsulin elevated</strong> → consistent with insulinoma</li>
+                        </ul>
+
+                        <h3>Urine/Serum Sulfonylurea Screen</h3>
+                        <p>Direct drug screen for SU metabolites. If positive → factitious hypoglycemia (SU ingestion).</p>
+                        <p><strong>This case:</strong> If screen negative + proinsulin &gt;25% + 72-hr fast positive → insulinoma diagnosis confirmed.</p>
+                    </div>
+                </div>
+
+                <div class="collapsible expanded">
+                    <div class="collapsible-header">Imaging &amp; Tumor Localization <span class="toggle-icon">▼</span></div>
+                    <div class="collapsible-content">
+                        <h3>Imaging Modalities (in order of sensitivity)</h3>
+                        <table>
+                            <tr><th>Modality</th><th>Sensitivity</th><th>Notes</th></tr>
+                            <tr><td>CT (multiphasic)</td><td>60–70%</td><td>First-line; arterial phase best</td></tr>
+                            <tr><td>MRI</td><td>60–70%</td><td>Alternative if CT inconclusive</td></tr>
+                            <tr><td>Endoscopic ultrasound (EUS)</td><td>85–95%</td><td>MOST SENSITIVE; invasive; for small tumors</td></tr>
+                            <tr><td>Somatostatin receptor scintigraphy (Octreoscan)</td><td>70–80%</td><td>Functional imaging; useful for metastases</td></tr>
+                            <tr><td>Intra-arterial calcium stimulation</td><td>Highly sensitive</td><td>Research tool; localizes to pancreatic region</td></tr>
+                        </table>
+
+                        <h3>Suggested Approach</h3>
+                        <ol>
+                            <li><strong>CT/MRI</strong> as first-line to identify mass</li>
+                            <li><strong>EUS</strong> if CT/MRI negative but high suspicion (small insulinomas &lt;2 cm often missed on CT)</li>
+                            <li><strong>Octreoscan</strong> if thinking about metastatic disease or multiple endocrine neoplasia (MEN-1 associated)</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="collapsible expanded">
+                    <div class="collapsible-header">Treatment &amp; Management <span class="toggle-icon">▼</span></div>
+                    <div class="collapsible-content">
+                        <h3>Surgical Resection (Curative)</h3>
+                        <ul>
+                            <li><strong>Indications:</strong> Confirmed insulinoma with localization</li>
+                            <li><strong>Success rate:</strong> ~90% cure rate</li>
+                            <li><strong>Benign vs. malignant:</strong> ~90% benign; check for MEN-1, metastases preoperatively</li>
+                        </ul>
+
+                        <h3>Medical Management (If Surgical Delay/Unresectable)</h3>
+                        <ul>
+                            <li><strong>Diazoxide:</strong> K+-ATP opener → inhibits insulin secretion. Dose 5–15 mg/kg/day in 2–3 divided doses. Monitor for hypokalemia, salt retention, hyperglycemia.</li>
+                            <li><strong>Octreotide:</strong> Somatostatin analog → inhibits insulin (as well as GH, glucagon). SC/IM 50–100 µg BID/TID. Useful for somatostatinomas (long-acting formulations available). Watch for diarrhea, steatorrhea, gallstones.</li>
+                            <li><strong>Frequent meals & complex carbs:</strong> Bridge therapy during diagnostic workup</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="collapsible expanded">
+                    <div class="collapsible-header">Factitious Hypoglycemia: Exogenous Insulin <span class="toggle-icon">▼</span></div>
+                    <div class="collapsible-content">
+                        <h3>Diagnostic Pattern</h3>
+                        <table>
+                            <tr><th>Parameter</th><th>Exog. Insulin</th></tr>
+                            <tr><td>Glucose</td><td>LOW</td></tr>
+                            <tr><td>Insulin</td><td>HIGH (exogenous)</td></tr>
+                            <tr><td>C-peptide</td><td>LOW/SUPPRESSED ⚠ KEY</td></tr>
+                            <tr><td>Proinsulin</td><td>Normal/LOW</td></tr>
+                        </table>
+                        <p><strong>KEY:</strong> Exogenous insulin suppresses endogenous β-cell function → C-peptide LOW.</p>
+
+                        <h3>Clinical Context</h3>
+                        <ul>
+                            <li>Often healthcare workers (nurses, doctors, family members)</li>
+                            <li>History of psychiatric disease, factitious disorder</li>
+                            <li>May have access to insulin supplies</li>
+                            <li>Presentation often strange (alone when hypoglycemia occurs, vague symptoms)</li>
+                        </ul>
+
+                        <h3>Management</h3>
+                        <ul>
+                            <li><strong>Diagnosis:</strong> Confrontation is delicate; psychiatric consultation recommended</li>
+                            <li><strong>Hospitalization:</strong> Supervised monitoring to prevent further injections</li>
+                            <li><strong>Psychiatry:</strong> Factitious disorder treatment (psychotherapy)</li>
+                            <li><strong>Addiction support:</strong> If co-morbid substance abuse</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="summary-box test-box">
+                    <strong>TEST INSIGHT:</strong> Insulinoma: glucose LOW + insulin HIGH + C-peptide HIGH + proinsulin &gt;25%. Gold standard: 72-hr supervised fast. Distinguish from SU by drug screen and proinsulin level.
+                </div>
+
+                <div class="summary-box trap-box">
+                    <strong>TRAP:</strong> Exogenous insulin injection mimics insulinoma (glucose LOW, insulin HIGH) BUT C-peptide is LOW (suppressed). Always check C-peptide to avoid missing factitious disorder.
+                </div>
+
+                <div class="summary-box hy-box">
+                    <strong>HYPER-FOCUS:</strong> 72-hour supervised fast is gold standard. Proinsulin &gt;25% of total insulin strongly suggests tumor (not processed). EUS is most sensitive for small tumors.
+                </div>
+
+                <div class="summary-box memory-box">
+                    <strong>MEMORY ANCHOR:</strong> "Insulinoma = HIGH insulin + HIGH C-peptide + HIGH proinsulin. Exo insulin = HIGH insulin + LOW C-peptide (key diff)."
+                </div>
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">How do you differentiate insulinoma from exogenous insulin injection?</div>
+                        <div class="flip-card-back">Check C-peptide: HIGH in insulinoma (endogenous), LOW/suppressed in exogenous insulin. Proinsulin also &gt;25% in insulinoma.</div>
+                    </div>
+                </div>
+
+                <div class="mastery-check">
+                    <input type="checkbox" id="case5-check">
+                    <label for="case5-check">I can diagnose insulinoma, perform 72-hr fast, differentiate from factitious hypoglycemia, and localize/treat.</label>
+                </div>
+            </div>
+
+            <!-- CASE 6: PERIOPERATIVE DIABETES MANAGEMENT -->
+            <div id="case6" class="content-tab">
+                <h2><span class="accent">LEC 24:</span> Perioperative Diabetes Management</h2>
+                <div class="case-header">
+                    <h3>CASE 6 — 65M with T2DM Undergoing Elective CABG</h3>
+                    <p>T2DM (HbA1c 9.2%), on metformin + sitagliptin + glargine 28U QHS. Pre-op glucose 248</p>
+                </div>
+
+                <div class="collapsible expanded">
+                    <div class="collapsible-header">Pre-Operative Optimization <span class="toggle-icon">▼</span></div>
+                    <div class="collapsible-content">
+                        <h3>Pre-Operative Assessment</h3>
+                        <ul>
+                            <li><strong>HbA1c 9.2%:</strong> Suboptimal (target &lt;8% before elective surgery to reduce wound infection risk). Consider delaying surgery if not urgent to optimize glycemic control (2–3 months).</li>
+                            <li><strong>Fasting glucose 248:</strong> Elevated; continue current regimen with adjustments</li>
+                            <li><strong>Screen for complications:</strong> Nephropathy (eGFR, ACR), neuropathy, retinopathy, cardiac (ECG, stress test for CAD)</li>
+                        </ul>
+
+                        <h3>Pre-Operative Glucose Target</h3>
+                        <p><strong>Goal:</strong> HbA1c &lt;8% (reduces surgical site infection by ~0.6% per 1% HbA1c reduction).</p>
+                        <p><strong>If elective surgery planned:</strong> Optimize DM control 2–3 months preoperatively.</p>
+                    </div>
+                </div>
+
+                <div class="collapsible expanded">
+                    <div class="collapsible-header">Day of Surgery: Medication Management <span class="toggle-icon">▼</span></div>
+                    <div class="collapsible-content">
+                        <h3>Antidiabetic Drug Protocol</h3>
+                        <table>
+                            <tr><th>Drug</th><th>Action</th><th>Rationale</th></tr>
+                            <tr><td>Metformin</td><td>HOLD day of surgery</td><td>NPO, contrast risk (periop AKI), hemodynamic instability</td></tr>
+                            <tr><td>SGLT2i</td><td>HOLD 3–5 days before</td><td>Euglycemic DKA risk (especially major surgery/illness)</td></tr>
+                            <tr><td>DPP-4i</td><td>HOLD day of surgery</td><td>NPO, low utility in acute setting</td></tr>
+                            <tr><td>SU (glyburide, etc.)</td><td>HOLD day of surgery</td><td>Hypoglycemia risk intraop</td></tr>
+                            <tr><td>Basal insulin (glargine)</td><td>CONTINUE 80% dose night before</td><td>Maintain β-cell function; reduce risk of DKA</td></tr>
+                            <tr><td>Basal insulin (detemir)</td><td>CONTINUE 80% dose night before</td><td>Same as glargine</td></tr>
+                        </table>
+
+                        <h3>Example Protocol</h3>
+                        <ul>
+                            <li><strong>NPO midnight:</strong> Metformin, sitagliptin held</li>
+                            <li><strong>Glargine night before surgery:</strong> Give 80% of 28 U = 22.4 U (~22 U)</li>
+                            <li><strong>Morning of surgery (NPO):</strong> NO short-acting insulin, NO metformin</li>
+                            <li><strong>Intraop:</strong> IV insulin drip (see below)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="collapsible expanded">
+                    <div class="collapsible-header">Intraoperative Glucose Management <span class="toggle-icon">▼</span></div>
+                    <div class="collapsible-content">
+                        <h3>IV Insulin Infusion</h3>
+                        <ul>
+                            <li><strong>Setup:</strong> Regular insulin IV drip (e.g., 100 U in 100 mL NS = 1 U/mL)</li>
+                            <li><strong>Initial infusion:</strong> 0.5–1 U/hr (titrate based on glucose)</li>
+                            <li><strong>Glucose monitoring:</strong> q15–30 min intraop, q1h postop</li>
+                            <li><strong>Target glucose:</strong> 140–180 mg/dL intraop (NICE-SUGAR trial: intensive control &lt;140 → worse outcomes in ICU)</li>
+                        </ul>
+
+                        <h3>Why NOT Tight Control Intraop?</h3>
+                        <p>NICE-SUGAR trial (2009): Intensive glucose control (80–110 mg/dL) in ICU → ↑ mortality vs. conventional (140–180 mg/dL). Likely due to hypoglycemia episodes and impaired immune function. Avoid &lt;140 intraop.</p>
+
+                        <h3>Fluid Management</h3>
+                        <ul>
+                            <li><strong>IV fluids:</strong> Use 0.9% NaCl (avoid D5W intraop to prevent hyperglycemia)</li>
+                            <li><strong>Add dextrose:</strong> Only if glucose &lt;100 mg/dL (rare intraop)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="collapsible expanded">
+                    <div class="collapsible-header">Postoperative Management <span class="toggle-icon">▼</span></div>
+                    <div class="collapsible-content">
+                        <h3>Stress Hyperglycemia</h3>
+                        <p><strong>Expected:</strong> Post-op glucose often ↑ due to cortisol, catecholamine surge, inflammatory cytokines. This patient may see glucose 250–350 despite pre-op being 248.</p>
+                        <ul>
+                            <li><strong>Mechanism:</strong> Stress hormones → hepatic glucose production, insulin resistance</li>
+                            <li><strong>Duration:</strong> Usually resolves in 48–72 hr as inflammation subsides</li>
+                        </ul>
+
+                        <h3>Perioperative Steroid Effect</h3>
+                        <p>If patient received methylprednisolone (common for cardiac surgery): Hyperglycemia peaks in afternoon/evening.</p>
+                        <ul>
+                            <li><strong>Management:</strong> Supplement with NPH in AM + PM, or increase IV insulin infusion</li>
+                            <li><strong>Avoid correction-only dosing;</strong> anticipate steroid effect</li>
+                        </ul>
+
+                        <h3>ICU Glucose Protocol</h3>
+                        <ul>
+                            <li><strong>Continue IV insulin:</strong> Until eating reliably</li>
+                            <li><strong>Target:</strong> 140–180 mg/dL (NICE-SUGAR)</li>
+                            <li><strong>Monitoring:</strong> q1–2h initially, q4h when stable</li>
+                            <li><strong>Transition to home regimen:</strong> When tolerating diet, restart basal-bolus ± prior agents</li>
+                        </ul>
+
+                        <h3>When to Restart Metformin</h3>
+                        <ul>
+                            <li><strong>Criteria:</strong> Eating, eGFR stable (no acute kidney injury), no hemodynamic instability</li>
+                            <li><strong>Timing:</strong> Usually postop day 2–3</li>
+                        </ul>
+
+                        <h3>When to Restart SGLT2i</h3>
+                        <ul>
+                            <li><strong>Timing:</strong> Not immediately postop (euglycemic DKA risk in acute illness)</li>
+                            <li><strong>Restart:</strong> After stabilization, no acute illness, good oral intake (~postop week 2–3)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="collapsible expanded">
+                    <div class="collapsible-header">Special Scenarios: Euglycemic DKA <span class="toggle-icon">▼</span></div>
+                    <div class="collapsible-content">
+                        <h3>Euglycemic DKA Risk in Perioperative Setting</h3>
+                        <p>Rare but serious complication with SGLT2i.</p>
+                        <ul>
+                            <li><strong>Presentation:</strong> Glucose &lt;200 (or even &lt;150), elevated AG, positive ketones, AMS</li>
+                            <li><strong>Risk factors:</strong> SGLT2i on board + acute illness/surgery + dehydration + reduced carb intake</li>
+                        </ul>
+
+                        <h3>Prevention</h3>
+                        <ul>
+                            <li>HOLD SGLT2i 3–5 days before major surgery</li>
+                            <li>Do not restart until postop recovery established, normal oral intake, no acute illness</li>
+                        </ul>
+
+                        <h3>Recognition &amp; Diagnosis</h3>
+                        <p><strong>Clue:</strong> Low glucose + elevated AG + elevated ketones + SGLT2i on board = euglycemic DKA until proven otherwise.</p>
+                        <ul>
+                            <li><strong>Labs:</strong> Serum β-hydroxybutyrate (>3 mmol/L diagnostic)</li>
+                            <li><strong>Treatment:</strong> IV insulin (0.1 U/kg/hr), fluids (0.9% NaCl), stop SGLT2i, supportive care</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="summary-box test-box">
+                    <strong>TEST INSIGHT:</strong> Periop glucose target 140–180 mg/dL (NICE-SUGAR). Hold metformin, SU, DPP-4i day of surgery. Hold SGLT2i 3–5 days before to prevent euglycemic DKA. Continue basal insulin at 80%.
+                </div>
+
+                <div class="summary-box trap-box">
+                    <strong>TRAP:</strong> Tight glucose control (&lt;140) intraop increases hypoglycemia and worsens outcomes. NICE-SUGAR showed ↑ mortality with intensive control. Use 140–180 target.
+                </div>
+
+                <div class="summary-box hy-box">
+                    <strong>HYPER-FOCUS:</strong> Post-op stress hyperglycemia is expected. If on steroids, peak in PM—supplement with NPH. Euglycemic DKA: glucose &lt;200 but HIGH AG + ketones + SGLT2i = emergency.
+                </div>
+
+                <div class="summary-box memory-box">
+                    <strong>MEMORY ANCHOR:</strong> "Periop DM = Hold MET, DPP4, SU. Hold SGLT2i 3–5 days. Continue basal 80%. IV insulin intraop. Target 140–180 (NICE-SUGAR)."
+                </div>
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">What intraop glucose target per NICE-SUGAR?</div>
+                        <div class="flip-card-back">140–180 mg/dL. Intensive control &lt;140 worsened outcomes and increased hypoglycemia. Avoid tight control perioperatively.</div>
+                    </div>
+                </div>
+
+                <div class="mastery-check">
+                    <input type="checkbox" id="case6-check">
+                    <label for="case6-check">I can manage perioperative DM drugs, IV insulin, stress hyperglycemia, and recognize euglycemic DKA risk.</label>
+                </div>
+            </div>
+
+            <!-- PRACTICE QUESTIONS TAB -->
+            <div id="mcq" class="content-tab">
+                <h2><span class="accent">LEC 24:</span> Practice Questions</h2>
+                <p style="margin-bottom: 24px;">Test your mastery across all 6 cases with these 18 clinical vignettes. Click on answers to reveal solutions.</p>
+
+                <div class="mcq-section">
+                    <div class="mcq">
+                        <div class="mcq-stem">1. A 16-year-old presents with polyuria, polydipsia, and DKA confirmed (pH 7.32, HCO3 18, AG 14, glucose 380). What is the FIRST fluid choice?</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> A) D5W bolus</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> B) 0.9% NaCl bolus 10–20 mL/kg</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> C) 0.45% NaCl bolus</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> D) Hypertonic saline</div>
+                        <div class="answer-key"><strong>ANSWER: B</strong> — 0.9% NaCl bolus 10–20 mL/kg initially for hemodynamic stabilization. Switch to 0.45% NaCl after stabilization to correct free water deficit.</div>
+                    </div>
+
+                    <div class="mcq">
+                        <div class="mcq-stem">2. In DKA with IV insulin drip, at what glucose level do you add dextrose, and why do you CONTINUE insulin?</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> A) &lt;100, to prevent hypoglycemia</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> B) &lt;250, to continue insulin until anion gap closes</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> C) &lt;150, to allow continued metabolism</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> D) &lt;180, per NICE-SUGAR</div>
+                        <div class="answer-key"><strong>ANSWER: B</strong> — Add D5W when glucose &lt;250 to prevent hypoglycemia, but CONTINUE insulin until AG closes (usually 12–24 hr). Glucose normalizes faster than ketosis resolves.</div>
+                    </div>
+
+                    <div class="mcq">
+                        <div class="mcq-stem">3. HHS and DKA: Which finding BEST distinguishes HHS?</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> A) Glucose &gt;600, osmolality &gt;320, minimal ketones, no acidosis</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> B) Elevated anion gap with positive ketones</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> C) pH &lt;7.15 with HCO3 &lt;10</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> D) High sodium, low potassium</div>
+                        <div class="answer-key"><strong>ANSWER: A</strong> — HHS: glucose &gt;600 + osmolality &gt;320 + minimal ketones + pH &gt;7.30 (no acidosis). DKA has acidosis and elevated AG.</div>
+                    </div>
+
+                    <div class="mcq">
+                        <div class="mcq-stem">4. In T1DM, which autoantibody is the MOST COMMON?</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> A) IA-2</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> B) GAD65</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> C) Anti-TPO</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> D) Zinc transporter 8</div>
+                        <div class="answer-key"><strong>ANSWER: B</strong> — GAD65 (glutamic acid decarboxylase) is the most common autoantigen in T1DM (~80% of autoimmune T1DM). IA-2 and ZnT8 also present.</div>
+                    </div>
+
+                    <div class="mcq">
+                        <div class="mcq-stem">5. A 32-year-old at 26 weeks is diagnosed with GDM (≥2 abnormal OGTT values). What is FIRST-LINE treatment?</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> A) Start metformin immediately</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> B) Dietary modification + physical activity + SMBG</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> C) Start insulin NPH</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> D) Glyburide for rapid control</div>
+                        <div class="answer-key"><strong>ANSWER: B</strong> — First-line is lifestyle: carb distribution 40–45%, physical activity, SMBG 4× daily (fasting + postprandial). Insulin started only if lifestyle fails after 1–2 weeks.</div>
+                    </div>
+
+                    <div class="mcq">
+                        <div class="mcq-stem">6. In GDM, when do you START insulin therapy?</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> A) If any glucose reading &gt;100</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> B) If fasting &gt;95 or postprandial &gt;120 (1-hr) or &gt;100 (2-hr) DESPITE lifestyle</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> C) Automatically at diagnosis</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> D) Only in 3rd trimester</div>
+                        <div class="answer-key"><strong>ANSWER: B</strong> — Start insulin if fasting &gt;95 or postprandial &gt;120 (1-hr) or &gt;100 (2-hr) despite dietary modification (1–2 week trial).</div>
+                    </div>
+
+                    <div class="mcq">
+                        <div class="mcq-stem">7. In GDM, how does maternal hyperglycemia lead to macrosomia (LGA)?</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> A) Reduced placental nutrient transfer</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> B) Maternal hyperglycemia → fetal hyperglycemia → fetal hyperinsulinism → growth stimulation</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> C) Enhanced oxygen delivery to fetus</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> D) Maternal weight gain</div>
+                        <div class="answer-key"><strong>ANSWER: B</strong> — Maternal glucose crosses placenta. High glucose → fetal hyperglycemia → fetal hyperinsulinism → increased growth and macrosomia.</div>
+                    </div>
+
+                    <div class="mcq">
+                        <div class="mcq-stem">8. What is the RECOMMENDED postpartum glucose tolerance test for women with GDM?</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> A) Fasting glucose at 2 weeks</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> B) 75g OGTT at 6–8 weeks</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> C) Random glucose at 3 months</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> D) HbA1c at 12 weeks</div>
+                        <div class="answer-key"><strong>ANSWER: B</strong> — 75g OGTT at 6–8 weeks postpartum. ~7–10% remain diabetic; ~50% develop T2DM within 5–10 years.</div>
+                    </div>
+
+                    <div class="mcq">
+                        <div class="mcq-stem">9. A 42-year-old has recurrent hypoglycemia (glucose 38, Whipple's triad confirmed). What is the GOLD STANDARD diagnostic test for insulinoma?</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> A) Random insulin and glucose</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> B) 72-hour supervised fast</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> C) CT abdomen</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> D) Insulin stimulation test</div>
+                        <div class="answer-key"><strong>ANSWER: B</strong> — 72-hour supervised fast: glucose falls &lt;55, insulin remains HIGH, C-peptide HIGH, proinsulin &gt;25% = insulinoma positive.</div>
+                    </div>
+
+                    <div class="mcq">
+                        <div class="mcq-stem">10. In FACTITIOUS hypoglycemia from exogenous insulin injection, what is the C-peptide level?</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> A) High (endogenous production)</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> B) Low/Suppressed (exogenous insulin shuts off β-cells)</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> C) Normal</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> D) Cannot be measured</div>
+                        <div class="answer-key"><strong>ANSWER: B</strong> — C-peptide LOW/SUPPRESSED in exogenous insulin because injected insulin suppresses endogenous β-cell secretion. KEY DISCRIMINATOR from insulinoma.</div>
+                    </div>
+
+                    <div class="mcq">
+                        <div class="mcq-stem">11. How do you distinguish insulinoma from sulfonylurea ingestion (both present with HIGH glucose + HIGH insulin + HIGH C-peptide)?</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> A) HbA1c level</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> B) Imaging (CT/MRI)</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> C) Urine/serum sulfonylurea drug screen + proinsulin percentage (&gt;25% = insulinoma)</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> D) Family history</div>
+                        <div class="answer-key"><strong>ANSWER: C</strong> — Drug screen for SU metabolites. Insulinoma has proinsulin &gt;25% of total insulin (tumors secrete unprocessed proinsulin); SU has normal proinsulin.</div>
+                    </div>
+
+                    <div class="mcq">
+                        <div class="mcq-stem">12. A 65-year-old with T2DM is scheduled for elective CABG. Which DM drug should be HELD the day of surgery?</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> A) Basal insulin (glargine)</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> B) Metformin</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> C) ACE inhibitor</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> D) B and C</div>
+                        <div class="answer-key"><strong>ANSWER: B</strong> — Hold metformin day of surgery (NPO, contrast risk, hemodynamic instability, acute kidney injury risk). Continue basal insulin at 80% dose.</div>
+                    </div>
+
+                    <div class="mcq">
+                        <div class="mcq-stem">13. Before elective surgery, when should SGLT2i be HELD to prevent euglycemic DKA?</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> A) Day of surgery only</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> B) 3–5 days before major surgery</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> C) 1 week before</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> D) Continue throughout</div>
+                        <div class="answer-key"><strong>ANSWER: B</strong> — Hold SGLT2i 3–5 days before major surgery. Euglycemic DKA risk (glucose &lt;200 but HIGH AG + ketones) in acute illness/surgery setting.</div>
+                    </div>
+
+                    <div class="mcq">
+                        <div class="mcq-stem">14. Per NICE-SUGAR trial, what is the recommended intraoperative glucose target?</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> A) &lt;100 mg/dL</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> B) 80–110 mg/dL</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> C) 140–180 mg/dL</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> D) &gt;200 mg/dL</div>
+                        <div class="answer-key"><strong>ANSWER: C</strong> — 140–180 mg/dL. Intensive control (&lt;140) increased hypoglycemia and worsened ICU outcomes. Moderate control is safer.</div>
+                    </div>
+
+                    <div class="mcq">
+                        <div class="mcq-stem">15. A post-CABG patient on SGLT2i presents with glucose 180, AMS, AG 18, and positive ketones. What is this?</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> A) Typical postop hyperglycemia</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> B) Euglycemic DKA (glucose &lt;200 but HIGH AG + ketones + SGLT2i)</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> C) DKA (high glucose)</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> D) Hyperglycemic hyperosmolar state</div>
+                        <div class="answer-key"><strong>ANSWER: B</strong> — Euglycemic DKA: glucose &lt;200 (or even normal in this case 180, still mild) + AG 18 + positive ketones + patient on SGLT2i = emergency. Check β-hydroxybutyrate; stop SGLT2i; start IV insulin.</div>
+                    </div>
+
+                    <div class="mcq">
+                        <div class="mcq-stem">16. What is the mortality rate of HHS compared to DKA?</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> A) HHS ~2%, DKA ~15%</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> B) HHS ~5%, DKA ~10%</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> C) HHS ~15%, DKA ~1–2%</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> D) Both ~25%</div>
+                        <div class="answer-key"><strong>ANSWER: C</strong> — HHS mortality ~15% (elderly, delayed presentation, thromboembolism, cerebral edema). DKA mortality ~1–2% with modern management.</div>
+                    </div>
+
+                    <div class="mcq">
+                        <div class="mcq-stem">17. In the honeymoon period after T1DM DKA, what is the CORRECT management?</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> A) Stop insulin; monitor glucose</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> B) Continue insulin; educate that remission is temporary</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> C) Switch to oral agents</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> D) Double insulin dose</div>
+                        <div class="answer-key"><strong>ANSWER: B</strong> — Honeymoon period (partial remission): continue insulin despite ↓ requirements. Educate that remission is temporary (weeks to months); diabetes will return. Stopping insulin = DKA relapse.</div>
+                    </div>
+
+                    <div class="mcq">
+                        <div class="mcq-stem">18. What HbA1c goal before elective surgery reduces wound infection risk?</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> A) &lt;6%</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> B) &lt;7%</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> C) &lt;8%</div>
+                        <div class="mcq-option"><input type="checkbox" onchange="toggleAnswer(this)"> D) &lt;9%</div>
+                        <div class="answer-key"><strong>ANSWER: C</strong> — HbA1c &lt;8% before elective surgery reduces surgical site infection and improves wound healing. Consider delaying non-urgent surgery to optimize control (2–3 months).</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Tab switching
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const contentTabs = document.querySelectorAll('.content-tab');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                contentTabs.forEach(tab => tab.classList.remove('active'));
+
+                button.classList.add('active');
+                const tabId = button.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+
+                // Save to localStorage
+                localStorage.setItem('endo_lec24', tabId);
+            });
+        });
+
+        // Restore last tab from localStorage
+        const lastTab = localStorage.getItem('endo_lec24');
+        if (lastTab) {
+            const lastButton = document.querySelector(`[data-tab="${lastTab}"]`);
+            if (lastButton) {
+                lastButton.click();
+            }
+        }
+
+        // Collapsible sections
+        const collapsibleHeaders = document.querySelectorAll('.collapsible-header');
+        collapsibleHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const parent = header.parentElement;
+                parent.classList.toggle('expanded');
+                localStorage.setItem(`endo_lec24_${parent.className}`, parent.classList.contains('expanded'));
+            });
+        });
+
+        // MCQ answer toggle
+        function toggleAnswer(checkbox) {
+            const mcqDiv = checkbox.closest('.mcq');
+            const answerKey = mcqDiv.querySelector('.answer-key');
+            if (checkbox.checked) {
+                answerKey.classList.add('show');
+            } else {
+                answerKey.classList.remove('show');
+            }
+        }
+
+        // Mastery checkbox persistence
+        const masteryCheckboxes = document.querySelectorAll('.mastery-check input[type="checkbox"]');
+        masteryCheckboxes.forEach(checkbox => {
+            const key = `endo_lec24_${checkbox.id}`;
+            if (localStorage.getItem(key)) {
+                checkbox.checked = true;
+            }
+            checkbox.addEventListener('change', () => {
+                if (checkbox.checked) {
+                    localStorage.setItem(key, 'true');
+                } else {
+                    localStorage.removeItem(key);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
