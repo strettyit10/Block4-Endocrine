@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lec 16: Diabetes Pathophysiology</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f8fafc;
+            display: flex;
+            min-height: 100vh;
+            color: #1e293b;
+        }
+
+        .sidebar {
+            width: 220px;
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 20px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            left: 0;
+            top: 0;
+            box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+        }
+
+        .sidebar h1 {
+            font-size: 16px;
+            margin-bottom: 24px;
+            color: #dc2626;
+            border-bottom: 2px solid #dc2626;
+            padding-bottom: 12px;
+        }
+
+        .sidebar-section {
+            margin-bottom: 20px;
+        }
+
+        .sidebar-section h3 {
+            font-size: 12px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            margin-top: 16px;
+        }
+
+        .sidebar-section a {
+            display: block;
+            padding: 8px 0;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 13px;
+            border-left: 3px solid transparent;
+            padding-left: 8px;
+            transition: all 0.2s;
+        }
+
+        .sidebar-section a:hover {
+            color: #dc2626;
+            border-left-color: #dc2626;
+        }
+
+        .main {
+            margin-left: 220px;
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .header {
+            margin-bottom: 40px;
+            border-bottom: 3px solid #dc2626;
+            padding-bottom: 24px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .header .meta {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .lo-section {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 28px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .lo-header {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            color: white;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: all 0.2s;
+        }
+
+        .lo-header:hover {
+            background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
+        }
+
+        .lo-header h2 {
+            font-size: 18px;
+            margin: 0;
+        }
+
+        .lo-toggle {
+            font-size: 24px;
+            transition: transform 0.3s;
+        }
+
+        .lo-toggle.expanded {
+            transform: rotate(180deg);
+        }
+
+        .lo-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .lo-content.expanded {
+            max-height: 4000px;
+        }
+
+        .lo-body {
+            padding: 28px;
+        }
+
+        .subsection {
+            margin-bottom: 24px;
+        }
+
+        .subsection-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #dc2626;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .bullet-list {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .bullet-list li {
+            margin-bottom: 8px;
+            padding-left: 24px;
+            position: relative;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .bullet-list li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #dc2626;
+        }
+
+        .summary-box {
+            background: #fef2f2;
+            border-left: 4px solid #dc2626;
+            padding: 16px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .summary-box .icon {
+            font-size: 18px;
+            margin-right: 8px;
+        }
+
+        .summary-box strong {
+            color: #991b1b;
+        }
+
+        .flip-card {
+            background-color: white;
+            border: 2px solid #dc2626;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            perspective: 1000px;
+        }
+
+        .flip-card:hover {
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
+        }
+
+        .flip-card.flipped {
+            background: #fef2f2;
+        }
+
+        .flip-card-front {
+            font-weight: 600;
+            color: #dc2626;
+            display: none;
+        }
+
+        .flip-card-back {
+            color: #334155;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .flip-card.flipped .flip-card-front {
+            display: none;
+        }
+
+        .flip-card.flipped .flip-card-back {
+            display: block;
+        }
+
+        .flip-card:not(.flipped) .flip-card-back {
+            display: none;
+        }
+
+        .flip-card:not(.flipped) .flip-card-front {
+            display: block;
+        }
+
+        .mcq-container {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .mcq-question {
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #0f172a;
+            font-size: 14px;
+        }
+
+        .mcq-options {
+            list-style: none;
+            margin-bottom: 16px;
+        }
+
+        .mcq-options li {
+            padding: 10px;
+            margin-bottom: 8px;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s;
+            font-size: 13px;
+        }
+
+        .mcq-options li:hover {
+            background: #f0f4f8;
+            border-color: #dc2626;
+        }
+
+        .mcq-options li input {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .mcq-reveal {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            margin-top: 12px;
+            padding: 0;
+        }
+
+        .mcq-reveal.show {
+            max-height: 500px;
+        }
+
+        .mcq-answer {
+            background: #dcfce7;
+            border-left: 4px solid #16a34a;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #15803d;
+        }
+
+        .mcq-answer.wrong {
+            background: #fee2e2;
+            border-left-color: #dc2626;
+            color: #991b1b;
+        }
+
+        .checkbox-list {
+            list-style: none;
+            margin: 16px 0;
+        }
+
+        .checkbox-list li {
+            padding: 10px;
+            margin-bottom: 8px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .checkbox-list input[type="checkbox"] {
+            margin-right: 12px;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+            accent-color: #dc2626;
+        }
+
+        .checkbox-list li.checked {
+            background: #fef2f2;
+            border-color: #dc2626;
+        }
+
+        .mindmap-svg {
+            width: 100%;
+            max-width: 800px;
+            margin: 24px 0;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .mnemonic {
+            background: #fef2f2;
+            border-left: 4px solid #dc2626;
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 4px;
+            font-size: 14px;
+            font-style: italic;
+        }
+
+        .mnemonic strong {
+            color: #991b1b;
+            font-style: normal;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 13px;
+        }
+
+        table th {
+            background: #dc2626;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        table tr:hover {
+            background: #f8fafc;
+        }
+
+        .footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        .progress-tracker {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            border: 2px solid #dc2626;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            max-width: 200px;
+            z-index: 100;
+        }
+
+        .progress-tracker h4 {
+            font-size: 12px;
+            color: #dc2626;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #dc2626;
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .progress-text {
+            font-size: 11px;
+            color: #64748b;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <h1>Lec 16</h1>
+        <div class="sidebar-section">
+            <h3>Learning Objectives</h3>
+            <a href="#lo1">LO1: Glucose Homeostasis</a>
+            <a href="#lo2">LO2: Type 1 Diabetes</a>
+            <a href="#lo3">LO3: Type 2 Diabetes</a>
+            <a href="#lo4">LO4: DKA vs HHS</a>
+            <a href="#lo5">LO5: Chronic Complications</a>
+            <a href="#lo6">LO6: Metabolic Syndrome</a>
+        </div>
+        <div class="sidebar-section">
+            <h3>Tools</h3>
+            <a href="#mindmap">Mind Map</a>
+            <a href="#mcqs">MCQs (18)</a>
+            <a href="#mnemonics">Mnemonics</a>
+            <a href="#checklist">Study Checklist</a>
+        </div>
+    </aside>
+
+    <main class="main">
+        <div class="header">
+            <h1>Pathophysiology of Diabetes Mellitus</h1>
+            <div class="meta">Lecture 16 | Endocrine Block | HoyaDocs</div>
+        </div>
+
+        <!-- LO1 -->
+        <div class="lo-section" id="lo1">
+            <div class="lo-header" onclick="toggleLO(this)">
+                <h2>LO1: Normal Glucose Homeostasis & Insulin Physiology</h2>
+                <span class="lo-toggle">▼</span>
+            </div>
+            <div class="lo-content">
+                <div class="lo-body">
+                    <div class="subsection">
+                        <div class="subsection-title">Fasting vs Fed State</div>
+                        <ul class="bullet-list">
+                            <li><strong>Fasting:</strong> glucose 70-100 mg/dL maintained by liver glycogenolysis + gluconeogenesis; adipose lipolysis releases FFAs</li>
+                            <li><strong>Fed:</strong> glucose ↑ → pancreatic β cells secrete insulin → ANABOLIC state (storage)</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection">
+                        <div class="subsection-title">Pancreatic Islets of Langerhans</div>
+                        <ul class="bullet-list">
+                            <li><strong>β cells (~70%):</strong> secrete insulin + C-peptide + amylin</li>
+                            <li><strong>α cells (~20%):</strong> glucagon</li>
+                            <li><strong>δ cells (~5%):</strong> somatostatin (inhibits insulin & glucagon)</li>
+                            <li><strong>PP cells & F cells:</strong> pancreatic polypeptide</li>
+                        </ul>
+                        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-card-front">Click to reveal: GLUT2 & Glucokinase</div>
+                            <div class="flip-card-back">
+                                <strong>GLUT2:</strong> glucose transporter in β cells; LOW affinity, HIGH capacity → glucose sensor<br>
+                                <strong>Glucokinase:</strong> rate-limiting enzyme; phosphorylates glucose → glucose-6-phosphate (key step in insulin secretion)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <div class="subsection-title">Insulin Secretion Mechanism (5 Steps)</div>
+                        <ul class="bullet-list">
+                            <li>1. Glucose enters β cell via GLUT2</li>
+                            <li>2. Glucokinase phosphorylates → G6P → glycolysis → ↑ ATP:ADP ratio</li>
+                            <li>3. ↑ ATP → closes K⁺-ATP channels (SUR1/Kir6.2) → depolarization</li>
+                            <li>4. Depolarization → opens voltage-gated Ca²⁺ channels → ↑ intracellular Ca²⁺</li>
+                            <li>5. ↑ Ca²⁺ → insulin granule exocytosis</li>
+                        </ul>
+                        <div class="summary-box">
+                            <div><span class="icon">💡</span><strong>Incretin Effect:</strong> GLP-1 & GIP (from gut L & K cells) → ↑ cAMP in β cells → ↑ glucose-dependent insulin secretion. Explains oral > IV glucose for insulin response.</div>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <div class="subsection-title">Insulin Actions</div>
+                        <table>
+                            <tr><th>Tissue</th><th>Effect</th></tr>
+                            <tr><td>Liver</td><td>↑ glycogen synthesis, ↓ gluconeogenesis, ↑ glycolysis, ↑ fatty acid synthesis</td></tr>
+                            <tr><td>Muscle</td><td>↑ glucose uptake (GLUT4), ↑ glycogen synthesis, ↑ protein synthesis</td></tr>
+                            <tr><td>Adipose</td><td>↑ glucose uptake (GLUT4), ↑ lipogenesis, ↓ lipolysis</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="subsection">
+                        <div class="subsection-title">Key Concepts</div>
+                        <ul class="bullet-list">
+                            <li><strong>C-peptide:</strong> equimolar with insulin; marker of endogenous insulin production (NOT in exogenous insulin)</li>
+                            <li><strong>First-phase response:</strong> rapid insulin surge (1-3 min); LOST EARLY in T2DM</li>
+                            <li><strong>Glucagon:</strong> α cell hormone; released when glucose ↓; ↑ glycogenolysis + gluconeogenesis</li>
+                            <li><strong>Counter-regulatory hormones:</strong> glucagon, epinephrine, cortisol, GH → raise glucose in hypoglycemia</li>
+                        </ul>
+                    </div>
+
+                    <div class="mnemonic">
+                        <strong>Mnemonic:</strong> "Insulin = ANABOLIC (store everything); Glucagon = CATABOLIC (release everything)"
+                    </div>
+
+                    <div class="summary-box">
+                        <div><span class="icon">🎯</span><strong>Tested Concepts:</strong> GLUT2 function, glucokinase as glucose sensor, incretin effect, C-peptide interpretation, first-phase response loss in T2DM</div>
+                    </div>
+                    <div class="summary-box">
+                        <div><span class="icon">⚠️</span><strong>Common Traps:</strong> Confusing GLUT2 (high capacity) with GLUT4 (insulin-responsive); forgetting C-peptide is absent in exogenous insulin therapy</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LO2 -->
+        <div class="lo-section" id="lo2">
+            <div class="lo-header" onclick="toggleLO(this)">
+                <h2>LO2: Type 1 Diabetes Mellitus</h2>
+                <span class="lo-toggle">▼</span>
+            </div>
+            <div class="lo-content">
+                <div class="lo-body">
+                    <div class="subsection">
+                        <div class="subsection-title">Definition & Epidemiology</div>
+                        <ul class="bullet-list">
+                            <li>Autoimmune destruction of pancreatic β cells → ABSOLUTE insulin deficiency</li>
+                            <li>Peaks in childhood/adolescence; strong HLA association (HLA-DR3, DR4, DQ2, DQ8)</li>
+                            <li>Can occur at any age; LADA (Latent Autoimmune Diabetes of Adults) = T1DM in adult onset</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection">
+                        <div class="subsection-title">Pathogenesis</div>
+                        <ul class="bullet-list">
+                            <li><strong>Genetic + Environmental:</strong> HLA susceptibility + viral trigger (enterovirus, Coxsackie B4, molecular mimicry)</li>
+                            <li><strong>Immune response:</strong> CD4+ T cells activate macrophages + CD8+ cytotoxic T cells → insulitis → β cell killing</li>
+                            <li><strong>β cell destruction:</strong> progressive over months-years; symptoms when ~80-90% destroyed</li>
+                        </ul>
+                        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-card-front">Click: Autoantibodies in T1DM</div>
+                            <div class="flip-card-back">
+                                <strong>Anti-GAD65:</strong> most common & sensitive<br>
+                                <strong>Anti-IA-2:</strong> islet antigen-2 (tyrosine phosphatase-like)<br>
+                                <strong>Anti-insulin (IAA):</strong> especially in young children<br>
+                                <strong>Anti-ZnT8:</strong> zinc transporter 8<br>
+                                <strong>ICA:</strong> islet cell antibodies<br>
+                                → Used for risk stratification & diagnosis
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <div class="subsection-title">Clinical Features</div>
+                        <ul class="bullet-list">
+                            <li>Acute onset; young patient (often child/teen)</li>
+                            <li>DKA (Diabetic Ketoacidosis) often presenting event</li>
+                            <li><strong>Histology:</strong> lymphocytic infiltrate (insulitis); eventual islet atrophy</li>
+                            <li><strong>Unlike T2DM:</strong> NO insulin resistance, NO metabolic syndrome, NO islet amyloid; patient is LEAN</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection">
+                        <div class="subsection-title">LADA (Latent Autoimmune)</div>
+                        <ul class="bullet-list">
+                            <li>Initial presentation mimics T2DM (slow onset in adults ~40-60y)</li>
+                            <li>BUT has autoantibodies (anti-GAD65 most common) → eventually insulin-dependent</li>
+                            <li><strong>Clinical pearl:</strong> treat early with insulin (don't delay with oral agents)</li>
+                        </ul>
+                    </div>
+
+                    <div class="mnemonic">
+                        <strong>Mnemonic:</strong> "T1DM = Thin, Teen, Type I (autoimmune), anti-GAD, Terrible ketoacidosis"
+                    </div>
+
+                    <div class="summary-box">
+                        <div><span class="icon">🎯</span><strong>Tested:</strong> Autoantibodies (anti-GAD most sensitive), HLA associations, insulitis histology, acute DKA presentation, C-peptide LOW in T1DM</div>
+                    </div>
+                    <div class="summary-box">
+                        <div><span class="icon">⚠️</span><strong>Traps:</strong> LADA initially looks like T2DM but is autoimmune; don't forget to check antibodies in slow-onset adult diabetes; confusing "relative" vs "absolute" insulin deficiency</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LO3 -->
+        <div class="lo-section" id="lo3">
+            <div class="lo-header" onclick="toggleLO(this)">
+                <h2>LO3: Type 2 Diabetes Mellitus</h2>
+                <span class="lo-toggle">▼</span>
+            </div>
+            <div class="lo-content">
+                <div class="lo-body">
+                    <div class="subsection">
+                        <div class="subsection-title">Definition & Epidemiology</div>
+                        <ul class="bullet-list">
+                            <li>Progressive insulin resistance + RELATIVE (not absolute) insulin deficiency</li>
+                            <li>90-95% of DM cases; associated with obesity, sedentary lifestyle, age, family history</li>
+                            <li>Strong genetic component (polygenic)</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection">
+                        <div class="subsection-title">Ominous Octet (DeFronzo Pathogenesis)</div>
+                        <ul class="bullet-list">
+                            <li><strong>1. Insulin resistance:</strong> muscle, liver, adipose → ↓ GLUT4 translocation, defective signaling</li>
+                            <li><strong>2. β cell failure:</strong> hypersecretes initially → exhaustion → relative deficiency (first-phase response loss is EARLIEST sign)</li>
+                            <li><strong>3. ↑ Hepatic glucose:</strong> gluconeogenesis; liver doesn't respond to insulin suppression</li>
+                            <li><strong>4. ↑ Glucagon:</strong> α cell dysfunction; not suppressed by insulin or glucose</li>
+                            <li><strong>5. ↓ Incretin effect:</strong> GLP-1, GIP secretion/response impaired</li>
+                            <li><strong>6. ↑ Renal glucose threshold:</strong> SGLT2 reabsorption ↑; threshold ~180 mg/dL → glycosuria above this</li>
+                            <li><strong>7. ↑ Lipolysis:</strong> excess FFAs → ectopic fat → worsens insulin resistance + β cell lipotoxicity</li>
+                            <li><strong>8. Brain dysfunction:</strong> impaired satiety, altered food reward</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection">
+                        <div class="subsection-title">Insulin Resistance Mechanisms</div>
+                        <ul class="bullet-list">
+                            <li><strong>FFA pathway:</strong> ↑ FFAs → diacylglycerol → PKC → serine phosphorylation of IRS-1 (instead of tyrosine) → impaired signaling</li>
+                            <li><strong>Inflammation:</strong> TNF-α, IL-6 from adipose → same IRS-1 impairment</li>
+                            <li><strong>Mitochondrial dysfunction:</strong> ↓ ATP production → ↑ insulin resistance</li>
+                        </ul>
+                        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-card-front">Click: Metabolic Syndrome Criteria</div>
+                            <div class="flip-card-back">
+                                <strong>NCEP-ATP III: Need ≥3 of 5</strong><br>
+                                • Central obesity (waist >102cm M, >88cm F)<br>
+                                • ↑ TG (>150)<br>
+                                • ↓ HDL (<40M, <50F)<br>
+                                • ↑ BP (>130/85)<br>
+                                • ↑ Fasting glucose (>100)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <div class="subsection-title">Islet Changes</div>
+                        <ul class="bullet-list">
+                            <li><strong>Islet amyloid:</strong> IAPP (amylin) deposits in islets → contributes to β cell failure/toxicity</li>
+                            <li><strong>NO insulitis or autoantibodies</strong> (unlike T1DM)</li>
+                        </ul>
+                    </div>
+
+                    <div class="mnemonic">
+                        <strong>Mnemonic:</strong> "T2DM = TWO problems: Resistance + β cell failure; TUBBY (obesity), Trickles to hyperglycemia (slow onset)"
+                    </div>
+
+                    <div class="summary-box">
+                        <div><span class="icon">🎯</span><strong>Tested:</strong> Ominous octet (especially first-phase response loss as earliest sign), insulin resistance mechanisms, metabolic syndrome criteria, islet amyloid, C-peptide HIGH in T2DM</div>
+                    </div>
+                    <div class="summary-box">
+                        <div><span class="icon">⚠️</span><strong>Traps:</strong> "Relative" not absolute insulin deficiency; first-phase loss is earliest (before overt hyperglycemia); SGLT2 threshold ~180 mg/dL; confusing serine vs tyrosine phosphorylation of IRS-1</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LO4 -->
+        <div class="lo-section" id="lo4">
+            <div class="lo-header" onclick="toggleLO(this)">
+                <h2>LO4: DKA vs Hyperosmolar Hyperglycemic State (HHS)</h2>
+                <span class="lo-toggle">▼</span>
+            </div>
+            <div class="lo-content">
+                <div class="lo-body">
+                    <div class="subsection">
+                        <div class="subsection-title">Diabetic Ketoacidosis (DKA)</div>
+                        <ul class="bullet-list">
+                            <li><strong>Cause:</strong> Absolute insulin deficiency (T1DM usually; T2DM with stress/illness)</li>
+                            <li><strong>Triad:</strong> hyperglycemia + anion gap metabolic acidosis + ketonemia/ketonuria</li>
+                            <li><strong>Pathophysiology:</strong> ↓ insulin → ↑ glucagon → ↑ lipolysis → ↑ FFAs → liver oxidizes to acetyl-CoA → ketone bodies</li>
+                        </ul>
+                        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-card-front">Click: Ketone Bodies & Electrolytes</div>
+                            <div class="flip-card-back">
+                                <strong>Ketones:</strong> β-hydroxybutyrate (most abundant, measured by blood ketones), acetoacetate, acetone (fruity breath, not acidic)<br>
+                                <strong>Glucose:</strong> typically 250-500 (not always extremely high)<br>
+                                <strong>K⁺:</strong> TOTAL BODY depleted BUT serum often HIGH initially (acidosis → K⁺ shifts out of cells; no insulin → K⁺ doesn't enter cells). MUST give K⁺ if <3.5 BEFORE/DURING insulin. NEVER start insulin if K⁺ <3.3!
+                            </div>
+                        </div>
+                        <ul class="bullet-list">
+                            <li><strong>Factitious hyponatremia:</strong> high glucose draws water out → lowers Na; correct: add 1.6-2.4 mEq/L Na per 100 mg/dL glucose >100</li>
+                            <li><strong>Phosphate depleted</strong> (osmotic diuresis)</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection">
+                        <div class="subsection-title">DKA Treatment</div>
+                        <ul class="bullet-list">
+                            <li>IV fluids (NS or LR)</li>
+                            <li><strong>CRITICAL:</strong> Check K⁺ FIRST — if <3.3, repleted before insulin; if 3.3-3.5, repleted concurrently</li>
+                            <li>Insulin drip (after K⁺ assured)</li>
+                            <li>Address precipitant</li>
+                            <li>Dextrose when glucose <200 (to continue insulin, close gap without hypoglycemia)</li>
+                            <li><strong>Resolution:</strong> anion gap closure is endpoint (NOT normalization of glucose); HCO3 >15, anion gap normal</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection">
+                        <div class="subsection-title">Hyperosmolar Hyperglycemic State (HHS)</div>
+                        <ul class="bullet-list">
+                            <li><strong>Cause:</strong> Relative insulin deficiency (T2DM); sufficient insulin to prevent ketosis, NOT to control glucose</li>
+                            <li><strong>Glucose:</strong> EXTREMELY HIGH (>600, often >1000 mg/dL)</li>
+                            <li><strong>NO or mild ketosis</strong> (some insulin still present in T2DM)</li>
+                            <li><strong>Severe dehydration:</strong> very high osmolality (>320 mOsm/kg) → altered mental status, coma</li>
+                            <li><strong>Osmolality calc:</strong> 2(Na) + Glucose/18 + BUN/2.8</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection">
+                        <div class="subsection-title">HHS Treatment</div>
+                        <ul class="bullet-list">
+                            <li>Aggressive fluid replacement (hypotonic fluids after initial NS)</li>
+                            <li>Insulin (cautious — less urgent than DKA)</li>
+                            <li>Careful electrolyte monitoring</li>
+                            <li><strong>Mortality:</strong> ~5-20% (elderly, comorbidities)</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection">
+                        <div class="subsection-title">DKA vs HHS Comparison Table</div>
+                        <table>
+                            <tr><th>Feature</th><th>DKA</th><th>HHS</th></tr>
+                            <tr><td>Glucose</td><td>250-500</td><td>>600, often >1000</td></tr>
+                            <tr><td>pH/Acidosis</td><td>↓ (acidotic)</td><td>Normal/mild acidosis</td></tr>
+                            <tr><td>Ketones</td><td>Present (high)</td><td>Absent/minimal</td></tr>
+                            <tr><td>Osmolality</td><td>Moderate ↑</td><td>Very high (>320)</td></tr>
+                            <tr><td>Mental status</td><td>Variable</td><td>Often altered/coma</td></tr>
+                            <tr><td>Type DM</td><td>Usually T1DM</td><td>T2DM</td></tr>
+                            <tr><td>Age</td><td>Younger</td><td>Older</td></tr>
+                            <tr><td>Mortality</td><td>1-5%</td><td>5-20%</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="mnemonic">
+                        <strong>Mnemonic:</strong> "DKA = Diabetic Kids Are ketotic (young, T1DM, ketones, acidosis); HHS = Hyperglycemic Horrible State (elderly, T2DM, no ketones, osmolar coma)"
+                    </div>
+
+                    <div class="summary-box">
+                        <div><span class="icon">⚠️</span><strong>Critical Trap:</strong> K⁺ in DKA — total body DEPLETED but serum HIGH initially (acidosis). When you give insulin → K⁺ shifts back IN → serum drops → HYPOKALEMIA & cardiac dysrhythmias. MUST replace K⁺ before/during insulin!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LO5 -->
+        <div class="lo-section" id="lo5">
+            <div class="lo-header" onclick="toggleLO(this)">
+                <h2>LO5: Chronic Complications of Diabetes</h2>
+                <span class="lo-toggle">▼</span>
+            </div>
+            <div class="lo-content">
+                <div class="lo-body">
+                    <div class="subsection">
+                        <div class="subsection-title">Mechanisms of Hyperglycemic Damage</div>
+                        <ul class="bullet-list">
+                            <li><strong>1. Non-enzymatic glycation → AGEs:</strong> bind RAGE receptors → ↑ oxidative stress, inflammation, vascular damage; HbA1c is an AGE</li>
+                            <li><strong>2. Polyol pathway:</strong> aldose reductase converts glucose → sorbitol (osmotically active, accumulates in lens/nerves/retina); ↓ NADPH → ↓ antioxidants</li>
+                            <li><strong>3. PKC activation:</strong> ↑ DAG → PKC → ↑ VEGF → neovascularization (retinopathy), ↑ permeability (nephropathy)</li>
+                            <li><strong>4. Hexosamine pathway:</strong> glucose → glucosamine → O-GlcNAc modification → altered transcription → vascular dysfunction</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection">
+                        <div class="subsection-title">Microvascular Complications</div>
+                        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-card-front">Click: Diabetic Retinopathy</div>
+                            <div class="flip-card-back">
+                                <strong>Leading cause of blindness in working-age adults</strong><br>
+                                <strong>Background (NPDR):</strong> microaneurysms (FIRST SIGN), dot-blot hemorrhages, hard exudates (lipid), cotton-wool spots (nerve infarcts)<br>
+                                <strong>Proliferative (PDR):</strong> neovascularization (VEGF-driven), vitreous hemorrhage, tractional retinal detachment<br>
+                                <strong>Diabetic macular edema:</strong> any stage; central vision loss<br>
+                                <strong>Tx:</strong> tight glucose control, annual exams, laser photocoagulation, anti-VEGF (bevacizumab/ranibizumab)
+                            </div>
+                        </div>
+                        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-card-front">Click: Diabetic Nephropathy</div>
+                            <div class="flip-card-back">
+                                <strong>Leading cause of ESRD in US</strong><br>
+                                <strong>Stages:</strong> microalbuminuria (30-300 mg/day) → macroalbuminuria (>300) → ↓ GFR → ESRD<br>
+                                <strong>Histology:</strong> Kimmelstiel-Wilson nodules (PATHOGNOMONIC — nodular glomerulosclerosis, mesangial PAS+ nodules); GBM thickening + mesangial expansion<br>
+                                <strong>Tx:</strong> RAAS blockade (ACEi/ARB reduce intraglomerular pressure), SGLT2 inhibitors (reduce hyperfiltration, cardioprotective)<br>
+                                <strong>Screening:</strong> urine UACR annually
+                            </div>
+                        </div>
+                        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-card-front">Click: Diabetic Neuropathy</div>
+                            <div class="flip-card-back">
+                                <strong>MOST COMMON chronic complication</strong><br>
+                                <strong>Distal symmetric sensorimotor:</strong> "stocking-glove" distribution; vibration loss FIRST (large fiber) → pain/temp (small fiber) → motor; ↑ risk foot ulcers, Charcot joint<br>
+                                <strong>Autonomic:</strong> gastroparesis (delayed gastric emptying → erratic glucose; treat with metoclopramide/erythromycin), orthostatic hypotension, erectile dysfunction (MOST COMMON autonomic manifestation), neurogenic bladder, sudomotor dysfunction<br>
+                                <strong>Mononeuropathy/CN palsies:</strong> CN III most common (pupil SPARED — unlike aneurysm; diabetes damages central fibers due to vasa nervorum ischemia; pupillomotor fibers on outside)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <div class="subsection-title">Macrovascular Complications</div>
+                        <ul class="bullet-list">
+                            <li><strong>CAD (MI):</strong> most common cause of death in T2DM; often "silent MI" (autonomic neuropathy → no chest pain)</li>
+                            <li><strong>Stroke (CVA):</strong> ↑ ischemic stroke risk</li>
+                            <li><strong>PAD (peripheral arterial disease):</strong> claudication, foot ulcers, gangrene</li>
+                        </ul>
+                    </div>
+
+                    <div class="mnemonic">
+                        <strong>Mnemonic:</strong> "Microvascular = Retina, Renal, neuropatHy (3 Rs + H); Macrovascular = CAD, CVA, PVD"
+                    </div>
+
+                    <div class="summary-box">
+                        <div><span class="icon">🎯</span><strong>Tested:</strong> Kimmelstiel-Wilson nodules (specific to diabetic nephropathy), microaneurysms as first sign of retinopathy, autonomic neuropathy manifestations (erectile dysfunction most common), CN III palsy with spared pupil</div>
+                    </div>
+                    <div class="summary-box">
+                        <div><span class="icon">⚠️</span><strong>Traps:</strong> CN III palsy in diabetes has spared pupil (central ischemia) vs aneurysm where pupil is involved (outer compression); forgetting erectile dysfunction is MOST COMMON autonomic manifestation, not gastroparesis</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LO6 -->
+        <div class="lo-section" id="lo6">
+            <div class="lo-header" onclick="toggleLO(this)">
+                <h2>LO6: Metabolic Syndrome, Insulin Resistance & Diabetic Foot</h2>
+                <span class="lo-toggle">▼</span>
+            </div>
+            <div class="lo-content">
+                <div class="lo-body">
+                    <div class="subsection">
+                        <div class="subsection-title">Metabolic Syndrome Pathophysiology</div>
+                        <ul class="bullet-list">
+                            <li><strong>Cluster of insulin resistance features</strong> → ↑ cardiovascular risk</li>
+                            <li><strong>Visceral fat pathology:</strong> ↑ FFAs + adipokines (TNF-α ↑, IL-6 ↑, leptin ↑, adiponectin ↓) → hepatic glucose production + systemic insulin resistance</li>
+                            <li><strong>Adiponectin:</strong> anti-inflammatory, insulin-sensitizing; DECREASED in obesity/T2DM → therapeutic target</li>
+                            <li><strong>Leptin resistance:</strong> satiety hormone impaired; obesity paradoxically has high leptin but resistance</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection">
+                        <div class="subsection-title">Diabetic Foot Syndrome</div>
+                        <ul class="bullet-list">
+                            <li><strong>Integration of complications:</strong> neuropathy + PAD + immune dysfunction</li>
+                            <li><strong>Neuropathy:</strong> ↓ protective sensation → unnoticed trauma → ulcers</li>
+                            <li><strong>PAD:</strong> poor wound healing → chronic ulcers → gangrene</li>
+                            <li><strong>Immune dysfunction:</strong> ↑ susceptibility to infection → polymicrobial osteomyelitis</li>
+                            <li><strong>Charcot foot:</strong> neuropathic arthropathy; joint collapse → rocker-bottom deformity</li>
+                            <li><strong>Prevention:</strong> daily foot inspection, proper footwear, regular podiatry, glucose control</li>
+                            <li><strong>Most common cause of non-traumatic lower limb amputation</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection">
+                        <div class="subsection-title">Lipotoxicity & Glucotoxicity</div>
+                        <ul class="bullet-list">
+                            <li><strong>Lipotoxicity:</strong> excess FFAs in β cells → ceramide → apoptosis</li>
+                            <li><strong>Glucotoxicity:</strong> chronic hyperglycemia → oxidative stress → β cell dysfunction</li>
+                            <li><strong>Vicious cycle:</strong> both worsen diabetes progression</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection">
+                        <div class="subsection-title">HbA1c (Glycosylated Hemoglobin)</div>
+                        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-card-front">Click: HbA1c Basics</div>
+                            <div class="flip-card-back">
+                                <strong>Reflects average glucose over 2-3 months</strong> (RBC lifespan ~120 days)<br>
+                                <strong>Correlates with complications risk</strong><br>
+                                <strong>Target:</strong> <7% for most adults<br>
+                                <strong>TRAPS (when unreliable):</strong><br>
+                                • Hemolytic anemia → shorter RBC life → falsely LOW HbA1c<br>
+                                • Sickle cell → falsely LOW<br>
+                                • Iron deficiency → older RBCs → falsely HIGH<br>
+                                • Pregnancy → more RBC turnover → falsely LOW
+                            </div>
+                        </div>
+                        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-card-front">Click: Diabetes Screening Criteria</div>
+                            <div class="flip-card-back">
+                                <strong>Diagnosis (need confirmation by repeat test):</strong><br>
+                                • HbA1c ≥6.5%<br>
+                                • Fasting glucose ≥126 mg/dL<br>
+                                • 2-hr glucose ≥200 on OGTT<br>
+                                • Random glucose ≥200 WITH symptoms
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mnemonic">
+                        <strong>Mnemonic:</strong> "HbA1c = Hemoglobin Archives glucose for 3 months (Average blood Accuracy)"
+                    </div>
+
+                    <div class="summary-box">
+                        <div><span class="icon">🎯</span><strong>Tested:</strong> Metabolic syndrome criteria (≥3 of 5 features), adiponectin as protective hormone, HbA1c as 2-3 month average, screening thresholds, TRAPS (hemolysis falsely lowers, iron deficiency falsely raises)</div>
+                    </div>
+                    <div class="summary-box">
+                        <div><span class="icon">⚠️</span><strong>Traps:</strong> HbA1c falsely LOW in hemolytic anemia/sickle cell (shorter RBC life); falsely HIGH in iron deficiency (older RBCs); forgetting to repeat test for diagnosis confirmation</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MIND MAP -->
+        <div id="mindmap" class="lo-section">
+            <div class="lo-header" onclick="toggleLO(this)">
+                <h2>Mind Map: Diabetes Pathophysiology</h2>
+                <span class="lo-toggle">▼</span>
+            </div>
+            <div class="lo-content">
+                <div class="lo-body">
+                    <svg class="mindmap-svg" viewBox="0 0 800 600">
+                        <defs>
+                            <style>
+                                .mindmap-node { font-family: sans-serif; font-size: 12px; text-anchor: middle; }
+                                .mindmap-label { fill: white; font-weight: bold; }
+                                .mindmap-edge { stroke: #cbd5e1; stroke-width: 2; fill: none; }
+                            </style>
+                        </defs>
+                        <!-- Central node -->
+                        <circle cx="400" cy="300" r="50" fill="#dc2626" class="mindmap-node"/>
+                        <text x="400" y="295" class="mindmap-label" dominant-baseline="middle">Diabetes</text>
+                        <text x="400" y="310" class="mindmap-label" dominant-baseline="middle">Mellitus</text>
+
+                        <!-- Normal Glucose -->
+                        <line x1="350" y1="270" x2="250" y2="150" class="mindmap-edge"/>
+                        <circle cx="250" cy="150" r="40" fill="#0f172a" class="mindmap-node"/>
+                        <text x="250" y="145" class="mindmap-label" dominant-baseline="middle">Normal</text>
+                        <text x="250" y="160" class="mindmap-label" dominant-baseline="middle">Glucose</text>
+
+                        <!-- T1DM -->
+                        <line x1="400" y1="250" x2="400" y2="120" class="mindmap-edge"/>
+                        <circle cx="400" cy="120" r="40" fill="#0f172a" class="mindmap-node"/>
+                        <text x="400" y="115" class="mindmap-label" dominant-baseline="middle">T1DM</text>
+                        <text x="400" y="130" class="mindmap-label" dominant-baseline="middle">Auto</text>
+
+                        <!-- T2DM -->
+                        <line x1="450" y1="270" x2="550" y2="150" class="mindmap-edge"/>
+                        <circle cx="550" cy="150" r="40" fill="#0f172a" class="mindmap-node"/>
+                        <text x="550" y="145" class="mindmap-label" dominant-baseline="middle">T2DM</text>
+                        <text x="550" y="160" class="mindmap-label" dominant-baseline="middle">IR+βFail</text>
+
+                        <!-- Acute Complications -->
+                        <line x1="380" y1="350" x2="300" y2="470" class="mindmap-edge"/>
+                        <circle cx="300" cy="470" r="40" fill="#0f172a" class="mindmap-node"/>
+                        <text x="300" y="465" class="mindmap-label" dominant-baseline="middle">DKA</text>
+                        <text x="300" y="480" class="mindmap-label" dominant-baseline="middle">vs HHS</text>
+
+                        <!-- Chronic Complications -->
+                        <line x1="420" y1="350" x2="500" y2="470" class="mindmap-edge"/>
+                        <circle cx="500" cy="470" r="40" fill="#0f172a" class="mindmap-node"/>
+                        <text x="500" y="460" class="mindmap-label" dominant-baseline="middle">Chronic</text>
+                        <text x="500" y="480" class="mindmap-label" dominant-baseline="middle">Comps</text>
+
+                        <!-- Metab Syndrome -->
+                        <line x1="350" y1="350" x2="200" y2="450" class="mindmap-edge"/>
+                        <circle cx="200" cy="450" r="40" fill="#0f172a" class="mindmap-node"/>
+                        <text x="200" y="450" class="mindmap-label" dominant-baseline="middle">Metab</text>
+                        <text x="200" y="465" class="mindmap-label" dominant-baseline="middle">Synd</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- MCQs -->
+        <div id="mcqs" class="lo-section">
+            <div class="lo-header" onclick="toggleLO(this)">
+                <h2>MCQ Practice (18 Questions)</h2>
+                <span class="lo-toggle">▼</span>
+            </div>
+            <div class="lo-content">
+                <div class="lo-body">
+                    <!-- MCQ 1 -->
+                    <div class="mcq-container">
+                        <div class="mcq-question">1. A 24-year-old presents with polyuria, polydipsia, and weight loss over 2 weeks. Labs show glucose 450 mg/dL, pH 7.28, HCO3 15, and blood ketones positive. Which of the following is MOST specific for confirming the diagnosis of Type 1 DM versus factitious hypoglycemia?</div>
+                        <ul class="mcq-options">
+                            <li><input type="radio" name="q1"> A) Serum glucose >250 mg/dL</li>
+                            <li><input type="radio" name="q1"> B) C-peptide <0.6 ng/mL</li>
+                            <li><input type="radio" name="q1"> C) Positive ketones</li>
+                            <li><input type="radio" name="q1"> D) Metabolic acidosis with anion gap</li>
+                            <li><input type="radio" name="q1"> E) HbA1c >9%</li>
+                        </ul>
+                        <button onclick="revealMCQ(this)">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer"><strong>B) C-peptide <0.6 ng/mL</strong> — C-peptide is EQUIMOLAR with endogenous insulin (cleaved from proinsulin). In T1DM, C-peptide is suppressed (absolute deficiency). In factitious hypoglycemia from exogenous insulin injection, C-peptide is LOW (no endogenous secretion). In insulinoma, C-peptide is HIGH. This distinguishes true autoimmune insulin deficiency.</div>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 2 -->
+                    <div class="mcq-container">
+                        <div class="mcq-question">2. Which of the following autoantibodies is the MOST SENSITIVE marker of ongoing autoimmunity in Type 1 DM?</div>
+                        <ul class="mcq-options">
+                            <li><input type="radio" name="q2"> A) Anti-IA-2</li>
+                            <li><input type="radio" name="q2"> B) Anti-GAD65</li>
+                            <li><input type="radio" name="q2"> C) Anti-insulin (IAA)</li>
+                            <li><input type="radio" name="q2"> D) Anti-ZnT8</li>
+                            <li><input type="radio" name="q2"> E) Islet cell antibodies (ICA)</li>
+                        </ul>
+                        <button onclick="revealMCQ(this)">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer"><strong>B) Anti-GAD65</strong> — Anti-GAD65 (glutamic acid decarboxylase) is the MOST COMMON and MOST SENSITIVE autoantibody in T1DM. Present in ~90% of newly diagnosed T1DM. Most useful for screening and early detection.</div>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 3 -->
+                    <div class="mcq-container">
+                        <div class="mcq-question">3. A 52-year-old obese man with T2DM presents with fatigue. His fasting glucose is 145 mg/dL despite metformin monotherapy. Which of the following is the EARLIEST defect in T2DM pathophysiology?</div>
+                        <ul class="mcq-options">
+                            <li><input type="radio" name="q3"> A) Hepatic glucose overproduction</li>
+                            <li><input type="radio" name="q3"> B) Loss of first-phase insulin response</li>
+                            <li><input type="radio" name="q3"> C) Impaired GLP-1 secretion</li>
+                            <li><input type="radio" name="q3"> D) α cell dysfunction</li>
+                            <li><input type="radio" name="q3"> E) Elevated renal glucose threshold</li>
+                        </ul>
+                        <button onclick="revealMCQ(this)">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer"><strong>B) Loss of first-phase insulin response</strong> — Loss of the first-phase (rapid 1-3 min) insulin response is the EARLIEST sign of β cell failure in T2DM. This occurs before overt hyperglycemia develops, even before increased fasting glucose. This precedes hepatic glucose overproduction and α cell dysfunction.</div>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 4 -->
+                    <div class="mcq-container">
+                        <div class="mcq-question">4. A 28-year-old with Type 1 DM arrives at the ED with DKA. Labs: glucose 380, pH 7.15, HCO3 10, K+ 6.2. Which is the CORRECT next step in management?</div>
+                        <ul class="mcq-options">
+                            <li><input type="radio" name="q4"> A) Start high-dose insulin drip immediately</li>
+                            <li><input type="radio" name="q4"> B) Administer dextrose IV to lower glucose osmotically</li>
+                            <li><input type="radio" name="q4"> C) Repleted K+ to >3.5, then start insulin</li>
+                            <li><input type="radio" name="q4"> D) Give bicarbonate to correct acidosis</li>
+                            <li><input type="radio" name="q4"> E) Check for hypomagnesemia first</li>
+                        </ul>
+                        <button onclick="revealMCQ(this)">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer"><strong>C) Replete K+ to >3.5, then start insulin</strong> — CRITICAL: In DKA, total body K+ is DEPLETED (osmotic diuresis + vomiting). Serum K+ is HIGH initially (acidosis shifts K+ OUT of cells; lack of insulin prevents K+ uptake). When insulin is given, K+ shifts BACK INTO cells → HYPOKALEMIA → cardiac dysrhythmias, respiratory failure. MUST give K+ BEFORE or CONCURRENTLY with insulin (if K+ 3.3-3.5). NEVER start insulin if K+ <3.3!</div>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 5 -->
+                    <div class="mcq-container">
+                        <div class="mcq-question">5. A 68-year-old with T2DM is admitted with glucose 1100 mg/dL, osmolality 340 mOsm/kg, pH 7.35, HCO3 18. Ketones are negative. Which diagnosis best explains this presentation?</div>
+                        <ul class="mcq-options">
+                            <li><input type="radio" name="q5"> A) Diabetic ketoacidosis</li>
+                            <li><input type="radio" name="q5"> B) Hyperosmolar hyperglycemic state (HHS)</li>
+                            <li><input type="radio" name="q5"> C) Mixed DKA-HHS</li>
+                            <li><input type="radio" name="q5"> D) Hypoglycemia with counterregulation</li>
+                            <li><input type="radio" name="q5"> E) Non-ketotic hyperosmolar coma</li>
+                        </ul>
+                        <button onclick="revealMCQ(this)">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer"><strong>B) Hyperosmolar hyperglycemic state (HHS)</strong> — HHS: EXTREMELY HIGH glucose (>600, often >1000), NO ketones (sufficient insulin in T2DM prevents ketosis), VERY HIGH osmolality (>320), minimal/no acidosis, usually T2DM patient, older age. DKA has ketones and acidosis; HHS does NOT.</div>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 6 -->
+                    <div class="mcq-container">
+                        <div class="mcq-question">6. A 35-year-old woman presenting with polydipsia and weight loss. Labs: glucose 320, anti-GAD65 positive, C-peptide 2.1 ng/mL (normal 0.8-3.1). She does NOT require insulin at diagnosis. What is this patient's diagnosis?</div>
+                        <ul class="mcq-options">
+                            <li><input type="radio" name="q6"> A) Type 1 DM</li>
+                            <li><input type="radio" name="q6"> B) Type 2 DM</li>
+                            <li><input type="radio" name="q6"> C) LADA (Latent Autoimmune Diabetes of Adults)</li>
+                            <li><input type="radio" name="q6"> D) MODY</li>
+                            <li><input type="radio" name="q6"> E) Secondary diabetes</li>
+                        </ul>
+                        <button onclick="revealMCQ(this)">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer"><strong>C) LADA (Latent Autoimmune Diabetes of Adults)</strong> — LADA: adult-onset (slow onset), autoimmune (anti-GAD65 positive), initially resembles T2DM (doesn't need insulin at first), eventually becomes insulin-dependent. This is autoimmune T1DM in adults. Distinguishing feature is presence of autoantibodies + initial lack of insulin dependence.</div>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 7 -->
+                    <div class="mcq-container">
+                        <div class="mcq-question">7. In the polyol pathway of diabetic complications, elevated aldose reductase activity converts glucose to sorbitol. Which tissue accumulation of sorbitol is MOST associated with cataract formation?</div>
+                        <ul class="mcq-options">
+                            <li><input type="radio" name="q7"> A) Retina</li>
+                            <li><input type="radio" name="q7"> B) Lens</li>
+                            <li><input type="radio" name="q7"> C) Peripheral nerve</li>
+                            <li><input type="radio" name="q7"> D) Kidney glomerulus</li>
+                            <li><input type="radio" name="q7"> E) Vascular endothelium</li>
+                        </ul>
+                        <button onclick="revealMCQ(this)">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer"><strong>B) Lens</strong> — Sorbitol is osmotically active and cannot easily cross cell membranes. In lens, sorbitol accumulates → osmotic influx of water → swelling → cataracts (osmotic cataracts in diabetes). This is the classic manifestation of polyol pathway in diabetic eye disease.</div>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 8 -->
+                    <div class="mcq-container">
+                        <div class="mcq-question">8. A 45-year-old diabetic patient with hypertension complains of erectile dysfunction. Which pathophysiologic mechanism BEST explains this autonomic complication?</div>
+                        <ul class="mcq-options">
+                            <li><input type="radio" name="q8"> A) Loss of parasympathetic innervation to penile smooth muscle</li>
+                            <li><input type="radio" name="q8"> B) Sympathetic overstimulation</li>
+                            <li><input type="radio" name="q8"> C) Hyperglycemia-induced oxidative stress affecting NO synthase and endothelial function</li>
+                            <li><input type="radio" name="q8"> D) Aldosterone-mediated sodium retention</li>
+                            <li><input type="radio" name="q8"> E) Direct β cell toxicity in penile tissue</li>
+                        </ul>
+                        <button onclick="revealMCQ(this)">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer"><strong>C) Hyperglycemia-induced oxidative stress affecting NO synthase and endothelial function</strong> — Erectile dysfunction is the MOST COMMON manifestation of diabetic autonomic neuropathy. Mechanism: chronic hyperglycemia → oxidative stress → ↓ NO availability (NO synthase impaired) → impaired vasodilation → erectile dysfunction. Also involves endothelial dysfunction and loss of parasympathetic tone over time.</div>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 9 -->
+                    <div class="mcq-container">
+                        <div class="mcq-question">9. A 58-year-old diabetic presents with acute diplopia and right eye ptosis. Pupil is normal (spared). Which cranial nerve is affected, and what is the pathophysiologic mechanism?</div>
+                        <ul class="mcq-options">
+                            <li><input type="radio" name="q9"> A) CN II; demyelination</li>
+                            <li><input type="radio" name="q9"> B) CN III; vasa nervorum ischemia (central fiber infarction)</li>
+                            <li><input type="radio" name="q9"> C) CN IV; microvascular occlusion</li>
+                            <li><input type="radio" name="q9"> D) CN VI; nerve root compression</li>
+                            <li><input type="radio" name="q9"> E) CN III; compressive lesion from aneurysm</li>
+                        </ul>
+                        <button onclick="revealMCQ(this)">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer"><strong>B) CN III; vasa nervorum ischemia (central fiber infarction)</strong> — CRUCIAL DISTINCTION: Diabetic CN III palsy presents with SPARED PUPIL (pupil-sparing), whereas CN III palsy from posterior communicating artery aneurysm involves the PUPIL. Why? Diabetes causes ischemia of the vasa nervorum → central fibers of CN III are damaged (motor fibers). Pupillomotor fibers run on the OUTSIDE of the nerve → spared. Aneurysm compresses the OUTSIDE of nerve → pupil involved.</div>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 10 -->
+                    <div class="mcq-container">
+                        <div class="mcq-question">10. A 50-year-old with T2DM has a urine albumin-to-creatinine ratio (UACR) of 45 mg/g (abnormal) and estimated GFR of 88 mL/min. A kidney biopsy shows nodular glomerulosclerosis with PAS-positive material. What is the pathognomonic lesion?</div>
+                        <ul class="mcq-options">
+                            <li><input type="radio" name="q10"> A) Segmental sclerosis (focal segmental glomerulosclerosis)</li>
+                            <li><input type="radio" name="q10"> B) Wire-loop deposits (lupus nephritis)</li>
+                            <li><input type="radio" name="q10"> C) Kimmelstiel-Wilson nodules</li>
+                            <li><input type="radio" name="q10"> D) Spike-and-dome deposits (membranous nephropathy)</li>
+                            <li><input type="radio" name="q10"> E) Crescent formation (crescentic GN)</li>
+                        </ul>
+                        <button onclick="revealMCQ(this)">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer"><strong>C) Kimmelstiel-Wilson nodules</strong> — PATHOGNOMONIC for diabetic nephropathy. These are mesangial nodules of PAS-positive material (hyaline). Occur in ~25% of T1DM and ~10-20% of T2DM patients. Combined with GBM thickening and mesangial expansion, they define diabetic glomerulosclerosis.</div>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 11 -->
+                    <div class="mcq-container">
+                        <div class="mcq-question">11. A 46-year-old diabetic undergoes annual eye exam. Fundoscopy shows multiple small red dots and blot hemorrhages, but NO new vessels. Which stage of diabetic retinopathy is present?</div>
+                        <ul class="mcq-options">
+                            <li><input type="radio" name="q11"> A) Proliferative diabetic retinopathy (PDR)</li>
+                            <li><input type="radio" name="q11"> B) Non-proliferative diabetic retinopathy (NPDR) / Background retinopathy</li>
+                            <li><input type="radio" name="q11"> C) Diabetic macular edema</li>
+                            <li><input type="radio" name="q11"> D) Pre-retinopathy (no visible lesions yet)</li>
+                            <li><input type="radio" name="q11"> E) Hypertensive retinopathy</li>
+                        </ul>
+                        <button onclick="revealMCQ(this)">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer"><strong>B) Non-proliferative diabetic retinopathy (NPDR) / Background retinopathy</strong> — NPDR features: microaneurysms (FIRST SIGN of retinopathy), dot-blot hemorrhages, hard exudates (lipid deposits), cotton-wool spots (nerve fiber infarcts). NO new vessel formation. PDR adds neovascularization, vitreous hemorrhage, tractional detachment.</div>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 12 -->
+                    <div class="mcq-container">
+                        <div class="mcq-question">12. Increased free fatty acid (FFA) flux in T2DM promotes insulin resistance via which mechanism?</div>
+                        <ul class="mcq-options">
+                            <li><input type="radio" name="q12"> A) Direct inhibition of GLUT4 transporter</li>
+                            <li><input type="radio" name="q12"> B) FFAs → DAG → PKC → serine phosphorylation of IRS-1 (instead of tyrosine)</li>
+                            <li><input type="radio" name="q12"> C) FFAs compete with glucose for oxidation</li>
+                            <li><input type="radio" name="q12"> D) FFAs increase GLP-1 secretion</li>
+                            <li><input type="radio" name="q12"> E) FFAs bind to PPAR-γ receptors</li>
+                        </ul>
+                        <button onclick="revealMCQ(this)">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer"><strong>B) FFAs → DAG → PKC → serine phosphorylation of IRS-1 (instead of tyrosine)</strong> — FFAs are metabolized to diacylglycerol (DAG). DAG activates PKC, which phosphorylates IRS-1 on SERINE (instead of the normal tyrosine). Serine phosphorylation prevents downstream signaling (PI3K/Akt), blocking GLUT4 translocation → insulin resistance. This is a KEY mechanism of FFA-induced insulin resistance.</div>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 13 -->
+                    <div class="mcq-container">
+                        <div class="mcq-question">13. A 55-year-old man with metabolic syndrome is found to have decreased serum adiponectin and elevated TNF-α. What is the expected metabolic consequence?</div>
+                        <ul class="mcq-options">
+                            <li><input type="radio" name="q13"> A) Improved insulin sensitivity</li>
+                            <li><input type="radio" name="q13"> B) Worsened insulin resistance and systemic inflammation</li>
+                            <li><input type="radio" name="q13"> C) Increased β cell proliferation</li>
+                            <li><input type="radio" name="q13"> D) Enhanced GLP-1 secretion</li>
+                            <li><input type="radio" name="q13"> E) Decreased visceral adiposity</li>
+                        </ul>
+                        <button onclick="revealMCQ(this)">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer"><strong>B) Worsened insulin resistance and systemic inflammation</strong> — Adiponectin is anti-inflammatory and insulin-sensitizing; DECREASED in obesity/metabolic syndrome. TNF-α is pro-inflammatory and pro-insulin resistance. The combination (↓ adiponectin + ↑ TNF-α) worsens insulin resistance, promotes hepatic glucose production, and increases cardiovascular risk.</div>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 14 -->
+                    <div class="mcq-container">
+                        <div class="mcq-question">14. A 62-year-old woman with diabetes has an HbA1c of 5.8%. However, she has active hemolytic anemia (reticulocyte count 8%). Which of the following is TRUE?</div>
+                        <ul class="mcq-options">
+                            <li><input type="radio" name="q14"> A) Her true average glucose is HIGHER than the HbA1c suggests</li>
+                            <li><input type="radio" name="q14"> B) Her true average glucose is LOWER than the HbA1c suggests</li>
+                            <li><input type="radio" name="q14"> C) HbA1c accurately reflects her glucose control</li>
+                            <li><input type="radio" name="q14"> D) Hemolytic anemia does not affect HbA1c</li>
+                            <li><input type="radio" name="q14"> E) Her glucose control is excellent based on HbA1c</li>
+                        </ul>
+                        <button onclick="revealMCQ(this)">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-reveal">
+                            <div class="mcq-answer"><strong>A) Her true average glucose is HIGHER than the HbA1c suggests</strong> — HbA1c reflects average glucose over RBC lifespan (~120 days). In hemolytic anemia, RBC lifespan is SHORTENED → less time for hemoglobin to accumulate glucose → HbA1c is falsely LOW. Her actual glucose control is likely WORSE than HbA1c suggests. This is a TRAP: falsely reassuring HbA1c in hemolysis.</div>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 15 -->
+                    <div class="mcq-container">
+                        <div class="mcq-question">15. A 40-year-old with diabetic neuropathy complains of delayed gastric emptying and erratic blood glucose levels. Which vagal nerve branch is affected?</div>
+                        <ul class="mcq-options">
+                            <li><input type="radio" name="q15"> A) Vagal parasympathetic fibers to the stomach (gastroparesis)</li>
+                            <li><input type="radio" name="q15"> B) Sympathetic fibers to pancreatic α cells</li>
+                            <li><input type="radio" name="q15"> C) Splanchnic nerve autonomic fibers</li>
+                            <li><input type="radio" name="q15"> D) Pelvic autonomic fibers</li>
+                            <li><input type="radio" name="q15"> E) Somatic sensory nerves to stomach</li>
+                        </ul>
+                        <button onclick="revealMCQ(this)">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer"><strong>A) Vagal parasympathetic fibers to the stomach (gastroparesis)</strong> — Diabetic gastroparesis is vagal neuropathy → loss of parasympathetic innervation to stomach → delayed gastric emptying → erratic nutrient absorption → unpredictable glucose spikes/dips. Treated with metoclopramide (dopamine antagonist, enhances acetylcholine) or erythromycin (motilin agonist).</div>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 16 -->
+                    <div class="mcq-container">
+                        <div class="mcq-question">16. A 35-year-old with newly diagnosed T2DM presents without overt hyperglycemia. However, an oral glucose tolerance test (OGTT) shows an exaggerated 2-hour glucose response despite normal fasting glucose. What pathophysiologic mechanism is MOST likely responsible?</div>
+                        <ul class="mcq-options">
+                            <li><input type="radio" name="q16"> A) Impaired incretin effect</li>
+                            <li><input type="radio" name="q16"> B) Elevated renal glucose threshold</li>
+                            <li><input type="radio" name="q16"> C) Increased hepatic glycogenolysis</li>
+                            <li><input type="radio" name="q16"> D) Pancreatic insufficiency</li>
+                            <li><input type="radio" name="q16"> E) Autoimmune β cell destruction</li>
+                        </ul>
+                        <button onclick="revealMCQ(this)">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer"><strong>A) Impaired incretin effect</strong> — The incretin effect accounts for ~50-70% of total insulin secretion in response to oral glucose. GLP-1 and GIP (secreted by gut L and K cells) amplify insulin secretion (glucose-dependent). In early T2DM, incretin response is impaired → blunted insulin secretion in response to oral glucose → 2-hour OGTT glucose ↑. This is part of the "ominous octet."</div>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 17 -->
+                    <div class="mcq-container">
+                        <div class="mcq-question">17. In SGLT2 (sodium-glucose cotransporter 2) dysfunction in T2DM, which of the following occurs?</div>
+                        <ul class="mcq-options">
+                            <li><input type="radio" name="q17"> A) SGLT2 expression is DECREASED → lower renal glucose reabsorption → glucose loses in urine</li>
+                            <li><input type="radio" name="q17"> B) SGLT2 expression is INCREASED → higher renal glucose reabsorption → kidneys retain more glucose</li>
+                            <li><input type="radio" name="q17"> C) SGLT2 dysfunction causes hyperkalemia</li>
+                            <li><input type="radio" name="q17"> D) SGLT2 is located in the distal convoluted tubule</li>
+                            <li><input type="radio" name="q17"> E) SGLT2 has HIGH affinity for glucose</li>
+                        </ul>
+                        <button onclick="revealMCQ(this)">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer"><strong>B) SGLT2 expression is INCREASED → higher renal glucose reabsorption → kidneys retain more glucose</strong> — In T2DM, SGLT2 expression is upregulated in the proximal tubule. SGLT2 reabsorbs ~90% of filtered glucose. Increased expression → kidneys reabsorb even more glucose → even when plasma glucose exceeds threshold (~180 mg/dL), kidneys still retain glucose. This contributes to hyperglycemia. SGLT2 inhibitors reduce this reabsorption → increase glucosuria → lower glucose.</div>
+                        </div>
+                    </div>
+
+                    <!-- MCQ 18 -->
+                    <div class="mcq-container">
+                        <div class="mcq-question">18. A 58-year-old with T2DM and iron deficiency anemia has an HbA1c of 7.5%. Which of the following is TRUE?</div>
+                        <ul class="mcq-options">
+                            <li><input type="radio" name="q18"> A) Her true average glucose is HIGHER than HbA1c suggests (HbA1c falsely LOW)</li>
+                            <li><input type="radio" name="q18"> B) Her true average glucose is LOWER than HbA1c suggests (HbA1c falsely HIGH)</li>
+                            <li><input type="radio" name="q18"> C) HbA1c is accurate; iron deficiency does not affect it</li>
+                            <li><input type="radio" name="q18"> D) Iron deficiency only affects serum iron, not glucose control</li>
+                            <li><input type="radio" name="q18"> E) She should use fructosamine instead of HbA1c</li>
+                        </ul>
+                        <button onclick="revealMCQ(this)">Reveal Answer</button>
+                        <div class="mcq-reveal">
+                            <div class="mcq-answer"><strong>B) Her true average glucose is LOWER than HbA1c suggests (HbA1c falsely HIGH)</strong> — In iron deficiency anemia, RBCs are older/more mature (lower reticulocyte count) → hemoglobin has MORE TIME to accumulate glucose → HbA1c is falsely HIGH. Her actual glucose control is BETTER than HbA1c suggests. This is a TRAP: falsely elevated HbA1c can mask good glucose control.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Study Checklist -->
+        <div id="checklist" class="lo-section">
+            <div class="lo-header" onclick="toggleLO(this)">
+                <h2>Study Checklist</h2>
+                <span class="lo-toggle">▼</span>
+            </div>
+            <div class="lo-content">
+                <div class="lo-body">
+                    <ul class="checkbox-list">
+                        <li onclick="toggleCheckbox(this)"><input type="checkbox"> LO1: GLUT2 vs GLUT4 distinction clear</li>
+                        <li onclick="toggleCheckbox(this)"><input type="checkbox"> LO1: Incretin effect (GLP-1/GIP) mechanism</li>
+                        <li onclick="toggleCheckbox(this)"><input type="checkbox"> LO1: C-peptide interpretation (low vs high vs absent)</li>
+                        <li onclick="toggleCheckbox(this)"><input type="checkbox"> LO2: Anti-GAD65 as most sensitive T1DM marker</li>
+                        <li onclick="toggleCheckbox(this)"><input type="checkbox"> LO2: Insulitis histology vs islet amyloid (T2DM)</li>
+                        <li onclick="toggleCheckbox(this)"><input type="checkbox"> LO2: LADA diagnosis & early insulin treatment</li>
+                        <li onclick="toggleCheckbox(this)"><input type="checkbox"> LO3: Ominous octet (8 pathophysiologic defects)</li>
+                        <li onclick="toggleCheckbox(this)"><input type="checkbox"> LO3: First-phase response loss as EARLIEST sign</li>
+                        <li onclick="toggleCheckbox(this)"><input type="checkbox"> LO3: FFAs → DAG → PKC → serine-phos IRS-1 mechanism</li>
+                        <li onclick="toggleCheckbox(this)"><input type="checkbox"> LO3: Metabolic syndrome criteria (≥3 of 5)</li>
+                        <li onclick="toggleCheckbox(this)"><input type="checkbox"> LO4: K+ paradox in DKA (depleted but high serum initially)</li>
+                        <li onclick="toggleCheckbox(this)"><input type="checkbox"> LO4: NEVER start insulin in DKA if K+ <3.3</li>
+                        <li onclick="toggleCheckbox(this)"><input type="checkbox"> LO4: DKA vs HHS comparison table mastered</li>
+                        <li onclick="toggleCheckbox(this)"><input type="checkbox"> LO5: 4 hyperglycemic pathways (glycation, polyol, PKC, hexosamine)</li>
+                        <li onclick="toggleCheckbox(this)"><input type="checkbox"> LO5: Microaneurysm as FIRST sign of retinopathy</li>
+                        <li onclick="toggleCheckbox(this)"><input type="checkbox"> LO5: Kimmelstiel-Wilson nodules (pathognomonic)</li>
+                        <li onclick="toggleCheckbox(this)"><input type="checkbox"> LO5: CN III palsy with SPARED pupil (diabetes) vs involved pupil (aneurysm)</li>
+                        <li onclick="toggleCheckbox(this)"><input type="checkbox"> LO5: Erectile dysfunction as MOST COMMON autonomic manifestation</li>
+                        <li onclick="toggleCheckbox(this)"><input type="checkbox"> LO6: Adiponectin as protective, decreased in obesity</li>
+                        <li onclick="toggleCheckbox(this)"><input type="checkbox"> LO6: Diabetic foot integration (neuropathy + PAD + infection)</li>
+                        <li onclick="toggleCheckbox(this)"><input type="checkbox"> LO6: HbA1c TRAPS (hemolysis falsely LOW, iron def falsely HIGH)</li>
+                        <li onclick="toggleCheckbox(this)"><input type="checkbox"> LO6: Diabetes screening criteria (HbA1c ≥6.5, FG ≥126, 2-hr OGTT ≥200)</li>
+                        <li onclick="toggleCheckbox(this)"><input type="checkbox"> MCQs: All 18 questions reviewed & answers understood</li>
+                        <li onclick="toggleCheckbox(this)"><input type="checkbox"> Ready for in-house exam & USMLE Step 1</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            Last updated: 2026-04-05 | Lecture 16 Diabetes Pathophysiology | HoyaDocs Endocrine Block
+        </div>
+    </main>
+
+    <div class="progress-tracker">
+        <h4>Progress</h4>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-text" id="progressText">0%</div>
+    </div>
+
+    <script>
+        // localStorage key
+        const STORAGE_KEY = 'endo_lec16';
+
+        // Toggle LO sections
+        function toggleLO(header) {
+            const content = header.nextElementSibling;
+            const toggle = header.querySelector('.lo-toggle');
+
+            content.classList.toggle('expanded');
+            toggle.classList.toggle('expanded');
+
+            saveProgress();
+        }
+
+        // Toggle MCQ reveal
+        function revealMCQ(button) {
+            const reveal = button.nextElementSibling;
+            reveal.classList.toggle('show');
+            button.textContent = reveal.classList.contains('show') ? 'Hide Answer' : 'Reveal Answer';
+            saveProgress();
+        }
+
+        // Toggle checkbox
+        function toggleCheckbox(li) {
+            li.classList.toggle('checked');
+            const checkbox = li.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
+            updateProgress();
+            saveProgress();
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const totalChecks = document.querySelectorAll('.checkbox-list input[type="checkbox"]').length;
+            const checkedChecks = document.querySelectorAll('.checkbox-list input[type="checkbox"]:checked').length;
+            const percentage = totalChecks > 0 ? Math.round((checkedChecks / totalChecks) * 100) : 0;
+
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressText').textContent = percentage + '%';
+        }
+
+        // Save progress to localStorage
+        function saveProgress() {
+            const progress = {
+                expandedSections: [],
+                checkedItems: [],
+                revealedAnswers: []
+            };
+
+            // Save expanded sections
+            document.querySelectorAll('.lo-content.expanded').forEach((section, idx) => {
+                progress.expandedSections.push(idx);
+            });
+
+            // Save checked items
+            document.querySelectorAll('.checkbox-list input[type="checkbox"]:checked').forEach(checkbox => {
+                progress.checkedItems.push(checkbox.parentElement.textContent.trim());
+            });
+
+            // Save revealed answers
+            document.querySelectorAll('.mcq-reveal.show').forEach(reveal => {
+                progress.revealedAnswers.push(reveal.previousElementSibling.textContent.trim());
+            });
+
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+        }
+
+        // Load progress from localStorage
+        function loadProgress() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (!saved) return;
+
+            const progress = JSON.parse(saved);
+
+            // Restore expanded sections
+            const loContents = document.querySelectorAll('.lo-content');
+            progress.expandedSections.forEach(idx => {
+                if (loContents[idx]) {
+                    loContents[idx].classList.add('expanded');
+                    loContents[idx].previousElementSibling.querySelector('.lo-toggle').classList.add('expanded');
+                }
+            });
+
+            // Restore checked items
+            document.querySelectorAll('.checkbox-list input[type="checkbox"]').forEach(checkbox => {
+                const text = checkbox.parentElement.textContent.trim();
+                if (progress.checkedItems.includes(text)) {
+                    checkbox.checked = true;
+                    checkbox.parentElement.classList.add('checked');
+                }
+            });
+
+            updateProgress();
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', loadProgress);
+    </script>
+</body>
+</html>

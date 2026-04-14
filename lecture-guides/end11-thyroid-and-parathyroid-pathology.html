@@ -1,0 +1,1923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lec 11: Thyroid, Parathyroid & Adrenal Histology</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ecedee 100%);
+            color: #1f2937;
+            line-height: 1.6;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 220px;
+            background: #0f172a;
+            color: #e5e7eb;
+            padding: 20px 15px;
+            overflow-y: auto;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+        }
+
+        .sidebar h1 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #b45309;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sidebar-nav a {
+            padding: 10px 12px;
+            background: #1e293b;
+            color: #cbd5e1;
+            border-left: 3px solid transparent;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .sidebar-nav a:hover {
+            background: #334155;
+            border-left-color: #b45309;
+            color: #f1f5f9;
+        }
+
+        .sidebar-nav a.active {
+            background: #1e293b;
+            border-left-color: #b45309;
+            color: #b45309;
+            font-weight: 600;
+        }
+
+        .sidebar-divider {
+            height: 1px;
+            background: #334155;
+            margin: 12px 0;
+        }
+
+        .progress-box {
+            margin-top: 20px;
+            padding: 12px;
+            background: #1e293b;
+            border-radius: 6px;
+            border-left: 3px solid #b45309;
+        }
+
+        .progress-label {
+            font-size: 11px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #334155;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #b45309;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 220px;
+            flex: 1;
+            overflow-y: auto;
+            padding: 40px;
+        }
+
+        header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #b45309;
+        }
+
+        header h1 {
+            font-size: 32px;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #6b7280;
+            font-size: 15px;
+        }
+
+        /* Learning Objectives Tabs */
+        .lo-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .lo-tab {
+            padding: 10px 16px;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #6b7280;
+            transition: all 0.2s ease;
+            font-size: 14px;
+        }
+
+        .lo-tab:hover {
+            border-color: #b45309;
+            color: #b45309;
+        }
+
+        .lo-tab.active {
+            background: #b45309;
+            color: white;
+            border-color: #b45309;
+        }
+
+        /* LO Section */
+        .lo-section {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lo-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .lo-title {
+            font-size: 22px;
+            color: #0f172a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #b45309;
+        }
+
+        /* Collapsible Sections */
+        .collapsible {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .collapsible-header {
+            padding: 16px;
+            background: #f9fafb;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s ease;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .collapsible-header:hover {
+            background: #f3f4f6;
+        }
+
+        .collapsible-header.expanded {
+            background: #fff7ed;
+            border-bottom: 1px solid #b45309;
+        }
+
+        .collapsible-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+            color: #b45309;
+        }
+
+        .collapsible-header.expanded .collapsible-icon {
+            transform: rotate(180deg);
+        }
+
+        .collapsible-body {
+            display: none;
+            padding: 20px;
+            background: white;
+        }
+
+        .collapsible-body.expanded {
+            display: block;
+        }
+
+        /* Content Cards */
+        .content-card {
+            background: #f9fafb;
+            border-left: 4px solid #b45309;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-radius: 6px;
+        }
+
+        .content-card h3 {
+            color: #0f172a;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .content-card p {
+            color: #4b5563;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .content-card ul {
+            list-style: none;
+            padding-left: 0;
+            color: #4b5563;
+            font-size: 14px;
+        }
+
+        .content-card li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .content-card li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #b45309;
+            font-weight: bold;
+        }
+
+        /* Summary Boxes */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .summary-box {
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            border: 2px solid #e5e7eb;
+            transition: all 0.2s ease;
+        }
+
+        .summary-box:hover {
+            border-color: #b45309;
+            box-shadow: 0 4px 12px rgba(180, 83, 9, 0.1);
+        }
+
+        .summary-box-title {
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 12px;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .summary-box-content {
+            color: #4b5563;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* Flip Cards */
+        .flip-card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .flip-card {
+            perspective: 1000px;
+            cursor: pointer;
+            height: 220px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .flip-card-front {
+            background: linear-gradient(135deg, #b45309 0%, #92400e 100%);
+            color: white;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .flip-card-back {
+            background: #f9fafb;
+            color: #1f2937;
+            transform: rotateY(180deg);
+            border: 2px solid #b45309;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* MCQ Section */
+        .mcq-container {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .mcq-question {
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+
+        .mcq-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .mcq-option {
+            padding: 12px;
+            background: #f9fafb;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 14px;
+        }
+
+        .mcq-option:hover {
+            background: #f3f4f6;
+            border-color: #b45309;
+        }
+
+        .mcq-option input[type="radio"] {
+            margin-right: 10px;
+            cursor: pointer;
+            accent-color: #b45309;
+        }
+
+        .mcq-option.correct {
+            background: #dbeafe;
+            border-color: #3b82f6;
+        }
+
+        .mcq-option.incorrect {
+            background: #fee2e2;
+            border-color: #ef4444;
+        }
+
+        .mcq-reveal {
+            padding: 12px;
+            background: #fff7ed;
+            border-left: 4px solid #b45309;
+            border-radius: 4px;
+            margin-top: 12px;
+            display: none;
+        }
+
+        .mcq-reveal.visible {
+            display: block;
+        }
+
+        .mcq-reveal-label {
+            font-weight: 600;
+            color: #b45309;
+            margin-bottom: 6px;
+            font-size: 13px;
+        }
+
+        .mcq-reveal-text {
+            color: #6b7280;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .mcq-button {
+            padding: 8px 16px;
+            background: #b45309;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: background 0.2s ease;
+        }
+
+        .mcq-button:hover {
+            background: #92400e;
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 12px;
+            background: #f9fafb;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .checklist li:hover {
+            background: #f3f4f6;
+        }
+
+        .checklist input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #b45309;
+            flex-shrink: 0;
+        }
+
+        .checklist li.checked {
+            background: #dbeafe;
+        }
+
+        .checklist li.checked label {
+            text-decoration: line-through;
+            color: #9ca3af;
+        }
+
+        .checklist label {
+            flex: 1;
+            cursor: pointer;
+            font-size: 14px;
+            color: #4b5563;
+        }
+
+        /* Mind Map */
+        .mind-map-container {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+        }
+
+        .mind-map-svg {
+            min-width: 100%;
+            height: 400px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 180px;
+            }
+
+            .main-content {
+                margin-left: 180px;
+                padding: 25px;
+            }
+
+            header h1 {
+                font-size: 26px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                padding: 15px;
+                position: static;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 22px;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .flip-card-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Utility Classes */
+        .text-amber {
+            color: #b45309;
+        }
+
+        .highlight {
+            background: #fef08a;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .mnemonic-box {
+            background: #fef3c7;
+            border-left: 4px solid #b45309;
+            padding: 12px;
+            border-radius: 4px;
+            margin: 12px 0;
+            font-style: italic;
+            color: #78350f;
+            font-weight: 500;
+        }
+
+        .key-point {
+            background: #fff7ed;
+            border: 2px solid #b45309;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 12px 0;
+            font-weight: 500;
+            color: #78350f;
+        }
+
+        .hr-divider {
+            height: 2px;
+            background: #e5e7eb;
+            margin: 20px 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h1>Endocrine Histology</h1>
+        <nav class="sidebar-nav">
+            <a href="#lo1" class="sidebar-link active" onclick="switchLO(event, 'lo1')">LO1: Thyroid Gland</a>
+            <a href="#lo2" class="sidebar-link" onclick="switchLO(event, 'lo2')">LO2: Parathyroid Gland</a>
+            <a href="#lo3" class="sidebar-link" onclick="switchLO(event, 'lo3')">LO3: Adrenal Cortex</a>
+            <a href="#lo4" class="sidebar-link" onclick="switchLO(event, 'lo4')">LO4: Adrenal Medulla</a>
+            <a href="#lo5" class="sidebar-link" onclick="switchLO(event, 'lo5')">LO5: Histopathology</a>
+            <a href="#mcq" class="sidebar-link" onclick="switchLO(event, 'mcq')">Practice MCQs</a>
+            <a href="#mindmap" class="sidebar-link" onclick="switchLO(event, 'mindmap')">Mind Map</a>
+        </nav>
+        <div class="sidebar-divider"></div>
+        <div class="progress-box">
+            <div class="progress-label">Progress</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+            </div>
+            <div style="font-size: 12px; color: #94a3b8; margin-top: 8px;" id="progressText">0/5 LOs</div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header>
+            <h1>Lecture 11: Thyroid, Parathyroid & Adrenal Histology</h1>
+            <p>Endocrine Gland Structure, Function & Pathology — HoyaDocs Endocrine Block</p>
+        </header>
+
+        <!-- Learning Objectives Tabs -->
+        <div class="lo-tabs">
+            <button class="lo-tab active" onclick="switchLO(event, 'lo1')">LO1: Thyroid</button>
+            <button class="lo-tab" onclick="switchLO(event, 'lo2')">LO2: Parathyroid</button>
+            <button class="lo-tab" onclick="switchLO(event, 'lo3')">LO3: Adrenal Cortex</button>
+            <button class="lo-tab" onclick="switchLO(event, 'lo4')">LO4: Adrenal Medulla</button>
+            <button class="lo-tab" onclick="switchLO(event, 'lo5')">LO5: Histopathology</button>
+        </div>
+
+        <!-- LEARNING OBJECTIVE 1: THYROID -->
+        <section id="lo1" class="lo-section active">
+            <h2 class="lo-title">LO1: Thyroid Gland Histology</h2>
+
+            <div class="summary-grid">
+                <div class="summary-box">
+                    <div class="summary-box-title">🎯 Tested Concepts</div>
+                    <div class="summary-box-content">Follicular unit, scalloping, PAS staining, C cell origin, medullary carcinoma amyloid</div>
+                </div>
+                <div class="summary-box">
+                    <div class="summary-box-title">⚠️ High-Yield Traps</div>
+                    <div class="summary-box-content">C cells ≠ follicular cells; PTC has Orphan Annie eyes (not follicular carcinoma); medullary = amyloid</div>
+                </div>
+                <div class="summary-box">
+                    <div class="summary-box-title">⭐ HY Bullets</div>
+                    <div class="summary-box-content">FLAT=inactive, TALL=active TSH; Colloid=glycoprotein; C cells=neural crest origin</div>
+                </div>
+            </div>
+
+            <!-- Collapsible: Functional Unit -->
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(event)">
+                    <span>Thyroid Follicle: Functional Unit</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-body">
+                    <div class="content-card">
+                        <h3>Structure & Composition</h3>
+                        <ul>
+                            <li><strong>Follicle = sphere of follicular cells (thyrocytes)</strong> surrounding homogeneous eosinophilic colloid in the lumen</li>
+                            <li>Colloid = <strong>thyroglobulin</strong> (glycoprotein); stains <strong>pink (eosinophilic)</strong> on H&E</li>
+                            <li><strong>PAS stain positive</strong> = carbohydrate in thyroglobulin</li>
+                            <li>Simple cuboidal to columnar epithelium lining follicle</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Follicular Cell States (FLAT vs TALL)</h3>
+                        <ul>
+                            <li><strong>Inactive follicles</strong>: FLAT squamous cells (low cuboidal), abundant colloid, little scalloping</li>
+                            <li><strong>Active follicles</strong> (TSH-stimulated): TALL columnar cells, columnar nuclei, <strong>scalloping of colloid at periphery</strong> (peripheral vacuoles = active resorption)</li>
+                            <li>Scalloping = hallmark of increased thyroid activity (reabsorption of colloid)</li>
+                        </ul>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        "FLAT follicular cells = Low/inactive; TALL columnar = TSH stimulated = Active"
+                    </div>
+
+                    <div class="key-point">
+                        KEY: Scalloping of colloid periphery indicates active resorption and hormone synthesis — sign of stimulated thyroid.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collapsible: C Cells -->
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(event)">
+                    <span>Parafollicular C Cells</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-body">
+                    <div class="content-card">
+                        <h3>Location & Morphology</h3>
+                        <ul>
+                            <li><strong>NOT in lumen</strong> of follicles — located between follicles in interfollicular stroma</li>
+                            <li>Larger than follicular cells, pale eosinophilic cytoplasm</li>
+                            <li><strong>Neural crest origin</strong> (NOT endodermal like follicular cells) — key embryology point</li>
+                            <li>Scattered throughout thyroid, increase with age</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Function & Staining</h3>
+                        <ul>
+                            <li>Produce <strong>calcitonin</strong> (serum calcium regulation)</li>
+                            <li><strong>Chromogranin A positive</strong> (neuroendocrine marker)</li>
+                            <li><strong>Calcitonin positive</strong> by immunohistochemistry</li>
+                            <li>Precursor to <strong>medullary thyroid carcinoma</strong> (C cell malignancy)</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point">
+                        KEY: C cells = Neural crest origin, produce calcitonin, prone to medullary carcinoma with amyloid deposits. Not follicular-derived!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collapsible: Gland Architecture -->
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(event)">
+                    <span>Gland Architecture & Vascular Supply</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-body">
+                    <div class="content-card">
+                        <h3>Organization</h3>
+                        <ul>
+                            <li><strong>Thin connective tissue capsule</strong> surrounds gland</li>
+                            <li>Septa divide gland into <strong>lobules</strong></li>
+                            <li>Follicles of varying sizes clustered together</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Vascular & Lymphatic Features</h3>
+                        <ul>
+                            <li><strong>Rich vascular supply</strong> — reflects high metabolic activity</li>
+                            <li><strong>Fenestrated capillaries</strong> — allow efficient hormone uptake into circulation</li>
+                            <li>Abundant lymphatic drainage (important for papillary thyroid carcinoma spread)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flip Cards: Thyroid Features -->
+            <div style="margin-top: 20px;">
+                <h3 style="margin-bottom: 16px; color: #0f172a;">Quick Review Flip Cards</h3>
+                <div class="flip-card-container">
+                    <div class="flip-card" onclick="toggleFlip(event)">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">What stain marks thyroid colloid?</div>
+                            <div class="flip-card-back">PAS positive (glycoprotein in thyroglobulin)</div>
+                        </div>
+                    </div>
+                    <div class="flip-card" onclick="toggleFlip(event)">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">What does colloid scalloping indicate?</div>
+                            <div class="flip-card-back">Active resorption → TSH stimulation & increased activity</div>
+                        </div>
+                    </div>
+                    <div class="flip-card" onclick="toggleFlip(event)">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">C cell embryologic origin?</div>
+                            <div class="flip-card-back">Neural crest (NOT endoderm). → Medullary carcinoma = C cell tumor</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LEARNING OBJECTIVE 2: PARATHYROID -->
+        <section id="lo2" class="lo-section">
+            <h2 class="lo-title">LO2: Parathyroid Gland Histology</h2>
+
+            <div class="summary-grid">
+                <div class="summary-box">
+                    <div class="summary-box-title">🎯 Tested Concepts</div>
+                    <div class="summary-box-content">Chief vs oxyphil cells, adenoma vs hyperplasia, PTH-secreting cells, embryologic origin</div>
+                </div>
+                <div class="summary-box">
+                    <div class="summary-box-title">⚠️ High-Yield Traps</div>
+                    <div class="summary-box-content">Oxyphil cells do NOT produce PTH; inferior parathyroids from 3rd pouch (not 4th); adenoma=single gland >80%</div>
+                </div>
+                <div class="summary-box">
+                    <div class="summary-box-title">⭐ HY Bullets</div>
+                    <div class="summary-box-content">Chief=PTH producer; Oxyphil=mitochondria-rich, no hormone; hyperplasia=4 glands (CKD)</div>
+                </div>
+            </div>
+
+            <!-- Collapsible: Anatomy & Cell Types -->
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(event)">
+                    <span>Anatomy & Cell Types</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-body">
+                    <div class="content-card">
+                        <h3>Gland Anatomy</h3>
+                        <ul>
+                            <li><strong>4 parathyroid glands</strong>: paired superior (4th pharyngeal pouch) & inferior (3rd pharyngeal pouch)</li>
+                            <li><strong>Embedded in posterior thyroid capsule</strong></li>
+                            <li>Size of grain of rice; <strong>yellow-brown color</strong></li>
+                            <li>Richly vascularized (rapid hormone secretion response)</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Chief Cells (Primary Producer)</h3>
+                        <ul>
+                            <li><strong>Most numerous cell type</strong></li>
+                            <li>Small, polygonal, <strong>pale eosinophilic cytoplasm</strong> (sparse glycogen)</li>
+                            <li><strong>Central round nucleus</strong></li>
+                            <li>Arranged in <strong>cords, sheets, or follicles</strong></li>
+                            <li><strong>Produce PTH</strong> (stored in secretory granules)</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Oxyphil Cells (Non-Secretory)</h3>
+                        <ul>
+                            <li>Larger than chief cells, <strong>intensely eosinophilic (bright pink)</strong> cytoplasm</li>
+                            <li><strong>Packed with mitochondria</strong> (oxidative metabolism)</li>
+                            <li><strong>Do NOT produce PTH</strong> — common trap!</li>
+                            <li>Increase in number with age</li>
+                            <li>Function unclear; may provide metabolic support</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Other Cell Types</h3>
+                        <ul>
+                            <li><strong>Water-clear cells</strong>: Rare; glycogen-rich; associated with primary hyperparathyroidism</li>
+                            <li><strong>Fat cells</strong>: Increase with age (30-70% fat in adult gland)</li>
+                        </ul>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        "Chief = PTH producer (chief job); Oxyphil = lots of Oxygen (mitochondria) but no PTH"
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collapsible: Pathology -->
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(event)">
+                    <span>Adenoma vs Hyperplasia Patterns</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-body">
+                    <div class="content-card">
+                        <h3>Parathyroid Adenoma</h3>
+                        <ul>
+                            <li><strong>Single enlarged gland</strong> (most common cause primary hyperparathyroidism, >80%)</li>
+                            <li>Sheets of chief cells with increased secretory granules</li>
+                            <li><strong>Rim of normal parathyroid tissue at periphery</strong> (key finding)</li>
+                            <li>Other 3 glands suppressed (normal/atrophic)</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Parathyroid Hyperplasia</h3>
+                        <ul>
+                            <li><strong>ALL 4 glands enlarged</strong></li>
+                            <li>Chief cell hyperplasia pattern (chief cells proliferate)</li>
+                            <li>Common cause: <strong>Secondary hyperparathyroidism (CKD)</strong> due to hypocalcemia & hyperphosphatemia</li>
+                            <li>Also: MEN syndromes (1, 2A, 2B)</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point">
+                        KEY: Adenoma = single gland (85-90% primary HPT); Hyperplasia = all 4 glands (secondary HPT from CKD)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flip Cards: Parathyroid -->
+            <div style="margin-top: 20px;">
+                <h3 style="margin-bottom: 16px; color: #0f172a;">Quick Review Flip Cards</h3>
+                <div class="flip-card-container">
+                    <div class="flip-card" onclick="toggleFlip(event)">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">Which cell produces PTH?</div>
+                            <div class="flip-card-back">Chief cells (pale eosinophilic, small, polygonal)</div>
+                        </div>
+                    </div>
+                    <div class="flip-card" onclick="toggleFlip(event)">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">Why are oxyphil cells pink on H&E?</div>
+                            <div class="flip-card-back">Packed with mitochondria (high metabolic rate)</div>
+                        </div>
+                    </div>
+                    <div class="flip-card" onclick="toggleFlip(event)">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">Adenoma vs hyperplasia: how many glands?</div>
+                            <div class="flip-card-back">Adenoma = 1 gland (+rim of normal); Hyperplasia = all 4</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LEARNING OBJECTIVE 3: ADRENAL CORTEX -->
+        <section id="lo3" class="lo-section">
+            <h2 class="lo-title">LO3: Adrenal Gland Histology — Cortex Zones</h2>
+
+            <div class="summary-grid">
+                <div class="summary-box">
+                    <div class="summary-box-title">🎯 Tested Concepts</div>
+                    <div class="summary-box-content">GFR zones, products, 17α-hydroxylase absence in glomerulosa, spongiocytes, ACTH/AngII regulation</div>
+                </div>
+                <div class="summary-box">
+                    <div class="summary-box-title">⚠️ High-Yield Traps</div>
+                    <div class="summary-box-content">Glomerulosa lacks 17α-hydroxylase (no cortisol); fasciculata has clear cytoplasm (lipid washout); hyperplasia in CKD affects cortex</div>
+                </div>
+                <div class="summary-box">
+                    <div class="summary-box-title">⭐ HY Bullets</div>
+                    <div class="summary-box-content">GFR = Glomerulosa/Fasciculata/Reticularis; Salt/Sugar/Sex products; ACTH stimulates F+R only</div>
+                </div>
+            </div>
+
+            <!-- Mind Map SVG -->
+            <div class="mind-map-container">
+                <svg class="mind-map-svg" viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Central box -->
+                    <rect x="420" y="160" width="160" height="80" fill="#b45309" stroke="#92400e" stroke-width="2" rx="8"/>
+                    <text x="500" y="210" font-size="16" font-weight="bold" fill="white" text-anchor="middle">ADRENAL CORTEX</text>
+
+                    <!-- Zona Glomerulosa -->
+                    <line x1="580" y1="200" x2="720" y2="140" stroke="#b45309" stroke-width="2"/>
+                    <rect x="700" y="100" width="140" height="80" fill="#fff7ed" stroke="#b45309" stroke-width="2" rx="6"/>
+                    <text x="770" y="125" font-size="13" font-weight="bold" fill="#78350f" text-anchor="middle">Zona Glomerulosa</text>
+                    <text x="770" y="145" font-size="12" fill="#78350f" text-anchor="middle">ALDOSTERONE</text>
+                    <text x="770" y="165" font-size="11" fill="#92400e" text-anchor="middle">No 17α-hydroxylase</text>
+
+                    <!-- Zona Fasciculata -->
+                    <line x1="580" y1="200" x2="720" y2="220" stroke="#b45309" stroke-width="2"/>
+                    <rect x="700" y="190" width="140" height="80" fill="#fff7ed" stroke="#b45309" stroke-width="2" rx="6"/>
+                    <text x="770" y="215" font-size="13" font-weight="bold" fill="#78350f" text-anchor="middle">Zona Fasciculata</text>
+                    <text x="770" y="235" font-size="12" fill="#78350f" text-anchor="middle">CORTISOL</text>
+                    <text x="770" y="255" font-size="11" fill="#92400e" text-anchor="middle">Spongiocytes, lipid-rich</text>
+
+                    <!-- Zona Reticularis -->
+                    <line x1="580" y1="240" x2="720" y2="300" stroke="#b45309" stroke-width="2"/>
+                    <rect x="700" y="280" width="140" height="80" fill="#fff7ed" stroke="#b45309" stroke-width="2" rx="6"/>
+                    <text x="770" y="305" font-size="13" font-weight="bold" fill="#78350f" text-anchor="middle">Zona Reticularis</text>
+                    <text x="770" y="325" font-size="12" fill="#78350f" text-anchor="middle">ANDROGENS</text>
+                    <text x="770" y="345" font-size="11" fill="#92400e" text-anchor="middle">Compact, eosinophilic</text>
+
+                    <!-- Regulation -->
+                    <text x="150" y="50" font-size="12" font-weight="bold" fill="#b45309">REGULATION:</text>
+                    <text x="150" y="80" font-size="11" fill="#4b5563">Glomerulosa: AngII, K+</text>
+                    <text x="150" y="105" font-size="11" fill="#4b5563">Fasciculata + Reticularis: ACTH</text>
+                </svg>
+            </div>
+
+            <!-- Collapsible: GFR Zones -->
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(event)">
+                    <span>GFR Zones Overview (Salt-Sugar-Sex)</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-body">
+                    <div class="content-card">
+                        <h3>Zone Organization (Outer to Inner)</h3>
+                        <ul>
+                            <li><strong>Zona Glomerulosa</strong> (outermost, ~15%)</li>
+                            <li><strong>Zona Fasciculata</strong> (middle, ~75%)</li>
+                            <li><strong>Zona Reticularis</strong> (innermost, ~10%)</li>
+                        </ul>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        "GFR = Salt (Glomerulosa), Sugar (Fasciculata), Sex (Reticularis)"
+                    </div>
+
+                    <div class="key-point">
+                        KEY: Three distinct zones with unique morphology, enzyme expression, products, and regulation patterns.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collapsible: Zona Glomerulosa -->
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(event)">
+                    <span>Zona Glomerulosa: Aldosterone Production</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-body">
+                    <div class="content-card">
+                        <h3>Morphology</h3>
+                        <ul>
+                            <li><strong>Outermost zone</strong>, represents ~15% of cortex</li>
+                            <li>Cells arranged in <strong>rounded clusters (glomeruli)</strong> appearance</li>
+                            <li>Columnar to cuboidal epithelium</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Product & Function</h3>
+                        <ul>
+                            <li><strong>Produces ALDOSTERONE</strong> (mineralocorticoid)</li>
+                            <li>Regulates sodium reabsorption & potassium secretion</li>
+                            <li><strong>Stimulated by: Angiotensin II and elevated K+</strong></li>
+                            <li>NOT responsive to ACTH (has different regulation)</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Unique Enzyme Expression</h3>
+                        <ul>
+                            <li><strong>LACKS 17α-hydroxylase</strong> — CRITICAL POINT</li>
+                            <li>Therefore CANNOT make cortisol (requires 17α-hydroxylase)</li>
+                            <li>Cannot make androgens (requires 17α-hydroxylase)</li>
+                            <li>Only makes aldosterone from pregnenolone → progesterone → DOC → corticosterone → aldosterone</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point">
+                        KEY: Glomerulosa lacks 17α-hydroxylase → aldosterone-only production. No ACTH regulation here!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collapsible: Zona Fasciculata -->
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(event)">
+                    <span>Zona Fasciculata: Cortisol Production</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-body">
+                    <div class="content-card">
+                        <h3>Morphology: Spongiocytes</h3>
+                        <ul>
+                            <li><strong>Middle zone</strong>, represents ~75% of cortex (largest)</li>
+                            <li>Cells arranged in <strong>long parallel cords (fascicles)</strong></li>
+                            <li><strong>"Spongiocytes" = foamy/vacuolated cytoplasm</strong> (lipid-filled)</li>
+                            <li>On H&E: <strong>clear cytoplasm</strong> (lipid dissolves away in fixation)</li>
+                            <li>Large central nucleus</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Product & Regulation</h3>
+                        <ul>
+                            <li><strong>Produces CORTISOL</strong> (glucocorticoid, ~95% of glucocorticoid activity)</li>
+                            <li><strong>Stimulated by ACTH</strong> (responds to pituitary-adrenal axis)</li>
+                            <li>Lipid droplets = stored cholesterol (steroid precursor)</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Functional Significance</h3>
+                        <ul>
+                            <li>Rich in mitochondria (energy for steroid synthesis)</li>
+                            <li>High degree of endoplasmic reticulum (enzyme synthesis)</li>
+                            <li>ACTH binding → increased lipid uptake & steroid synthesis</li>
+                            <li>In Cushing's syndrome: fasciculata hyperplasia (ACTH-driven)</li>
+                        </ul>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        "SPONGiocyte = sCLEAR (no lipid on stain); produces Sugar (cortisol)"
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collapsible: Zona Reticularis -->
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(event)">
+                    <span>Zona Reticularis: Androgen Production</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-body">
+                    <div class="content-card">
+                        <h3>Morphology</h3>
+                        <ul>
+                            <li><strong>Innermost zone</strong>, represents ~10% of cortex</li>
+                            <li>Cells arranged in <strong>anastomosing (interconnecting) network</strong></li>
+                            <li><strong>Compact, eosinophilic cytoplasm</strong> (bright pink — little lipid)</li>
+                            <li>Dark nuclear chromatin</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Products & Regulation</h3>
+                        <ul>
+                            <li><strong>Produces ANDROGENS</strong>: DHEA (dehydroepiandrosterone) and androstenedione</li>
+                            <li><strong>Stimulated by ACTH</strong> (shares regulation with fasciculata)</li>
+                            <li>Minor contribution to adrenal androgens in steady state</li>
+                            <li>Becomes important during stress or in tumors (excessive androgens = virilization)</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Functional Notes</h3>
+                        <ul>
+                            <li>Eosinophilic appearance = less lipid storage than fasciculata</li>
+                            <li>Involution occurs with age (innermost layers first)</li>
+                            <li>Hyperplasia with chronic ACTH stimulation (ACTH-secreting tumors, Cushing's disease)</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point">
+                        KEY: Reticularis = androgens; responds to ACTH; eosinophilic (lipid-poor); forms interconnected network.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flip Cards: Adrenal Cortex -->
+            <div style="margin-top: 20px;">
+                <h3 style="margin-bottom: 16px; color: #0f172a;">Quick Review Flip Cards</h3>
+                <div class="flip-card-container">
+                    <div class="flip-card" onclick="toggleFlip(event)">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">What enzyme is ABSENT from glomerulosa?</div>
+                            <div class="flip-card-back">17α-hydroxylase → cannot make cortisol or androgens</div>
+                        </div>
+                    </div>
+                    <div class="flip-card" onclick="toggleFlip(event)">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">Fasciculata cells look clear. Why?</div>
+                            <div class="flip-card-back">Lipid dissolves during fixation → clear (spongiocytes)</div>
+                        </div>
+                    </div>
+                    <div class="flip-card" onclick="toggleFlip(event)">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">GFR products: Salt, Sugar, ?</div>
+                            <div class="flip-card-back">Sex (androgens). Glomerulosa/Fasciculata/Reticularis</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LEARNING OBJECTIVE 4: ADRENAL MEDULLA -->
+        <section id="lo4" class="lo-section">
+            <h2 class="lo-title">LO4: Adrenal Gland Histology — Medulla</h2>
+
+            <div class="summary-grid">
+                <div class="summary-box">
+                    <div class="summary-box-title">🎯 Tested Concepts</div>
+                    <div class="summary-box-content">Chromaffin cells, catecholamine staining, neural crest origin, chromogranin A, pheochromocytoma</div>
+                </div>
+                <div class="summary-box">
+                    <div class="summary-box-title">⚠️ High-Yield Traps</div>
+                    <div class="summary-box-content">Medulla has NO capsule (continuous with cortex); Pheochromocytoma = modified sympathetic neurons; RULE OF 10s</div>
+                </div>
+                <div class="summary-box">
+                    <div class="summary-box-title">⭐ HY Bullets</div>
+                    <div class="summary-box-content">Chromaffin cells = postganglionic neurons; 80% epi/20% norepi; splanchnic innervation; S100+ sustentacular cells</div>
+                </div>
+            </div>
+
+            <!-- Collapsible: Medullary Structure -->
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(event)">
+                    <span>Medullary Architecture & Cell Types</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-body">
+                    <div class="content-card">
+                        <h3>Embryology & General Features</h3>
+                        <ul>
+                            <li><strong>Adrenal medulla = modified sympathetic ganglion</strong></li>
+                            <li><strong>Neural crest origin</strong> (not mesodermal like cortex)</li>
+                            <li><strong>NO capsule separating medulla from cortex</strong> — direct continuity</li>
+                            <li>Cortex wraps entirely around medulla in cross-section</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Chromaffin Cells (Neuroendocrine)</h3>
+                        <ul>
+                            <li><strong>Large, polygonal cells</strong></li>
+                            <li><strong>Basophilic granular cytoplasm</strong> (neurosecretory granules)</li>
+                            <li>Arranged in <strong>nests and cords around sinusoids</strong> (fenestrated capillaries)</li>
+                            <li><strong>Named for brown color with chromaffin stain</strong> (chromium salts oxidize catecholamines)</li>
+                            <li><strong>Modified postganglionic sympathetic neurons</strong> (lost axons, became secretory)</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Supporting Cell Types</h3>
+                        <ul>
+                            <li><strong>Sustentacular (support) cells</strong>: surround chromaffin cells, S100 positive</li>
+                            <li><strong>Ganglion cells</strong>: scattered sympathetic neurons among chromaffin cells</li>
+                            <li><strong>Preganglionic sympathetic fibers (splanchnic nerves)</strong>: directly innervate chromaffin cells for rapid catecholamine release</li>
+                        </ul>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        "CHROMaffin → CHROMium stain (brown with chromaffin) → CATecholamines (epi/norepi)"
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collapsible: Products & Regulation -->
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(event)">
+                    <span>Catecholamine Products & Neural Control</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-body">
+                    <div class="content-card">
+                        <h3>Products</h3>
+                        <ul>
+                            <li><strong>EPINEPHRINE (~80%)</strong> — adrenaline</li>
+                            <li><strong>NOREPINEPHRINE (~20%)</strong> — noradrenaline</li>
+                            <li>Released directly into sinusoid circulation</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Regulation: Direct Neural Control</h3>
+                        <ul>
+                            <li><strong>Preganglionic sympathetic splanchnic nerves directly innervate chromaffin cells</strong></li>
+                            <li>NOT hormonal control (unlike cortex with ACTH)</li>
+                            <li>Stress → splanchnic nerve impulses → immediate catecholamine release</li>
+                            <li>"Fight-or-flight" response</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Neuroendocrine Markers</h3>
+                        <ul>
+                            <li><strong>Chromogranin A positive</strong> (neuroendocrine tumor marker)</li>
+                            <li><strong>Synaptophysin positive</strong> (synaptic vesicle marker)</li>
+                            <li>These markers used to diagnose pheochromocytoma</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point">
+                        KEY: Medulla is directly innervated (not ACTH-controlled); produces 80% epi + 20% norepi via splanchnic nerve stimulation.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collapsible: Pheochromocytoma -->
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(event)">
+                    <span>Pheochromocytoma: Chromaffin Cell Tumor</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-body">
+                    <div class="content-card">
+                        <h3>Definition & Origin</h3>
+                        <ul>
+                            <li><strong>Tumor of chromaffin cells (adrenal medulla)</strong></li>
+                            <li>Can arise from extra-adrenal paraganglia (sympathetic chain neurons)</li>
+                            <li><strong>Catecholamine-secreting</strong> (epinephrine & norepinephrine)</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Histologic Features</h3>
+                        <ul>
+                            <li><strong>"Zellballen" (nest/ball) pattern</strong> of chromaffin cells</li>
+                            <li>Chromaffin cells surrounded by sustentacular cells (S100+)</li>
+                            <li><strong>Chromogranin A positive, synaptophysin positive</strong></li>
+                            <li>Variable cellularity, pleomorphism can occur</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Clinical & Pathologic Notes</h3>
+                        <ul>
+                            <li><strong>RULE OF 10s</strong> (though numbers now thought to underestimate): 10% malignant, 10% bilateral, 10% extra-adrenal, 10% in children, 10% familial</li>
+                            <li>Presents with hypertension, palpitations, sweating (catecholamine release)</li>
+                            <li>Metastatic lesions may occur in bone, liver, lung</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point">
+                        KEY: Pheochromocytoma = chromaffin cell tumor with "zellballen" pattern; chromogranin A+; presents with adrenergic symptoms.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flip Cards: Adrenal Medulla -->
+            <div style="margin-top: 20px;">
+                <h3 style="margin-bottom: 16px; color: #0f172a;">Quick Review Flip Cards</h3>
+                <div class="flip-card-container">
+                    <div class="flip-card" onclick="toggleFlip(event)">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">What innervates chromaffin cells?</div>
+                            <div class="flip-card-back">Preganglionic sympathetic splanchnic nerves (direct, not ACTH)</div>
+                        </div>
+                    </div>
+                    <div class="flip-card" onclick="toggleFlip(event)">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">Epi:Norepi ratio in medulla?</div>
+                            <div class="flip-card-back">80% epinephrine : 20% norepinephrine</div>
+                        </div>
+                    </div>
+                    <div class="flip-card" onclick="toggleFlip(event)">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">Pheochromocytoma pattern?</div>
+                            <div class="flip-card-back">Zellballen (nests); chromogranin A+; S100+ sustentacular cells</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LEARNING OBJECTIVE 5: HISTOPATHOLOGY -->
+        <section id="lo5" class="lo-section">
+            <h2 class="lo-title">LO5: Histopathology Correlations — Recognizing Key Lesions</h2>
+
+            <div class="summary-grid">
+                <div class="summary-box">
+                    <div class="summary-box-title">🎯 Tested Concepts</div>
+                    <div class="summary-box-content">PTC nuclei, follicular carcinoma invasion, medullary amyloid, Hashimoto's Hürthle cells, adenoma rim</div>
+                </div>
+                <div class="summary-box">
+                    <div class="summary-box-title">⚠️ High-Yield Traps</div>
+                    <div class="summary-box-content">PTC diagnosed by nuclear features (not capsule invasion); Follicular diagnosed by invasion only; Medullary = amyloid</div>
+                </div>
+                <div class="summary-box">
+                    <div class="summary-box-title">⭐ HY Bullets</div>
+                    <div class="summary-box-content">Orphan Annie eyes = PTC; Psammoma bodies in PTC; Hürthle = Hashimoto's; Medullary amyloid = calcitonin-derived</div>
+                </div>
+            </div>
+
+            <!-- Collapsible: Thyroid Pathology -->
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(event)">
+                    <span>Thyroid Pathology: Inflammatory & Neoplastic</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-body">
+                    <div class="content-card">
+                        <h3>Graves' Disease (Hyperthyroidism)</h3>
+                        <ul>
+                            <li><strong>Hyperplastic follicles</strong> with tall columnar epithelium</li>
+                            <li><strong>Prominent scalloping of colloid</strong> (active resorption)</li>
+                            <li><strong>Lymphocytic infiltrate</strong> (autoimmune)</li>
+                            <li>Little colloid in lumens (used up by TSI-driven synthesis)</li>
+                            <li>Increased vascularity</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Hashimoto's Thyroiditis (Autoimmune)</h3>
+                        <ul>
+                            <li><strong>Dense lymphocytic infiltrate with germinal centers</strong> (B-cell hyperplasia)</li>
+                            <li><strong>Hürthle cell change</strong> = oxyphilic metaplasia of follicular cells (large, pink, granular cytoplasm due to mitochondrial accumulation)</li>
+                            <li>Follicle destruction with loss of follicles</li>
+                            <li>Fibrosis replacing gland (eventually hypothyroidism)</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Multinodular Goiter</h3>
+                        <ul>
+                            <li><strong>Variable follicle sizes</strong> — some markedly enlarged (macro-follicles), some small</li>
+                            <li>Follicular hyperplasia in areas</li>
+                            <li>Fibrosis, hemorrhage, calcification (degeneration)</li>
+                            <li>Results from iodine deficiency or autonomous growth</li>
+                        </ul>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        "Graves = Hyperplasia + scalloping (active); Hashimoto = lymphocytes + Hürthle cells"
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collapsible: Thyroid Cancers -->
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(event)">
+                    <span>Thyroid Cancers: Diagnostic Features</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-body">
+                    <div class="content-card">
+                        <h3>Papillary Thyroid Carcinoma (PTC) — Most Common</h3>
+                        <ul>
+                            <li><strong>Papillary architecture</strong> (not follicular)</li>
+                            <li><strong>Orphan Annie eye nuclei</strong> = ground-glass, empty-appearing, overlapping nuclei (KEY DIAGNOSTIC FEATURE)</li>
+                            <li><strong>Nuclear grooves</strong> (longitudinal)</li>
+                            <li><strong>Psammoma bodies</strong> = concentric calcifications (pathognomonic)</li>
+                            <li><strong>Does NOT require capsular invasion for diagnosis</strong> — nuclear features sufficient for PTC diagnosis</li>
+                            <li>Spreads to lymph nodes (good prognosis, ~95% 10-year survival)</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Follicular Thyroid Carcinoma (FTC)</h3>
+                        <ul>
+                            <li><strong>Follicular architecture (looks similar to benign thyroid)</strong></li>
+                            <li><strong>DIAGNOSED BY CAPSULAR OR VASCULAR INVASION ONLY</strong> (critical distinction from adenoma)</li>
+                            <li><strong>Cannot distinguish from adenoma by cytology alone</strong> — must have excision & histology</li>
+                            <li>No nuclear features to rely on (unlike PTC)</li>
+                            <li>More aggressive than PTC; ~80% 10-year survival</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Medullary Thyroid Carcinoma (MTC) — C Cell Origin</h3>
+                        <ul>
+                            <li><strong>Spindle and polygonal cells</strong> (variable morphology)</li>
+                            <li><strong>Amyloid deposits</strong> (Congo red positive, apple-green birefringence under polarized light)</li>
+                            <li><strong>Amyloid = calcitonin-derived</strong> (stacked calcitonin molecules)</li>
+                            <li><strong>Chromogranin A positive, calcitonin positive</strong></li>
+                            <li>Associated with MEN 2A, 2B syndromes (RET mutations)</li>
+                            <li>Spreads to lymph nodes and distant sites; intermediate prognosis</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Anaplastic (Undifferentiated) Carcinoma</h3>
+                        <ul>
+                            <li><strong>Bizarre giant cells, pleomorphism, mitotic figures, necrosis</strong></li>
+                            <li>Loss of follicular or papillary architecture</li>
+                            <li>Most aggressive thyroid cancer; ~10% 10-year survival</li>
+                            <li>Rapid progression; often presents at stage III-IV</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point">
+                        KEY: PTC = papillary + Orphan Annie eyes + psammoma bodies; FTC = invasion-based diagnosis; MTC = amyloid (calcitonin-derived)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collapsible: Parathyroid & Adrenal Pathology -->
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(event)">
+                    <span>Parathyroid & Adrenal Pathology</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-body">
+                    <div class="content-card">
+                        <h3>Parathyroid Adenoma (Primary HPT)</h3>
+                        <ul>
+                            <li><strong>Single enlarged gland</strong></li>
+                            <li>Sheets of chief cells with increased secretory granules</li>
+                            <li><strong>Rim of normal parathyroid tissue at periphery</strong> (compressed)</li>
+                            <li>Other 3 glands appear normal/atrophic (suppressed by hypercalcemia)</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Adrenocortical Adenoma</h3>
+                        <ul>
+                            <li><strong>Lipid-rich cells resembling zona fasciculata</strong></li>
+                            <li>Well-circumscribed, <strong>complete fibrous capsule</strong></li>
+                            <li>Can produce cortisol (Cushing's) or aldosterone (primary hyperaldosteronism)</li>
+                            <li>Benign by definition (no invasion)</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Adrenocortical Carcinoma</h3>
+                        <ul>
+                            <li><strong>Large, invasive mass with necrosis</strong></li>
+                            <li><strong>Vascular invasion present</strong></li>
+                            <li><strong>Pleomorphism, high mitotic rate</strong></li>
+                            <li><strong>Weiss criteria</strong> for malignancy (necrosis, mitotic rate, vascular invasion, capsular invasion, etc.)</li>
+                            <li>Aggressive; can produce multiple hormones (cortisol, androgens, aldosterone)</li>
+                        </ul>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        "Adenoma = capsule + no invasion; Carcinoma = invasion + necrosis + pleomorphism"
+                    </div>
+                </div>
+            </div>
+
+            <!-- Checklist: Pathology Mnemonics -->
+            <div style="margin-top: 20px;">
+                <h3 style="margin-bottom: 16px; color: #0f172a;">Pathology Recognition Checklist</h3>
+                <ul class="checklist">
+                    <li><input type="checkbox" id="check1" onchange="updateProgress()"><label for="check1"><strong>PTC:</strong> Papillary, Psammoma bodies, ground-glass Pupils (Orphan Annie) nuclei</label></li>
+                    <li><input type="checkbox" id="check2" onchange="updateProgress()"><label for="check2"><strong>FTC:</strong> Follicular architecture, diagnosed by INVASION only (capsular or vascular)</label></li>
+                    <li><input type="checkbox" id="check3" onchange="updateProgress()"><label for="check3"><strong>MTC:</strong> Medullary, Amyloid (Congo red+), calcitonin-derived</label></li>
+                    <li><input type="checkbox" id="check4" onchange="updateProgress()"><label for="check4"><strong>Hashimoto's:</strong> Hürthle cells, lymphocytic infiltrate, germinal centers</label></li>
+                    <li><input type="checkbox" id="check5" onchange="updateProgress()"><label for="check5"><strong>Graves':</strong> Hyperplastic follicles, scalloping, lymphocytic infiltrate</label></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- MIND MAP SECTION -->
+        <section id="mindmap" class="lo-section">
+            <h2 class="lo-title">Mind Map: Endocrine Gland Histology Integration</h2>
+            <div class="mind-map-container">
+                <svg class="mind-map-svg" viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Central Hub -->
+                    <circle cx="600" cy="250" r="45" fill="#b45309" stroke="#92400e" stroke-width="2"/>
+                    <text x="600" y="255" font-size="12" font-weight="bold" fill="white" text-anchor="middle">ENDOCRINE</text>
+                    <text x="600" y="270" font-size="12" font-weight="bold" fill="white" text-anchor="middle">HISTOLOGY</text>
+
+                    <!-- Branch 1: Thyroid -->
+                    <line x1="645" y1="210" x2="750" y2="150" stroke="#b45309" stroke-width="3"/>
+                    <rect x="720" y="100" width="120" height="100" fill="#fff7ed" stroke="#b45309" stroke-width="2" rx="6"/>
+                    <text x="780" y="125" font-size="13" font-weight="bold" fill="#78350f" text-anchor="middle">THYROID</text>
+                    <text x="780" y="145" font-size="11" fill="#78350f" text-anchor="middle">Follicular cells</text>
+                    <text x="780" y="160" font-size="11" fill="#78350f" text-anchor="middle">C cells (neural crest)</text>
+                    <text x="780" y="175" font-size="11" fill="#78350f" text-anchor="middle">Colloid/PAS+</text>
+
+                    <!-- Branch 2: Parathyroid -->
+                    <line x1="600" y1="295" x2="600" y2="380" stroke="#b45309" stroke-width="3"/>
+                    <rect x="530" y="380" width="140" height="100" fill="#fff7ed" stroke="#b45309" stroke-width="2" rx="6"/>
+                    <text x="600" y="405" font-size="13" font-weight="bold" fill="#78350f" text-anchor="middle">PARATHYROID</text>
+                    <text x="600" y="425" font-size="11" fill="#78350f" text-anchor="middle">Chief cells (PTH)</text>
+                    <text x="600" y="440" font-size="11" fill="#78350f" text-anchor="middle">Oxyphil (no PTH)</text>
+                    <text x="600" y="455" font-size="11" fill="#78350f" text-anchor="middle">Adenoma vs hyperplasia</text>
+
+                    <!-- Branch 3: Adrenal Cortex -->
+                    <line x1="555" y1="210" x2="450" y2="150" stroke="#b45309" stroke-width="3"/>
+                    <rect x="350" y="100" width="120" height="100" fill="#fff7ed" stroke="#b45309" stroke-width="2" rx="6"/>
+                    <text x="410" y="125" font-size="13" font-weight="bold" fill="#78350f" text-anchor="middle">ADRENAL</text>
+                    <text x="410" y="145" font-size="11" fill="#78350f" text-anchor="middle">CORTEX</text>
+                    <text x="410" y="160" font-size="11" fill="#78350f" text-anchor="middle">GFR zones</text>
+                    <text x="410" y="175" font-size="11" fill="#78350f" text-anchor="middle">Spongiocytes</text>
+
+                    <!-- Branch 4: Adrenal Medulla -->
+                    <line x1="645" y1="290" x2="750" y2="350" stroke="#b45309" stroke-width="3"/>
+                    <rect x="720" y="320" width="120" height="100" fill="#fff7ed" stroke="#b45309" stroke-width="2" rx="6"/>
+                    <text x="780" y="345" font-size="13" font-weight="bold" fill="#78350f" text-anchor="middle">ADRENAL</text>
+                    <text x="780" y="365" font-size="11" fill="#78350f" text-anchor="middle">MEDULLA</text>
+                    <text x="780" y="380" font-size="11" fill="#78350f" text-anchor="middle">Chromaffin cells</text>
+                    <text x="780" y="395" font-size="11" fill="#78350f" text-anchor="middle">Catecholamines</text>
+
+                    <!-- Branch 5: Pathology -->
+                    <line x1="555" y1="290" x2="450" y2="350" stroke="#b45309" stroke-width="3"/>
+                    <rect x="350" y="320" width="120" height="100" fill="#fff7ed" stroke="#b45309" stroke-width="2" rx="6"/>
+                    <text x="410" y="345" font-size="13" font-weight="bold" fill="#78350f" text-anchor="middle">PATHOLOGY</text>
+                    <text x="410" y="365" font-size="11" fill="#78350f" text-anchor="middle">PTC (nuclei)</text>
+                    <text x="410" y="380" font-size="11" fill="#78350f" text-anchor="middle">FTC (invasion)</text>
+                    <text x="410" y="395" font-size="11" fill="#78350f" text-anchor="middle">MTC (amyloid)</text>
+                </svg>
+            </div>
+        </section>
+
+        <!-- MCQ SECTION -->
+        <section id="mcq" class="lo-section">
+            <h2 class="lo-title">Practice MCQs: USMLE-Style Questions</h2>
+
+            <p style="color: #6b7280; margin-bottom: 25px; font-size: 15px;">Select your answer and click "Reveal Answer" to check. Click a question to expand. Minimum 15 questions covering all 5 LOs.</p>
+
+            <!-- MCQ 1 -->
+            <div class="mcq-container">
+                <div class="mcq-question">1. A 45-year-old woman with Graves' disease undergoes thyroid biopsy. Which of the following histologic findings would be MOST consistent with this diagnosis?</div>
+                <div class="mcq-options">
+                    <label class="mcq-option"><input type="radio" name="mcq1" value="a"> A) Dense lymphocytic infiltrate with germinal centers and Hürthle cells</label>
+                    <label class="mcq-option"><input type="radio" name="mcq1" value="b"> B) Hyperplastic follicles with tall columnar epithelium and prominent colloid scalloping</label>
+                    <label class="mcq-option"><input type="radio" name="mcq1" value="c"> C) Papillary architecture with overlapping nuclei and psammoma bodies</label>
+                    <label class="mcq-option"><input type="radio" name="mcq1" value="d"> D) Variable follicle sizes with fibrosis and hemorrhage</label>
+                    <label class="mcq-option"><input type="radio" name="mcq1" value="e"> E) Follicular architecture with capsular invasion</label>
+                </div>
+                <button class="mcq-button" onclick="revealAnswer(this, 'mcq1', 'b')">Reveal Answer</button>
+                <div class="mcq-reveal">
+                    <div class="mcq-reveal-label">Correct Answer: B</div>
+                    <div class="mcq-reveal-text"><strong>Explanation:</strong> Graves' disease shows hyperplastic follicles with tall columnar epithelium (TSH receptor antibodies stimulate growth) and prominent scalloping of colloid due to active resorption. Lymphocytic infiltrate is present but NOT as organized as Hashimoto's. A) Hashimoto's (germinal centers + Hürthle cells); C) Papillary thyroid carcinoma; D) Multinodular goiter; E) Follicular carcinoma.</div>
+                </div>
+            </div>
+
+            <!-- MCQ 2 -->
+            <div class="mcq-container">
+                <div class="mcq-question">2. A histology slide shows a thyroid tumor with ground-glass nuclei, nuclear grooves, and psammoma bodies. The tumor has a papillary architecture. What is the most likely diagnosis?</div>
+                <div class="mcq-options">
+                    <label class="mcq-option"><input type="radio" name="mcq2" value="a"> A) Follicular thyroid carcinoma</label>
+                    <label class="mcq-option"><input type="radio" name="mcq2" value="b"> B) Papillary thyroid carcinoma</label>
+                    <label class="mcq-option"><input type="radio" name="mcq2" value="c"> C) Medullary thyroid carcinoma</label>
+                    <label class="mcq-option"><input type="radio" name="mcq2" value="d"> D) Anaplastic thyroid carcinoma</label>
+                    <label class="mcq-option"><input type="radio" name="mcq2" value="e"> E) Follicular adenoma</label>
+                </div>
+                <button class="mcq-button" onclick="revealAnswer(this, 'mcq2', 'b')">Reveal Answer</button>
+                <div class="mcq-reveal">
+                    <div class="mcq-reveal-text"><strong>Explanation:</strong> Papillary thyroid carcinoma (PTC) is characterized by papillary architecture, "Orphan Annie eye" nuclei (ground-glass, overlapping), nuclear grooves, and psammoma bodies. Notably, PTC does NOT require capsular invasion for diagnosis—nuclear features are sufficient. A) FTC also has follicular architecture but is diagnosed by invasion only; C) MTC has amyloid and calcitonin; D) Anaplastic is undifferentiated; E) Adenoma is benign.</div>
+                </div>
+            </div>
+
+            <!-- MCQ 3 -->
+            <div class="mcq-container">
+                <div class="mcq-question">3. A 32-year-old man presents with elevated serum calcium and PTH. A parathyroid gland is removed and histology shows sheets of chief cells with a rim of normal parathyroid tissue at the periphery. What is the most likely diagnosis?</div>
+                <div class="mcq-options">
+                    <label class="mcq-option"><input type="radio" name="mcq3" value="a"> A) Parathyroid carcinoma</label>
+                    <label class="mcq-option"><input type="radio" name="mcq3" value="b"> B) Parathyroid hyperplasia</label>
+                    <label class="mcq-option"><input type="radio" name="mcq3" value="c"> C) Parathyroid adenoma</label>
+                    <label class="mcq-option"><input type="radio" name="mcq3" value="d"> D) Oxyphil cell tumor</label>
+                    <label class="mcq-option"><input type="radio" name="mcq3" value="e"> E) Chief cell hyperplasia</label>
+                </div>
+                <button class="mcq-button" onclick="revealAnswer(this, 'mcq3', 'c')">Reveal Answer</button>
+                <div class="mcq-reveal">
+                    <div class="mcq-reveal-text"><strong>Explanation:</strong> The rim of normal parathyroid tissue at the periphery is the classic finding in parathyroid adenoma. This represents compressed normal parathyroid tissue. In hyperplasia, all 4 glands are enlarged without a well-defined adenoma. Adenoma accounts for ~80-90% of primary hyperparathyroidism cases.</div>
+                </div>
+            </div>
+
+            <!-- MCQ 4 -->
+            <div class="mcq-container">
+                <div class="mcq-question">4. Which of the following cell types in the parathyroid gland produces parathyroid hormone?</div>
+                <div class="mcq-options">
+                    <label class="mcq-option"><input type="radio" name="mcq4" value="a"> A) Oxyphil cells</label>
+                    <label class="mcq-option"><input type="radio" name="mcq4" value="b"> B) Water-clear cells</label>
+                    <label class="mcq-option"><input type="radio" name="mcq4" value="c"> C) Chief cells</label>
+                    <label class="mcq-option"><input type="radio" name="mcq4" value="d"> D) Fat cells</label>
+                    <label class="mcq-option"><input type="radio" name="mcq4" value="e"> E) Sustentacular cells</label>
+                </div>
+                <button class="mcq-button" onclick="revealAnswer(this, 'mcq4', 'c')">Reveal Answer</button>
+                <div class="mcq-reveal">
+                    <div class="mcq-reveal-text"><strong>Explanation:</strong> Chief cells are the primary PTH-secreting cells in the parathyroid. They are small, polygonal, pale eosinophilic cells arranged in cords/sheets. Common trap: oxyphil cells look "active" with intense eosinophilia (due to mitochondria) but do NOT produce PTH.</div>
+                </div>
+            </div>
+
+            <!-- MCQ 5 -->
+            <div class="mcq-container">
+                <div class="mcq-question">5. A 28-year-old patient with primary hyperaldosteronism undergoes CT and a 1.5 cm adrenal nodule is found. Histology shows a well-circumscribed mass of lipid-rich cells resembling zona fasciculata. What is the diagnosis?</div>
+                <div class="mcq-options">
+                    <label class="mcq-option"><input type="radio" name="mcq5" value="a"> A) Adrenocortical carcinoma</label>
+                    <label class="mcq-option"><input type="radio" name="mcq5" value="b"> B) Pheochromocytoma</label>
+                    <label class="mcq-option"><input type="radio" name="mcq5" value="c"> C) Adrenocortical adenoma</label>
+                    <label class="mcq-option"><input type="radio" name="mcq5" value="d"> D) Cortical hyperplasia</label>
+                    <label class="mcq-option"><input type="radio" name="mcq5" value="e"> E) Adrenal metastasis</label>
+                </div>
+                <button class="mcq-button" onclick="revealAnswer(this, 'mcq5', 'c')">Reveal Answer</button>
+                <div class="mcq-reveal">
+                    <div class="mcq-reveal-text"><strong>Explanation:</strong> Adrenocortical adenoma presents as a lipid-rich, well-circumscribed mass with a fibrous capsule and no evidence of invasion. Histologically similar to zona fasciculata. Benign by definition. A size <4 cm, no necrosis, and no vascular invasion support benignity.</div>
+                </div>
+            </div>
+
+            <!-- MCQ 6 -->
+            <div class="mcq-container">
+                <div class="mcq-question">6. Which zone of the adrenal cortex LACKS the enzyme 17α-hydroxylase and therefore cannot produce cortisol or androgens?</div>
+                <div class="mcq-options">
+                    <label class="mcq-option"><input type="radio" name="mcq6" value="a"> A) Zona fasciculata</label>
+                    <label class="mcq-option"><input type="radio" name="mcq6" value="b"> B) Zona reticularis</label>
+                    <label class="mcq-option"><input type="radio" name="mcq6" value="c"> C) Zona glomerulosa</label>
+                    <label class="mcq-option"><input type="radio" name="mcq6" value="d"> D) Zona intermedia</label>
+                    <label class="mcq-option"><input type="radio" name="mcq6" value="e"> E) Adrenal medulla</label>
+                </div>
+                <button class="mcq-button" onclick="revealAnswer(this, 'mcq6', 'c')">Reveal Answer</button>
+                <div class="mcq-reveal">
+                    <div class="mcq-reveal-text"><strong>Explanation:</strong> Zona glomerulosa lacks 17α-hydroxylase, so it can only produce aldosterone. This enzyme is essential for cortisol (from 17-OHP) and androgen synthesis, making glomerulosa unable to produce these hormones. This is a critical enzyme distinction tested frequently.</div>
+                </div>
+            </div>
+
+            <!-- MCQ 7 -->
+            <div class="mcq-container">
+                <div class="mcq-question">7. A 52-year-old man with hypertension and hypokalemia is found to have elevated aldosterone and suppressed plasma renin. An adrenal nodule is identified. Histologically, cells are arranged in rounded clusters (glomeruli). What is being produced?</div>
+                <div class="mcq-options">
+                    <label class="mcq-option"><input type="radio" name="mcq7" value="a"> A) Cortisol</label>
+                    <label class="mcq-option"><input type="radio" name="mcq7" value="b"> B) DHEA</label>
+                    <label class="mcq-option"><input type="radio" name="mcq7" value="c"> C) Aldosterone</label>
+                    <label class="mcq-option"><input type="radio" name="mcq7" value="d"> D) Epinephrine</label>
+                    <label class="mcq-option"><input type="radio" name="mcq7" value="e"> E) Norepinephrine</label>
+                </div>
+                <button class="mcq-button" onclick="revealAnswer(this, 'mcq7', 'c')">Reveal Answer</button>
+                <div class="mcq-reveal">
+                    <div class="mcq-reveal-text"><strong>Explanation:</strong> Rounded clusters (glomeruli arrangement) = zona glomerulosa, which produces aldosterone. Clinical findings (hypertension, hypokalemia, suppressed renin) confirm primary hyperaldosteronism. The histologic arrangement is pathognomonic for glomerulosa.</div>
+                </div>
+            </div>
+
+            <!-- MCQ 8 -->
+            <div class="mcq-container">
+                <div class="mcq-question">8. Histology of the adrenal cortex shows cells in long parallel cords with extensive lipid-filled cytoplasm. These cells appear pale/clear on routine H&E staining. Which zone is this?</div>
+                <div class="mcq-options">
+                    <label class="mcq-option"><input type="radio" name="mcq8" value="a"> A) Zona glomerulosa</label>
+                    <label class="mcq-option"><input type="radio" name="mcq8" value="b"> B) Zona fasciculata</label>
+                    <label class="mcq-option"><input type="radio" name="mcq8" value="c"> C) Zona reticularis</label>
+                    <label class="mcq-option"><input type="radio" name="mcq8" value="d"> D) Adrenal medulla</label>
+                    <label class="mcq-option"><input type="radio" name="mcq8" value="e"> E) Adrenal cortex (non-specific)</label>
+                </div>
+                <button class="mcq-button" onclick="revealAnswer(this, 'mcq8', 'b')">Reveal Answer</button>
+                <div class="mcq-reveal">
+                    <div class="mcq-reveal-text"><strong>Explanation:</strong> Zona fasciculata has spongiocytes (lipid-rich cells) arranged in fascicles (parallel cords). The lipid dissolves during fixation, leaving a pale/clear cytoplasm on H&E. This is the largest zone (~75%) and produces cortisol (regulated by ACTH).</div>
+                </div>
+            </div>
+
+            <!-- MCQ 9 -->
+            <div class="mcq-container">
+                <div class="mcq-question">9. A 35-year-old man presents with palpitations, sweating, and hypertension. A CT scan reveals a 3 cm adrenal mass. Histology shows a "zellballen" (nest/ball) pattern of large, polygonal cells with basophilic granular cytoplasm. What is the most likely diagnosis?</div>
+                <div class="mcq-options">
+                    <label class="mcq-option"><input type="radio" name="mcq9" value="a"> A) Adrenocortical adenoma</label>
+                    <label class="mcq-option"><input type="radio" name="mcq9" value="b"> B) Pheochromocytoma</label>
+                    <label class="mcq-option"><input type="radio" name="mcq9" value="c"> C) Adrenocortical carcinoma</label>
+                    <label class="mcq-option"><input type="radio" name="mcq9" value="d"> D) Metastatic melanoma</label>
+                    <label class="mcq-option"><input type="radio" name="mcq9" value="e"> E) Medullary thyroid carcinoma metastasis</label>
+                </div>
+                <button class="mcq-button" onclick="revealAnswer(this, 'mcq9', 'b')">Reveal Answer</button>
+                <div class="mcq-reveal">
+                    <div class="mcq-reveal-text"><strong>Explanation:</strong> Pheochromocytoma of the adrenal medulla presents with the classic "zellballen" pattern. Chromaffin cells (neuroendocrine origin) arranged in nests surrounded by sustentacular cells. The clinical presentation (catecholamine symptoms) and histology are pathognomonic.</div>
+                </div>
+            </div>
+
+            <!-- MCQ 10 -->
+            <div class="mcq-container">
+                <div class="mcq-question">10. A pathology specimen from a pheochromocytoma is stained with an antibody against chromogranin A. Which finding would you expect?</div>
+                <div class="mcq-options">
+                    <label class="mcq-option"><input type="radio" name="mcq10" value="a"> A) Positive staining in sustentacular cells only</label>
+                    <label class="mcq-option"><input type="radio" name="mcq10" value="b"> B) Positive staining in chromaffin cells</label>
+                    <label class="mcq-option"><input type="radio" name="mcq10" value="c"> C) Negative staining (not a neuroendocrine tumor)</label>
+                    <label class="mcq-option"><input type="radio" name="mcq10" value="d"> D) Positive staining throughout cortex</label>
+                    <label class="mcq-option"><input type="radio" name="mcq10" value="e"> E) Staining of nerve fibers only</label>
+                </div>
+                <button class="mcq-button" onclick="revealAnswer(this, 'mcq10', 'b')">Reveal Answer</button>
+                <div class="mcq-reveal">
+                    <div class="mcq-reveal-text"><strong>Explanation:</strong> Chromogranin A is a neuroendocrine tumor marker found in secretory granules of chromaffin cells. Positive staining in pheochromocytoma is diagnostic. Sustentacular cells (S100+) provide support but don't contain chromogranin A.</div>
+                </div>
+            </div>
+
+            <!-- MCQ 11 -->
+            <div class="mcq-container">
+                <div class="mcq-question">11. A thyroid tumor shows follicular architecture with nuclear and morphologic features identical to benign follicular adenoma. However, vascular invasion is noted on histology. What is the diagnosis?</div>
+                <div class="mcq-options">
+                    <label class="mcq-option"><input type="radio" name="mcq11" value="a"> A) Follicular thyroid adenoma</label>
+                    <label class="mcq-option"><input type="radio" name="mcq11" value="b"> B) Papillary thyroid carcinoma</label>
+                    <label class="mcq-option"><input type="radio" name="mcq11" value="c"> C) Follicular thyroid carcinoma</label>
+                    <label class="mcq-option"><input type="radio" name="mcq11" value="d"> D) Anaplastic thyroid carcinoma</label>
+                    <label class="mcq-option"><input type="radio" name="mcq11" value="e"> E) Medullary thyroid carcinoma</label>
+                </div>
+                <button class="mcq-button" onclick="revealAnswer(this, 'mcq11', 'c')">Reveal Answer</button>
+                <div class="mcq-reveal">
+                    <div class="mcq-reveal-text"><strong>Explanation:</strong> Follicular thyroid carcinoma is diagnosed entirely on the basis of capsular or vascular invasion—NOT by cytologic features. Without invasion, it's an adenoma despite identical nuclear morphology. This is why excision and histology are essential for follicular lesions (FNA cannot distinguish adenoma from carcinoma).</div>
+                </div>
+            </div>
+
+            <!-- MCQ 12 -->
+            <div class="mcq-container">
+                <div class="mcq-question">12. Histology of a medullary thyroid carcinoma shows spindle cells with deposits that stain positive with Congo red and show apple-green birefringence under polarized light. What protein is being deposited?</div>
+                <div class="mcq-options">
+                    <label class="mcq-option"><input type="radio" name="mcq12" value="a"> A) Thyroglobulin</label>
+                    <label class="mcq-option"><input type="radio" name="mcq12" value="b"> B) Amyloid (calcitonin-derived)</label>
+                    <label class="mcq-option"><input type="radio" name="mcq12" value="c"> C) Collagen</label>
+                    <label class="mcq-option"><input type="radio" name="mcq12" value="d"> D) Fibrin</label>
+                    <label class="mcq-option"><input type="radio" name="mcq12" value="e"> E) Elastin</label>
+                </div>
+                <button class="mcq-button" onclick="revealAnswer(this, 'mcq12', 'b')">Reveal Answer</button>
+                <div class="mcq-reveal">
+                    <div class="mcq-reveal-text"><strong>Explanation:</strong> Medullary thyroid carcinoma (MTC) is derived from C cells and produces calcitonin. Calcitonin molecules aggregate to form amyloid, which stains Congo red positive and shows apple-green birefringence under polarized light. This is pathognomonic for MTC.</div>
+                </div>
+            </div>
+
+            <!-- MCQ 13 -->
+            <div class="mcq-container">
+                <div class="mcq-question">13. A 58-year-old woman with a history of autoimmune thyroiditis undergoes thyroid biopsy. Histology shows dense lymphocytic infiltrate with germinal centers, large pale cells with granular eosinophilic cytoplasm replacing follicular epithelium, and fibrosis. What is this light pink granular change in follicular cells called?</div>
+                <div class="mcq-options">
+                    <label class="mcq-option"><input type="radio" name="mcq13" value="a"> A) Squamous metaplasia</label>
+                    <label class="mcq-option"><input type="radio" name="mcq13" value="b"> B) Mucinous metaplasia</label>
+                    <label class="mcq-option"><input type="radio" name="mcq13" value="c"> C) Hürthle cell change (oxyphilic metaplasia)</label>
+                    <label class="mcq-option"><input type="radio" name="mcq13" value="d"> D) Clear cell change</label>
+                    <label class="mcq-option"><input type="radio" name="mcq13" value="e"> E) Papillary metaplasia</label>
+                </div>
+                <button class="mcq-button" onclick="revealAnswer(this, 'mcq13', 'c')">Reveal Answer</button>
+                <div class="mcq-reveal">
+                    <div class="mcq-reveal-text"><strong>Explanation:</strong> Hürthle cell change (oxyphilic metaplasia) is seen in Hashimoto's thyroiditis and other autoimmune conditions. Follicular cells accumulate mitochondria, giving them a large, pink, granular cytoplasm appearance. This is a pathognomonic finding in Hashimoto's along with lymphocytic infiltrate and germinal centers.</div>
+                </div>
+            </div>
+
+            <!-- MCQ 14 -->
+            <div class="mcq-container">
+                <div class="mcq-question">14. C cells of the thyroid are found scattered between follicles in the interfollicular stroma. What is their embryologic origin?</div>
+                <div class="mcq-options">
+                    <label class="mcq-option"><input type="radio" name="mcq14" value="a"> A) Endoderm (pharyngeal pouches)</label>
+                    <label class="mcq-option"><input type="radio" name="mcq14" value="b"> B) Mesoderm</label>
+                    <label class="mcq-option"><input type="radio" name="mcq14" value="c"> C) Neural crest</label>
+                    <label class="mcq-option"><input type="radio" name="mcq14" value="d"> D) Ectoderm</label>
+                    <label class="mcq-option"><input type="radio" name="mcq14" value="e"> E) Bone marrow (hematopoietic)</label>
+                </div>
+                <button class="mcq-button" onclick="revealAnswer(this, 'mcq14', 'c')">Reveal Answer</button>
+                <div class="mcq-reveal">
+                    <div class="mcq-reveal-text"><strong>Explanation:</strong> C cells are neural crest in origin (NOT endodermal like follicular cells). They migrate into the thyroid and produce calcitonin. This distinction is important because C cell-derived tumors (medullary thyroid carcinoma) have different behavior and associations (MEN 2A, 2B, familial MTC) than follicular cell tumors.</div>
+                </div>
+            </div>
+
+            <!-- MCQ 15 -->
+            <div class="mcq-container">
+                <div class="mcq-question">15. A 38-year-old man with secondary hyperparathyroidism (from chronic kidney disease) undergoes parathyroidectomy. Which of the following histologic patterns is expected?</div>
+                <div class="mcq-options">
+                    <label class="mcq-option"><input type="radio" name="mcq15" value="a"> A) Single enlarged parathyroid gland with a rim of normal tissue</label>
+                    <label class="mcq-option"><input type="radio" name="mcq15" value="b"> B) All four parathyroid glands enlarged with chief cell hyperplasia</label>
+                    <label class="mcq-option"><input type="radio" name="mcq15" value="c"> C) Water-clear cell hyperplasia</label>
+                    <label class="mcq-option"><input type="radio" name="mcq15" value="d"> D) Oxyphil cell predominance</label>
+                    <label class="mcq-option"><input type="radio" name="mcq15" value="e"> E) Fibrosis and fatty infiltration only</label>
+                </div>
+                <button class="mcq-button" onclick="revealAnswer(this, 'mcq15', 'b')">Reveal Answer</button>
+                <div class="mcq-reveal">
+                    <div class="mcq-reveal-text"><strong>Explanation:</strong> Secondary hyperparathyroidism (from CKD-induced hypocalcemia and hyperphosphatemia) causes hyperplasia of ALL FOUR parathyroid glands with chief cell proliferation. In contrast, adenoma (primary HPT) shows a single enlarged gland with a rim of normal compressed tissue. This distinction guides surgical planning.</div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script>
+        const STORAGE_KEY = 'endo_lec11';
+
+        // Initialize localStorage
+        function initStorage() {
+            if (!localStorage.getItem(STORAGE_KEY)) {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify({
+                    completedLOs: [],
+                    checkedItems: [],
+                    flippedCards: [],
+                    answeredMCQs: {}
+                }));
+            }
+        }
+
+        // Switch LO sections
+        function switchLO(event, loId) {
+            event.preventDefault();
+
+            // Hide all sections
+            document.querySelectorAll('.lo-section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Remove active class from all tabs/links
+            document.querySelectorAll('.lo-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Show selected section
+            const section = document.getElementById(loId);
+            if (section) {
+                section.classList.add('active');
+            }
+
+            // Update active states
+            event.target.classList.add('active');
+            document.querySelectorAll(`.sidebar-link[href="#${loId}"]`).forEach(link => {
+                link.classList.add('active');
+            });
+
+            // Scroll to top
+            document.querySelector('.main-content').scrollTop = 0;
+        }
+
+        // Toggle collapsible sections
+        function toggleCollapsible(event) {
+            const header = event.currentTarget;
+            const body = header.nextElementSibling;
+
+            header.classList.toggle('expanded');
+            body.classList.toggle('expanded');
+        }
+
+        // Toggle flip cards
+        function toggleFlip(event) {
+            const card = event.currentTarget;
+            card.classList.toggle('flipped');
+        }
+
+        // Reveal MCQ answers
+        function revealAnswer(button, mcqName, correctAnswer) {
+            const reveal = button.nextElementSibling;
+            reveal.classList.add('visible');
+
+            // Update radio button styles
+            document.querySelectorAll(`input[name="${mcqName}"]`).forEach(radio => {
+                const option = radio.closest('.mcq-option');
+                if (radio.value === correctAnswer) {
+                    option.classList.add('correct');
+                } else if (radio.checked) {
+                    option.classList.add('incorrect');
+                }
+            });
+
+            button.disabled = true;
+            button.style.opacity = '0.5';
+        }
+
+        // Update progress
+        function updateProgress() {
+            const checkedCount = document.querySelectorAll('.checklist input[type="checkbox"]:checked').length;
+            const totalItems = document.querySelectorAll('.checklist input[type="checkbox"]').length;
+            const percentage = (checkedCount / totalItems) * 100;
+
+            document.getElementById('progressBar').style.width = percentage + '%';
+            document.getElementById('progressText').textContent = `${checkedCount}/${totalItems} Items`;
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            initStorage();
+            updateProgress();
+        });
+    </script>
+</body>
+</html>

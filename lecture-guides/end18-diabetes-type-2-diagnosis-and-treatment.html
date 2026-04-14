@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 18 — T2DM: Diagnosis & Treatment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 220px;
+            background-color: #0f172a;
+            color: #e2e8f0;
+            padding: 20px 0;
+            overflow-y: auto;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            border-right: 3px solid #059669;
+            z-index: 100;
+        }
+
+        .sidebar-content {
+            padding: 0 15px;
+        }
+
+        .sidebar h1 {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #059669;
+            margin-bottom: 20px;
+            padding: 0 10px;
+            border-left: 3px solid #059669;
+            padding-left: 10px;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 8px;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            padding: 10px 12px;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 13px;
+            border-radius: 4px;
+            transition: all 0.2s;
+            border-left: 2px solid transparent;
+        }
+
+        .sidebar-nav a:hover {
+            background-color: rgba(5, 150, 105, 0.1);
+            color: #059669;
+            border-left-color: #059669;
+        }
+
+        .sidebar-nav a.active {
+            background-color: rgba(5, 150, 105, 0.2);
+            color: #059669;
+            border-left-color: #059669;
+            font-weight: 600;
+        }
+
+        /* MAIN CONTENT */
+        main {
+            margin-left: 220px;
+            flex: 1;
+            padding: 40px;
+            max-width: 1200px;
+        }
+
+        header {
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #0f172a;
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background-color: #e2e8f0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #059669;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* LO SECTIONS */
+        .lo-section {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            border: 2px solid #e2e8f0;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .lo-section.collapsed {
+            border-color: #059669;
+        }
+
+        .lo-header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 18px 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: all 0.3s;
+        }
+
+        .lo-header:hover {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        }
+
+        .lo-title {
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .lo-number {
+            display: inline-block;
+            background-color: #059669;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            font-weight: 700;
+            margin-right: 12px;
+        }
+
+        .toggle-icon {
+            font-size: 20px;
+            transition: transform 0.3s;
+        }
+
+        .lo-section.collapsed .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .lo-content {
+            padding: 24px;
+            display: none;
+        }
+
+        .lo-section.collapsed .lo-content {
+            display: block;
+        }
+
+        /* SUMMARY BOXES */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .summary-box {
+            border-radius: 6px;
+            padding: 16px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .summary-box.tested {
+            background-color: #dcfce7;
+            border-left: 4px solid #16a34a;
+        }
+
+        .summary-box.traps {
+            background-color: #fed7aa;
+            border-left: 4px solid #ea580c;
+        }
+
+        .summary-box.hy {
+            background-color: #fef08a;
+            border-left: 4px solid #ca8a04;
+        }
+
+        .summary-box-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        /* CONTENT BLOCKS */
+        .content-block {
+            margin-bottom: 20px;
+        }
+
+        .content-block h3 {
+            color: #059669;
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #d1fae5;
+            padding-bottom: 8px;
+        }
+
+        .bullet-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .bullet-list li {
+            padding-left: 24px;
+            margin-bottom: 10px;
+            position: relative;
+            font-size: 14px;
+        }
+
+        .bullet-list li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #059669;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* FLIP CARDS */
+        .flip-card {
+            perspective: 1000px;
+            cursor: pointer;
+            margin-bottom: 16px;
+            height: 150px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .flip-card-front {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+        }
+
+        .flip-card-back {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            transform: rotateY(180deg);
+        }
+
+        /* MCQ */
+        .mcq {
+            background-color: #f0f9ff;
+            border-left: 4px solid #059669;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .mcq-question {
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .mcq-options {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .mcq-option {
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #cbd5e1;
+            font-size: 13px;
+        }
+
+        .mcq-option:hover {
+            background-color: #f1f5f9;
+            border-color: #059669;
+        }
+
+        .mcq-option input[type="radio"] {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .mcq-reveal {
+            display: none;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 2px solid #cbd5e1;
+        }
+
+        .mcq.answered .mcq-reveal {
+            display: block;
+        }
+
+        .correct {
+            background-color: #dcfce7;
+            border-left: 3px solid #16a34a;
+        }
+
+        .explanation {
+            font-size: 13px;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* MIND MAP */
+        .mindmap-container {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .mindmap-container h3 {
+            color: #059669;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        /* MNEMONIC */
+        .mnemonic-box {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+            padding: 16px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .mnemonic-label {
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.95;
+            margin-bottom: 6px;
+        }
+
+        /* CHECKLIST */
+        .checklist {
+            margin-bottom: 20px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px;
+            margin-bottom: 8px;
+            background-color: #f8fafc;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .checklist-item:hover {
+            background-color: #f1f5f9;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            margin-right: 12px;
+            margin-top: 2px;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+            accent-color: #059669;
+        }
+
+        .checklist-item.checked {
+            background-color: #dcfce7;
+        }
+
+        .checklist-item.checked label {
+            text-decoration: line-through;
+            color: #64748b;
+        }
+
+        .checklist-item label {
+            flex: 1;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* TABS */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .tab {
+            padding: 12px 16px;
+            background: none;
+            border: none;
+            color: #64748b;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .tab:hover {
+            color: #059669;
+        }
+
+        .tab.active {
+            color: #059669;
+            border-bottom-color: #059669;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #64748b;
+            font-size: 12px;
+            margin-top: 40px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: #dbeafe;
+            color: #0c4a6e;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 6px;
+        }
+
+        .badge.green {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .badge.orange {
+            background-color: #fed7aa;
+            color: #92400e;
+        }
+
+        .highlight {
+            background-color: #fef08a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 0;
+                display: none;
+            }
+
+            main {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-content">
+                <h1>Lecture 18</h1>
+                <ul class="sidebar-nav">
+                    <li><a href="#lo1" class="nav-link active">LO1: Lifestyle</a></li>
+                    <li><a href="#lo2" class="nav-link">LO2: Metformin</a></li>
+                    <li><a href="#lo3" class="nav-link">LO3: SU/TZD</a></li>
+                    <li><a href="#lo4" class="nav-link">LO4: GLP-1/DPP-4</a></li>
+                    <li><a href="#lo5" class="nav-link">LO5: SGLT2</a></li>
+                    <li><a href="#lo6" class="nav-link">LO6: Insulin/CV</a></li>
+                    <li><a href="#mindmap" class="nav-link">Mind Map</a></li>
+                    <li><a href="#mcq" class="nav-link">MCQ Bank</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main>
+            <header>
+                <h1>Lecture 18: T2DM Treatment & Pharmacology</h1>
+                <p class="subtitle">Type 2 Diabetes Mellitus: Diagnosis & Management | Endocrine Block</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </header>
+
+            <!-- LO1 -->
+            <section class="lo-section" id="lo1" data-lo="1">
+                <div class="lo-header">
+                    <div>
+                        <span class="lo-number">1</span>
+                        <span class="lo-title">Lifestyle & Stepwise Approach to T2DM</span>
+                    </div>
+                    <div class="toggle-icon">▾</div>
+                </div>
+                <div class="lo-content">
+                    <div class="summary-grid">
+                        <div class="summary-box tested">
+                            <div class="summary-box-title">🎯 Tested Concepts</div>
+                            <div>Stepwise approach; HbA1c targets; treatment algorithm; lifestyle foundation; MNT + exercise + weight loss</div>
+                        </div>
+                        <div class="summary-box traps">
+                            <div class="summary-box-title">⚠️ Common Traps</div>
+                            <div>Ignoring lifestyle (always FIRST); wrong HbA1c target (not universal <7%); skipping patient factors in drug selection</div>
+                        </div>
+                        <div class="summary-box hy">
+                            <div class="summary-box-title">⭐ High Yield</div>
+                            <div>5-10% wt loss → ↓ HbA1c; bariatric surgery remission 50-70%; 150 min/week aerobic exercise</div>
+                        </div>
+                    </div>
+
+                    <div class="content-block">
+                        <h3>T2DM Management: The Foundation — Lifestyle First</h3>
+                        <ul class="bullet-list">
+                            <li><span class="highlight">Lifestyle modification is FOUNDATIONAL for all stages</span> — diet, exercise, weight loss, smoking cessation</li>
+                            <li>Medical Nutrition Therapy (MNT): reduce refined carbohydrates, moderate caloric restriction for weight loss, Mediterranean/DASH patterns</li>
+                            <li>Physical activity: 150 min/week moderate-intensity aerobic + resistance training → ↑ GLUT4 translocation (insulin-independent glucose uptake)</li>
+                            <li>Weight loss: 5-10% body weight → meaningful ↓ HbA1c, BP, lipids; 10-15% loss → even greater benefit</li>
+                            <li>Bariatric surgery: 50-70% T2DM remission (via GLP-1 effect, caloric restriction, metabolic remodeling)</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-block">
+                        <h3>HbA1c Targets (Individualized)</h3>
+                        <ul class="bullet-list">
+                            <li><span class="highlight">&lt;7%</span> for most non-pregnant adults (standard target)</li>
+                            <li><span class="highlight">&lt;6.5%</span> if achievable without hypoglycemia (young, new DM, no CV disease)</li>
+                            <li><span class="highlight">&lt;8%</span> for elderly, limited life expectancy, frequent hypoglycemia, extensive comorbidities</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-block">
+                        <h3>2023 ADA Treatment Algorithm (Stepwise)</h3>
+                        <ol style="padding-left: 24px; margin-bottom: 12px;">
+                            <li style="margin-bottom: 10px; font-size: 14px;"><strong>Step 1:</strong> Lifestyle + Metformin (first-line if no contraindications)</li>
+                            <li style="margin-bottom: 10px; font-size: 14px;"><strong>Step 2:</strong> Add second agent based on PATIENT-SPECIFIC FACTORS (not just HbA1c):
+                                <ul style="margin-top: 8px; margin-left: 20px; list-style: none;">
+                                    <li style="margin-bottom: 6px;">• Established ASCVD or high CV risk → GLP-1 agonist or SGLT2 inhibitor (proven CV benefit)</li>
+                                    <li style="margin-bottom: 6px;">• Heart failure → SGLT2 inhibitor (↓ HF hospitalizations)</li>
+                                    <li style="margin-bottom: 6px;">• CKD → SGLT2 inhibitor (renal protection), GLP-1 agonist</li>
+                                    <li style="margin-bottom: 6px;">• Need for weight loss → GLP-1 agonist or SGLT2 inhibitor</li>
+                                    <li style="margin-bottom: 6px;">• Cost concerns → sulfonylurea or thiazolidinedione</li>
+                                    <li>• Need to avoid hypoglycemia → DPP-4, GLP-1, SGLT2</li>
+                                </ul>
+                            </li>
+                            <li style="font-size: 14px;"><strong>Step 3:</strong> Progress to triple therapy or insulin if not at goal</li>
+                        </ol>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        <div class="mnemonic-label">Mnemonic</div>
+                        "Treat T2DM with LEGAL drugs: Lifestyle, Exercise, GLP-1/SGLT2 (for ASCVD/HF/CKD), Agents (metformin first), Last resort = insulin"
+                    </div>
+                </div>
+            </section>
+
+            <!-- LO2 -->
+            <section class="lo-section" id="lo2" data-lo="2">
+                <div class="lo-header">
+                    <div>
+                        <span class="lo-number">2</span>
+                        <span class="lo-title">Metformin: Mechanism, Benefits, Contraindications</span>
+                    </div>
+                    <div class="toggle-icon">▾</div>
+                </div>
+                <div class="lo-content">
+                    <div class="summary-grid">
+                        <div class="summary-box tested">
+                            <div class="summary-box-title">🎯 Tested Concepts</div>
+                            <div>AMPK activation; ↓ gluconeogenesis; NO hypoglycemia; eGFR cutoffs; lactic acidosis; B12 deficiency; contrast hold</div>
+                        </div>
+                        <div class="summary-box traps">
+                            <div class="summary-box-title">⚠️ Common Traps</div>
+                            <div>Hold for contrast (48h after if stable); check B12 annually; contraindicated eGFR <30 (caution 30-45); lactic acidosis with renal/liver/hypoxia</div>
+                        </div>
+                        <div class="summary-box hy">
+                            <div class="summary-box-title">⭐ High Yield</div>
+                            <div>First-line drug; ↓ CVD events (UKPDS); no weight gain; safe in renal insufficiency eGFR ≥30; AMPK ↓ gluconeogenesis</div>
+                        </div>
+                    </div>
+
+                    <div class="content-block">
+                        <h3>Mechanism: AMPK Activation</h3>
+                        <ul class="bullet-list">
+                            <li><span class="highlight">Activates AMP-kinase (AMPK)</span> → metabolic master switch</li>
+                            <li><strong>PRIMARY:</strong> ↓ hepatic gluconeogenesis (↓ PEPCK, ↓ G6Pase) — MAIN glucose-lowering effect</li>
+                            <li>↑ peripheral insulin sensitivity (↑ muscle GLUT4 expression)</li>
+                            <li>↓ intestinal glucose absorption</li>
+                            <li>Modulates gut microbiome (emerging evidence)</li>
+                            <li>Mild weight loss or weight neutral</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-block">
+                        <h3>Benefits</h3>
+                        <ul class="bullet-list">
+                            <li><span class="highlight">NO hypoglycemia</span> (no insulin release)</li>
+                            <li>↓ cardiovascular events (UKPDS benefit)</li>
+                            <li>Weight-neutral or modest weight loss</li>
+                            <li>↓ LDL, inexpensive</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-block">
+                        <h3>Side Effects</h3>
+                        <ul class="bullet-list">
+                            <li><strong>GI:</strong> nausea, diarrhea, metallic taste (most common; take with food to reduce)</li>
+                            <li><strong>Lactic acidosis:</strong> rare but serious → ↑ risk in renal insufficiency (accumulation), liver failure, CHF, hypoxia, contrast administration</li>
+                            <li><strong>Vitamin B12 deficiency:</strong> chronic use → ↓ absorption → check B12 annually</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-block">
+                        <h3>Contraindications & Drug Holds</h3>
+                        <ul class="bullet-list">
+                            <li><span class="highlight">eGFR &lt;30:</span> contraindicated; use cautiously if eGFR 30-45 (reduce dose)</li>
+                            <li><span class="highlight">IV iodinated contrast:</span> HOLD metformin at time of procedure → restart 48h after if renal function stable (lactic acidosis risk from contrast-induced nephropathy)</li>
+                            <li>Hepatic failure, CHF, respiratory failure (hypoxia → lactic acidosis risk)</li>
+                        </ul>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        <div class="mnemonic-label">Mnemonic</div>
+                        "Metformin = Main drug; blocks Gluconeogenesis; No hypoglycemia; B12 deficiency risk; Beware renal/contrast"
+                    </div>
+                </div>
+            </section>
+
+            <!-- LO3 -->
+            <section class="lo-section" id="lo3" data-lo="3">
+                <div class="lo-header">
+                    <div>
+                        <span class="lo-number">3</span>
+                        <span class="lo-title">Sulfonylureas, Meglitinides, & Thiazolidinediones</span>
+                    </div>
+                    <div class="toggle-icon">▾</div>
+                </div>
+                <div class="lo-content">
+                    <div class="summary-grid">
+                        <div class="summary-box tested">
+                            <div class="summary-box-title">🎯 Tested Concepts</div>
+                            <div>SU K⁺-ATP mechanism; hypoglycemia + wt gain; glyburide renal issues; TZD PPAR-γ; HF contraindication; fracture risk</div>
+                        </div>
+                        <div class="summary-box traps">
+                            <div class="summary-box-title">⚠️ Common Traps</div>
+                            <div>SU causes hypoglycemia (NOT with metformin alone); glyburide unsafe in renal failure; TZD CONTRAINDICATED NYHA III-IV HF; TZD ↑ fractures (women)</div>
+                        </div>
+                        <div class="summary-box hy">
+                            <div class="summary-box-title">⭐ High Yield</div>
+                            <div>SU drug of choice for MODY3 (HNF1α); glyburide > glipizide > glimepiride (hypoglycemia risk); TZD no hypoglycemia; PPAR-γ ↑ adiponectin</div>
+                        </div>
+                    </div>
+
+                    <div class="content-block">
+                        <h3>SULFONYLUREAS: Glyburide, Glipizide, Glimepiride</h3>
+                        <ul class="bullet-list">
+                            <li><strong>Mechanism:</strong> block K⁺-ATP channels on β cells → depolarization → ↑ Ca²⁺ → insulin secretion REGARDLESS of glucose level (insulin secretagogue)</li>
+                            <li><strong>Receptor:</strong> SUR1 (sulfonylurea receptor 1) — part of K⁺-ATP channel complex</li>
+                            <li><strong>Effect:</strong> ↓ HbA1c 1-2%; <span class="highlight">stimulate insulin secretion</span></li>
+                            <li><strong>Benefits:</strong> inexpensive, effective, decades of use</li>
+                            <li><strong>Side effects:</strong> <span class="highlight">HYPOGLYCEMIA (most important)</span> — insulin secretion even if glucose is low; weight gain (↑ insulin → anabolic)</li>
+                            <li><strong>Key differences:</strong>
+                                <ul style="margin-top: 8px; margin-left: 20px; list-style: none;">
+                                    <li style="margin-bottom: 6px;">• <strong>Glyburide:</strong> longest acting → most hypoglycemia; active metabolites accumulate in renal failure → AVOID</li>
+                                    <li style="margin-bottom: 6px;">• <strong>Glipizide:</strong> shorter acting, safer in renal failure</li>
+                                    <li>• <strong>Glimepiride:</strong> once daily, less hypoglycemia risk</li>
+                                </ul>
+                            </li>
+                            <li><span class="highlight">Drug of choice for MODY3 (HNF1α mutation):</span> very sensitive to sulfonylureas</li>
+                        </ul>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        <div class="mnemonic-label">Mnemonic (SU)</div>
+                        "SUs = Secret insulin (secretagogue); cause hypoGlycemia and weight Gain"
+                    </div>
+
+                    <div class="content-block">
+                        <h3>MEGLITINIDES: Repaglinide, Nateglinide</h3>
+                        <ul class="bullet-list">
+                            <li><strong>Mechanism:</strong> same as SU (block K-ATP channels) but bind DIFFERENT site; faster onset, shorter duration</li>
+                            <li><strong>Dosing:</strong> taken WITH each meal (skip if meal skipped → ↓ hypoglycemia risk)</li>
+                            <li>Less hypoglycemia than SU; useful in irregular meal patterns; can use in renal failure (repaglinide)</li>
+                            <li><strong>Side effects:</strong> hypoglycemia (less than SU), weight gain</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-block">
+                        <h3>THIAZOLIDINEDIONES: Pioglitazone, Rosiglitazone</h3>
+                        <ul class="bullet-list">
+                            <li><strong>Mechanism:</strong> <span class="highlight">PPAR-γ (peroxisome proliferator-activated receptor gamma) agonist</span> → nuclear receptor → ↑ adiponectin, ↑ insulin-sensitive genes → ↑ insulin sensitivity in adipose + muscle + liver</li>
+                            <li>Redistributes fat from visceral → subcutaneous (safer metabolically)</li>
+                            <li><strong>Benefits:</strong> NO hypoglycemia, ↑ HDL, pioglitazone ↓ TG, durable effect</li>
+                            <li><strong>Side effects:</strong>
+                                <ul style="margin-top: 8px; margin-left: 20px; list-style: none;">
+                                    <li style="margin-bottom: 6px;">• <span class="highlight">Fluid retention → edema, ↑ risk HF exacerbation</span> — CONTRAINDICATED in NYHA Class III-IV HF</li>
+                                    <li style="margin-bottom: 6px;">• Weight gain (fat redistribution + fluid)</li>
+                                    <li style="margin-bottom: 6px;">• Osteoporosis (↑ fracture risk — especially women; activates osteoclasts in bone)</li>
+                                    <li>• Bladder cancer risk (pioglitazone — FDA warning; rosiglitazone removed temporarily due to CV concerns)</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        <div class="mnemonic-label">Mnemonic (TZD)</div>
+                        "TZDs = Treat insulin resistance (PPAR-γ) but beware Heart Failure and Heavy bones (fractures)"
+                    </div>
+                </div>
+            </section>
+
+            <!-- LO4 -->
+            <section class="lo-section" id="lo4" data-lo="4">
+                <div class="lo-header">
+                    <div>
+                        <span class="lo-number">4</span>
+                        <span class="lo-title">GLP-1 Receptor Agonists & DPP-4 Inhibitors</span>
+                    </div>
+                    <div class="toggle-icon">▾</div>
+                </div>
+                <div class="lo-content">
+                    <div class="summary-grid">
+                        <div class="summary-box tested">
+                            <div class="summary-box-title">🎯 Tested Concepts</div>
+                            <div>GLP-1 RA glucose-dependent; weight loss; CV benefit (liraglutide, semaglutide); tirzepatide dual GLP-1/GIP; DPP-4 NO hypoglycemia, weight neutral</div>
+                        </div>
+                        <div class="summary-box traps">
+                            <div class="summary-box-title">⚠️ Common Traps</div>
+                            <div>GLP-1 MTC CI if personal/family hx; saxagliptin ↑ HF; DPP-4 neutral CV outcome; GLP-1 GI side effects (transient)</div>
+                        </div>
+                        <div class="summary-box hy">
+                            <div class="summary-box-title">⭐ High Yield</div>
+                            <div>GLP-1 = greatest weight loss agent; CVOT proven (LEADER, SUSTAIN-6, REWIND); DPP-4 = oral, safe, weak; tirzepatide > GLP-1 alone (dual mechanism)</div>
+                        </div>
+                    </div>
+
+                    <div class="content-block">
+                        <h3>GLP-1 RECEPTOR AGONISTS (GLP-1 RAs)</h3>
+                        <p style="font-size: 14px; margin-bottom: 10px;">Drugs: liraglutide, semaglutide, dulaglutide, exenatide, tirzepatide (dual GLP-1/GIP)</p>
+                        <ul class="bullet-list">
+                            <li><strong>Mechanism:</strong> activate GLP-1 receptor (Gs-coupled) → <span class="highlight">↑ insulin secretion (GLUCOSE-DEPENDENT)</span> → ↓ glucagon, ↓ gastric emptying (↓ postprandial glucose), ↑ satiety (→ weight loss), CNS appetite suppression</li>
+                            <li><strong>KEY:</strong> <span class="highlight">NO hypoglycemia when glucose is low</span> (glucose-dependent mechanism)</li>
+                            <li><strong>Major benefits:</strong> <span class="highlight">WEIGHT LOSS (2-15 kg)</span>, CV benefit (liraglutide LEADER, semaglutide SUSTAIN-6 → ↓ MACE), renal protection (semaglutide FLOW trial)</li>
+                            <li><strong>Route:</strong> SC injection (daily or weekly); oral semaglutide (Rybelsus) — limited absorption, requires specific administration</li>
+                            <li><strong>Side effects:</strong> GI (nausea, vomiting, diarrhea — most common; why patients lose weight; improves with time), pancreatitis (rare), medullary thyroid cancer (rodent data only; CI in personal/family hx MTC or MEN2A/2B), kidney injury (dehydration from GI)</li>
+                            <li><strong>Tirzepatide (Mounjaro):</strong> dual GLP-1 + GIP agonist → superior weight loss (20-25% body weight in obesity trials)</li>
+                        </ul>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        <div class="mnemonic-label">Mnemonic (GLP-1 RA)</div>
+                        "GLP-1 agonists = Great Losers of Pounds (weight loss); GLUCOSE-DEPENDENT → no hypoglycemia"
+                    </div>
+
+                    <div class="content-block">
+                        <h3>DPP-4 INHIBITORS ("Gliptins")</h3>
+                        <p style="font-size: 14px; margin-bottom: 10px;">Drugs: sitagliptin, saxagliptin, linagliptin, alogliptin</p>
+                        <ul class="bullet-list">
+                            <li><strong>Mechanism:</strong> inhibit DPP-4 (dipeptidyl peptidase-4) enzyme → prevent degradation of endogenous GLP-1 and GIP → ↑ GLP-1/GIP levels (2-3-fold) → glucose-dependent insulin secretion + ↓ glucagon</li>
+                            <li>Weaker than GLP-1 agonists (raises GLP-1 levels vs direct receptor activation)</li>
+                            <li><strong>Benefits:</strong> <span class="highlight">NO hypoglycemia, weight neutral, oral, well-tolerated</span>, can use in CKD (linagliptin - hepatic elimination, no dose adjustment; others need reduction)</li>
+                            <li><strong>Side effects:</strong> nasopharyngitis (mild), UTIs, pancreatitis (rare, controversial), joint pain (arthralgia — FDA warning)</li>
+                            <li><strong>Saxagliptin:</strong> possible ↑ HF hospitalizations (SAVOR-TIMI trial) — avoid in HF</li>
+                            <li><span class="highlight">CV outcomes: neutral (DPP-4 do NOT reduce CV events unlike GLP-1 or SGLT2)</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        <div class="mnemonic-label">Mnemonic (DPP-4)</div>
+                        "DPP-4 inhibitors = Dipeptidyl Protease Prevented (gliptins); Neutral weight, No hypoglycemia, Nasal symptoms"
+                    </div>
+                </div>
+            </section>
+
+            <!-- LO5 -->
+            <section class="lo-section" id="lo5" data-lo="5">
+                <div class="lo-header">
+                    <div>
+                        <span class="lo-number">5</span>
+                        <span class="lo-title">SGLT2 Inhibitors & Other Agents</span>
+                    </div>
+                    <div class="toggle-icon">▾</div>
+                </div>
+                <div class="lo-content">
+                    <div class="summary-grid">
+                        <div class="summary-box tested">
+                            <div class="summary-box-title">🎯 Tested Concepts</div>
+                            <div>SGLT2 glucosuria mechanism; euglycemic DKA; genital yeast (most common side effect); HF benefit (non-diabetics); CKD protection; hold peri-op</div>
+                        </div>
+                        <div class="summary-box traps">
+                            <div class="summary-box-title">⚠️ Common Traps</div>
+                            <div>Euglycemic DKA (perioperative, low carb, sepsis); genital infections (yeast most common, not UTI); Fournier's gangrene (rare); canagliflozin ↑ amputation; hold 3-7 days before surgery</div>
+                        </div>
+                        <div class="summary-box hy">
+                            <div class="summary-box-title">⭐ High Yield</div>
+                            <div>SGLT2 CVOT proven (EMPA-REG, CANVAS, DECLARE); HF benefit even non-diabetics (EMPEROR, DAPA-HF); CKD benefit (CREDENCE, DAPA-CKD); lowest mortality benefit</div>
+                        </div>
+                    </div>
+
+                    <div class="content-block">
+                        <h3>SGLT2 INHIBITORS ("Gliflozins")</h3>
+                        <p style="font-size: 14px; margin-bottom: 10px;">Drugs: empagliflozin, dapagliflozin, canagliflozin, ertugliflozin</p>
+                        <ul class="bullet-list">
+                            <li><strong>Mechanism:</strong> inhibit SGLT2 (sodium-glucose cotransporter 2) in proximal convoluted tubule → block glucose reabsorption → <span class="highlight">glucosuria (+ natriuresis, osmotic diuresis)</span></li>
+                            <li>Lower glucose by removing ~60-100g glucose/day in urine</li>
+                            <li><strong>Major cardiovascular/renal benefits (FDA approved indications BEYOND T2DM):</strong>
+                                <ul style="margin-top: 8px; margin-left: 20px; list-style: none;">
+                                    <li style="margin-bottom: 6px;">• ↓ MACE (CV death/MI/stroke) in established ASCVD</li>
+                                    <li style="margin-bottom: 6px;">• <span class="highlight">↓ Hospitalization for heart failure</span> (EMPA-REG OUTCOME, DAPA-HF — even in non-diabetics)</li>
+                                    <li style="margin-bottom: 6px;">• ↓ Progression of CKD (canagliflozin CREDENCE, dapagliflozin DAPA-CKD)</li>
+                                    <li>• Mechanism of HF/CKD benefit: ↓ preload/afterload (natriuresis), ↓ RAAS, ↑ ketones (cardiac fuel), anti-fibrotic</li>
+                                </ul>
+                            </li>
+                            <li><strong>Benefits:</strong> weight loss (~2-3 kg), ↓ BP (2-4 mmHg), NO hypoglycemia, cardiorenal benefits</li>
+                            <li><strong>Side effects:</strong>
+                                <ul style="margin-top: 8px; margin-left: 20px; list-style: none;">
+                                    <li style="margin-bottom: 6px;">• <span class="highlight">Genital mycotic infections (most common)</span> — yeast (women), balanitis (men) — from glucosuria sugar-rich environment</li>
+                                    <li style="margin-bottom: 6px;">• UTIs (mild ↑)</li>
+                                    <li style="margin-bottom: 6px;">• <span class="highlight">Euglycemic DKA (perioperative, low carb diet, sepsis)</span> — insulin requirements ↑, glucosuria continues → ketosis without high glucose</li>
+                                    <li style="margin-bottom: 6px;">• Volume depletion / hypotension (elderly, diuretics)</li>
+                                    <li style="margin-bottom: 6px;">• Fournier's gangrene (necrotizing fasciitis perineum — rare, serious FDA warning)</li>
+                                    <li style="margin-bottom: 6px;">• Canagliflozin: ↑ fracture risk, possible amputation risk (lower extremity)</li>
+                                    <li>• Lower extremity amputations: canagliflozin (CANVAS trial); possibly drug-class effect</li>
+                                </ul>
+                            </li>
+                            <li><strong>Hold SGLT2:</strong> 3-7 days before surgery (euglycemic DKA risk perioperatively); hold in contrast procedures, acute illness</li>
+                            <li><strong>Dose adjustment CKD:</strong> empagliflozin/dapagliflozin for CKD benefit to eGFR ≥20; less glucose-lowering at low eGFR</li>
+                        </ul>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        <div class="mnemonic-label">Mnemonic (SGLT2)</div>
+                        "SGLT2 = Spills Glucose Like a Toilet (glucosuria); Saves hearts and kidneys; Sexy complications (genital yeast)"
+                    </div>
+
+                    <div class="content-block">
+                        <h3>ALPHA-GLUCOSIDASE INHIBITORS: Acarbose, Miglitol</h3>
+                        <ul class="bullet-list">
+                            <li><strong>Mechanism:</strong> inhibit intestinal α-glucosidase → ↓ starch/disaccharide digestion → ↓ postprandial glucose</li>
+                            <li>Mainly postprandial glucose lowering</li>
+                            <li><strong>Side effects:</strong> flatulence, GI bloating (undigested carbs fermented) — poorly tolerated</li>
+                            <li>NO hypoglycemia; weight neutral</li>
+                            <li><span class="highlight">IMPORTANT:</span> if hypoglycemia occurs while on alpha-glucosidase inhibitor, treat with GLUCOSE (not sucrose) — sucrose requires α-glucosidase for absorption (blocked!)</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-block">
+                        <h3>Other Agents (Brief Overview)</h3>
+                        <ul class="bullet-list">
+                            <li><strong>Pramlintide:</strong> amylin analog; see Lec 17 (T1DM adjunct); also approved for T2DM on insulin</li>
+                            <li><strong>Colesevelam:</strong> bile acid sequestrant; modest glucose lowering; combined diabetes + hypercholesterolemia; GI side effects</li>
+                            <li><strong>Bromocriptine:</strong> dopamine D2 agonist; modest HbA1c lowering; mechanism unclear; add-on therapy</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LO6 -->
+            <section class="lo-section" id="lo6" data-lo="6">
+                <div class="lo-header">
+                    <div>
+                        <span class="lo-number">6</span>
+                        <span class="lo-title">Insulin in T2DM, Hypoglycemia Risk, & CV Drug Selection</span>
+                    </div>
+                    <div class="toggle-icon">▾</div>
+                </div>
+                <div class="lo-content">
+                    <div class="summary-grid">
+                        <div class="summary-box tested">
+                            <div class="summary-box-title">🎯 Tested Concepts</div>
+                            <div>When to start insulin (high HbA1c, oral failure, acute illness); basal-bolus regimens; hypoglycemia risk by drug; CVOT outcomes; special populations</div>
+                        </div>
+                        <div class="summary-box traps">
+                            <div class="summary-box-title">⚠️ Common Traps</div>
+                            <div>Hypoglycemia HIGH: insulin/SU/meglitinides; NO: metformin/TZD/GLP-1/DPP-4/SGLT2; CV benefit ONLY GLP-1 & SGLT2 (NOT DPP-4); saxagliptin HF risk</div>
+                        </div>
+                        <div class="summary-box hy">
+                            <div class="summary-box-title">⭐ High Yield</div>
+                            <div>CVOT proven agents (GLP-1/SGLT2); HF = SGLT2 only; CKD = SGLT2 > GLP-1; avoid hypoglycemia in elderly; MACE reduction = GLP-1 & SGLT2</div>
+                        </div>
+                    </div>
+
+                    <div class="content-block">
+                        <h3>When to Start Insulin in T2DM</h3>
+                        <ul class="bullet-list">
+                            <li>HbA1c very high (&gt;10%), glucose &gt;300, symptomatic hyperglycemia → start insulin promptly</li>
+                            <li>Failure of multiple oral agents</li>
+                            <li>Acute illness, surgery, hospitalization</li>
+                            <li>Pregnancy (insulin preferred if oral agents fail)</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-block">
+                        <h3>Insulin Regimens in T2DM</h3>
+                        <ul class="bullet-list">
+                            <li><strong>Start:</strong> basal insulin (glargine or degludec) once daily; typically 10 units or 0.2 units/kg at bedtime; titrate 2 units every 3 days to fasting glucose target</li>
+                            <li><strong>Intensify:</strong> add prandial insulin (basal-plus → basal-bolus) for postprandial control</li>
+                            <li><strong>Premixed insulins (70/30, 75/25):</strong> fixed intermediate + rapid; less flexible; ↑ hypoglycemia risk</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-block">
+                        <h3>Hypoglycemia Risk by Drug Class</h3>
+                        <ul class="bullet-list">
+                            <li><span class="highlight">HIGH risk:</span> insulin, sulfonylureas, meglitinides</li>
+                            <li><span class="highlight">NO/LOW risk:</span> metformin, TZDs, GLP-1 agonists, DPP-4 inhibitors, SGLT2 inhibitors, alpha-glucosidase inhibitors</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-block">
+                        <h3>Cardiovascular Outcomes Trials (CVOTs) — KEY for Step 1</h3>
+                        <ul class="bullet-list">
+                            <li><strong>GLP-1 agonists with CV benefit:</strong> liraglutide (LEADER), semaglutide (SUSTAIN-6), dulaglutide (REWIND), albiglutide (HARMONY) → <span class="highlight">↓ MACE</span></li>
+                            <li><strong>SGLT2 with CV benefit:</strong> empagliflozin (EMPA-REG), canagliflozin (CANVAS), dapagliflozin (DECLARE)</li>
+                            <li><strong>SGLT2 with HF benefit:</strong> empagliflozin (EMPEROR-Reduced), dapagliflozin (DAPA-HF) — even in non-diabetics</li>
+                            <li><strong>SGLT2 with CKD benefit:</strong> canagliflozin (CREDENCE), dapagliflozin (DAPA-CKD)</li>
+                            <li><strong>DPP-4:</strong> neutral CV (saxagliptin slight ↑ HF hospitalizations SAVOR-TIMI — avoid in HF)</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-block">
+                        <h3>T2DM Special Populations</h3>
+                        <ul class="bullet-list">
+                            <li><strong>CKD:</strong> SGLT2 preferred; GLP-1 second; avoid metformin if eGFR &lt;30; dose-adjust most drugs</li>
+                            <li><strong>Heart failure:</strong> SGLT2 first-line; avoid TZDs, saxagliptin</li>
+                            <li><strong>Obesity:</strong> GLP-1 agonists (semaglutide, tirzepatide) → greatest weight loss</li>
+                            <li><strong>Elderly:</strong> avoid hypoglycemia; target HbA1c &lt;8%; prefer DPP-4 or GLP-1 (no hypoglycemia)</li>
+                            <li><strong>Pregnancy:</strong> insulin preferred; metformin and glyburide used but not preferred (cross placenta)</li>
+                        </ul>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        <div class="mnemonic-label">Mnemonic</div>
+                        "For CV disease in T2DM: GOAL = GLP-1 Or SGLT2 Are the Lead; For HF = SGLT2 always; For CKD = SGLT2 first, GLP-1 second"
+                    </div>
+                </div>
+            </section>
+
+            <!-- MIND MAP SECTION -->
+            <section class="mindmap-container" id="mindmap">
+                <h3>T2DM Treatment Algorithm: Mind Map</h3>
+                <svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 600px; margin: 0 auto;">
+                    <!-- Central Node -->
+                    <circle cx="400" cy="250" r="45" fill="#059669" stroke="#0f172a" stroke-width="3"/>
+                    <text x="400" y="245" text-anchor="middle" font-size="14" font-weight="bold" fill="white">T2DM</text>
+                    <text x="400" y="265" text-anchor="middle" font-size="12" fill="white">Treatment</text>
+
+                    <!-- Lifestyle Node -->
+                    <circle cx="150" cy="150" r="35" fill="#0f172a" stroke="#059669" stroke-width="2"/>
+                    <text x="150" y="150" text-anchor="middle" font-size="12" font-weight="bold" fill="#059669">Lifestyle</text>
+                    <line x1="380" y1="230" x2="185" y2="180" stroke="#059669" stroke-width="2"/>
+
+                    <!-- Metformin Node -->
+                    <circle cx="150" cy="350" r="35" fill="#0f172a" stroke="#059669" stroke-width="2"/>
+                    <text x="150" y="350" text-anchor="middle" font-size="12" font-weight="bold" fill="#059669">Metformin</text>
+                    <line x1="380" y1="270" x2="185" y2="320" stroke="#059669" stroke-width="2"/>
+
+                    <!-- Insulin Node (Last Resort) -->
+                    <circle cx="650" cy="150" r="35" fill="#ea580c" stroke="#0f172a" stroke-width="2"/>
+                    <text x="650" y="153" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Insulin</text>
+                    <text x="650" y="168" text-anchor="middle" font-size="10" fill="white">(Last)</text>
+                    <line x1="440" y1="235" x2="615" y2="180" stroke="#ea580c" stroke-width="2"/>
+
+                    <!-- Add-on Drugs Arc -->
+                    <!-- SU/Meglitinide -->
+                    <circle cx="400" cy="80" r="30" fill="#0f172a" stroke="#059669" stroke-width="2"/>
+                    <text x="400" y="85" text-anchor="middle" font-size="11" font-weight="bold" fill="#059669">SU/</text>
+                    <text x="400" y="98" text-anchor="middle" font-size="11" font-weight="bold" fill="#059669">MEG</text>
+                    <line x1="400" y1="215" x2="400" y2="110" stroke="#059669" stroke-width="2"/>
+
+                    <!-- TZD Node -->
+                    <circle cx="550" cy="80" r="30" fill="#0f172a" stroke="#059669" stroke-width="2"/>
+                    <text x="550" y="87" text-anchor="middle" font-size="11" font-weight="bold" fill="#059669">TZD</text>
+                    <text x="550" y="100" text-anchor="middle" font-size="9" fill="#059669">PPAR-γ</text>
+                    <line x1="430" y1="215" x2="530" y2="110" stroke="#059669" stroke-width="2"/>
+
+                    <!-- GLP-1 Node -->
+                    <circle cx="650" cy="280" r="35" fill="#0f172a" stroke="#059669" stroke-width="2"/>
+                    <text x="650" y="280" text-anchor="middle" font-size="11" font-weight="bold" fill="#059669">GLP-1</text>
+                    <text x="650" y="296" text-anchor="middle" font-size="9" fill="#059669">CV/Wt loss</text>
+                    <line x1="445" y1="260" x2="615" y2="280" stroke="#059669" stroke-width="2"/>
+
+                    <!-- DPP-4 Node -->
+                    <circle cx="550" cy="420" r="30" fill="#0f172a" stroke="#059669" stroke-width="2"/>
+                    <text x="550" y="425" text-anchor="middle" font-size="11" font-weight="bold" fill="#059669">DPP-4</text>
+                    <text x="550" y="438" text-anchor="middle" font-size="9" fill="#059669">Oral/Safe</text>
+                    <line x1="430" y1="270" x2="530" y2="400" stroke="#059669" stroke-width="2"/>
+
+                    <!-- SGLT2 Node -->
+                    <circle cx="400" cy="420" r="30" fill="#0f172a" stroke="#059669" stroke-width="2"/>
+                    <text x="400" y="425" text-anchor="middle" font-size="11" font-weight="bold" fill="#059669">SGLT2</text>
+                    <text x="400" y="438" text-anchor="middle" font-size="9" fill="#059669">HF/CKD</text>
+                    <line x1="400" y1="285" x2="400" y2="390" stroke="#059669" stroke-width="2"/>
+                </svg>
+                <p style="text-align: center; margin-top: 20px; font-size: 13px; color: #64748b; font-weight: 600;">Central: T2DM → Lifestyle + Metformin → Add-on (SU/TZD/GLP-1/DPP-4/SGLT2) → Insulin</p>
+            </section>
+
+            <!-- MCQ SECTION -->
+            <section id="mcq">
+                <h2 style="font-size: 24px; color: #0f172a; margin-bottom: 24px; font-weight: 700;">MCQ Bank: 18 USMLE-Style Questions</h2>
+
+                <!-- MCQ 1 -->
+                <div class="mcq">
+                    <div class="mcq-question">1. A 58-year-old man with type 2 diabetes is started on metformin for glucose control. Before prescribing, you check his renal function. Which eGFR cutoff would be an absolute contraindication to metformin use?</div>
+                    <ul class="mcq-options">
+                        <li><label><input type="radio" name="mcq1" value="a"> A) eGFR 45-60 mL/min/1.73m²</label></li>
+                        <li><label><input type="radio" name="mcq1" value="b"> B) eGFR 30-45 mL/min/1.73m² (use cautiously, reduce dose)</label></li>
+                        <li><label><input type="radio" name="mcq1" value="c"> C) eGFR <30 mL/min/1.73m² — CONTRAINDICATED</label></li>
+                        <li><label><input type="radio" name="mcq1" value="d"> D) eGFR <15 (only if combined with ACE inhibitor)</label></li>
+                        <li><label><input type="radio" name="mcq1" value="e"> E) Metformin is safe at all eGFR levels if dose is reduced</label></li>
+                    </ul>
+                    <div class="mcq-reveal">
+                        <div class="correct">✓ CORRECT: C) eGFR &lt;30</div>
+                        <div class="explanation"><strong>Why:</strong> Metformin is contraindicated at eGFR &lt;30 due to lactic acidosis risk (metformin accumulates in renal insufficiency). eGFR 30-45 requires caution and dose reduction. <strong>HY Trap:</strong> Students often forget eGFR thresholds; remember: hold for contrast; check B12 annually.</div>
+                    </div>
+                </div>
+
+                <!-- MCQ 2 -->
+                <div class="mcq">
+                    <div class="mcq-question">2. A patient with T2DM is scheduled for cardiac angiography with IV iodinated contrast. He is on metformin 1000 mg BID. What is the correct management?</div>
+                    <ul class="mcq-options">
+                        <li><label><input type="radio" name="mcq2" value="a"> A) Continue metformin; no special precautions needed</label></li>
+                        <li><label><input type="radio" name="mcq2" value="b"> B) Hold metformin at the time of procedure; restart immediately after</label></li>
+                        <li><label><input type="radio" name="mcq2" value="c"> C) Hold metformin at the time of procedure; restart 48h after if renal function stable — CORRECT</label></li>
+                        <li><label><input type="radio" name="mcq2" value="d"> D) Switch to insulin before the procedure, then resume metformin</label></li>
+                        <li><label><input type="radio" name="mcq2" value="e"> E) Double the metformin dose to compensate for the contrast</label></li>
+                    </ul>
+                    <div class="mcq-reveal">
+                        <div class="correct">✓ CORRECT: C) Hold at procedure; restart 48h after if renal stable</div>
+                        <div class="explanation"><strong>Why:</strong> IV iodinated contrast → contrast-induced nephropathy → ↑ metformin accumulation → lactic acidosis risk. Hold metformin at time of contrast; restart 48h after if renal function stable. <strong>HY:</strong> This is HIGH YIELD for Step 1 exams.</div>
+                    </div>
+                </div>
+
+                <!-- MCQ 3 -->
+                <div class="mcq">
+                    <div class="mcq-question">3. A 62-year-old woman with T2DM is on glipizide 10 mg BID. She calls complaining of tremor, sweating, and confusion after missing breakfast. What is the most likely diagnosis and what is the drug-mechanism explanation?</div>
+                    <ul class="mcq-options">
+                        <li><label><input type="radio" name="mcq3" value="a"> A) Hyperglycemia; glipizide blocks K-ATP channels → persistent insulin release even when glucose is low</label></li>
+                        <li><label><input type="radio" name="mcq3" value="b"> B) Hypoglycemia; glipizide blocks K-ATP channels → persistent insulin secretion even when glucose is low — CORRECT</label></li>
+                        <li><label><input type="radio" name="mcq3" value="c"> C) Acute pancreatitis from glipizide</label></li>
+                        <li><label><input type="radio" name="mcq3" value="d"> D) Metformin lactic acidosis (cross-coverage error)</label></li>
+                        <li><label><input type="radio" name="mcq3" value="e"> E) Glipizide-induced DKA</label></li>
+                    </ul>
+                    <div class="mcq-reveal">
+                        <div class="correct">✓ CORRECT: B) Hypoglycemia; K-ATP channel blockade</div>
+                        <div class="explanation"><strong>Why:</strong> Sulfonylureas (glyburide, glipizide) block K⁺-ATP channels → depolarization → insulin secretion REGARDLESS of glucose level. Unlike GLP-1 agonists (glucose-dependent), SU cause hypoglycemia even at low glucose. <strong>HY Trap:</strong> Most important SU side effect is HYPOGLYCEMIA.</div>
+                    </div>
+                </div>
+
+                <!-- MCQ 4 -->
+                <div class="mcq">
+                    <div class="mcq-question">4. A 55-year-old man with T2DM and known NYHA Class II heart failure is being considered for additional glucose-lowering therapy. Which drug is CONTRAINDICATED?</div>
+                    <ul class="mcq-options">
+                        <li><label><input type="radio" name="mcq4" value="a"> A) SGLT2 inhibitor (dapagliflozin)</label></li>
+                        <li><label><input type="radio" name="mcq4" value="b"> B) GLP-1 agonist (semaglutide)</label></li>
+                        <li><label><input type="radio" name="mcq4" value="c"> C) Thiazolidinedione (pioglitazone) — CONTRAINDICATED in Class III-IV HF; caution in Class II</label></li>
+                        <li><label><input type="radio" name="mcq4" value="d"> D) DPP-4 inhibitor (linagliptin)</label></li>
+                        <li><label><input type="radio" name="mcq4" value="e"> E) Metformin (if eGFR >30)</label></li>
+                    </ul>
+                    <div class="mcq-reveal">
+                        <div class="correct">✓ CORRECT: C) TZD — contraindicated NYHA III-IV HF</div>
+                        <div class="explanation"><strong>Why:</strong> TZDs → fluid retention, edema → worsens HF. Contraindicated in NYHA Class III-IV (severe HF); caution in Class II. SGLT2 inhibitors are BENEFICIAL for HF (even non-diabetics). GLP-1 and DPP-4 are neutral/safe in HF. <strong>HY Trap:</strong> TZD + HF = danger; SGLT2 + HF = benefit.</div>
+                    </div>
+                </div>
+
+                <!-- MCQ 5 -->
+                <div class="mcq">
+                    <div class="mcq-question">5. A 72-year-old woman with T2DM is started on liraglutide (GLP-1 agonist). She experiences mild nausea and vomiting in the first 2 weeks. What counseling is most appropriate?</div>
+                    <ul class="mcq-options">
+                        <li><label><input type="radio" name="mcq5" value="a"> A) Discontinue immediately; adverse event is unmanageable</label></li>
+                        <li><label><input type="radio" name="mcq5" value="b"> B) Switch to DPP-4 inhibitor to avoid GI side effects</label></li>
+                        <li><label><input type="radio" name="mcq5" value="c"> C) GI side effects (nausea, vomiting) are transient and typically improve over time; this is actually why patients lose weight — CORRECT</label></li>
+                        <li><label><input type="radio" name="mcq5" value="d"> D) Patient has contraindication (age >70); should never have been prescribed</label></li>
+                        <li><label><input type="radio" name="mcq5" value="e"> E) Indicates severe pancreatitis; hospitalize immediately</label></li>
+                    </ul>
+                    <div class="mcq-reveal">
+                        <div class="correct">✓ CORRECT: C) Transient GI effects; improve over time</div>
+                        <div class="explanation"><strong>Why:</strong> GLP-1 RAs → slowed gastric emptying + satiety → nausea, vomiting, diarrhea. These are TRANSIENT (improve in 1-4 weeks) and are the mechanism for weight loss. Not a contraindication; counsel patience and reassurance. <strong>HY:</strong> GI side effects ≠ pancreatitis (which is rare).</div>
+                    </div>
+                </div>
+
+                <!-- MCQ 6 -->
+                <div class="mcq">
+                    <div class="mcq-question">6. A 48-year-old man with T2DM and established ASCVD (prior MI) requires additional glucose-lowering therapy. According to 2023 ADA guidelines, which drug CLASS is recommended as FIRST add-on based on CV outcomes?</div>
+                    <ul class="mcq-options">
+                        <li><label><input type="radio" name="mcq6" value="a"> A) Sulfonylurea (low cost)</label></li>
+                        <li><label><input type="radio" name="mcq6" value="b"> B) DPP-4 inhibitor (neutral CV outcomes)</label></li>
+                        <li><label><input type="radio" name="mcq6" value="c"> C) GLP-1 agonist or SGLT2 inhibitor (proven MACE reduction) — CORRECT</label></li>
+                        <li><label><input type="radio" name="mcq6" value="d"> D) Thiazolidinedione (increases insulin sensitivity)</label></li>
+                        <li><label><input type="radio" name="mcq6" value="e"> E) Alpha-glucosidase inhibitor (postprandial control)</label></li>
+                    </ul>
+                    <div class="mcq-reveal">
+                        <div class="correct">✓ CORRECT: C) GLP-1 agonist or SGLT2 inhibitor</div>
+                        <div class="explanation"><strong>Why:</strong> CVOTs prove GLP-1 RAs (liraglutide LEADER, semaglutide SUSTAIN-6) and SGLT2 inhibitors (empagliflozin EMPA-REG, canagliflozin CANVAS) ↓ MACE. This is now ADA standard: CV disease → GLP-1 or SGLT2 FIRST (not SU, DPP-4, or TZD). <strong>HY:</strong> CVOT knowledge = must-know for board exams.</div>
+                    </div>
+                </div>
+
+                <!-- MCQ 7 -->
+                <div class="mcq">
+                    <div class="mcq-question">7. A 64-year-old man with T2DM and CKD (eGFR 25 mL/min) requires drug selection. Which agent offers BOTH glucose lowering AND proven renal protection (↓ CKD progression)?</div>
+                    <ul class="mcq-options">
+                        <li><label><input type="radio" name="mcq7" value="a"> A) DPP-4 inhibitor (linagliptin requires no renal dose adjustment)</label></li>
+                        <li><label><input type="radio" name="mcq7" value="b"> B) GLP-1 agonist (semaglutide has CV benefit)</label></li>
+                        <li><label><input type="radio" name="mcq7" value="c"> C) SGLT2 inhibitor (dapagliflozin DAPA-CKD; canagliflozin CREDENCE) — CORRECT</label></li>
+                        <li><label><input type="radio" name="mcq7" value="d"> D) Metformin (contraindicated at eGFR <30)</label></li>
+                        <li><label><input type="radio" name="mcq7" value="e"> E) Thiazolidinedione (increases insulin sensitivity)</label></li>
+                    </ul>
+                    <div class="mcq-reveal">
+                        <div class="correct">✓ CORRECT: C) SGLT2 inhibitor</div>
+                        <div class="explanation"><strong>Why:</strong> SGLT2 inhibitors (especially dapagliflozin, canagliflozin) have proven CKD benefit independent of glucose lowering (DAPA-CKD, CREDENCE trials → ↓ CKD progression, ↓ ESRD, ↓ CV death). GLP-1 has CV benefit but weaker CKD evidence. SGLT2 is FIRST-LINE for CKD. <strong>HY:</strong> SGLT2 for HF/CKD; GLP-1 for CV disease/obesity.</div>
+                    </div>
+                </div>
+
+                <!-- MCQ 8 -->
+                <div class="mcq">
+                    <div class="mcq-question">8. A 51-year-old woman with T2DM is on canagliflozin 100 mg daily. She presents with genital itching and vaginal yeast infection. What is the mechanism?</div>
+                    <ul class="mcq-options">
+                        <li><label><input type="radio" name="mcq8" value="a"> A) Allergy to SGLT2 inhibitors</label></li>
+                        <li><label><input type="radio" name="mcq8" value="b"> B) Canagliflozin causes immunosuppression → yeast overgrowth</label></li>
+                        <li><label><input type="radio" name="mcq8" value="c"> C) SGLT2 inhibitor → glucosuria → glucose-rich urine → yeast thrives in osmotic environment — CORRECT</label></li>
+                        <li><label><input type="radio" name="mcq8" value="d"> D) Unrelated to SGLT2 inhibitor; true UTI, not yeast</label></li>
+                        <li><label><input type="radio" name="mcq8" value="e"> E) Patient has uncontrolled diabetes</label></li>
+                    </ul>
+                    <div class="mcq-reveal">
+                        <div class="correct">✓ CORRECT: C) Glucosuria → glucose-rich environment</div>
+                        <div class="explanation"><strong>Why:</strong> SGLT2 inhibitors → block glucose reabsorption → 60-100g glucose/day in urine → creates osmotic environment favoring yeast overgrowth (balanitis in men, vulvovaginal candidiasis in women). This is the MOST COMMON SGLT2 side effect (not serious, but bothersome). Counsel good hygiene. <strong>HY Trap:</strong> "Sexy complications" (genital yeast) is HIGH YIELD.</div>
+                    </div>
+                </div>
+
+                <!-- MCQ 9 -->
+                <div class="mcq">
+                    <div class="mcq-question">9. A 45-year-old man with T2DM is undergoing elective knee surgery. He is on dapagliflozin (SGLT2 inhibitor) and metformin. Pre-op labs show glucose 185, eGFR 42. Which medication should be HELD 3-7 days before surgery?</div>
+                    <ul class="mcq-options">
+                        <li><label><input type="radio" name="mcq9" value="a"> A) Metformin (renal insufficiency risk)</label></li>
+                        <li><label><input type="radio" name="mcq9" value="b"> B) Dapagliflozin (euglycemic DKA risk perioperatively) — CORRECT</label></li>
+                        <li><label><input type="radio" name="mcq9" value="c"> C) Both metformin and dapagliflozin</label></li>
+                        <li><label><input type="radio" name="mcq9" value="d"> D) Neither; continue both throughout perioperative period</label></li>
+                        <li><label><input type="radio" name="mcq9" value="e"> E) Switch to insulin, then resume dapagliflozin after surgery</label></li>
+                    </ul>
+                    <div class="mcq-reveal">
+                        <div class="correct">✓ CORRECT: B) Hold dapagliflozin</div>
+                        <div class="explanation"><strong>Why:</strong> SGLT2 inhibitors → euglycemic DKA risk during surgery/illness. Mechanism: ↑ insulin requirements (stress), glucosuria continues → ketosis WITHOUT high glucose (euglycemic). Hold 3-7 days perioperatively. Resume after stable oral intake. Metformin can continue (eGFR 42 is safe, though hold if acute renal injury). <strong>HY:</strong> Euglycemic DKA with SGLT2 is a MUST-KNOW trap.</div>
+                    </div>
+                </div>
+
+                <!-- MCQ 10 -->
+                <div class="mcq">
+                    <div class="mcq-question">10. A 70-year-old man with T2DM, history of medullary thyroid cancer (MTC), and CKD Stage 3b (eGFR 35) requires glucose-lowering therapy. Which agent is CONTRAINDICATED?</div>
+                    <ul class="mcq-options">
+                        <li><label><input type="radio" name="mcq10" value="a"> A) Metformin (needs dose reduction)</label></li>
+                        <li><label><input type="radio" name="mcq10" value="b"> B) SGLT2 inhibitor (dapagliflozin)</label></li>
+                        <li><label><input type="radio" name="mcq10" value="c"> C) GLP-1 agonist (liraglutide) — CONTRAINDICATED in personal hx MTC or MEN2A/2B</label></li>
+                        <li><label><input type="radio" name="mcq10" value="d"> D) DPP-4 inhibitor (linagliptin)</label></li>
+                        <li><label><input type="radio" name="mcq10" value="e"> E) Sulfonylurea (glimepiride)</label></li>
+                    </ul>
+                    <div class="mcq-reveal">
+                        <div class="correct">✓ CORRECT: C) GLP-1 agonist</div>
+                        <div class="explanation"><strong>Why:</strong> GLP-1 RAs are CONTRAINDICATED in patients with personal or family history of medullary thyroid cancer (MTC) or MEN2A/2EN2B (based on rodent data showing C-cell hyperplasia). Always screen for hx MTC before prescribing GLP-1. SGLT2, DPP-4, metformin, SU are safe. <strong>HY Trap:</strong> GLP-1 + MTC hx = absolute CI.</div>
+                    </div>
+                </div>
+
+                <!-- MCQ 11 -->
+                <div class="mcq">
+                    <div class="mcq-question">11. A 55-year-old patient with T2DM is on metformin monotherapy with HbA1c 8.5%. He has established ASCVD and BMI 32. Which agent would provide the GREATEST weight loss as add-on therapy?</div>
+                    <ul class="mcq-options">
+                        <li><label><input type="radio" name="mcq11" value="a"> A) Sulfonylurea (glipizide) — causes weight gain</label></li>
+                        <li><label><input type="radio" name="mcq11" value="b"> B) Thiazolidinedione (pioglitazone) — weight gain</label></li>
+                        <li><label><input type="radio" name="mcq11" value="c"> C) DPP-4 inhibitor (sitagliptin) — weight neutral</label></li>
+                        <li><label><input type="radio" name="mcq11" value="d"> D) GLP-1 agonist or tirzepatide (semaglutide, tirzepatide) — GREATEST weight loss (2-15kg GLP-1; 20-25% body weight tirzepatide) — CORRECT</label></li>
+                        <li><label><input type="radio" name="mcq11" value="e"> E) SGLT2 inhibitor (2-3kg weight loss)</label></li>
+                    </ul>
+                    <div class="mcq-reveal">
+                        <div class="correct">✓ CORRECT: D) GLP-1 agonist/tirzepatide</div>
+                        <div class="explanation"><strong>Why:</strong> GLP-1 RAs cause 2-15 kg weight loss (gastric emptying ↓, satiety ↑, CNS appetite suppression). Tirzepatide (dual GLP-1/GIP) → 20-25% body weight loss in obesity trials (superior to GLP-1 alone). This is the GREATEST weight loss among all glucose-lowering agents. SGLT2 → 2-3 kg. SU/TZD → weight gain. <strong>HY:</strong> Obesity + CV disease → GLP-1/tirzepatide preferred.</div>
+                    </div>
+                </div>
+
+                <!-- MCQ 12 -->
+                <div class="mcq">
+                    <div class="mcq-question">12. A patient with T2DM is on acarbose (alpha-glucosidase inhibitor) and develops symptomatic hypoglycemia (tremor, sweating, confusion). What is the CORRECT treatment?</div>
+                    <ul class="mcq-options">
+                        <li><label><input type="radio" name="mcq12" value="a"> A) Sucrose (table sugar) tablet</label></li>
+                        <li><label><input type="radio" name="mcq12" value="b"> B) Lactose tablet</label></li>
+                        <li><label><input type="radio" name="mcq12" value="c"> C) Pure GLUCOSE (not table sugar) — CORRECT</label></li>
+                        <li><label><input type="radio" name="mcq12" value="d"> D) Complex carbohydrates (bread, pasta)</label></li>
+                        <li><label><input type="radio" name="mcq12" value="e"> E) Protein (cheese, nuts)</label></li>
+                    </ul>
+                    <div class="mcq-reveal">
+                        <div class="correct">✓ CORRECT: C) Pure glucose</div>
+                        <div class="explanation"><strong>Why:</strong> Acarbose blocks α-glucosidase → prevents sucrose/disaccharide digestion. If hypoglycemia occurs, treat with PURE GLUCOSE (monosaccharide, doesn't require glucosidase for absorption), NOT table sugar (sucrose requires glucosidase → blocked by acarbose). <strong>HY Trap:</strong> This is a classic board exam question testing mechanism understanding.</div>
+                    </div>
+                </div>
+
+                <!-- MCQ 13 -->
+                <div class="mcq">
+                    <div class="mcq-question">13. A 60-year-old woman with T2DM and BMI 28 is on metformin + saxagliptin. She develops dyspnea and lower extremity edema over 3 months. Echocardiogram shows reduced EF (35%). What is the likely culprit?</div>
+                    <ul class="mcq-options">
+                        <li><label><input type="radio" name="mcq13" value="a"> A) Metformin (cardiotoxicity — no such effect)</label></li>
+                        <li><label><input type="radio" name="mcq13" value="b"> B) Saxagliptin (SAVOR-TIMI trial: ↑ HF hospitalizations) — CORRECT</label></li>
+                        <li><label><input type="radio" name="mcq13" value="c"> C) Diabetes itself (inevitable progression)</label></li>
+                        <li><label><input type="radio" name="mcq13" value="d"> D) Unrelated cardiac condition; no drug adjustment needed</label></li>
+                        <li><label><input type="radio" name="mcq13" value="e"> E) She should be started on a TZD for better HF outcomes</label></li>
+                    </ul>
+                    <div class="mcq-reveal">
+                        <div class="correct">✓ CORRECT: B) Saxagliptin (SAVOR-TIMI)</div>
+                        <div class="explanation"><strong>Why:</strong> SAVOR-TIMI trial: saxagliptin (DPP-4 inhibitor) → slight ↑ HF hospitalizations. While other DPP-4s (sitagliptin, linagliptin) appear neutral, saxagliptin should be AVOIDED in HF. Management: discontinue saxagliptin; consider SGLT2 inhibitor (proven HF benefit). <strong>HY Trap:</strong> DPP-4 generally neutral, but saxagliptin is an exception (↑ HF).</div>
+                    </div>
+                </div>
+
+                <!-- MCQ 14 -->
+                <div class="mcq">
+                    <div class="mcq-question">14. A 66-year-old woman with T2DM and eGFR 28 requires medication adjustment. Which statement about renal dosing is CORRECT?</div>
+                    <ul class="mcq-options">
+                        <li><label><input type="radio" name="mcq14" value="a"> A) Metformin: contraindicated (eGFR <30)</label></li>
+                        <li><label><input type="radio" name="mcq14" value="b"> B) Linagliptin (DPP-4): no renal dose adjustment (hepatic elimination)</label></li>
+                        <li><label><input type="radio" name="mcq14" value="c"> C) Sitagliptin (DPP-4): requires dose reduction (renal elimination)</label></li>
+                        <li><label><input type="radio" name="mcq14" value="d"> D) All of the above are correct — CORRECT</label></li>
+                        <li><label><input type="radio" name="mcq14" value="e"> E) Dapagliflozin: contraindicated at eGFR <30</label></li>
+                    </ul>
+                    <div class="mcq-reveal">
+                        <div class="correct">✓ CORRECT: D) All correct</div>
+                        <div class="explanation"><strong>Why:</strong> (A) Metformin CI at eGFR <30 ✓ (B) Linagliptin = hepatic elimination = no renal adjustment ✓ (C) Sitagliptin = renal elimination = needs dose reduction ✓ (E is incorrect: dapagliflozin can be used down to eGFR ≥20 for CKD benefit, though glucose-lowering effect ↓). <strong>HY:</strong> Know specific renal dosing for each drug class — board exams test this detail.</div>
+                    </div>
+                </div>
+
+                <!-- MCQ 15 -->
+                <div class="mcq">
+                    <div class="mcq-question">15. A 52-year-old man with T2DM has HbA1c 7.8% on metformin alone. He wants to avoid insulin. Which regimen follows 2023 ADA guidelines BEST if he has no CV disease, HF, or CKD?</div>
+                    <ul class="mcq-options">
+                        <li><label><input type="radio" name="mcq15" value="a"> A) Add sulfonylurea (cheapest add-on)</label></li>
+                        <li><label><input type="radio" name="mcq15" value="b"> B) Add DPP-4 inhibitor (safest, no hypoglycemia)</label></li>
+                        <li><label><input type="radio" name="mcq15" value="c"> C) Add SGLT2 inhibitor (HF/CKD protection, even without disease)</label></li>
+                        <li><label><input type="radio" name="mcq15" value="d"> D) Add GLP-1 agonist (CV benefit, weight loss) OR SGLT2 inhibitor; both reasonable in absence of comorbidities — CORRECT</label></li>
+                        <li><label><input type="radio" name="mcq15" value="e"> E) Start insulin immediately (HbA1c >7%)</label></li>
+                    </ul>
+                    <div class="mcq-reveal">
+                        <div class="correct">✓ CORRECT: D) GLP-1 or SGLT2 reasonable</div>
+                        <div class="explanation"><strong>Why:</strong> 2023 ADA guidelines: in absence of comorbidities, GLP-1 agonist or SGLT2 inhibitor are REASONABLE first add-ons due to weight loss, CV benefit, and safety. SU/TZD/DPP-4 are alternatives but less preferred. Guidelines shifted toward GLP-1/SGLT2 as preferred. <strong>HY:</strong> Memorize the stepwise approach: metformin → GLP-1 or SGLT2 (preferred) → or DPP-4/SU (alternatives).</div>
+                    </div>
+                </div>
+
+                <!-- MCQ 16 -->
+                <div class="mcq">
+                    <div class="mcq-question">16. A 78-year-old patient with T2DM, dementia, and multiple comorbidities is hospitalized. Current HbA1c 6.8%. What is the most appropriate HbA1c target for this patient?</div>
+                    <ul class="mcq-options">
+                        <li><label><input type="radio" name="mcq16" value="a"> A) <6.5% (tight control to prevent complications)</label></li>
+                        <li><label><input type="radio" name="mcq16" value="b"> B) <7% (standard target)</label></li>
+                        <li><label><input type="radio" name="mcq16" value="c"> C) <8% (individualized target for elderly, limited life expectancy, extensive comorbidities) — CORRECT</label></li>
+                        <li><label><input type="radio" name="mcq16" value="d"> D) <9% (no need for tight control)</label></li>
+                        <li><label><input type="radio" name="mcq16" value="e"> E) >10% (avoid hypoglycemia at all costs)</label></li>
+                    </ul>
+                    <div class="mcq-reveal">
+                        <div class="correct">✓ CORRECT: C) &lt;8%</div>
+                        <div class="explanation"><strong>Why:</strong> HbA1c targets are INDIVIDUALIZED: <7% standard, <6.5% if young/new DM/no CV disease, <8% if elderly/limited life expectancy/frequent hypoglycemia risk/extensive comorbidities. Tight control (<6.5%) in elderly with dementia → ↑ hypoglycemia risk (confusion/injury) with minimal benefit. Target <8% is appropriate. <strong>HY:</strong> Individualized targets = must-know concept.</div>
+                    </div>
+                </div>
+
+                <!-- MCQ 17 -->
+                <div class="mcq">
+                    <div class="mcq-question">17. A 51-year-old man with newly diagnosed T2DM (HbA1c 9.2%) and normal weight is started on metformin. His glucose remains high. Which add-on should be considered FIRST to minimize hypoglycemia risk?</div>
+                    <ul class="mcq-options">
+                        <li><label><input type="radio" name="mcq17" value="a"> A) Glyburide (sulfonylurea) — causes hypoglycemia</label></li>
+                        <li><label><input type="radio" name="mcq17" value="b"> B) Insulin — hypoglycemia risk, premature</label></li>
+                        <li><label><input type="radio" name="mcq17" value="c"> C) GLP-1 agonist, SGLT2 inhibitor, or DPP-4 (glucose-dependent or no insulin release) — CORRECT</label></li>
+                        <li><label><input type="radio" name="mcq17" value="d"> D) Pioglitazone (weight gain, HF risk)</label></li>
+                        <li><label><input type="radio" name="mcq17" value="e"> E) Acarbose alone (weak effect, GI side effects)</label></li>
+                    </ul>
+                    <div class="mcq-reveal">
+                        <div class="correct">✓ CORRECT: C) GLP-1, SGLT2, or DPP-4</div>
+                        <div class="explanation"><strong>Why:</strong> To minimize hypoglycemia while adding therapy, choose agents that DO NOT cause hypoglycemia: GLP-1 (glucose-dependent), SGLT2 (insulin-independent), DPP-4 (glucose-dependent). Avoid SU/meglitinides (insulin secretagogues) and early insulin. <strong>HY:</strong> Hypoglycemia-free agents are increasingly preferred in modern diabetes management.</div>
+                    </div>
+                </div>
+
+                <!-- MCQ 18 -->
+                <div class="mcq">
+                    <div class="mcq-question">18. A 55-year-old man with T2DM and CKD (eGFR 28) develops medullary thyroid cancer (MTC) on screening imaging. He is currently on linagliptin and metformin. Which statement is CORRECT regarding future therapy?</div>
+                    <ul class="mcq-options">
+                        <li><label><input type="radio" name="mcq18" value="a"> A) He can start a GLP-1 agonist for better CV outcomes (CV benefit > MTC risk)</label></li>
+                        <li><label><input type="radio" name="mcq18" value="b"> B) GLP-1 agonist is CONTRAINDICATED (personal hx MTC) — CORRECT</label></li>
+                        <li><label><input type="radio" name="mcq18" value="c"> C) Switch to sulfonylurea (cheapest option)</label></li>
+                        <li><label><input type="radio" name="mcq18" value="d"> D) Insulin is now required (MTC is end-stage diabetes)</label></li>
+                        <li><label><input type="radio" name="mcq18" value="e"> E) SGLT2 and DPP-4 are contraindicated if MTC is present</label></li>
+                    </ul>
+                    <div class="mcq-reveal">
+                        <div class="correct">✓ CORRECT: B) GLP-1 CI in personal hx MTC</div>
+                        <div class="explanation"><strong>Why:</strong> GLP-1 RAs are CONTRAINDICATED in patients with personal or family history of MTC or MEN2A/2B (based on rodent C-cell hyperplasia data). Even if CV benefit exists, the CI is absolute. Other agents (SGLT2, DPP-4, metformin, SU) can continue. <strong>HY Trap:</strong> This is a HIGH YIELD concept tested frequently on boards.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SUMMARY & PRACTICE CHECKLIST -->
+            <section style="background: white; border-radius: 8px; padding: 24px; margin-bottom: 24px; border: 2px solid #e2e8f0;">
+                <h2 style="font-size: 20px; color: #0f172a; margin-bottom: 16px; font-weight: 700;">Pre-Exam Checklist: What You MUST Know</h2>
+                <div class="checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox">
+                        <label>Metformin: AMPK → ↓ gluconeogenesis; eGFR <30 CI; hold for contrast (48h after)</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox">
+                        <label>Sulfonylureas: K⁺-ATP block → insulin secretion → HYPOGLYCEMIA + weight gain; glyburide worst in renal failure</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox">
+                        <label>Thiazolidinediones: PPAR-γ → insulin sensitivity; CI NYHA III-IV HF; ↑ fractures (women)</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox">
+                        <label>GLP-1 agonists: GLUCOSE-DEPENDENT (no hypoglycemia); weight loss 2-15kg; CVOT benefit; CI personal/family hx MTC</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox">
+                        <label>DPP-4 inhibitors: weak GLP-1 boost; weight neutral; oral; saxagliptin ↑ HF (AVOID)</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox">
+                        <label>SGLT2 inhibitors: glucosuria; genital yeast (most common); euglycemic DKA (hold peri-op); HF/CKD benefit (CVOT proven)</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox">
+                        <label>Insulin: when to start (HbA1c >10%, oral failure, acute illness); basal-bolus regimen; HIGH hypoglycemia risk</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox">
+                        <label>2023 ADA: Lifestyle + Metformin → GLP-1 or SGLT2 preferred (if ASCVD/HF/CKD/obesity) → Triple therapy/insulin</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox">
+                        <label>HbA1c targets: <7% standard; <6.5% if young; <8% if elderly/comorbidities</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox">
+                        <label>CVOT: GLP-1 (LEADER, SUSTAIN-6) & SGLT2 (EMPA-REG, CANVAS) = MACE reduction; DPP-4 = neutral</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox">
+                        <label>Special pop: CKD=SGLT2>GLP-1; HF=SGLT2 first; Obesity=GLP-1/tirzepatide; Elderly=no hypoglycemia (DPP-4/GLP-1/SGLT2)</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox">
+                        <label>Hypoglycemia treatment with acarbose: use pure GLUCOSE (not sucrose — blocked by drug)</label>
+                    </div>
+                </div>
+            </section>
+
+            <footer>
+                <p>Lecture 18: Type 2 Diabetes Treatment & Pharmacology | Created for HoyaDocs Endocrine Block | localStorage: endo_lec18</p>
+                <p style="margin-top: 8px; font-size: 11px;">Last updated: 2026-04-05 | Study tip: Review one LO daily; practice MCQs until comfortable with mechanisms</p>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // localStorage management
+        const STORAGE_KEY = 'endo_lec18';
+
+        function saveProgress() {
+            const loSections = document.querySelectorAll('.lo-section');
+            const checklist = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+            const progress = {
+                expandedLOs: Array.from(loSections).map((el, idx) => ({
+                    lo: idx + 1,
+                    expanded: el.classList.contains('collapsed')
+                })),
+                checklistItems: Array.from(checklist).map(el => el.checked),
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+        }
+
+        function loadProgress() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (!saved) return;
+            const progress = JSON.parse(saved);
+
+            // Restore LO expanded states
+            progress.expandedLOs.forEach((item, idx) => {
+                const loSection = document.querySelectorAll('.lo-section')[idx];
+                if (item.expanded) {
+                    loSection.classList.add('collapsed');
+                }
+            });
+
+            // Restore checklist
+            const checklist = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+            checklist.forEach((el, idx) => {
+                if (progress.checklistItems[idx]) {
+                    el.checked = true;
+                    el.closest('.checklist-item').classList.add('checked');
+                }
+            });
+        }
+
+        // Collapse/expand LO sections
+        document.querySelectorAll('.lo-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const section = header.closest('.lo-section');
+                section.classList.toggle('collapsed');
+                updateProgress();
+                updateNavigation();
+            });
+        });
+
+        // MCQ reveal
+        document.querySelectorAll('.mcq-option').forEach(option => {
+            option.addEventListener('click', () => {
+                const mcq = option.closest('.mcq');
+                mcq.classList.add('answered');
+            });
+        });
+
+        // Checklist toggle
+        document.querySelectorAll('.checklist-item').forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('checked');
+                item.querySelector('input[type="checkbox"]').checked = !item.querySelector('input[type="checkbox"]').checked;
+                updateProgress();
+            });
+        });
+
+        // Flip cards
+        document.querySelectorAll('.flip-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('flipped');
+            });
+        });
+
+        // Sidebar navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            });
+        });
+
+        function updateProgress() {
+            const loSections = document.querySelectorAll('.lo-section');
+            const expandedCount = Array.from(loSections).filter(el => el.classList.contains('collapsed')).length;
+            const totalLOs = loSections.length;
+            const progressPercent = (expandedCount / totalLOs) * 100;
+            document.getElementById('progressFill').style.width = progressPercent + '%';
+            saveProgress();
+        }
+
+        function updateNavigation() {
+            const loSections = document.querySelectorAll('.lo-section');
+            loSections.forEach((section, idx) => {
+                const link = document.querySelectorAll('.nav-link')[idx];
+                if (section.classList.contains('collapsed')) {
+                    link.style.opacity = '1';
+                } else {
+                    link.style.opacity = '0.6';
+                }
+            });
+        }
+
+        // Initialize
+        document.querySelectorAll('.lo-section').forEach(section => {
+            section.classList.add('collapsed');
+        });
+        loadProgress();
+        updateProgress();
+        updateNavigation();
+    </script>
+</body>
+</html>

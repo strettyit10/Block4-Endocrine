@@ -1,0 +1,1838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lec 21: Case Discussion: Pituitary & Thyroid Disorders</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 20px;
+            background: rgba(5, 150, 105, 0.15);
+            border: 2px solid #059669;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(5, 150, 105, 0.2);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #059669;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            color: #cbd5e1;
+            font-size: 1.1em;
+            margin: 5px 0;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-tabs button {
+            padding: 12px 24px;
+            background: rgba(5, 150, 105, 0.1);
+            color: #059669;
+            border: 2px solid #059669;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tabs button:hover {
+            background: rgba(5, 150, 105, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .nav-tabs button.active {
+            background: #059669;
+            color: #0f172a;
+        }
+
+        .content-area {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .sidebar {
+            background: rgba(5, 150, 105, 0.08);
+            border: 2px solid #059669;
+            border-radius: 12px;
+            padding: 20px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .sidebar h1 {
+            color: #059669;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar li {
+            margin: 10px 0;
+        }
+
+        .sidebar a {
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 8px 12px;
+            display: block;
+            border-left: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            color: #059669;
+            border-left-color: #059669;
+            background: rgba(5, 150, 105, 0.2);
+        }
+
+        .case-section {
+            display: none;
+            background: rgba(30, 41, 59, 0.8);
+            border: 2px solid #059669;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .case-section.active {
+            display: block;
+        }
+
+        .case-header {
+            border-bottom: 3px solid #059669;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .case-header h2 {
+            color: #059669;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .case-header .vignette {
+            background: rgba(5, 150, 105, 0.1);
+            padding: 20px;
+            border-left: 4px solid #059669;
+            border-radius: 8px;
+            font-style: italic;
+            color: #e2e8f0;
+            margin-top: 15px;
+        }
+
+        .section-title {
+            color: #059669;
+            font-size: 1.4em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #059669;
+            padding-bottom: 10px;
+        }
+
+        .collapsible {
+            background: rgba(5, 150, 105, 0.1);
+            border: 2px solid rgba(5, 150, 105, 0.3);
+            color: #e2e8f0;
+            padding: 16px;
+            margin: 12px 0;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .collapsible:hover {
+            background: rgba(5, 150, 105, 0.2);
+            border-color: #059669;
+        }
+
+        .collapsible.active {
+            background: rgba(5, 150, 105, 0.3);
+            border-color: #059669;
+            color: #059669;
+        }
+
+        .collapsible-content {
+            display: none;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 20px;
+            margin: 0 0 15px 0;
+            border-left: 4px solid #059669;
+            border-radius: 0 8px 8px 0;
+            line-height: 1.8;
+        }
+
+        .collapsible-content.active {
+            display: block;
+        }
+
+        .summary-boxes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .summary-box {
+            background: rgba(5, 150, 105, 0.15);
+            border: 2px solid #059669;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .summary-box h4 {
+            color: #059669;
+            margin-bottom: 12px;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .summary-box p {
+            color: #cbd5e1;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .mcq-section {
+            margin: 30px 0;
+        }
+
+        .mcq {
+            background: rgba(5, 150, 105, 0.08);
+            border: 2px solid rgba(5, 150, 105, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .mcq h4 {
+            color: #059669;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .mcq-question {
+            color: #e2e8f0;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .mcq-options {
+            margin: 15px 0;
+        }
+
+        .mcq-option {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 12px 15px;
+            margin: 8px 0;
+            border-radius: 6px;
+            color: #cbd5e1;
+            cursor: pointer;
+            border-left: 4px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .mcq-option:hover {
+            border-left-color: #059669;
+            background: rgba(5, 150, 105, 0.1);
+        }
+
+        .reveal-btn {
+            background: #059669;
+            color: #0f172a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .reveal-btn:hover {
+            background: #047857;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+        }
+
+        .answer-reveal {
+            display: none;
+            background: rgba(5, 150, 105, 0.15);
+            border-left: 4px solid #059669;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 6px;
+            color: #e2e8f0;
+        }
+
+        .answer-reveal.active {
+            display: block;
+        }
+
+        .answer-reveal strong {
+            color: #059669;
+        }
+
+        .mindmap {
+            background: rgba(5, 150, 105, 0.08);
+            border: 2px solid #059669;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .mindmap h3 {
+            color: #059669;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .mindmap svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .study-tips {
+            background: rgba(5, 150, 105, 0.12);
+            border-left: 4px solid #059669;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+
+        .study-tips h4 {
+            color: #059669;
+            margin-bottom: 12px;
+        }
+
+        .study-tips ul {
+            margin-left: 20px;
+            color: #cbd5e1;
+        }
+
+        .study-tips li {
+            margin: 8px 0;
+        }
+
+        @media (max-width: 1024px) {
+            .content-area {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                height: auto;
+                position: static;
+            }
+        }
+
+        .arrow {
+            color: #059669;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Lecture 21: Case Discussion</h1>
+            <p>Pituitary & Thyroid Disorders | Pharmacology (Case Integration)</p>
+            <p style="font-size: 0.95em; margin-top: 10px;">ADHD-Friendly Interactive Study Guide</p>
+        </header>
+
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="switchView('case1')">Case 1: Prolactinoma</button>
+            <button class="tab-btn" onclick="switchView('case2')">Case 2: Acromegaly</button>
+            <button class="tab-btn" onclick="switchView('case3')">Case 3: Cushing's</button>
+            <button class="tab-btn" onclick="switchView('case4')">Case 4: Hypothyroidism</button>
+            <button class="tab-btn" onclick="switchView('case5')">Case 5: Thyrotoxicosis</button>
+            <button class="tab-btn" onclick="switchView('case6')">Case 6: Pituitary Mass</button>
+            <button class="tab-btn" onclick="switchView('mindmap')">Mind Map</button>
+        </div>
+
+        <div class="content-area">
+            <aside class="sidebar">
+                <h1>Quick Links</h1>
+                <ul>
+                    <li><a href="#case1" class="sidebar-link active" onclick="switchView('case1')">Prolactinoma</a></li>
+                    <li><a href="#case2" class="sidebar-link" onclick="switchView('case2')">Acromegaly</a></li>
+                    <li><a href="#case3" class="sidebar-link" onclick="switchView('case3')">Cushing's Disease</a></li>
+                    <li><a href="#case4" class="sidebar-link" onclick="switchView('case4')">Hypothyroidism</a></li>
+                    <li><a href="#case5" class="sidebar-link" onclick="switchView('case5')">Thyrotoxicosis</a></li>
+                    <li><a href="#case6" class="sidebar-link" onclick="switchView('case6')">Pituitary Mass</a></li>
+                    <li><a href="#mindmap" class="sidebar-link" onclick="switchView('mindmap')">Mind Map</a></li>
+                </ul>
+            </aside>
+
+            <main>
+                <!-- CASE 1: PROLACTINOMA -->
+                <div id="case1" class="case-section active">
+                    <div class="case-header">
+                        <h2>Case 1: Macroprolactinoma</h2>
+                        <div class="vignette">
+                            <strong>Patient:</strong> 28-year-old woman<br>
+                            <strong>Presentation:</strong> Amenorrhea, galactorrhea, headache, bitemporal visual field defect<br>
+                            <strong>Key Labs:</strong> Prolactin 340 ng/mL, MRI pituitary shows 18mm mass
+                        </div>
+                    </div>
+
+                    <div class="section-title">Clinical Diagnosis</div>
+                    <p style="margin-bottom: 15px;">Macroprolactinoma with potential mass effect on optic chiasm and signs of hyperpituitarism.</p>
+
+                    <button class="collapsible" onclick="toggleCollapsible(event)">
+                        Diagnostic Approach <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <strong>Step 1: Confirm Diagnosis</strong><br>
+                        • Serum prolactin >20 ng/mL is abnormal<br>
+                        • This patient's 340 ng/mL confirms pathologic hyperprolactinemia<br>
+                        <br>
+                        <strong>Step 2: HOOK EFFECT Alert!</strong><br>
+                        • Extremely high prolactin (>200) can falsely SUPPRESS on immunometric assay<br>
+                        • Always dilute sample 1:100 if clinical suspicion high and prolactin very elevated<br>
+                        • Hook effect: antibodies saturated → falsely LOW reading<br>
+                        <br>
+                        <strong>Step 3: Full Pituitary Panel</strong><br>
+                        • TSH/FT4 (hypothyroidism increases TRH → ↑ prolactin)<br>
+                        • ACTH, cortisol, IGF-1, LH/FSH (rule out hypopituitarism from mass)<br>
+                        • β-hCG (exclude pregnancy)<br>
+                        <br>
+                        <strong>Step 4: Imaging & Visual Assessment</strong><br>
+                        • MRI pituitary with contrast (define size, extension, chiasm compression)<br>
+                        • Goldman perimetry visual field test (bitemporal hemianopsia = chiasm compression)<br>
+                        • Formal neuro-ophthalmology consult if vision loss
+                    </div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(event)">
+                        Treatment Strategy <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <strong>First-Line: Dopamine Agonist</strong><br>
+                        • Cabergoline 0.5-1.5 mg twice weekly (preferred: better tolerability, efficacy)<br>
+                        • Mechanism: D2 receptor agonist suppresses prolactin synthesis<br>
+                        • Tumor often shrinks on medical therapy alone<br>
+                        • Monitor prolactin + visual fields q4-6 weeks initially<br>
+                        <br>
+                        <strong>Alternative: Bromocriptine</strong><br>
+                        • 2.5-15 mg daily (less convenient, more side effects)<br>
+                        • Use if cabergoline intolerant or cardiac risk (cabergoline has valve concerns at high dose)<br>
+                        • Preferred in pregnancy (more safety data)<br>
+                        <br>
+                        <strong>Surgery Indications</strong><br>
+                        • Failed medical therapy (no shrinkage or poor prolactin control)<br>
+                        • Acute CSF leak or apoplexy<br>
+                        • Persistent vision loss despite medical therapy<br>
+                        <br>
+                        <strong>Pregnancy Management</strong><br>
+                        • STOP cabergoline when pregnancy confirmed<br>
+                        • If microprolactinoma (<10mm): remain off dopamine agonist<br>
+                        • If macroprolactinoma: close monitoring for visual/headache symptoms<br>
+                        • Restart dopamine agonist if symptomatic (vision change, severe headache)<br>
+                        • Bromocriptine preferred if restart needed (safety data)
+                    </div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(event)">
+                        Teaching Points & HY Pearls <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <strong>Must Know:</strong><br>
+                        ✓ Hook effect = extremely HIGH prolactin falsely shows LOW on assay → dilute 1:100<br>
+                        ✓ Always check visual fields in macroprolactinoma (bitemporal hemianopsia)<br>
+                        ✓ Cabergoline is first-line dopamine agonist (better than bromocriptine)<br>
+                        ✓ Stop cabergoline in pregnancy; bromocriptine safer if restart needed<br>
+                        ✓ Tumor shrinkage expected on dopamine agonists (60-80% of cases)<br>
+                        ✓ Microprolactinomas rarely require surgery; macroadenomas often do if medical failure<br>
+                    </div>
+
+                    <div class="summary-boxes">
+                        <div class="summary-box">
+                            <h4>TEST YOURSELF</h4>
+                            <p>What is the hook effect and when is it most likely?</p>
+                        </div>
+                        <div class="summary-box">
+                            <h4>TRAP</h4>
+                            <p>Very HIGH prolactin that looks falsely low on first assay—always dilute!</p>
+                        </div>
+                        <div class="summary-box">
+                            <h4>HIGH YIELD</h4>
+                            <p>Cabergoline > bromocriptine; visual fields mandatory; stop during pregnancy</p>
+                        </div>
+                        <div class="summary-box">
+                            <h4>MEMORY</h4>
+                            <p>"CABERGO": Cabergoline = Dopamine Agonist = goldstanDard</p>
+                        </div>
+                    </div>
+
+                    <div class="mcq-section">
+                        <div class="mcq">
+                            <h4>MCQ 1.1</h4>
+                            <div class="mcq-question">A 29-year-old woman with galactorrhea and amenorrhea is found to have serum prolactin of 450 ng/mL on initial testing. Repeat testing an hour later shows prolactin of 42 ng/mL. What is the most likely explanation?</div>
+                            <div class="mcq-options">
+                                <div class="mcq-option">A) The initial sample was contaminated</div>
+                                <div class="mcq-option">B) Hook effect from extremely high prolactin</div>
+                                <div class="mcq-option">C) The patient took bromocriptine before second draw</div>
+                                <div class="mcq-option">D) Prolactin naturally fluctuates hour-to-hour</div>
+                                <div class="mcq-option">E) The first assay used a different antibody</div>
+                            </div>
+                            <button class="reveal-btn" onclick="toggleReveal(event)">Reveal Answer</button>
+                            <div class="answer-reveal">
+                                <strong>Correct Answer: B) Hook effect from extremely high prolactin</strong><br><br>
+                                The enormous drop in prolactin level (450 to 42) in such a short time is pathognomonic for hook effect. In immunometric assays with very high prolactin, antibodies become saturated and paradoxically show a falsely LOW result. The second sample was likely diluted 1:100, unmasking the true value. This is a classic board question trap—always think "dilute the sample" for extremely elevated prolactin.
+                            </div>
+                        </div>
+
+                        <div class="mcq">
+                            <h4>MCQ 1.2</h4>
+                            <div class="mcq-question">A 26-year-old woman with a macroprolactinoma confirms pregnancy. She was on cabergoline 0.5 mg twice weekly with excellent prolactin control. What is the most appropriate next step?</div>
+                            <div class="mcq-options">
+                                <div class="mcq-option">A) Continue cabergoline throughout pregnancy at same dose</div>
+                                <div class="mcq-option">B) Stop cabergoline immediately; arrange neurosurgery consultation</div>
+                                <div class="mcq-option">C) Stop cabergoline; arrange close monitoring for visual/headache changes</div>
+                                <div class="mcq-option">D) Switch cabergoline to bromocriptine; continue medical therapy</div>
+                                <div class="mcq-option">E) Obtain urgent MRI to assess tumor size</div>
+                            </div>
+                            <button class="reveal-btn" onclick="toggleReveal(event)">Reveal Answer</button>
+                            <div class="answer-reveal">
+                                <strong>Correct Answer: C) Stop cabergoline; arrange close monitoring for visual/headache changes</strong><br><br>
+                                Cabergoline is teratogenic and should be stopped when pregnancy is confirmed. For macroadenomas, observation with close clinical monitoring (for vision loss, severe headaches) is standard. Surgery is reserved for acute decompensation. Bromocriptine has more pregnancy safety data but is not typically needed if the tumor was stable. Many patients tolerate pregnancy without dopamine agonists, though vigilance is essential.
+                            </div>
+                        </div>
+
+                        <div class="mcq">
+                            <h4>MCQ 1.3</h4>
+                            <div class="mcq-question">Which finding most strongly suggests pituitary adenoma as the cause of hyperprolactinemia rather than primary hypothyroidism?</div>
+                            <div class="mcq-options">
+                                <div class="mcq-option">A) Prolactin 150 ng/mL</div>
+                                <div class="mcq-option">B) Bitemporal visual field defect</div>
+                                <div class="mcq-option">C) Elevated TSH with low FT4</div>
+                                <div class="mcq-option">D) Galactorrhea and amenorrhea</div>
+                                <div class="mcq-option">E) Normal MRI pituitary</div>
+                            </div>
+                            <button class="reveal-btn" onclick="toggleReveal(event)">Reveal Answer</button>
+                            <div class="answer-reveal">
+                                <strong>Correct Answer: B) Bitemporal visual field defect</strong><br><br>
+                                While hypothyroidism can cause prolactin elevation (TRH stimulates prolactin), it does not cause mass effect. Bitemporal hemianopsia is the hallmark of chiasm compression from a pituitary mass—this definitively indicates adenoma, not primary hypothyroidism. Always check visual fields in any patient with significant prolactin elevation.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CASE 2: ACROMEGALY -->
+                <div id="case2" class="case-section">
+                    <div class="case-header">
+                        <h2>Case 2: Acromegaly from GH-Secreting Adenoma</h2>
+                        <div class="vignette">
+                            <strong>Patient:</strong> 45-year-old man<br>
+                            <strong>Presentation:</strong> Progressive hand/foot enlargement, frontal bossing, jaw protrusion, sleep apnea, new DM<br>
+                            <strong>Key Labs:</strong> IGF-1 elevated for age, MRI shows 12mm pituitary adenoma
+                        </div>
+                    </div>
+
+                    <div class="section-title">Clinical Diagnosis</div>
+                    <p style="margin-bottom: 15px;">Acromegaly confirmed by elevated IGF-1 and failure of GH suppression on OGTT.</p>
+
+                    <button class="collapsible" onclick="toggleCollapsible(event)">
+                        Diagnostic Workup <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <strong>Step 1: IGF-1 Screening</strong><br>
+                        • IGF-1 elevated for patient's age = best initial screening test<br>
+                        • More specific and practical than GH (GH is pulsatile, many false elevations)<br>
+                        <br>
+                        <strong>Step 2: OGTT (Oral Glucose Tolerance Test) for Confirmation</strong><br>
+                        • Normal: GH suppresses to <0.4-1 ng/mL within 60 min after glucose load<br>
+                        • Acromegaly: GH FAILS to suppress (remains >1 ng/mL)<br>
+                        • OR GH paradoxically RISES (very characteristic, though less common)<br>
+                        • Diagnostic gold standard<br>
+                        <br>
+                        <strong>Step 3: Pituitary MRI</strong><br>
+                        • Identify adenoma, assess size, chiasm involvement<br>
+                        • Visual field testing if large/near chiasm<br>
+                        <br>
+                        <strong>Step 4: Screen for Complications</strong><br>
+                        • Colonoscopy (↑ colon cancer risk by 2-fold)<br>
+                        • Echocardiography (cardiomegaly from chronic GH excess)<br>
+                        • Sleep study (obstructive sleep apnea common)<br>
+                        • Ophthalmology (visual field if tumor near chiasm)
+                    </div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(event)">
+                        Treatment Approach <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <strong>First-Line: Transsphenoidal Surgery</strong><br>
+                        • Performed by neurosurgeon<br>
+                        • Cure rates: 90% for microadenomas, 50-60% for macroadenomas<br>
+                        • Lower morbidity than craniotomy<br>
+                        <br>
+                        <strong>Second-Line: Somatostatin Analogues (SSA)</strong><br>
+                        • For residual/recurrent disease after surgery or if surgery declined<br>
+                        • Octreotide LAR 30 mg IM monthly<br>
+                        • Lanreotide depot 120 mg SC monthly<br>
+                        • Suppress GH and IGF-1 by 50% in ~50% of patients<br>
+                        • Monitor with IGF-1 (NOT GH) for dose adjustment<br>
+                        <br>
+                        <strong>Third-Line: GH Receptor Antagonist</strong><br>
+                        • Pegvisomant (unique mechanism: blocks GH receptor)<br>
+                        • For SSA-refractory cases<br>
+                        • CRITICAL: Monitor IGF-1 for response (NOT GH)<br>
+                        • GH RISES on pegvisomant (expected) — if you track GH you'll over-treat<br>
+                        • IGF-1 is the bioactive hormone; pegvisomant works despite high GH<br>
+                        <br>
+                        <strong>Radiation Therapy</strong><br>
+                        • For refractory disease<br>
+                        • Slower onset (months to years)<br>
+                        • Risk of hypopituitarism
+                    </div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(event)">
+                        Teaching Points & HY Pearls <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <strong>Must Know:</strong><br>
+                        ✓ IGF-1 is the best screening test (not GH)<br>
+                        ✓ OGTT is gold standard for diagnosis: GH fails to suppress or paradoxically rises<br>
+                        ✓ Transsphenoidal surgery is first-line curative treatment<br>
+                        ✓ Monitor treatment response with IGF-1 level (NEVER use GH for pegvisomant)<br>
+                        ✓ Pegvisomant: GH goes UP but IGF-1 goes DOWN (expected, not toxicity)<br>
+                        ✓ Screen for colon cancer, cardiac complications, sleep apnea<br>
+                        ✓ SSA can shrink adenoma 10-20% (slower than dopamine agonists for prolactinoma)
+                    </div>
+
+                    <div class="summary-boxes">
+                        <div class="summary-box">
+                            <h4>TEST YOURSELF</h4>
+                            <p>Why is GH a poor screening test but IGF-1 excellent?</p>
+                        </div>
+                        <div class="summary-box">
+                            <h4>TRAP</h4>
+                            <p>Using GH to monitor pegvisomant therapy — GH rises on this drug by design!</p>
+                        </div>
+                        <div class="summary-box">
+                            <h4>HIGH YIELD</h4>
+                            <p>IGF-1 screen → OGTT confirm → Surgery → SSA/Pegvisomant if needed</p>
+                        </div>
+                        <div class="summary-box">
+                            <h4>MEMORY</h4>
+                            <p>"ACRO-IGF": Acromegaly = IGF-1 = gold-standard marker</p>
+                        </div>
+                    </div>
+
+                    <div class="mcq-section">
+                        <div class="mcq">
+                            <h4>MCQ 2.1</h4>
+                            <div class="mcq-question">A 48-year-old man with acromegaly undergoes transsphenoidal adenomectomy. Postoperatively, his GH is 0.8 ng/mL and IGF-1 normalizes. Which test best confirms biochemical remission?</div>
+                            <div class="mcq-options">
+                                <div class="mcq-option">A) Random GH level of 0.8 ng/mL</div>
+                                <div class="mcq-option">B) 24-hour GH secretion profile</div>
+                                <div class="mcq-option">C) Normalized IGF-1 level</div>
+                                <div class="mcq-option">D) GH suppression <0.1 ng/mL on OGTT</div>
+                                <div class="mcq-option">E) MRI showing no residual adenoma</div>
+                            </div>
+                            <button class="reveal-btn" onclick="toggleReveal(event)">Reveal Answer</button>
+                            <div class="answer-reveal">
+                                <strong>Correct Answer: C) Normalized IGF-1 level</strong><br><br>
+                                While GH can suppress in some cases after surgery, IGF-1 is the most reliable marker of disease control because it reflects the integrated GH effect (IGF-1 is relatively stable vs pulsatile GH). A normalized IGF-1 for the patient's age confirms biochemical remission. Option D is excellent but less practical in routine post-op follow-up.
+                            </div>
+                        </div>
+
+                        <div class="mcq">
+                            <h4>MCQ 2.2</h4>
+                            <div class="mcq-question">A patient with acromegaly refractory to SSA is started on pegvisomant. Three weeks later, his GH is 8.2 ng/mL (elevated from pre-treatment 3.1) and IGF-1 is normal. What is the most appropriate clinical action?</div>
+                            <div class="mcq-options">
+                                <div class="mcq-option">A) Discontinue pegvisomant immediately (paradoxical response)</div>
+                                <div class="mcq-option">B) Increase pegvisomant dose (inadequate GH suppression)</div>
+                                <div class="mcq-option">C) Continue pegvisomant and monitor IGF-1 (expected response)</div>
+                                <div class="mcq-option">D) Add SSA to pegvisomant to suppress GH</div>
+                                <div class="mcq-option">E) Obtain brain MRI to assess for tumor progression</div>
+                            </div>
+                            <button class="reveal-btn" onclick="toggleReveal(event)">Reveal Answer</button>
+                            <div class="answer-reveal">
+                                <strong>Correct Answer: C) Continue pegvisomant and monitor IGF-1 (expected response)</strong><br><br>
+                                This is the classic pegvisomant scenario. Rising GH on pegvisomant is EXPECTED and NOT a sign of treatment failure. Pegvisomant works by blocking the GH receptor, so GH rises due to loss of negative feedback. The critical marker is IGF-1 normalization, which indicates effective treatment at the cellular level. Any clinician who increases pegvisomant based on elevated GH is making a major error.
+                            </div>
+                        </div>
+
+                        <div class="mcq">
+                            <h4>MCQ 2.3</h4>
+                            <div class="mcq-question">Which complication screening is MOST important in a patient newly diagnosed with acromegaly?</div>
+                            <div class="mcq-options">
+                                <div class="mcq-option">A) Thyroid ultrasound</div>
+                                <div class="mcq-option">B) Colonoscopy for colorectal cancer screening</div>
+                                <div class="mcq-option">C) Chest X-ray</div>
+                                <div class="mcq-option">D) Bone density (DEXA scan)</div>
+                                <div class="mcq-option">E) Abdominal ultrasound</div>
+                            </div>
+                            <button class="reveal-btn" onclick="toggleReveal(event)">Reveal Answer</button>
+                            <div class="answer-reveal">
+                                <strong>Correct Answer: B) Colonoscopy for colorectal cancer screening</strong><br><br>
+                                Acromegaly significantly increases colorectal cancer risk (2-fold or higher). Colonoscopy is the most important screening test and should be done at diagnosis (not waiting for standard age-based screening). Cardiac echo and sleep study are also important but colonoscopy addresses the highest malignancy risk.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CASE 3: CUSHING'S DISEASE VS ECTOPIC ACTH -->
+                <div id="case3" class="case-section">
+                    <div class="case-header">
+                        <h2>Case 3: Cushing's Syndrome Differential</h2>
+                        <div class="vignette">
+                            <strong>Vignette A (Pituitary):</strong> 35F, central obesity, easy bruising, proximal weakness, HTN, glucose 186; UFC elevated ×3, ACTH 85 pg/mL; MRI pituitary 6mm lesion<br>
+                            <strong>Vignette B (Ectopic):</strong> 58M smoker, K+ 2.8, BP 185/105, rapid weight gain, weakness; ACTH 240 pg/mL, UFC >3000 μg/day; MRI normal
+                        </div>
+                    </div>
+
+                    <div class="section-title">Case A: Cushing's Disease (Pituitary Dependent)</div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(event)">
+                        Diagnosis in Case A <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <strong>Clinical Clues:</strong><br>
+                        • Moderate ACTH elevation (85 pg/mL) in context of Cushing's<br>
+                        • MRI shows pituitary adenoma<br>
+                        • Central obesity, easy bruising, hypertension, hyperglycemia<br>
+                        <br>
+                        <strong>Diagnostic Tests:</strong><br>
+                        • UFC elevated ×3 = confirms hypercortisolism<br>
+                        • HDDST: Cortisol should suppress >50% (pituitary is suppressible)<br>
+                        • IPSS (Inferior Petrous Sinus Sampling): Diagnostic gold standard<br>
+                          - Central-to-peripheral ACTH ratio >2 = pituitary source<br>
+                          - Central-to-peripheral ACTH ratio <2 = ectopic source<br>
+                        <br>
+                        <strong>Why IPSS is Needed:</strong><br>
+                        • Even with MRI lesion, must prove it's secreting ACTH<br>
+                        • Non-functioning adenomas are common (can be incidental)<br>
+                        • IPSS is invasive but gold standard for source localization
+                    </div>
+
+                    <div class="section-title">Case B: Ectopic ACTH (Occult Malignancy)</div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(event)">
+                        Diagnosis in Case B <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <strong>Clinical Red Flags:</strong><br>
+                        • VERY HIGH ACTH (240 pg/mL) — ectopic ACTH often >200<br>
+                        • Severe hypokalemia (K+ 2.8) = extreme mineralocorticoid excess<br>
+                        • Why? Massive cortisol saturates 11β-HSD2 enzyme → cortisol gets access to mineralocorticoid receptors → K+ wasting<br>
+                        • Rapid onset of symptoms (accelerated course)<br>
+                        • Normal MRI pituitary = no adenoma visualized<br>
+                        <br>
+                        <strong>Diagnostic Tests:</strong><br>
+                        • UFC severely elevated (>3000 μg/day vs mild elevation in some pituitary cases)<br>
+                        • HDDST: Cortisol does NOT suppress (resistant to dexamethasone)<br>
+                        • No IPSS needed if already confident of ectopic source<br>
+                        • CT chest/abdomen/pelvis: Locate occult tumor (often small-cell lung cancer)<br>
+                        <br>
+                        <strong>Most Likely Diagnosis:</strong><br>
+                        • Small-cell lung cancer (SCLC) is #1 cause of ectopic ACTH<br>
+                        • Others: carcinoid (lung, thymus), pheochromocytoma, medullary thyroid
+                    </div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(event)">
+                        Key Differentiators <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <tr style="border-bottom: 2px solid #059669;">
+                                <th style="padding: 10px; text-align: left; color: #059669;">Feature</th>
+                                <th style="padding: 10px; text-align: left; color: #059669;">Cushing's Disease</th>
+                                <th style="padding: 10px; text-align: left; color: #059669;">Ectopic ACTH</th>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(5, 150, 105, 0.3);">
+                                <td style="padding: 10px;">ACTH Level</td>
+                                <td style="padding: 10px;">Mild-moderate (50-200)</td>
+                                <td style="padding: 10px;">HIGH (often >200)</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(5, 150, 105, 0.3);">
+                                <td style="padding: 10px;">HDDST Suppression</td>
+                                <td style="padding: 10px;">Suppresses >50%</td>
+                                <td style="padding: 10px;">No suppression</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(5, 150, 105, 0.3);">
+                                <td style="padding: 10px;">Hypokalemia Severity</td>
+                                <td style="padding: 10px;">Mild (if present)</td>
+                                <td style="padding: 10px;">Severe (K+ often <3)</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(5, 150, 105, 0.3);">
+                                <td style="padding: 10px;">Pituitary MRI</td>
+                                <td style="padding: 10px;">Often shows adenoma</td>
+                                <td style="padding: 10px;">Normal</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(5, 150, 105, 0.3);">
+                                <td style="padding: 10px;">IPSS Gradient</td>
+                                <td style="padding: 10px;">Central/Peripheral >2</td>
+                                <td style="padding: 10px;">Central/Peripheral <2</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px;">Definitive Test</td>
+                                <td style="padding: 10px;">IPSS sampling</td>
+                                <td style="padding: 10px;">CT imaging + clinical context</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(event)">
+                        Treatment Approach <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <strong>Case A (Pituitary Cushing's):</strong><br>
+                        • First-line: Transsphenoidal surgery<br>
+                        • If residual: Pituitary radiation or bilateral adrenalectomy<br>
+                        • Mitotane, metyrapone, ketoconazole for medical control (bridge to surgery)<br>
+                        <br>
+                        <strong>Case B (Ectopic ACTH):</strong><br>
+                        • Primary: Treat underlying malignancy (SCLC → chemotherapy)<br>
+                        • Immediate: Aggressive K+ repletion (life-threatening hypokalemia)<br>
+                        • Medical: Mitotane, metyrapone, or ketoconazole to suppress cortisol while cancer treated<br>
+                        • Bilateral adrenalectomy if cancer unresponsive/unresectable<br>
+                    </div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(event)">
+                        Teaching Points & HY Pearls <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <strong>Must Know:</strong><br>
+                        ✓ Ectopic ACTH: VERY HIGH ACTH + severe hypokalemia + no HDDST suppression<br>
+                        ✓ Cushing's disease: moderate ACTH + HDDST suppression + MRI adenoma usually present<br>
+                        ✓ IPSS gold standard: central/peripheral ACTH ratio >2 = pituitary<br>
+                        ✓ Hypokalemia in ectopic ACTH is life-threatening (mineral corticoid excess from cortisol overflow)<br>
+                        ✓ SCLC is #1 ectopic ACTH source (especially smokers)<br>
+                        ✓ Cortisol must be replaced AFTER bilateral adrenalectomy (both in pituitary and ectopic cases)
+                    </div>
+
+                    <div class="summary-boxes">
+                        <div class="summary-box">
+                            <h4>TEST YOURSELF</h4>
+                            <p>Why is hypokalemia more severe in ectopic ACTH?</p>
+                        </div>
+                        <div class="summary-box">
+                            <h4>TRAP</h4>
+                            <p>Missing ectopic ACTH because MRI pituitary is normal—always check ACTH level!</p>
+                        </div>
+                        <div class="summary-box">
+                            <h4>HIGH YIELD</h4>
+                            <p>ACTH >200 + severe K+ loss + no HDDST suppression = ectopic (likely SCLC)</p>
+                        </div>
+                        <div class="summary-box">
+                            <h4>MEMORY</h4>
+                            <p>"ECTOPIC ALERT": Extreme ACTH + Critical K+ depletion</p>
+                        </div>
+                    </div>
+
+                    <div class="mcq-section">
+                        <div class="mcq">
+                            <h4>MCQ 3.1</h4>
+                            <div class="mcq-question">A 54-year-old smoker presents with Cushing's syndrome. Labs: ACTH 280 pg/mL, UFC 4200 μg/day, K+ 2.6 mmol/L. MRI pituitary is normal. HDDST shows no suppression of cortisol. What is the most likely diagnosis?</div>
+                            <div class="mcq-options">
+                                <div class="mcq-option">A) Cushing's disease with MRI-occult pituitary adenoma</div>
+                                <div class="mcq-option">B) Ectopic ACTH, likely small-cell lung cancer</div>
+                                <div class="mcq-option">C) Adrenocortical carcinoma</div>
+                                <div class="mcq-option">D) Primary adrenal hyperplasia</div>
+                                <div class="mcq-option">E) Factitious Cushing's from steroid ingestion</div>
+                            </div>
+                            <button class="reveal-btn" onclick="toggleReveal(event)">Reveal Answer</button>
+                            <div class="answer-reveal">
+                                <strong>Correct Answer: B) Ectopic ACTH, likely small-cell lung cancer</strong><br><br>
+                                The combination of VERY HIGH ACTH (280), severe hypokalemia (2.6), lack of HDDST suppression, and normal MRI pituitary is pathognomonic for ectopic ACTH. In a smoker, SCLC is the most likely source. CT chest/abdomen should be obtained urgently.
+                            </div>
+                        </div>
+
+                        <div class="mcq">
+                            <h4>MCQ 3.2</h4>
+                            <div class="mcq-question">Inferior petrous sinus sampling (IPSS) shows a central-to-peripheral ACTH ratio of 1.2. Which diagnosis is most likely?</div>
+                            <div class="mcq-options">
+                                <div class="mcq-option">A) Cushing's disease from pituitary adenoma</div>
+                                <div class="mcq-option">B) Ectopic ACTH syndrome</div>
+                                <div class="mcq-option">C) Adrenocortical carcinoma</div>
+                                <div class="mcq-option">D) Bilateral adrenal hyperplasia</div>
+                                <div class="mcq-option">E) ACTH-secreting carcinoid of the thymus</div>
+                            </div>
+                            <button class="reveal-btn" onclick="toggleReveal(event)">Reveal Answer</button>
+                            <div class="answer-reveal">
+                                <strong>Correct Answer: B) Ectopic ACTH syndrome</strong><br><br>
+                                An IPSS ratio of 1.2 is LESS than 2, indicating the ACTH is NOT coming from the pituitary. In ACTH-dependent Cushing's, a ratio <2 strongly suggests ectopic source. The pituitary gland itself is not hypersecreting ACTH, so there's no gradient between central (pituitary) and peripheral sampling.
+                            </div>
+                        </div>
+
+                        <div class="mcq">
+                            <h4>MCQ 3.3</h4>
+                            <div class="mcq-question">In a patient with ectopic ACTH and K+ of 2.4 mmol/L, what is the primary mechanism causing hypokalemia?</div>
+                            <div class="mcq-options">
+                                <div class="mcq-option">A) Aldosterone excess from bilateral adrenal hyperplasia</div>
+                                <div class="mcq-option">B) Cortisol overwhelming 11β-HSD2, allowing access to mineralocorticoid receptors</div>
+                                <div class="mcq-option">C) Renal failure from severe volume depletion</div>
+                                <div class="mcq-option">D) ACTH directly stimulates urinary K+ wasting</div>
+                                <div class="mcq-option">E) Hypomagnesemia-induced renal K+ loss</div>
+                            </div>
+                            <button class="reveal-btn" onclick="toggleReveal(event)">Reveal Answer</button>
+                            <div class="answer-reveal">
+                                <strong>Correct Answer: B) Cortisol overwhelming 11β-HSD2, allowing access to mineralocorticoid receptors</strong><br><br>
+                                In ectopic ACTH with extreme cortisol elevation, the enzyme 11β-HSD2 (which normally inactivates cortisol in the distal tubule) becomes saturated. Inactive cortisol cannot be protected, so active cortisol binds mineralocorticoid receptors → sodium retention and potassium wasting. This explains why severe K+ loss is unique to ectopic ACTH (highest cortisol levels).
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CASE 4: HYPOTHYROIDISM -->
+                <div id="case4" class="case-section">
+                    <div class="case-header">
+                        <h2>Case 4: Hypothyroidism — Primary vs Secondary</h2>
+                        <div class="vignette">
+                            <strong>Case A:</strong> 52F, fatigue, weight gain, constipation, dry skin, puffy face, cold intolerance; TSH 42, FT4 low, anti-TPO positive<br>
+                            <strong>Case B:</strong> 38F, 3 months postpartum (hemorrhage), fatigue, amenorrhea, cold intolerance; TSH 0.8 (normal), FT4 low
+                        </div>
+                    </div>
+
+                    <div class="section-title">Case A: Primary Hypothyroidism (Hashimoto's)</div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(event)">
+                        Diagnosis & Management <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <strong>Clinical Findings:</strong><br>
+                        • Classic hypothyroid symptoms (fatigue, weight gain, cold intolerance, constipation)<br>
+                        • Puffy face (myxedema)<br>
+                        • Anti-TPO positive = autoimmune (Hashimoto's thyroiditis)<br>
+                        <br>
+                        <strong>Diagnostic Labs:</strong><br>
+                        • TSH ELEVATED (42) = primary thyroid failure<br>
+                        • FT4 LOW = inadequate thyroid hormone production<br>
+                        • Anti-TPO positive = Hashimoto's etiology<br>
+                        <br>
+                        <strong>Treatment:</strong><br>
+                        • Levothyroxine (synthetic T4) 1.6 μg/kg/day initial dose<br>
+                        • Monitor TSH in 6-8 weeks; adjust if needed<br>
+                        • Goal TSH 0.5-2.5 mIU/L (target TSH varies by patient, age)<br>
+                        • T4 has long half-life → steady state in 6-8 weeks<br>
+                        • Once stable, monitor annually<br>
+                        <br>
+                        <strong>Dosing Considerations:</strong><br>
+                        • Increase by 25 μg if inadequate response<br>
+                        • Take on empty stomach (food/supplements ↓ absorption)<br>
+                        • Avoid taking within 4 hours of calcium, iron, SSRIs (chelation risk)
+                    </div>
+
+                    <div class="section-title">Case B: Secondary Hypothyroidism (Sheehan's Syndrome)</div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(event)">
+                        Diagnosis & Why It's Tricky <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <strong>History:</strong><br>
+                        • Postpartum hemorrhage → pituitary ischemia/necrosis<br>
+                        • Sheehan's syndrome = pituitary infarction from hypovolemia<br>
+                        <br>
+                        <strong>Clinical Presentation:</strong><br>
+                        • Classic first symptom: FAILURE TO LACTATE (prolactin deficiency)<br>
+                        • Amenorrhea (LH/FSH deficiency)<br>
+                        • Fatigue, cold intolerance, weight loss (hypothyroidism)<br>
+                        • Loss of libido (gonadal failure)<br>
+                        <br>
+                        <strong>THE TRAP: TSH is Inappropriately Normal or LOW</strong><br>
+                        • In primary hypothyroidism: TSH ↑ (compensatory)<br>
+                        • In secondary hypothyroidism: TSH is NORMAL or LOW (pituitary dysfunction)<br>
+                        • Why? The pituitary (which makes TSH) is damaged!<br>
+                        <br>
+                        <strong>Diagnostic Labs:</strong><br>
+                        • FT4 is LOW (most important finding)<br>
+                        • TSH 0.8 (inappropriately NORMAL despite low FT4)<br>
+                        • This is the hallmark: ↓ FT4 + ↓ or normal TSH<br>
+                        • Prolactin LOW (vs elevated in pituitary adenoma)<br>
+                        • LH/FSH LOW (gonadal axis failure)<br>
+                        • ACTH/cortisol may be LOW (axis check needed)<br>
+                        <br>
+                        <strong>Critical Lesson: TSH is UNRELIABLE in Secondary Hypothyroidism</strong><br>
+                        • Must use FREE T4 to assess thyroid status<br>
+                        • TSH can be "falsely reassuring"
+                    </div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(event)">
+                        Treatment Priority <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <strong>CRITICAL: Cortisol MUST be Replaced FIRST</strong><br>
+                        • Why? If you give levothyroxine to a cortisol-deficient patient:<br>
+                        • ↑ Thyroid hormone → ↑ cortisol metabolism → acute adrenal crisis!<br>
+                        <br>
+                        <strong>Correct Order:</strong><br>
+                        1. Replace ACTH/Cortisol FIRST (e.g., hydrocortisone 15-20 mg/day)<br>
+                        2. After 1-2 weeks, then START levothyroxine<br>
+                        3. Monitor TSH/FT4 but remember TSH is unreliable guide<br>
+                        4. Replace gonadal hormones (last step, lowest priority acutely)<br>
+                        <br>
+                        <strong>Dose & Monitoring:</strong><br>
+                        • Levothyroxine: start 25-50 μg, titrate based on FT4 (not TSH)<br>
+                        • Goal FT4 in middle-to-upper normal range<br>
+                        • Monitor LH/FSH and testosterone separately<br>
+                    </div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(event)">
+                        Key Differences Summary <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <tr style="border-bottom: 2px solid #059669;">
+                                <th style="padding: 10px; text-align: left; color: #059669;">Feature</th>
+                                <th style="padding: 10px; text-align: left; color: #059669;">Primary (Hashimoto's)</th>
+                                <th style="padding: 10px; text-align: left; color: #059669;">Secondary (Sheehan's)</th>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(5, 150, 105, 0.3);">
+                                <td style="padding: 10px;">FT4</td>
+                                <td style="padding: 10px;">LOW</td>
+                                <td style="padding: 10px;">LOW</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(5, 150, 105, 0.3);">
+                                <td style="padding: 10px;">TSH</td>
+                                <td style="padding: 10px;">HIGH (42 in case A)</td>
+                                <td style="padding: 10px;">Normal/LOW (inappropriately normal)</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(5, 150, 105, 0.3);">
+                                <td style="padding: 10px;">Anti-TPO</td>
+                                <td style="padding: 10px;">Positive</td>
+                                <td style="padding: 10px;">Negative</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(5, 150, 105, 0.3);">
+                                <td style="padding: 10px;">Other Pituitary Axes</td>
+                                <td style="padding: 10px;">Normal</td>
+                                <td style="padding: 10px;">Multiple deficiencies (prolactin, ACTH, GH)</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(5, 150, 105, 0.3);">
+                                <td style="padding: 10px;">First Symptom of Sheehan's</td>
+                                <td style="padding: 10px;">N/A</td>
+                                <td style="padding: 10px;">FAILURE TO LACTATE</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px;">Treatment Priority</td>
+                                <td style="padding: 10px;">Levothyroxine</td>
+                                <td style="padding: 10px;">Cortisol FIRST, then levothyroxine</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(event)">
+                        Teaching Points & HY Pearls <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <strong>Must Know:</strong><br>
+                        ✓ Primary hypothyroidism: TSH high, FT4 low (most common type)<br>
+                        ✓ Secondary hypothyroidism: FT4 low, TSH inappropriately normal/low<br>
+                        ✓ Sheehan's syndrome: postpartum hemorrhage → pituitary necrosis<br>
+                        ✓ Failure to lactate = classic FIRST symptom of Sheehan's (prolactin deficiency)<br>
+                        ✓ TSH unreliable in central hypothyroidism — must monitor FREE T4<br>
+                        ✓ Cortisol MUST be replaced BEFORE levothyroxine (adrenal crisis risk)<br>
+                        ✓ Levothyroxine dosing: 1.6 μg/kg/day initial; adjust q 6-8 weeks<br>
+                    </div>
+
+                    <div class="summary-boxes">
+                        <div class="summary-box">
+                            <h4>TEST YOURSELF</h4>
+                            <p>Why is TSH inappropriately normal in Sheehan's?</p>
+                        </div>
+                        <div class="summary-box">
+                            <h4>TRAP</h4>
+                            <p>Normal TSH + low FT4 = missing secondary hypothyroidism diagnosis!</p>
+                        </div>
+                        <div class="summary-box">
+                            <h4>HIGH YIELD</h4>
+                            <p>Sheehan's: failure to lactate first, then amenorrhea, then hypothyroidism. Cortisol FIRST!</p>
+                        </div>
+                        <div class="summary-box">
+                            <h4>MEMORY</h4>
+                            <p>"SECONDARY = Sheehan's + Shortage of pituitary" (TSH can't rise)</p>
+                        </div>
+                    </div>
+
+                    <div class="mcq-section">
+                        <div class="mcq">
+                            <h4>MCQ 4.1</h4>
+                            <div class="mcq-question">A 40-year-old woman with postpartum hemorrhage 3 months ago presents with amenorrhea, inability to produce breast milk, and fatigue. TSH is 0.8 mIU/L (normal) and FT4 is 0.9 ng/dL (low). What is the most appropriate initial step?</div>
+                            <div class="mcq-options">
+                                <div class="mcq-option">A) Start levothyroxine monotherapy</div>
+                                <div class="mcq-option">B) Check cortisol level and give hydrocortisone before levothyroxine</div>
+                                <div class="mcq-option">C) Assume elevated TSH-receptor antibodies (Graves') and measure TRAb</div>
+                                <div class="mcq-option">D) Repeat TSH in 2 weeks (likely lab error)</div>
+                                <div class="mcq-option">E) Treat amenorrhea with OCPs and assume euthyroid</div>
+                            </div>
+                            <button class="reveal-btn" onclick="toggleReveal(event)">Reveal Answer</button>
+                            <div class="answer-reveal">
+                                <strong>Correct Answer: B) Check cortisol level and give hydrocortisone before levothyroxine</strong><br><br>
+                                This is the classic Sheehan's picture: postpartum hemorrhage, failure to lactate (prolactin deficiency), amenorrhea, and the KEY finding of normal TSH + low FT4. This indicates secondary hypothyroidism. Cortisol must be checked and replaced FIRST before levothyroxine, to prevent precipitating adrenal crisis.
+                            </div>
+                        </div>
+
+                        <div class="mcq">
+                            <h4>MCQ 4.2</h4>
+                            <div class="mcq-question">Why does TSH remain normal in secondary hypothyroidism from Sheehan's syndrome despite markedly low FT4?</div>
+                            <div class="mcq-options">
+                                <div class="mcq-option">A) The pituitary is damaged and cannot produce adequate TSH</div>
+                                <div class="mcq-option">B) FT4 directly suppresses TSH in pituitary-to-thyroid feedback loops</div>
+                                <div class="mcq-option">C) Thyroid peroxidase antibodies neutralize TSH</div>
+                                <div class="mcq-option">D) The thyroid gland is unresponsive to TSH</div>
+                                <div class="mcq-option">E) Pregnancy hormones from retained products of conception suppress TSH</div>
+                            </div>
+                            <button class="reveal-btn" onclick="toggleReveal(event)">Reveal Answer</button>
+                            <div class="answer-reveal">
+                                <strong>Correct Answer: A) The pituitary is damaged and cannot produce adequate TSH</strong><br><br>
+                                In Sheehan's syndrome from pituitary necrosis, the anterior pituitary—which manufactures TSH—is damaged. The thyroid gland is intact and working (primary dysfunction is NOT present), but without adequate TSH stimulation, T4 production falls. This is why TSH fails to compensate despite low FT4. The pituitary's loss of TSH-secreting function creates the paradox of low FT4 with normal/low TSH.
+                            </div>
+                        </div>
+
+                        <div class="mcq">
+                            <h4>MCQ 4.3</h4>
+                            <div class="mcq-question">A patient with secondary hypothyroidism from Sheehan's is started on levothyroxine WITHOUT first receiving hydrocortisone. Which complication is MOST likely?</div>
+                            <div class="mcq-options">
+                                <div class="mcq-option">A) Thyroid storm (accelerated metabolism)</div>
+                                <div class="mcq-option">B) Acute adrenal crisis (cortisol metabolism overwhelms limited reserves)</div>
+                                <div class="mcq-option">C) Permanent TSH suppression (loss of negative feedback)</div>
+                                <div class="mcq-option">D) Allergic reaction to levothyroxine</div>
+                                <div class="mcq-option">E) Spontaneous hypothyroid coma</div>
+                            </div>
+                            <button class="reveal-btn" onclick="toggleReveal(event)">Reveal Answer</button>
+                            <div class="answer-reveal">
+                                <strong>Correct Answer: B) Acute adrenal crisis (cortisol metabolism overwhelms limited reserves)</strong><br><br>
+                                Levothyroxine increases metabolism of glucocorticoids. In a cortisol-deficient patient (ACTH axis failure from Sheehan's), this acceleration of cortisol breakdown can precipitate acute adrenal crisis with hypotension, shock, and potentially death. Always check and replace cortisol BEFORE thyroid hormone in pituitary insufficiency.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CASE 5: THYROTOXICOSIS -->
+                <div id="case5" class="case-section">
+                    <div class="case-header">
+                        <h2>Case 5: Thyrotoxicosis Differential Diagnosis</h2>
+                        <div class="vignette">
+                            <strong>Case A:</strong> 32F, diffuse goiter, palpitations, weight loss, exophthalmos, pretibial myxedema; TSH <0.01, FT4 elevated, TSI positive, high radioiodine uptake<br>
+                            <strong>Case B:</strong> 28F, 6 weeks postpartum, palpitations, weight loss; TSH <0.01, FT4 elevated, NO goiter, no pain; LOW radioiodine uptake<br>
+                            <strong>Case C:</strong> 45F, neck pain, fever, tender thyroid after URI; TSH <0.01, ESR 85, elevated CRP, LOW radioiodine uptake
+                        </div>
+                    </div>
+
+                    <div class="section-title">Case A: Graves' Disease (Autoimmune Thyroiditis)</div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(event)">
+                        Diagnosis & Management <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <strong>Pathophysiology:</strong><br>
+                        • TSI (TSH receptor stimulating antibody) mimics TSH → unregulated thyroid hormone production<br>
+                        • Activates TSH receptor → thyroid grows (diffuse goiter) and synthesizes excess T3/T4<br>
+                        <br>
+                        <strong>Clinical Features:</strong><br>
+                        • Exophthalmos (orbital TSH-receptor activation → orbital fibroblast proliferation)<br>
+                        • Pretibial myxedema (TSH-receptor in fibroblasts of shin)<br>
+                        • Diffuse goiter (uniform enlargement)<br>
+                        • Palpitations, weight loss, heat intolerance<br>
+                        <br>
+                        <strong>Diagnostic Tests:</strong><br>
+                        • TSH <0.01 (suppressed)<br>
+                        • FT4 elevated<br>
+                        • TSI (TSH receptor antibody) POSITIVE<br>
+                        • Radioiodine uptake DIFFUSELY HIGH (thyroid is hypersecreting/synthesizing)<br>
+                        <br>
+                        <strong>First-Line Treatment: Antithyroid Drugs</strong><br>
+                        • Methimazole: 10-30 mg TID → blocks iodine incorporation<br>
+                        • PTU (propylthiouracil): 100-200 mg TID (older agent, more GI side effects, rare hepatotoxicity)<br>
+                        • Preference: Methimazole (fewer side effects, better compliance)<br>
+                        • EXCEPT 1st trimester pregnancy → use PTU (methimazole teratogenic — methimazole embryopathy)<br>
+                        • Switch to methimazole after 1st trimester<br>
+                        <br>
+                        <strong>Adjunctive Measures:</strong><br>
+                        • Beta-blocker (propranolol) for symptomatic relief (palpitations, tremor)<br>
+                        • Iodine solution (Lugol's or SSKI) to inhibit hormone release (used perioperatively/for crisis)<br>
+                        <br>
+                        <strong>Alternative: Radioactive Iodine (RAI)</strong><br>
+                        • If antithyroid failure or intolerance<br>
+                        • Contraindicated in pregnancy<br>
+                        • Risk of hypothyroidism (long-term)<br>
+                        <br>
+                        <strong>Third-Line: Thyroidectomy</strong><br>
+                        • Surgical cure for severe/refractory cases<br>
+                        • Preoperatively: achieve euthyroidism with methimazole, then give iodine (Lugol's)<br>
+                        <br>
+                        <strong>Ophthalmopathy Management:</strong><br>
+                        • Selenium, lubricating eye drops, protective eyewear<br>
+                        • Prednisone if severe (orbital decompression in extreme cases)<br>
+                        • Separate from thyroid treatment; may worsen transiently after RAI
+                    </div>
+
+                    <div class="section-title">Case B: Postpartum Thyroiditis (Destructive Thyroiditis)</div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(event)">
+                        Diagnosis & Management <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <strong>Pathophysiology:</strong><br>
+                        • Autoimmune thyroid inflammation postpartum (immune rebound after pregnancy-induced tolerance)<br>
+                        • Lymphocytic infiltration → thyroid follicles rupture → stored T3/T4 RELEASED (not synthesized)<br>
+                        • Transient thyrotoxicosis (3-6 weeks) from hormone leakage<br>
+                        <br>
+                        <strong>Clinical Presentation:</strong><br>
+                        • Thyroid symptoms 3-6 weeks postpartum<br>
+                        • NO goiter (or mild)<br>
+                        • NO pain in thyroid (unlike subacute thyroiditis)<br>
+                        • Not associated with recent URI (unlike subacute)<br>
+                        <br>
+                        <strong>Lab Features:</strong><br>
+                        • TSH <0.01, FT4 elevated (thyrotoxic phase)<br>
+                        • Radioiodine uptake: LOW (thyroid not synthesizing — just releasing stored hormone)<br>
+                        • This is the KEY distinguishing feature from Graves'<br>
+                        • Thyroid antibodies (anti-TPO, anti-thyroglobulin) may be present<br>
+                        <br>
+                        <strong>Natural History:</strong><br>
+                        • Thyrotoxic phase (weeks 1-6) → euthyroid (weeks 6-12) → hypothyroid (weeks 12-24) → recovery (euthyroid)<br>
+                        • Self-limited; does NOT require antithyroid drugs<br>
+                        <br>
+                        <strong>Treatment:</strong><br>
+                        • SYMPTOMATIC ONLY: beta-blocker for palpitations/tremor<br>
+                        • NO antithyroid drugs (methimazole/PTU ineffective — thyroid not synthesizing)<br>
+                        • NO iodine (won't help destructive process)<br>
+                        • Reassurance and monitoring<br>
+                        • Levothyroxine if hypothyroid phase develops<br>
+                        <br>
+                        <strong>Important: Recurrence Risk</strong><br>
+                        • High risk of recurrence in future pregnancies<br>
+                        • Counsel about symptoms; plan closer monitoring
+                    </div>
+
+                    <div class="section-title">Case C: Subacute (De Quervain's) Thyroiditis</div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(event)">
+                        Diagnosis & Management <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <strong>Pathophysiology:</strong><br>
+                        • Post-viral granulomatous thyroid inflammation<br>
+                        • Thought to follow viral URI (enterovirus, mumps, influenza)<br>
+                        • Destructive thyroiditis releasing stored hormone<br>
+                        <br>
+                        <strong>Clinical Features:</strong><br>
+                        • Recent URI (days to weeks prior)<br>
+                        • PAINFUL thyroid (classic presentation)<br>
+                        • Pain radiates to jaw/ear (can be severe)<br>
+                        • Systemic symptoms: fever, malaise<br>
+                        • Thyrotoxic symptoms (secondary to hormone release)<br>
+                        <br>
+                        <strong>Lab Features:</strong><br>
+                        • TSH <0.01, FT4 elevated (destructive phase)<br>
+                        • Radioiodine uptake: LOW<br>
+                        • ESR markedly elevated (85 in this case — key differentiator)<br>
+                        • CRP elevated<br>
+                        • Thyroid antibodies: typically NEGATIVE<br>
+                        <br>
+                        <strong>Treatment:</strong><br>
+                        • NSAIDs (ibuprofen 600 mg TID) for pain and inflammation<br>
+                        • If severe/not responding: Prednisone 40-60 mg daily × 1-2 weeks, then taper<br>
+                        • Beta-blocker for thyrotoxic symptoms (propranolol)<br>
+                        • NO antithyroid drugs<br>
+                        • Analgesics for severe pain<br>
+                        <br>
+                        <strong>Natural History:</strong><br>
+                        • Self-limited (usually 2-6 weeks)<br>
+                        • Three phases: thyrotoxic → hypothyroid → recovery<br>
+                        • ~90% completely recover euthyroid function<br>
+                        <br>
+                        <strong>Recurrence:</strong><br>
+                        • Rare (unlike postpartum thyroiditis)<br>
+                        • Usually one-time event
+                    </div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(event)">
+                        Key Differentiators: Radioiodine Uptake <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <tr style="border-bottom: 2px solid #059669;">
+                                <th style="padding: 10px; text-align: left; color: #059669;">Condition</th>
+                                <th style="padding: 10px; text-align: left; color: #059669;">Mechanism</th>
+                                <th style="padding: 10px; text-align: left; color: #059669;">Radioiodine Uptake</th>
+                                <th style="padding: 10px; text-align: left; color: #059669;">Treatment</th>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(5, 150, 105, 0.3);">
+                                <td style="padding: 10px;">Graves'</td>
+                                <td style="padding: 10px;">↑ Synthesis (TSI stimulation)</td>
+                                <td style="padding: 10px;"><strong>HIGH (diffuse)</strong></td>
+                                <td style="padding: 10px;">Antithyroid drugs, RAI, surgery</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(5, 150, 105, 0.3);">
+                                <td style="padding: 10px;">Postpartum Thyroiditis</td>
+                                <td style="padding: 10px;">Release of stored hormone</td>
+                                <td style="padding: 10px;"><strong>LOW</strong></td>
+                                <td style="padding: 10px;">Beta-blocker only (self-limited)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px;">Subacute Thyroiditis</td>
+                                <td style="padding: 10px;">Release of stored hormone + inflammation</td>
+                                <td style="padding: 10px;"><strong>LOW</strong></td>
+                                <td style="padding: 10px;">NSAIDs ± prednisone (self-limited)</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(event)">
+                        Teaching Points & HY Pearls <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <strong>Must Know:</strong><br>
+                        ✓ Graves' = HIGH uptake (synthesis), TSI+, exophthalmos → treat with antithyroid or RAI<br>
+                        ✓ Postpartum thyroiditis = LOW uptake (destruction), postpartum timing, self-limited → beta-blocker only<br>
+                        ✓ Subacute thyroiditis = LOW uptake (destruction), painful thyroid, elevated ESR, post-URI → NSAIDs/prednisone<br>
+                        ✓ Radioiodine uptake is KEY distinguisher: HIGH = synthesis (Graves'), LOW = destruction (thyroiditis)<br>
+                        ✓ Antithyroid drugs work ONLY in Graves' (block synthesis, not release)<br>
+                        ✓ Methimazole in pregnancy avoided 1st trimester (teratogenic); PTU preferred<br>
+                        ✓ Postpartum thyroiditis recurs in 25-30% of future pregnancies
+                    </div>
+
+                    <div class="summary-boxes">
+                        <div class="summary-box">
+                            <h4>TEST YOURSELF</h4>
+                            <p>How does radioiodine uptake distinguish synthesis from destruction?</p>
+                        </div>
+                        <div class="summary-box">
+                            <h4>TRAP</h4>
+                            <p>Giving antithyroid drugs to postpartum thyroiditis — won't work, thyroid not synthesizing!</p>
+                        </div>
+                        <div class="summary-box">
+                            <h4>HIGH YIELD</h4>
+                            <p>LOW uptake + thyrotoxic = destructive thyroiditis (postpartum or subacute, self-limited)</p>
+                        </div>
+                        <div class="summary-box">
+                            <h4>MEMORY</h4>
+                            <p>"UPTAKE TELLS ALL": HIGH = Graves (treat), LOW = thyroiditis (wait it out)</p>
+                        </div>
+                    </div>
+
+                    <div class="mcq-section">
+                        <div class="mcq">
+                            <h4>MCQ 5.1</h4>
+                            <div class="mcq-question">A 30-year-old woman presents with palpitations and weight loss 4 weeks postpartum. TSH is <0.01 mIU/L, FT4 is elevated, and thyroid radioiodine uptake is low. No goiter or thyroid pain is noted. What is the most likely diagnosis?</div>
+                            <div class="mcq-options">
+                                <div class="mcq-option">A) Graves' disease</div>
+                                <div class="mcq-option">B) Postpartum thyroiditis</div>
+                                <div class="mcq-option">C) Subacute (de Quervain's) thyroiditis</div>
+                                <div class="mcq-option">D) Thyroid cancer with metastases</div>
+                                <div class="mcq-option">E) Factitious thyroiditis from hormone ingestion</div>
+                            </div>
+                            <button class="reveal-btn" onclick="toggleReveal(event)">Reveal Answer</button>
+                            <div class="answer-reveal">
+                                <strong>Correct Answer: B) Postpartum thyroiditis</strong><br><br>
+                                The combination of postpartum timing (4 weeks), low radioiodine uptake (destructive thyroiditis), absence of goiter/pain, and thyrotoxic labs is classic for postpartum thyroiditis. This is a transient, self-limited condition from immune rebound thyroid inflammation. Treatment is symptomatic (beta-blocker); antithyroid drugs are ineffective because the thyroid is not hypersecreting—hormone is simply being released from damaged follicles.
+                            </div>
+                        </div>
+
+                        <div class="mcq">
+                            <h4>MCQ 5.2</h4>
+                            <div class="mcq-question">A 45-year-old woman presents with severe neck pain, fever, and palpitations after a flu-like illness. Labs show TSH <0.01, FT4 elevated, ESR 82 (very elevated), and thyroid radioiodine uptake is low. What is the most appropriate treatment?</div>
+                            <div class="mcq-options">
+                                <div class="mcq-option">A) Start methimazole 20 mg TID immediately</div>
+                                <div class="mcq-option">B) Start propranolol for symptoms and NSAIDs for pain; observe for self-resolution</div>
+                                <div class="mcq-option">C) Thyroidectomy urgently</div>
+                                <div class="mcq-option">D) Prednisone monotherapy (NSAIDs ineffective in subacute thyroiditis)</div>
+                                <div class="mcq-option">E) Radioactive iodine ablation</div>
+                            </div>
+                            <button class="reveal-btn" onclick="toggleReveal(event)">Reveal Answer</button>
+                            <div class="answer-reveal">
+                                <strong>Correct Answer: B) Start propranolol for symptoms and NSAIDs for pain; observe for self-resolution</strong><br><br>
+                                This is subacute (de Quervain's) thyroiditis: post-viral, painful thyroid, markedly elevated ESR, low uptake (destructive), and thyrotoxic labs. NSAIDs are first-line for pain; prednisone can be added if severe. Beta-blocker (propranolol) controls thyrotoxic symptoms. This is a self-limited condition—no antithyroid drugs needed (thyroid not synthesizing). The inflammation will resolve within weeks.
+                            </div>
+                        </div>
+
+                        <div class="mcq">
+                            <h4>MCQ 5.3</h4>
+                            <div class="mcq-question">A pregnant woman with Graves' disease is in her 8th week of gestation. She is currently on methimazole 10 mg daily. What is the most appropriate next step?</div>
+                            <div class="mcq-options">
+                                <div class="mcq-option">A) Continue methimazole (safe throughout pregnancy)</div>
+                                <div class="mcq-option">B) Switch to PTU (lower teratogenicity in first trimester)</div>
+                                <div class="mcq-option">C) Discontinue all antithyroid drugs (pregnancy is immunosuppressive)</div>
+                                <div class="mcq-option">D) Switch to radioactive iodine</div>
+                                <div class="mcq-option">E) Start beta-blockers only (most pregnancy-safe)</div>
+                            </div>
+                            <button class="reveal-btn" onclick="toggleReveal(event)">Reveal Answer</button>
+                            <div class="answer-reveal">
+                                <strong>Correct Answer: B) Switch to PTU (lower teratogenicity in first trimester)</strong><br><br>
+                                Methimazole is associated with methimazole embryopathy (congenital anomalies including alopecia, choanal/esophageal atresia) when used in the first trimester. PTU has better safety data in early pregnancy and should be used through the first trimester, then switched to methimazole afterward (PTU has a rare hepatotoxicity risk with long-term use).
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CASE 6: PITUITARY MASS & HYPOPITUITARISM -->
+                <div id="case6" class="case-section">
+                    <div class="case-header">
+                        <h2>Case 6: Non-Functioning Pituitary Adenoma with Hypopituitarism</h2>
+                        <div class="vignette">
+                            <strong>Patient:</strong> 54-year-old man<br>
+                            <strong>Presentation:</strong> Severe headache; MRI found 24mm pituitary mass<br>
+                            <strong>History:</strong> Decreased libido, fatigue, body hair loss over 2 years<br>
+                            <strong>Labs:</strong> Low testosterone, LH/FSH low, FT4 low, TSH low/normal, IGF-1 low, prolactin 85 ng/mL (mildly elevated)
+                        </div>
+                    </div>
+
+                    <div class="section-title">Clinical Diagnosis</div>
+                    <p style="margin-bottom: 15px;">Non-functioning pituitary macroadenoma (most common type) with multiple pituitary hormone deficiencies and stalk effect hyperprolactinemia.</p>
+
+                    <button class="collapsible" onclick="toggleCollapsible(event)">
+                        Understanding Stalk Effect vs True Prolactinoma <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <strong>Stalk Effect (from this case):</strong><br>
+                        • Non-functioning adenoma compresses pituitary stalk<br>
+                        • Dopamine (prolactin-inhibitory factor) fails to reach lactotroph cells<br>
+                        • Loss of dopamine inhibition → mild prolactin elevation<br>
+                        • Prolactin typically <100-200 ng/mL in stalk compression<br>
+                        • Plus: other hormone deficiencies (T4, testosterone, GH)<br>
+                        <br>
+                        <strong>True Prolactinoma:</strong><br>
+                        • Adenoma directly secretes prolactin<br>
+                        • Prolactin very HIGH (often 200-500+)<br>
+                        • Stalk effect causes mild elevation; prolactinoma causes massive elevation<br>
+                        <br>
+                        <strong>How to Distinguish:</strong><br>
+                        • Very high prolactin (>200) = think prolactinoma<br>
+                        • Mildly elevated prolactin + other axis failure = think stalk effect<br>
+                        • Clinical context: prolactinoma = galactorrhea, amenorrhea; stalk effect = mass effect symptoms
+                    </div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(event)">
+                        Full Diagnostic Workup <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <strong>Step 1: Imaging & Visual Assessment</strong><br>
+                        • MRI pituitary with contrast (24 mm = macroadenoma, >10 mm)<br>
+                        • Formal visual fields (Goldman perimetry) — look for bitemporal hemianopsia<br>
+                        • Assess chiasm compression on MRI<br>
+                        <br>
+                        <strong>Step 2: Full Pituitary Hormone Panel</strong><br>
+                        • Prolactin: 85 ng/mL (mildly elevated — stalk effect)<br>
+                        • Testosterone: LOW (LH/FSH also low = secondary hypogonadism)<br>
+                        • FT4 LOW (TSH low/normal = secondary hypothyroidism)<br>
+                        • IGF-1 LOW (no GH secretion)<br>
+                        • 8 AM cortisol and ACTH stim test (check ACTH reserve)<br>
+                        <br>
+                        <strong>Step 3: Assessment of Compression & Emergency Status</strong><br>
+                        • Acute vision loss? Ophthalmoplegia? (apoplexy — neurosurgical emergency)<br>
+                        • Gradual vision loss or headache? (elective surgical planning)<br>
+                        <br>
+                        <strong>Step 4: Rule Out Functioning Adenoma</strong><br>
+                        • No elevated GH or IGF-1 (normal/low)<br>
+                        • No ACTH excess (cortisol normal, not elevated)<br>
+                        • Prolactin mildly elevated (stalk effect, not secretion)<br>
+                        • Diagnosis: non-functioning adenoma
+                    </div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(event)">
+                        Treatment & Management Strategy <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <strong>CRITICAL PRIORITY ORDER FOR HORMONE REPLACEMENT:</strong><br>
+                        <br>
+                        <strong>1. CORTISOL (Most Urgent)</strong><br>
+                        • Hydrocortisone 15-20 mg daily (divided AM/PM dose)<br>
+                        • Reason: cortisol is essential for survival; deficiency causes shock<br>
+                        • Start BEFORE replacing other hormones<br>
+                        <br>
+                        <strong>2. THYROID HORMONE (Second)</strong><br>
+                        • Levothyroxine 25-50 μg initial, titrate based on FREE T4 (not TSH)<br>
+                        • Monitor in 6-8 weeks<br>
+                        • Reason: cortisol must be replete first to prevent adrenal crisis<br>
+                        <br>
+                        <strong>3. GONADAL HORMONES (Last in Acute Setting)</strong><br>
+                        • Testosterone replacement: intramuscular or gel<br>
+                        • LHRH agonists generally not indicated (won't restore fertility without GH/FSH)<br>
+                        <br>
+                        <strong>4. GROWTH HORMONE (Lowest Priority Acutely)</strong><br>
+                        • GH replacement after stabilization of cortisol, thyroid, gonadal axes<br>
+                        • Assess if symptoms warrant GH replacement (varies by patient)<br>
+                        <br>
+                        <strong>Surgical Considerations:</strong><br>
+                        • Macroadenoma with visual field defect (bitemporal hemianopsia) → neurosurgery consult<br>
+                        • Pituitary apoplexy (acute vision loss, ophthalmoplegia, severe headache) → urgent transsphenoidal decompression<br>
+                        • Elective surgery if stable with gradual compression<br>
+                    </button>
+
+                    <button class="collapsible" onclick="toggleCollapsible(event)">
+                        Why Non-Functioning Adenomas are Most Common <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <strong>Epidemiology:</strong><br>
+                        • Non-functioning adenomas account for >40% of all pituitary adenomas<br>
+                        • Typically diagnosed late (mass effect symptoms: headache, vision loss)<br>
+                        • Functioning adenomas (prolactin, ACTH, GH) present earlier (hormonal symptoms obvious)<br>
+                        <br>
+                        <strong>Why Late Diagnosis?</strong><br>
+                        • No hormonal symptoms initially (adenoma doesn't secrete bioactive hormone)<br>
+                        • Headache/visual loss are slow, insidious<br>
+                        • Often incidental finding on imaging for other reasons<br>
+                        <br>
+                        <strong>Long-Term Complications of Pituitary Mass:</strong><br>
+                        • Chiasm compression → visual field loss<br>
+                        • Cavernous sinus invasion → CN III/IV/V/VI palsy (ophthalmoplegia)<br>
+                        • Stalk compression → hypopituitarism<br>
+                        • Apoplexy (hemorrhage into tumor) → emergency
+                    </div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(event)">
+                        Teaching Points & HY Pearls <span class="arrow">▼</span>
+                    </button>
+                    <div class="collapsible-content">
+                        <strong>Must Know:</strong><br>
+                        ✓ Non-functioning adenoma = most common pituitary mass (>40%)<br>
+                        ✓ Stalk effect prolactin is <200 ng/mL (vs prolactinoma >200)<br>
+                        ✓ Mildly elevated prolactin + other hormone deficiencies = stalk effect<br>
+                        ✓ Visual fields MUST be checked in any pituitary mass<br>
+                        ✓ Hormone replacement order: cortisol FIRST, then T4, then gonadal, then GH<br>
+                        ✓ Cortisol MUST be replaced before T4 (avoid adrenal crisis)<br>
+                        ✓ Macroadenoma + visual defect = neurosurgery candidate<br>
+                        ✓ Pituitary apoplexy (acute deterioration) = neurosurgical emergency<br>
+                    </div>
+
+                    <div class="summary-boxes">
+                        <div class="summary-box">
+                            <h4>TEST YOURSELF</h4>
+                            <p>What distinguishes stalk effect from true prolactinoma?</p>
+                        </div>
+                        <div class="summary-box">
+                            <h4>TRAP</h4>
+                            <p>Giving T4 before cortisol in hypopituitarism = adrenal crisis!</p>
+                        </div>
+                        <div class="summary-box">
+                            <h4>HIGH YIELD</h4>
+                            <p>Non-functioning adenoma: cortisol→T4→gonadal→GH order; check visual fields!</p>
+                        </div>
+                        <div class="summary-box">
+                            <h4>MEMORY</h4>
+                            <p>"MASS EFFECT = Headache, vision loss, hypopituitarism" (non-functioning adenoma)</p>
+                        </div>
+                    </div>
+
+                    <div class="mcq-section">
+                        <div class="mcq">
+                            <h4>MCQ 6.1</h4>
+                            <div class="mcq-question">A 55-year-old man with a 22mm pituitary adenoma has prolactin 78 ng/mL, low testosterone (LH/FSH low), and low FT4 (TSH low/normal). Why is this prolactin level consistent with stalk effect rather than prolactinoma?</div>
+                            <div class="mcq-options">
+                                <div class="mcq-option">A) Prolactin is too low to be from adenoma</div>
+                                <div class="mcq-option">B) Prolactinomas have very high prolactin (>200 typically) and isolated hyperprolactinemia</div>
+                                <div class="mcq-option">C) Stalk effect always causes exactly 78 ng/mL</div>
+                                <div class="mcq-option">D) This prolactin is falsely elevated (hook effect)</div>
+                                <div class="mcq-option">E) The patient has primary hypothyroidism, not pituitary disease</div>
+                            </div>
+                            <button class="reveal-btn" onclick="toggleReveal(event)">Reveal Answer</button>
+                            <div class="answer-reveal">
+                                <strong>Correct Answer: B) Prolactinomas have very high prolactin (>200 typically) and isolated hyperprolactinemia</strong><br><br>
+                                In stalk effect from a non-functioning adenoma, dopamine delivery to lactotrophs is blocked, causing MILD prolactin elevation (usually <150 ng/mL). True prolactinomas secrete prolactin directly, causing VERY HIGH levels (often >200 ng/mL). Additionally, this patient has multiple hormone deficiencies (low T4, low testosterone), which is typical of a space-occupying lesion (non-functioning adenoma with stalk compression), not a prolactin-secreting tumor.
+                            </div>
+                        </div>
+
+                        <div class="mcq">
+                            <h4>MCQ 6.2</h4>
+                            <div class="mcq-question">A patient with a newly diagnosed pituitary macroadenoma and confirmed ACTH deficiency is admitted with fatigue and hypotension. What is the FIRST step in hormone replacement?</div>
+                            <div class="mcq-options">
+                                <div class="mcq-option">A) Start levothyroxine 50 μg daily</div>
+                                <div class="mcq-option">B) Start hydrocortisone 15-20 mg daily (divided doses)</div>
+                                <div class="mcq-option">C) Start testosterone replacement</div>
+                                <div class="mcq-option">D) Start GH replacement</div>
+                                <div class="mcq-option">E) Obtain MRI before giving any hormones</div>
+                            </div>
+                            <button class="reveal-btn" onclick="toggleReveal(event)">Reveal Answer</button>
+                            <div class="answer-reveal">
+                                <strong>Correct Answer: B) Start hydrocortisone 15-20 mg daily (divided doses)</strong><br><br>
+                                Cortisol deficiency is life-threatening and must be corrected immediately. If you give levothyroxine BEFORE cortisol replacement, thyroid hormone will increase cortisol metabolism and precipitate acute adrenal crisis. Always replace cortisol first in any hypopituitary patient, then add other hormones sequentially.
+                            </div>
+                        </div>
+
+                        <div class="mcq">
+                            <h4>MCQ 6.3</h4>
+                            <div class="mcq-question">A 60-year-old man with a pituitary macroadenoma presents with sudden-onset severe headache, acute vision loss, and ophthalmoplegia (CN III palsy). What is the most appropriate immediate action?</div>
+                            <div class="mcq-options">
+                                <div class="mcq-option">A) Start medical management with dopamine agonists</div>
+                                <div class="mcq-option">B) Start hydrocortisone and schedule elective MRI</div>
+                                <div class="mcq-option">C) Notify neurosurgery for urgent/emergent transsphenoidal decompression</div>
+                                <div class="mcq-option">D) Obtain cortisol level before any treatment</div>
+                                <div class="mcq-option">E) Start levothyroxine for secondary hypothyroidism</div>
+                            </div>
+                            <button class="reveal-btn" onclick="toggleReveal(event)">Reveal Answer</button>
+                            <div class="answer-reveal">
+                                <strong>Correct Answer: C) Notify neurosurgery for urgent/emergent transsphenoidal decompression</strong><br><br>
+                                This clinical presentation (sudden severe headache + acute vision loss + ophthalmoplegia) is consistent with pituitary apoplexy—hemorrhage into the pituitary adenoma causing mass effect and potential pituitary infarction. This is a neurosurgical emergency requiring immediate decompression. Hydrocortisone should be given to support the patient, but surgical intervention cannot wait.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MIND MAP VIEW -->
+                <div id="mindmap" class="case-section">
+                    <div class="mindmap">
+                        <h3>Pituitary & Thyroid Cases: Integrated Mind Map</h3>
+                        <svg viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Central node -->
+                            <circle cx="500" cy="300" r="60" fill="#059669" opacity="0.3" stroke="#059669" stroke-width="2"/>
+                            <text x="500" y="295" text-anchor="middle" font-size="14" font-weight="bold" fill="#059669">Pituitary &amp;</text>
+                            <text x="500" y="315" text-anchor="middle" font-size="14" font-weight="bold" fill="#059669">Thyroid Cases</text>
+
+                            <!-- Case 1: Prolactinoma -->
+                            <circle cx="150" cy="80" r="40" fill="#059669" opacity="0.2" stroke="#059669" stroke-width="2"/>
+                            <text x="150" y="82" text-anchor="middle" font-size="12" font-weight="bold" fill="#059669">Prolactinoma</text>
+                            <text x="150" y="98" text-anchor="middle" font-size="10" fill="#cbd5e1">Hook Effect</text>
+                            <line x1="470" y1="330" x2="190" y2="110" stroke="#059669" stroke-width="2" opacity="0.5"/>
+
+                            <!-- Case 2: Acromegaly -->
+                            <circle cx="300" cy="50" r="40" fill="#059669" opacity="0.2" stroke="#059669" stroke-width="2"/>
+                            <text x="300" y="52" text-anchor="middle" font-size="12" font-weight="bold" fill="#059669">Acromegaly</text>
+                            <text x="300" y="68" text-anchor="middle" font-size="10" fill="#cbd5e1">IGF-1/OGTT</text>
+                            <line x1="470" y1="330" x2="330" y2="85" stroke="#059669" stroke-width="2" opacity="0.5"/>
+
+                            <!-- Case 3: Cushing's -->
+                            <circle cx="450" cy="50" r="40" fill="#059669" opacity="0.2" stroke="#059669" stroke-width="2"/>
+                            <text x="450" y="52" text-anchor="middle" font-size="12" font-weight="bold" fill="#059669">Cushing's</text>
+                            <text x="450" y="68" text-anchor="middle" font-size="10" fill="#cbd5e1">Pit vs Ectopic</text>
+                            <line x1="490" y1="330" x2="465" y2="85" stroke="#059669" stroke-width="2" opacity="0.5"/>
+
+                            <!-- Case 4: Hypothyroidism -->
+                            <circle cx="600" cy="50" r="40" fill="#059669" opacity="0.2" stroke="#059669" stroke-width="2"/>
+                            <text x="600" y="52" text-anchor="middle" font-size="12" font-weight="bold" fill="#059669">Hypothyroidism</text>
+                            <text x="600" y="68" text-anchor="middle" font-size="10" fill="#cbd5e1">Sheehan's</text>
+                            <line x1="510" y1="330" x2="600" y2="85" stroke="#059669" stroke-width="2" opacity="0.5"/>
+
+                            <!-- Case 5: Thyrotoxicosis -->
+                            <circle cx="750" cy="50" r="40" fill="#059669" opacity="0.2" stroke="#059669" stroke-width="2"/>
+                            <text x="750" y="52" text-anchor="middle" font-size="12" font-weight="bold" fill="#059669">Thyrotoxicosis</text>
+                            <text x="750" y="68" text-anchor="middle" font-size="10" fill="#cbd5e1">Uptake Scan</text>
+                            <line x1="530" y1="330" x2="720" y2="85" stroke="#059669" stroke-width="2" opacity="0.5"/>
+
+                            <!-- Case 6: Pituitary Mass -->
+                            <circle cx="850" cy="80" r="40" fill="#059669" opacity="0.2" stroke="#059669" stroke-width="2"/>
+                            <text x="850" y="82" text-anchor="middle" font-size="12" font-weight="bold" fill="#059669">Pituitary Mass</text>
+                            <text x="850" y="98" text-anchor="middle" font-size="10" fill="#cbd5e1">Stalk Effect</text>
+                            <line x1="530" y1="340" x2="810" y2="110" stroke="#059669" stroke-width="2" opacity="0.5"/>
+
+                            <!-- Bottom diagnostic nodes -->
+                            <text x="150" y="450" text-anchor="middle" font-size="11" font-weight="bold" fill="#059669">Dopamine</text>
+                            <text x="150" y="470" text-anchor="middle" font-size="10" fill="#cbd5e1">Agonists</text>
+                            <line x1="500" y1="360" x2="150" y2="430" stroke="#059669" stroke-width="1.5" opacity="0.4" stroke-dasharray="5,5"/>
+
+                            <text x="300" y="450" text-anchor="middle" font-size="11" font-weight="bold" fill="#059669">Surgery</text>
+                            <text x="300" y="470" text-anchor="middle" font-size="10" fill="#cbd5e1">+ SSA</text>
+                            <line x1="500" y1="360" x2="300" y2="430" stroke="#059669" stroke-width="1.5" opacity="0.4" stroke-dasharray="5,5"/>
+
+                            <text x="450" y="450" text-anchor="middle" font-size="11" font-weight="bold" fill="#059669">IPSS</text>
+                            <text x="450" y="470" text-anchor="middle" font-size="10" fill="#cbd5e1">Diagnosis</text>
+                            <line x1="500" y1="360" x2="450" y2="430" stroke="#059669" stroke-width="1.5" opacity="0.4" stroke-dasharray="5,5"/>
+
+                            <text x="600" y="450" text-anchor="middle" font-size="11" font-weight="bold" fill="#059669">TSH</text>
+                            <text x="600" y="470" text-anchor="middle" font-size="10" fill="#cbd5e1">Unreliable</text>
+                            <line x1="500" y1="360" x2="600" y2="430" stroke="#059669" stroke-width="1.5" opacity="0.4" stroke-dasharray="5,5"/>
+
+                            <text x="750" y="450" text-anchor="middle" font-size="11" font-weight="bold" fill="#059669">Uptake</text>
+                            <text x="750" y="470" text-anchor="middle" font-size="10" fill="#cbd5e1">HIGH vs LOW</text>
+                            <line x1="500" y1="360" x2="750" y2="430" stroke="#059669" stroke-width="1.5" opacity="0.4" stroke-dasharray="5,5"/>
+
+                            <text x="850" y="450" text-anchor="middle" font-size="11" font-weight="bold" fill="#059669">Cortisol</text>
+                            <text x="850" y="470" text-anchor="middle" font-size="10" fill="#cbd5e1">First!</text>
+                            <line x1="500" y1="360" x2="850" y2="430" stroke="#059669" stroke-width="1.5" opacity="0.4" stroke-dasharray="5,5"/>
+                        </svg>
+                    </div>
+
+                    <div class="study-tips">
+                        <h4>Study Strategy for Case-Based Learning</h4>
+                        <ul>
+                            <li><strong>Focus on Discriminators:</strong> What ONE finding separates each diagnosis? (e.g., hook effect for prolactinoma, uptake scan for thyroiditis)</li>
+                            <li><strong>Learn the Treatment Hierarchy:</strong> For each case, know the first-line, second-line, and when to escalate to surgery</li>
+                            <li><strong>Pregnancy Pearls:</strong> Cabergoline vs bromocriptine, PTU vs methimazole, cortisol FIRST in Sheehan's—test loves these</li>
+                            <li><strong>Lab Interpretation is Key:</strong> Elevated prolactin with hook effect? Dilute. Normal TSH with low FT4? Secondary hypothyroidism. Low uptake with thyrotoxia? Destructive thyroiditis.</li>
+                            <li><strong>Master the Mind Map:</strong> Each case has one central diagnostic test and one treatment principle—memorize those linkages</li>
+                        </ul>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Initialize localStorage
+        const STORAGE_KEY = 'endo_lec21';
+
+        function initializeLecture() {
+            const savedState = localStorage.getItem(STORAGE_KEY);
+            if (!savedState) {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify({
+                    activeCase: 'case1',
+                    expandedCollapsibles: {},
+                    revealedAnswers: {}
+                }));
+            }
+        }
+
+        function getState() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            return saved ? JSON.parse(saved) : { activeCase: 'case1', expandedCollapsibles: {}, revealedAnswers: {} };
+        }
+
+        function setState(state) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }
+
+        function switchView(caseId) {
+            // Hide all case sections
+            document.querySelectorAll('.case-section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show selected case
+            const selected = document.getElementById(caseId);
+            if (selected) {
+                selected.classList.add('active');
+            }
+
+            // Update nav tabs
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Update sidebar links
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            const activeLink = document.querySelector(`a[href="#${caseId}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+
+            // Save state
+            let state = getState();
+            state.activeCase = caseId;
+            setState(state);
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function toggleCollapsible(event) {
+            const button = event.target.closest('.collapsible');
+            const content = button.nextElementSibling;
+
+            if (!content || !content.classList.contains('collapsible-content')) {
+                return;
+            }
+
+            button.classList.toggle('active');
+            content.classList.toggle('active');
+
+            // Update arrow
+            const arrow = button.querySelector('.arrow');
+            if (arrow) {
+                if (button.classList.contains('active')) {
+                    arrow.textContent = '▲';
+                } else {
+                    arrow.textContent = '▼';
+                }
+            }
+
+            // Save state
+            let state = getState();
+            const buttonId = button.parentElement.id || button.textContent;
+            if (!state.expandedCollapsibles[state.activeCase]) {
+                state.expandedCollapsibles[state.activeCase] = {};
+            }
+            state.expandedCollapsibles[state.activeCase][buttonId] = button.classList.contains('active');
+            setState(state);
+        }
+
+        function toggleReveal(event) {
+            const button = event.target;
+            const reveal = button.nextElementSibling;
+
+            if (reveal && reveal.classList.contains('answer-reveal')) {
+                reveal.classList.toggle('active');
+                button.textContent = reveal.classList.contains('active') ? 'Hide Answer' : 'Reveal Answer';
+            }
+        }
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            initializeLecture();
+            const state = getState();
+
+            // Restore active case
+            const activeCase = document.getElementById(state.activeCase);
+            if (activeCase) {
+                activeCase.classList.add('active');
+                const corresponding btn = Array.from(document.querySelectorAll('.tab-btn')).find(btn =>
+                    btn.textContent.includes(state.activeCase.replace('case', 'Case '))
+                );
+                if (corresponding btn) {
+                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                    corresponding btn.classList.add('active');
+                }
+            }
+
+            // Restore expanded collapsibles
+            if (state.expandedCollapsibles[state.activeCase]) {
+                document.querySelectorAll('.collapsible').forEach(collapsible => {
+                    const shouldBeOpen = state.expandedCollapsibles[state.activeCase][collapsible.parentElement.id || collapsible.textContent];
+                    if (shouldBeOpen) {
+                        collapsible.classList.add('active');
+                        const content = collapsible.nextElementSibling;
+                        if (content && content.classList.contains('collapsible-content')) {
+                            content.classList.add('active');
+                        }
+                        const arrow = collapsible.querySelector('.arrow');
+                        if (arrow) arrow.textContent = '▲';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

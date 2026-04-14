@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEC 23: Endocrine Laboratory — Interpreting Endocrine Tests</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f9fafb;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 220px;
+            height: 100vh;
+            background: #0f172a;
+            color: white;
+            padding: 20px;
+            overflow-y: auto;
+            border-right: 3px solid #dc2626;
+            z-index: 100;
+        }
+
+        .sidebar h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #dc2626;
+            text-align: center;
+        }
+
+        .sidebar p {
+            font-size: 12px;
+            color: #94a3b8;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 20px;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sidebar-nav button {
+            background: #1e293b;
+            border: 2px solid #334155;
+            color: #cbd5e1;
+            padding: 10px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-align: left;
+        }
+
+        .sidebar-nav button:hover {
+            background: #334155;
+            border-color: #dc2626;
+        }
+
+        .sidebar-nav button.active {
+            background: #dc2626;
+            border-color: #dc2626;
+            color: white;
+        }
+
+        .main {
+            margin-left: 220px;
+            width: calc(100% - 220px);
+            padding: 40px;
+            max-width: 1200px;
+        }
+
+        .header {
+            margin-bottom: 40px;
+            border-bottom: 3px solid #dc2626;
+            padding-bottom: 20px;
+        }
+
+        .header h1 {
+            color: #0f172a;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e2e8f0;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            color: #64748b;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab-btn:hover {
+            color: #dc2626;
+        }
+
+        .tab-btn.active {
+            color: #dc2626;
+            border-bottom-color: #dc2626;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .lo-section {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-left: 5px solid #dc2626;
+        }
+
+        .lo-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .lo-checkbox {
+            width: 24px;
+            height: 24px;
+            accent-color: #dc2626;
+            cursor: pointer;
+        }
+
+        .lo-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f172a;
+            flex: 1;
+        }
+
+        .expand-icon {
+            font-size: 20px;
+            color: #dc2626;
+            transition: transform 0.3s;
+        }
+
+        .lo-section.collapsed .expand-icon {
+            transform: rotate(-90deg);
+        }
+
+        .lo-content {
+            max-height: 5000px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .lo-section.collapsed .lo-content {
+            max-height: 0;
+        }
+
+        .collapsible {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .collapsible-header {
+            background: #f1f5f9;
+            padding: 12px 16px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #0f172a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: all 0.3s;
+        }
+
+        .collapsible-header:hover {
+            background: #fef2f2;
+            border-left: 4px solid #dc2626;
+            padding-left: 12px;
+        }
+
+        .collapsible.expanded .collapsible-header {
+            background: #fef2f2;
+            border-bottom: 2px solid #dc2626;
+        }
+
+        .collapsible-icon {
+            font-size: 16px;
+            transition: transform 0.3s;
+        }
+
+        .collapsible.expanded .collapsible-icon {
+            transform: rotate(180deg);
+        }
+
+        .collapsible-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0;
+        }
+
+        .collapsible.expanded .collapsible-body {
+            max-height: 2000px;
+            padding: 16px;
+            border-top: 2px solid #dc2626;
+        }
+
+        .collapsible-body p {
+            color: #475569;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .collapsible-body ul, .collapsible-body ol {
+            margin-left: 20px;
+            margin-bottom: 10px;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        .flip-card-container {
+            perspective: 1000px;
+            margin: 20px 0;
+        }
+
+        .flip-card {
+            background: white;
+            border-radius: 8px;
+            min-height: 200px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .flip-card-front {
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .flip-card-back {
+            background: #f1f5f9;
+            color: #0f172a;
+            transform: rotateY(180deg);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .summary-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .summary-item {
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .summary-item.red {
+            background: #fef2f2;
+            border-left-color: #dc2626;
+            color: #7f1d1d;
+        }
+
+        .summary-item.blue {
+            background: #eff6ff;
+            border-left-color: #0284c7;
+            color: #082f49;
+        }
+
+        .summary-item.green {
+            background: #f0fdf4;
+            border-left-color: #16a34a;
+            color: #14532d;
+        }
+
+        .summary-item.yellow {
+            background: #fffbeb;
+            border-left-color: #f59e0b;
+            color: #78350f;
+        }
+
+        .summary-item strong {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .mcq-container {
+            margin-top: 20px;
+        }
+
+        .mcq {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .mcq-question {
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .mcq-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .mcq-option {
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #f9fafb;
+            font-size: 13px;
+        }
+
+        .mcq-option:hover {
+            background: #f1f5f9;
+            border-color: #dc2626;
+        }
+
+        .mcq-option input[type="radio"] {
+            accent-color: #dc2626;
+            margin-right: 8px;
+        }
+
+        .mcq-explanation {
+            margin-top: 15px;
+            padding: 12px;
+            background: #fef2f2;
+            border-left: 3px solid #dc2626;
+            border-radius: 4px;
+            font-size: 12px;
+            line-height: 1.6;
+            color: #7f1d1d;
+            display: none;
+        }
+
+        .mcq.answered .mcq-explanation {
+            display: block;
+        }
+
+        .reference {
+            background: #f8fafc;
+            padding: 10px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 180px;
+            }
+            .main {
+                margin-left: 180px;
+                width: calc(100% - 180px);
+                padding: 20px;
+            }
+            .header h1 {
+                font-size: 24px;
+            }
+            .summary-box {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h1>LEC 23</h1>
+        <p>Endocrine Lab Interpretation</p>
+        <div class="sidebar-nav">
+            <button class="tab-btn active" onclick="switchTab('lo1')">LO1: Principles</button>
+            <button class="tab-btn" onclick="switchTab('lo2')">LO2: Thyroid</button>
+            <button class="tab-btn" onclick="switchTab('lo3')">LO3: Adrenal</button>
+            <button class="tab-btn" onclick="switchTab('lo4')">LO4: Pituitary</button>
+            <button class="tab-btn" onclick="switchTab('lo5')">LO5: Glucose</button>
+            <button class="tab-btn" onclick="switchTab('lo6')">LO6: Ca/PTH/VitD</button>
+            <button class="tab-btn" onclick="switchTab('practice')">Practice Qs</button>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="header">
+            <h1>LEC 23: Endocrine Laboratory</h1>
+            <p>Interpreting Endocrine Tests — USMLE Step 1 Depth</p>
+        </div>
+
+        <!-- LO1: Principles -->
+        <div id="lo1" class="tab-content active">
+            <div class="lo-section">
+                <div class="lo-header" onclick="toggleLO(this)">
+                    <input type="checkbox" class="lo-checkbox">
+                    <div class="lo-title">LO1: Principles of Endocrine Lab Testing</div>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="lo-content">
+                    <p style="color: #475569; line-height: 1.7; margin-bottom: 15px;">Master the distinction between static tests (single measurements) and dynamic tests (provocation/suppression), understand negative feedback principles, and recognize key pre-analytic considerations for accurate endocrine diagnosis.</p>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">Static vs Dynamic Testing<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>STATIC TESTS:</strong> Single measurement at one time point; assess baseline hormone levels.</p>
+                            <ul>
+                                <li>Morning cortisol (8 AM peak)</li>
+                                <li>Fasting glucose</li>
+                                <li>TSH</li>
+                                <li>Serum calcium</li>
+                                <li>Simple, fast, useful for screening</li>
+                            </ul>
+                            <p style="margin-top: 15px;"><strong>DYNAMIC TESTS:</strong> Provoke or suppress the axis to assess reserve or autonomy.</p>
+                            <ul>
+                                <li><strong>STIMULATION tests:</strong> Used when deficiency suspected. Questions: "Will the axis respond to stimulation?"</li>
+                                <li style="margin-left: 20px;">Cosyntropin test (adrenal reserve)</li>
+                                <li style="margin-left: 20px;">GnRH stimulation (pituitary LH/FSH)</li>
+                                <li style="margin-left: 20px;">TRH stimulation (TSH)</li>
+                                <li style="margin-left: 20px;">Glucagon test (GH)</li>
+                                <li style="margin-left: 20px;">Insulin tolerance test (GH, ACTH)</li>
+                                <li style="margin-left: 20px;">GHRH + arginine (GH)</li>
+                                <li><strong>SUPPRESSION tests:</strong> Used when excess suspected. Questions: "Can the axis be suppressed normally?"</li>
+                                <li style="margin-left: 20px;">Dexamethasone suppression test (cortisol)</li>
+                                <li style="margin-left: 20px;">Oral glucose tolerance test for GH (acromegaly)</li>
+                                <li style="margin-left: 20px;">Water load test (vasopressin)</li>
+                                <li style="margin-left: 20px;">Saline infusion for aldosterone</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">Negative Feedback Principle<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p>In primary gland failure, trophic hormone concentration rises due to loss of negative feedback inhibition.</p>
+                            <p style="margin-top: 10px;"><strong>Classic Pattern:</strong></p>
+                            <ul>
+                                <li><strong>Primary hypothyroidism:</strong> ↑TSH, ↓T4 (thyroid gland fails → TSH compensates)</li>
+                                <li><strong>Primary adrenal insufficiency:</strong> ↑ACTH, ↓cortisol (adrenal fails → ACTH compensates)</li>
+                                <li><strong>Primary hypogonadism:</strong> ↑LH/FSH, ↓testosterone (gonads fail → LH/FSH compensate)</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Central (Secondary) Deficiency:</strong> Both trophic hormone AND target gland hormone are ↓.</p>
+                            <ul>
+                                <li>Pituitary failure → ↓TSH and ↓T4 (unlike primary)</li>
+                                <li>Pituitary ACTH deficiency → ↓ACTH and ↓cortisol</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">Basal Values & Reference Ranges<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>Morning Cortisol (8 AM, the peak):</strong></p>
+                            <ul>
+                                <li>&lt;3 mcg/dL = likely adrenal insufficiency (inadequate morning rise)</li>
+                                <li>&gt;18 mcg/dL = unlikely adrenal insufficiency (sufficient reserve)</li>
+                                <li>3–18 mcg/dL = equivocal → cosyntropin stimulation test required</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Fasting Insulin & Glucose:</strong></p>
+                            <ul>
+                                <li>Calculate HOMA-IR = [fasting insulin (µU/mL) × fasting glucose (mg/dL)] / 405</li>
+                                <li>HOMA-IR &gt;2 suggests insulin resistance</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>ACTH Collection (Critical!):</strong></p>
+                            <ul>
+                                <li>Must be collected in chilled EDTA tube (lavender-top) on ice</li>
+                                <li>Immediately centrifuged and frozen (pulsatile; degrades rapidly)</li>
+                                <li>Transport on ice to lab</li>
+                                <li>Improper handling → falsely low ACTH → misdiagnosis</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="flip-card-container">
+                        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <span>When to order STIMULATION vs SUPPRESSION tests</span>
+                                </div>
+                                <div class="flip-card-back">
+                                    <span><strong>STIMULATION:</strong> When you suspect DEFICIENCY (low hormone). Test: "Does the gland respond?" Example: Low morning cortisol → cosyntropin test. <strong>SUPPRESSION:</strong> When you suspect EXCESS (high hormone). Test: "Can you turn it off?" Example: High cortisol → dexamethasone suppression test.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="summary-box">
+                        <div class="summary-item red">
+                            <strong>Red Flag: ACTH Handling</strong>
+                            Improper ACTH collection/storage = falsely low result = misdiagnosis of adrenal insufficiency as secondary (when it's actually primary).
+                        </div>
+                        <div class="summary-item blue">
+                            <strong>8 AM Cortisol</strong>
+                            &lt;3 = likely AI; &gt;18 = unlikely AI; 3–18 = need stimulation test.
+                        </div>
+                        <div class="summary-item green">
+                            <strong>Negative Feedback</strong>
+                            Primary disease: ↑trophic hormone. Central disease: ↓trophic hormone.
+                        </div>
+                        <div class="summary-item yellow">
+                            <strong>Dynamic Testing</strong>
+                            Use stimulation to unmask deficiency; use suppression to confirm excess.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LO2: Thyroid Function Tests -->
+        <div id="lo2" class="tab-content">
+            <div class="lo-section">
+                <div class="lo-header" onclick="toggleLO(this)">
+                    <input type="checkbox" class="lo-checkbox">
+                    <div class="lo-title">LO2: Thyroid Function Tests — Complete Interpretation</div>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="lo-content">
+                    <p style="color: #475569; line-height: 1.7; margin-bottom: 15px;">TSH is the most sensitive test for primary thyroid dysfunction. Understand free T4, antibodies, and the pitfalls of thyroid testing including biotin interference, heterophile antibodies, and TSH suppression lags.</p>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">TSH (Thyroid-Stimulating Hormone)<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>Normal Range:</strong> 0.4–4.0 mIU/L (varies by assay; trimester-dependent in pregnancy)</p>
+                            <ul>
+                                <li><strong>Most sensitive test for primary thyroid dysfunction</strong></li>
+                                <li>Log-linear relationship with free T4: small change in T4 → large change in TSH</li>
+                                <li>3rd-generation assays detect down to 0.01 mIU/L → can detect suppressed TSH</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Interpretation Patterns:</strong></p>
+                            <ul>
+                                <li><strong>TSH ↑ alone:</strong> Subclinical hypothyroidism (normal T4, high TSH)</li>
+                                <li><strong>TSH ↓ alone:</strong> Subclinical hyperthyroidism (normal T4, low TSH)</li>
+                                <li><strong>TSH ↑ + ↓T4:</strong> Primary hypothyroidism (Hashimoto's)</li>
+                                <li><strong>TSH ↓ + ↑T4:</strong> Primary hyperthyroidism (Graves', toxic nodule)</li>
+                                <li><strong>TSH ↓ + ↓T4:</strong> Central hypothyroidism (pituitary or hypothalamus)</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Key Pitfalls:</strong></p>
+                            <ul>
+                                <li><strong>Biotin interference:</strong> Biotin supplements ↓TSH (false low). Stop biotin 2–3 days before testing.</li>
+                                <li><strong>Heterophile antibodies:</strong> May cause falsely high or low TSH on immunoassay.</li>
+                                <li><strong>Pregnancy:</strong> Lower TSH limits in 1st trimester (0.1–2.5 mIU/L). Use trimester-specific ranges.</li>
+                                <li><strong>NTIS (non-thyroidal illness):</strong> ↓TSH in sick patients due to illness, not thyroid disease.</li>
+                                <li><strong>TSH lag after treatment:</strong> TSH lags weeks to months behind T4 changes. Don't adjust dose on TSH alone early in treatment.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">Free T4 (FT4) & Total T4/T3<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>Free T4 (FT4):</strong> Unbound, biologically active T4.</p>
+                            <ul>
+                                <li>Measured by equilibrium dialysis (gold standard) or immunoassay</li>
+                                <li><strong>NOT affected by TBG changes</strong> (major advantage over total T4)</li>
+                                <li><strong>Use when:</strong> TSH discordant with clinical picture; central hypothyroidism (monitor FT4, not TSH); pregnancy</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Total T4 & T3:</strong> Bound + unbound hormone.</p>
+                            <ul>
+                                <li>Affected by TBG (thyroid-binding globulin) concentration:</li>
+                                <li style="margin-left: 20px;">↑TBG (pregnancy, OCP, estrogen) → ↑total T4/T3 (FT4 normal)</li>
+                                <li style="margin-left: 20px;">↓TBG (androgens, nephrotic syndrome, cirrhosis) → ↓total T4/T3 (FT4 normal)</li>
+                                <li>Rarely used alone; mostly historical interest</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Free T3:</strong> Useful in T3 toxicosis (elevated T3 with normal T4 in Graves' disease).</p>
+                            <ul>
+                                <li>T3:T4 ratio elevated in Graves' (autonomous thyroid activity favors T3 production)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">Thyroid Antibodies<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>Anti-TPO (Thyroid Peroxidase Antibody):</strong></p>
+                            <ul>
+                                <li>Most sensitive for Hashimoto's thyroiditis</li>
+                                <li>Also elevated in Graves' disease (overlap)</li>
+                                <li>Present in ~10% of euthyroid women → indicates risk for postpartum thyroiditis</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Anti-Tg (Thyroglobulin Antibody):</strong></p>
+                            <ul>
+                                <li>Less specific; present in ~60% of Hashimoto's</li>
+                                <li>Also seen in Graves' (less common than anti-TPO)</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>TRAb / TSI (TSH Receptor Antibody / TSH Receptor Immunoglobulin):</strong></p>
+                            <ul>
+                                <li><strong>Specific for Graves' disease</strong></li>
+                                <li>IgG crosses placenta → risk of neonatal Graves' (transient)</li>
+                                <li>Used to predict Graves' remission (declining TRAb = better prognosis)</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Anti-TSH Receptor Blocking Antibody:</strong></p>
+                            <ul>
+                                <li>Causes hypothyroidism (different from stimulating TRAb)</li>
+                                <li>Rare; seen in some patients with Graves' who develop atrophic thyroiditis</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">Thyroglobulin & Calcitonin<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>Thyroglobulin (Tg):</strong> Tumor marker for differentiated thyroid cancer (papillary, follicular).</p>
+                            <ul>
+                                <li>Used post-thyroidectomy + radioactive iodine (RAI) ablation</li>
+                                <li>Should be undetectable after total thyroidectomy + RAI</li>
+                                <li>Rising Tg = recurrence/metastasis</li>
+                                <li><strong>Pitfall:</strong> Anti-Tg antibodies can falsely lower Tg measurements (interference)</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Calcitonin:</strong> Tumor marker for medullary thyroid carcinoma (MTC).</p>
+                            <ul>
+                                <li>Elevated pre-operatively → obtain RET mutation testing for MEN2 syndrome</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="flip-card-container">
+                        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <span>Thyroid Antibodies & Disease Associations</span>
+                                </div>
+                                <div class="flip-card-back">
+                                    <span><strong>Anti-TPO:</strong> Most sensitive for Hashimoto's. <strong>Anti-Tg:</strong> Less specific, ~60% Hashimoto's. <strong>TRAb (TSI):</strong> Specific for Graves'; IgG crosses placenta. <strong>Anti-TSH-R blocking:</strong> Causes hypothyroidism (rare).</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card-container">
+                        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <span>TFT Interpretation: Primary vs Central Hypothyroidism</span>
+                                </div>
+                                <div class="flip-card-back">
+                                    <span><strong>Primary Hypothyroidism:</strong> ↑TSH, ↓FT4 (Hashimoto's). <strong>Central Hypothyroidism:</strong> ↓TSH, ↓FT4 (pituitary/hypothalamus). <strong>Subclinical:</strong> ↑TSH, normal FT4 (primary); ↓TSH, normal FT4 (secondary).</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="summary-box">
+                        <div class="summary-item red">
+                            <strong>TSH Most Sensitive</strong>
+                            For primary thyroid dysfunction. Small FT4 changes → large TSH changes (log-linear).
+                        </div>
+                        <div class="summary-item blue">
+                            <strong>Biotin Interference</strong>
+                            Biotin supplements falsely ↓TSH. Stop 2–3 days before testing.
+                        </div>
+                        <div class="summary-item green">
+                            <strong>TRAb Specific for Graves'</strong>
+                            Diagnostic for Graves' disease; predicts remission if declining.
+                        </div>
+                        <div class="summary-item yellow">
+                            <strong>Free T4 in Pregnancy</strong>
+                            Use FT4 in pregnancy (not total T4). TSH normal range shifts in 1st trimester.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LO3: Adrenal Function Tests -->
+        <div id="lo3" class="tab-content">
+            <div class="lo-section">
+                <div class="lo-header" onclick="toggleLO(this)">
+                    <input type="checkbox" class="lo-checkbox">
+                    <div class="lo-title">LO3: Adrenal Function Tests</div>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="lo-content">
+                    <p style="color: #475569; line-height: 1.7; margin-bottom: 15px;">Master cortisol assessment (basal, 24h UFC, late-night salivary), suppression tests (DST), ACTH interpretation for diagnosis of Cushing's syndrome, adrenal insufficiency, and primary aldosteronism screening.</p>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">Cortisol Tests<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>8 AM Serum Cortisol:</strong></p>
+                            <ul>
+                                <li>&lt;3 mcg/dL = likely adrenal insufficiency (AI)</li>
+                                <li>&gt;18 mcg/dL = unlikely adrenal insufficiency</li>
+                                <li>3–18 mcg/dL = equivocal → cosyntropin stimulation test needed</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>24-Hour Urinary Free Cortisol (UFC):</strong></p>
+                            <ul>
+                                <li>Elevated &gt;3× upper limit normal → Cushing's syndrome</li>
+                                <li>Normal reference: &lt;50 mcg/24h (varies by lab)</li>
+                                <li>Advantage: integrates cortisol over 24 hours; less affected by stress/diurnal variation</li>
+                                <li>Disadvantage: collection errors (incomplete sample)</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Late-Night Salivary Cortisol:</strong></p>
+                            <ul>
+                                <li>Nadir should be very low at midnight/bedtime</li>
+                                <li>Elevated at midnight → Cushing's syndrome (loss of normal suppression)</li>
+                                <li>Advantages: convenient, non-invasive, at-home collection possible, sensitive for Cushing's</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">ACTH Interpretation<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>ACTH distinguishes ACTH-dependent vs ACTH-independent pathology:</strong></p>
+                            <ul>
+                                <li><strong>High ACTH + High Cortisol:</strong> ACTH-dependent Cushing's (pituitary adenoma, ectopic ACTH)</li>
+                                <li><strong>Low/Normal ACTH + High Cortisol:</strong> ACTH-independent Cushing's (adrenal tumor, CAH)</li>
+                                <li><strong>High ACTH + Low Cortisol:</strong> Primary adrenal insufficiency (ACTH compensates)</li>
+                                <li><strong>Low ACTH + Low Cortisol:</strong> Secondary/central adrenal insufficiency (pituitary ACTH deficiency)</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Critical Pre-analytic Requirements:</strong></p>
+                            <ul>
+                                <li>Chilled EDTA tube (lavender-top) on ice</li>
+                                <li>Immediate centrifugation (pulsatile, degrades rapidly)</li>
+                                <li>Transport on ice; freeze immediately</li>
+                                <li>Improper handling → falsely LOW ACTH → misdiagnosis</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">Cosyntropin Stimulation Test<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>Standard Dose (250 mcg) Cosyntropin:</strong></p>
+                            <ul>
+                                <li>Give 250 mcg IV or IM; measure cortisol at 0, 30, 60 min</li>
+                                <li>Peak cortisol ≥18 mcg/dL = normal (rules out primary adrenal insufficiency)</li>
+                                <li>Peak &lt;18 mcg/dL = adrenal insufficiency (inadequate response)</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Low-Dose Cosyntropin (1 mcg):</strong></p>
+                            <ul>
+                                <li>More sensitive for mild secondary (central) adrenal insufficiency</li>
+                                <li>Standard test picks up primary AI well, but may miss mild secondary AI</li>
+                                <li>1 mcg ACTH → peak cortisol ≥18 mcg/dL = normal (same cutoff)</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Difference:</strong> 250 mcg "supraphysiologic" dose masks mild secondary AI; 1 mcg is more physiologic.</p>
+                        </div>
+                    </div>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">Dexamethasone Suppression Test (DST)<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>1 mg Overnight DST (screening):</strong></p>
+                            <ul>
+                                <li>Give 1 mg dexamethasone at 11 PM → measure 8 AM cortisol next day</li>
+                                <li>Normal: cortisol &lt;1.8 mcg/dL (suppressed by dexamethasone feedback)</li>
+                                <li>Abnormal: cortisol ≥1.8 mcg/dL → suggests Cushing's syndrome (fails suppression)</li>
+                                <li>Screening test; high false positives (depression, obesity, alcohol)</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>High-Dose DST (8 mg or 2 mg q6h × 2 days):</strong></p>
+                            <ul>
+                                <li>Distinguishes pituitary Cushing's (ACTH-secreting adenoma) from ectopic ACTH or adrenal tumors</li>
+                                <li><strong>Suppression &gt;50% from baseline cortisol:</strong> Pituitary Cushing's (adenoma still partially responsive to GC feedback)</li>
+                                <li><strong>No suppression (&lt;50%):</strong> Ectopic ACTH (ectopic tumors ignore dexamethasone) or adrenal tumor</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">Aldosterone & Primary Aldosteronism<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>Aldosterone-to-Renin Ratio (ARR) — Screening:</strong></p>
+                            <ul>
+                                <li>Patient sitting upright for ≥5 min; fasting if possible; off interfering drugs (ACEi, ARB, β-blockers, K-sparing diuretics, NSAIDs)</li>
+                                <li>ARR = aldosterone (ng/dL) / renin (ng/mL/h) or plasma renin activity</li>
+                                <li>ARR &gt;20–30 (with aldosterone &gt;15 ng/dL) = positive screen → proceed to confirmatory test</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Confirmatory Tests (if positive ARR):</strong></p>
+                            <ul>
+                                <li><strong>Saline Loading Test:</strong> IV infusion of 2L 0.9% saline over 4 hours. Normal: aldosterone suppresses to &lt;5 ng/dL. Primary aldosteronism: fails to suppress (aldosterone &gt;5 ng/dL).</li>
+                                <li><strong>Oral Sodium Loading:</strong> High sodium diet for 3–5 days + measure 24h urine aldosterone. Normal: &lt;12 mcg/24h. Primary aldosteronism: &gt;12 mcg/24h.</li>
+                                <li><strong>Fludrocortisone Suppression:</strong> Fludrocortisone for 4 days + measure upright aldosterone. Suppression &lt;6 ng/dL = normal.</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Adrenal Venous Sampling (AVS):</strong></p>
+                            <ul>
+                                <li>Gold standard to lateralize (unilateral adenoma vs bilateral hyperplasia)</li>
+                                <li>Guides surgery (unilateral case = adrenalectomy; bilateral = medical management)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">Other Adrenal Tests<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>DHEA-S (Dehydroepiandrosterone Sulfate):</strong></p>
+                            <ul>
+                                <li>Marker of adrenal androgen secretion</li>
+                                <li>↓ in secondary adrenal insufficiency (ACTH-dependent; ACTH drives DHEA-S)</li>
+                                <li>↑ in CAH (congenital adrenal hyperplasia) — adrenal hyperplasia with shunting to adrenal androgens</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>24-Hour Urine Metanephrines:</strong></p>
+                            <ul>
+                                <li>Screening for pheochromocytoma</li>
+                                <li>Preferred over plasma catecholamines (more stable analyte)</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Plasma Free Metanephrines:</strong></p>
+                            <ul>
+                                <li>Alternative to urine metanephrines; more sensitive but less specific</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="flip-card-container">
+                        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <span>Cushing's Diagnostic Algorithm</span>
+                                </div>
+                                <div class="flip-card-back">
+                                    <span>1) Confirm hypercortisolism: 24h UFC, late-night salivary cortisol, 1mg DST. 2) Measure ACTH: high = ACTH-dependent, low = ACTH-independent. 3) If ACTH-high, do high-dose DST: suppression = pituitary Cushing's, no suppression = ectopic ACTH or adrenal tumor.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card-container">
+                        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <span>Low-Dose vs High-Dose Cosyntropin</span>
+                                </div>
+                                <div class="flip-card-back">
+                                    <span><strong>Standard 250 mcg:</strong> Supraphysiologic dose; good for primary AI; may miss mild secondary AI. <strong>Low-Dose 1 mcg:</strong> More physiologic; more sensitive for central/secondary AI. Same cortisol cutoff (≥18 mcg/dL).</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="summary-box">
+                        <div class="summary-item red">
+                            <strong>Morning Cortisol Ranges</strong>
+                            &lt;3 = likely AI; &gt;18 = unlikely AI; 3–18 = need stimulation test.
+                        </div>
+                        <div class="summary-item blue">
+                            <strong>ACTH Handling Critical</strong>
+                            Chilled tube, ice transport, immediate processing. Poor handling → falsely low ACTH.
+                        </div>
+                        <div class="summary-item green">
+                            <strong>High-Dose DST for Cushing's</strong>
+                            Suppression &gt;50% = pituitary. No suppression = ectopic or adrenal tumor.
+                        </div>
+                        <div class="summary-item yellow">
+                            <strong>ARR Screening</strong>
+                            ARR &gt;20–30 (aldosterone &gt;15) = positive screen for primary aldosteronism.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LO4: Pituitary Function Tests -->
+        <div id="lo4" class="tab-content">
+            <div class="lo-section">
+                <div class="lo-header" onclick="toggleLO(this)">
+                    <input type="checkbox" class="lo-checkbox">
+                    <div class="lo-title">LO4: Pituitary Function Tests</div>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="lo-content">
+                    <p style="color: #475569; line-height: 1.7; margin-bottom: 15px;">Pituitary hormones are pulsatile. Master static markers (IGF-1, prolactin), dynamic stimulation tests (ITT, GHRH+arginine, GnRH), suppression tests for GH excess, water deprivation test for DI diagnosis, and recognize hook effect pitfall in prolactin.</p>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">GH (Growth Hormone) Axis<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>IGF-1 (Insulin-like Growth Factor-1):</strong></p>
+                            <ul>
+                                <li>Best integrated marker of GH secretion (more stable than pulsatile GH)</li>
+                                <li>IGF-1 reflects GH secretion over hours/days, not minute-to-minute</li>
+                                <li>Normal ↑ with age in children; peaks in young adults; ↓ with age</li>
+                                <li>Low IGF-1 = GH deficiency (consider stimulation test)</li>
+                                <li>High IGF-1 = GH excess (acromegaly/gigantism)</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>GH Stimulation Tests (GH Deficiency):</strong></p>
+                            <ul>
+                                <li><strong>Insulin Tolerance Test (ITT):</strong> Gold standard. IV insulin (0.1 U/kg) → hypoglycemia. GH response normal if &gt;5 µg/L. Also assesses ACTH/cortisol response.</li>
+                                <li><strong>GHRH + Arginine:</strong> Combination GH secretagogues. GH &gt;4–5 µg/L = normal response.</li>
+                                <li><strong>Glucagon Test:</strong> Alternative if ITT contraindicated (seizure risk). GH &gt;3 µg/L normal.</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>GH Suppression Test (GH Excess/Acromegaly):</strong></p>
+                            <ul>
+                                <li><strong>OGTT:</strong> 75g glucose load. GH should suppress to &lt;1 ng/mL (or &lt;0.4 by newer assays). If GH nadir &gt;1 ng/mL = acromegaly (GH fails to suppress normally).</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">Prolactin<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>Normal Range:</strong> &lt;20 ng/mL in women; &lt;15 ng/mL in men (varies by assay)</p>
+                            <ul>
+                                <li>Slight elevation with stress/venipuncture → re-check if mildly elevated</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Interpretation:</strong></p>
+                            <ul>
+                                <li><strong>Prolactin &gt;200 ng/mL:</strong> Almost always prolactinoma (macroprolactinoma common). Macroadenomas usually &gt;200.</li>
+                                <li><strong>Prolactin 20–200 ng/mL:</strong> Differential includes drugs, stalk effect (non-functioning adenoma compresses stalk → ↓dopamine), other pituitary disease</li>
+                                <li><strong>Elevated + amenorrhea + galactorrhea:</strong> Prolactinoma until proven otherwise</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Hook Effect (High-Dose Hook):</strong></p>
+                            <ul>
+                                <li><strong>Paradoxically high prolactin can give falsely LOW result on sandwich immunoassay</strong></li>
+                                <li>Occurs when prolactin so high it saturates capture antibodies → underestimation</li>
+                                <li>Solution: Dilute the serum sample (1:10 or 1:100) to unmask true high value</li>
+                                <li>RED FLAG: If clinical picture suggests prolactinoma but prolactin "only mildly elevated" → consider hook effect</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Macroprolactin:</strong></p>
+                            <ul>
+                                <li>Large prolactin complexes (IgG-bound) that are biologically inactive</li>
+                                <li>Falsely elevates measured prolactin on standard assay</li>
+                                <li>Check macroprolactin if elevated prolactin without clinical symptoms</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">LH/FSH & GnRH Stimulation<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>Basal LH/FSH:</strong></p>
+                            <ul>
+                                <li>Normal ranges vary widely (pulsatile secretion)</li>
+                                <li>Single values less reliable than dynamic testing</li>
+                                <li>High LH/FSH (with low testosterone) = primary hypogonadism (testicular failure)</li>
+                                <li>Low LH/FSH (with low testosterone) = secondary hypogonadism (hypothalamic/pituitary)</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>GnRH Stimulation Test:</strong></p>
+                            <ul>
+                                <li>Give GnRH bolus; measure LH/FSH response at 30 min</li>
+                                <li><strong>Intact HPG axis (normal hypothalamus/pituitary):</strong> LH/FSH ↑ responsively</li>
+                                <li><strong>Hypogonadotropic hypogonadism:</strong> Blunted LH/FSH response (hypothalamic or pituitary disorder)</li>
+                                <li><strong>Primary hypogonadism:</strong> LH/FSH basally ↑ (no further rise with GnRH); testis is problem, not pituitary</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Clomiphene Citrate Challenge Test:</strong></p>
+                            <ul>
+                                <li>Clomiphene blocks estrogen feedback → should stimulate GnRH/LH/FSH if axis intact</li>
+                                <li>Assesses HPG axis reserve</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">Water Deprivation Test (Diabetes Insipidus)<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>Indication:</strong> Suspected diabetes insipidus (polyuria + polydipsia with low urine osmolality)</p>
+                            <p style="margin-top: 10px;"><strong>Protocol:</strong></p>
+                            <ul>
+                                <li>Restrict water (NPO) → monitor urine osmolality and serum osmolality</li>
+                                <li>Continue until urine osmolality plateaus (doesn't increase despite dehydration) or serum osmolality &gt;295 mOsm/kg</li>
+                                <li>Then administer desmopressin (DDAVP, synthetic ADH)</li>
+                                <li>Re-measure urine osmolality 30–60 min post-DDAVP</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Interpretation:</strong></p>
+                            <ul>
+                                <li><strong>Central DI (Pituitary/Hypothalamic):</strong> Dilute urine despite dehydration (osmolality &lt;300) → CONCENTRATES after DDAVP (ADH receptor is intact, just missing ADH)</li>
+                                <li><strong>Nephrogenic DI (Kidney Resistance to ADH):</strong> Dilute urine → FAILS to concentrate after DDAVP (ADH receptor defective; DDAVP can't work)</li>
+                                <li><strong>Primary Polydipsia (Psychogenic):</strong> Concentrated urine on water deprivation (normal ADH response; problem is excess drinking)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="flip-card-container">
+                        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <span>Central vs Nephrogenic DI</span>
+                                </div>
+                                <div class="flip-card-back">
+                                    <span><strong>Central DI:</strong> Dilute urine on dehydration → concentrates after DDAVP (problem is missing ADH; kidney works fine). <strong>Nephrogenic DI:</strong> Dilute urine on dehydration → fails to concentrate after DDAVP (kidney doesn't respond to ADH).</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card-container">
+                        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <span>Hook Effect in Prolactin</span>
+                                </div>
+                                <div class="flip-card-back">
+                                    <span>Very high prolactin paradoxically gives falsely LOW result on sandwich immunoassay (saturation of capture antibodies). Solution: Dilute serum sample. RED FLAG: Prolactinoma suspected but prolactin only mildly elevated → consider hook effect.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="summary-box">
+                        <div class="summary-item red">
+                            <strong>IGF-1 Best Marker</strong>
+                            IGF-1 integrates GH secretion. Low = GH deficiency; high = GH excess.
+                        </div>
+                        <div class="summary-item blue">
+                            <strong>Hook Effect Risk</strong>
+                            Very high prolactin → falsely low on immunoassay. Dilute sample to unmask.
+                        </div>
+                        <div class="summary-item green">
+                            <strong>DDAVP Response</strong>
+                            Central DI responds to DDAVP; nephrogenic DI does not.
+                        </div>
+                        <div class="summary-item yellow">
+                            <strong>Prolactin &gt;200 = Prolactinoma</strong>
+                            Almost always macroprolactinoma. Levels 20–200 require differential.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LO5: Diabetes & Glucose Tests -->
+        <div id="lo5" class="tab-content">
+            <div class="lo-section">
+                <div class="lo-header" onclick="toggleLO(this)">
+                    <input type="checkbox" class="lo-checkbox">
+                    <div class="lo-title">LO5: Diabetes & Glucose Tests</div>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="lo-content">
+                    <p style="color: #475569; line-height: 1.7; margin-bottom: 15px;">Master diagnosis of diabetes (FPG, OGTT, HbA1c), gestational diabetes screening, C-peptide for classification, and 72-hour fast protocol for insulinoma workup. Recognize HbA1c pitfalls and reactive hypoglycemia testing.</p>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">Fasting Plasma Glucose (FPG)<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><strong>Normal:</strong> &lt;100 mg/dL</li>
+                                <li><strong>Prediabetes (Impaired Fasting Glucose):</strong> 100–125 mg/dL</li>
+                                <li><strong>Diabetes:</strong> ≥126 mg/dL (on two separate occasions to diagnose)</li>
+                            </ul>
+                            <p style="margin-top: 10px;">Requires ≥8 hour fast. Variability ±5–10% day-to-day.</p>
+                        </div>
+                    </div>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">Oral Glucose Tolerance Test (OGTT)<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>Standard 75g OGTT (Nonpregnant Adults):</strong></p>
+                            <ul>
+                                <li>Give 75g glucose; measure at 0, 1h (sometimes), 2h</li>
+                                <li><strong>2-hour glucose:</strong> &lt;140 = normal; 140–199 = IGT (impaired glucose tolerance); ≥200 = diabetes</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Gestational Diabetes (GDM) — One-Step Approach (IADPSG):</strong></p>
+                            <ul>
+                                <li>75g OGTT (fasting and 2-hour values)</li>
+                                <li>≥1 abnormal value = GDM diagnosis:</li>
+                                <li style="margin-left: 20px;">Fasting ≥92 mg/dL, 1h ≥180 mg/dL, or 2h ≥153 mg/dL</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Gestational Diabetes — Two-Step Approach (Carpenter-Coustan):</strong></p>
+                            <ul>
+                                <li><strong>Step 1 (Screen):</strong> 50g glucose challenge test (non-fasting). 1h glucose ≥130–140 mg/dL (lab-dependent) → proceed to step 2</li>
+                                <li><strong>Step 2 (Diagnostic):</strong> 100g OGTT (fasting). Abnormal values: fasting ≥95, 1h ≥180, 2h ≥155, 3h ≥140 mg/dL. ≥2 abnormal = GDM.</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>OGTT for Acromegaly Screening:</strong></p>
+                            <ul>
+                                <li>GH should suppress to &lt;1 ng/mL with glucose load</li>
+                                <li>If GH nadir &gt;1 ng/mL → acromegaly (GH fails to suppress)</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>OGTT for Reactive Hypoglycemia:</strong></p>
+                            <ul>
+                                <li>5-hour OGTT (rarely indicated)</li>
+                                <li>Hypoglycemia &lt;55 mg/dL at 2–4 hours with symptoms = reactive hypoglycemia</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">HbA1c (Glycated Hemoglobin)<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>Mechanism:</strong> Non-enzymatic glycosylation of hemoglobin A N-terminal valine (β-chain). Reflects 2–3 month average glucose (RBC lifespan ~120 days).</p>
+                            <ul>
+                                <li><strong>Normal:</strong> &lt;5.7%</li>
+                                <li><strong>Prediabetes:</strong> 5.7–6.4%</li>
+                                <li><strong>Diabetes:</strong> ≥6.5%</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Estimated Average Glucose (eAG):</strong> eAG = (28.7 × HbA1c) – 46.7 mg/dL</p>
+                            <p style="margin-top: 10px;"><strong>False LOW HbA1c:</strong></p>
+                            <ul>
+                                <li>Hemolytic anemia (↑RBC turnover → ↓RBC age → less glycosylation time)</li>
+                                <li>Sickle cell disease (hemolysis)</li>
+                                <li>G6PD deficiency (hemolysis)</li>
+                                <li>Pregnancy (↑RBC turnover)</li>
+                                <li>Recent blood transfusion (fresh RBCs)</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>False HIGH HbA1c:</strong></p>
+                            <ul>
+                                <li>Iron deficiency anemia (↓RBC count → older RBCs → more glycosylation time)</li>
+                                <li>Splenectomy (↑RBC lifespan)</li>
+                                <li>Uremia (carbamylated hemoglobin interferes with assay)</li>
+                                <li>Chronic kidney disease (similar carbamylation effect)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">C-Peptide Interpretation<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>What is C-Peptide?</strong> Cleavage product of proinsulin. Equimolar with endogenous insulin but not cleared as rapidly → better marker of endogenous insulin production.</p>
+                            <p style="margin-top: 10px;"><strong>Clinical Uses:</strong></p>
+                            <ul>
+                                <li><strong>LOW C-peptide:</strong> T1DM (↓beta cell mass), exogenous insulin use (suppresses C-peptide)</li>
+                                <li><strong>NORMAL/HIGH C-peptide:</strong> T2DM (adequate beta cells), insulinoma (very high C-peptide + low glucose), SU/meglitinide ingestion (stimulates endogenous insulin)</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Distinguish Insulinoma vs Factitious Hypoglycemia (Exogenous Insulin):</strong></p>
+                            <ul>
+                                <li><strong>Insulinoma:</strong> Elevated insulin + elevated C-peptide + hypoglycemia</li>
+                                <li><strong>Exogenous insulin:</strong> Elevated insulin + LOW C-peptide + hypoglycemia (exogenous insulin suppresses endogenous)</li>
+                                <li><strong>Insulin antibodies:</strong> Check if available; SU use → high insulin, high C-peptide</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Assess Residual Beta Cell Function:</strong></p>
+                            <ul>
+                                <li>C-peptide is better marker than insulin (not degraded as rapidly)</li>
+                                <li>Higher C-peptide = more endogenous insulin production capacity</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">Insulin & Proinsulin<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>Insulin (Fasting):</strong> Normal fasting &lt;12 µU/mL (varies by assay). Elevated fasting insulin = insulin resistance or insulinoma.</p>
+                            <p style="margin-top: 10px;"><strong>Insulin:Glucose Ratio:</strong></p>
+                            <ul>
+                                <li>&gt;0.3 during hypoglycemia (glucose &lt;55 mg/dL) = inappropriate insulin secretion (insulinoma)</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Proinsulin:</strong></p>
+                            <ul>
+                                <li>Precursor of insulin (cleaved to insulin + C-peptide)</li>
+                                <li>Elevated in insulinoma (tumors secrete proinsulin in addition to insulin)</li>
+                                <li>Normal fasting proinsulin &lt;12 pmol/L</li>
+                                <li>Proinsulin &gt;30% of total insulin = insulinoma</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">72-Hour Fast (Insulinoma Diagnosis)<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>Indication:</strong> Suspected insulinoma (hypoglycemia with symptoms + inappropriate insulin)</p>
+                            <p style="margin-top: 10px;"><strong>Protocol:</strong></p>
+                            <ul>
+                                <li>Supervised fast (NPO) for up to 72 hours</li>
+                                <li>Measure at baseline and then q4-6h (or at symptom onset): glucose, insulin, C-peptide, proinsulin, β-hydroxybutyrate</li>
+                                <li>Terminate fast if glucose &lt;55 mg/dL with symptoms (Whipple's triad) or after 72 hours</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Whipple's Triad:</strong></p>
+                            <ul>
+                                <li>Documented hypoglycemia (glucose &lt;55 mg/dL)</li>
+                                <li>Symptoms of hypoglycemia (tremor, diaphoresis, altered mental status, palpitations)</li>
+                                <li>Relief with glucose administration</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Diagnosis of Insulinoma:</strong></p>
+                            <ul>
+                                <li>Hypoglycemia + inappropriately elevated insulin (insulin/glucose ratio &gt;0.3)</li>
+                                <li>Elevated C-peptide (endogenous source)</li>
+                                <li>Elevated proinsulin (&gt;30% total insulin)</li>
+                                <li>↓β-hydroxybutyrate (exogenous insulin suppresses ketogenesis; endogenous insulinoma also suppresses)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="flip-card-container">
+                        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <span>Distinguish Insulinoma vs Factitious Hypoglycemia</span>
+                                </div>
+                                <div class="flip-card-back">
+                                    <span><strong>Insulinoma:</strong> High glucose + high insulin + high C-peptide + high proinsulin. <strong>Exogenous insulin:</strong> Low glucose + high insulin + LOW C-peptide + normal/low proinsulin (exogenous insulin suppresses endogenous). <strong>SU ingestion:</strong> Low glucose + high insulin + high C-peptide.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card-container">
+                        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <span>HbA1c False Values</span>
+                                </div>
+                                <div class="flip-card-back">
+                                    <span><strong>False LOW:</strong> Hemolytic anemia, sickle cell, G6PD, pregnancy, recent transfusion (↑RBC turnover). <strong>False HIGH:</strong> Iron deficiency anemia, splenectomy, uremia, chronic kidney disease (older RBCs or carbamylation).</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="summary-box">
+                        <div class="summary-item red">
+                            <strong>HbA1c ≥6.5% = Diabetes</strong>
+                            Reflects 2–3 month average glucose. Use eAG for patient communication.
+                        </div>
+                        <div class="summary-item blue">
+                            <strong>C-Peptide Distinguishes Source</strong>
+                            Low C-peptide + high insulin = exogenous. High C-peptide + high insulin = endogenous (insulinoma, T2DM).
+                        </div>
+                        <div class="summary-item green">
+                            <strong>72-Hour Fast Gold Standard</strong>
+                            For insulinoma. Hypoglycemia + high insulin + high C-peptide = insulinoma.
+                        </div>
+                        <div class="summary-item yellow">
+                            <strong>Proinsulin &gt;30% Total Insulin</strong>
+                            Suggests insulinoma (tumors secrete proinsulin).
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LO6: Calcium, PTH & Vitamin D -->
+        <div id="lo6" class="tab-content">
+            <div class="lo-section">
+                <div class="lo-header" onclick="toggleLO(this)">
+                    <input type="checkbox" class="lo-checkbox">
+                    <div class="lo-title">LO6: Calcium, PTH & Vitamin D Lab Interpretation</div>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="lo-content">
+                    <p style="color: #475569; line-height: 1.7; margin-bottom: 15px;">Master calcium correction for albumin, PTH interpretation patterns to diagnose primary/secondary hyperparathyroidism, hypoparathyroidism, and non-PTH mediated hypercalcemia. Understand vitamin D metabolism, PTHrP in malignancy, and FHH distinction from primary HPT.</p>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">Calcium Measurement & Correction<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>Total Calcium:</strong> 8.5–10.2 mg/dL (includes bound to albumin + ionized + complexed)</p>
+                            <p style="margin-top: 10px;"><strong>Albumin Correction (CRITICAL):</strong></p>
+                            <ul>
+                                <li><strong>Corrected Ca = Measured Ca + 0.8 × (4 – [albumin in g/dL])</strong></li>
+                                <li>For every 1 g/dL ↓albumin below 4, add 0.8 mg/dL to total Ca</li>
+                                <li>Example: Measured Ca 7.8, albumin 2.0: Corrected Ca = 7.8 + 0.8 × (4 – 2.0) = 7.8 + 1.6 = 9.4 mg/dL (not low!)</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Ionized Calcium:</strong> 1.1–1.35 mmol/L (4.5–5.3 mg/dL)</p>
+                            <ul>
+                                <li>Directly biologically active (not affected by albumin)</li>
+                                <li>Use in ICU, acidosis, or when albumin abnormal</li>
+                                <li>Acidosis ↓protein binding → ↑ionized Ca (despite same total); alkalosis ↑protein binding → ↓ionized Ca (tetany)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">PTH (Parathyroid Hormone)<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>Intact PTH (iPTH):</strong> 10–65 pg/mL (varies by assay). Measures biologically active 1-84 PTH fragment.</p>
+                            <p style="margin-top: 10px;"><strong>Interpretation Patterns (Using PTH + Calcium):</strong></p>
+                            <ul>
+                                <li><strong>↑PTH + ↑Ca:</strong> Primary hyperparathyroidism (PTH drives Ca up)</li>
+                                <li><strong>↑PTH + ↓Ca or normal Ca:</strong> Secondary hyperparathyroidism (reactive; PTH compensates for low Ca from other cause — vitamin D deficiency, CKD, malabsorption)</li>
+                                <li><strong>↓PTH + ↓Ca:</strong> Hypoparathyroidism (PTH deficiency or resistance)</li>
+                                <li><strong>↓PTH + ↑Ca:</strong> Non-PTH mediated hypercalcemia (malignancy, granulomatous disease, vitamin D toxicity, thiazides, FHH)</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Intraoperative PTH (IOPTH) Monitoring:</strong></p>
+                            <ul>
+                                <li>Measured during parathyroid surgery to confirm gland removal</li>
+                                <li>PTH drops &gt;50% at 10 min post-gland removal → confirms cure</li>
+                                <li>Validates that the diseased gland was removed and residual/ectopic parathyroids not responsible</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">PTHrP (PTH-Related Protein)<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>PTHrP Mechanism:</strong> Secreted by malignancies. Acts like PTH on PTH1 receptor → ↑Ca reabsorption, ↑PO₄ wasting.</p>
+                            <p style="margin-top: 10px;"><strong>Humoral Hypercalcemia of Malignancy (HHM):</strong></p>
+                            <ul>
+                                <li>Most common cause of hypercalcemia in hospitalized patients</li>
+                                <li><strong>Classic cancers:</strong> Squamous cell (lung, head/neck, cervix), renal cell, breast</li>
+                                <li><strong>Lab pattern:</strong> ↑Ca, ↓PO₄, but PTH is LOW (suppressed by high Ca) — key distinction from primary HPT</li>
+                                <li>PTHrP level can be measured to confirm; usually &gt;2 pmol/L in HHM</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Other Mechanisms of Malignancy Hypercalcemia:</strong></p>
+                            <ul>
+                                <li>↑1,25-OH₂D (lymphomas; autonomous 1α-hydroxylase in macrophages)</li>
+                                <li>Osteolytic metastases (↑local RANKL → osteoclast activation)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">Vitamin D<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>25-OH-D (Calcidiol):</strong> Measure for vitamin D status.</p>
+                            <ul>
+                                <li>Normal: &gt;30 ng/mL</li>
+                                <li>Insufficiency: 20–29 ng/mL</li>
+                                <li>Deficiency: &lt;20 ng/mL</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>1,25-OH₂-D (Calcitriol):</strong> Active form; rarely measured clinically.</p>
+                            <ul>
+                                <li>Regulated by PTH (↑PTH → ↑1α-hydroxylase) and FGF23 (↓1α-hydroxylase)</li>
+                                <li><strong>Measured when:</strong> Suspected enzyme defect (1α-hydroxylase deficiency), granulomatous disease, or hypercalcemia workup</li>
+                                <li><strong>Elevated 1,25-OH₂D:</strong> Granulomatous disease (sarcoidosis, TB, histoplasmosis) — macrophages autonomously express 1α-hydroxylase → hypercalcemia</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">Hypercalcemia Differential Diagnosis<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>PTH HIGH (→ ↑Ca):</strong></p>
+                            <ul>
+                                <li><strong>Primary hyperparathyroidism:</strong> Most common cause outpatient (adenoma ~80%)</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>PTH LOW (→ ↓Ca feedback suppressed):</strong></p>
+                            <ul>
+                                <li><strong>Malignancy (HHM):</strong> PTHrP mimics PTH → ↑Ca, ↓PO₄, ↓PTH</li>
+                                <li><strong>Granulomatous disease (Sarcoidosis, TB):</strong> ↑1,25-OH₂D from macrophage 1α-hydroxylase → ↑Ca absorption, ↑1,25-OH₂D, normal-low PTH, responds to steroids</li>
+                                <li><strong>Vitamin D toxicity:</strong> Excess calcitriol (supplements, malignancy producing calcitriol) → ↑Ca, ↓PTH</li>
+                                <li><strong>Thiazide diuretics:</strong> Reduce urinary Ca loss → mild hypercalcemia</li>
+                                <li><strong>Milk-alkali syndrome:</strong> Excessive calcium + absorbable alkali (e.g., calcium carbonate + sodium bicarbonate)</li>
+                                <li><strong>FHH (Familial Hypocalciuric Hypercalcemia):</strong> CaSR (calcium-sensing receptor) mutation → inappropriately high set-point for suppression</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">FHH vs Primary Hyperparathyroidism<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <p><strong>FHH (Familial Hypocalciuric Hypercalcemia):</strong></p>
+                            <ul>
+                                <li>CaSR mutation → "resetting" of calcium set-point</li>
+                                <li>Benign; asymptomatic hypercalcemia in multiple family members</li>
+                                <li><strong>Lab hallmark:</strong> Urine calcium VERY LOW (despite high serum Ca)</li>
+                                <li>Calcium:creatinine clearance ratio &lt;0.01 in FHH (normal &gt;0.02)</li>
+                                <li>PTH normal or mildly elevated (appropriate for Ca level, but inappropriately high for patient's "set-point")</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Primary Hyperparathyroidism:</strong></p>
+                            <ul>
+                                <li>Adenoma, hyperplasia, or carcinoma → excessive PTH</li>
+                                <li><strong>Lab hallmark:</strong> High urinary calcium (↑filtered load from high Ca)</li>
+                                <li>Calcium:creatinine clearance ratio &gt;0.02</li>
+                                <li>PTH high (clearly suppresses Ca inappropriately)</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><strong>Key Distinction:</strong> 24-hour urine calcium (or Ca:Cr clearance) easily separates them. FHH does NOT need surgery (surgery ineffective).</p>
+                        </div>
+                    </div>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header">24-Hour Urine Calcium<span class="collapsible-icon">▼</span></div>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><strong>Elevated (normal &gt;24h reference):</strong> Primary hyperparathyroidism (↑filtered load from high serum Ca), vitamin D toxicity</li>
+                                <li><strong>Low:</strong> FHH (hallmark; urine Ca reabsorption↑), thiazide diuretics (↓urinary Ca loss), hypoparathyroidism (↓serum Ca → ↓filtered load)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="flip-card-container">
+                        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <span>Calcium Correction Formula</span>
+                                </div>
+                                <div class="flip-card-back">
+                                    <span><strong>Corrected Ca = Measured Ca + 0.8 × (4 – albumin in g/dL)</strong>. Example: Measured 7.8, albumin 2.0 → 7.8 + 0.8 × 2 = 9.4 mg/dL.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card-container">
+                        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <span>Hypercalcemia Differential: PTH-Mediated vs Non-PTH</span>
+                                </div>
+                                <div class="flip-card-back">
+                                    <span><strong>PTH HIGH:</strong> Primary HPT. <strong>PTH LOW:</strong> Malignancy (HHM via PTHrP), granulomatous disease (↑1,25-OH₂D), vitamin D toxicity, thiazides, FHH. Key test: Urine calcium (low in FHH; high in primary HPT).</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="summary-box">
+                        <div class="summary-item red">
+                            <strong>Always Correct Calcium for Albumin</strong>
+                            Falsely low/high total Ca if albumin abnormal. Use formula.
+                        </div>
+                        <div class="summary-item blue">
+                            <strong>PTH + Ca Pattern Diagnostic</strong>
+                            ↑PTH + ↑Ca = primary HPT. ↓PTH + ↑Ca = non-PTH mediated.
+                        </div>
+                        <div class="summary-item green">
+                            <strong>FHH Urine Calcium Very Low</strong>
+                            Ca:Cr clearance &lt;0.01. Primary HPT has high urine Ca.
+                        </div>
+                        <div class="summary-item yellow">
+                            <strong>PTHrP in Malignancy</strong>
+                            ↑Ca, ↓PO₄, ↓PTH (classic HHM pattern). Distinguish from primary HPT by low PTH.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Practice Questions -->
+        <div id="practice" class="tab-content">
+            <div style="background: white; border-radius: 8px; padding: 25px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-left: 5px solid #dc2626; margin-bottom: 25px;">
+                <h2 style="color: #0f172a; margin-bottom: 20px; font-size: 20px;">Practice Questions — Endocrine Laboratory Interpretation</h2>
+                <p style="color: #475569; margin-bottom: 25px;">Test your mastery with 18 USMLE-style MCQs. Click each option to reveal the correct answer and explanation.</p>
+
+                <div class="mcq-container" id="mcqContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // MCQ Data
+        const mcqs = [
+            {
+                id: 1,
+                question: "A 58-year-old woman presents with hypertension (BP 165/98) and hypokalemia (K 3.1). Laboratory evaluation reveals: aldosterone 28 ng/dL, plasma renin activity 0.8 ng/mL/hr. Which is the best next diagnostic step?",
+                options: [
+                    "A) High-dose dexamethasone suppression test",
+                    "B) Aldosterone-to-renin ratio (ARR) interpretation and saline loading test",
+                    "C) Renal ultrasound for renal artery stenosis",
+                    "D) Plasma ACTH measurement"
+                ],
+                correct: 1,
+                explanation: "The aldosterone-to-renin ratio (ARR) = 28/0.8 = 35, which is >20–30 and indicates primary aldosteronism. The next step is a confirmatory test such as saline loading test (IV saline → aldosterone should suppress to <5 ng/dL in normal; fails in primary aldosteronism). High-dose DST is for Cushing's; renal ultrasound is for secondary HTN (renovascular); ACTH is for Cushing's/AI."
+            },
+            {
+                id: 2,
+                question: "Which confirmatory test best confirms primary aldosteronism after a positive aldosterone-to-renin ratio?",
+                options: [
+                    "A) 24-hour urine aldosterone",
+                    "B) IV saline loading test (suppression test)",
+                    "C) High-dose dexamethasone suppression",
+                    "D) ACTH stimulation test"
+                ],
+                correct: 1,
+                explanation: "IV saline loading (2L 0.9% saline over 4 hours) is the most specific confirmatory test. Normal response: aldosterone suppresses to <5 ng/dL. In primary aldosteronism, aldosterone fails to suppress appropriately. This confirms autonomous aldosterone production independent of volume/RAAS status."
+            },
+            {
+                id: 3,
+                question: "A 42-year-old man undergoes a 72-hour supervised fast. At 36 hours, glucose is 38 mg/dL with symptoms (tremor, diaphoresis). Labs show: insulin 25 µU/mL, C-peptide 6.2 ng/mL, proinsulin 40 pmol/L. What is the likely diagnosis?",
+                options: [
+                    "A) Exogenous insulin injection",
+                    "B) Sulfonylurea ingestion",
+                    "C) Insulinoma",
+                    "D) Type 1 diabetes mellitus"
+                ],
+                correct: 2,
+                explanation: "Insulinoma: Low glucose + HIGH insulin + HIGH C-peptide + elevated proinsulin. C-peptide is high (endogenous source). Exogenous insulin would show high insulin but LOW C-peptide. SU ingestion would show high insulin + high C-peptide but proinsulin usually normal/low. The elevated proinsulin (>30% of total insulin) is characteristic of insulinoma."
+            },
+            {
+                id: 4,
+                question: "A 35-year-old woman with hypoglycemic episodes has: glucose 42 mg/dL, insulin 18 µU/mL, C-peptide 0.8 ng/mL (LOW). Which is the most likely etiology?",
+                options: [
+                    "A) Insulinoma",
+                    "B) Exogenous insulin injection",
+                    "C) Sulfonylurea use",
+                    "D) Type 1 diabetes"
+                ],
+                correct: 1,
+                explanation: "Exogenous insulin: Low glucose + HIGH insulin + LOW C-peptide. Exogenous insulin suppresses endogenous beta cell insulin production (C-peptide). Insulinoma would have high C-peptide. SU would have high C-peptide. Type 1 DM would have low insulin/C-peptide basally, not inappropriate elevation during hypoglycemia."
+            },
+            {
+                id: 5,
+                question: "A 22-year-old man with sickle cell disease has HbA1c 7.2%. Which is the most appropriate interpretation?",
+                options: [
+                    "A) HbA1c is accurate; patient has diabetes",
+                    "B) HbA1c is falsely LOW due to increased RBC turnover; obtain FPG or OGTT for accurate glucose status",
+                    "C) HbA1c is falsely HIGH due to carbamylation",
+                    "D) HbA1c is unreliable; switch to CGM only"
+                ],
+                correct: 1,
+                explanation: "Sickle cell disease causes hemolysis and increased RBC turnover. RBCs are younger → less time for glycosylation → falsely LOW HbA1c. This underestimates average glucose. Obtain fasting glucose, OGTT, or continuous glucose monitoring for accurate glucose assessment. Iron deficiency anemia causes falsely HIGH HbA1c (older RBCs)."
+            },
+            {
+                id: 6,
+                question: "A 50-year-old woman with iron deficiency anemia (Hgb 8.5, MCV 65) has HbA1c 7.1%. Which is the most appropriate interpretation?",
+                options: [
+                    "A) HbA1c is accurate; patient has diabetes",
+                    "B) HbA1c is falsely LOW due to increased RBC turnover",
+                    "C) HbA1c is falsely HIGH due to older RBC population; FPG/OGTT more reliable",
+                    "D) HbA1c is unreliable in anemia; repeat after iron repletion"
+                ],
+                correct: 2,
+                explanation: "Iron deficiency anemia reduces RBC production. Circulating RBCs are older (↑RBC lifespan) → more time for glycosylation → falsely HIGH HbA1c. This overestimates average glucose. FPG/OGTT are more reliable in iron deficiency. Correct the anemia and recheck HbA1c."
+            },
+            {
+                id: 7,
+                question: "A 45-year-old man with suspected diabetes insipidus undergoes water deprivation test. Urine osmolality remains 220 mOsm/kg despite 8 hours of dehydration (serum osmolality 295 mOsm/kg). Desmopressin (DDAVP) is given. Urine osmolality rises to 580 mOsm/kg within 30 minutes. What is the diagnosis?",
+                options: [
+                    "A) Nephrogenic DI",
+                    "B) Central DI",
+                    "C) Primary polydipsia",
+                    "D) Normal response (no DI)"
+                ],
+                correct: 1,
+                explanation: "Central DI: Dilute urine on dehydration despite high serum osmolality → RESPONDS to DDAVP (urine concentrates). The kidney is intact (ADH receptor works); the problem is insufficient ADH. Nephrogenic DI would NOT concentrate after DDAVP. Primary polydipsia would concentrate on water deprivation (normal ADH response)."
+            },
+            {
+                id: 8,
+                question: "A woman with amenorrhea/galactorrhea has prolactin measured at 'only 35 ng/mL' on standard immunoassay, yet MRI shows a large pituitary mass. What is the most likely explanation for the apparently low prolactin?",
+                options: [
+                    "A) The patient does not have a prolactinoma",
+                    "B) Hook effect (very high prolactin saturates capture antibodies → falsely LOW result)",
+                    "C) The patient has macroprolactin (biologically inactive)",
+                    "D) Secondary hypothyroidism suppressing TRH"
+                ],
+                correct: 1,
+                explanation: "Hook effect (high-dose hook): Very high prolactin paradoxically gives falsely LOW result on sandwich immunoassay (saturation of capture antibodies). Solution: Dilute the serum sample. The clinical picture (large pituitary mass + amenorrhea/galactorrhea) strongly suggests prolactinoma despite 'low' prolactin. Repeat with dilution to unmask the true high value."
+            },
+            {
+                id: 9,
+                question: "A 70-year-old patient with hypoalbuminemia (albumin 2.0 g/dL) has measured total serum calcium 7.8 mg/dL. What is the corrected (adjusted) calcium?",
+                options: [
+                    "A) 7.8 mg/dL (no correction needed)",
+                    "B) 8.6 mg/dL",
+                    "C) 9.4 mg/dL",
+                    "D) 10.2 mg/dL"
+                ],
+                correct: 2,
+                explanation: "Corrected Ca = Measured Ca + 0.8 × (4 – albumin). = 7.8 + 0.8 × (4 – 2.0) = 7.8 + 0.8 × 2 = 7.8 + 1.6 = 9.4 mg/dL. The measured value was falsely low due to hypoalbuminemia. The corrected value is actually in the normal range, so the patient does not have hypocalcemia."
+            },
+            {
+                id: 10,
+                question: "A 65-year-old man with lung cancer presents with hypercalcemia (Ca 11.8). PTH is measured at 15 pg/mL (LOW-normal). PTHrP is elevated. Which mechanism best explains the hypercalcemia?",
+                options: [
+                    "A) Primary hyperparathyroidism",
+                    "B) Humoral hypercalcemia of malignancy via PTHrP",
+                    "C) Osteolytic bone metastases",
+                    "D) Granulomatous disease producing calcitriol"
+                ],
+                correct: 1,
+                explanation: "PTHrP (PTH-related protein) secreted by malignancy acts like PTH → ↑Ca, ↓PO₄. KEY: PTH itself is LOW (suppressed by high Ca). This distinguishes HHM from primary HPT (where PTH is high). Elevated PTHrP confirms the diagnosis. This is the most common cause of hypercalcemia in hospitalized patients."
+            },
+            {
+                id: 11,
+                question: "A 55-year-old woman has: total Ca 10.8 mg/dL (corrected), phosphate 2.2 mg/dL, PTH 8 pg/mL (LOW), 1,25-OH2-D 85 pg/mL (elevated). Which diagnosis is most likely?",
+                options: [
+                    "A) Primary hyperparathyroidism",
+                    "B) Secondary hyperparathyroidism from vitamin D deficiency",
+                    "C) Sarcoidosis with granulomatous hypercalcemia",
+                    "D) Familial hypocalciuric hypercalcemia (FHH)"
+                ],
+                correct: 2,
+                explanation: "Sarcoidosis: ↑Ca, ↓PO₄, LOW PTH, elevated 1,25-OH2-D. Granulomatous macrophages autonomously express 1α-hydroxylase → produces calcitriol → ↑Ca absorption. PTH is suppressed by high Ca. Primary HPT has HIGH PTH. Secondary HPT has ↑PTH (reactive). FHH has very low urine Ca."
+            },
+            {
+                id: 12,
+                question: "A 45-year-old woman is found to have asymptomatic hypercalcemia (Ca 10.6) and hypokalemia. PTH is normal at 45 pg/mL. 24-hour urine calcium is 90 mg/24h (LOW). Which is the most likely diagnosis?",
+                options: [
+                    "A) Primary hyperparathyroidism",
+                    "B) Sarcoidosis",
+                    "C) Familial hypocalciuric hypercalcemia (FHH)",
+                    "D) Vitamin D toxicity"
+                ],
+                correct: 2,
+                explanation: "FHH (Familial Hypocalciuric Hypercalcemia): Benign calcium-sensing receptor mutation → asymptomatic hypercalcemia in multiple family members. HALLMARK: Very low urine calcium despite high serum Ca. This reflects increased renal Ca reabsorption. Primary HPT has high urine Ca. Sarcoidosis has elevated calcitriol and low PTH. FHH does NOT require surgery (ineffective)."
+            },
+            {
+                id: 13,
+                question: "During parathyroid surgery for confirmed primary hyperparathyroidism, the surgeon removes an adenoma. Intraoperative PTH (IOPTH) is measured pre-excision (65 pg/mL) and 10 minutes post-removal (28 pg/mL). What is the appropriate interpretation?",
+                options: [
+                    "A) Cure confirmed; >50% drop at 10 minutes indicates successful adenoma removal",
+                    "B) Incomplete resection; PTH did not drop enough",
+                    "C) Must proceed to bilateral exploration despite >50% drop",
+                    "D) Requires intraoperative ultrasound to confirm"
+                ],
+                correct: 0,
+                explanation: "IOPTH monitoring: Drop >50% at 10 minutes post-gland removal confirms cure (validates that diseased gland was removed and residual/ectopic parathyroids not responsible). This allows the surgeon to stop without need for bilateral neck exploration in most cases. Percent drop = [(65 – 28) / 65] × 100 = 57%, which exceeds 50% threshold."
+            },
+            {
+                id: 14,
+                question: "A 32-year-old patient has morning cortisol 2.8 mcg/dL and ACTH 8 pg/mL (LOW). What is the next appropriate diagnostic step?",
+                options: [
+                    "A) Recommend rest and recheck in 1 week (may be stress-related)",
+                    "B) Order high-dose dexamethasone suppression test",
+                    "C) Order cosyntropin stimulation test to assess adrenal reserve",
+                    "D) Start hydrocortisone replacement immediately"
+                ],
+                correct: 2,
+                explanation: "Morning cortisol 2.8 mcg/dL is in the equivocal range (3–18 requires dynamic testing). Low ACTH with low cortisol indicates secondary (central) adrenal insufficiency. Cosyntropin test (preferably low-dose 1 mcg) assesses adrenal reserve. Cosyntropin stimulates adrenal directly; if cortisol response is adequate (≥18 mcg/dL), rules out primary AI. Low response confirms secondary AI."
+            },
+            {
+                id: 15,
+                question: "A 55-year-old man with progressive fatigue has 8 AM cortisol 1.9 mcg/dL and elevated ACTH 68 pg/mL. What is the most likely diagnosis?",
+                options: [
+                    "A) Cushing's syndrome",
+                    "B) Primary adrenal insufficiency",
+                    "C) Secondary adrenal insufficiency (pituitary disorder)",
+                    "D) Adrenal adenoma"
+                ],
+                correct: 1,
+                explanation: "Low cortisol (<3 mcg/dL) + HIGH ACTH = primary adrenal insufficiency. ACTH compensates for low cortisol (negative feedback loss). Cushing's would have high cortisol + high ACTH (if ACTH-dependent). Secondary AI would have low cortisol + LOW ACTH."
+            },
+            {
+                id: 16,
+                question: "A 42-year-old woman with suspected Cushing's syndrome has late-night salivary cortisol 5.2 mcg/dL (normal <1.0). What is the appropriate next step in confirming Cushing's?",
+                options: [
+                    "A) Measure morning cortisol at 8 AM",
+                    "B) Order 24-hour urine free cortisol to confirm hypercortisolism",
+                    "C) Measure ACTH to distinguish ACTH-dependent vs ACTH-independent",
+                    "D) Order high-dose dexamethasone suppression test immediately"
+                ],
+                correct: 1,
+                explanation: "Late-night salivary cortisol is an excellent screening test for Cushing's (loss of normal suppression at nadir). Elevated value is highly suggestive. The next step is confirmation with 24h UFC (elevated >3× normal) or 1mg overnight DST. Once hypercortisolism is confirmed, measure ACTH to classify (ACTH-dependent vs independent)."
+            },
+            {
+                id: 17,
+                question: "A woman taking biotin supplements for hair/nails has TSH measured at 0.08 mIU/L (suppressed, normal 0.4–4.0). Free T4 is normal at 1.1 ng/dL. Clinical exam shows no signs of hyperthyroidism. What is the most appropriate action?",
+                options: [
+                    "A) Diagnose subclinical hyperthyroidism; start propranolol",
+                    "B) Repeat TSH after stopping biotin for 2–3 days",
+                    "C) Order thyroid ultrasound to exclude nodules",
+                    "D) Measure TSI/TRAb to exclude Graves' disease"
+                ],
+                correct: 1,
+                explanation: "Biotin supplements interfere with TSH assays → falsely LOW TSH. With normal FT4 and no clinical hyperthyroidism, this is a false positive. Solution: Stop biotin 2–3 days before repeating TSH. The suppressed TSH will likely normalize. This avoids unnecessary workup/treatment."
+            },
+            {
+                id: 18,
+                question: "A patient has persistently elevated serum prolactin (measured 26 ng/mL) but no symptoms of galactorrhea, amenorrhea, or erectile dysfunction. When the sample is fractionated, macroprolactin comprises 80% of measured prolactin. What is the clinical significance?",
+                options: [
+                    "A) Patient definitely has a prolactinoma requiring MRI and dopamine agonists",
+                    "B) Macroprolactin is biologically inactive; the elevated prolactin measurement is a laboratory artifact with no clinical consequence",
+                    "C) Patient should undergo water deprivation test (DI risk)",
+                    "D) Macroprolactin indicates autoimmune thyroiditis"
+                ],
+                correct: 1,
+                explanation: "Macroprolactin: Large prolactin complexes (IgG-bound) that are biologically inactive. They falsely elevate measured prolactin on standard assay. Clinical significance: None if truly macroprolactin. Check macroprolactin when elevated prolactin without clinical symptoms. Reassure patient; no treatment needed. Distinguishes true prolactinoma (would have symptoms + high monomeric prolactin) from laboratory artifact."
+            }
+        ];
+
+        function switchTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(c => c.classList.remove('active'));
+
+            // Remove active from all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(b => b.classList.remove('active'));
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+
+            // Mark button active
+            event.target.classList.add('active');
+
+            // Generate MCQs if practice tab
+            if (tabName === 'practice') {
+                generateMCQs();
+            }
+
+            // Save to localStorage
+            localStorage.setItem('endo_lec23', tabName);
+        }
+
+        function toggleLO(header) {
+            const section = header.closest('.lo-section');
+            section.classList.toggle('collapsed');
+        }
+
+        function toggleCollapsible(header) {
+            const collapsible = header.closest('.collapsible');
+            collapsible.classList.toggle('expanded');
+        }
+
+        function generateMCQs() {
+            const container = document.getElementById('mcqContainer');
+            container.innerHTML = '';
+
+            mcqs.forEach((mcq, idx) => {
+                const mcqDiv = document.createElement('div');
+                mcqDiv.className = 'mcq';
+                mcqDiv.id = `mcq-${mcq.id}`;
+
+                let optionsHTML = '';
+                mcq.options.forEach((opt, optIdx) => {
+                    optionsHTML += `
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq${mcq.id}" value="${optIdx}" onchange="showAnswer(${mcq.id}, ${optIdx})">
+                            ${opt}
+                        </label>
+                    `;
+                });
+
+                mcqDiv.innerHTML = `
+                    <div class="mcq-question"><strong>Q${mcq.id}:</strong> ${mcq.question}</div>
+                    <div class="mcq-options">${optionsHTML}</div>
+                    <div class="mcq-explanation"><strong>Explanation:</strong> ${mcq.explanation}</div>
+                `;
+
+                container.appendChild(mcqDiv);
+            });
+        }
+
+        function showAnswer(mcqId, selectedIdx) {
+            const mcq = mcqs.find(m => m.id === mcqId);
+            const mcqDiv = document.getElementById(`mcq-${mcqId}`);
+            mcqDiv.classList.add('answered');
+        }
+
+        // Add collapsible event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Attach collapsible listeners
+            document.querySelectorAll('.collapsible-header').forEach(header => {
+                header.addEventListener('click', function() {
+                    toggleCollapsible(this);
+                });
+            });
+
+            // Restore tab state
+            const savedTab = localStorage.getItem('endo_lec23') || 'lo1';
+            const tabBtn = document.querySelector(`[onclick="switchTab('${savedTab}')"]`);
+            if (tabBtn) {
+                tabBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>

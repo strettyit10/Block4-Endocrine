@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 15: HPA Axis - Comprehensive Study Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f8fafc;
+            display: flex;
+            min-height: 100vh;
+            color: #1e293b;
+        }
+
+        /* Sidebar */
+        aside {
+            width: 220px;
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 24px 16px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            left: 0;
+            top: 0;
+            border-right: 2px solid #2563eb;
+            z-index: 1000;
+        }
+
+        aside h1 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #2563eb;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        aside nav ul {
+            list-style: none;
+        }
+
+        aside nav li {
+            margin-bottom: 8px;
+        }
+
+        aside nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+            display: block;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        aside nav a:hover {
+            background: rgba(37, 99, 235, 0.15);
+            color: #2563eb;
+            border-left-color: #2563eb;
+        }
+
+        /* Main Content */
+        main {
+            margin-left: 220px;
+            flex: 1;
+            padding: 32px;
+            overflow-y: auto;
+        }
+
+        header {
+            background: white;
+            padding: 24px;
+            border-radius: 8px;
+            border-left: 4px solid #2563eb;
+            margin-bottom: 32px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            color: #2563eb;
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        /* LO Section */
+        .lo-section {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .lo-header {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            padding: 20px 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: background 0.2s;
+        }
+
+        .lo-header:hover {
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+        }
+
+        .lo-header h2 {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .lo-toggle {
+            font-size: 20px;
+            transition: transform 0.3s;
+        }
+
+        .lo-toggle.open {
+            transform: rotate(180deg);
+        }
+
+        .lo-content {
+            display: none;
+            padding: 24px;
+            animation: slideDown 0.3s ease;
+        }
+
+        .lo-content.show {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .lo-content h3 {
+            color: #2563eb;
+            font-size: 16px;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .lo-content h3:first-child {
+            margin-top: 0;
+        }
+
+        .lo-content p, .lo-content li {
+            line-height: 1.8;
+            margin-bottom: 12px;
+            color: #334155;
+            font-size: 15px;
+        }
+
+        .lo-content ul {
+            margin-left: 20px;
+            margin-bottom: 16px;
+        }
+
+        .lo-content ul ul {
+            margin-left: 20px;
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+
+        /* Summary Box */
+        .summary-box {
+            background: #f0f9ff;
+            border-left: 4px solid #2563eb;
+            padding: 16px;
+            border-radius: 4px;
+            margin: 16px 0;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .summary-box strong {
+            color: #2563eb;
+        }
+
+        .tested {
+            background: #dcfce7;
+            border-left-color: #22c55e;
+        }
+
+        .traps {
+            background: #fef3c7;
+            border-left-color: #f59e0b;
+        }
+
+        .hy-bullets {
+            background: #fce7f3;
+            border-left-color: #ec4899;
+        }
+
+        /* Flip Card */
+        .flip-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            height: 200px;
+            cursor: pointer;
+            perspective: 1000px;
+            margin: 16px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .flip-card-front {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            font-size: 16px;
+        }
+
+        .flip-card-back {
+            background: #f0f9ff;
+            color: #1e293b;
+            font-size: 14px;
+            transform: rotateY(180deg);
+        }
+
+        /* MCQ */
+        .mcq-container {
+            background: white;
+            border-left: 4px solid #2563eb;
+            padding: 20px;
+            margin: 16px 0;
+            border-radius: 4px;
+        }
+
+        .mcq-question {
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+
+        .mcq-options {
+            list-style: none;
+            margin-bottom: 16px;
+        }
+
+        .mcq-option {
+            padding: 12px;
+            margin-bottom: 8px;
+            border: 2px solid #e2e8f0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .mcq-option:hover {
+            border-color: #2563eb;
+            background: #f0f9ff;
+        }
+
+        .mcq-option input {
+            margin-right: 8px;
+            cursor: pointer;
+        }
+
+        .mcq-reveal {
+            display: none;
+            margin-top: 16px;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .mcq-reveal.show {
+            display: block;
+        }
+
+        .mcq-correct {
+            background: #dcfce7;
+            border-left: 4px solid #22c55e;
+            color: #166534;
+        }
+
+        .mcq-incorrect {
+            background: #fee2e2;
+            border-left: 4px solid #ef4444;
+            color: #991b1b;
+        }
+
+        /* Mind Map */
+        .mindmap-container {
+            background: #f8fafc;
+            border: 2px solid #2563eb;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 24px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Checkbox */
+        .checklist {
+            list-style: none;
+            margin: 16px 0;
+        }
+
+        .checklist li {
+            padding: 12px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+        .checklist li:hover {
+            border-color: #2563eb;
+            background: #f0f9ff;
+        }
+
+        .checklist input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 12px;
+            cursor: pointer;
+            accent-color: #2563eb;
+        }
+
+        .checklist li input:checked + label {
+            text-decoration: line-through;
+            color: #94a3b8;
+        }
+
+        .checklist label {
+            cursor: pointer;
+            flex: 1;
+            margin: 0;
+        }
+
+        /* Mnemonic Box */
+        .mnemonic {
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+            border-left: 4px solid #ec4899;
+            padding: 16px;
+            border-radius: 4px;
+            margin: 16px 0;
+            font-style: italic;
+            color: #831843;
+            font-weight: 500;
+        }
+
+        /* Highlight */
+        .highlight {
+            background: #fef08a;
+            padding: 2px 4px;
+            border-radius: 2px;
+            font-weight: 500;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            aside {
+                width: 180px;
+            }
+            main {
+                margin-left: 180px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            aside {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 2px solid #2563eb;
+            }
+            main {
+                margin-left: 0;
+                padding: 16px;
+            }
+            header h1 {
+                font-size: 24px;
+            }
+            .lo-header h2 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside>
+        <h1>📚 HPA Axis</h1>
+        <nav>
+            <ul>
+                <li><a href="#lo1">LO1: Axis Overview</a></li>
+                <li><a href="#lo2">LO2: Cortisol Physiology</a></li>
+                <li><a href="#lo3">LO3: Circadian & Regulation</a></li>
+                <li><a href="#lo4">LO4: ACTH Measurement</a></li>
+                <li><a href="#lo5">LO5: Adrenal Insufficiency</a></li>
+                <li><a href="#lo6">LO6: Glucocorticoid Pharmacology</a></li>
+                <li><a href="#mcqs">MCQs & Practice</a></li>
+                <li><a href="#mindmap">Mind Map</a></li>
+                <li><a href="#checklist">Study Checklist</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+        <header>
+            <h1>Lecture 15: Hypothalamic-Pituitary-Adrenal Axis</h1>
+            <p>Physiology of the HPA axis, cortisol effects, diagnostic testing, and clinical management of adrenal disorders</p>
+        </header>
+
+        <!-- LO1 -->
+        <div id="lo1" class="lo-section">
+            <div class="lo-header">
+                <h2>LO1: HPA Axis Overview — CRH, ACTH, Cortisol</h2>
+                <span class="lo-toggle">▼</span>
+            </div>
+            <div class="lo-content">
+                <h3>Three-Tier Axis Architecture</h3>
+                <p><strong>Hypothalamus (PVN)</strong> → <strong>Anterior Pituitary (corticotrophs)</strong> → <strong>Adrenal cortex (zona fasciculata)</strong></p>
+
+                <h3>CRH: Corticotropin-Releasing Hormone</h3>
+                <ul>
+                    <li>41-amino acid peptide from paraventricular nucleus (PVN)</li>
+                    <li>Receptor: Gs-coupled (↑ cAMP) on corticotrophs</li>
+                    <li>Effect: stimulates POMC synthesis and ACTH secretion</li>
+                </ul>
+
+                <h3>POMC: Pro-Opiomelanocortin</h3>
+                <p>Precursor peptide cleaved into:</p>
+                <ul>
+                    <li><strong>ACTH</strong>: main product from anterior pituitary</li>
+                    <li><strong>β-endorphin</strong>: opioid</li>
+                    <li><strong>MSH</strong> (melanocyte-stimulating hormone): shares N-terminal sequence with ACTH; ↑ melanin → hyperpigmentation in primary adrenal insufficiency (↑↑ ACTH → ↑ MSH-like activity)</li>
+                    <li>Note: intermediate lobe in humans is vestigial; POMC cleavage mainly gives ACTH</li>
+                </ul>
+
+                <h3>ACTH: Adrenocorticotropic Hormone</h3>
+                <ul>
+                    <li>39 amino acids; first 13 AAs = α-MSH</li>
+                    <li>Receptor: MC2R (Gs-coupled) on zona fasciculata/reticularis</li>
+                    <li>Stimulates cortisol synthesis: ↑ StAR protein (rate-limiting), ↑ CYP11A1, ↑ CYP11B1</li>
+                    <li>Trophic effect: maintains adrenal gland size; without ACTH → adrenal atrophy</li>
+                </ul>
+
+                <h3>Cortisol: Main Glucocorticoid</h3>
+                <ul>
+                    <li>Circadian rhythm: peaks 6-8 AM (cortisol awakening response); nadir at midnight</li>
+                    <li>Pulsatile secretion</li>
+                </ul>
+
+                <h3>Negative Feedback</h3>
+                <p>Cortisol → ↓ CRH (hypothalamus), ↓ ACTH (pituitary)</p>
+                <ul>
+                    <li><strong>Fast feedback</strong>: seconds-minutes, non-genomic</li>
+                    <li><strong>Slow feedback</strong>: hours-days, genomic</li>
+                </ul>
+
+                <div class="mnemonic">
+                    💡 "CRH → ACTH → Cortisol; Cortisol feeds BACK to crush CRH and ACTH"
+                </div>
+
+                <div class="summary-box hy-bullets">
+                    <strong>⭐ HY Bullets:</strong><br>
+                    • POMC → ACTH + β-endorphin + MSH<br>
+                    • MSH-like activity causes hyperpigmentation in PRIMARY adrenal insufficiency<br>
+                    • ACTH receptor = MC2R (Gs-coupled)<br>
+                    • Cortisol negative feedback suppresses both CRH and ACTH
+                </div>
+            </div>
+        </div>
+
+        <!-- LO2 -->
+        <div id="lo2" class="lo-section">
+            <div class="lo-header">
+                <h2>LO2: Cortisol Physiology — Mechanism and Effects</h2>
+                <span class="lo-toggle">▼</span>
+            </div>
+            <div class="lo-content">
+                <h3>Mechanism of Action</h3>
+                <p><strong>Cortisol</strong> (lipophilic steroid) → binds <strong>GR</strong> (glucocorticoid receptor) in cytoplasm → GR translocates to nucleus → affects gene transcription</p>
+
+                <h3>Transport in Blood</h3>
+                <ul>
+                    <li>~90% bound to cortisol-binding globulin (CBG) + albumin</li>
+                    <li>~10% free (biologically active)</li>
+                    <li><span class="highlight">CBG increases with estrogen (pregnancy) → ↑ total cortisol, normal free cortisol</span></li>
+                </ul>
+
+                <h3>Key Physiologic Effects</h3>
+
+                <div class="flip-card" onclick="toggleFlip(this)">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">Cortisol Effects on Metabolism</div>
+                        <div class="flip-card-back">
+                            ↑ Gluconeogenesis (liver): PEPCK, G6Pase<br>
+                            ↑ Proteolysis (muscle): amino acids for gluconeogenesis<br>
+                            ↑ Lipolysis (fat): FFAs → triglycerides<br>
+                            Net: HYPERGLYCEMIA + peripheral wasting + central obesity
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card" onclick="toggleFlip(this)">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">Immune & Anti-Inflammatory</div>
+                        <div class="flip-card-back">
+                            Inhibits NF-κB → ↓ cytokines (IL-1, IL-6, TNF-α)<br>
+                            ↓ COX-2, ↓ phospholipase A2<br>
+                            ↓ Lymphocytes, ↓ Eosinophils, ↑ Neutrophils
+                        </div>
+                    </div>
+                </div>
+
+                <p><strong>ELIN mnemonic (Cushing's)</strong>: Eosinophils ↓, Lymphocytes ↓, Increased neutrophils, iN (neutrophilia)</p>
+
+                <div class="flip-card" onclick="toggleFlip(this)">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">Cardiovascular Effects</div>
+                        <div class="flip-card-back">
+                            ↑ Sensitivity to catecholamines (↑ α-receptor expression)<br>
+                            Maintains vascular tone/BP<br>
+                            Addison's → hypotension<br>
+                            Cushing's → hypertension
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card" onclick="toggleFlip(this)">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">Bone & Growth Effects</div>
+                        <div class="flip-card-back">
+                            Bone: ↓ Osteoblasts, ↑ Osteoclasts → osteoporosis<br>
+                            ↓ Intestinal Ca absorption + ↑ Renal Ca loss → 2° HPT<br>
+                            Growth: ↓ GH, ↓ IGF-1 → growth suppression
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card" onclick="toggleFlip(this)">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">Renal & Mineralocorticoid</div>
+                        <div class="flip-card-back">
+                            Cortisol has mild MR activity (normally protected by 11β-HSD2)<br>
+                            Excess cortisol overwhelms 11β-HSD2<br>
+                            → Hypokalemia + hypertension (apparent mineralocorticoid excess)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card" onclick="toggleFlip(this)">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">CNS Effects</div>
+                        <div class="flip-card-back">
+                            High doses → euphoria then depression<br>
+                            Chronic excess → hippocampus damage<br>
+                            → Memory ↓, HPA dysregulation
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mnemonic">
+                    💡 "CORTISOL = Catabolic, Opposes insulin, Raises glucose, Thins skin/bones, Immune suppression, Stimulates catecholamines, Opposes growth, Lipid redistribution"
+                </div>
+
+                <div class="summary-box tested">
+                    <strong>🎯 Tested Concepts:</strong><br>
+                    • Free cortisol (not total) is biologically active<br>
+                    • CBG ↑ with estrogen → total cortisol ↑, but free cortisol normal<br>
+                    • Cortisol causes central obesity (redistribution to visceral fat)<br>
+                    • Chronic glucocorticoids → osteoporosis + avascular necrosis
+                </div>
+
+                <div class="summary-box traps">
+                    <strong>⚠️ Traps:</strong><br>
+                    • Hypokalemia + hypertension can occur from EXCESS cortisol's MR activity<br>
+                    • "Cortisol suppresses immune" = may have normal WBC count but reduced function<br>
+                    • Cortisol ↑ lipolysis (mobilizes fat) but redistributes to central depot
+                </div>
+            </div>
+        </div>
+
+        <!-- LO3 -->
+        <div id="lo3" class="lo-section">
+            <div class="lo-header">
+                <h2>LO3: Circadian Rhythm and HPA Axis Regulation</h2>
+                <span class="lo-toggle">▼</span>
+            </div>
+            <div class="lo-content">
+                <h3>Cortisol Circadian Rhythm</h3>
+                <p><strong>Driver:</strong> SCN (suprachiasmatic nucleus) → PVN → CRH pulse amplitude varies</p>
+                <ul>
+                    <li><strong>Peak:</strong> 6-8 AM (before waking) — cortisol awakening response (CAR)</li>
+                    <li><strong>Nadir:</strong> midnight (12 AM) — <span class="highlight">late-night salivary cortisol used diagnostically (normally very low; elevated in Cushing's)</span></li>
+                    <li>Light/dark entrainment; disrupted by shift work, jet lag → cortisol dysregulation</li>
+                </ul>
+
+                <h3>Stressors That Activate HPA</h3>
+                <p><strong>Physical:</strong> hypoglycemia (most potent), surgery, trauma, infection/sepsis, pain, hemorrhage, exercise, cold</p>
+                <p><strong>Psychological:</strong> fear, anxiety, anticipatory stress</p>
+                <p><strong>Other stimulants:</strong> IL-1, IL-6, TNF-α (immune-neuroendocrine link), vasopressin (AVP/ADH — synergizes with CRH)</p>
+
+                <h3>Dexamethasone Suppression Test (DST)</h3>
+                <p><strong>Principle:</strong> synthetic glucocorticoid → suppresses ACTH (pituitary feedback) → ↓ cortisol in normal</p>
+
+                <div class="flip-card" onclick="toggleFlip(this)">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">LOW-DOSE DST</div>
+                        <div class="flip-card-back">
+                            1mg overnight or 2-day regimen<br>
+                            Screens for Cushing's syndrome<br>
+                            Normal: cortisol suppresses to &lt;1.8 μg/dL<br>
+                            Cushing's: FAILS to suppress
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card" onclick="toggleFlip(this)">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">HIGH-DOSE DST</div>
+                        <div class="flip-card-back">
+                            8mg regimen<br>
+                            Distinguishes pituitary from ectopic/adrenal<br>
+                            Cushing's disease: SUPPRESSES<br>
+                            Ectopic/adrenal: does NOT suppress
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mnemonic">
+                    💡 "Low dose = Rule OUT Cushing's (normal = suppresses); High dose = Rule IN pituitary (pituitary suppresses, ectopic doesn't)"
+                </div>
+
+                <h3>Other Diagnostic Tests</h3>
+                <ul>
+                    <li><strong>Midnight salivary cortisol:</strong> elevated in Cushing's (loss of circadian nadir)</li>
+                    <li><strong>24-hour UFC (urine free cortisol):</strong> integrated cortisol exposure; elevated in Cushing's</li>
+                    <li><strong>CRH stimulation test:</strong> differentiates pituitary (responds → ↑ ACTH + cortisol) from ectopic (no response) and adrenal (↓ ACTH baseline, no response) causes</li>
+                </ul>
+
+                <div class="summary-box tested">
+                    <strong>🎯 Tested Concepts:</strong><br>
+                    • Midnight salivary cortisol = BEST initial screening for Cushing's (non-invasive, loss of normal nadir)<br>
+                    • Low-dose DST: normal person suppresses cortisol; Cushing's patient does NOT<br>
+                    • High-dose DST: if suppresses → pituitary; if doesn't suppress → ectopic or adrenal
+                </div>
+
+                <div class="summary-box traps">
+                    <strong>⚠️ Traps:</strong><br>
+                    • Dexamethasone doesn't cross-react with cortisol assay (critical for DST)<br>
+                    • Midnight salivary cortisol is MORE specific than 24-hr UFC<br>
+                    • DST unreliable if cortisol-binding abnormalities (pregnancy, OCPs, liver disease)
+                </div>
+            </div>
+        </div>
+
+        <!-- LO4 -->
+        <div id="lo4" class="lo-section">
+            <div class="lo-header">
+                <h2>LO4: ACTH Measurement and the Step-Down Diagnostic Approach</h2>
+                <span class="lo-toggle">▼</span>
+            </div>
+            <div class="lo-content">
+                <h3>Principle: ACTH Tells the Story</h3>
+                <p>Measure ACTH to determine if pituitary-driven or autonomous</p>
+
+                <h3>ACTH-DEPENDENT Hypercortisolism (↑ ACTH)</h3>
+                <ul>
+                    <li><strong>Cushing's disease</strong> (pituitary adenoma — ~70% of endogenous Cushing's)</li>
+                    <li><strong>Ectopic ACTH syndrome</strong> (small cell lung, carcinoid, pancreatic NETs, medullary thyroid)</li>
+                    <li><strong>CRH-secreting tumor</strong> (very rare)</li>
+                </ul>
+
+                <h3>ACTH-INDEPENDENT Hypercortisolism (↓ ACTH — adrenal autonomous)</h3>
+                <ul>
+                    <li><strong>Adrenal adenoma</strong> (~10%)</li>
+                    <li><strong>Adrenal carcinoma</strong> (~5%)</li>
+                    <li><strong>Bilateral adrenal hyperplasia</strong> (macronodular, PPNAD)</li>
+                </ul>
+
+                <h3>Diagnostic Algorithm for Confirmed Cushing's</h3>
+                <ol>
+                    <li><strong>Measure plasma ACTH</strong>
+                        <ul>
+                            <li>ACTH LOW (&lt;10 pg/mL) → adrenal source → CT adrenal</li>
+                            <li>ACTH NORMAL or HIGH (&gt;20 pg/mL) → ACTH-dependent → proceed</li>
+                        </ul>
+                    </li>
+                    <li><strong>High-dose DST or CRH stimulation</strong>
+                        <ul>
+                            <li>Suppresses → likely Cushing's disease → MRI pituitary</li>
+                            <li>Doesn't suppress → likely ectopic → CT/MRI chest/abdomen for source</li>
+                        </ul>
+                    </li>
+                    <li><strong>IPSS (inferior petrosal sinus sampling):</strong> gold standard for pituitary vs ectopic distinction
+                        <ul>
+                            <li>Measure ACTH in IPS (drains pituitary) vs peripheral blood</li>
+                            <li><span class="highlight">IPS:peripheral ratio &gt;2 basal OR &gt;3 after CRH = Cushing's disease</span></li>
+                            <li>Ratio &lt;2 = ectopic source</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h3>Adrenal Insufficiency Classification by ACTH</h3>
+                <ul>
+                    <li><strong>Primary adrenal insufficiency:</strong> ↓ cortisol → ↑ ACTH → hyperpigmentation (MSH-like)</li>
+                    <li><strong>Secondary adrenal insufficiency:</strong> ↓ ACTH → ↓ cortisol; NO hyperpigmentation; NO aldosterone deficiency (aldosterone regulated by RAAS)</li>
+                </ul>
+
+                <h3>ACTH Stimulation Test (Cosyntropin Test)</h3>
+                <p>Gives synthetic ACTH (cosyntropin) → measures cortisol at 30/60 min</p>
+                <ul>
+                    <li><strong>Normal:</strong> cortisol rises to &gt;18-20 μg/dL</li>
+                    <li><strong>Failure:</strong> adrenal insufficiency</li>
+                </ul>
+
+                <div class="summary-box tested">
+                    <strong>🎯 Tested Concepts:</strong><br>
+                    • ACTH &lt;10 in hypercortisolism = adrenal source<br>
+                    • ACTH-dependent = pituitary, ectopic, or rarely CRH source<br>
+                    • IPSS: ratio &gt;2 or &gt;3 post-CRH = pituitary<br>
+                    • Cosyntropin test: measures adrenal responsiveness
+                </div>
+
+                <div class="summary-box traps">
+                    <strong>⚠️ Traps:</strong><br>
+                    • ACTH in "normal range" (10-20) with elevated cortisol = still abnormal (suppressed)<br>
+                    • Ectopic ACTH can be VERY high (200+ pg/mL) — often alkalosis, hypokalemia<br>
+                    • IPSS requires specialized center; technical sample can be unreliable
+                </div>
+            </div>
+        </div>
+
+        <!-- LO5 -->
+        <div id="lo5" class="lo-section">
+            <div class="lo-header">
+                <h2>LO5: Adrenal Insufficiency — Primary (Addison's) vs Secondary</h2>
+                <span class="lo-toggle">▼</span>
+            </div>
+            <div class="lo-content">
+                <h3>Primary Adrenal Insufficiency (Addison's Disease)</h3>
+                <p><strong>Pathology:</strong> destruction of adrenal cortex → ↓ cortisol + ↓ aldosterone + ↓ adrenal androgens; ↑ ACTH + ↑ renin</p>
+
+                <h4>Causes:</h4>
+                <ul>
+                    <li><strong>Autoimmune</strong> (most common in developed world — anti-21-hydroxylase antibodies)</li>
+                    <li><strong>TB</strong> (worldwide leading cause historically)</li>
+                    <li><strong>Meningococcemia</strong> (Waterhouse-Friderichsen syndrome — bilateral adrenal hemorrhage in sepsis)</li>
+                    <li><strong>Fungal, metastatic cancer, hemorrhage, drugs</strong> (ketoconazole, etomidate)</li>
+                </ul>
+
+                <h4>Features of Primary Adrenal Insufficiency:</h4>
+                <ul>
+                    <li>Fatigue, weakness, weight loss, nausea/vomiting, abdominal pain</li>
+                    <li>Hypotension, salt craving</li>
+                    <li><span class="highlight">Hyperpigmentation</span> (ACTH/MSH on melanocytes)</li>
+                    <li>Hyponatremia (↓ aldosterone + cortisol → ↓ free water clearance)</li>
+                    <li>Hyperkalemia (↓ aldosterone)</li>
+                    <li>Hypoglycemia (↓ cortisol)</li>
+                    <li>Eosinophilia (↑ from loss of cortisol's suppression)</li>
+                </ul>
+
+                <div class="flip-card" onclick="toggleFlip(this)">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">Waterhouse-Friderichsen Syndrome</div>
+                        <div class="flip-card-back">
+                            Bilateral adrenal hemorrhage from septicemia<br>
+                            Especially N. meningitidis<br>
+                            DIC → hemorrhagic infarction<br>
+                            Acute adrenal crisis: severe hypotension, altered mental status
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Secondary Adrenal Insufficiency</h3>
+                <p><strong>Pathology:</strong> ↓ ACTH → ↓ cortisol; <span class="highlight">aldosterone PRESERVED (RAAS intact)</span></p>
+
+                <h4>Most Common Cause:</h4>
+                <p>Chronic exogenous glucocorticoid use → HPA axis suppression → sudden withdrawal → adrenal crisis</p>
+
+                <h4>Other Causes:</h4>
+                <p>Pituitary destruction (Sheehan's, tumors, trauma, radiation)</p>
+
+                <h4>Features of Secondary Adrenal Insufficiency:</h4>
+                <ul>
+                    <li>Similar to primary BUT:</li>
+                    <li><strong>NO hyperpigmentation</strong> (↓ ACTH/MSH)</li>
+                    <li><strong>NO hyperkalemia</strong> (aldosterone OK)</li>
+                    <li><strong>NO salt craving</strong></li>
+                    <li>Hyponatremia CAN still occur (cortisol deficiency → SIADH-like via ↑ ADH)</li>
+                </ul>
+
+                <h3>Adrenal Crisis: Life-Threatening Emergency</h3>
+                <p><strong>Definition:</strong> acute cortisol deficiency; precipitated by stress (illness, surgery, trauma)</p>
+
+                <h4>Features:</h4>
+                <ul>
+                    <li>Severe hypotension, nausea/vomiting, abdominal pain</li>
+                    <li>Altered consciousness, fever</li>
+                    <li>Shock, cardiovascular collapse if untreated</li>
+                </ul>
+
+                <h4>Treatment (DO NOT DELAY FOR TESTING):</h4>
+                <ul>
+                    <li>IV hydrocortisone 100mg bolus (then 50-100mg q6-8h)</li>
+                    <li>IV 0.9% NaCl + dextrose</li>
+                    <li>Treat underlying cause</li>
+                </ul>
+
+                <div class="mnemonic">
+                    💡 "Addison's 3 A's: Adrenal (primary), ACTH up, Aldosterone down (Addison's = missing ALL 3 cortical products)"
+                </div>
+
+                <div class="summary-box tested">
+                    <strong>🎯 Tested Concepts:</strong><br>
+                    • PRIMARY adrenal insufficiency: ↑ ACTH, ↓ Na, ↑ K, hyperpigmentation<br>
+                    • SECONDARY adrenal insufficiency: ↓ ACTH, ↓ Na (SIADH), normal K, NO pigmentation<br>
+                    • Waterhouse-Friderichsen = meningococcal sepsis + bilateral adrenal hemorrhage<br>
+                    • Adrenal crisis: IV hydrocortisone STAT — don't wait for labs
+                </div>
+
+                <div class="summary-box traps">
+                    <strong>⚠️ Traps:</strong><br>
+                    • Hyperpigmentation = PRIMARY insufficiency ONLY (↑ ACTH → ↑ MSH)<br>
+                    • Hyperkalemia = PRIMARY only (aldosterone deficiency)<br>
+                    • Secondary insufficiency: aldosterone still works (RAAS independent)<br>
+                    • Hyponatremia in secondary = from cortisol ↓ (→ ↑ ADH), NOT aldosterone deficiency<br>
+                    • Eosinophilia in primary (↓ cortisol no longer suppresses eosinophils)
+                </div>
+            </div>
+        </div>
+
+        <!-- LO6 -->
+        <div id="lo6" class="lo-section">
+            <div class="lo-header">
+                <h2>LO6: Glucocorticoid Pharmacology — Synthetic Steroids</h2>
+                <span class="lo-toggle">▼</span>
+            </div>
+            <div class="lo-content">
+                <h3>Glucocorticoid Potency Comparison (relative to cortisol = 1)</h3>
+                <div style="overflow-x: auto; margin: 16px 0;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                        <tr style="background: #2563eb; color: white;">
+                            <th style="padding: 12px; text-align: left; border: 1px solid #1e40af;">Drug</th>
+                            <th style="padding: 12px; text-align: center; border: 1px solid #1e40af;">GC Activity</th>
+                            <th style="padding: 12px; text-align: center; border: 1px solid #1e40af;">MC Activity</th>
+                            <th style="padding: 12px; text-align: left; border: 1px solid #1e40af;">Notes</th>
+                        </tr>
+                        <tr style="background: #f8fafc;">
+                            <td style="padding: 12px; border: 1px solid #e2e8f0;">Hydrocortisone</td>
+                            <td style="padding: 12px; text-align: center; border: 1px solid #e2e8f0;">1×</td>
+                            <td style="padding: 12px; text-align: center; border: 1px solid #e2e8f0;">1×</td>
+                            <td style="padding: 12px; border: 1px solid #e2e8f0;">Replacement therapy</td>
+                        </tr>
+                        <tr style="background: white;">
+                            <td style="padding: 12px; border: 1px solid #e2e8f0;">Prednisone</td>
+                            <td style="padding: 12px; text-align: center; border: 1px solid #e2e8f0;">4×</td>
+                            <td style="padding: 12px; text-align: center; border: 1px solid #e2e8f0;">0.8×</td>
+                            <td style="padding: 12px; border: 1px solid #e2e8f0;">Oral; converted to prednisolone in liver</td>
+                        </tr>
+                        <tr style="background: #f8fafc;">
+                            <td style="padding: 12px; border: 1px solid #e2e8f0;">Methylprednisolone</td>
+                            <td style="padding: 12px; text-align: center; border: 1px solid #e2e8f0;">5×</td>
+                            <td style="padding: 12px; text-align: center; border: 1px solid #e2e8f0;">0.5×</td>
+                            <td style="padding: 12px; border: 1px solid #e2e8f0;">IV (status asthmaticus, SCI)</td>
+                        </tr>
+                        <tr style="background: white;">
+                            <td style="padding: 12px; border: 1px solid #e2e8f0;">Dexamethasone</td>
+                            <td style="padding: 12px; text-align: center; border: 1px solid #e2e8f0;">25-30×</td>
+                            <td style="padding: 12px; text-align: center; border: 1px solid #e2e8f0;">0×</td>
+                            <td style="padding: 12px; border: 1px solid #e2e8f0;">No MC; DST, meningitis, brain edema</td>
+                        </tr>
+                        <tr style="background: #f8fafc;">
+                            <td style="padding: 12px; border: 1px solid #e2e8f0;">Fludrocortisone</td>
+                            <td style="padding: 12px; text-align: center; border: 1px solid #e2e8f0;">0.1×</td>
+                            <td style="padding: 12px; text-align: center; border: 1px solid #e2e8f0;">125×</td>
+                            <td style="padding: 12px; border: 1px solid #e2e8f0;">Pure MC replacement</td>
+                        </tr>
+                        <tr style="background: white;">
+                            <td style="padding: 12px; border: 1px solid #e2e8f0;">Betamethasone</td>
+                            <td style="padding: 12px; text-align: center; border: 1px solid #e2e8f0;">25×</td>
+                            <td style="padding: 12px; text-align: center; border: 1px solid #e2e8f0;">—</td>
+                            <td style="padding: 12px; border: 1px solid #e2e8f0;">Fetal lung maturity (crosses placenta)</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3>Half-Lives and Clinical Implications</h3>
+                <ul>
+                    <li><strong>Hydrocortisone:</strong> short (8-12h)</li>
+                    <li><strong>Prednisone:</strong> intermediate (12-36h)</li>
+                    <li><strong>Dexamethasone:</strong> long (36-72h) → more potent HPA suppression risk</li>
+                </ul>
+
+                <h3>Clinical Uses of Glucocorticoids</h3>
+                <ul>
+                    <li>Autoimmune/inflammatory (RA, lupus, asthma, IBD)</li>
+                    <li>Allergic reactions</li>
+                    <li>Adrenal insufficiency replacement</li>
+                    <li>CAH (congenital adrenal hyperplasia)</li>
+                    <li>Immunosuppression (transplant)</li>
+                    <li>Malignancy (lymphoma, edema)</li>
+                    <li>ARDS, meningitis (dexamethasone reduces inflammation)</li>
+                </ul>
+
+                <h3>Side Effects of Chronic Glucocorticoid Use</h3>
+
+                <div class="flip-card" onclick="toggleFlip(this)">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">Metabolic & Musculoskeletal</div>
+                        <div class="flip-card-back">
+                            Hyperglycemia, dyslipidemia, central obesity<br>
+                            Osteoporosis (↓ Ca absorption + ↑ resorption)<br>
+                            Proximal myopathy<br>
+                            Avascular necrosis (femoral head most common)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card" onclick="toggleFlip(this)">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">Immunologic & Dermatologic</div>
+                        <div class="flip-card-back">
+                            Susceptibility to infection (especially opportunistic)<br>
+                            Impaired wound healing<br>
+                            Thin skin, striae, easy bruising
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card" onclick="toggleFlip(this)">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">Ophthalmic & GI</div>
+                        <div class="flip-card-back">
+                            Cataracts (posterior subcapsular)<br>
+                            Glaucoma (↑ IOP)<br>
+                            Peptic ulcer disease (especially + NSAIDs)<br>
+                            Pancreatitis
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card" onclick="toggleFlip(this)">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">CNS & HPA Suppression</div>
+                        <div class="flip-card-back">
+                            Mood changes, insomnia, psychosis<br>
+                            Pseudotumor cerebri (children on withdrawal)<br>
+                            HPA suppression: &gt;5-7.5mg prednisone for &gt;3 weeks<br>
+                            Must taper slowly (don't stop abruptly)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mnemonic">
+                    💡 "GIVING steroids: Glucose ↑, Infections ↑, Vision (cataracts/glaucoma), Infections ↑, Necrosis (avascular), Growth ↓"
+                </div>
+
+                <h3>HPA Suppression & Tapering</h3>
+                <ul>
+                    <li><strong>Trigger:</strong> doses >5-7.5mg prednisone equivalent for >3 weeks → suppress HPA</li>
+                    <li><strong>Consequence:</strong> sudden withdrawal → adrenal crisis</li>
+                    <li><strong>Solution:</strong> must taper slowly (gradual dose reduction)</li>
+                </ul>
+
+                <h3>Stress Dosing</h3>
+                <p><strong>For patients on chronic steroids undergoing physiologic stress:</strong></p>
+                <ul>
+                    <li>"Sick day rules": <strong>double/triple dose during illness</strong></li>
+                    <li><strong>IV hydrocortisone 100mg before surgery</strong></li>
+                </ul>
+
+                <div class="summary-box tested">
+                    <strong>🎯 Tested Concepts:</strong><br>
+                    • Dexamethasone: 25-30× more potent than cortisol, zero MC activity<br>
+                    • Hydrocortisone: replacement drug (1:1 activity ratio)<br>
+                    • >3 weeks at moderate-high dose → HPA suppression → taper slowly<br>
+                    • Avascular necrosis of femoral head: most common serious MSK complication<br>
+                    • Stress dosing: double/triple during illness; IV hydrocortisone before surgery
+                </div>
+
+                <div class="summary-box traps">
+                    <strong>⚠️ Traps:</strong><br>
+                    • Abrupt steroid withdrawal = adrenal crisis (patient may seem fine at first)<br>
+                    • "Posterior subcapsular cataracts" = typical steroid cataract<br>
+                    • Proximal myopathy from steroids (not distal)<br>
+                    • Avascular necrosis: femoral head &gt; humeral head &gt; tibia<br>
+                    • Pseudotumor cerebri in children: especially on withdrawal
+                </div>
+            </div>
+        </div>
+
+        <!-- MCQs -->
+        <div id="mcqs" class="lo-section">
+            <div class="lo-header">
+                <h2>MCQs & Practice Questions</h2>
+                <span class="lo-toggle">▼</span>
+            </div>
+            <div class="lo-content">
+                <p style="margin-bottom: 20px; font-style: italic; color: #64748b;">Click on an answer to reveal the explanation.</p>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">1. A 45-year-old woman presents with hypertension, central obesity, proximal muscle weakness, and purple striae. Labs show elevated 24-hour urine free cortisol and midnight salivary cortisol. ACTH is 35 pg/mL (normal 5-25). Which of the following best localizes the source?</div>
+                    <ul class="mcq-options">
+                        <li class="mcq-option">
+                            <input type="radio" id="q1a" name="q1" value="a" onchange="revealMCQ('q1')">
+                            <label for="q1a">A) Adrenal adenoma</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q1b" name="q1" value="b" onchange="revealMCQ('q1')">
+                            <label for="q1b">B) Pituitary microadenoma (Cushing's disease)</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q1c" name="q1" value="c" onchange="revealMCQ('q1')">
+                            <label for="q1c">C) Small cell lung carcinoma</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q1d" name="q1" value="d" onchange="revealMCQ('q1')">
+                            <label for="q1d">D) Adrenal carcinoma</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q1e" name="q1" value="e" onchange="revealMCQ('q1')">
+                            <label for="q1e">E) CRH-secreting neuroendocrine tumor</label>
+                        </li>
+                    </ul>
+                    <div id="q1-reveal" class="mcq-reveal">
+                        <strong>Answer: B) Pituitary microadenoma</strong><br>
+                        ACTH is elevated/normal (35 is at upper limit), indicating ACTH-dependent Cushing's. Adrenal adenoma (A) would have LOW ACTH (<10). Both ectopic ACTH (C, D) and pituitary disease cause elevated ACTH, but the constellation of classic Cushing's features (proximal weakness, striae, central obesity) is most common with pituitary disease, which represents ~70% of endogenous Cushing's. CRH-secreting tumors (E) are extremely rare. MRI pituitary would localize to microadenoma.
+                    </div>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">2. A patient with newly diagnosed primary adrenal insufficiency presents with hypotension, hyperkalemia, and hyponatremia. Which finding would NOT be present?</div>
+                    <ul class="mcq-options">
+                        <li class="mcq-option">
+                            <input type="radio" id="q2a" name="q2" value="a" onchange="revealMCQ('q2')">
+                            <label for="q2a">A) Elevated ACTH</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q2b" name="q2" value="b" onchange="revealMCQ('q2')">
+                            <label for="q2b">B) Hyperpigmentation of oral mucosa and palms</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q2c" name="q2" value="c" onchange="revealMCQ('q2')">
+                            <label for="q2c">C) Elevated renin level</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q2d" name="q2" value="d" onchange="revealMCQ('q2')">
+                            <label for="q2d">D) Normal aldosterone level</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q2e" name="q2" value="e" onchange="revealMCQ('q2')">
+                            <label for="q2e">E) Eosinophilia</label>
+                        </li>
+                    </ul>
+                    <div id="q2-reveal" class="mcq-reveal">
+                        <strong>Answer: D) Normal aldosterone level</strong><br>
+                        In PRIMARY adrenal insufficiency, the adrenal cortex is destroyed, so aldosterone IS low (not normal). Elevated ACTH (A) occurs from loss of cortisol feedback. Hyperpigmentation (B) results from high ACTH/MSH-like activity. Renin (C) and eosinophils (E) are elevated (RAAS activated from low aldosterone; cortisol suppression allows eosinophil survival). The key trap: primary adrenal insufficiency = low aldosterone + low cortisol.
+                    </div>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">3. A 55-year-old man on long-term prednisone (10mg daily for 8 months) for rheumatoid arthritis develops hip pain and cannot walk. X-ray shows collapse of the femoral head. What is the most likely diagnosis?</div>
+                    <ul class="mcq-options">
+                        <li class="mcq-option">
+                            <input type="radio" id="q3a" name="q3" value="a" onchange="revealMCQ('q3')">
+                            <label for="q3a">A) Osteoarthritis</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q3b" name="q3" value="b" onchange="revealMCQ('q3')">
+                            <label for="q3b">B) Avascular necrosis of femoral head</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q3c" name="q3" value="c" onchange="revealMCQ('q3')">
+                            <label for="q3c">C) Pathologic fracture from osteoporosis</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q3d" name="q3" value="d" onchange="revealMCQ('q3')">
+                            <label for="q3d">D) Rheumatoid arthritis progression</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q3e" name="q3" value="e" onchange="revealMCQ('q3')">
+                            <label for="q3e">E) Steroid-induced myopathy with secondary fracture</label>
+                        </li>
+                    </ul>
+                    <div id="q3-reveal" class="mcq-reveal">
+                        <strong>Answer: B) Avascular necrosis of femoral head</strong><br>
+                        Chronic glucocorticoid use is a well-known cause of avascular necrosis (also called osteonecrosis). The femoral head is the most common site, followed by the humeral head and tibia. Hip pain with collapse on imaging is classic. While osteoporosis (C) also occurs, it typically causes compression fractures of the spine, not femoral head collapse. The timing (8 months of high-dose prednisone) fits avascular necrosis risk.
+                    </div>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">4. A 35-year-old woman undergoes low-dose dexamethasone suppression test. Her midnight cortisol is 22 μg/dL (normal <1.8 after 1mg dexamethasone). What is the next diagnostic step?</div>
+                    <ul class="mcq-options">
+                        <li class="mcq-option">
+                            <input type="radio" id="q4a" name="q4" value="a" onchange="revealMCQ('q4')">
+                            <label for="q4a">A) Reassure patient; no further workup needed</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q4b" name="q4" value="b" onchange="revealMCQ('q4')">
+                            <label for="q4b">B) High-dose dexamethasone suppression test</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q4c" name="q4" value="c" onchange="revealMCQ('q4')">
+                            <label for="q4c">C) Measure plasma ACTH level</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q4d" name="q4" value="d" onchange="revealMCQ('q4')">
+                            <label for="q4d">D) Abdominal CT for adrenal imaging</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q4e" name="q4" value="e" onchange="revealMCQ('q4')">
+                            <label for="q4e">E) MRI brain for pituitary pathology</label>
+                        </li>
+                    </ul>
+                    <div id="q4-reveal" class="mcq-reveal">
+                        <strong>Answer: C) Measure plasma ACTH level</strong><br>
+                        Low-dose DST failed to suppress (cortisol 22 >> 1.8), confirming autonomous hypercortisolism (Cushing's syndrome). The NEXT step is ACTH measurement to determine if it's ACTH-dependent (elevated/normal ACTH) vs. ACTH-independent (low ACTH). If ACTH is low, proceed to adrenal CT. If ACTH is elevated, proceed to high-dose DST (B) to distinguish pituitary from ectopic. Answer (C) is the logical next step in the algorithm before imaging.
+                    </div>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">5. A 42-year-old man with Cushing's disease (pituitary microadenoma) undergoes high-dose dexamethasone suppression test. His cortisol falls from 35 μg/dL to 8 μg/dL after 8mg dexamethasone. What does this indicate?</div>
+                    <ul class="mcq-options">
+                        <li class="mcq-option">
+                            <input type="radio" id="q5a" name="q5" value="a" onchange="revealMCQ('q5')">
+                            <label for="q5a">A) Test is inconclusive; need IPSS</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q5b" name="q5" value="b" onchange="revealMCQ('q5')">
+                            <label for="q5b">B) Confirms pituitary source (maintains some ACTH feedback suppression)</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q5c" name="q5" value="c" onchange="revealMCQ('q5')">
+                            <label for="q5c">C) Confirms ectopic ACTH source</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q5d" name="q5" value="d" onchange="revealMCQ('q5')">
+                            <label for="q5d">D) Indicates adrenal carcinoma</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q5e" name="q5" value="e" onchange="revealMCQ('q5')">
+                            <label for="q5e">E) Indicates CRH-secreting tumor</label>
+                        </li>
+                    </ul>
+                    <div id="q5-reveal" class="mcq-reveal">
+                        <strong>Answer: B) Confirms pituitary source (maintains some ACTH feedback suppression)</strong><br>
+                        HIGH-DOSE DST: cortisol SUPPRESSES → indicates pituitary source. Pituitary adenomas retain partial feedback sensitivity to high-dose dexamethasone, so cortisol falls. In ectopic ACTH (C) or adrenal tumors, cortisol does NOT suppress (fully autonomous, no feedback). The rule: "High dose suppresses = pituitary; High dose doesn't suppress = ectopic/adrenal". IPSS (A) is reserved when DST/CRH testing is inconclusive or equivocal.
+                    </div>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">6. A patient on chronic exogenous glucocorticoids suddenly stops taking his prednisone. Within 24-48 hours, he presents with severe hypotension, altered mental status, and nausea. What is the mechanism?</div>
+                    <ul class="mcq-options">
+                        <li class="mcq-option">
+                            <input type="radio" id="q6a" name="q6" value="a" onchange="revealMCQ('q6')">
+                            <label for="q6a">A) Allergic reaction to prednisone withdrawal</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q6b" name="q6" value="b" onchange="revealMCQ('q6')">
+                            <label for="q6b">B) HPA axis suppressed; adrenal glands atrophied → cannot produce cortisol acutely</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q6c" name="q6" value="c" onchange="revealMCQ('q6')">
+                            <label for="q6c">C) Thyroid storm from steroid-induced thyroiditis</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q6d" name="q6" value="d" onchange="revealMCQ('q6')">
+                            <label for="q6d">D) Rebound hypokalemia and arrhythmia</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q6e" name="q6" value="e" onchange="revealMCQ('q6')">
+                            <label for="q6e">E) Infection from immune reconstitution</label>
+                        </li>
+                    </ul>
+                    <div id="q6-reveal" class="mcq-reveal">
+                        <strong>Answer: B) HPA axis suppressed; adrenal glands atrophied → cannot produce cortisol acutely</strong><br>
+                        SECONDARY ADRENAL INSUFFICIENCY from chronic exogenous steroids. Chronic glucocorticoid exposure suppresses the HPA axis (negative feedback on CRH and ACTH), so the adrenal cortex atrophies. Sudden withdrawal leaves the patient without any cortisol source (exogenous supply gone, endogenous production cannot recover immediately). This causes ADRENAL CRISIS. Recovery of HPA axis takes weeks to months even after tapering. Answer (B) is the mechanism. Always taper steroids slowly!
+                    </div>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">7. A 28-year-old woman presents with fatigue, weight loss, hypotension, and oral hyperpigmentation. Labs show low cortisol (3 μg/dL), elevated ACTH (85 pg/mL), hyponatremia, and hyperkalemia. A cosyntropin stimulation test is performed, and cortisol remains low (fails to rise above 18 μg/dL). What is the most likely diagnosis?</div>
+                    <ul class="mcq-options">
+                        <li class="mcq-option">
+                            <input type="radio" id="q7a" name="q7" value="a" onchange="revealMCQ('q7')">
+                            <label for="q7a">A) Secondary adrenal insufficiency from pituitary adenoma</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q7b" name="q7" value="b" onchange="revealMCQ('q7')">
+                            <label for="q7b">B) Primary adrenal insufficiency (Addison's disease)</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q7c" name="q7" value="c" onchange="revealMCQ('q7')">
+                            <label for="q7c">C) Cushing's syndrome with adrenal insufficiency</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q7d" name="q7" value="d" onchange="revealMCQ('q7')">
+                            <label for="q7d">D) Isolated ACTH deficiency</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q7e" name="q7" value="e" onchange="revealMCQ('q7')">
+                            <label for="q7e">E) Hypoaldosteronism with normal cortisol</label>
+                        </li>
+                    </ul>
+                    <div id="q7-reveal" class="mcq-reveal">
+                        <strong>Answer: B) Primary adrenal insufficiency (Addison's disease)</strong><br>
+                        Classic presentation: ↓ cortisol + ↑ ACTH + hyperpigmentation + hyponatremia + hyperkalemia. The high ACTH is the key finding (excludes secondary insufficiency, where ACTH would be low). Cosyntropin test fails because the adrenal glands themselves are destroyed and cannot respond to ACTH stimulus. Answer (A) would show low ACTH. Addison's disease (most commonly autoimmune or TB) causes all 3 cortical hormone deficiencies: cortisol, aldosterone, and androgens.
+                    </div>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">8. A 50-year-old man with small cell lung cancer presents with severe hypokalemia (K+ 2.2), metabolic alkalosis, and very elevated ACTH (280 pg/mL). His cortisol is 55 μg/dL. High-dose dexamethasone suppression test shows cortisol remains at 52 μg/dL. What is the mechanism of his hypokalemia?</div>
+                    <ul class="mcq-options">
+                        <li class="mcq-option">
+                            <input type="radio" id="q8a" name="q8" value="a" onchange="revealMCQ('q8')">
+                            <label for="q8a">A) ACTH stimulates aldosterone → sodium reabsorption + potassium wasting</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q8b" name="q8" value="b" onchange="revealMCQ('q8')">
+                            <label for="q8b">B) Cortisol deficiency causes secondary hyperaldosteronism</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q8c" name="q8" value="c" onchange="revealMCQ('q8')">
+                            <label for="q8c">C) Chemo-induced nephrotoxicity</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q8d" name="q8" value="d" onchange="revealMCQ('q8')">
+                            <label for="q8d">D) Malnutrition from cancer</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q8e" name="q8" value="e" onchange="revealMCQ('q8')">
+                            <label for="q8e">E) Tumor secretes potassium-wasting factor</label>
+                        </li>
+                    </ul>
+                    <div id="q8-reveal" class="mcq-reveal">
+                        <strong>Answer: A) ACTH stimulates aldosterone → sodium reabsorption + potassium wasting</strong><br>
+                        This is ECTOPIC ACTH SYNDROME from small cell lung cancer. The very high ACTH (280) stimulates aldosterone secretion (ACTH has some cross-reactivity with MC receptors on adrenal zona glomerulosa). High cortisol ALSO has mineralocorticoid activity (overwhelms 11β-HSD2). Result: severe hypokalemia + metabolic alkalosis (classic for ectopic ACTH). High-dose DST fails to suppress (proves ectopic source, not pituitary). This is a medical emergency requiring treatment of the underlying cancer + hypokalemia replacement + possibly metyrapone/ketoconazole to block cortisol synthesis.
+                    </div>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">9. A 38-year-old woman on OCPs (oral contraceptive pills) has total cortisol level of 40 μg/dL (high) but free cortisol is normal. What is the explanation?</div>
+                    <ul class="mcq-options">
+                        <li class="mcq-option">
+                            <input type="radio" id="q9a" name="q9" value="a" onchange="revealMCQ('q9')">
+                            <label for="q9a">A) She has subclinical Cushing's syndrome</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q9b" name="q9" value="b" onchange="revealMCQ('q9')">
+                            <label for="q9b">B) OCPs increase estrogen → ↑ CBG → ↑ total cortisol, normal free cortisol</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q9c" name="q9" value="c" onchange="revealMCQ('q9')">
+                            <label for="q9c">C) Malabsorption from GI disorder</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q9d" name="q9" value="d" onchange="revealMCQ('q9')">
+                            <label for="q9d">D) Renal retention of cortisol</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q9e" name="q9" value="e" onchange="revealMCQ('q9')">
+                            <label for="q9e">E) Adrenal adenoma with normal function</label>
+                        </li>
+                    </ul>
+                    <div id="q9-reveal" class="mcq-reveal">
+                        <strong>Answer: B) OCPs increase estrogen → ↑ CBG → ↑ total cortisol, normal free cortisol</strong><br>
+                        KEY CONCEPT: Estrogen increases CBG (cortisol-binding globulin). OCPs contain ethinyl estradiol, which increases CBG synthesis in the liver. More CBG = more cortisol bound (and less free). But the TOTAL cortisol is elevated because the hormone is bound but still present. Free cortisol (the biologically active form) remains normal. This is why measuring free cortisol (not total) is better in patients on estrogen therapy. Same phenomenon occurs in pregnancy.
+                    </div>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">10. A 64-year-old woman with meningococcal sepsis rapidly develops shock, DIC, and bilateral adrenal hemorrhage. What is this syndrome called?</div>
+                    <ul class="mcq-options">
+                        <li class="mcq-option">
+                            <input type="radio" id="q10a" name="q10" value="a" onchange="revealMCQ('q10')">
+                            <label for="q10a">A) Waterhouse-Friderichsen syndrome</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q10b" name="q10" value="b" onchange="revealMCQ('q10')">
+                            <label for="q10b">B) Acute respiratory distress syndrome</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q10c" name="q10" value="c" onchange="revealMCQ('q10')">
+                            <label for="q10c">C) Septic shock with disseminated intravascular coagulation</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q10d" name="q10" value="d" onchange="revealMCQ('q10')">
+                            <label for="q10d">D) Hemorrhagic stroke</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q10e" name="q10" value="e" onchange="revealMCQ('q10')">
+                            <label for="q10e">E) Acute adrenal insufficiency from malignancy</label>
+                        </li>
+                    </ul>
+                    <div id="q10-reveal" class="mcq-reveal">
+                        <strong>Answer: A) Waterhouse-Friderichsen syndrome</strong><br>
+                        This is the classic eponymous syndrome: bilateral adrenal hemorrhage during fulminant meningococcemia (N. meningitidis). DIC leads to bleeding into the adrenal glands → hemorrhagic infarction. Patient develops acute adrenal crisis (severe hypotension, shock) on top of septic shock. Mortality is very high even with treatment. Requires immediate IV hydrocortisone + antibiotics + supportive care. This is a medical emergency and a classic board question.
+                    </div>
+                </div>
+
+                <!-- Additional 8 MCQs -->
+                <div class="mcq-container">
+                    <div class="mcq-question">11. Which of the following statements about CRH is correct?</div>
+                    <ul class="mcq-options">
+                        <li class="mcq-option">
+                            <input type="radio" id="q11a" name="q11" value="a" onchange="revealMCQ('q11')">
+                            <label for="q11a">A) CRH is a 39-amino acid peptide</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q11b" name="q11" value="b" onchange="revealMCQ('q11')">
+                            <label for="q11b">B) CRH binds a Gi-coupled receptor → ↓ cAMP on corticotrophs</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q11c" name="q11" value="c" onchange="revealMCQ('q11')">
+                            <label for="q11c">C) CRH is produced by the anterior pituitary</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q11d" name="q11" value="d" onchange="revealMCQ('q11')">
+                            <label for="q11d">D) CRH is released from the paraventricular nucleus</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q11e" name="q11" value="e" onchange="revealMCQ('q11')">
+                            <label for="q11e">E) CRH does not bind to pituitary CRH receptors</label>
+                        </li>
+                    </ul>
+                    <div id="q11-reveal" class="mcq-reveal">
+                        <strong>Answer: D) CRH is released from the paraventricular nucleus</strong><br>
+                        CRH (41 amino acids, not 39 — that's ACTH) is produced by hypothalamic neurons in the PVN. It binds a GS-coupled receptor (A is wrong type of peptide; B is wrong coupling; C is wrong location; E is wrong statement). Answer (D) is correct.
+                    </div>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">12. A 45-year-old man on hydrocortisone replacement for primary adrenal insufficiency develops an acute surgical abdomen requiring emergency surgery. How should his hydrocortisone be dosed perioperatively?</div>
+                    <ul class="mcq-options">
+                        <li class="mcq-option">
+                            <input type="radio" id="q12a" name="q12" value="a" onchange="revealMCQ('q12')">
+                            <label for="q12a">A) Continue usual oral hydrocortisone dose</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q12b" name="q12" value="b" onchange="revealMCQ('q12')">
+                            <label for="q12b">B) IV hydrocortisone 100mg immediately, then 50-100mg q6-8h perioperatively</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q12c" name="q12" value="c" onchange="revealMCQ('q12')">
+                            <label for="q12c">C) Double oral dose; no IV needed</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q12d" name="q12" value="d" onchange="revealMCQ('q12')">
+                            <label for="q12d">D) Hold hydrocortisone to prevent interference with anesthesia</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q12e" name="q12" value="e" onchange="revealMCQ('q12')">
+                            <label for="q12e">E) Use dexamethasone 2mg q6h instead</label>
+                        </li>
+                    </ul>
+                    <div id="q12-reveal" class="mcq-reveal">
+                        <strong>Answer: B) IV hydrocortisone 100mg immediately, then 50-100mg q6-8h perioperatively</strong><br>
+                        STRESS DOSING for adrenal insufficiency patients. During surgery (physiologic stress), HPA is activated and needs cortisol. Patients with primary or secondary insufficiency cannot mount an adequate response. Standard approach: IV hydrocortisone 100mg bolus before anesthesia induction, then 50-100mg q6-8h for the duration of stress. Taper back to baseline as recovery progresses. Answers (A), (C), (D), (E) are incorrect or suboptimal.
+                    </div>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">13. In the IPSS (inferior petrosal sinus sampling) test for distinguishing pituitary from ectopic ACTH, which of the following is the diagnostic criterion for pituitary source?</div>
+                    <ul class="mcq-options">
+                        <li class="mcq-option">
+                            <input type="radio" id="q13a" name="q13" value="a" onchange="revealMCQ('q13')">
+                            <label for="q13a">A) IPS ACTH / peripheral ACTH ratio &lt;1.5</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q13b" name="q13" value="b" onchange="revealMCQ('q13')">
+                            <label for="q13b">B) IPS ACTH / peripheral ACTH ratio >2 basal or >3 after CRH stimulation</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q13c" name="q13" value="c" onchange="revealMCQ('q13')">
+                            <label for="q13c">C) IPS ACTH concentration &gt;200 pg/mL absolute</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q13d" name="q13" value="d" onchange="revealMCQ('q13')">
+                            <label for="q13d">D) Central to peripheral gradient &lt;1</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q13e" name="q13" value="e" onchange="revealMCQ('q13')">
+                            <label for="q13e">E) Negative ACTH gradient = ectopic source</label>
+                        </li>
+                    </ul>
+                    <div id="q13-reveal" class="mcq-reveal">
+                        <strong>Answer: B) IPS ACTH / peripheral ACTH ratio >2 basal or >3 after CRH stimulation</strong><br>
+                        IPSS compares ACTH from the inferior petrosal sinus (which drains the pituitary) to peripheral blood ACTH. A HIGH ratio indicates that the pituitary is producing the excess ACTH (Cushing's disease). Cutoff: >2:1 basal or >3:1 after CRH stimulation = pituitary. Ratio <2 = ectopic source (ACTH not coming from pituitary). Answer (B) is the established criterion.
+                    </div>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">14. A 55-year-old man with newly diagnosed Cushing's syndrome has an ACTH of 8 pg/mL and cortisol of 35 μg/dL. What is the source of his hypercortisolism?</div>
+                    <ul class="mcq-options">
+                        <li class="mcq-option">
+                            <input type="radio" id="q14a" name="q14" value="a" onchange="revealMCQ('q14')">
+                            <label for="q14a">A) Pituitary adenoma (Cushing's disease)</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q14b" name="q14" value="b" onchange="revealMCQ('q14')">
+                            <label for="q14b">B) Ectopic ACTH syndrome</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q14c" name="q14" value="c" onchange="revealMCQ('q14')">
+                            <label for="q14c">C) Adrenal adenoma or carcinoma</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q14d" name="q14" value="d" onchange="revealMCQ('q14')">
+                            <label for="q14d">D) CRH-secreting tumor</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q14e" name="q14" value="e" onchange="revealMCQ('q14')">
+                            <label for="q14e">E) Factitious ingestion of glucocorticoids</label>
+                        </li>
+                    </ul>
+                    <div id="q14-reveal" class="mcq-reveal">
+                        <strong>Answer: C) Adrenal adenoma or carcinoma</strong><br>
+                        ACTH is LOW (8 pg/mL, normal 5-25) with elevated cortisol. This is ACTH-INDEPENDENT hypercortisolism = primary adrenal pathology. The low ACTH indicates the pituitary "knows" there's too much cortisol and is appropriately suppressing CRH/ACTH. Differential: adrenal adenoma (~10% of Cushing's), adrenal carcinoma (~5%), or bilateral adrenal hyperplasia. Answer (C) is correct.
+                    </div>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">15. A patient with secondary adrenal insufficiency (from pituitary radiation) presents with hyponatremia. Which mechanism explains the hyponatremia?</div>
+                    <ul class="mcq-options">
+                        <li class="mcq-option">
+                            <input type="radio" id="q15a" name="q15" value="a" onchange="revealMCQ('q15')">
+                            <label for="q15a">A) Aldosterone deficiency causes sodium loss</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q15b" name="q15" value="b" onchange="revealMCQ('q15')">
+                            <label for="q15b">B) Cortisol deficiency → ↑ ADH (SIADH-like effect) → free water retention</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q15c" name="q15" value="c" onchange="revealMCQ('q15')">
+                            <label for="q15c">C) Hypothyroidism from radiation impairs water excretion</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q15d" name="q15" value="d" onchange="revealMCQ('q15')">
+                            <label for="q15d">D) Hyperkalemia causes pseudohyponatremia</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q15e" name="q15" value="e" onchange="revealMCQ('q15')">
+                            <label for="q15e">E) Radiation-induced renal damage</label>
+                        </li>
+                    </ul>
+                    <div id="q15-reveal" class="mcq-reveal">
+                        <strong>Answer: B) Cortisol deficiency → ↑ ADH (SIADH-like effect) → free water retention</strong><br>
+                        In SECONDARY adrenal insufficiency, aldosterone production is INTACT (RAAS independent). So hyponatremia is NOT from aldosterone deficiency. Instead, cortisol normally suppresses ADH/vasopressin. When cortisol is low, ADH rises → free water retention → dilutional hyponatremia (SIADH-like). Key difference from primary insufficiency where hyponatremia comes from BOTH aldosterone and cortisol deficiency. Answer (B) is correct for secondary insufficiency mechanism.
+                    </div>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">16. Which of the following synthetic glucocorticoids has ZERO mineralocorticoid activity and is therefore preferred for dexamethasone suppression testing?</div>
+                    <ul class="mcq-options">
+                        <li class="mcq-option">
+                            <input type="radio" id="q16a" name="q16" value="a" onchange="revealMCQ('q16')">
+                            <label for="q16a">A) Hydrocortisone</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q16b" name="q16" value="b" onchange="revealMCQ('q16')">
+                            <label for="q16b">B) Prednisone</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q16c" name="q16" value="c" onchange="revealMCQ('q16')">
+                            <label for="q16c">C) Methylprednisolone</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q16d" name="q16" value="d" onchange="revealMCQ('q16')">
+                            <label for="q16d">D) Dexamethasone</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q16e" name="q16" value="e" onchange="revealMCQ('q16')">
+                            <label for="q16e">E) Fludrocortisone</label>
+                        </li>
+                    </ul>
+                    <div id="q16-reveal" class="mcq-reveal">
+                        <strong>Answer: D) Dexamethasone</strong><br>
+                        Dexamethasone has 25-30× the glucocorticoid activity of cortisol and ZERO mineralocorticoid activity. This makes it ideal for DST because: (1) doesn't bind to aldosterone receptors, (2) doesn't interfere with cortisol assay, (3) maximally suppresses ACTH/CRH. Hydrocortisone (A) has both GC and MC activity. Prednisone and methylprednisolone (B, C) have some MC activity. Fludrocortisone (E) is a pure mineralocorticoid. Answer (D) is correct.
+                    </div>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">17. A 40-year-old woman on long-term corticosteroids for polymyalgia rheumatica gradually develops proximal muscle weakness. Which type of myopathy is this?</div>
+                    <ul class="mcq-options">
+                        <li class="mcq-option">
+                            <input type="radio" id="q17a" name="q17" value="a" onchange="revealMCQ('q17')">
+                            <label for="q17a">A) Distal myopathy from steroid deposition</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q17b" name="q17" value="b" onchange="revealMCQ('q17')">
+                            <label for="q17b">B) Proximal myopathy from glucocorticoid effects on type II muscle fibers</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q17c" name="q17" value="c" onchange="revealMCQ('q17')">
+                            <label for="q17c">C) Peripheral neuropathy from cortisol deposition in nerves</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q17d" name="q17" value="d" onchange="revealMCQ('q17')">
+                            <label for="q17d">D) Myositis from immune reactivation</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q17e" name="q17" value="e" onchange="revealMCQ('q17')">
+                            <label for="q17e">E) Metabolic myopathy from hypokalemia</label>
+                        </li>
+                    </ul>
+                    <div id="q17-reveal" class="mcq-reveal">
+                        <strong>Answer: B) Proximal myopathy from glucocorticoid effects on type II muscle fibers</strong><br>
+                        Chronic glucocorticoid use causes PROXIMAL myopathy (hip, shoulder girdle weakness), not distal. Mechanism: glucocorticoids inhibit protein synthesis and promote proteolysis in type II (fast-twitch) muscle fibers. This is well-established in medical literature and a classic board question. Elevated CK and EMG show myopathic pattern. Answer (B) is correct. Note: separate from Cushing's cortisol ↑ causing peripheral wasting — this is direct steroid drug effect.
+                    </div>
+                </div>
+
+                <div class="mcq-container">
+                    <div class="mcq-question">18. A 50-year-old patient on chronic prednisone develops cataracts. Which type of cataract is most typical of glucocorticoid-induced cataracts?</div>
+                    <ul class="mcq-options">
+                        <li class="mcq-option">
+                            <input type="radio" id="q18a" name="q18" value="a" onchange="revealMCQ('q18')">
+                            <label for="q18a">A) Nuclear sclerotic cataracts</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q18b" name="q18" value="b" onchange="revealMCQ('q18')">
+                            <label for="q18b">B) Cortical cataracts</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q18c" name="q18" value="c" onchange="revealMCQ('q18')">
+                            <label for="q18c">C) Posterior subcapsular cataracts</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q18d" name="q18" value="d" onchange="revealMCQ('q18')">
+                            <label for="q18d">D) Anterior subcapsular cataracts</label>
+                        </li>
+                        <li class="mcq-option">
+                            <input type="radio" id="q18e" name="q18" value="e" onchange="revealMCQ('q18')">
+                            <label for="q18e">E) Traumatic cataract</label>
+                        </li>
+                    </ul>
+                    <div id="q18-reveal" class="mcq-reveal">
+                        <strong>Answer: C) Posterior subcapsular cataracts</strong><br>
+                        Glucocorticoid-induced cataracts classically present as POSTERIOR SUBCAPSULAR cataracts. This is a pathognomonic finding in patients on chronic steroids. Present with visual symptoms, often earlier than age-related nuclear sclerotic or cortical cataracts. Screening ophthalmology exams are recommended for patients on prolonged high-dose steroid therapy. Answer (C) is the classic board answer.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mind Map -->
+        <div id="mindmap" class="lo-section">
+            <div class="lo-header">
+                <h2>Mind Map: HPA Axis Integration</h2>
+                <span class="lo-toggle">▼</span>
+            </div>
+            <div class="lo-content">
+                <div class="mindmap-container">
+                    <svg width="100%" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Central node -->
+                        <rect x="300" y="250" width="200" height="80" fill="#2563eb" stroke="#1e40af" stroke-width="3" rx="10"/>
+                        <text x="400" y="295" font-size="18" font-weight="bold" fill="white" text-anchor="middle">HPA AXIS</text>
+
+                        <!-- Hypothalamus -->
+                        <rect x="50" y="30" width="140" height="70" fill="#60a5fa" stroke="#2563eb" stroke-width="2" rx="8"/>
+                        <text x="120" y="60" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Hypothalamus</text>
+                        <text x="120" y="80" font-size="12" fill="white" text-anchor="middle">(PVN)</text>
+                        <line x1="190" y1="60" x2="300" y2="280" stroke="#2563eb" stroke-width="2"/>
+                        <text x="230" y="160" font-size="12" fill="#2563eb" font-weight="bold">CRH</text>
+
+                        <!-- Pituitary -->
+                        <rect x="600" y="30" width="140" height="70" fill="#60a5fa" stroke="#2563eb" stroke-width="2" rx="8"/>
+                        <text x="670" y="60" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Anterior</text>
+                        <text x="670" y="80" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Pituitary</text>
+                        <line x1="500" y1="280" x2="600" y2="60" stroke="#2563eb" stroke-width="2"/>
+                        <text x="540" y="150" font-size="12" fill="#2563eb" font-weight="bold">ACTH</text>
+
+                        <!-- Adrenal -->
+                        <rect x="600" y="450" width="140" height="70" fill="#60a5fa" stroke="#2563eb" stroke-width="2" rx="8"/>
+                        <text x="670" y="485" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Adrenal</text>
+                        <text x="670" y="505" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Cortex</text>
+                        <line x1="670" y1="100" x2="670" y2="450" stroke="#2563eb" stroke-width="2"/>
+                        <text x="710" y="280" font-size="12" fill="#2563eb" font-weight="bold">Zona fasciculata</text>
+
+                        <!-- Cortisol output -->
+                        <circle cx="400" cy="500" r="35" fill="#ec4899" stroke="#be123c" stroke-width="2"/>
+                        <text x="400" y="505" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Cortisol</text>
+
+                        <!-- Negative feedback loops -->
+                        <path d="M 400 480 Q 350 400 200 200" stroke="#ef4444" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+                        <text x="320" y="350" font-size="11" fill="#ef4444" font-weight="bold">Negative</text>
+                        <text x="320" y="365" font-size="11" fill="#ef4444" font-weight="bold">Feedback</text>
+
+                        <!-- Effects boxes -->
+                        <rect x="20" y="380" width="120" height="100" fill="#fef3c7" stroke="#f59e0b" stroke-width="2" rx="6"/>
+                        <text x="80" y="400" font-size="12" font-weight="bold" fill="#b45309" text-anchor="middle">CORTISOL</text>
+                        <text x="80" y="418" font-size="11" fill="#b45309" text-anchor="middle">Effects:</text>
+                        <text x="80" y="434" font-size="10" fill="#b45309" text-anchor="middle">↑ Gluconeogenesis</text>
+                        <text x="80" y="450" font-size="10" fill="#b45309" text-anchor="middle">↑ Lipolysis</text>
+                        <text x="80" y="466" font-size="10" fill="#b45309" text-anchor="middle">↓ Immune</text>
+
+                        <!-- Circadian -->
+                        <rect x="200" y="380" width="120" height="100" fill="#dbeafe" stroke="#2563eb" stroke-width="2" rx="6"/>
+                        <text x="260" y="400" font-size="12" font-weight="bold" fill="#1e40af" text-anchor="middle">CIRCADIAN</text>
+                        <text x="260" y="418" font-size="11" fill="#1e40af" text-anchor="middle">Pattern:</text>
+                        <text x="260" y="434" font-size="10" fill="#1e40af" text-anchor="middle">Peak: 6-8 AM</text>
+                        <text x="260" y="450" font-size="10" fill="#1e40af" text-anchor="middle">Nadir: Midnight</text>
+                        <text x="260" y="466" font-size="10" fill="#1e40af" text-anchor="middle">Driver: SCN</text>
+
+                        <!-- Testing -->
+                        <rect x="380" y="380" width="120" height="100" fill="#e0e7ff" stroke="#2563eb" stroke-width="2" rx="6"/>
+                        <text x="440" y="400" font-size="12" font-weight="bold" fill="#3730a3" text-anchor="middle">TESTING</text>
+                        <text x="440" y="418" font-size="10" fill="#3730a3" text-anchor="middle">Low-dose DST</text>
+                        <text x="440" y="432" font-size="10" fill="#3730a3" text-anchor="middle">High-dose DST</text>
+                        <text x="440" y="446" font-size="10" fill="#3730a3" text-anchor="middle">Midnight saliva</text>
+                        <text x="440" y="460" font-size="10" fill="#3730a3" text-anchor="middle">24-h UFC</text>
+
+                        <!-- Pathology -->
+                        <rect x="560" y="380" width="120" height="100" fill="#fee2e2" stroke="#ef4444" stroke-width="2" rx="6"/>
+                        <text x="620" y="400" font-size="12" font-weight="bold" fill="#991b1b" text-anchor="middle">PATHOLOGY</text>
+                        <text x="620" y="418" font-size="10" fill="#991b1b" text-anchor="middle">Cushing's</text>
+                        <text x="620" y="432" font-size="10" fill="#991b1b" text-anchor="middle">(↑ cortisol)</text>
+                        <text x="620" y="446" font-size="10" fill="#991b1b" text-anchor="middle">Addison's</text>
+                        <text x="620" y="460" font-size="10" fill="#991b1b" text-anchor="middle">(↓ cortisol)</text>
+                    </svg>
+                </div>
+
+                <div class="summary-box">
+                    <strong>🎯 Mind Map Summary:</strong><br>
+                    The HPA axis is a three-tier endocrine system: hypothalamic CRH stimulates pituitary ACTH, which drives adrenal cortisol secretion. Cortisol provides negative feedback at hypothalamus and pituitary. Circadian rhythm drives ACTH pulsatility, peaking at 6-8 AM. Clinical disorders range from Cushing's (excess) to Addison's (deficiency), diagnosed by cortisol levels, ACTH measurements, and DST paradigms. Pharmacologic understanding of synthetic glucocorticoids is essential for both replacement and therapeutic use.
+                </div>
+            </div>
+        </div>
+
+        <!-- Checklist -->
+        <div id="checklist" class="lo-section">
+            <div class="lo-header">
+                <h2>Study Checklist</h2>
+                <span class="lo-toggle">▼</span>
+            </div>
+            <div class="lo-content">
+                <p style="margin-bottom: 16px; color: #64748b; font-size: 14px;">Check off each concept as you master it. Your progress is automatically saved.</p>
+                <ul class="checklist">
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>LO1: Three-tier HPA axis (Hypothalamus → Pituitary → Adrenal)</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>POMC cleavage → ACTH + β-endorphin + MSH</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>Hyperpigmentation = HIGH ACTH/MSH in PRIMARY adrenal insufficiency ONLY</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>Cortisol negative feedback (fast and slow)</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>LO2: Cortisol effects (metabolism, immune, CV, bone, growth, CNS)</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>CBG increases with estrogen → ↑ total cortisol, normal free cortisol</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>ELIN mnemonic (Cushing's): Eosinophils ↓, Lymphocytes ↓, Increased neutrophils</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>LO3: Cortisol circadian rhythm (peak 6-8 AM, nadir midnight)</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>Stressors that activate HPA (hypoglycemia, surgery, infection, pain)</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>Low-dose DST: normal suppresses, Cushing's doesn't</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>High-dose DST: pituitary suppresses, ectopic/adrenal doesn't</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>Midnight salivary cortisol (screening test for Cushing's)</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>LO4: ACTH-dependent vs. ACTH-independent Cushing's</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>ACTH LOW (<10) in hypercortisolism = adrenal source</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>Cosyntropin (ACTH stimulation) test interpretation</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>IPSS: ratio >2 basal or >3 post-CRH = pituitary source</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>Primary vs. Secondary adrenal insufficiency classification</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>LO5: Addison's disease features (fatigue, hypotension, salt craving, hyperpigmentation)</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>Primary adrenal insufficiency: ↓ cortisol + ↓ aldosterone → hyperkalemia + hyponatremia</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>Secondary adrenal insufficiency: aldosterone intact (RAAS), NO hyperkalemia</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>Waterhouse-Friderichsen syndrome (meningococcal sepsis + bilateral adrenal hemorrhage)</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>Adrenal crisis: IV hydrocortisone 100mg STAT (don't delay for labs)</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>LO6: Glucocorticoid potency table (hydrocortisone, prednisone, dexamethasone, etc.)</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>Dexamethasone: 25-30× GC, zero MC activity; ideal for DST</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>HPA suppression: >3 weeks at moderate-high dose → must taper slowly</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>Side effects of chronic steroids (osteoporosis, avascular necrosis, cataracts, infections)</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>Avascular necrosis of femoral head (most common serious MSK complication)</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>Posterior subcapsular cataracts (typical steroid cataract)</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>Proximal myopathy from chronic steroids (type II fiber effect)</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" class="saveProgress" onchange="saveChecklist()">
+                        <label>Stress dosing: double/triple during illness; IV hydrocortisone before surgery</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <footer style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e2e8f0; color: #94a3b8; font-size: 14px;">
+            <p>Lecture 15: HPA Axis • ADHD-Friendly Interactive Study Guide • Last updated April 2026</p>
+        </footer>
+    </main>
+
+    <script>
+        // Local storage key
+        const STORAGE_KEY = 'endo_lec15';
+
+        // Toggle LO sections
+        document.querySelectorAll('.lo-header').forEach(header => {
+            header.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const toggle = this.querySelector('.lo-toggle');
+                content.classList.toggle('show');
+                toggle.classList.toggle('open');
+            });
+        });
+
+        // Flip cards
+        function toggleFlip(card) {
+            card.classList.toggle('flipped');
+        }
+
+        // MCQ reveal
+        function revealMCQ(qId) {
+            const reveal = document.getElementById(qId + '-reveal');
+            if (reveal) {
+                reveal.classList.add('show');
+            }
+        }
+
+        // Save checklist progress
+        function saveChecklist() {
+            const checked = Array.from(document.querySelectorAll('.checklist input[type="checkbox"]'))
+                .map((cb, idx) => ({ idx, checked: cb.checked }));
+            localStorage.setItem(STORAGE_KEY + '_checklist', JSON.stringify(checked));
+        }
+
+        // Load checklist progress
+        function loadChecklist() {
+            const saved = localStorage.getItem(STORAGE_KEY + '_checklist');
+            if (saved) {
+                try {
+                    const data = JSON.parse(saved);
+                    data.forEach(item => {
+                        const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
+                        if (checkboxes[item.idx]) {
+                            checkboxes[item.idx].checked = item.checked;
+                        }
+                    });
+                } catch (e) {
+                    console.log('Could not load checklist');
+                }
+            }
+        }
+
+        // Initialize on page load
+        window.addEventListener('load', function() {
+            loadChecklist();
+            // Expand first LO section by default
+            const firstHeader = document.querySelector('.lo-header');
+            if (firstHeader) {
+                const content = firstHeader.nextElementSibling;
+                const toggle = firstHeader.querySelector('.lo-toggle');
+                content.classList.add('show');
+                toggle.classList.add('open');
+            }
+        });
+    </script>
+</body>
+</html>

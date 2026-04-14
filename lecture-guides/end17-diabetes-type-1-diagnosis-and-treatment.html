@@ -1,0 +1,1945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 17 — T1DM: Diagnosis & Treatment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f8fafc;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 220px;
+            background-color: #0f172a;
+            color: #e2e8f0;
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 20px 0;
+            border-right: 2px solid #059669;
+        }
+
+        .sidebar h2 {
+            color: #059669;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 15px 15px;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar li {
+            padding: 8px 15px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar li:hover {
+            background-color: #1e293b;
+            border-left-color: #059669;
+            padding-left: 18px;
+        }
+
+        .sidebar li.active {
+            background-color: #1e293b;
+            border-left-color: #059669;
+            color: #059669;
+            font-weight: 600;
+        }
+
+        /* MAIN CONTENT */
+        main {
+            margin-left: 220px;
+            flex: 1;
+            padding: 40px;
+            max-width: 1000px;
+        }
+
+        header {
+            margin-bottom: 30px;
+            border-bottom: 3px solid #059669;
+            padding-bottom: 20px;
+        }
+
+        header h1 {
+            color: #0f172a;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        header .meta {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .meta span {
+            margin-right: 20px;
+        }
+
+        /* LO SECTIONS */
+        .lo-section {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .lo-header {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+            padding: 18px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 15px;
+            user-select: none;
+            transition: all 0.3s;
+        }
+
+        .lo-header:hover {
+            background: linear-gradient(135deg, #047857 0%, #059669 100%);
+            padding-left: 25px;
+        }
+
+        .lo-header.collapsed {
+            border-bottom: none;
+        }
+
+        .lo-toggle {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: transform 0.3s;
+        }
+
+        .lo-toggle.rotated {
+            transform: rotate(180deg);
+        }
+
+        .lo-content {
+            padding: 25px;
+            display: none;
+        }
+
+        .lo-content.active {
+            display: block;
+        }
+
+        /* SUMMARY BOX */
+        .summary-box {
+            background: #f0fdf4;
+            border-left: 4px solid #059669;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .summary-box strong {
+            color: #059669;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .summary-item {
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .summary-item::before {
+            content: attr(data-icon);
+            margin-right: 8px;
+            font-weight: bold;
+        }
+
+        /* FLIP CARDS */
+        .flip-card-container {
+            perspective: 1000px;
+            margin: 15px 0;
+        }
+
+        .flip-card {
+            background-color: #fff;
+            border: 2px solid #059669;
+            border-radius: 6px;
+            cursor: pointer;
+            height: 140px;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .flip-card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .flip-front, .flip-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            backface-visibility: hidden;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .flip-front {
+            background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%);
+            color: #0c4a6e;
+            border: 2px solid #059669;
+        }
+
+        .flip-back {
+            background: linear-gradient(135deg, #f0fdf4 0%, #e6f7f0 100%);
+            color: #065f46;
+            transform: rotateY(180deg);
+            font-size: 12px;
+            line-height: 1.3;
+            padding: 12px;
+        }
+
+        /* MCQ */
+        .mcq {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            padding: 18px;
+            margin: 15px 0;
+        }
+
+        .mcq-q {
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .mcq-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .mcq-option {
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.2s;
+            font-size: 13px;
+            background: white;
+        }
+
+        .mcq-option:hover {
+            background: #f1f5f9;
+            border-color: #059669;
+        }
+
+        .mcq-option input {
+            margin-right: 10px;
+            cursor: pointer;
+            accent-color: #059669;
+        }
+
+        .mcq-reveal {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #cbd5e1;
+            display: none;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .mcq-reveal.show {
+            display: block;
+        }
+
+        .mcq-reveal.correct {
+            color: #059669;
+            font-weight: 600;
+        }
+
+        .mcq-reveal.explanation {
+            color: #475569;
+            margin-top: 8px;
+        }
+
+        /* CHECKBOX */
+        .checkbox-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .checkbox-list li {
+            padding: 8px 0;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-list input {
+            margin-right: 10px;
+            cursor: pointer;
+            accent-color: #059669;
+            width: 18px;
+            height: 18px;
+        }
+
+        /* TABLE */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 12px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #cbd5e1;
+        }
+
+        th {
+            background: #f0fdf4;
+            color: #059669;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        /* MIND MAP */
+        .mindmap {
+            margin: 25px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* UTILITY */
+        .content-block {
+            margin: 15px 0;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #334155;
+        }
+
+        .content-block h3 {
+            color: #059669;
+            font-size: 14px;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .content-block h4 {
+            color: #0f172a;
+            font-size: 13px;
+            margin-top: 10px;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .content-block ul, .content-block ol {
+            margin-left: 20px;
+            margin-top: 8px;
+        }
+
+        .content-block li {
+            margin-bottom: 6px;
+        }
+
+        .highlight {
+            background: #fef3c7;
+            padding: 2px 4px;
+            border-radius: 2px;
+            font-weight: 500;
+        }
+
+        .mnemonic {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-style: italic;
+            font-size: 12px;
+            color: #92400e;
+        }
+
+        .trap {
+            background: #fee2e2;
+            border-left: 4px solid #dc2626;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #7f1d1d;
+        }
+
+        .trap strong {
+            color: #dc2626;
+        }
+
+        /* SCROLLBAR */
+        .sidebar::-webkit-scrollbar, main::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .sidebar::-webkit-scrollbar-track, main::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb, main::-webkit-scrollbar-thumb {
+            background: #059669;
+            border-radius: 4px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover, main::-webkit-scrollbar-thumb:hover {
+            background: #047857;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 2px solid #059669;
+            }
+
+            main {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 22px;
+            }
+
+            .lo-header {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="sidebar">
+        <h2>Lecture 17</h2>
+        <ul id="sidebar-nav">
+            <li data-lo="lo1" class="active">LO1: Diagnosis</li>
+            <li data-lo="lo2">LO2: Insulin Types</li>
+            <li data-lo="lo3">LO3: Insulin Regimens</li>
+            <li data-lo="lo4">LO4: DKA Management</li>
+            <li data-lo="lo5">LO5: Hypoglycemia</li>
+            <li data-lo="lo6">LO6: Monitoring</li>
+            <li data-lo="mindmap">Mind Map</li>
+            <li data-lo="mcqs">MCQs (18)</li>
+        </ul>
+    </nav>
+
+    <main>
+        <header>
+            <h1>Lecture 17: Type 1 Diabetes Mellitus — Diagnosis & Treatment</h1>
+            <div class="meta">
+                <span><strong>Subject:</strong> Pharmacology</span>
+                <span><strong>Color:</strong> Green (#059669)</span>
+            </div>
+        </header>
+
+        <!-- LO1: DIAGNOSIS -->
+        <section class="lo-section" id="lo1">
+            <div class="lo-header" onclick="toggleLO(this)">
+                <span>LO1: Diagnosis of Diabetes Mellitus</span>
+                <div class="lo-toggle">▼</div>
+            </div>
+            <div class="lo-content active">
+                <div class="summary-box">
+                    <strong>🎯 Tested Concepts</strong>
+                    <div class="summary-item" data-icon="✓">ADA diagnostic criteria (FPG, OGTT, HbA1c, random glucose)</div>
+                    <div class="summary-item" data-icon="✓">Prediabetes ranges (IFG, IGT)</div>
+                    <div class="summary-item" data-icon="✓">GDM screening and diagnosis</div>
+                    <div class="summary-item" data-icon="✓">T1DM vs T2DM distinguishing features</div>
+                </div>
+
+                <div class="content-block">
+                    <h3>ADA Diagnostic Criteria</h3>
+                    <p>Any ONE of the following, confirmed on repeat testing (except if symptomatic with random glucose ≥200):</p>
+                    <ul>
+                        <li><strong>FPG ≥126 mg/dL</strong> (fasting = no caloric intake ≥8h)</li>
+                        <li><strong>2-hour plasma glucose ≥200 mg/dL</strong> during 75g OGTT</li>
+                        <li><strong>HbA1c ≥6.5%</strong></li>
+                        <li><strong>Random plasma glucose ≥200 mg/dL</strong> WITH classic symptoms (polyuria, polydipsia, unexplained weight loss)</li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>Prediabetes</h3>
+                    <p>Increased risk of T2DM; intervention with lifestyle modification recommended:</p>
+                    <ul>
+                        <li><strong>IFG (Impaired Fasting Glucose):</strong> FPG 100–125 mg/dL</li>
+                        <li><strong>IGT (Impaired Glucose Tolerance):</strong> 2-hr OGTT 140–199 mg/dL</li>
+                        <li><strong>HbA1c:</strong> 5.7–6.4%</li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>Gestational Diabetes Mellitus (GDM)</h3>
+                    <p><strong>Screening:</strong> At 24–28 weeks gestation</p>
+                    <p><strong>Approach:</strong> 1-step (75g OGTT) or 2-step (50g GCT → if elevated → 100g OGTT)</p>
+                    <p><strong>GDM Diagnosis (IADPSG/ADA 2013; 75g OGTT):</strong> Any ONE value positive</p>
+                    <ul>
+                        <li>Fasting ≥92 mg/dL</li>
+                        <li>1-hour ≥180 mg/dL</li>
+                        <li>2-hour ≥153 mg/dL</li>
+                    </ul>
+                    <p><strong>Maternal Risks:</strong> Preeclampsia, C-section</p>
+                    <p><strong>Fetal Risks:</strong> Macrosomia → shoulder dystocia, neonatal hypoglycemia</p>
+                    <p><strong>Long-term:</strong> ~50% develop T2DM within 10 years postpartum</p>
+                </div>
+
+                <div class="content-block">
+                    <h3>T1DM vs T2DM</h3>
+                    <table>
+                        <tr>
+                            <th>Feature</th>
+                            <th>T1DM</th>
+                            <th>T2DM</th>
+                        </tr>
+                        <tr>
+                            <td>Age of onset</td>
+                            <td>Younger (often childhood)</td>
+                            <td>Older (usually >40y, but ↑ in youth)</td>
+                        </tr>
+                        <tr>
+                            <td>Body habitus</td>
+                            <td>Lean</td>
+                            <td>Obese (often)</td>
+                        </tr>
+                        <tr>
+                            <td>Onset</td>
+                            <td>Acute</td>
+                            <td>Insidious</td>
+                        </tr>
+                        <tr>
+                            <td>DKA at presentation</td>
+                            <td>Common</td>
+                            <td>Rare (HHS instead)</td>
+                        </tr>
+                        <tr>
+                            <td>Autoantibodies (anti-GAD65)</td>
+                            <td>Positive</td>
+                            <td>Negative</td>
+                        </tr>
+                        <tr>
+                            <td>C-peptide</td>
+                            <td>Low</td>
+                            <td>High/normal (initially)</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="content-block">
+                    <h3>MODY (Maturity-Onset Diabetes of the Young)</h3>
+                    <p>Rare monogenic diabetes; autosomal dominant inheritance:</p>
+                    <ul>
+                        <li><strong>MODY2 (Glucokinase mutation):</strong> Mild hyperglycemia, often asymptomatic</li>
+                        <li><strong>MODY3 (HNF1α mutation):</strong> <span class="highlight">Responsive to sulfonylureas</span></li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>HbA1c Targets</h3>
+                    <ul>
+                        <li><strong>&lt;7%</strong> for most adults</li>
+                        <li><strong>&lt;6.5%</strong> if tight control achievable without hypoglycemia</li>
+                        <li><strong>&lt;8%</strong> for elderly/frail patients</li>
+                        <li><strong>&lt;6%</strong> in pregnancy (T1DM)</li>
+                        <li>Goals must be individualized</li>
+                    </ul>
+                </div>
+
+                <div class="trap">
+                    <strong>TRAP:</strong> Diagnostic confirmation requires repeat testing UNLESS patient is symptomatic with random glucose ≥200 (then single test sufficient). Don't overdiagnose based on single value in asymptomatic patient.
+                </div>
+
+                <div class="mnemonic">
+                    <strong>Mnemonic:</strong> "FHR26 = Fasting ≥126, HbA1c ≥6.5, Random (with symptoms) ≥200, 2-hr OGTT ≥200"
+                </div>
+            </div>
+        </section>
+
+        <!-- LO2: INSULIN TYPES -->
+        <section class="lo-section" id="lo2">
+            <div class="lo-header" onclick="toggleLO(this)">
+                <span>LO2: Insulin Types and Pharmacokinetics</span>
+                <div class="lo-toggle">▼</div>
+            </div>
+            <div class="lo-content active">
+                <div class="summary-box">
+                    <strong>🎯 Tested Concepts</strong>
+                    <div class="summary-item" data-icon="✓">Onset, peak, duration of all insulin types</div>
+                    <div class="summary-item" data-icon="✓">Structural modifications (Lispro, Aspart, Glargine, Detemir)</div>
+                    <div class="summary-item" data-icon="✓">Mixing and compatibility rules</div>
+                    <div class="summary-item" data-icon="✓">Clinical applications of each type</div>
+                </div>
+
+                <div class="content-block">
+                    <h3>Insulin Pharmacokinetics Summary</h3>
+                    <table>
+                        <tr>
+                            <th>Insulin Type</th>
+                            <th>Onset</th>
+                            <th>Peak</th>
+                            <th>Duration</th>
+                            <th>Key Notes</th>
+                        </tr>
+                        <tr>
+                            <td>Lispro/Aspart/Glulisine (Rapid)</td>
+                            <td>5–15 min</td>
+                            <td>30–90 min</td>
+                            <td>3–5 hr</td>
+                            <td>Inject just before/with meals; structurally modified</td>
+                        </tr>
+                        <tr>
+                            <td>Regular (Short-acting)</td>
+                            <td>30–60 min</td>
+                            <td>2–4 hr</td>
+                            <td>5–8 hr</td>
+                            <td>Inject 30 min before meals; used in IV drips</td>
+                        </tr>
+                        <tr>
+                            <td>NPH (Intermediate)</td>
+                            <td>1–2 hr</td>
+                            <td>4–8 hr</td>
+                            <td>12–18 hr</td>
+                            <td>Cloudy; twice-daily dosing; peak → nocturnal hypo risk</td>
+                        </tr>
+                        <tr>
+                            <td>Glargine (Lantus)/Detemir (Long-acting)</td>
+                            <td>1–2 hr</td>
+                            <td>Flat (no peak)</td>
+                            <td>20–24 hr</td>
+                            <td>Once daily; CANNOT mix with other insulins</td>
+                        </tr>
+                        <tr>
+                            <td>Degludec (Ultra-long)</td>
+                            <td>1 hr</td>
+                            <td>Flat (no peak)</td>
+                            <td>&gt;42 hr</td>
+                            <td>Once daily; most stable basal profile</td>
+                        </tr>
+                        <tr>
+                            <td>Afrezza (Inhaled)</td>
+                            <td>5 min</td>
+                            <td>15–20 min</td>
+                            <td>2–3 hr</td>
+                            <td>Rapid; CI in asthma/COPD</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="content-block">
+                    <h3>Structural Modifications</h3>
+                    <p><strong>Lispro (Humalog):</strong> Pro→Lys and Lys→Pro swap at B28-B29 → ↓ self-aggregation → faster absorption</p>
+                    <p><strong>Aspart (NovoLog):</strong> Pro→Asp at B28 → rapid action</p>
+                    <p><strong>Glargine (Lantus):</strong> 2 Arg added at C-terminus + Asn→Gly → precipitates at SC pH → slow, flat absorption</p>
+                    <p><strong>Detemir (Levemir):</strong> Fatty acid chain → binds albumin → prolonged action</p>
+                </div>
+
+                <div class="flip-card-container">
+                    <div class="flip-card" onclick="flipCard(this)">
+                        <div class="flip-front">Click to reveal: Insulin mixing rules</div>
+                        <div class="flip-back">
+                            Glargine & Degludec: DO NOT mix (precipitate). NPH can mix with regular. Clear before cloudy (regular before NPH).
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trap">
+                    <strong>TRAP:</strong> Glargine CANNOT be mixed with other insulins—it precipitates. Must give as separate injection.
+                </div>
+
+                <div class="mnemonic">
+                    <strong>Mnemonic:</strong> "RNIL = Regular, NPH, Intermediate, Long-acting (in order of duration)"
+                </div>
+            </div>
+        </section>
+
+        <!-- LO3: INSULIN REGIMENS -->
+        <section class="lo-section" id="lo3">
+            <div class="lo-header" onclick="toggleLO(this)">
+                <span>LO3: Insulin Regimens for T1DM</span>
+                <div class="lo-toggle">▼</div>
+            </div>
+            <div class="lo-content active">
+                <div class="summary-box">
+                    <strong>🎯 Tested Concepts</strong>
+                    <div class="summary-item" data-icon="✓">Basal-bolus regimens (4+ injections/day)</div>
+                    <div class="summary-item" data-icon="✓">Insulin pump (CSII) indications & advantages</div>
+                    <div class="summary-item" data-icon="✓">CGM role & time-in-range targets</div>
+                    <div class="summary-item" data-icon="✓">Dawn phenomenon vs Somogyi effect</div>
+                    <div class="summary-item" data-icon="✓">Honeymoon period</div>
+                </div>
+
+                <div class="content-block">
+                    <h3>Physiologic Insulin Replacement</h3>
+                    <p>Goal: Mimic normal insulin secretion pattern with:</p>
+                    <ul>
+                        <li><strong>Basal insulin:</strong> Covers hepatic glucose output between meals & overnight (e.g., glargine/degludec once daily or detemir BID)</li>
+                        <li><strong>Bolus (prandial) insulin:</strong> Covers carbohydrate intake at meals (rapid-acting analog lispro/aspart/glulisine)</li>
+                        <li><strong>Correction doses:</strong> Extra rapid-acting for elevated pre-meal glucose</li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>Basal-Bolus Regimen ("Intensive Therapy")</h3>
+                    <ul>
+                        <li>4+ injections/day (most closely mimics physiology)</li>
+                        <li>REQUIRED for T1DM management</li>
+                        <li><strong>Insulin-to-carb ratio (ICR):</strong> Units per grams of carbohydrate (e.g., 1 unit per 15g carbs)</li>
+                        <li><strong>Insulin sensitivity factor (ISF):</strong> mg/dL glucose drop per unit insulin</li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>Continuous Subcutaneous Insulin Infusion (CSII = Insulin Pump)</h3>
+                    <p>Delivers programmable basal rate + patient-activated boluses; uses rapid-acting analog only.</p>
+                    <p><strong>Advantages:</strong></p>
+                    <ul>
+                        <li>Tighter glucose control</li>
+                        <li>Flexibility in meal timing/size</li>
+                        <li>↓ Hypoglycemia (variable basal rates)</li>
+                        <li>Improved quality of life</li>
+                    </ul>
+                    <p><strong>Disadvantages:</strong></p>
+                    <ul>
+                        <li>DKA risk if pump failure (no long-acting reserve)</li>
+                        <li>Infection at infusion site</li>
+                        <li>Cost</li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>Closed-Loop Systems (Artificial Pancreas)</h3>
+                    <p>CGM + insulin pump + algorithm → automatically adjusts insulin delivery based on glucose trends</p>
+                </div>
+
+                <div class="content-block">
+                    <h3>Continuous Glucose Monitoring (CGM)</h3>
+                    <ul>
+                        <li>Sensor under skin measures interstitial glucose every 5 min</li>
+                        <li>Replaced every 7–14 days</li>
+                        <li>Gives trends and alarms; reduces hypoglycemia unawareness</li>
+                        <li><strong>Time-in-range (TIR) 70–180 mg/dL:</strong> Target >70% TIR</li>
+                        <li>HbA1c targets still guide overall control</li>
+                    </ul>
+                </div>
+
+                <div class="flip-card-container">
+                    <div class="flip-card" onclick="flipCard(this)">
+                        <div class="flip-front">Click to reveal: Honeymoon period definition</div>
+                        <div class="flip-back">
+                            Shortly after T1DM diagnosis, remaining β cells partially recover from reduced glucotoxicity → temporary ↓ insulin requirements. Eventually lost as autoimmune destruction continues.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <h3>Dawn Phenomenon vs Somogyi Effect</h3>
+                    <table>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Dawn Phenomenon</th>
+                            <th>Somogyi Effect</th>
+                        </tr>
+                        <tr>
+                            <td>Cause</td>
+                            <td>↑ GH + cortisol (4–8 AM)</td>
+                            <td>Nocturnal hypoglycemia → counter-regulatory response</td>
+                        </tr>
+                        <tr>
+                            <td>Overnight glucose</td>
+                            <td>Normal</td>
+                            <td>LOW (hypoglycemia)</td>
+                        </tr>
+                        <tr>
+                            <td>Morning glucose</td>
+                            <td>Elevated (hyperglycemia)</td>
+                            <td>Elevated (rebound hyperglycemia)</td>
+                        </tr>
+                        <tr>
+                            <td>Treatment</td>
+                            <td>↑ Basal insulin dose</td>
+                            <td>↓ Nighttime insulin (LESS SUPPORTED by modern evidence)</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="trap">
+                    <strong>TRAP:</strong> Dawn phenomenon and Somogyi effect both present with morning hyperglycemia. Must check 3 AM glucose to distinguish: normal = dawn phenomenon; low = Somogyi. Somogyi is less common than originally thought with modern insulin analogs.
+                </div>
+
+                <div class="mnemonic">
+                    <strong>Mnemonic:</strong> "Basal-Bolus = 4+ injections mimicking physiology; Pump = flexibility but DKA risk; CGM = trends & alarms"
+                </div>
+            </div>
+        </section>
+
+        <!-- LO4: DKA MANAGEMENT -->
+        <section class="lo-section" id="lo4">
+            <div class="lo-header" onclick="toggleLO(this)">
+                <span>LO4: DKA Management (Detailed)</span>
+                <div class="lo-toggle">▼</div>
+            </div>
+            <div class="lo-content active">
+                <div class="summary-box">
+                    <strong>⚠️ Critical Traps</strong>
+                    <div class="summary-item" data-icon="⚡">Hold insulin ONLY if K⁺ <3.3 (not just any hypokalemia)</div>
+                    <div class="summary-item" data-icon="⚡">Add dextrose when glucose <200—don't stop insulin</div>
+                    <div class="summary-item" data-icon="⚡">Anion gap closure = endpoint (not glucose normalization)</div>
+                    <div class="summary-item" data-icon="⚡">Urine ketones detect acetoacetate NOT BHB (early DKA may be negative!)</div>
+                </div>
+
+                <div class="content-block">
+                    <h3>DKA Diagnostic Criteria</h3>
+                    <ul>
+                        <li>Glucose >250 mg/dL (usually)</li>
+                        <li>pH <7.3 OR serum bicarbonate <18 mEq/L</li>
+                        <li>Anion gap >12 (Na - [Cl + HCO3])</li>
+                        <li>Serum/urine ketones positive</li>
+                    </ul>
+                    <p><strong>Severity:</strong></p>
+                    <ul>
+                        <li><strong>Mild:</strong> pH 7.25–7.30, bicarb 15–18</li>
+                        <li><strong>Moderate:</strong> pH 7.00–7.24, bicarb 10–15</li>
+                        <li><strong>Severe:</strong> pH <7.0, bicarb <10</li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>Precipitants</h3>
+                    <ul>
+                        <li><strong>Infection (most common, ~40%)</strong> — UTI, pneumonia, etc.</li>
+                        <li>New-onset T1DM</li>
+                        <li>Insulin omission</li>
+                        <li>MI, pancreatitis</li>
+                        <li>Medications: steroids, atypical antipsychotics, <span class="highlight">SGLT2 inhibitors (euglycemic DKA)</span></li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>Pathophysiology of Ketone Production</h3>
+                    <ol>
+                        <li>↓ Insulin → ↑ Glucagon</li>
+                        <li>↑ Lipolysis → Free fatty acids (FFAs) to liver</li>
+                        <li>FFAs → β-oxidation → acetyl-CoA → TCA cycle overwhelmed</li>
+                        <li>Excess acetyl-CoA → Ketone bodies (β-hydroxybutyrate [BHB] → acetoacetate → acetone)</li>
+                    </ol>
+                    <p><strong>Key point:</strong> Nitroprusside/Acetest detects <span class="highlight">acetoacetate, NOT BHB</span>. Early in DKA, BHB predominates → urine ketones may be NEGATIVE. Use serum BHB measurement for accurate assessment.</p>
+                    <p>As DKA resolves, BHB → acetoacetate → urine ketones can appear to WORSEN even as patient improves clinically.</p>
+                </div>
+
+                <div class="content-block">
+                    <h3>DKA Treatment Protocol (FIKP)</h3>
+
+                    <h4>1. IV FLUIDS</h4>
+                    <ul>
+                        <li><strong>Initial:</strong> NS (0.9% NaCl) 1 L/hr for first 1–2h</li>
+                        <li><strong>Maintenance:</strong> 250–500 mL/hr after initial bolus</li>
+                        <li><strong>Switch to 0.45% NaCl</strong> when Na+ corrects</li>
+                        <li><strong>Add dextrose (D5W–D10W)</strong> when glucose reaches ~200 mg/dL (continue insulin to close anion gap!)</li>
+                    </ul>
+
+                    <h4>2. POTASSIUM REPLACEMENT</h4>
+                    <ul>
+                        <li>Replace if K⁺ <5.5 mEq/L</li>
+                        <li><strong>CRITICAL:</strong> HOLD insulin if K⁺ <3.3 (dangerous hypokalemia when insulin starts) → replete K to >3.3 THEN start insulin</li>
+                        <li>Goal K⁺: 4–5 mEq/L</li>
+                    </ul>
+
+                    <h4>3. INSULIN</h4>
+                    <ul>
+                        <li><strong>Regular insulin:</strong> 0.1 units/kg bolus → 0.1 units/kg/hr drip (or 0.14 units/kg/hr without bolus)</li>
+                        <li>Adjust to decrease glucose 50–75 mg/dL/hr</li>
+                        <li><strong>CRITICAL:</strong> Continue EVEN WHEN GLUCOSE REACHES 200 (reduce rate, add dextrose)—goal is anion gap closure, NOT just glucose normalization</li>
+                    </ul>
+
+                    <h4>4. BICARBONATE</h4>
+                    <ul>
+                        <li>NOT routinely recommended</li>
+                        <li>Only if pH <6.9 (severe acidosis)</li>
+                        <li>Risks: ↓ K⁺, paradoxical CNS acidosis, delayed ketone clearance</li>
+                    </ul>
+
+                    <h4>5. PHOSPHATE</h4>
+                    <ul>
+                        <li>Replace if <1 mg/dL; may need for severe DKA</li>
+                    </ul>
+
+                    <h4>6. MONITORING</h4>
+                    <ul>
+                        <li>Glucose q1h</li>
+                        <li>BMP q2–4h</li>
+                        <li>Watch for cerebral edema (esp. children) — treat with mannitol; don't correct Na too fast</li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>DKA Resolution Criteria</h3>
+                    <p>Glucose <200 AND TWO of the following:</p>
+                    <ul>
+                        <li>Bicarbonate ≥15 mEq/L</li>
+                        <li>pH ≥7.3</li>
+                        <li>Anion gap ≤12</li>
+                    </ul>
+                    <p>Then transition to SC insulin (overlap IV & SC by 1–2h to avoid rebound DKA).</p>
+                </div>
+
+                <div class="content-block">
+                    <h3>Euglycemic DKA (Important!)</h3>
+                    <p><strong>SGLT2 inhibitors (empagliflozin, dapagliflozin, etc.)</strong> can cause DKA with glucose that appears NORMAL or only mildly elevated (hence "euglycemic").</p>
+                    <p><strong>Mechanism:</strong> SGLT2 inhibition → ↑ glucagon, ↑ gluconeogenesis → ketone accumulation despite normal glucose</p>
+                    <p><strong>Recognition:</strong> Often MISSED because glucose isn't high. Must maintain high clinical suspicion; use serum BHB + anion gap.</p>
+                    <p><strong>Note:</strong> SGLT2 inhibitors are NOT FDA approved for T1DM (risk of euglycemic DKA); used off-label only in select patients.</p>
+                </div>
+
+                <div class="flip-card-container">
+                    <div class="flip-card" onclick="flipCard(this)">
+                        <div class="flip-front">Click to reveal: FIKP mnemonic expansion</div>
+                        <div class="flip-back">
+                            Fluids (NS 1L/hr, then 0.45%, add dextrose at glucose ~200), Insulin (0.1 units/kg/hr; continue despite glucose ≥200 until anion gap closes), Potassium (check first; HOLD insulin if K <3.3), close the gaP (anion gap is endpoint, not glucose)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trap">
+                    <strong>TRAP 1:</strong> Holding insulin because glucose is <200 is WRONG. The goal is anion gap closure. Decrease insulin rate and add dextrose instead.
+                </div>
+
+                <div class="trap">
+                    <strong>TRAP 2:</strong> Urine ketones are negative early in DKA (BHB predominates) but appear to worsen as DKA resolves (BHB converted to acetoacetate). Use serum BHB for accurate assessment.
+                </div>
+
+                <div class="trap">
+                    <strong>TRAP 3:</strong> Euglycemic DKA with SGLT2 inhibitors presents with NORMAL glucose. Don't miss it—check anion gap and serum BHB.
+                </div>
+
+                <div class="mnemonic">
+                    <strong>Mnemonic:</strong> "DKA treatment = FIKP = Fluids, Insulin (after K checked), Potassium, close the gaP"
+                </div>
+            </div>
+        </section>
+
+        <!-- LO5: HYPOGLYCEMIA -->
+        <section class="lo-section" id="lo5">
+            <div class="lo-header" onclick="toggleLO(this)">
+                <span>LO5: Hypoglycemia in T1DM — Recognition & Management</span>
+                <div class="lo-toggle">▼</div>
+            </div>
+            <div class="lo-content active">
+                <div class="summary-box">
+                    <strong>🎯 Tested Concepts</strong>
+                    <div class="summary-item" data-icon="✓">Symptoms: adrenergic vs neuroglycopenic</div>
+                    <div class="summary-item" data-icon="✓">Hypoglycemia unawareness and recovery</div>
+                    <div class="summary-item" data-icon="✓">15–15 Rule for mild-moderate</div>
+                    <div class="summary-item" data-icon="✓">Glucagon (IM, SC, nasal) for severe</div>
+                    <div class="summary-item" data-icon="✓">Glucagon limitations (glycogen stores)</div>
+                </div>
+
+                <div class="content-block">
+                    <h3>Hypoglycemia Severity</h3>
+                    <ul>
+                        <li><strong>Alert:</strong> Glucose <70 mg/dL</li>
+                        <li><strong>Significant:</strong> <54 mg/dL</li>
+                        <li><strong>Severe:</strong> <40 mg/dL (unconscious)</li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>Symptoms</h3>
+                    <p><strong>Adrenergic (early warning, glucose ~60–70 mg/dL):</strong> Mediated by epinephrine</p>
+                    <ul>
+                        <li>Sweating, tremor, palpitations, anxiety, hunger</li>
+                    </ul>
+                    <p><strong>Neuroglycopenic (later, more severe, glucose <50 mg/dL):</strong> Brain glucose deprivation</p>
+                    <ul>
+                        <li>Confusion, slurred speech, visual changes, seizures, coma</li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>Hypoglycemia Unawareness</h3>
+                    <p><strong>Definition:</strong> Loss of adrenergic warning symptoms; common in long-standing T1DM</p>
+                    <p><strong>Mechanism:</strong> Autonomic neuropathy + repeated hypoglycemia → blunted counter-regulatory response</p>
+                    <p><strong>Treatment:</strong> Strict hypoglycemia avoidance for 2–3 weeks → partially restores awareness. <span class="highlight">CGM with alerts is essential</span> in these patients.</p>
+                </div>
+
+                <div class="content-block">
+                    <h3>Counter-Regulatory Response (Normal)</h3>
+                    <p>Hypoglycemia triggers:</p>
+                    <ol>
+                        <li><strong>Glucagon</strong> (first-line defense in non-diabetics)</li>
+                        <li><strong>Epinephrine</strong> (primary defense in T1DM after glucagon response is lost)</li>
+                        <li>Cortisol + GH (delayed backup)</li>
+                    </ol>
+                    <p><strong>Key point:</strong> In T1DM, glucagon response is lost (α cells cannot respond appropriately) → epinephrine becomes main defense. If autonomic neuropathy → blunted epinephrine too → SEVERE hypoglycemia risk.</p>
+                </div>
+
+                <div class="content-block">
+                    <h3>Hypoglycemia Treatment</h3>
+
+                    <h4>Mild-Moderate (Conscious Patient)</h4>
+                    <p><span class="highlight">"15–15 Rule":</span></p>
+                    <ol>
+                        <li>15g fast-acting carbohydrate (e.g., 4 oz juice, 3–4 glucose tablets, regular soda)</li>
+                        <li>Recheck glucose in 15 min</li>
+                        <li>Repeat if still low</li>
+                    </ol>
+                    <p>After recovery: eat complex carbs to prevent rebound.</p>
+
+                    <h4>Severe (Unconscious, Cannot Take Oral)</h4>
+                    <ul>
+                        <li><strong>Glucagon (IM or SC):</strong> 1 mg in adults</li>
+                        <li><strong>Nasal glucagon (Baqsimi):</strong> Alternative formulation</li>
+                        <li><strong>IV dextrose:</strong> D50W 50 mL = 25g glucose (if IV access available)</li>
+                    </ul>
+                </div>
+
+                <div class="flip-card-container">
+                    <div class="flip-card" onclick="flipCard(this)">
+                        <div class="flip-front">Click to reveal: Glucagon limitations</div>
+                        <div class="flip-back">
+                            Glucagon mobilizes hepatic glycogen. Won't work if:
+                            • Starvation/fasting (depleted glycogen)
+                            • Chronic alcohol intoxication (depleted stores)
+                            • Addison's disease (↓ cortisol cofactors)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <h3>Drug-Induced Hypoglycemia</h3>
+                    <ul>
+                        <li><strong>Insulin & sulfonylureas:</strong> Most common causes</li>
+                        <li><strong>Sulfonylureas:</strong> Prolonged action → prolonged hypoglycemia → may need dextrose drip</li>
+                        <li><strong>Beta-blockers:</strong> Mask adrenergic symptoms + ↓ glycogenolysis</li>
+                        <li><strong>Quinolones, salicylates:</strong> Can enhance insulin effect</li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>Glucagon Emergency Kit</h3>
+                    <ul>
+                        <li>Injection (Glucagen): IM or SC</li>
+                        <li>Nasal powder (Baqsimi): no needle required</li>
+                        <li>Family/household should have kit available</li>
+                    </ul>
+                </div>
+
+                <div class="trap">
+                    <strong>TRAP:</strong> Glucagon works by mobilizing hepatic glycogen. Won't work in starvation, alcohol intoxication, or Addison's disease (depleted glycogen or inadequate cortisol cofactors).
+                </div>
+
+                <div class="mnemonic">
+                    <strong>Mnemonic:</strong> "15-15 Rule for mild hypoglycemia; GLUCAGON for severe (unconscious); family should have kit ready"
+                </div>
+            </div>
+        </section>
+
+        <!-- LO6: MONITORING & ADJUNCTIVE THERAPIES -->
+        <section class="lo-section" id="lo6">
+            <div class="lo-header" onclick="toggleLO(this)">
+                <span>LO6: Monitoring, Targets, & Adjunctive Therapies</span>
+                <div class="lo-toggle">▼</div>
+            </div>
+            <div class="lo-content active">
+                <div class="summary-box">
+                    <strong>🎯 Tested Concepts</strong>
+                    <div class="summary-item" data-icon="✓">SMBG, CGM, HbA1c, time-in-range (TIR)</div>
+                    <div class="summary-item" data-icon="✓">Annual complication screening (retinopathy, nephropathy, neuropathy, CV, thyroid, celiac)</div>
+                    <div class="summary-item" data-icon="✓">Pramlintide (amylin analog) dosing & insulin adjustment</div>
+                    <div class="summary-item" data-icon="✓">Teplizumab for Stage 2 T1DM prevention</div>
+                    <div class="summary-item" data-icon="✓">Exercise considerations</div>
+                </div>
+
+                <div class="content-block">
+                    <h3>Monitoring Glucose Control</h3>
+
+                    <h4>Self-Monitoring Blood Glucose (SMBG)</h4>
+                    <ul>
+                        <li>Fingerstick minimum 4x/day in T1DM (before meals, bedtime)</li>
+                    </ul>
+
+                    <h4>Continuous Glucose Monitoring (CGM)</h4>
+                    <ul>
+                        <li>Superior for detecting patterns, hypoglycemia, overnight trends</li>
+                        <li>Time-in-range (TIR 70–180 mg/dL): Target >70%</li>
+                    </ul>
+
+                    <h4>HbA1c</h4>
+                    <ul>
+                        <li>Every 3 months until at goal, then every 6 months</li>
+                        <li><strong>Target <7%</strong> for most T1DM (≤6.5% if achievable without significant hypoglycemia)</li>
+                    </ul>
+
+                    <h4>LBGI/HBGI</h4>
+                    <ul>
+                        <li>Low/High Blood Glucose Index for risk stratification</li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>Annual Complication Screening</h3>
+                    <table>
+                        <tr>
+                            <th>Complication</th>
+                            <th>Screening Test</th>
+                            <th>Frequency</th>
+                        </tr>
+                        <tr>
+                            <td>Retinopathy</td>
+                            <td>Dilated eye exam</td>
+                            <td>Annually (or q2y if stable, low risk)</td>
+                        </tr>
+                        <tr>
+                            <td>Nephropathy</td>
+                            <td>UACR + creatinine (eGFR)</td>
+                            <td>Annually</td>
+                        </tr>
+                        <tr>
+                            <td>Neuropathy</td>
+                            <td>Monofilament, vibration, temperature, reflexes</td>
+                            <td>Annually</td>
+                        </tr>
+                        <tr>
+                            <td>Cardiovascular</td>
+                            <td>Lipid panel, BP at every visit</td>
+                            <td>Every visit</td>
+                        </tr>
+                        <tr>
+                            <td>Thyroid</td>
+                            <td>Anti-TPO at diagnosis; TSH if symptomatic (T1DM ↑ risk Hashimoto's & Graves')</td>
+                            <td>At diagnosis, then PRN</td>
+                        </tr>
+                        <tr>
+                            <td>Celiac disease</td>
+                            <td>Anti-tissue transglutaminase (anti-tTG) IgA at diagnosis</td>
+                            <td>At diagnosis</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="content-block">
+                    <h3>Adjunctive Therapies in T1DM (NOT Alternatives to Insulin!)</h3>
+
+                    <h4>Pramlintide (Synthetic Amylin)</h4>
+                    <ul>
+                        <li>Injected before meals</li>
+                        <li>Effects: ↓ postprandial glucose (↓ gastric emptying, ↓ glucagon, ↑ satiety)</li>
+                        <li><span class="highlight">CRITICAL: Must ↓ premeal insulin dose 50% to avoid hypoglycemia</span></li>
+                        <li>FDA approved as adjunct to insulin in T1DM</li>
+                    </ul>
+
+                    <h4>SGLT2 Inhibitors in T1DM</h4>
+                    <ul>
+                        <li>NOT FDA approved for T1DM (risk of euglycemic DKA)</li>
+                        <li>Used off-label in some patients</li>
+                    </ul>
+
+                    <h4>GLP-1 Agonists in T1DM</h4>
+                    <ul>
+                        <li>Investigational; not routinely used</li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>Sick Day Rules (T1DM + Illness)</h3>
+                    <ul>
+                        <li><strong>NEVER stop insulin</strong> in T1DM even if not eating (illness causes insulin resistance + ketone production)</li>
+                        <li>Check glucose & ketones q4h</li>
+                        <li>Extra doses for ketones or hyperglycemia</li>
+                        <li>If ketones present + unable to keep fluids down → go to ER</li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>Immunotherapy & Prevention</h3>
+
+                    <h4>Teplizumab (Anti-CD3 mAb)</h4>
+                    <ul>
+                        <li>FDA approved for <span class="highlight">Stage 2 T1DM</span> (2+ antibodies + dysglycemia but NOT yet Stage 3/overt diabetes)</li>
+                        <li>Effect: Delays progression to Stage 3 by ~2–3 years</li>
+                    </ul>
+
+                    <h4>Ongoing Research</h4>
+                    <ul>
+                        <li>Antigen-specific immunotherapy</li>
+                        <li>Stem cell transplant</li>
+                        <li>Encapsulated islet cells</li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>Exercise Considerations</h3>
+                    <ul>
+                        <li>Exercise ↓ glucose (↑ GLUT4 translocation, ↑ insulin sensitivity)</li>
+                        <li>T1DM must adjust insulin and/or carb intake around exercise</li>
+                        <li>Delayed hypoglycemia can occur hours after exercise (muscles replenish glycogen)</li>
+                    </ul>
+                </div>
+
+                <div class="flip-card-container">
+                    <div class="flip-card" onclick="flipCard(this)">
+                        <div class="flip-front">Click to reveal: Pramlintide dosing adjustments</div>
+                        <div class="flip-back">
+                            When adding pramlintide, REDUCE premeal insulin dose by 50% to avoid hypoglycemia. Then titrate both pramlintide and insulin based on glucose response.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card-container">
+                    <div class="flip-card" onclick="flipCard(this)">
+                        <div class="flip-front">Click to reveal: Teplizumab vs preventive therapies</div>
+                        <div class="flip-back">
+                            Teplizumab (anti-CD3): Stage 2 T1DM PREVENTION (2+ antibodies + dysglycemia). Delays overt T1DM by 2-3 years. NOT for overt diabetes treatment. Ongoing trials for earlier stages.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trap">
+                    <strong>TRAP:</strong> Pramlintide REQUIRES 50% reduction in premeal insulin dose. Failure to reduce insulin → severe hypoglycemia.
+                </div>
+
+                <div class="trap">
+                    <strong>TRAP:</strong> Teplizumab is for Stage 2 T1DM PREVENTION (autoantibodies + dysglycemia), not for treatment of overt diabetes.
+                </div>
+
+                <div class="mnemonic">
+                    <strong>Mnemonic:</strong> "T1DM monitoring = SCAN: Sugar (glucose), Complications (annual screens), A1c (q3-6 months), Nutrition/lifestyle"
+                </div>
+            </div>
+        </section>
+
+        <!-- MIND MAP SECTION -->
+        <section class="lo-section" id="mindmap">
+            <div class="lo-header" onclick="toggleLO(this)">
+                <span>Mind Map: T1DM Treatment Pathway</span>
+                <div class="lo-toggle">▼</div>
+            </div>
+            <div class="lo-content active">
+                <div class="mindmap">
+                    <svg width="100%" height="500" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Central node -->
+                        <circle cx="500" cy="250" r="60" fill="#059669" stroke="#047857" stroke-width="3"/>
+                        <text x="500" y="255" text-anchor="middle" font-size="16" font-weight="bold" fill="white">T1DM Treatment</text>
+
+                        <!-- Branch 1: Diagnosis -->
+                        <line x1="460" y1="210" x2="300" y2="100" stroke="#059669" stroke-width="2"/>
+                        <circle cx="300" cy="100" r="45" fill="#e0f2fe" stroke="#059669" stroke-width="2"/>
+                        <text x="300" y="100" text-anchor="middle" font-size="12" font-weight="bold" fill="#0c4a6e">Diagnosis</text>
+                        <text x="300" y="115" text-anchor="middle" font-size="10" fill="#0c4a6e">FPG, OGTT</text>
+                        <text x="300" y="128" text-anchor="middle" font-size="10" fill="#0c4a6e">HbA1c</text>
+
+                        <!-- Branch 2: Insulin Types -->
+                        <line x1="500" y1="190" x2="500" y2="50" stroke="#059669" stroke-width="2"/>
+                        <circle cx="500" cy="50" r="45" fill="#e0f2fe" stroke="#059669" stroke-width="2"/>
+                        <text x="500" y="50" text-anchor="middle" font-size="12" font-weight="bold" fill="#0c4a6e">Insulin Types</text>
+                        <text x="500" y="65" text-anchor="middle" font-size="10" fill="#0c4a6e">Rapid, Short,</text>
+                        <text x="500" y="78" text-anchor="middle" font-size="10" fill="#0c4a6e">Intermediate, Long</text>
+
+                        <!-- Branch 3: Regimens -->
+                        <line x1="540" y1="210" x2="700" y2="100" stroke="#059669" stroke-width="2"/>
+                        <circle cx="700" cy="100" r="45" fill="#e0f2fe" stroke="#059669" stroke-width="2"/>
+                        <text x="700" y="100" text-anchor="middle" font-size="12" font-weight="bold" fill="#0c4a6e">Regimens</text>
+                        <text x="700" y="115" text-anchor="middle" font-size="10" fill="#0c4a6e">Basal-Bolus</text>
+                        <text x="700" y="128" text-anchor="middle" font-size="10" fill="#0c4a6e">Pump, CGM</text>
+
+                        <!-- Branch 4: DKA -->
+                        <line x1="460" y1="290" x2="300" y2="400" stroke="#059669" stroke-width="2"/>
+                        <circle cx="300" cy="400" r="45" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+                        <text x="300" y="400" text-anchor="middle" font-size="12" font-weight="bold" fill="#7f1d1d">DKA Management</text>
+                        <text x="300" y="415" text-anchor="middle" font-size="10" fill="#7f1d1d">FIKP Protocol</text>
+
+                        <!-- Branch 5: Hypoglycemia -->
+                        <line x1="500" y1="310" x2="500" y2="450" stroke="#059669" stroke-width="2"/>
+                        <circle cx="500" cy="450" r="45" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="500" y="450" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">Hypoglycemia</text>
+                        <text x="500" y="465" text-anchor="middle" font-size="10" fill="#92400e">15-15, Glucagon</text>
+
+                        <!-- Branch 6: Monitoring -->
+                        <line x1="540" y1="290" x2="700" y2="400" stroke="#059669" stroke-width="2"/>
+                        <circle cx="700" cy="400" r="45" fill="#f0fdf4" stroke="#059669" stroke-width="2"/>
+                        <text x="700" y="400" text-anchor="middle" font-size="12" font-weight="bold" fill="#065f46">Monitoring</text>
+                        <text x="700" y="415" text-anchor="middle" font-size="10" fill="#065f46">SMBG, HbA1c</text>
+                        <text x="700" y="428" text-anchor="middle" font-size="10" fill="#065f46">Annual screens</text>
+                    </svg>
+                </div>
+                <p style="text-align: center; margin-top: 20px; color: #475569; font-size: 13px;">
+                    Central pathway: Diagnosis → Select insulin type → Choose regimen → Monitor glucose → Manage complications (DKA, hypoglycemia)
+                </p>
+            </div>
+        </section>
+
+        <!-- MCQs SECTION -->
+        <section class="lo-section" id="mcqs">
+            <div class="lo-header" onclick="toggleLO(this)">
+                <span>MCQs: 18 USMLE-Style Questions</span>
+                <div class="lo-toggle">▼</div>
+            </div>
+            <div class="lo-content active">
+                <!-- MCQ 1 -->
+                <div class="mcq">
+                    <div class="mcq-q">1. A 24-year-old female presents with polyuria, polydipsia, and a 2-week history of weight loss. Labs show fasting plasma glucose 285 mg/dL, pH 7.20, bicarbonate 12 mEq/L, and positive serum ketones. Which is the MOST appropriate next step?</div>
+                    <div class="mcq-options">
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq1" value="a"> A) Initiate glargine once daily; recheck glucose in 3 days
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq1" value="b"> B) IV fluids, check K+, start insulin drip after K+ >3.3
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq1" value="c"> C) Oral metformin; recheck in 1 week
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq1" value="d"> D) Sodium bicarbonate 100 mEq IV immediately
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq1" value="e"> E) Acetaminophen for fever
+                        </label>
+                    </div>
+                    <button onclick="revealMCQ(this, 'b')">Show Answer & Explanation</button>
+                    <div class="mcq-reveal">
+                        <div class="mcq-reveal correct">Correct: B</div>
+                        <div class="mcq-reveal explanation">
+                            This is DKA (glucose >250, pH <7.3, positive ketones). Treatment: IV fluids (NS), check K+, and start insulin only AFTER K+ is >3.3 (if K+ <3.3, hold insulin to avoid cardiac arrhythmias from hypokalemia). A) Glargine alone insufficient for DKA. C) Metformin ineffective in DKA. D) Bicarbonate reserved for pH <6.9.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MCQ 2 -->
+                <div class="mcq">
+                    <div class="mcq-q">2. A 16-year-old with newly diagnosed T1DM is started on basal-bolus therapy with glargine (once daily) + lispro (with meals). Which of the following is an INCORRECT statement about this regimen?</div>
+                    <div class="mcq-options">
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq2" value="a"> A) Glargine can be mixed with lispro in the same syringe
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq2" value="b"> B) Lispro is injected just before or with meals
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq2" value="c"> C) Glargine has no distinct peak, minimizing nocturnal hypoglycemia risk
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq2" value="d"> D) Insulin-to-carb ratio is used to calculate lispro boluses
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq2" value="e"> E) Glargine should be given at the same time daily
+                        </label>
+                    </div>
+                    <button onclick="revealMCQ(this, 'a')">Show Answer & Explanation</button>
+                    <div class="mcq-reveal">
+                        <div class="mcq-reveal correct">Correct: A</div>
+                        <div class="mcq-reveal explanation">
+                            Glargine CANNOT be mixed with other insulins (including lispro) because it precipitates at subcutaneous pH. They must be given as separate injections. All other statements are correct.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MCQ 3 -->
+                <div class="mcq">
+                    <div class="mcq-q">3. A patient with T1DM on insulin pump therapy experiences sudden hyperglycemia (glucose >300 mg/dL) and is found to have a disconnected infusion set. Which complication is he at HIGHEST risk of developing?</div>
+                    <div class="mcq-options">
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq3" value="a"> A) Hypoglycemic coma
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq3" value="b"> B) DKA (because pump has no long-acting reserve insulin)
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq3" value="c"> C) Acute MI
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq3" value="d"> D) Permanent retinal damage
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq3" value="e"> E) Hypercalcemia
+                        </label>
+                    </div>
+                    <button onclick="revealMCQ(this, 'b')">Show Answer & Explanation</button>
+                    <div class="mcq-reveal">
+                        <div class="mcq-reveal correct">Correct: B</div>
+                        <div class="mcq-reveal explanation">
+                            Pump therapy uses only rapid-acting insulin, which has a 3–5 hr duration. Loss of insulin delivery → DKA within hours (no long-acting reserve). This is a major disadvantage of pump therapy compared to basal-bolus with long-acting insulin (glargine/detemir).
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MCQ 4 -->
+                <div class="mcq">
+                    <div class="mcq-q">4. A 28-year-old with T1DM presents with confusion and sweating. Fingerstick glucose is 38 mg/dL. Which is the MOST appropriate immediate management?</div>
+                    <div class="mcq-options">
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq4" value="a"> A) Give 8 oz orange juice orally
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq4" value="b"> B) Administer IM glucagon 1 mg (cannot swallow safely)
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq4" value="c"> C) Start dextrose drip and reassess in 15 min
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq4" value="d"> D) Check HbA1c
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq4" value="e"> E) Admit to ICU
+                        </label>
+                    </div>
+                    <button onclick="revealMCQ(this, 'b')">Show Answer & Explanation</button>
+                    <div class="mcq-reveal">
+                        <div class="mcq-reveal correct">Correct: B</div>
+                        <div class="mcq-reveal explanation">
+                            Patient has SEVERE hypoglycemia (glucose <40, confused) and cannot safely swallow oral carbs → IM glucagon is first-line. A) Unsafe (aspiration risk). C) Needs IM glucagon first while IV access being obtained.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MCQ 5 -->
+                <div class="mcq">
+                    <div class="mcq-q">5. A 34-year-old with longstanding T1DM reports that he no longer experiences tremor or sweating when his glucose drops to 60 mg/dL. He is referred for evaluation. What is the mechanism of this HYPOGLYCEMIA UNAWARENESS?</div>
+                    <div class="mcq-options">
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq5" value="a"> A) Pancreatic β-cell recovery (honeymoon period)
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq5" value="b"> B) Autonomic neuropathy + repeated hypoglycemia → blunted epinephrine response
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq5" value="c"> C) SGLT2 inhibitor use
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq5" value="d"> D) Increased C-peptide secretion
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq5" value="e"> E) Hyperinsulinemia
+                        </label>
+                    </div>
+                    <button onclick="revealMCQ(this, 'b')">Show Answer & Explanation</button>
+                    <div class="mcq-reveal">
+                        <div class="mcq-reveal correct">Correct: B</div>
+                        <div class="mcq-reveal explanation">
+                            Hypoglycemia unawareness in long-standing T1DM results from autonomic neuropathy (affects epinephrine release) + repeated hypoglycemic episodes (blunt counter-regulatory response). Adrenergic symptoms (tremor, sweating) are lost. Treatment: strict glucose control for 2–3 weeks + CGM for safety.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MCQ 6 -->
+                <div class="mcq">
+                    <div class="mcq-q">6. A 31-year-old with T1DM is in DKA with glucose 320 mg/dL, pH 7.15, bicarbonate 10 mEq/L, K+ 2.8 mEq/L. After IV fluid bolus, what is the CORRECT next step regarding insulin and potassium?</div>
+                    <div class="mcq-options">
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq6" value="a"> A) Start insulin immediately; begin K+ replacement simultaneously
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq6" value="b"> B) Start insulin immediately; hold K+ (will rise as insulin drives K+ intracellularly)
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq6" value="c"> C) HOLD insulin; aggressively replicate K+ to >3.3 mEq/L, THEN start insulin
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq6" value="d"> D) Start insulin + sodium bicarbonate to rapidly correct pH
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq6" value="e"> E) Give diuretics to lower K+
+                        </label>
+                    </div>
+                    <button onclick="revealMCQ(this, 'c')">Show Answer & Explanation</button>
+                    <div class="mcq-reveal">
+                        <div class="mcq-reveal correct">Correct: C</div>
+                        <div class="mcq-reveal explanation">
+                            K+ <3.3 is DANGEROUS. Insulin drives K+ intracellularly, worsening hypokalemia → cardiac arrhythmias. HOLD insulin until K+ >3.3, then replete K+ and start insulin. B) Wrong—cannot "wait" for K+ to rise. D) Bicarbonate only for pH <6.9.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MCQ 7 -->
+                <div class="mcq">
+                    <div class="mcq-q">7. A 55-year-old in DKA receives IV fluids and insulin. After 6 hours, glucose is now 210 mg/dL, pH 7.28, bicarbonate 16 mEq/L, anion gap 14. Which is the MOST appropriate management?</div>
+                    <div class="mcq-options">
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq7" value="a"> A) STOP insulin (glucose now <250)
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq7" value="b"> B) REDUCE insulin rate and add dextrose (D5W); continue insulin until anion gap closes
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq7" value="c"> C) Give glucagon to prevent hypoglycemia
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq7" value="d"> D) Discharge home; recheck glucose in clinic tomorrow
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq7" value="e"> E) Give sodium bicarbonate (pH is still <7.3)
+                        </label>
+                    </div>
+                    <button onclick="revealMCQ(this, 'b')">Show Answer & Explanation</button>
+                    <div class="mcq-reveal">
+                        <div class="mcq-reveal correct">Correct: B</div>
+                        <div class="mcq-reveal explanation">
+                            The GOAL of DKA treatment is anion gap closure, NOT just glucose normalization. At glucose 210, anion gap is still 14 (elevated) → continue insulin (at reduced rate) + add dextrose to prevent hypoglycemia. Stop insulin only when anion gap ≤12, pH ≥7.3, and bicarb ≥15.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MCQ 8 -->
+                <div class="mcq">
+                    <div class="mcq-q">8. A 26-year-old female with T1DM on SGLT2 inhibitor (empagliflozin) for off-label glucose control presents with nausea, fatigue, and shortness of breath. Labs: glucose 184 mg/dL, pH 7.22, bicarbonate 13 mEq/L, serum BHB 4.8 mmol/L (high). What is the diagnosis?</div>
+                    <div class="mcq-options">
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq8" value="a"> A) Normal DKA (expected with SGLT2i in T1DM)
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq8" value="b"> B) Euglycemic DKA (normal glucose with ketosis due to SGLT2i)
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq8" value="c"> C) Hyperglycemic HHS
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq8" value="d"> D) Diabetic ketosis without acidosis (safe)
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq8" value="e"> E) Acute coronary syndrome
+                        </label>
+                    </div>
+                    <button onclick="revealMCQ(this, 'b')">Show Answer & Explanation</button>
+                    <div class="mcq-reveal">
+                        <div class="mcq-reveal correct">Correct: B</div>
+                        <div class="mcq-reveal explanation">
+                            SGLT2 inhibitors can cause EUGLYCEMIC DKA (glucose appears normal/low but ketosis present). This is often missed because glucose is not high. Key: serum BHB is elevated with metabolic acidosis at "normal" glucose. SGLT2i contraindicated in T1DM due to this risk.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MCQ 9 -->
+                <div class="mcq">
+                    <div class="mcq-q">9. A patient in DKA is given insulin drip. Urine ketone test (via nitroprusside) is NEGATIVE. The patient clinically improves. What is the MOST likely explanation?</div>
+                    <div class="mcq-options">
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq9" value="a"> A) DKA has resolved completely
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq9" value="b"> B) Early DKA: urine ketones detect acetoacetate, but serum BHB (major ketone) is high → negative urine test
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq9" value="c"> C) Insulin is causing false-negative urine ketones
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq9" value="d"> D) The patient never had ketones
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq9" value="e"> E) Urine dipsticks are unreliable in DKA
+                        </label>
+                    </div>
+                    <button onclick="revealMCQ(this, 'b')">Show Answer & Explanation</button>
+                    <div class="mcq-reveal">
+                        <div class="mcq-reveal correct">Correct: B</div>
+                        <div class="mcq-reveal explanation">
+                            Urine ketone tests (nitroprusside/Acetest) detect ACETOACETATE, not β-hydroxybutyrate (BHB). Early in DKA, BHB predominates → urine ketones negative. As DKA resolves, BHB is converted to acetoacetate → urine ketones become POSITIVE (paradoxically worsens). Use serum BHB for accurate assessment.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MCQ 10 -->
+                <div class="mcq">
+                    <div class="mcq-q">10. A 19-year-old with T1DM is started on pramlintide (synthetic amylin) to improve postprandial glucose control. What is the CRITICAL adjustment that MUST be made?</div>
+                    <div class="mcq-options">
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq10" value="a"> A) Increase premeal insulin by 25%
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq10" value="b"> B) Reduce premeal insulin by 50% (to avoid hypoglycemia)
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq10" value="c"> C) No insulin adjustment needed; pramlintide is additive
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq10" value="d"> D) Switch from lispro to regular insulin
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq10" value="e"> E) Stop basal insulin
+                        </label>
+                    </div>
+                    <button onclick="revealMCQ(this, 'b')">Show Answer & Explanation</button>
+                    <div class="mcq-reveal">
+                        <div class="mcq-reveal correct">Correct: B</div>
+                        <div class="mcq-reveal explanation">
+                            Pramlintide slows gastric emptying + ↓ glucagon + ↑ satiety → ↓ postprandial glucose. If premeal insulin is not reduced 50%, severe hypoglycemia will occur. Pramlintide is an adjunct, not a replacement for insulin.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MCQ 11 -->
+                <div class="mcq">
+                    <div class="mcq-q">11. A 22-year-old newly diagnosed with T1DM presents 3 months after diagnosis requiring only 0.3 units/kg/day (reduced from initial 0.8 units/kg/day). What is this phenomenon called?</div>
+                    <div class="mcq-options">
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq11" value="a"> A) Gluconeogenic rebound
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq11" value="b"> B) Honeymoon period (temporary β-cell recovery due to ↓ glucotoxicity)
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq11" value="c"> C) Somogyi effect
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq11" value="d"> D) Remission of T1DM
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq11" value="e"> E) Insulin resistance from weight gain
+                        </label>
+                    </div>
+                    <button onclick="revealMCQ(this, 'b')">Show Answer & Explanation</button>
+                    <div class="mcq-reveal">
+                        <div class="mcq-reveal correct">Correct: B</div>
+                        <div class="mcq-reveal explanation">
+                            The honeymoon period occurs shortly after T1DM diagnosis when glycemic control improves (↓ glucotoxicity), allowing remaining β cells to partially recover. Insulin requirements drop temporarily. Eventually, autoimmune destruction continues → permanent loss of β-cell function and ↑ insulin requirements again.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MCQ 12 -->
+                <div class="mcq">
+                    <div class="mcq-q">12. A patient with T1DM has consistent 3 AM glucose values of 55 mg/dL with morning glucose of 250 mg/dL. Which is the CORRECT management?</div>
+                    <div class="mcq-options">
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq12" value="a"> A) Increase basal (nighttime) insulin (dawn phenomenon)
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq12" value="b"> B) REDUCE nighttime insulin (Somogyi effect—nocturnal hypo → rebound hyperglycemia)
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq12" value="c"> C) Give extra carbs at bedtime
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq12" value="d"> D) Switch to twice-daily NPH
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq12" value="e"> E) Check HbA1c
+                        </label>
+                    </div>
+                    <button onclick="revealMCQ(this, 'b')">Show Answer & Explanation</button>
+                    <div class="mcq-reveal">
+                        <div class="mcq-reveal correct">Correct: B</div>
+                        <div class="mcq-reveal explanation">
+                            Low 3 AM glucose (55) + high morning glucose = Somogyi effect (nocturnal hypoglycemia → counter-regulatory response → rebound hyperglycemia). REDUCE nighttime insulin. If 3 AM glucose were normal + morning high = dawn phenomenon → increase basal insulin.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MCQ 13 -->
+                <div class="mcq">
+                    <div class="mcq-q">13. A 32-year-old with T1DM has HbA1c of 8.2% on basal-bolus therapy. He is counseled on intensive glucose control to reduce complications. What is his target HbA1c?</div>
+                    <div class="mcq-options">
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq13" value="a"> A) <5.0% (normal)
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq13" value="b"> B) <6.5% if tight control achievable without significant hypoglycemia
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq13" value="c"> C) <7.0% for most T1DM adults
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq13" value="d"> D) 7.5–8.0%
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq13" value="e"> E) <8.5% (avoid hypoglycemia)
+                        </label>
+                    </div>
+                    <button onclick="revealMCQ(this, 'c')">Show Answer & Explanation</button>
+                    <div class="mcq-reveal">
+                        <div class="mcq-reveal correct">Correct: C</div>
+                        <div class="mcq-reveal explanation">
+                            ADA target for most T1DM adults is <7%. For younger patients with long life expectancy and no contraindications, <6.5% is acceptable if achievable without significant hypoglycemia. Targets must be individualized. Elderly/frail patients: <8%.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MCQ 14 -->
+                <div class="mcq">
+                    <div class="mcq-q">14. A 40-year-old with T1DM for 20 years presents for annual complications screening. Which screening test is NOT routinely recommended?</div>
+                    <div class="mcq-options">
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq14" value="a"> A) Dilated retinal eye exam
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq14" value="b"> B) Urine albumin-to-creatinine ratio (UACR)
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq14" value="c"> C) Annual CT chest screening for lung cancer (no diabetes-specific indication)
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq14" value="d"> D) Monofilament testing for neuropathy
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq14" value="e"> E) Lipid panel
+                        </label>
+                    </div>
+                    <button onclick="revealMCQ(this, 'c')">Show Answer & Explanation</button>
+                    <div class="mcq-reveal">
+                        <div class="mcq-reveal correct">Correct: C</div>
+                        <div class="mcq-reveal explanation">
+                            Routine T1DM complications screening includes dilated eye exam, UACR, neuropathy testing, and lipid panel. CT chest for lung cancer screening is NOT a standard diabetes complication screen—applied per general cancer screening guidelines.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MCQ 15 -->
+                <div class="mcq">
+                    <div class="mcq-q">15. A 28-year-old with newly diagnosed T1DM and positive anti-GAD antibodies is informed about a new medication (teplizumab). What is its indication?</div>
+                    <div class="mcq-options">
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq15" value="a"> A) Treatment of overt T1DM (Stage 3)
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq15" value="b"> B) Prevention in Stage 2 T1DM (2+ autoantibodies + dysglycemia, NOT yet overt DM)
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq15" value="c"> C) Prevention of DKA
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq15" value="d"> D) Management of hypoglycemia unawareness
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq15" value="e"> E) Cure of autoimmune diabetes
+                        </label>
+                    </div>
+                    <button onclick="revealMCQ(this, 'b')">Show Answer & Explanation</button>
+                    <div class="mcq-reveal">
+                        <div class="mcq-reveal correct">Correct: B</div>
+                        <div class="mcq-reveal explanation">
+                            Teplizumab (anti-CD3) is FDA approved for Stage 2 T1DM PREVENTION (2+ autoantibodies + dysglycemia but not yet overt diabetes). It delays progression to Stage 3 by ~2–3 years. NOT for treatment of overt T1DM; NOT a cure.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MCQ 16 -->
+                <div class="mcq">
+                    <div class="mcq-q">16. A 45-year-old patient taking propranolol for hypertension develops hypoglycemia (glucose 48 mg/dL) while on T1DM insulin therapy. Why is this patient at higher risk?</div>
+                    <div class="mcq-options">
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq16" value="a"> A) Propranolol increases insulin absorption
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq16" value="b"> B) Propranolol (β-blocker) masks adrenergic symptoms of hypoglycemia + impairs glycogenolysis
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq16" value="c"> C) Propranolol causes DKA
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq16" value="d"> D) Propranolol increases glucagon secretion
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq16" value="e"> E) No interaction with T1DM
+                        </label>
+                    </div>
+                    <button onclick="revealMCQ(this, 'b')">Show Answer & Explanation</button>
+                    <div class="mcq-reveal">
+                        <div class="mcq-reveal correct">Correct: B</div>
+                        <div class="mcq-reveal explanation">
+                            β-Blockers mask adrenergic warning symptoms (tremor, sweating) of hypoglycemia (patient may not realize glucose is dropping) AND impair hepatic glycogenolysis (↓ counter-regulatory response). Combined effect: unrecognized, prolonged hypoglycemia.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MCQ 17 -->
+                <div class="mcq">
+                    <div class="mcq-q">17. A 35-year-old with T1DM on CGM reports achieving time-in-range (TIR) of 65% (70–180 mg/dL target). According to current guidelines, what is the goal TIR?</div>
+                    <div class="mcq-options">
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq17" value="a"> A) >50%
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq17" value="b"> B) >60%
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq17" value="c"> C) >70%
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq17" value="d"> D) >80%
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq17" value="e"> E) No specific goal; HbA1c is sufficient
+                        </label>
+                    </div>
+                    <button onclick="revealMCQ(this, 'c')">Show Answer & Explanation</button>
+                    <div class="mcq-reveal">
+                        <div class="mcq-reveal correct">Correct: C</div>
+                        <div class="mcq-reveal explanation">
+                            Current guidelines recommend TIR >70% (70–180 mg/dL range) as a major metric for glucose control in T1DM, especially with CGM use. Patient's TIR of 65% is slightly below goal and suggests need for adjustments to insulin regimen or carb intake.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MCQ 18 -->
+                <div class="mcq">
+                    <div class="mcq-q">18. A 29-year-old with T1DM develops an acute febrile illness (pneumonia). Which is the CORRECT sick-day rule?</div>
+                    <div class="mcq-options">
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq18" value="a"> A) STOP all insulin until fever resolves
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq18" value="b"> B) NEVER stop insulin even if not eating (illness causes insulin resistance + ketone production)
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq18" value="c"> C) Switch to metformin temporarily
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq18" value="d"> D) Skip meals and carbs to avoid hyperglycemia
+                        </label>
+                        <label class="mcq-option">
+                            <input type="radio" name="mcq18" value="e"> E) Reduce insulin by 50%
+                        </label>
+                    </div>
+                    <button onclick="revealMCQ(this, 'b')">Show Answer & Explanation</button>
+                    <div class="mcq-reveal">
+                        <div class="mcq-reveal correct">Correct: B</div>
+                        <div class="mcq-reveal explanation">
+                            Critical sick-day rule: NEVER stop insulin in T1DM during illness, even if not eating. Infection causes insulin resistance + increased ketone production → DKA risk. Check glucose & ketones q4h; give extra insulin doses for hyperglycemia/ketones; if ketones present + unable to keep fluids down → go to ER.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Initialize localStorage
+        const STORAGE_KEY = 'endo_lec17';
+
+        // Sidebar navigation
+        document.querySelectorAll('.sidebar li').forEach(li => {
+            li.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-lo');
+                const targetSection = document.getElementById(targetId);
+
+                // Update sidebar active state
+                document.querySelectorAll('.sidebar li').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+
+                // Scroll to section
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Toggle LO sections
+        function toggleLO(headerEl) {
+            const content = headerEl.nextElementSibling;
+            const toggle = headerEl.querySelector('.lo-toggle');
+
+            content.classList.toggle('active');
+            toggle.classList.toggle('rotated');
+            headerEl.classList.toggle('collapsed');
+
+            // Save state
+            const loId = headerEl.parentElement.id;
+            const isOpen = content.classList.contains('active');
+            let savedState = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+            savedState[loId] = isOpen;
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(savedState));
+        }
+
+        // Flip cards
+        function flipCard(cardEl) {
+            cardEl.classList.toggle('flipped');
+        }
+
+        // Reveal MCQ answers
+        function revealMCQ(btnEl, correctAnswer) {
+            const mcqEl = btnEl.parentElement;
+            const reveal = mcqEl.querySelector('.mcq-reveal');
+            const selectedInput = mcqEl.querySelector(`input[name="${btnEl.parentElement.querySelector('input').name}"]:checked`);
+
+            if (!reveal) return;
+
+            reveal.classList.add('show');
+
+            if (selectedInput && selectedInput.value === correctAnswer) {
+                reveal.classList.add('correct');
+            } else {
+                reveal.classList.remove('correct');
+                // Show correct answer
+                const correctLabel = mcqEl.querySelector(`input[value="${correctAnswer}"]`).parentElement.textContent;
+                const explanation = reveal.querySelector('.mcq-reveal.explanation');
+                if (explanation) {
+                    explanation.innerHTML = `<strong>Correct answer: ${correctAnswer.toUpperCase()}</strong><br>` + explanation.innerHTML;
+                }
+            }
+
+            btnEl.style.display = 'none';
+        }
+
+        // Load saved state on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedState = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+            Object.keys(savedState).forEach(loId => {
+                const section = document.getElementById(loId);
+                if (section && savedState[loId]) {
+                    const header = section.querySelector('.lo-header');
+                    const content = section.querySelector('.lo-content');
+                    const toggle = header.querySelector('.lo-toggle');
+                    content.classList.add('active');
+                    toggle.classList.add('rotated');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

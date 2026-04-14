@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 6: Posterior Pituitary Hormones | HoyaDocs Endocrine Block</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --subject-color: #7c3aed;
+            --subject-dark: #6d28d9;
+            --header-bg: #0f172a;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border-light: #e2e8f0;
+            --amber-bg: #fef3c7;
+            --amber-border: #f59e0b;
+            --green-bg: #dcfce7;
+            --green-border: #22c55e;
+            --red-bg: #fee2e2;
+            --red-border: #ef4444;
+            --blue-bg: #e0f2fe;
+            --blue-border: #0ea5e9;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f8fafc;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: var(--header-bg);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .header-meta {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .header-meta span {
+            margin-left: 16px;
+        }
+
+        .header-meta .subject-badge {
+            background: var(--subject-color);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 220px;
+            height: 100vh;
+            background: white;
+            border-right: 1px solid var(--border-light);
+            overflow-y: auto;
+            padding-top: 80px;
+            padding-bottom: 40px;
+            z-index: 50;
+        }
+
+        .sidebar-content {
+            padding: 0;
+        }
+
+        .sidebar-section {
+            margin-bottom: 0;
+        }
+
+        .sidebar-section-title {
+            padding: 12px 16px;
+            font-weight: 700;
+            color: var(--subject-color);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin: 0;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            padding: 10px 16px;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 13px;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .sidebar-nav a:hover {
+            background: #f1f5f9;
+            border-left-color: var(--subject-color);
+            color: var(--subject-color);
+        }
+
+        .sidebar-nav a.active {
+            background: rgba(124, 58, 237, 0.05);
+            border-left-color: var(--subject-color);
+            color: var(--subject-color);
+            font-weight: 600;
+        }
+
+        /* Main content */
+        .container {
+            margin-left: 220px;
+            max-width: 1200px;
+            padding: 40px 40px;
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: var(--subject-color);
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s;
+            z-index: 40;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .back-to-top:hover {
+            background: var(--subject-dark);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(124, 58, 237, 0.4);
+        }
+
+        /* Learning Objectives */
+        .lo-section {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border-left: 4px solid var(--subject-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .lo-header {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .lo-header:hover {
+            opacity: 0.8;
+        }
+
+        .lo-toggle {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--subject-color);
+            color: white;
+            border-radius: 4px;
+            margin-right: 12px;
+            font-weight: bold;
+            font-size: 14px;
+            transition: transform 0.2s;
+        }
+
+        .lo-toggle.collapsed {
+            transform: rotate(-90deg);
+        }
+
+        .lo-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+            flex: 1;
+        }
+
+        .lo-number {
+            display: inline-block;
+            background: var(--subject-color);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .lo-content {
+            margin-top: 20px;
+            padding-left: 44px;
+        }
+
+        .lo-content.collapsed {
+            display: none;
+        }
+
+        /* Text formatting */
+        strong {
+            color: var(--subject-color);
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        h2 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: var(--text-dark);
+        }
+
+        ul, ol {
+            margin-left: 24px;
+            margin-bottom: 16px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        /* Boxes */
+        .mnemonic-box {
+            background: var(--amber-bg);
+            border-left: 4px solid var(--amber-border);
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        .mnemonic-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .exam-trap {
+            background: var(--red-bg);
+            border-left: 4px solid var(--red-border);
+            padding: 16px;
+            border-radius: 6px;
+            margin: 16px 0;
+            font-size: 13px;
+        }
+
+        .exam-trap::before {
+            content: '⚠️ EXAM TRAP: ';
+            font-weight: 700;
+            color: var(--red-border);
+        }
+
+        .high-yield {
+            background: var(--green-bg);
+            border-left: 4px solid var(--green-border);
+            padding: 16px;
+            border-radius: 6px;
+            margin: 16px 0;
+            font-size: 13px;
+        }
+
+        .high-yield::before {
+            content: '⭐ HIGH-YIELD: ';
+            font-weight: 700;
+            color: var(--green-border);
+        }
+
+        .summary-box {
+            background: var(--blue-bg);
+            border-left: 4px solid var(--blue-border);
+            padding: 16px;
+            border-radius: 6px;
+            margin: 16px 0;
+            font-size: 13px;
+        }
+
+        .summary-box::before {
+            content: '🎯 ';
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        thead {
+            background: var(--subject-color);
+            color: white;
+        }
+
+        th {
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-light);
+            font-size: 13px;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        /* Flip cards */
+        .flip-container {
+            perspective: 1000px;
+            margin: 20px 0;
+        }
+
+        .flip-card {
+            background-color: #fff;
+            border: 2px solid var(--subject-color);
+            border-radius: 8px;
+            height: 280px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .flip-card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .flip-front, .flip-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .flip-front {
+            background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(124,58,237,0.02) 100%);
+            color: var(--subject-color);
+            font-weight: 700;
+            font-size: 16px;
+            border-radius: 6px;
+        }
+
+        .flip-back {
+            background: white;
+            color: var(--text-dark);
+            transform: rotateY(180deg);
+            font-size: 14px;
+            border-radius: 6px;
+        }
+
+        /* Mind map */
+        .mind-map {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border: 2px solid var(--subject-color);
+        }
+
+        .mind-map svg {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Practice questions */
+        .practice-q {
+            background: white;
+            border: 2px solid var(--border-light);
+            border-radius: 8px;
+            padding: 24px;
+            margin: 24px 0;
+            border-left: 4px solid var(--subject-color);
+        }
+
+        .practice-q-number {
+            font-weight: 700;
+            color: var(--subject-color);
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .practice-q-text {
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.7;
+            color: var(--text-dark);
+        }
+
+        .practice-q-reveal {
+            background: var(--blue-bg);
+            border: 1px solid var(--blue-border);
+            border-radius: 6px;
+            padding: 16px;
+            cursor: pointer;
+            margin-top: 16px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--blue-border);
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .practice-q-reveal:hover {
+            background: var(--blue-border);
+            color: white;
+        }
+
+        .practice-q-answer {
+            background: #f0f9ff;
+            border: 1px solid var(--blue-border);
+            border-radius: 6px;
+            padding: 16px;
+            margin-top: 12px;
+            font-size: 13px;
+            line-height: 1.7;
+            color: var(--text-dark);
+            display: none;
+        }
+
+        .practice-q-answer.revealed {
+            display: block;
+        }
+
+        /* Checkbox for LO tracking */
+        .lo-checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-right: 16px;
+        }
+
+        .lo-checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--subject-color);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--header-bg);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            margin-top: 60px;
+            font-size: 13px;
+        }
+
+        .footer a {
+            color: var(--subject-color);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+                width: 200px;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .container {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header h1 {
+                font-size: 18px;
+            }
+
+            .header-meta {
+                margin-top: 8px;
+            }
+
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        .lo-content ul li {
+            margin-bottom: 12px;
+        }
+
+        .lo-content p {
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <h1>Lecture 6: Posterior Pituitary Hormones</h1>
+            <div class="header-meta">
+                <span>HoyaDocs</span>
+                <span>Endocrine Block</span>
+                <span class="subject-badge">Biochemistry</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-content">
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Learning Objectives</div>
+                <ul class="sidebar-nav">
+                    <li><a href="#lo1">LO 1: ADH Synthesis</a></li>
+                    <li><a href="#lo2">LO 2: ADH Regulation</a></li>
+                    <li><a href="#lo3">LO 3: Diabetes Insipidus</a></li>
+                    <li><a href="#lo4">LO 4: SIADH</a></li>
+                    <li><a href="#lo5">LO 5: Oxytocin</a></li>
+                </ul>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Tools</div>
+                <ul class="sidebar-nav">
+                    <li><a href="#mindmap">Mind Map</a></li>
+                    <li><a href="#flipcards">Flip Cards</a></li>
+                    <li><a href="#practiceqs">Practice Qs</a></li>
+                </ul>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <!-- LO 1: ADH Synthesis and Structure -->
+        <div class="lo-section" id="lo1">
+            <div class="lo-header">
+                <div class="lo-number">1</div>
+                <div class="lo-toggle"></div>
+                <h2 class="lo-title">ADH (Antidiuretic Hormone / Vasopressin): Synthesis and Structure</h2>
+                <input type="checkbox" class="lo-checkbox" data-lo="lo1">
+            </div>
+
+            <div class="lo-content">
+                <h3>Synthesis and Transport</h3>
+                <ul>
+                    <li><strong>Synthesized in:</strong> Supraoptic nucleus (ADH primarily) and paraventricular nucleus of hypothalamus</li>
+                    <li><strong>Transport:</strong> Down axons to posterior pituitary (neurohypophysis)</li>
+                    <li><strong>Storage:</strong> Herring bodies (axon terminals in posterior pituitary)</li>
+                    <li><strong>Release:</strong> Action potentials trigger Ca²⁺ influx → vesicle fusion → ADH release</li>
+                </ul>
+
+                <h3>Structure and Nomenclature</h3>
+                <ul>
+                    <li><strong>Neuropeptide:</strong> 9 amino acids (octapeptide with cysteine bridge)</li>
+                    <li><strong>Similarity to oxytocin:</strong> Differ in only 2 amino acids at positions 3 and 8 (both disulfide-linked)</li>
+                    <li><strong>Names:</strong> ADH = AVP (arginine vasopressin) = vasopressin</li>
+                    <li><strong>Sequence:</strong> Cys-Tyr-Phe-Gln-Asn-Cys-Pro-Arg-Gly-NH₂</li>
+                </ul>
+
+                <h3>Receptor Types and Actions</h3>
+                <ul>
+                    <li><strong>V1 (Gq-coupled):</strong>
+                        <ul>
+                            <li>Location: Vascular smooth muscle (arteries, arterioles)</li>
+                            <li>Action: Vasoconstriction (↑BP)</li>
+                            <li>Also on liver: glycogenolysis (↑glucose)</li>
+                            <li>Also on platelets: aggregation (procoagulant)</li>
+                        </ul>
+                    </li>
+                    <li><strong>V2 (Gs-coupled, ↑cAMP):</strong>
+                        <ul>
+                            <li>Location: Principal cells of collecting duct</li>
+                            <li>Action: Inserts AQP2 (aquaporin-2) water channels into apical membrane → water reabsorption</li>
+                            <li>Also contributes to urea reabsorption in inner medullary collecting duct</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>Clinical Pharmacology</h3>
+                <ul>
+                    <li><strong>DDAVP (desmopressin):</strong> V2-selective agonist
+                        <ul>
+                            <li>Uses: Central diabetes insipidus, hemophilia A, von Willebrand disease (releases vWF from endothelium)</li>
+                            <li>Route: Intranasal, oral, IV, IM, SQ</li>
+                        </ul>
+                    </li>
+                    <li><strong>Terlipressin:</strong> V1 agonist, longer half-life
+                        <ul>
+                            <li>Uses: Esophageal varices, hepatorenal syndrome</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div class="summary-box">
+                    ADH is a 9-amino acid neuropeptide synthesized in the hypothalamus and stored in the posterior pituitary. V2 receptors on collecting duct principal cells mediate water reabsorption via AQP2 insertion; V1 receptors on vascular smooth muscle cause vasoconstriction.
+                </div>
+
+                <div class="high-yield">
+                    ADH and oxytocin are "sister" peptides that differ in only 2 amino acids but have completely different effects. Know the receptor types: V1 = Gq (vasoconstriction), V2 = Gs (water reabsorption).
+                </div>
+            </div>
+        </div>
+
+        <!-- LO 2: ADH Regulation and Physiology -->
+        <div class="lo-section" id="lo2">
+            <div class="lo-header">
+                <div class="lo-number">2</div>
+                <div class="lo-toggle"></div>
+                <h2 class="lo-title">ADH Regulation and Physiology</h2>
+                <input type="checkbox" class="lo-checkbox" data-lo="lo2">
+            </div>
+
+            <div class="lo-content">
+                <h3>Stimuli for ADH Release</h3>
+                <ul>
+                    <li><strong>↑Plasma osmolarity (most potent):</strong> Sensed by osmoreceptors in anterior hypothalamus (around organum vasculosum of lamina terminalis)
+                        <ul>
+                            <li>Threshold: ~280–290 mOsm/kg</li>
+                            <li>Linear increase above threshold</li>
+                        </ul>
+                    </li>
+                    <li><strong>↓Blood volume or ↓BP:</strong> Sensed by baroreceptors in atria, carotid sinus, aortic arch
+                        <ul>
+                            <li>Requires ~10% decrease (less sensitive than osmolarity)</li>
+                            <li>Potent trigger once activated</li>
+                        </ul>
+                    </li>
+                    <li><strong>Pain, stress, nausea, surgery, hypoxia</strong></li>
+                    <li><strong>Drugs causing SIADH:</strong> Nicotine, morphine, tricyclic antidepressants, carbamazepine, cyclophosphamide (SIADH-causing)</li>
+                    <li><strong>Angiotensin II</strong> (especially if ↓BP/↓volume)</li>
+                </ul>
+
+                <h3>Inhibitors of ADH Release</h3>
+                <ul>
+                    <li><strong>↓Plasma osmolarity (most important):</strong> Suppresses osmoreceptor firing</li>
+                    <li><strong>↑Blood volume or ↑BP:</strong> Activates baroreceptors → inhibit ADH</li>
+                    <li><strong>Alcohol (ETOH):</strong> Directly inhibits ADH release → polyuria (hence "pissing like a horse" after drinking) and dehydration (hangover)</li>
+                    <li><strong>ANP/BNP:</strong> Increase water excretion via multiple mechanisms</li>
+                    <li><strong>Demeclocycline:</strong> V2 receptor antagonist (used therapeutically for SIADH)</li>
+                    <li><strong>Lithium:</strong> Blocks V2 signaling (used therapeutically but also causes nephrogenic DI as side effect)</li>
+                </ul>
+
+                <h3>ADH Physiology in the Collecting Duct</h3>
+                <ul>
+                    <li><strong>Mechanism of water reabsorption:</strong>
+                        <ol>
+                            <li>ADH binds V2 receptor (Gs-coupled) on principal cells</li>
+                            <li>↑cAMP via adenylyl cyclase</li>
+                            <li>cAMP activates PKA (protein kinase A)</li>
+                            <li>PKA phosphorylates AQP2-containing vesicles</li>
+                            <li>AQP2 vesicles translocate to and insert into apical membrane</li>
+                            <li>Water enters cell from tubular lumen via AQP2 channels (osmotic gradient)</li>
+                            <li>Water exits cell via AQP3/AQP4 on basolateral membrane</li>
+                        </ol>
+                    </li>
+                    <li><strong>Without ADH:</strong> AQP2 endocytosed from membrane → apical membrane impermeable to water → dilute urine (polyuria)</li>
+                    <li><strong>ADH also increases urea reabsorption:</strong> In inner medullary collecting duct, contributes to medullary osmotic gradient</li>
+                </ul>
+
+                <div class="mnemonic-box">
+                    <div class="mnemonic-title">ADH Release: PAIN & SNOW</div>
+                    <strong>Stimuli (PAIN):</strong><br>
+                    <strong>P</strong>ain, stress<br>
+                    <strong>A</strong>ngiotensin II<br>
+                    <strong>I</strong>↑osmolarity, nausea<br>
+                    <strong>N</strong>icotine, ↓BP/volume<br>
+                    <br>
+                    <strong>Inhibitors (SNOW):</strong><br>
+                    <strong>S</strong>uccess (low osmolarity, high volume)<br>
+                    <strong>N</strong>o pain, normal pressure<br>
+                    <strong>O</strong>smolarity ↓<br>
+                    <strong>W</strong>hisky/alcohol (ETOH)
+                </div>
+
+                <div class="summary-box">
+                    ADH release is primarily regulated by plasma osmolarity (osmoreceptors) and secondarily by blood volume/pressure (baroreceptors). In the collecting duct, ADH → V2 → cAMP → PKA → AQP2 insertion → water reabsorption.
+                </div>
+
+                <div class="exam-trap">
+                    Baroreceptor stimulation requires ~10% volume loss, whereas osmoreceptors are exquisitely sensitive to small changes. Hypovolemia is a powerful ADH stimulus even when osmolarity is normal—this is why hemorrhage suppresses urine output despite plasma dilution.
+                </div>
+            </div>
+        </div>
+
+        <!-- LO 3: Diabetes Insipidus -->
+        <div class="lo-section" id="lo3">
+            <div class="lo-header">
+                <div class="lo-number">3</div>
+                <div class="lo-toggle"></div>
+                <h2 class="lo-title">Diabetes Insipidus (DI)</h2>
+                <input type="checkbox" class="lo-checkbox" data-lo="lo3">
+            </div>
+
+            <div class="lo-content">
+                <h3>Central (Neurogenic) Diabetes Insipidus</h3>
+                <ul>
+                    <li><strong>Pathophysiology:</strong> ADH deficiency (hypothalamus or posterior pituitary damage)</li>
+                    <li><strong>Causes:</strong>
+                        <ul>
+                            <li>Head trauma (pituitary stalk transection)</li>
+                            <li>Pituitary or hypothalamic surgery (transsphenoidal approach most common)</li>
+                            <li>Pituitary tumors (craniopharyngioma, prolactinoma, adenomas)</li>
+                            <li>Metastatic cancer to pituitary</li>
+                            <li>Sheehan syndrome (postpartum pituitary necrosis)</li>
+                            <li>Langerhans cell histiocytosis (LCH)</li>
+                            <li>Idiopathic (autoimmune destruction ~30% of cases)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Clinical presentation:</strong> Polydipsia, polyuria (>3 L/day, often 8–12 L/day), nocturia, enuresis</li>
+                    <li><strong>Labs:</strong>
+                        <ul>
+                            <li>↑Serum Na⁺ (>145) — hypernatremia</li>
+                            <li>↑Serum osmolarity (>300)</li>
+                            <li>↓Urine osmolarity (<300, typically <200)</li>
+                            <li>↓Urine specific gravity (<1.005)</li>
+                            <li>↓ADH level (if measured)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Water deprivation test:</strong>
+                        <ul>
+                            <li>Restrict fluids for 8 hours → measure serum osmolarity, urine osmolarity</li>
+                            <li><strong>Central DI:</strong> Urine osmolarity remains very low (<300) despite ↑serum osmolarity → GIVE DDAVP → urine osmolarity rises (>600) → confirms kidney is responsive, ADH is the problem</li>
+                            <li>Discriminates from nephrogenic DI and psychogenic polydipsia</li>
+                        </ul>
+                    </li>
+                    <li><strong>Treatment:</strong>
+                        <ul>
+                            <li><strong>DDAVP (desmopressin):</strong> Intranasal (preferred), oral, IV, IM, or SQ
+                                <ul>
+                                    <li>Dose: Titrate to individual need (avoid overcorrection)</li>
+                                    <li>Monitor serum Na⁺ q1-2h during acute correction to avoid hyponatremia</li>
+                                </ul>
+                            </li>
+                            <li><strong>Thiazide diuretics (paradoxical):</strong>
+                                <ul>
+                                    <li>Cause mild volume depletion → ↓GFR → ↑proximal tubule reabsorption → less water delivered to collecting duct</li>
+                                    <li>Also ↓hypokalemia → improve sensitivity</li>
+                                </ul>
+                            </li>
+                            <li><strong>NSAIDs:</strong> Inhibit prostaglandin synthesis → may modestly reduce urine output</li>
+                        </ul>
+                    </li>
+                    <li><strong>Triphasic response post-pituitary surgery:</strong>
+                        <ol>
+                            <li>Acute DI (days 1–3): ADH release stops immediately</li>
+                            <li>SIADH (days 3–5): Stored ADH leaks from damaged stalk (paradoxical excess)</li>
+                            <li>Permanent DI (weeks): If stalk transaction is complete and axons don't regenerate</li>
+                        </ol>
+                    </li>
+                </ul>
+
+                <h3>Nephrogenic Diabetes Insipidus</h3>
+                <ul>
+                    <li><strong>Pathophysiology:</strong> ADH present but kidney doesn't respond (V2 receptor or AQP2 defect)</li>
+                    <li><strong>Causes:</strong>
+                        <ul>
+                            <li><strong>Lithium (most common drug cause):</strong> Enters principal cells via ENaC → blocks adenylyl cyclase downstream of V2 → ↓cAMP → AQP2 not inserted</li>
+                            <li><strong>Demeclocycline:</strong> Direct V2 receptor antagonist (same mechanism, intentional for SIADH therapy)</li>
+                            <li><strong>Hypercalcemia:</strong> ↓cAMP production, damages collecting duct cells</li>
+                            <li><strong>Hypokalemia:</strong> Impairs concentrating ability</li>
+                            <li><strong>Inherited:</strong> X-linked V2 receptor mutations (~90% of hereditary cases), rare AQP2 mutations</li>
+                        </ul>
+                    </li>
+                    <li><strong>Labs:</strong>
+                        <ul>
+                            <li>↑ADH level (high! kidney not responding)</li>
+                            <li>↑Serum Na⁺ (>145)</li>
+                            <li>↑Serum osmolarity (>300)</li>
+                            <li>↓Urine osmolarity (very low, <300) — kidneys cannot concentrate despite high ADH</li>
+                        </ul>
+                    </li>
+                    <li><strong>Water deprivation test:</strong>
+                        <ul>
+                            <li>Urine osmolarity remains low even with dehydration → GIVE DDAVP → urine osmolarity does NOT rise (or rises only slightly) → kidney is the problem, not ADH production</li>
+                        </ul>
+                    </li>
+                    <li><strong>Treatment:</strong>
+                        <ul>
+                            <li><strong>Thiazide diuretics + low-sodium diet:</strong>
+                                <ul>
+                                    <li>Volume contraction stimulates proximal tubule reabsorption (before water reaches collecting duct)</li>
+                                    <li>↓Distal delivery of fluid → less polyuria despite inability to concentrate</li>
+                                    <li>Low-Na⁺ diet enhances effect by reducing osmotic load</li>
+                                </ul>
+                            </li>
+                            <li><strong>Amiloride (for lithium-induced):</strong>
+                                <ul>
+                                    <li>Blocks ENaC (epithelial sodium channel) → prevents lithium entry into principal cells</li>
+                                    <li>Preserves V2 signaling even in presence of lithium</li>
+                                    <li>Also K⁺-sparing (treats concurrent hypokalemia)</li>
+                                </ul>
+                            </li>
+                            <li><strong>NSAIDs:</strong> ↓Prostaglandin E2 production → ↓adenylyl cyclase antagonism → modest benefit</li>
+                            <li><strong>Adequate hydration:</strong> Ensure free access to water to prevent hypernatremia</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>Differential Diagnosis: DI vs Psychogenic Polydipsia</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Central DI</th>
+                            <th>Nephrogenic DI</th>
+                            <th>Psychogenic Polydipsia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Serum Na⁺</strong></td>
+                            <td>↑ (>145)</td>
+                            <td>↑ (>145)</td>
+                            <td>↓ or normal</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Serum Osmolarity</strong></td>
+                            <td>↑ (>300)</td>
+                            <td>↑ (>300)</td>
+                            <td>↓ or normal</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Urine Osmolarity</strong></td>
+                            <td>Very ↓ (<200)</td>
+                            <td>Very ↓ (<200)</td>
+                            <td>Very ↓ (<200)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ADH Level</strong></td>
+                            <td>↓ (low)</td>
+                            <td>↑ (high/normal)</td>
+                            <td>↓ (suppressed)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Water Deprivation Test</strong></td>
+                            <td>Urine stays dilute</td>
+                            <td>Urine stays dilute</td>
+                            <td>Urine concentrates (after medulla reaccumulates osm)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>+ DDAVP</strong></td>
+                            <td>Urine osmolarity ↑ (>600)</td>
+                            <td>Urine osmolarity no change</td>
+                            <td>May ↑ slightly if deprived long enough</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Key distinguisher</strong></td>
+                            <td>ADH responsive</td>
+                            <td>ADH resistant</td>
+                            <td>Serum osmolarity normal despite dilute urine</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="mnemonic-box">
+                    <div class="mnemonic-title">Nephrogenic DI Causes: CHALKUDL</div>
+                    <strong>C</strong>hemotherapy (lithium #1)<br>
+                    <strong>H</strong>ypercalcemia, hypercalcuria<br>
+                    <strong>A</strong>miloride (paradoxical — blocks lithium entry)<br>
+                    <strong>L</strong>ithium, low K⁺<br>
+                    <strong>K</strong>idney disease<br>
+                    <strong>U</strong>nresponsive collecting duct<br>
+                    <strong>D</strong>emeclocycline<br>
+                    <strong>L</strong>oop diuretics, loss of medullary gradient
+                </div>
+
+                <div class="exam-trap">
+                    In nephrogenic DI, ADH levels are HIGH (not low like in central DI). The kidney simply doesn't respond. Giving DDAVP won't help unless it's lithium-induced and you're also blocking ENaC with amiloride.
+                </div>
+
+                <div class="high-yield">
+                    After pituitary surgery, watch for triphasic response: DI → SIADH → permanent DI. Monitor urine output and serum Na⁺ closely. Don't forget to ask about lithium use (commonest drug cause of nephrogenic DI).
+                </div>
+
+                <div class="summary-box">
+                    Central DI: ↓ADH, responds to DDAVP. Nephrogenic DI: ↑ADH, doesn't respond to DDAVP (treat with thiazide + low-Na diet). Psychogenic polydipsia: serum osmolarity stays normal despite polyuria.
+                </div>
+            </div>
+        </div>
+
+        <!-- LO 4: SIADH -->
+        <div class="lo-section" id="lo4">
+            <div class="lo-header">
+                <div class="lo-number">4</div>
+                <div class="lo-toggle"></div>
+                <h2 class="lo-title">SIADH (Syndrome of Inappropriate ADH)</h2>
+                <input type="checkbox" class="lo-checkbox" data-lo="lo4">
+            </div>
+
+            <div class="lo-content">
+                <h3>Pathophysiology</h3>
+                <ul>
+                    <li><strong>Definition:</strong> Inappropriately high ADH (relative to serum osmolarity) → excess water retention and dilution of serum → dilutional hyponatremia</li>
+                    <li><strong>Water excess without sodium loss:</strong> ADH retains water, but kidneys still excrete Na⁺ normally → euvolemic hyponatremia (no edema, no hypotension)</li>
+                    <li><strong>ADH continues to be released:</strong> Despite ↓serum osmolarity, kidneys concentrate urine and reabsorb water → Na⁺ diluted, hyponatremia worsens</li>
+                </ul>
+
+                <h3>Causes of SIADH</h3>
+                <ul>
+                    <li><strong>Malignancy (SIADH caused by tumor):</strong>
+                        <ul>
+                            <li><strong>Small cell lung cancer (SCLC):</strong> Most common malignant cause; produces ectopic ADH (secretion happens from neuroendocrine granules)</li>
+                            <li>Also: head/neck, breast, pancreas, bladder, GI cancers (but SCLC is #1)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Pulmonary disease:</strong>
+                        <ul>
+                            <li>Infections: pneumonia, TB, aspergillosis</li>
+                            <li>Positive pressure ventilation (mechanical ventilation, CPAP) — ↓atrial stretch → ADH release</li>
+                        </ul>
+                    </li>
+                    <li><strong>CNS disease:</strong>
+                        <ul>
+                            <li>Meningitis, encephalitis (viral, bacterial, fungal)</li>
+                            <li>Subarachnoid hemorrhage (SAH)</li>
+                            <li>Head trauma (hypothalamic damage → direct ADH release)</li>
+                            <li>Stroke, hypoxia</li>
+                        </ul>
+                    </li>
+                    <li><strong>Endocrine:</strong>
+                        <ul>
+                            <li><strong>Adrenal insufficiency:</strong> ↓Cortisol disinhibits CRH → ↑ADH; also cortisol normally suppresses ADH</li>
+                            <li><strong>Hypothyroidism:</strong> ↓Metabolic rate → ↓free water clearance (?), ↑ADH sensitivity</li>
+                        </ul>
+                    </li>
+                    <li><strong>Drugs (SIADH-causing):</strong>
+                        <ul>
+                            <li>SSRIs (especially sertraline, fluoxetine): inhibit ADH suppression</li>
+                            <li>Tricyclic antidepressants (TCAs)</li>
+                            <li>Carbamazepine (anticonvulsant): enhances ADH release</li>
+                            <li>Cyclophosphamide (chemotherapy)</li>
+                            <li>Vincristine (chemotherapy)</li>
+                            <li>Nicotine</li>
+                            <li>Morphine</li>
+                            <li>Haloperidol</li>
+                            <li>Oxytocin (exogenous administration)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Post-operative/Post-ICU:</strong> Pain, stress, nausea, hypoxia → ADH release</li>
+                    <li><strong>Other:</strong> HIV/AIDS (opportunistic infections), exercise-induced SIADH (marathon runners)</li>
+                </ul>
+
+                <div class="mnemonic-box">
+                    <div class="mnemonic-title">SIADH Causes: SIADH</div>
+                    <strong>S</strong> — Small cell lung cancer (ectopic ADH)<br>
+                    <strong>I</strong> — Intracranial (meningitis, encephalitis, SAH, trauma, stroke)<br>
+                    <strong>A</strong> — Adrenal insufficiency, atypical presentations<br>
+                    <strong>D</strong> — Drugs (SSRIs, carbamazepine, cyclophosphamide, vincristine, nicotine, morphine)<br>
+                    <strong>H</strong> — Hypothyroidism, HIV (pulmonary), Hospital-acquired (post-op, ICU)
+                </div>
+
+                <h3>Diagnosis of SIADH</h3>
+                <ul>
+                    <li><strong>Prerequisites for diagnosis:</strong> Rule out hypothyroidism, adrenal insufficiency, diuretic use, heart failure, cirrhosis, renal disease (these cause hyponatremia for other reasons)</li>
+                    <li><strong>Labs confirming SIADH:</strong>
+                        <ul>
+                            <li><strong>↓Serum Na⁺</strong> (<135, often 115–125 in symptomatic SIADH)</li>
+                            <li><strong>↓Serum osmolarity</strong> (<275, hypoosmolar)</li>
+                            <li><strong>↑Urine osmolarity</strong> (>100, often >300) — inappropriate concentration despite low serum osmolarity</li>
+                            <li><strong>↑Urine Na⁺</strong> (>20 mEq/L, often >40) — kidneys still excreting Na despite volume expansion</li>
+                            <li><strong>Normal thyroid function, normal cortisol (rule out)</strong></li>
+                            <li><strong>Euvolemia:</strong> No edema, no hypotension, JVP normal</li>
+                        </ul>
+                    </li>
+                    <li><strong>Imaging:</strong> Chest CT if SCLC suspected (paraneoplastic syndrome); brain MRI if CNS etiology</li>
+                </ul>
+
+                <h3>Treatment of SIADH</h3>
+                <ul>
+                    <li><strong>Mild to moderate hyponatremia (Na⁺ 120–135, asymptomatic):</strong>
+                        <ul>
+                            <li><strong>Fluid restriction (first-line):</strong> Restrict to 500–1000 mL/day (hypotonic intake)</li>
+                            <li>Usually effective; avoids rapid Na⁺ swings</li>
+                        </ul>
+                    </li>
+                    <li><strong>Severe or symptomatic hyponatremia (Na⁺ <120, seizures, altered mental status, coma):</strong>
+                        <ul>
+                            <li><strong>Hypertonic saline (3% NaCl):</strong> IV infusion
+                                <ul>
+                                    <li>Correct SLOWLY: max 8–12 mEq/L per 24 hours (never >12 mEq/L/24h)</li>
+                                    <li>Formula: Na⁺ deficit = 0.6 × weight(kg) × (desired[Na⁺] − current[Na⁺])</li>
+                                    <li>Example: 70 kg, current Na⁺ = 115, target Na⁺ = 125: deficit = 0.6 × 70 × (125−115) = 420 mEq</li>
+                                    <li>3% saline = 513 mEq/L → need ~820 mL over 24h (~34 mL/h)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Correct symptomatic hyponatremia faster initially:</strong> ~4–6 mEq/L acutely to stop seizures, then slow down</li>
+                            <li><strong>Monitor serum Na⁺ q2–4h during acute correction</strong> to avoid overcorrection</li>
+                        </ul>
+                    </li>
+                    <li><strong>Chronic SIADH management:</strong>
+                        <ul>
+                            <li><strong>Fluid restriction:</strong> Long-term first-line; compliance can be difficult</li>
+                            <li><strong>Demeclocycline:</strong>
+                                <ul>
+                                    <li>V2 receptor antagonist → blocks ADH effect on collecting duct</li>
+                                    <li>Dose: 600–1200 mg/day PO divided</li>
+                                    <li>Onset slow (5–7 days); used for chronic/recurrent SIADH unresponsive to fluid restriction</li>
+                                    <li>Cause nephrogenic DI phenotype (intentional therapeutic use)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Vaptans (V2/V1 receptor antagonists):</strong>
+                                <ul>
+                                    <li><strong>Tolvaptan (Samsca):</strong> Selective V2 antagonist, oral</li>
+                                    <li><strong>Conivaptan:</strong> Mixed V1/V2 antagonist, IV (hospital use)</li>
+                                    <li>Fast onset (hours), but expensive; monitor for overcorrection and liver toxicity</li>
+                                </ul>
+                            </li>
+                            <li><strong>Treat underlying cause:</strong> Remove offending drug, treat infection, manage cancer, etc.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>Osmotic Demyelination Syndrome (ODS) / Central Pontine Myelinolysis (CPM)</h3>
+                <ul>
+                    <li><strong>Pathophysiology:</strong> Rapid overcorrection of hyponatremia → osmotic gradient shifts water OUT of oligodendrocytes → myelin disruption, demyelination</li>
+                    <li><strong>Risk:</strong> Correcting >12 mEq/L per 24 hours; especially if Na⁺ was low for >48 hours (brain adapts)</li>
+                    <li><strong>Presentation (3–5 days after overcorrection):</strong>
+                        <ul>
+                            <li>Flaccid quadriplegia (initially may be spastic)</li>
+                            <li>Dysarthria, dysphagia</li>
+                            <li>"Locked-in" syndrome (preserved consciousness but can't move/speak)</li>
+                            <li>Pseudobulbar palsy</li>
+                            <li>Can be irreversible if severe</li>
+                        </ul>
+                    </li>
+                    <li><strong>Prevention:</strong> Slow, cautious correction; recheck Na⁺ q2–4h; don't exceed 12 mEq/L/24h</li>
+                    <li><strong>Treatment:</strong> Supportive; if ODS occurs, may lower Na⁺ back down slightly (risky maneuver) to reduce osmotic gradient</li>
+                </ul>
+
+                <div class="mnemonic-box">
+                    <div class="mnemonic-title">ODS Prevention: "Too Fast for Na, Too Slow to Walk"</div>
+                    Overly rapid correction of hyponatremia (>12 mEq/L/24h) → osmotic demyelination syndrome → locked-in syndrome, quadriplegia. Correct SLOWLY.
+                </div>
+
+                <div class="exam-trap">
+                    SIADH is euvolemic hyponatremia (no edema, no dehydration). Don't confuse with hyponatremia from heart failure or cirrhosis (hypervolemic) or from diuretics (hypovolemic). Check urine Na⁺ and osmolarity to distinguish.
+                </div>
+
+                <div class="high-yield">
+                    Small cell lung cancer is the most common malignancy causing SIADH. Always check Na⁺ in SCLC patients. When correcting severe hyponatremia, aim for 8–12 mEq/L/24h—not 8–12 mEq/L/hour!
+                </div>
+
+                <div class="summary-box">
+                    SIADH: euvolemic ↓Na⁺, ↓serum osmolarity, ↑urine osmolarity, ↑urine Na⁺. Treat mild cases with fluid restriction, severe cases with slow 3% saline (max 12 mEq/L/24h). Rapid correction causes ODS. Chronic management with demeclocycline or vaptans.
+                </div>
+            </div>
+        </div>
+
+        <!-- LO 5: Oxytocin -->
+        <div class="lo-section" id="lo5">
+            <div class="lo-header">
+                <div class="lo-number">5</div>
+                <div class="lo-toggle"></div>
+                <h2 class="lo-title">Oxytocin: Synthesis, Actions, and Clinical Uses</h2>
+                <input type="checkbox" class="lo-checkbox" data-lo="lo5">
+            </div>
+
+            <div class="lo-content">
+                <h3>Synthesis and Release</h3>
+                <ul>
+                    <li><strong>Synthesized in:</strong> Paraventricular nucleus (primarily, ~60–70%) and supraoptic nucleus of hypothalamus</li>
+                    <li><strong>Transport and storage:</strong> Down axons to posterior pituitary, stored in Herring bodies</li>
+                    <li><strong>Release triggers:</strong>
+                        <ul>
+                            <li><strong>Nipple stimulation (suckling/breastfeeding):</strong> Sensory input from breast → medial forebrain bundle → oxytocin neurons fire → milk let-down reflex</li>
+                            <li><strong>Cervical dilation (Ferguson reflex):</strong> Cervical stretch receptors → spinal cord → oxytocin release → uterine contractions → more stretch → positive feedback</li>
+                            <li><strong>Orgasm, touch, emotional bonding</strong></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>Structure and Receptor</h3>
+                <ul>
+                    <li><strong>Neuropeptide:</strong> 9 amino acids (octapeptide); differs from ADH in positions 3 and 8
+                        <ul>
+                            <li>ADH: ...Phe-Gln...Pro-Arg-Gly-NH₂</li>
+                            <li>Oxytocin: ...Ile-Gln...Pro-Leu-Gly-NH₂</li>
+                        </ul>
+                    </li>
+                    <li><strong>Receptor (OTR):</strong> G-protein coupled receptor, Gq subtype
+                        <ul>
+                            <li>Activation → phospholipase C → IP3/DAG → ↑intracellular Ca²⁺</li>
+                            <li>Ca²⁺ triggers smooth muscle contraction (myosin-actin interaction)</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>Physiological Actions</h3>
+                <ul>
+                    <li><strong>Uterine contractions:</strong>
+                        <ul>
+                            <li>Frequency and force ↑ throughout pregnancy (due to ↑OTR expression with progesterone withdrawal)</li>
+                            <li>Labor: strong rhythmic contractions → cervical dilation → more stretch → more oxytocin → positive feedback loop</li>
+                        </ul>
+                    </li>
+                    <li><strong>Milk let-down (milk ejection reflex):</strong>
+                        <ul>
+                            <li>Nipple stimulation → afferent sensory → oxytocin → myoepithelial cells contract → milk expelled from alveoli into ducts</li>
+                            <li>Also stimulates alpha-smooth muscle in breast → increases pressure → milk flows</li>
+                        </ul>
+                    </li>
+                    <li><strong>CNS effects:</strong>
+                        <ul>
+                            <li>Bonding, pair-bonding, maternal behavior, trust, social behavior ("love hormone")</li>
+                            <li>May reduce anxiety, promote calm</li>
+                        </ul>
+                    </li>
+                    <li><strong>Kidney (minor):</strong>
+                        <ul>
+                            <li>Mild V2-like effect (water reabsorption) due to structural similarity with ADH</li>
+                            <li>Can cause hyponatremia if given in large doses (rare clinically)</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>Clinical Pharmacology and Uses</h3>
+                <ul>
+                    <li><strong>Pitocin (synthetic oxytocin):</strong>
+                        <ul>
+                            <li><strong>Indications:</strong>
+                                <ul>
+                                    <li>Labor induction (post-term pregnancy, maternal/fetal indications)</li>
+                                    <li>Augmentation of labor (strengthen weak contractions)</li>
+                                    <li>Postpartum hemorrhage (↑uterine tone → compression of vessels → ↓bleeding from uterine atony)</li>
+                                    <li>Retained placenta</li>
+                                </ul>
+                            </li>
+                            <li><strong>Dosing:</strong> IV infusion, titrated by uterine response (start 0.5–1 mU/min, increase by 1 mU/min q30min until contractions q2–3min)</li>
+                            <li><strong>Adverse effects:</strong> Uterine tetany (sustained contraction → placental insufficiency → fetal hypoxia), water intoxication/hyponatremia (if given in hypotonic fluid), arrhythmias</li>
+                        </ul>
+                    </li>
+                    <li><strong>Carbetocin:</strong>
+                        <ul>
+                            <li>Longer-acting oxytocin analog (half-life ~40 min vs 3 min for oxytocin)</li>
+                            <li>Used for postpartum hemorrhage prophylaxis (single dose more effective than repeated oxytocin)</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>Oxytocin Antagonists (Tocolytics)</h3>
+                <ul>
+                    <li><strong>Atosiban:</strong>
+                        <ul>
+                            <li>Selective oxytocin receptor antagonist</li>
+                            <li>Use: Preterm labor (tocolytic to slow/stop contractions)</li>
+                            <li>Efficacy similar to β2-agonists but fewer systemic side effects</li>
+                        </ul>
+                    </li>
+                    <li><strong>Beta-2 agonists (terbutaline, ritodrine):</strong>
+                        <ul>
+                            <li>Relax uterine smooth muscle (↑cAMP → ↓Ca²⁺)</li>
+                            <li>Also reduce oxytocin receptor expression</li>
+                            <li>Side effects: Tachycardia, tremor, hyperglycemia</li>
+                        </ul>
+                    </li>
+                    <li><strong>Progesterone:</strong>
+                        <ul>
+                            <li>↓Oxytocin receptor expression during pregnancy → maintains uterine quiescence</li>
+                            <li>Withdrawal of progesterone (placental separation) → ↑OTR expression → labor onset</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>Ferguson Reflex and Labor</h3>
+                <ul>
+                    <li><strong>Ferguson reflex:</strong>
+                        <ol>
+                            <li>Cervical dilation during labor</li>
+                            <li>Stretch receptors in cervix/lower uterus activated</li>
+                            <li>Sensory signal → pelvic plexus → spinal cord (S2–S4) → brainstem → hypothalamus</li>
+                            <li>Oxytocin neurons fire → oxytocin release</li>
+                            <li>Oxytocin → myometrial contraction → further dilation → more oxytocin</li>
+                            <li><strong>Positive feedback loop</strong> that augments labor progression</li>
+                        </ol>
+                    </li>
+                    <li><strong>Also called "milk let-down reflex" when applied to breastfeeding</strong></li>
+                </ul>
+
+                <h3>ADH vs Oxytocin Comparison</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>ADH (Vasopressin)</th>
+                            <th>Oxytocin</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Synthesized in</strong></td>
+                            <td>Supraoptic nucleus (primary)</td>
+                            <td>Paraventricular nucleus (primary)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Stored in</strong></td>
+                            <td>Posterior pituitary (Herring bodies)</td>
+                            <td>Posterior pituitary (Herring bodies)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AA difference from each other</strong></td>
+                            <td>Positions 3, 8 differ</td>
+                            <td>Positions 3, 8 differ</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Main receptor</strong></td>
+                            <td>V1 (Gq) — vasoconstriction<br>V2 (Gs) — water reabs</td>
+                            <td>OTR (Gq) — IP3/DAG/Ca²⁺</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Primary action</strong></td>
+                            <td>Water reabsorption (V2), vasoconstriction (V1)</td>
+                            <td>Uterine contraction, milk ejection</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Release triggered by</strong></td>
+                            <td>↑Osmolarity, ↓BP/volume, pain, stress</td>
+                            <td>Nipple stimulation, cervical dilation</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Clinical agonist</strong></td>
+                            <td>DDAVP (desmopressin) — V2 selective</td>
+                            <td>Pitocin (oxytocin) — OTR agonist</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Clinical antagonist</strong></td>
+                            <td>Demeclocycline (V2 blocker)</td>
+                            <td>Atosiban (OTR antagonist)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Deficiency syndrome</strong></td>
+                            <td>Central diabetes insipidus</td>
+                            <td>Rare (mild lactation issues)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Excess syndrome</strong></td>
+                            <td>SIADH (dilutional hyponatremia)</td>
+                            <td>Labor induction; can cause water intoxication</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="mnemonic-box">
+                    <div class="mnemonic-title">Oxytocin Action: LMIT</div>
+                    <strong>L</strong>abor (uterine contraction)<br>
+                    <strong>M</strong>ilk let-down (breast myoepithelial contraction)<br>
+                    <strong>I</strong>ncreases social bonding ("love hormone")<br>
+                    <strong>T</strong>ocolytics oppose it (atosiban, β2-agonists)
+                </div>
+
+                <div class="exam-trap">
+                    Oxytocin can cause water intoxication if given in large doses with hypotonic fluids (rare but important). Always use normal saline or dextrose-free fluids for IV oxytocin. Don't confuse oxytocin with oxytocin agonists (Pitocin) vs antagonists (atosiban).
+                </div>
+
+                <div class="high-yield">
+                    Ferguson reflex is a positive feedback loop: stretch → oxytocin → contraction → more stretch. Know that progesterone keeps the uterus quiet by suppressing oxytocin receptors; its withdrawal triggers labor.
+                </div>
+
+                <div class="summary-box">
+                    Oxytocin (paraventricular nucleus) causes uterine contractions and milk let-down via Gq/IP3/Ca²⁺. Pitocin (synthetic) is used for labor induction and postpartum hemorrhage. Atosiban (antagonist) is used for preterm labor. Ferguson reflex is positive feedback: stretch → oxytocin → contraction → more stretch.
+                </div>
+            </div>
+        </div>
+
+        <!-- Mind Map -->
+        <section id="mindmap" class="mind-map">
+            <h2>Mind Map: Posterior Pituitary Hormones</h2>
+            <svg viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
+                <!-- Central node -->
+                <circle cx="500" cy="300" r="80" fill="#7c3aed" opacity="0.1" stroke="#7c3aed" stroke-width="2"/>
+                <text x="500" y="305" text-anchor="middle" font-size="14" font-weight="bold" fill="#7c3aed">Posterior<br/>Pituitary</text>
+
+                <!-- ADH Branch -->
+                <line x1="580" y1="250" x2="700" y2="150" stroke="#7c3aed" stroke-width="2"/>
+                <circle cx="750" cy="120" r="60" fill="none" stroke="#7c3aed" stroke-width="2"/>
+                <text x="750" y="115" text-anchor="middle" font-size="13" font-weight="bold">ADH</text>
+                <text x="750" y="135" text-anchor="middle" font-size="11">9 AA peptide</text>
+
+                <line x1="700" y1="180" x2="800" y2="220" stroke="#7c3aed" stroke-width="1" stroke-dasharray="5,5"/>
+                <text x="820" y="215" font-size="10">V1: Gq, vasoconstriction</text>
+                <line x1="700" y1="180" x2="800" y2="260" stroke="#7c3aed" stroke-width="1" stroke-dasharray="5,5"/>
+                <text x="820" y="255" font-size="10">V2: Gs, AQP2, water</text>
+
+                <!-- DI Branch -->
+                <line x1="580" y1="330" x2="700" y2="420" stroke="#7c3aed" stroke-width="2"/>
+                <circle cx="750" cy="470" r="60" fill="none" stroke="#7c3aed" stroke-width="2"/>
+                <text x="750" y="465" text-anchor="middle" font-size="13" font-weight="bold">Diabetes</text>
+                <text x="750" y="480" text-anchor="middle" font-size="13" font-weight="bold">Insipidus</text>
+
+                <line x1="680" y1="510" x2="600" y2="540" stroke="#7c3aed" stroke-width="1" stroke-dasharray="5,5"/>
+                <text x="550" y="545" font-size="10">Central: ↓ADH</text>
+                <line x1="750" y1="530" x2="750" y2="570" stroke="#7c3aed" stroke-width="1" stroke-dasharray="5,5"/>
+                <text x="800" y="575" font-size="10">Nephrogenic: resistant</text>
+
+                <!-- SIADH Branch -->
+                <line x1="420" y1="330" x2="300" y2="420" stroke="#7c3aed" stroke-width="2"/>
+                <circle cx="250" cy="470" r="60" fill="none" stroke="#7c3aed" stroke-width="2"/>
+                <text x="250" y="465" text-anchor="middle" font-size="13" font-weight="bold">SIADH</text>
+                <text x="250" y="480" text-anchor="middle" font-size="11">(↑ADH)</text>
+
+                <line x1="180" y1="510" x2="100" y2="540" stroke="#7c3aed" stroke-width="1" stroke-dasharray="5,5"/>
+                <text x="40" y="545" font-size="10">Dilutional hyponatremia</text>
+                <line x1="250" y1="530" x2="250" y2="570" stroke="#7c3aed" stroke-width="1" stroke-dasharray="5,5"/>
+                <text x="310" y="575" font-size="10">3% saline (careful!)</text>
+
+                <!-- Oxytocin Branch -->
+                <line x1="580" y1="250" x2="700" y2="100" stroke="#7c3aed" stroke-width="2"/>
+                <circle cx="750" cy="50" r="60" fill="none" stroke="#7c3aed" stroke-width="2"/>
+                <text x="750" y="45" text-anchor="middle" font-size="13" font-weight="bold">Oxytocin</text>
+                <text x="750" y="60" text-anchor="middle" font-size="11">Gq/IP3/Ca²⁺</text>
+
+                <!-- Regulation Branch -->
+                <line x1="420" y1="250" x2="300" y2="150" stroke="#7c3aed" stroke-width="2"/>
+                <circle cx="250" cy="100" r="60" fill="none" stroke="#7c3aed" stroke-width="2"/>
+                <text x="250" y="100" text-anchor="middle" font-size="13" font-weight="bold">Regulation</text>
+
+                <line x1="190" y1="120" x2="100" y2="80" stroke="#7c3aed" stroke-width="1" stroke-dasharray="5,5"/>
+                <text x="40" y="85" font-size="10">Osmolarity (primary)</text>
+                <line x1="190" y1="160" x2="100" y2="200" stroke="#7c3aed" stroke-width="1" stroke-dasharray="5,5"/>
+                <text x="40" y="205" font-size="10">Volume/BP</text>
+            </svg>
+        </section>
+
+        <!-- Flip Cards -->
+        <section id="flipcards">
+            <h2>Flip Cards: Key Concepts</h2>
+
+            <div class="flip-container">
+                <div class="flip-card">
+                    <div class="flip-front">
+                        ADH vs Oxytocin: What are the 2 amino acid differences?
+                    </div>
+                    <div class="flip-back">
+                        Positions 3 and 8.<br>
+                        ADH: Phe (position 3), Pro-Arg (position 8)<br>
+                        Oxytocin: Ile (position 3), Pro-Leu (position 8)
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-container">
+                <div class="flip-card">
+                    <div class="flip-front">
+                        What is the V2 receptor's main function?
+                    </div>
+                    <div class="flip-back">
+                        Gs-coupled → cAMP → PKA → phosphorylates AQP2 vesicles → insertion into apical membrane of collecting duct principal cells → water reabsorption
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-container">
+                <div class="flip-card">
+                    <div class="flip-front">
+                        How do you distinguish central DI from nephrogenic DI?
+                    </div>
+                    <div class="flip-back">
+                        Water deprivation test + DDAVP:<br>
+                        Central DI: Urine concentrates after DDAVP ✓<br>
+                        Nephrogenic DI: Urine remains dilute even after DDAVP ✗<br>
+                        Also: central DI has ↓ADH, nephrogenic has ↑ADH
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-container">
+                <div class="flip-card">
+                    <div class="flip-front">
+                        What is the pathophysiology of SIADH?
+                    </div>
+                    <div class="flip-back">
+                        Inappropriately ↑ADH → kidney reabsorbs excess water → dilutional hyponatremia (euvolemic because Na⁺ is diluted, not volume expanded)
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-container">
+                <div class="flip-card">
+                    <div class="flip-front">
+                        What is the maximum safe rate of Na⁺ correction in hyponatremia?
+                    </div>
+                    <div class="flip-back">
+                        8–12 mEq/L per 24 hours (max 12 mEq/L/24h). Exceeding this causes osmotic demyelination syndrome (central pontine myelinolysis) with locked-in syndrome, quadriplegia, dysarthria.
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-container">
+                <div class="flip-card">
+                    <div class="flip-front">
+                        What is the Ferguson reflex?
+                    </div>
+                    <div class="flip-back">
+                        Cervical dilation → stretch receptors → oxytocin release → uterine contractions → more dilation → positive feedback loop that augments labor
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-container">
+                <div class="flip-card">
+                    <div class="flip-front">
+                        How does lithium cause nephrogenic DI?
+                    </div>
+                    <div class="flip-back">
+                        Enters principal cells via ENaC → blocks adenylyl cyclase → ↓cAMP → AQP2 not inserted into membrane → no water reabsorption. Treat with amiloride (blocks ENaC entry) + low-Na diet + thiazide
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-container">
+                <div class="flip-card">
+                    <div class="flip-front">
+                        Name 3 drugs that cause SIADH
+                    </div>
+                    <div class="flip-back">
+                        SSRIs (sertraline, fluoxetine), carbamazepine, cyclophosphamide, vincristine, TCAs, nicotine, morphine, haloperidol. SCLC (small cell lung cancer) is the most common malignant cause.
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-container">
+                <div class="flip-card">
+                    <div class="flip-front">
+                        What is the treatment for postpartum hemorrhage?
+                    </div>
+                    <div class="flip-back">
+                        Oxytocin (Pitocin) IV → increases uterine tone → compression of vessels in uterine wall → stops bleeding from uterine atony. Also carbetocin (longer-acting analog)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practice Questions -->
+        <section id="practiceqs">
+            <h2>Practice Questions: USMLE Vignettes</h2>
+
+            <div class="practice-q">
+                <div class="practice-q-number">Question 1</div>
+                <div class="practice-q-text">
+                    A 55-year-old man with a recent diagnosis of small cell lung cancer presents with confusion, headache, and a serum sodium of 118 mEq/L. Physical exam reveals no edema or signs of volume depletion. His urine sodium is 45 mEq/L and urine osmolarity is 520 mOsm/kg. Serum osmolarity is 245 mOsm/kg. The patient is initially given 3% NaCl to address his symptoms.
+                    <br><br>
+                    <strong>What is the diagnosis?</strong> And <strong>what is the maximum rate at which his sodium should be corrected?</strong>
+                </div>
+                <div class="practice-q-reveal">Click to reveal answer</div>
+                <div class="practice-q-answer">
+                    <strong>Diagnosis: SIADH from ectopic ADH production by small cell lung cancer.</strong>
+                    <br><br>
+                    <strong>Key findings:</strong>
+                    <ul>
+                        <li>Euvolemic hyponatremia (no edema, no dehydration)</li>
+                        <li>↓Serum Na⁺ (118) and ↓serum osmolarity (245) — inappropriately low</li>
+                        <li>↑Urine osmolarity (520) despite low serum osmolarity — inappropriate concentration</li>
+                        <li>↑Urine Na⁺ (45) — kidneys still excreting sodium</li>
+                        <li>Small cell lung cancer is the most common malignancy causing SIADH via ectopic ADH production</li>
+                    </ul>
+                    <br>
+                    <strong>Correction rate:</strong> Maximum 8–12 mEq/L per 24 hours (never >12 mEq/L/24h).
+                    <br><br>
+                    <strong>Rationale:</strong> This patient is symptomatic (confusion, headache) from severe hyponatremia (Na⁺ 118), so 3% hypertonic saline is appropriate for symptomatic SIADH. However, correction must be slow and monitored carefully (serum Na⁺ q2–4h initially) to prevent overcorrection. Rapid correction (>12 mEq/L/24h) causes osmotic demyelination syndrome (central pontine myelinolysis) with permanent neurologic damage (flaccid quadriplegia, locked-in syndrome, dysarthria).
+                    <br><br>
+                    <strong>Long-term management:</strong> Treat the underlying malignancy (chemotherapy for SCLC); fluid restriction; demeclocycline (V2 antagonist) if fluid restriction fails; consider vaptans (tolvaptan) for rapid/refractory correction.
+                </div>
+            </div>
+
+            <div class="practice-q">
+                <div class="practice-q-number">Question 2</div>
+                <div class="practice-q-text">
+                    A 28-year-old man undergoes transsphenoidal pituitary surgery for a non-functioning adenoma. On postoperative day 1, he produces 8 liters of urine over 12 hours. His serum sodium is 148 mEq/L (normal 135–145), serum osmolarity is 305 mOsm/kg. Urine osmolarity is 65 mOsm/kg. He is given DDAVP intravenously, and his urine osmolarity rises to 620 mOsm/kg within 2 hours.
+                    <br><br>
+                    <strong>What is the diagnosis? Explain the mechanism of this complication.</strong>
+                </div>
+                <div class="practice-q-reveal">Click to reveal answer</div>
+                <div class="practice-q-answer">
+                    <strong>Diagnosis: Central (neurogenic) diabetes insipidus.</strong>
+                    <br><br>
+                    <strong>Mechanism:</strong>
+                    <ul>
+                        <li>Transsphenoidal pituitary surgery damages the pituitary stalk and/or posterior pituitary tissue</li>
+                        <li>Loss of ADH synthesis/release from hypothalamus or loss of storage/release from posterior pituitary</li>
+                        <li>Kidney loses the signal to reabsorb water despite high serum osmolarity</li>
+                        <li>Results: polyuria (8L in 12h), dilute urine (osmolarity 65), hypernatremia (148)</li>
+                    </ul>
+                    <br>
+                    <strong>DDAVP response (key finding):</strong>
+                    <ul>
+                        <li>Urine osmolarity rises from 65 to 620 mOsm/kg after DDAVP → confirms the kidney IS responsive</li>
+                        <li>The collecting duct can concentrate urine when given exogenous ADH replacement</li>
+                        <li>Therefore, the problem is ADH deficiency (not kidney resistance), confirming CENTRAL DI</li>
+                    </ul>
+                    <br>
+                    <strong>Triphasic response to pituitary surgery (common pattern):</strong>
+                    <ol>
+                        <li><strong>Acute DI (immediate):</strong> Stalk transection → ADH release stops → polyuria</li>
+                        <li><strong>SIADH (days 3–5):</strong> Stored ADH leaks from damaged stalk → hyponatremia (paradoxically opposite)</li>
+                        <li><strong>Permanent DI (weeks):</strong> If stalk transection is complete and axons don't regenerate</li>
+                    </ol>
+                    <br>
+                    <strong>Management:</strong>
+                    <ul>
+                        <li>DDAVP replacement (intranasal preferred; dose titrated to urine output, typically 10 mcg 1–3×/day)</li>
+                        <li>Fluid replacement to match insensible losses</li>
+                        <li>Monitor serum Na⁺ closely (q4–6h initially, then daily) to avoid overcorrection</li>
+                        <li>Watch for triphasic response: DI → SIADH → permanent DI</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="practice-q">
+                <div class="practice-q-number">Question 3</div>
+                <div class="practice-q-text">
+                    A 62-year-old woman with bipolar disorder has been on lithium for 15 years. She now presents with severe polydipsia (drinking 6 L/day) and polyuria (voiding 6 L/day). Her serum sodium is 146 mEq/L and serum osmolarity is 304. Urine osmolarity is 80 mOsm/kg. She is given an IV bolus of DDAVP, but her urine osmolarity fails to rise and remains at 85 mOsm/kg.
+                    <br><br>
+                    <strong>What is the diagnosis? Explain the molecular mechanism of lithium toxicity. How should this patient be treated?</strong>
+                </div>
+                <div class="practice-q-reveal">Click to reveal answer</div>
+                <div class="practice-q-answer">
+                    <strong>Diagnosis: Nephrogenic diabetes insipidus secondary to chronic lithium use.</strong>
+                    <br><br>
+                    <strong>Molecular mechanism of lithium-induced nephrogenic DI:</strong>
+                    <ul>
+                        <li>Lithium enters principal cells of the collecting duct via the epithelial sodium channel (ENaC)</li>
+                        <li>Inside the cell, lithium inhibits inositol polyphosphate (IP) recycling</li>
+                        <li>↓IP availability → impaired phospholipase C signaling from V2 receptor (Gq → PLC → IP3)</li>
+                        <li>Also: lithium may directly inhibit adenylyl cyclase downstream of V2 receptor</li>
+                        <li>Result: ↓cAMP → PKA not activated → AQP2 vesicles not inserted → collecting duct impermeable to water</li>
+                        <li>Urine remains dilute despite high endogenous ADH and exogenous DDAVP</li>
+                    </ul>
+                    <br>
+                    <strong>Why DDAVP fails:</strong>
+                    <ul>
+                        <li>DDAVP's mechanism (V2 → cAMP → AQP2 insertion) is blocked by lithium's intracellular effect</li>
+                        <li>The kidney is the problem, not ADH production</li>
+                        <li>This is ADH-resistant nephrogenic DI</li>
+                    </ul>
+                    <br>
+                    <strong>Labs confirming nephrogenic DI:</strong>
+                    <ul>
+                        <li>High ADH levels (expected; body trying to compensate) — but NOT directly measured in this case</li>
+                        <li>Hypernatremia (146) and ↑osmolarity (304)</li>
+                        <li>Dilute urine (osmolarity 80) despite hypernatremia</li>
+                        <li>No response to DDAVP (unlike central DI)</li>
+                    </ul>
+                    <br>
+                    <strong>Treatment:</strong>
+                    <ol>
+                        <li><strong>Discontinue lithium if possible:</strong> Talk to psychiatrist about alternative mood stabilizers (valproate, lamotrigine, etc.). Nephrogenic DI may partially reverse if lithium is stopped early.</li>
+                        <li><strong>Thiazide diuretic + low-sodium diet (first-line for nephrogenic DI):</strong>
+                            <ul>
+                                <li>Thiazide (e.g., HCTZ) causes mild volume depletion → ↓GFR → ↑proximal tubule reabsorption of Na⁺ and water</li>
+                                <li>Less fluid is delivered to collecting duct → less polyuria despite inability to concentrate</li>
+                                <li>Low-Na⁺ diet reduces osmotic load, enhances proximal reabsorption</li>
+                            </ul>
+                        </li>
+                        <li><strong>Amiloride (specific for lithium-induced DI):</strong>
+                            <ul>
+                                <li>ENaC blocker → prevents lithium entry into principal cells</li>
+                                <li>Allows V2 signaling to work normally despite lithium presence</li>
+                                <li>Dose: 5–10 mg PO daily; monitor K⁺ (amiloride is K⁺-sparing)</li>
+                            </ul>
+                        </li>
+                        <li><strong>NSAIDs (modest benefit):</strong> Inhibit prostaglandin synthesis; may reduce adenylyl cyclase antagonism</li>
+                        <li><strong>Ensure adequate free water intake:</strong> Patient should have ad libitum access to water to maintain hydration and prevent hypernatremia</li>
+                    </ol>
+                    <br>
+                    <strong>Prognosis:</strong> Nephrogenic DI from lithium is often irreversible if lithium was used for many years, as it can cause permanent renal damage. Early recognition and intervention (discontinuing lithium, starting amiloride + thiazide) improve outcomes.
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Lecture 6: Posterior Pituitary Hormones | HoyaDocs Endocrine Block | Biochemistry</p>
+        <p>This study guide is designed for USMLE Step 1 preparation. Use alongside lectures, practice questions, and clinical cases.</p>
+        <p>Generated April 2026 | All content organized for maximum retention</p>
+    </footer>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop">↑</button>
+
+    <script>
+        // Initialize sidebar based on localStorage
+        const STORAGE_KEY = 'endo_lec06';
+
+        // Load checked boxes on page load
+        function initCheckboxes() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (stored) {
+                const checked = JSON.parse(stored);
+                Object.keys(checked).forEach(loId => {
+                    const checkbox = document.querySelector(`input[data-lo="${loId}"]`);
+                    if (checkbox) checkbox.checked = checked[loId];
+                });
+            }
+        }
+
+        // Save checkbox state to localStorage
+        function saveCheckboxState() {
+            const checkboxes = document.querySelectorAll('.lo-checkbox');
+            const state = {};
+            checkboxes.forEach(cb => {
+                state[cb.dataset.lo] = cb.checked;
+            });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }
+
+        // Collapsible LO sections
+        function initCollapsibles() {
+            const loSections = document.querySelectorAll('.lo-section');
+            loSections.forEach(section => {
+                const header = section.querySelector('.lo-header');
+                const toggle = section.querySelector('.lo-toggle');
+                const content = section.querySelector('.lo-content');
+
+                header.addEventListener('click', function() {
+                    toggle.classList.toggle('collapsed');
+                    content.classList.toggle('collapsed');
+                });
+            });
+        }
+
+        // Flip cards
+        function initFlipCards() {
+            const flipCards = document.querySelectorAll('.flip-card');
+            flipCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.classList.toggle('flipped');
+                });
+            });
+        }
+
+        // Practice question reveals
+        function initPracticeQ() {
+            const reveals = document.querySelectorAll('.practice-q-reveal');
+            reveals.forEach(reveal => {
+                reveal.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    answer.classList.toggle('revealed');
+                    this.textContent = answer.classList.contains('revealed') ? 'Hide answer' : 'Click to reveal answer';
+                });
+            });
+        }
+
+        // Back to top button
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Sidebar active link tracking
+        function updateActiveLink() {
+            const sections = document.querySelectorAll('[id^="lo"], [id^="mindmap"], [id^="flipcards"], [id^="practiceqs"]');
+            const navLinks = document.querySelectorAll('.sidebar-nav a');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initCheckboxes();
+            initCollapsibles();
+            initFlipCards();
+            initPracticeQ();
+            updateActiveLink();
+        });
+
+        // Save checkbox state on change
+        document.querySelectorAll('.lo-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', saveCheckboxState);
+        });
+    </script>
+</body>
+</html>
