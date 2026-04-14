@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HoyaDocs | Endocrine Study Hub</title>
+
+  <!-- Prevents flash of wrong theme on load -->
+  <script>(function(){const t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);})();</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ══════════════════════════════════════
+       DESIGN TOKENS — light mode defaults
+    ══════════════════════════════════════ */
+    :root {
+      --sb:         #1c1400;
+      --sb-hover:   rgba(255,255,255,0.07);
+      --sb-line:    rgba(255,255,255,0.09);
+      --bg:         #fefbf0;
+      --surface:    #ffffff;
+      --ink:        #0f172a;
+      --ink-2:      #334155;
+      --ink-3:      #64748b;
+      --rule:       #e2e8f0;
+      --card-sh:    0 1px 3px rgba(0,0,0,0.05);
+      --bc-blue-bg: #eef4ff; --bc-blue-br: #c7d9f5; --bc-blue-tx: #1f4b99;
+      --bc-grn-bg:  #edfdf4; --bc-grn-br:  #a7f3c9; --bc-grn-tx:  #166534;
+      --bc-ros-bg:  #fff1f2; --bc-ros-br:  #fda4af; --bc-ros-tx:  #9f1239;
+      --bc-pur-bg:  #f5f0ff; --bc-pur-br:  #d8b4fe; --bc-pur-tx:  #6d28d9;
+      --hero-em:    #854d0e;
+    }
+
+    /* ── DARK MODE ── */
+    [data-theme="dark"] {
+      --bg:         #1a1200;
+      --surface:    #261d08;
+      --ink:        #f1f5f9;
+      --ink-2:      #cbd5e1;
+      --ink-3:      #94a3b8;
+      --rule:       #4a3510;
+      --card-sh:    0 1px 3px rgba(0,0,0,0.4);
+      --bc-blue-bg: #1a2744; --bc-blue-br: #2d4a8a; --bc-blue-tx: #6ba3e8;
+      --bc-grn-bg:  #0a2218; --bc-grn-br:  #1a5c35; --bc-grn-tx:  #5dbf87;
+      --bc-ros-bg:  #250a12; --bc-ros-br:  #6b1a2e; --bc-ros-tx:  #e06b8a;
+      --bc-pur-bg:  #1a1033; --bc-pur-br:  #4c1d95; --bc-pur-tx:  #a78bfa;
+      --hero-em:    #fbbf24;
+    }
+
+    html, body { height: 100%; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; }
+
+    /* ══════════════════════════════════════
+       LAYOUT SHELL
+    ══════════════════════════════════════ */
+    .shell { display: flex; min-height: 100vh; }
+
+    /* ══════════════════════════════════════
+       SIDEBAR
+    ══════════════════════════════════════ */
+    .sidebar {
+      width: 232px; flex-shrink: 0;
+      background: var(--sb);
+      position: sticky; top: 0; height: 100vh;
+      display: flex; flex-direction: column;
+      padding: 28px 18px 24px;
+      overflow-y: auto;
+      transition: background 0.2s;
+    }
+
+    .sb-brand {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .sb-crest { display: none; }
+
+    .sb-name {
+      font-size: 1.35rem; font-weight: 900; color: #fff;
+      letter-spacing: -0.01em; flex: 1;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.25);
+    }
+
+    .dark-toggle {
+      width: 28px; height: 28px; border-radius: 7px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.82rem; color: rgba(255,255,255,0.7);
+      flex-shrink: 0;
+      transition: background 0.14s;
+    }
+    .dark-toggle:hover { background: rgba(255,255,255,0.16); }
+
+    .sb-block {
+      font-size: 0.72rem; font-weight: 500;
+      color: rgba(255,255,255,0.42);
+      margin-bottom: 26px; padding-left: 2px;
+    }
+
+    .sb-section-label {
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.10em; text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 6px; padding: 0 8px;
+    }
+
+    .sb-nav { display: flex; flex-direction: column; gap: 2px; margin-bottom: 20px; }
+
+    .sb-link {
+      display: flex; align-items: center; gap: 9px;
+      padding: 8px 10px; border-radius: 8px;
+      font-size: 0.82rem; font-weight: 500;
+      color: rgba(255,255,255,0.60);
+      transition: background 0.13s, color 0.13s;
+    }
+    .sb-link:hover { background: var(--sb-hover); color: rgba(255,255,255,0.92); }
+
+    .sb-link-icon {
+      width: 22px; height: 22px; border-radius: 6px;
+      background: rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.82rem; flex-shrink: 0;
+    }
+    .sb-icon-blue  { background: rgba(99,140,220,0.32); }
+    .sb-icon-green { background: rgba(74,180,120,0.32); }
+    .sb-icon-rose  { background: rgba(220,90,110,0.32); }
+    .sb-icon-teal  { background: rgba(20,184,166,0.32); }
+    .sb-icon-amber { background: rgba(245,158,11,0.32); }
+    .sb-icon-qref  { background: rgba(139,92,246,0.32); }
+
+    .sb-rule { height: 1px; background: var(--sb-line); margin: 4px 0 18px; }
+    .sb-spacer { flex: 1; }
+
+    .sb-ext-label {
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.10em; text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 8px; padding: 0 8px;
+    }
+
+    .sb-ext-link {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 9px 10px; border-radius: 8px;
+      font-size: 0.82rem; font-weight: 600;
+      color: rgba(255,255,255,0.65);
+      border: 1px solid rgba(255,255,255,0.10);
+      margin-bottom: 6px;
+      transition: background 0.13s, color 0.13s, border-color 0.13s;
+    }
+    .sb-ext-link:hover { background: rgba(255,255,255,0.08); color: #fff; border-color: rgba(255,255,255,0.20); }
+    .sb-ext-link:last-child { margin-bottom: 0; }
+    .sb-ext-arrow { opacity: 0.5; font-size: 0.75rem; }
+
+    /* ══════════════════════════════════════
+       MAIN CONTENT
+    ══════════════════════════════════════ */
+    .main { flex: 1; min-width: 0; background: var(--bg); transition: background 0.2s; }
+
+    .main-inner { max-width: 860px; padding: 52px 48px 80px; }
+
+    /* ── HERO ── */
+    .hero { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--rule); }
+
+    .hero-eyebrow {
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--ink-3); margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      font-weight: 900; letter-spacing: -0.045em;
+      color: var(--ink); line-height: 0.98; margin-bottom: 20px;
+    }
+
+    .hero-title em { font-style: normal; color: var(--hero-em); }
+
+    .hero-sub {
+      font-size: 0.97rem; color: var(--ink-2);
+      line-height: 1.7; margin-bottom: 22px;
+    }
+
+    /* ── FEEDBACK BUTTON (fixed top-right) ── */
+    .feedback-fab {
+      position: fixed; top: 16px; right: 20px; z-index: 500;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 14px; border-radius: 20px;
+      background: var(--hero-em); color: #fff;
+      font-size: 0.78rem; font-weight: 700;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+      transition: opacity 0.15s, transform 0.15s;
+      text-decoration: none;
+    }
+    .feedback-fab:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 12px; border-radius: 999px;
+      background: var(--surface); border: 1px solid var(--rule);
+      font-size: 0.78rem; font-weight: 600; color: var(--ink-2);
+      box-shadow: var(--card-sh);
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    /* ── SECTION DIVIDER ── */
+    .section-divider { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+
+    .section-divider-text {
+      font-size: 1.25rem; font-weight: 800;
+      letter-spacing: -0.02em; color: var(--ink); white-space: nowrap;
+    }
+
+    .section-divider-line { flex: 1; height: 1px; background: #854d0e; }
+
+    .section-block { margin-bottom: 48px; }
+
+    /* ══════════════════════════════════════
+       BENTO STUDY TOOL CARDS
+    ══════════════════════════════════════ */
+    .bento {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .bcard {
+      border-radius: 20px; padding: 24px;
+      display: flex; flex-direction: column;
+      border: 1px solid transparent;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative; overflow: hidden;
+    }
+    .bcard:hover { transform: translateY(-3px); }
+
+    .bcard-watermark {
+      position: absolute; bottom: -14px; right: -8px;
+      font-size: 6.5rem; opacity: 0.06;
+      pointer-events: none; user-select: none; line-height: 1;
+    }
+
+    .bcard-header { display: flex; align-items: center; gap: 13px; margin-bottom: 12px; }
+
+    .bcard-icon {
+      width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(255,255,255,0.75);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.10);
+      display: flex; align-items: center; justify-content: center; font-size: 1.45rem;
+    }
+    .bcard-feature .bcard-icon { width: 56px; height: 56px; font-size: 1.7rem; }
+
+    .bcard-header-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+
+    .bcard-label {
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.10em; text-transform: uppercase; opacity: 0.65;
+    }
+
+    .bcard h3 {
+      font-size: 1.05rem; font-weight: 800;
+      letter-spacing: -0.025em; color: var(--ink); margin: 0; line-height: 1.2;
+    }
+    .bcard-feature h3 { font-size: 1.2rem; }
+
+    .bcard p {
+      font-size: 0.845rem; color: var(--ink-2);
+      line-height: 1.65; flex: 1; margin-bottom: 20px;
+    }
+
+    .bcard-cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.82rem; font-weight: 700;
+      transition: gap 0.14s; align-self: flex-start;
+    }
+    .bcard:hover .bcard-cta { gap: 10px; }
+
+    .bc-blue  { background: var(--bc-blue-bg); border-color: var(--bc-blue-br); }
+    .bc-blue:hover  { box-shadow: 0 12px 40px rgba(31,75,153,0.16), 0 3px 10px rgba(31,75,153,0.08); }
+    .bc-blue  .bcard-cta, .bc-blue  .bcard-label { color: var(--bc-blue-tx); }
+
+    .bc-green { background: var(--bc-grn-bg); border-color: var(--bc-grn-br); }
+    .bc-green:hover { box-shadow: 0 12px 40px rgba(22,101,52,0.14), 0 3px 10px rgba(22,101,52,0.07); }
+    .bc-green .bcard-cta, .bc-green .bcard-label { color: var(--bc-grn-tx); }
+
+    .bc-rose  { background: var(--bc-ros-bg); border-color: var(--bc-ros-br); }
+    .bc-rose:hover  { box-shadow: 0 12px 40px rgba(159,18,57,0.14), 0 3px 10px rgba(159,18,57,0.07); }
+    .bc-rose  .bcard-cta, .bc-rose  .bcard-label { color: var(--bc-ros-tx); }
+
+    .bc-purple { background: var(--bc-pur-bg); border-color: var(--bc-pur-br); }
+    .bc-purple:hover { box-shadow: 0 12px 40px rgba(109,40,217,0.14), 0 3px 10px rgba(109,40,217,0.07); }
+    .bc-purple .bcard-cta, .bc-purple .bcard-label { color: var(--bc-pur-tx); }
+
+    /* ══════════════════════════════════════
+       UTILITY ROWS
+    ══════════════════════════════════════ */
+    .util-list {
+      background: var(--surface); border: 1px solid var(--rule);
+      border-radius: 16px; overflow: hidden; box-shadow: var(--card-sh);
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .util-row {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 20px; transition: background 0.14s;
+    }
+    .util-row:not(:last-child) { border-bottom: 1px solid var(--rule); }
+    .util-row:hover { background: color-mix(in srgb, var(--bg) 60%, var(--surface)); }
+
+    .util-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    .ui-teal   { background: #ccfbf1; }
+    .ui-amber  { background: #fef3c7; }
+    .ui-purple { background: #ede9fe; }
+
+    .util-text { flex: 1; }
+    .util-text strong { display: block; font-size: 0.93rem; font-weight: 700; color: var(--ink); }
+    .util-text span   { font-size: 0.8rem; color: var(--ink-3); }
+
+    .util-arrow { font-size: 0.85rem; font-weight: 700; color: var(--ink-3); transition: transform 0.14s; }
+    .util-row:hover .util-arrow { transform: translateX(4px); color: var(--ink); }
+
+    /* ══════════════════════════════════════
+       WORKFLOW
+    ══════════════════════════════════════ */
+    .workflow-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; }
+
+    .wf-item { padding: 0 22px; border-right: 1px solid var(--rule); }
+    .wf-item:first-child { padding-left: 0; }
+    .wf-item:last-child  { border-right: none; padding-right: 0; }
+
+    .wf-num { font-size: 2.4rem; font-weight: 900; letter-spacing: -0.06em; color: var(--rule); line-height: 1; margin-bottom: 10px; transition: color 0.2s; }
+    .wf-title { font-size: 0.85rem; font-weight: 700; color: var(--ink); margin-bottom: 5px; letter-spacing: -0.01em; }
+    .wf-desc  { font-size: 0.76rem; color: var(--ink-3); line-height: 1.55; }
+
+    /* ══════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════ */
+    .footer {
+      border-top: 1px solid var(--rule); padding-top: 22px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; font-size: 0.8rem; color: var(--ink-3);
+    }
+    .footer strong { color: var(--ink-2); font-weight: 600; }
+
+    /* ══════════════════════════════════════
+       MOBILE BOTTOM NAV
+    ══════════════════════════════════════ */
+    .mobile-nav {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 500;
+      background: var(--surface);
+      border-top: 1px solid var(--rule);
+      padding: 8px 0 max(8px, env(safe-area-inset-bottom));
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.10);
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .mobile-nav-items { display: flex; justify-content: space-around; }
+
+    .mobile-nav-item {
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      padding: 4px 10px; color: var(--ink-3);
+      font-size: 0.6rem; font-weight: 600; letter-spacing: 0.02em;
+      transition: color 0.13s;
+    }
+    .mobile-nav-item:hover { color: #854d0e; }
+
+    .mobile-nav-icon { font-size: 1.25rem; line-height: 1; }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════ */
+    @media (max-width: 960px) {
+      .shell { flex-direction: column; }
+
+      .sidebar {
+        width: 100%; height: auto; position: sticky; top: 0; z-index: 400;
+        flex-direction: row; align-items: center;
+        padding: 12px 18px; gap: 12px; flex-wrap: nowrap;
+      }
+      .sb-brand   { margin-bottom: 0; flex: 1; }
+      .sb-block   { display: none; }
+      .sb-rule    { display: none; }
+      .sb-section-label { display: none; }
+      .sb-spacer  { display: none; }
+      .sb-ext-label { display: none; }
+      .sb-nav     { display: none; }
+      /* Hide quick-access links from top bar on mobile — accessed via bottom nav */
+      .sb-ext-link { display: none; }
+
+      .main-inner { padding: 24px 18px 100px; }
+
+      /* Move feedback FAB above mobile nav */
+      .feedback-fab { top: auto; bottom: 72px; right: 16px; font-size: 0.74rem; padding: 6px 12px; }
+
+      .mobile-nav { display: flex; }
+    }
+
+    @media (max-width: 680px) {
+      .bento { grid-template-columns: 1fr; }
+      .bcard-feature { grid-row: span 1; }
+
+      /* Give Today's Lectures a bounded height when stacked */
+      .today-lec-scroll { max-height: 260px; }
+
+      /* Slightly more compact cards */
+      .bcard { padding: 18px; border-radius: 16px; }
+      .bcard h3 { font-size: 0.98rem; }
+      .bcard-icon { width: 40px; height: 40px; font-size: 1.2rem; }
+
+      .workflow-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .wf-item { padding: 0; border-right: none; border-bottom: 1px solid var(--rule); padding-bottom: 20px; }
+      .wf-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+      .hero-title { font-size: 2.4rem; }
+      .section-divider-text { font-size: 1.1rem; }
+      .footer { flex-direction: column; align-items: flex-start; gap: 6px; }
+
+      /* Larger touch targets for util rows */
+      .util-row { padding: 18px 16px; }
+    }
+    /* ══════════════════════════════════════
+       TODAY'S LECTURES CARD
+    ══════════════════════════════════════ */
+    .today-lec-scroll { flex: 1; overflow-y: auto; }
+    .lec-row { display: flex; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--rule); line-height: 1.35; }
+    .lec-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .lec-time { font-weight: 700; color: var(--ink-3); flex-shrink: 0; width: 42px; font-size: 0.72rem; padding-top: 2px; }
+    .lec-info { min-width: 0; }
+    .lec-name { font-size: 0.80rem; font-weight: 600; color: var(--ink); }
+    .lec-name a { color: inherit; text-decoration: none; }
+    .lec-name a:hover { text-decoration: underline; }
+    .lec-sub { font-size: 0.70rem; color: var(--ink-3); margin-top: 2px; }
+    .lec-tag { display: inline-block; padding: 1px 5px; border-radius: 4px; font-size: 0.66rem; font-weight: 700; margin-right: 4px; }
+    .lec-none { font-size: 0.82rem; color: var(--ink-3); font-style: italic; padding: 4px 0; }
+
+  </style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- ══ SIDEBAR ══ -->
+  <aside class="sidebar">
+    <div class="sb-brand">
+      <span class="sb-name">HoyaDocs</span>
+      <button class="dark-toggle" id="darkToggle" onclick="toggleDark()" title="Toggle dark mode">🌙</button>
+    </div>
+    <div class="sb-block">Block 4 - Endocrine</div>
+
+    <div class="sb-rule"></div>
+
+    <div class="sb-section-label">Lecture Guides</div>
+    <nav class="sb-nav">
+      <a class="sb-link" href="./lecture-guides/index.html">
+        <span class="sb-link-icon sb-icon-teal">📖</span>
+        Lecture Guides
+      </a>
+    </nav>
+
+    <div class="sb-spacer"></div>
+
+    <div class="sb-ext-label">Quick Access</div>
+    <a class="sb-ext-link" href="https://www.uworld.com/" target="_blank" rel="noopener">
+      <span>UWorld</span><span class="sb-ext-arrow">↗</span>
+    </a>
+    <a class="sb-ext-link" href="https://drive.google.com/" target="_blank" rel="noopener">
+      <span>Class Drive</span><span class="sb-ext-arrow">↗</span>
+    </a>
+    <a class="sb-ext-link" href="https://docs.google.com/spreadsheets/d/14WyUf7nLK21R5drauE0qpBrFZ-gNnyo6d4O1ymhvj4Y/edit?usp=sharing" target="_blank" rel="noopener">
+      <span>HoyaDocs Work In Progress</span><span class="sb-ext-arrow">↗</span>
+    </a>
+  </aside>
+
+  <!-- ══ MAIN ══ -->
+  <main class="main">
+    <div class="main-inner">
+
+      <!-- HERO -->
+      <section class="hero" id="hero">
+        <p class="hero-eyebrow">HoyaDocs · Endocrine</p>
+        <h1 class="hero-title">Endocrine <em>Study Hub.</em></h1>
+        <p class="hero-sub">In-house exam prep and USMLE Step 1 review — all your tools in one place.</p>
+      </section>
+
+      <!-- LECTURE SPECIFIC TOOLS -->
+      <div class="section-block" id="lecture-tools">
+        <div class="section-divider">
+          <span class="section-divider-text">Lecture Study Tools</span>
+          <div class="section-divider-line"></div>
+        </div>
+        <div class="bento">
+
+          <div style="display:flex; flex-direction:column; gap:14px;">
+
+            <a class="bcard bc-blue" href="./study-planner.html" style="flex:1;">
+              <span class="bcard-watermark">📋</span>
+              <div class="bcard-header">
+                <div class="bcard-icon">📋</div>
+                <div class="bcard-header-text">
+                  <span class="bcard-label">Planning · 01</span>
+                  <h3>Endocrine Study Planner</h3>
+                </div>
+              </div>
+              <p>Select resources per lecture, track Prep / Watch / Anki / Last Pass tasks, day-by-day schedule, and Anki card counts — all with progress tracking.</p>
+              <span class="bcard-cta">Open planner →</span>
+            </a>
+
+            <a class="bcard bc-purple" href="./resource-mapping/endocrine_resource_hub.html" style="flex:1;">
+              <span class="bcard-watermark">🔗</span>
+              <div class="bcard-header">
+                <div class="bcard-icon">🔗</div>
+                <div class="bcard-header-text">
+                  <span class="bcard-label">Reference · 01</span>
+                  <h3>Lecture Specific Resources</h3>
+                </div>
+              </div>
+              <p>Per-lecture study guides, practice questions, UWorld QIDs, and Anki cards (In-House &amp; ANKing).</p>
+              <span class="bcard-cta">Open section →</span>
+            </a>
+
+            <a class="bcard bc-purple" href="./resource-mapping/endocrine_mapping.html" style="flex:1;">
+              <span class="bcard-watermark">🗂</span>
+              <div class="bcard-header">
+                <div class="bcard-icon">🗂</div>
+                <div class="bcard-header-text">
+                  <span class="bcard-label">Reference · 02</span>
+                  <h3>Lecture × 3rd Party Mapping</h3>
+                </div>
+              </div>
+              <p>3rd party resources mapped to each lecture — BnB, Bootcamp, Pathoma, Physeo, and Sketchy.</p>
+              <span class="bcard-cta">Open section →</span>
+            </a>
+
+          </div>
+
+          <div class="bcard bc-blue">
+            <span class="bcard-watermark">📅</span>
+            <div class="bcard-header">
+              <div class="bcard-icon">📅</div>
+              <div class="bcard-header-text">
+                <span class="bcard-label" id="today-date-lbl">Today</span>
+                <h3>Today's Endocrine Lectures</h3>
+              </div>
+            </div>
+            <div id="today-lec-list" class="today-lec-scroll">
+              <div class="lec-none">Loading…</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- STUDY TOOLS -->
+      <div class="section-block" id="study-tools">
+        <div class="section-divider">
+          <span class="section-divider-text">Study Tools</span>
+          <div class="section-divider-line"></div>
+        </div>
+        <div class="bento">
+
+
+          <a class="bcard bc-green" href="./active-recall-hub.html">
+            <span class="bcard-watermark">🎯</span>
+            <div class="bcard-header">
+              <div class="bcard-icon">🎯</div>
+              <div class="bcard-header-text">
+                <span class="bcard-label">Foundational · 02</span>
+                <h3>Active Recall Drills</h3>
+              </div>
+            </div>
+            <p>Gamified practice for recognizing vignettes, trap questions, mechanisms, and drug facts.</p>
+            <span class="bcard-cta">Open section →</span>
+          </a>
+
+          <a class="bcard bc-rose" href="./question-banks/">
+            <span class="bcard-watermark">🩺</span>
+            <div class="bcard-header">
+              <div class="bcard-icon">🩺</div>
+              <div class="bcard-header-text">
+                <span class="bcard-label">Application · 03</span>
+                <h3>Coming Soon! Board-Style Practice</h3>
+              </div>
+            </div>
+            <p>Exam-oriented question sets and external QBank links organized in one place.</p>
+            <span class="bcard-cta">Open section →</span>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- UTILITIES -->
+      <div class="section-block" id="utilities">
+        <div class="section-divider">
+          <span class="section-divider-text">Utilities</span>
+          <div class="section-divider-line"></div>
+        </div>
+        <div class="util-list">
+          <a class="util-row" href="./study-guides/">
+            <div class="util-icon ui-purple">📘</div>
+            <div class="util-text">
+              <strong>Coming Soon! Endocrine Exam HY Study Guides</strong>
+              <span>Summary notes, curated review pages, concept breakdowns, and structured Endocrine study documents for both in-house and Step 1 prep.</span>
+            </div>
+            <span class="util-arrow">→</span>
+          </a>
+          <a class="util-row" href="#">
+            <div class="util-icon ui-amber">🧬</div>
+            <div class="util-text">
+              <strong>Coming Soon! Databases</strong>
+              <span>High-yield tables, fact banks, and reference repositories for quick lookup.</span>
+            </div>
+            <span class="util-arrow">→</span>
+          </a>
+          <a class="util-row" href="#">
+            <div class="util-icon ui-purple">⚡</div>
+            <div class="util-text">
+              <strong>Coming Soon! Quick Reference</strong>
+              <span>Tabbed high-yield pages — Endocrine anatomy, classic presentations, key labs, and more.</span>
+            </div>
+            <span class="util-arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- WORKFLOW -->
+      <div class="section-block" id="workflow">
+        <div class="section-divider">
+          <span class="section-divider-text">Recommended Workflow</span>
+          <div class="section-divider-line"></div>
+        </div>
+        <div class="workflow-grid">
+          <div class="wf-item">
+            <div class="wf-num">01</div>
+            <div class="wf-title">Study Guides</div>
+            <div class="wf-desc">Build a structured overview and identify the highest-yield concepts first.</div>
+          </div>
+          <div class="wf-item">
+            <div class="wf-num">02</div>
+            <div class="wf-title">Active Recall Drills</div>
+            <div class="wf-desc">Practice vignettes, trap patterns, mechanisms, and key facts through active repetition.</div>
+          </div>
+          <div class="wf-item">
+            <div class="wf-num">03</div>
+            <div class="wf-title">Reinforce via Databases</div>
+            <div class="wf-desc">Return to reference tables for clarification and side-by-side comparison.</div>
+          </div>
+          <div class="wf-item">
+            <div class="wf-num">04</div>
+            <div class="wf-title">Board-Style Practice</div>
+            <div class="wf-desc">Shift into question-based reasoning and exam-style thinking with practice sets.</div>
+          </div>
+          <div class="wf-item">
+            <div class="wf-num">05</div>
+            <div class="wf-title">Track Progress</div>
+            <div class="wf-desc">Log what's complete, what feels weak, and where to focus next.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        <span>Built as a shared entry point for HoyaDocs Endocrine resources.</span>
+        <span><strong>Last updated: April 1, 2026</strong></span>
+      </footer>
+
+    </div>
+  </main>
+
+</div>
+
+<!-- ══ MOBILE BOTTOM NAV ══ -->
+<nav class="mobile-nav">
+  <div class="mobile-nav-items">
+    <a class="mobile-nav-item" href="#hero">
+      <span class="mobile-nav-icon">🏠</span>Home
+    </a>
+    <a class="mobile-nav-item" href="#lecture-tools">
+      <span class="mobile-nav-icon">📅</span>Lectures
+    </a>
+    <a class="mobile-nav-item" href="#study-tools">
+      <span class="mobile-nav-icon">📘</span>Study
+    </a>
+    <a class="mobile-nav-item" href="#utilities">
+      <span class="mobile-nav-icon">📊</span>Utilities
+    </a>
+    <a class="mobile-nav-item" href="https://www.uworld.com/" target="_blank" rel="noopener">
+      <span class="mobile-nav-icon">🩺</span>UWorld
+    </a>
+  </div>
+</nav>
+
+<script>
+  // ── Dark mode toggle ──
+  function toggleDark() {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const next = isDark ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    document.getElementById('darkToggle').textContent = next === 'dark' ? '☀️' : '🌙';
+  }
+
+  // Set correct icon on load
+  document.addEventListener('DOMContentLoaded', function () {
+    const t = document.documentElement.getAttribute('data-theme');
+    document.getElementById('darkToggle').textContent = t === 'dark' ? '☀️' : '🌙';
+  });
+
+  // ── Today's Lectures ──
+  const LECTURES = [];
+
+  const COURSE_TAG = {
+    'Phys':  ['#dbeafe','#1e40af'], 'Anat':  ['#dcfce7','#166534'],
+    'Path':  ['#ffe4e6','#9f1239'], 'Pharm': ['#d1fae5','#065f46'],
+    'Embr':  ['#ede9fe','#5b21b6'], 'Hist':  ['#f3e8ff','#6b21a8'],
+    'Micro': ['#fef3c7','#92400e'], 'DRT':   ['#dbeafe','#1e3a8a'],
+    'Ethics':['#fce7f3','#9d174d'], 'CP':    ['#e0f2fe','#0369a1'],
+    'N/A':   ['#f1f5f9','#64748b'],
+  };
+
+  function renderTodayLectures() {
+    const now = new Date();
+    const yyyy = now.getFullYear();
+    const mm   = String(now.getMonth() + 1).padStart(2, '0');
+    const dd   = String(now.getDate()).padStart(2, '0');
+    const todayStr = `${yyyy}-${mm}-${dd}`;
+
+    const lbl = document.getElementById('today-date-lbl');
+    if (lbl) lbl.textContent = now.toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' });
+
+    const list = document.getElementById('today-lec-list');
+    if (!list) return;
+
+    const rows = LECTURES.filter(l => l.d === todayStr);
+    if (!rows.length) {
+      list.innerHTML = '<div class="lec-none">No lectures scheduled today.</div>';
+      return;
+    }
+
+    list.innerHTML = rows.map(l => {
+      const [bg, tx] = COURSE_TAG[l.course] || COURSE_TAG['N/A'];
+      const name = l.link
+        ? `<a href="${l.link}" target="_blank" rel="noopener">${l.title}</a>`
+        : l.title;
+      const who = (l.lecturer && l.lecturer !== 'N/A') ? `Dr. ${l.lecturer}` : '';
+      const loc = l.location && l.location !== 'N/A' ? `· ${l.location}` : '';
+      return `<div class="lec-row">
+        <div class="lec-time">${l.start}</div>
+        <div class="lec-info">
+          <div class="lec-name">${name}</div>
+          <div class="lec-sub"><span class="lec-tag" style="background:${bg};color:${tx}">${l.course}</span>${who} ${loc}</div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  document.addEventListener('DOMContentLoaded', renderTodayLectures);
+
+</script>
+
+<!-- Feedback button fixed top-right -->
+<a class="feedback-fab" href="https://forms.gle/382rWjcPXC1beo8G8" target="_blank" rel="noopener">
+  💬 Feedback
+</a>
+
+</body>
+</html>
