@@ -1,0 +1,2138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 2: Thyroid Physiology — HoyaDocs Endocrine Block</title>
+    <style>        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #f8f9fa;
+            color: #1f2937;
+            line-height: 1.6;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 220px;
+            height: 100vh;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            padding: 20px 0 140px;
+            overflow-y: auto;
+            z-index: 100;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-header {
+            padding: 0 15px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .sidebar-header h2 {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-header p {
+            font-size: 12px;
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        .sidebar-nav {
+            padding: 0 15px;
+        }
+
+        .sidebar-link {
+            display: block;
+            padding: 10px 12px;
+            background: #1e293b;
+            color: #cbd5e1;
+            border-left: 3px solid transparent;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            margin-bottom: 6px;
+        }
+
+        .sidebar-link:hover {
+            background: #334155;
+            border-left-color: #2563eb;
+            color: #f1f5f9;
+        }
+
+        .sidebar-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px 15px 12px;
+            background: linear-gradient(to top, #0f172a 60%, transparent);
+        }
+
+        .export-actions {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .export-btn {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            padding: 7px 6px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 6px;
+            color: #cbd5e1;
+            font-size: 10.5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            line-height: 1.2;
+        }
+
+        .export-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            color: #f1f5f9;
+        }
+
+        .export-btn .btn-icon {
+            font-size: 16px;
+            line-height: 1;
+        }
+
+        @media print {
+            .sidebar, .sidebar-footer { display: none !important; }
+            body { display: block !important; overflow: visible !important; height: auto !important; background: white !important; }
+            .main { margin-left: 0 !important; height: auto !important; overflow: visible !important; max-width: 100% !important; padding: 20px !important; }
+            .lo-section { display: block !important; box-shadow: none !important; border: 1px solid #e2e8f0; margin-bottom: 30px; page-break-before: always; }
+            .lo-section:first-child { page-break-before: auto; }
+            .section-body, .h4-body, .h5-body, .mnemonic-body { display: block !important; }
+            .section-chevron, .h5-chevron, .mnemonic-chevron { display: none !important; }
+            .header { page-break-after: avoid; }
+            a { color: inherit; text-decoration: none; }
+        }
+
+        .hub-return-btn {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            width: 100%;
+            padding: 9px 12px;
+            background: rgba(37, 99, 235, 0.18);
+            border: 1px solid rgba(96, 165, 250, 0.35);
+            border-radius: 6px;
+            color: #93c5fd;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .hub-return-btn:hover {
+            background: rgba(37, 99, 235, 0.32);
+            border-color: rgba(96, 165, 250, 0.7);
+            color: #dbeafe;
+        }
+
+        .hub-return-btn .btn-arrow {
+            font-size: 14px;
+            line-height: 1;
+        }
+
+        .sidebar-link.active {
+            background: #1e293b;
+            border-left-color: #2563eb;
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        .sidebar-divider {
+            height: 1px;
+            background: #334155;
+            margin: 12px 0;
+        }
+
+        /* Main Content */
+        .main {
+            margin-left: 220px;
+            flex: 1;
+            padding: 40px;
+            max-width: 1000px;
+            overflow-y: auto;
+            height: 100vh;
+        }
+
+        .header {
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #0f172a;
+        }
+
+        .header p {
+            font-size: 16px;
+            color: #475569;
+            margin: 0;
+        }
+
+        /* LO Sections — show only active */
+        .lo-section {
+            display: none;
+            background: white;
+            border-radius: 8px;
+            padding: 28px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lo-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .lo-section.physio {
+        }
+
+        .lo-section.path {
+        }
+
+        .lo-section.pharm {
+        }
+
+        .lo-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 5px;
+        }
+
+        .lo-subtitle {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        /* ── Section headers inside LO content ── */
+        .lo-content h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1e3a5f;
+            margin: 24px 0 10px;
+            padding: 6px 10px;
+            border-left: 3px solid #2563eb;
+            background: transparent;
+        }
+
+        .lo-content h4 {
+            font-size: 14.5px;
+            font-weight: 700;
+            color: #1e3a5f;
+            background: #dbeafe;
+            border-radius: 4px;
+            padding: 6px 12px;
+            margin: 18px 0 8px;
+        }
+
+        .lo-content h5 {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1e293b;
+            margin: 12px 0 4px;
+        }
+
+        .lo-content p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+
+        .lo-content ul {
+            margin-left: 22px;
+            margin-bottom: 12px;
+        }
+
+        .lo-content ol {
+            margin-left: 22px;
+            margin-bottom: 12px;
+        }
+
+        .lo-content li {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #1e293b;
+            margin-bottom: 6px;
+        }
+
+        /* ── Tables ── */
+        .lo-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0 20px;
+            font-size: 13px;
+        }
+
+        .lo-content table thead tr {
+            background: #1e3a5f;
+            color: white;
+        }
+
+        .lo-content table th {
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 12px;
+            letter-spacing: 0.3px;
+            color: white;
+        }
+
+        .lo-content table td {
+            padding: 9px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #1e293b;
+            vertical-align: top;
+        }
+
+        .lo-content table tbody tr:nth-child(even) {
+            background: #eff6ff;
+        }
+
+        .lo-content table tbody tr:hover {
+            background: #dbeafe;
+        }
+
+        /* ── Section rule ── */
+        .section-rule {
+            border: none;
+            border-top: 1px solid #e2e8f0;
+            margin: 22px 0;
+        }
+
+        /* ── Buzzword pills (for key terms row below a concept) ── */
+        .buzzwords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 10px 0 16px;
+        }
+
+        .buzzword {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            padding: 3px 10px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        /* ── Callout boxes (bottom of each LO) ── */
+        /* TRAP — red */
+        .exam-trap {
+            background-color: #fef2f2;
+            border-left: 4px solid #dc2626;
+            padding: 14px 16px;
+            margin: 16px 0;
+            border-radius: 4px;
+        }
+
+        .exam-trap .trap-header {
+            font-weight: 700;
+            color: #b91c1c;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .exam-trap ul { margin-left: 18px; margin-top: 6px; }
+        .exam-trap li { font-size: 13px; margin-bottom: 6px; color: #1f2937; line-height: 1.6; }
+        .exam-trap p { font-size: 13px; color: #1f2937; line-height: 1.6; margin-top: 6px; }
+        .exam-trap strong { color: #991b1b; }
+
+        /* HY bullets — yellow */
+        .hy-box {
+            background-color: #fefce8;
+            border-left: 4px solid #ca8a04;
+            padding: 14px 16px;
+            margin: 16px 0;
+            border-radius: 4px;
+        }
+
+        .hy-box strong { color: #a16207; font-weight: 700; font-size: 13px; }
+        .hy-box ul { margin-left: 18px; margin-top: 6px; }
+        .hy-box li { font-size: 13px; margin-bottom: 6px; color: #1f2937; line-height: 1.6; }
+
+        /* Mnemonic — orange */
+        .mnemonic {
+            background-color: #fff7ed;
+            border-left: 4px solid #ea580c;
+            padding: 14px 16px;
+            margin: 16px 0;
+            border-radius: 4px;
+        }
+
+        .mnemonic .mnemonic-header {
+            font-weight: 700;
+            color: #c2410c;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .mnemonic strong { color: #c2410c; font-size: 13px; }
+        .mnemonic ul { margin-left: 18px; margin-top: 6px; }
+        .mnemonic li { font-size: 13px; margin-bottom: 5px; color: #431407; line-height: 1.5; }
+
+        /* ── details/collapsible ── */
+        details { margin: 10px 0; }
+        details summary {
+            cursor: pointer;
+            color: #1e40af;
+            font-weight: 600;
+            font-size: 13px;
+            padding: 5px 0;
+            user-select: none;
+            list-style: none;
+        }
+        details summary:hover { text-decoration: underline; }
+        details summary::before { content: "▶ "; font-size: 10px; }
+        details[open] summary::before { content: "▼ "; }
+
+        /* ── Testing Your Understanding ── */
+        .tyu-section {
+            margin: 24px 0;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 18px;
+        }
+
+        .tyu-section > h4 {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 14px;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .practice-question {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-left: 3px solid #2563eb;
+            padding: 16px;
+            margin: 14px 0;
+            border-radius: 6px;
+        }
+
+        .practice-question h4 {
+            color: #1d4ed8;
+            font-size: 13px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .practice-question p { font-size: 13px; }
+        .practice-question .option { color: #475569; font-style: italic; margin-bottom: 4px; font-size: 13px; }
+        .answer {
+            display: none;
+            margin-top: 12px;
+            background: #eff6ff;
+            border-left: 3px solid #2563eb;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            line-height: 1.7;
+            color: #1f2937;
+        }
+        .answer.show { display: block; }
+        .answer strong { color: #1e3a5f; }
+    
+    
+        /* In-page Table of Contents */
+        .lo-toc {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 14px 18px;
+            margin-bottom: 24px;
+            font-size: 13px;
+        }
+        .lo-toc-title {
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: #64748b;
+            margin-bottom: 10px;
+        }
+        .lo-toc ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .lo-toc li {
+            margin-bottom: 5px;
+        }
+        .lo-toc a {
+            color: #1e3a5f;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .lo-toc a:hover {
+            text-decoration: underline;
+            color: #2563eb;
+        }
+
+        
+        /* Collapsible h3 sections */
+        .collapsible-h3 {
+            cursor: pointer;
+            user-select: none;
+        }
+        .collapsible-h3:hover {
+            color: #1e3a8a;
+        }
+        .section-chevron {
+            display: inline-block;
+            font-size: 12px;
+            color: #2563eb;
+            transition: transform 0.2s ease;
+            margin-right: 6px;
+        }
+        .collapsible-h3.collapsed .section-chevron {
+            transform: rotate(-90deg);
+        }
+        .section-body {
+            padding-left: 16px;
+            margin-left: 4px;
+        }
+        .section-body.collapsed {
+            display: none;
+        }
+
+        
+        /* Indented content under h4 subheadings */
+        .h4-body {
+            padding-left: 14px;
+            margin-left: 4px;
+            margin-bottom: 6px;
+        }
+        
+        /* USMLE Summary box */
+        .usmle-summary {
+            background: #eff6ff;
+            border-left: 4px solid #2563eb;
+            padding: 14px 16px;
+            margin: 16px 0;
+            border-radius: 4px;
+        }
+        .usmle-header {
+            font-weight: 700;
+            color: #1e40af;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .usmle-summary ul { margin-left: 18px; margin-top: 6px; }
+        .usmle-summary li { font-size: 13px; margin-bottom: 6px; color: #1f2937; line-height: 1.6; }
+        .usmle-summary p  { font-size: 13px; color: #1f2937; line-height: 1.6; margin-top: 6px; }
+        
+        /* Trap card toggle */
+        .trap-header {
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .trap-chevron {
+            font-size: 11px;
+            font-weight: 400;
+            color: #b91c1c;
+            transition: transform 0.2s ease;
+            margin-left: 8px;
+            flex-shrink: 0;
+        }
+        .trap-header.collapsed .trap-chevron {
+            transform: rotate(-90deg);
+        }
+        .trap-body.collapsed {
+            display: none;
+        }
+        
+        /* Collapse/Expand All controls */
+        .lo-controls {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .lo-controls button {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: 4px;
+            border: 1px solid #2563eb;
+            cursor: pointer;
+            background: white;
+            color: #2563eb;
+            transition: all 0.15s ease;
+        }
+        .lo-controls button:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        /* Collapsible h3 styles applied globally (some h3s may fall outside .lo-content) */
+        h3.collapsible-h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1e3a5f;
+            margin: 24px 0 10px;
+            padding: 6px 10px;
+            border-left: 3px solid #2563eb;
+            cursor: pointer;
+            user-select: none;
+        }
+        /* Override lo-content h4 blue-pill styling inside practice questions */
+        .practice-question h4,
+        .tyu-section .practice-question h4 {
+            background: none !important;
+            padding: 0 !important;
+            border-radius: 0 !important;
+            margin: 4px 0 8px !important;
+            color: #1d4ed8;
+            font-size: 14.5px;
+            font-weight: 700;
+        }
+                /* Learning Objectives covered listing */
+        .lo-covered {
+            background: #f0f4ff;
+            border: 1px solid #c7d2fe;
+            border-left: 4px solid #4f46e5;
+            border-radius: 6px;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            font-size: 13px;
+        }
+        .lo-covered-title {
+            font-weight: 700;
+            color: #3730a3;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .lo-covered ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        .lo-covered li {
+            margin-bottom: 3px;
+            color: #1e293b;
+            line-height: 1.5;
+        }
+        .lo-covered li strong {
+            color: #3730a3;
+        }
+
+        .lo-acc-header.open .acc-chevron { transform: rotate(180deg); }
+        .lo-acc-header .acc-chevron { transition: transform 0.2s ease; display:inline-block; }
+        .lo-accordion-item { transition: box-shadow 0.15s; }
+        .lo-acc-header:hover { background: #f1f5f9 !important; }
+
+        /* Sub-subheading h5 inside GPCR sections */
+        .h5-subheading {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1e3a5f;
+            background: #eff6ff;
+            border-left: 2px solid #93c5fd;
+            border-radius: 3px;
+            padding: 4px 10px;
+            margin: 14px 0 6px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .h5-subheading:hover { background: #dbeafe; }
+        .h5-subheading .h5-chevron {
+            display: inline-block;
+            font-size: 10px;
+            color: #2563eb;
+            transition: transform 0.2s ease;
+            margin-right: 5px;
+        }
+        .h5-subheading.collapsed .h5-chevron {
+            transform: rotate(-90deg);
+        }
+        .h5-body {
+            padding-left: 18px;
+            margin-left: 4px;
+            margin-bottom: 8px;
+        }
+        .h5-body.collapsed {
+            display: none;
+        }
+
+        /* Mnemonic toggle */
+        .mnemonic-toggle-header {
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .mnemonic-toggle-header .mnemonic-chevron {
+            font-size: 11px;
+            font-weight: 400;
+            color: #c2410c;
+            transition: transform 0.2s ease;
+            margin-left: 8px;
+            flex-shrink: 0;
+        }
+        .mnemonic-toggle-header.collapsed .mnemonic-chevron {
+            transform: rotate(-90deg);
+        }
+        .mnemonic-body.collapsed {
+            display: none;
+        }
+
+        /* Collapsible h4 (subheader style, not full h3) */
+        h4.collapsible-h4 {
+            cursor: pointer;
+            user-select: none;
+        }
+        h4.collapsible-h4:hover {
+            background: #bfdbfe;
+        }
+        h4.collapsible-h4 .h4-chevron {
+            display: inline-block;
+            font-size: 11px;
+            color: #2563eb;
+            transition: transform 0.2s ease;
+            margin-right: 5px;
+        }
+        h4.collapsible-h4.collapsed .h4-chevron {
+            transform: rotate(-90deg);
+        }
+
+</style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="https://strettyit10.github.io/Block4-Endo/"
+               target="_blank" rel="noopener noreferrer"
+               style="display:inline-block; margin-bottom:8px; font-size:17px; font-weight:700; color:#60a5fa; text-decoration:none; letter-spacing:0.5px; border-bottom:1px solid rgba(96,165,250,0.35); padding-bottom:1px; transition:color 0.2s;"
+               onmouseover="this.style.color='#93c5fd'"
+               onmouseout="this.style.color='#60a5fa'">HoyaDocs ↗</a>
+            <h2>Lecture 2</h2>
+            <p>Thyroid Physiology</p>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#overview" class="sidebar-link active" onclick="switchLO(event,'overview')">📋 Lecture Overview</a>
+            <div class="sidebar-divider"></div>
+            <a href="#lo1" class="sidebar-link" onclick="switchLO(event,'lo1')">Thyroid Synthesis</a>
+            <a href="#lo2" class="sidebar-link" onclick="switchLO(event,'lo2')">T3/T4 &amp; TSH Signaling</a>
+            <a href="#lo3" class="sidebar-link" onclick="switchLO(event,'lo3')">Thyroid Hormone Action</a>
+            <a href="#lo4" class="sidebar-link" onclick="switchLO(event,'lo4')">Labs &amp; Pharmacology</a>
+            <a href="#lo5" class="sidebar-link" onclick="switchLO(event,'lo5')">Graves Disease</a>
+            <div class="sidebar-divider"></div>
+            <a href="#practice" class="sidebar-link" onclick="switchLO(event,'practice')">Practice Questions</a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="export-actions">
+                <button class="export-btn" onclick="printAll(this)" title="Save as PDF">
+                    <span class="btn-icon">🖨️</span>Print PDF
+                </button>
+                <button class="export-btn" onclick="downloadWord(this)" title="Download as Word document">
+                    <span class="btn-icon">📄</span>Word Doc
+                </button>
+            </div>
+            <a href="https://strettyit10.github.io/Block4-Endocrine/resource-mapping/resource_hub.html"
+               class="hub-return-btn" target="_blank" rel="noopener noreferrer">
+                <span class="btn-arrow">&#8592;</span> Study Hub Resources
+            </a>
+        </div>
+    </aside>
+    <!-- Main Content -->
+    <main class="main">
+        <div class="header">
+            <h1>Lecture 2: Thyroid Physiology</h1>
+            <p>HoyaDocs — Endocrine Block | USMLE Step 1 Preparation</p>
+        </div>
+        <!-- ======================== OVERVIEW ======================== -->
+        <section class="lo-section active" id="overview">
+            <h2 class="lo-title" style="color:#1e3a5f; font-size:22px; margin-bottom:6px;">Lecture Overview</h2>
+            <p class="lo-subtitle" style="margin-bottom:28px;">Thyroid Physiology · HoyaDocs Endocrine Block</p>
+
+            <div class="lo-content">
+
+                <!-- Page Summary Cards -->
+                <h3 style="font-size:16px; font-weight:700; color:#1e3a5f; margin:0 0 12px; padding:6px 10px; border-left:3px solid #2563eb;">Page Summaries</h3>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:12px;">
+                    <div style="background:#dbeafe; border:1px solid #93c5fd; border-radius:8px; padding:16px;">
+                        <div style="font-weight:700; color:#1e3a5f; margin-bottom:6px; font-size:14px;">📘 Thyroid Synthesis</div>
+                        <div style="font-size:12.5px; color:#1e293b; line-height:1.7;">Covers <strong>LOs 1–2</strong><br>NIS iodide pump · Pendrin · TPO organification · MIT/DIT coupling · Thyroglobulin storage &amp; release · Wolff-Chaikoff effect<br><em style="color:#475569;">Practice Qs: 1–5</em></div>
+                    </div>
+                    <div style="background:#dcfce7; border:1px solid #86efac; border-radius:8px; padding:16px;">
+                        <div style="font-weight:700; color:#14532d; margin-bottom:6px; font-size:14px;">🔬 T3/T4 &amp; TSH Signaling</div>
+                        <div style="font-size:12.5px; color:#1e293b; line-height:1.7;">Covers <strong>LOs 3–4</strong><br>T3 vs T4 potency &amp; half-life · Type I/II deiodinases · TBG carrier protein · TSH-receptor Gs/cAMP axis · HPT axis negative feedback<br><em style="color:#475569;">Practice Qs: 6–10</em></div>
+                    </div>
+                    <div style="background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:16px;">
+                        <div style="font-weight:700; color:#92400e; margin-bottom:6px; font-size:14px;">⚙️ Thyroid Hormone Action</div>
+                        <div style="font-size:12.5px; color:#1e293b; line-height:1.7;">Covers <strong>LO 5</strong><br>TR-α vs TR-β receptor isoforms · RXR heterodimerization · TRE gene regulation · Calorigenic effects · T3 cardiac &amp; CNS effects<br><em style="color:#475569;">Practice Qs: 11–14</em></div>
+                    </div>
+                    <div style="background:#fce7f3; border:1px solid #f9a8d4; border-radius:8px; padding:16px;">
+                        <div style="font-weight:700; color:#831843; margin-bottom:6px; font-size:14px;">🧪 Labs &amp; Pharmacology</div>
+                        <div style="font-size:12.5px; color:#1e293b; line-height:1.7;">Covers <strong>LOs 6–7</strong><br>TFT interpretation · Primary vs secondary hypothyroidism · PTU vs methimazole mechanisms · Radioactive iodine · Perchlorate<br><em style="color:#475569;">Practice Qs: 15–19</em></div>
+                    </div>
+                    <div style="background:#ede9fe; border:1px solid #c4b5fd; border-radius:8px; padding:16px; grid-column:1/-1;">
+                        <div style="font-weight:700; color:#4c1d95; margin-bottom:6px; font-size:14px;">🦋 Graves Disease</div>
+                        <div style="font-size:12.5px; color:#1e293b; line-height:1.7;">Covers <strong>LO 8</strong><br>TSI autoantibodies · Diffuse goiter · Exophthalmos · Pretibial myxedema · Graves vs toxic nodule labs · Treatment options<br><em style="color:#475569;">Practice Qs: 20–24</em></div>
+                    </div>
+                </div>
+
+                <!-- Official LO Map -->
+                <h3 style="font-size:16px; font-weight:700; color:#1e3a5f; margin:32px 0 4px; padding:6px 10px; border-left:3px solid #2563eb;">Official Learning Objectives Map</h3>
+                <p style="font-size:13px; color:#475569; margin-bottom:14px; padding-left:10px;">Click any objective to see where it is covered and which practice questions test it.</p>
+                <div id="lo-accordion">
+
+                    <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                        <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                             style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                            <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">1</span>
+                            <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Recognize the structure of thyroid hormones and their precursors (MIT, DIT, T3, T4, rT3)</span>
+                            <span style="background:#dbeafe; color:#1e40af; font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:10px; white-space:nowrap; flex-shrink:0;">Thyroid Synthesis</span>
+                            <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                        </div>
+                        <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                                <div>
+                                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Section / Subheading</div>
+                                    <ul style="margin:0; padding-left:16px; font-size:13px; line-height:1.8;"><li style="margin-bottom:5px;"><a href="#" onclick="switchLO(event,'lo1');return false;" style="color:#1e3a5f;text-decoration:none;">Hormone Structure</a></li></ul>
+                                </div>
+                                <div>
+                                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                                    <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q1</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q2</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                        <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                             style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                            <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">2</span>
+                            <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Describe iodide transport (NIS), organification (TPO), thyroglobulin's role, and the complete steps of thyroid hormone synthesis</span>
+                            <span style="background:#dbeafe; color:#1e40af; font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:10px; white-space:nowrap; flex-shrink:0;">Thyroid Synthesis</span>
+                            <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                        </div>
+                        <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                                <div>
+                                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Section / Subheading</div>
+                                    <ul style="margin:0; padding-left:16px; font-size:13px; line-height:1.8;"><li style="margin-bottom:5px;"><a href="#" onclick="switchLO(event,'lo1');return false;" style="color:#1e3a5f;text-decoration:none;">Iodide Uptake &amp; Organification</a></li><li style="margin-bottom:5px;"><a href="#" onclick="switchLO(event,'lo1');return false;" style="color:#1e3a5f;text-decoration:none;">Thyroglobulin &amp; Hormone Release</a></li></ul>
+                                </div>
+                                <div>
+                                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                                    <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q3</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q4</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q5</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                        <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                             style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                            <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">3</span>
+                            <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Compare T3 vs T4: potency, protein binding, half-life, and peripheral conversion by deiodinases</span>
+                            <span style="background:#dcfce7; color:#14532d; font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:10px; white-space:nowrap; flex-shrink:0;">T3/T4 &amp; TSH Signaling</span>
+                            <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                        </div>
+                        <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                                <div>
+                                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Section / Subheading</div>
+                                    <ul style="margin:0; padding-left:16px; font-size:13px; line-height:1.8;"><li style="margin-bottom:5px;"><a href="#" onclick="switchLO(event,'lo2');return false;" style="color:#1e3a5f;text-decoration:none;">T3 vs T4 Comparison</a></li><li style="margin-bottom:5px;"><a href="#" onclick="switchLO(event,'lo2');return false;" style="color:#1e3a5f;text-decoration:none;">Deiodinases &amp; Carrier Proteins</a></li></ul>
+                                </div>
+                                <div>
+                                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                                    <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q6</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q7</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                        <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                             style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                            <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">4</span>
+                            <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Explain TSH synthesis and regulation; describe TSH's mechanism of action via Gs/cAMP and the HPT axis negative feedback loop</span>
+                            <span style="background:#dcfce7; color:#14532d; font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:10px; white-space:nowrap; flex-shrink:0;">T3/T4 &amp; TSH Signaling</span>
+                            <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                        </div>
+                        <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                                <div>
+                                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Section / Subheading</div>
+                                    <ul style="margin:0; padding-left:16px; font-size:13px; line-height:1.8;"><li style="margin-bottom:5px;"><a href="#" onclick="switchLO(event,'lo2');return false;" style="color:#1e3a5f;text-decoration:none;">TSH Signaling &amp; HPT Axis</a></li></ul>
+                                </div>
+                                <div>
+                                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                                    <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q8</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q9</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q10</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                        <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                             style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                            <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">5</span>
+                            <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Describe thyroid hormone mechanism of action: TR-α and TR-β nuclear receptors, RXR heterodimerization, TRE-mediated gene regulation, and physiologic effects</span>
+                            <span style="background:#fef3c7; color:#92400e; font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:10px; white-space:nowrap; flex-shrink:0;">Thyroid Hormone Action</span>
+                            <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                        </div>
+                        <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                                <div>
+                                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Section / Subheading</div>
+                                    <ul style="margin:0; padding-left:16px; font-size:13px; line-height:1.8;"><li style="margin-bottom:5px;"><a href="#" onclick="switchLO(event,'lo3');return false;" style="color:#1e3a5f;text-decoration:none;">Nuclear Receptors &amp; Genomic Effects</a></li></ul>
+                                </div>
+                                <div>
+                                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                                    <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q11</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q12</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q13</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q14</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                        <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                             style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                            <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">6</span>
+                            <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Interpret thyroid function tests (TSH, free T4, total T4) in primary hypothyroidism, secondary hypothyroidism, hyperthyroidism, and euthyroid states</span>
+                            <span style="background:#fce7f3; color:#831843; font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:10px; white-space:nowrap; flex-shrink:0;">Labs &amp; Pharmacology</span>
+                            <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                        </div>
+                        <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                                <div>
+                                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Section / Subheading</div>
+                                    <ul style="margin:0; padding-left:16px; font-size:13px; line-height:1.8;"><li style="margin-bottom:5px;"><a href="#" onclick="switchLO(event,'lo4');return false;" style="color:#1e3a5f;text-decoration:none;">TFT Interpretation</a></li></ul>
+                                </div>
+                                <div>
+                                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                                    <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q15</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q16</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q17</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                        <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                             style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                            <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">7</span>
+                            <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Describe the mechanisms of antithyroid drugs: PTU, methimazole, radioactive iodine (I-131), and perchlorate; explain why PTU is preferred in thyroid storm</span>
+                            <span style="background:#fce7f3; color:#831843; font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:10px; white-space:nowrap; flex-shrink:0;">Labs &amp; Pharmacology</span>
+                            <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                        </div>
+                        <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                                <div>
+                                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Section / Subheading</div>
+                                    <ul style="margin:0; padding-left:16px; font-size:13px; line-height:1.8;"><li style="margin-bottom:5px;"><a href="#" onclick="switchLO(event,'lo4');return false;" style="color:#1e3a5f;text-decoration:none;">Antithyroid Drug Mechanisms</a></li></ul>
+                                </div>
+                                <div>
+                                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                                    <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q18</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q19</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                        <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                             style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                            <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">8</span>
+                            <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Describe the pathophysiology, clinical features, laboratory findings, and treatment of Graves disease</span>
+                            <span style="background:#ede9fe; color:#4c1d95; font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:10px; white-space:nowrap; flex-shrink:0;">Graves Disease</span>
+                            <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                        </div>
+                        <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                                <div>
+                                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Section / Subheading</div>
+                                    <ul style="margin:0; padding-left:16px; font-size:13px; line-height:1.8;"><li style="margin-bottom:5px;"><a href="#" onclick="switchLO(event,'lo5');return false;" style="color:#1e3a5f;text-decoration:none;">Graves Pathophysiology &amp; Clinical Features</a></li><li style="margin-bottom:5px;"><a href="#" onclick="switchLO(event,'lo5');return false;" style="color:#1e3a5f;text-decoration:none;">Graves Treatment</a></li></ul>
+                                </div>
+                                <div>
+                                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                                    <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q20</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q21</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q22</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q23</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q24</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- /#lo-accordion -->
+
+            </div><!-- /.lo-content (overview) -->
+        </section><!-- /#overview -->
+
+        <!-- ======================== LO1: SYNTHESIS ======================== -->
+        <section class="lo-section" id="lo1">
+            <h2 class="lo-title" style="color:#1e3a5f; font-size:22px; margin-bottom:6px;">LO 1–2 — Thyroid Synthesis</h2>
+            <p class="lo-subtitle" style="margin-bottom:28px;">NIS · TPO · Thyroglobulin · Hormone Release · HoyaDocs Endocrine Block</p>
+            <div class="lo-content">
+                <div class="lo-covered">
+                    <div class="lo-covered-title">Learning Objectives Covered</div>
+                    <ul><li><strong>LO 1:</strong> Recognize the structure of thyroid hormones and their precursors (MIT, DIT, T3, T4, rT3)</li><li><strong>LO 2:</strong> Describe iodide transport (NIS), organification (TPO), thyroglobulin's role, and the complete steps of thyroid hormone synthesis</li></ul>
+                </div>
+                <div class="lo-controls">
+                    <button onclick="expandAll()">Expand All</button>
+                    <button onclick="collapseAll()">Collapse All</button>
+                </div>
+                <div class="lo-toc">
+                    <div class="lo-toc-title">On This Page</div>
+                    <ol><li><a href="#hormone-structure">Hormone Structure &amp; Precursors</a></li><li><a href="#iodide-uptake">Iodide Uptake (NIS)</a></li><li><a href="#organification">Organification &amp; Coupling (TPO)</a></li><li><a href="#thyroglobulin">Thyroglobulin: Storage &amp; Release</a></li></ol>
+                </div>
+
+                <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)" id="hormone-structure" style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                    <span class="section-chevron">▼</span> Hormone Structure &amp; Precursors
+                </h3>
+                <div class="section-body collapsed">
+                    <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ Thyroid hormones are iodinated tyrosine derivatives. T4 (thyroxine) is the major secretory product; T3 is the biologically active form. Understanding the precursor chain — tyrosine → MIT → DIT → T3/T4 — is essential for understanding drug targets.</p>
+                    <h4 style="font-weight:600; margin-top:14px; margin-bottom:10px;">🔬 The Precursor Chain</h4>
+                    <div class="h4-body">
+                        <ul><li><strong>Tyrosine:</strong> Amino acid building block embedded in thyroglobulin protein</li><li><strong>MIT (monoiodotyrosine):</strong> Tyrosine + 1 iodine atom</li><li><strong>DIT (diiodotyrosine):</strong> Tyrosine + 2 iodine atoms</li><li><strong>T3 (triiodothyronine):</strong> MIT + DIT coupled together (1+2 = 3 iodines). Biologically ACTIVE form.</li><li><strong>T4 (thyroxine):</strong> DIT + DIT coupled (2+2 = 4 iodines). Main secretory product; converted to T3 in periphery.</li><li><strong>rT3 (reverse T3):</strong> Inactive isomer of T3. Formed by removing inner-ring iodine from T4. Elevated in sick euthyroid syndrome.</li></ul>
+                        <hr class="section-rule">
+                    </div>
+                    <div class="hy-box">
+                        <strong>⚡ High-Yield:</strong>
+                        <ul><li>The thyroid secretes mostly T4 (80%) but T3 is 3–5× more potent at the receptor</li><li>Mnemonic: <strong>1+2=3 (MIT+DIT=T3); 2+2=4 (DIT+DIT=T4)</strong></li><li>Step 1 loves to ask: "Which is more potent?" → T3. "Which is secreted more?" → T4.</li></ul>
+                    </div>
+                </div>
+
+                <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)" id="iodide-uptake" style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                    <span class="section-chevron">▼</span> Iodide Uptake (NIS)
+                </h3>
+                <div class="section-body collapsed">
+                    <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ Iodide enters the follicular cell via the sodium-iodide symporter (NIS) on the basolateral membrane. NIS is the rate-limiting step for iodine availability and is stimulated by TSH. Competitive inhibitors of NIS are used clinically to diagnose and treat thyroid disease.</p>
+                    <h4 style="font-weight:600; margin-top:14px; margin-bottom:10px;">🔬 NIS Mechanism</h4>
+                    <div class="h4-body">
+                        <ul><li><strong>NIS (Sodium-Iodide Symporter):</strong> Located on the basolateral membrane of follicular cells. Cotransports 2 Na+ with 1 I− into the cell. Energy comes from the Na+/K+-ATPase gradient.</li><li><strong>T:S ratio:</strong> The ratio of iodide inside follicular cells to serum iodide. Normal ≈25:1. With TSH stimulation, rises to ≈500:1. Reflects NIS activity.</li><li><strong>TSH stimulation:</strong> TSH increases NIS expression and activity via Gs/cAMP. This is how TSH drives iodide uptake.</li><li><strong>Pendrin:</strong> Apical anion exchanger that transports I− from the follicular cell into the colloid lumen. Mutations → Pendred syndrome (sensorineural deafness + goiter).</li></ul>
+                        <hr class="section-rule">
+                    </div>
+                    <div class="exam-trap">
+                        <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                            ⚠️ TRAP: NIS Inhibitors vs TPO Inhibitors <span class="trap-chevron">▼</span>
+                        </div>
+                        <div class="trap-body collapsed">
+                            <ul><li><strong>NIS inhibitors (block iodide UPTAKE):</strong> Perchlorate (ClO4−), thiocyanate (SCN−), pertechnetate. These prevent iodide from entering the cell.</li><li><strong>PTU and methimazole do NOT block NIS</strong> — they block TPO (organification). Students commonly confuse this.</li><li><strong>Pertechnetate (99mTc):</strong> Radiolabeled NIS substrate used for thyroid imaging scans — it enters via NIS but is NOT organified (so it can image the gland without delivering radiation dose to the tissue).</li></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)" id="organification" style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                    <span class="section-chevron">▼</span> Organification &amp; Coupling (TPO)
+                </h3>
+                <div class="section-body collapsed">
+                    <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ After iodide reaches the colloid lumen, thyroid peroxidase (TPO) performs two critical reactions: oxidation of I− to I0 (active iodine), and attachment of iodine to tyrosine residues on thyroglobulin (organification). TPO then couples MIT and DIT to form T3 and T4 — still within thyroglobulin.</p>
+                    <h4 style="font-weight:600; margin-top:14px; margin-bottom:10px;">🔬 TPO Reactions</h4>
+                    <div class="h4-body">
+                        <ul><li><strong>Step 1 — Oxidation:</strong> TPO oxidizes I− → I0 (active iodine) using H2O2 (generated by NADPH oxidase/DUOX2)</li><li><strong>Step 2 — Organification:</strong> TPO attaches active iodine to tyrosine residues on thyroglobulin → forms MIT and DIT within thyroglobulin</li><li><strong>Step 3 — Coupling:</strong> TPO couples MIT + DIT → T3 (within thyroglobulin); or DIT + DIT → T4 (within thyroglobulin). The T3/T4 ratio depends on iodine availability and TSH tone.</li></ul>
+                    </div>
+                    <h4 style="font-weight:600; margin-top:14px; margin-bottom:10px;">🔬 Wolff-Chaikoff Effect</h4>
+                    <div class="h4-body">
+                        <ul><li>Acute large iodine load → transiently INHIBITS organification → ↓T3/T4 synthesis</li><li>Mechanism: High intra-thyroidal I− temporarily suppresses TPO activity and NIS expression</li><li>The gland "escapes" this effect in normal individuals within 1–2 weeks (downregulation of NIS reduces uptake)</li><li><strong>Clinical use:</strong> Lugol's iodine (saturated KI) given before thyroid surgery exploits the Wolff-Chaikoff effect to rapidly reduce thyroid hormone synthesis and vascularity</li><li>Patients who FAIL to escape: those with Hashimoto thyroiditis or other intrinsic thyroid disease → develop hypothyroidism with iodine excess (e.g., amiodarone toxicity)</li>
+                        <hr class="section-rule">
+                        </li></ul>
+                    </div>
+                    <div class="exam-trap">
+                        <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                            ⚠️ TRAP: PTU vs Methimazole at TPO <span class="trap-chevron">▼</span>
+                        </div>
+                        <div class="trap-body collapsed">
+                            <ul><li>Both PTU and methimazole block TPO → block organification AND coupling</li><li>PTU ALSO blocks peripheral conversion of T4→T3 (by inhibiting type 1 deiodinase)</li><li>This extra mechanism makes PTU preferred in thyroid storm (rapid action needed to stop T3 production)</li><li>Methimazole preferred in pregnancy (except 1st trimester) — less teratogenic overall; PTU used in 1st trimester</li></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)" id="thyroglobulin" style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                    <span class="section-chevron">▼</span> Thyroglobulin: Storage &amp; Hormone Release
+                </h3>
+                <div class="section-body collapsed">
+                    <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The thyroid is unique in storing its hormones extracellularly as part of thyroglobulin (Tg) in the colloid. When TSH stimulates the gland, Tg is endocytosed, digested by lysosomes, and T3/T4 are released into the blood. Serum thyroglobulin is used as a tumor marker for differentiated thyroid cancer.</p>
+                    <h4 style="font-weight:600; margin-top:14px; margin-bottom:10px;">🔬 Storage in Colloid</h4>
+                    <div class="h4-body">
+                        <ul><li><strong>Thyroglobulin (Tg):</strong> Large glycoprotein (~660 kDa) synthesized by follicular cells and secreted into the colloid lumen. Each Tg molecule contains ~70 tyrosine residues, of which ~20% are iodinated.</li><li><strong>Colloid:</strong> PAS-positive (glycoprotein) material in follicle lumen. Scalloping at colloid-cell border = active resorption (sign of high TSH stimulation)</li><li>The thyroid stores a 2–3 month supply of preformed hormone — unique among endocrine glands</li></ul>
+                    </div>
+                    <h4 style="font-weight:600; margin-top:14px; margin-bottom:10px;">🔬 Hormone Release Pathway</h4>
+                    <div class="h4-body">
+                        <ul><li><strong>TSH stimulation → endocytosis:</strong> Tg-filled colloid is engulfed from the apical surface by follicular cells via pinocytosis/macropinocytosis</li><li><strong>Lysosomal proteolysis:</strong> Tg is cleaved by lysosomal proteases (cathepsins) → releases free T3, T4, MIT, and DIT</li><li><strong>MIT/DIT are recycled:</strong> Iodotyrosine dehalogenase (DEHAL1) removes iodine from MIT and DIT → free iodine is recycled within the gland (not released to blood)</li><li><strong>T3 and T4 are secreted</strong> into the blood (~80% T4, ~20% T3 from thyroid itself)</li>
+                        <hr class="section-rule">
+                        </li></ul>
+                    </div>
+                    <div class="exam-trap">
+                        <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                            ⚠️ TRAP: DEHAL1 Deficiency vs TPO Deficiency <span class="trap-chevron">▼</span>
+                        </div>
+                        <div class="trap-body collapsed">
+                            <ul><li>DEHAL1 (iodotyrosine dehalogenase) deficiency → MIT and DIT leak into bloodstream (instead of being recycled) → iodine deficiency → goiter + hypothyroidism</li><li>TPO deficiency → can't organify iodide → iodide accumulates but no hormone is made → goiter + hypothyroidism</li><li>Both cause hypothyroidism + goiter + high TSH, but the mechanism differs. Perchlorate discharge test is positive in TPO deficiency (releases accumulated unorganified iodide).</li></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tyu-section">
+                    <h4 style="font-size:14px; font-weight:700; color:#1e3a5f; margin-bottom:14px;">🧠 Testing Your Understanding</h4>
+                    <ol style="margin-left:20px; font-size:14px; line-height:1.8; color:#1e293b;">
+                        <li style="margin-bottom:10px;">Walk through the complete sequence of events from dietary iodide entering the bloodstream to thyroid hormone being secreted into the blood. Name every transporter and enzyme involved.</li>
+                        <li style="margin-bottom:10px;">A patient is given chronic perchlorate therapy. Predict the effect on TSH, T3, T4, and thyroid gland size. Explain your reasoning step by step.</li>
+                        <li style="margin-bottom:10px;">Why is the thyroid unique among endocrine glands in terms of hormone storage? What clinical advantage does this provide, and what is the clinical implication for treating hyperthyroidism with antithyroid drugs?</li>
+                    </ol>
+                </div>
+            </div><!-- /.lo-content -->
+        </section><!-- /#lo1 -->
+
+        <!-- ======================== LO2: T3/T4 & TSH ======================== -->
+        <section class="lo-section" id="lo2">
+            <h2 class="lo-title" style="color:#1e3a5f; font-size:22px; margin-bottom:6px;">LO 3–4 — T3/T4 &amp; TSH Signaling</h2>
+            <p class="lo-subtitle" style="margin-bottom:28px;">T3 vs T4 · Deiodinases · Carrier Proteins · HPT Axis · HoyaDocs Endocrine Block</p>
+            <div class="lo-content">
+                <div class="lo-covered">
+                    <div class="lo-covered-title">Learning Objectives Covered</div>
+                    <ul><li><strong>LO 3:</strong> Compare T3 vs T4: potency, protein binding, half-life, and peripheral conversion by deiodinases</li><li><strong>LO 4:</strong> Explain TSH synthesis and regulation; describe TSH's mechanism of action via Gs/cAMP and the HPT axis negative feedback loop</li></ul>
+                </div>
+                <div class="lo-controls">
+                    <button onclick="expandAll()">Expand All</button>
+                    <button onclick="collapseAll()">Collapse All</button>
+                </div>
+                <div class="lo-toc">
+                    <div class="lo-toc-title">On This Page</div>
+                    <ol><li><a href="#t3-t4-compare">T3 vs T4 Comparison</a></li><li><a href="#deiodinases">Deiodinases &amp; Peripheral Conversion</a></li><li><a href="#carrier-proteins">Carrier Proteins (TBG)</a></li><li><a href="#tsh-hpt">TSH Signaling &amp; HPT Axis</a></li></ol>
+                </div>
+
+                <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)" id="t3-t4-compare" style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                    <span class="section-chevron">▼</span> T3 vs T4 Comparison
+                </h3>
+                <div class="section-body collapsed">
+                    <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ T4 is the primary secretory product but is a prohormone. T3 is the active form — 3–5× more potent, less protein-bound, shorter half-life, and generated mainly by peripheral deiodination of T4. Step 1 loves this comparison.</p>
+                    <h4 style="font-weight:600; margin-top:14px; margin-bottom:10px;">🔬 Comparison Table</h4>
+                    <div class="h4-body">
+                        <table>
+                            <thead><tr><th>Property</th><th>T4 (Thyroxine)</th><th>T3 (Triiodothyronine)</th></tr></thead>
+                            <tbody>
+                                <tr><td>Iodines</td><td>4</td><td>3</td></tr>
+                                <tr><td>Source</td><td>80% thyroid secretion</td><td>20% thyroid + 80% peripheral T4→T3</td></tr>
+                                <tr><td>Biologic activity</td><td>Low (prohormone)</td><td>High (3–5× T4)</td></tr>
+                                <tr><td>Protein binding</td><td>Tightly bound (~99.97% bound)</td><td>Less bound (~99.7% bound)</td></tr>
+                                <tr><td>Half-life</td><td>~7 days (long)</td><td>~1 day (short)</td></tr>
+                                <tr><td>Free fraction</td><td>~0.03%</td><td>~0.3%</td></tr>
+                                <tr><td>Receptor affinity</td><td>10× lower than T3</td><td>10× higher than T4</td></tr>
+                            </tbody>
+                        </table>
+                        <hr class="section-rule">
+                    </div>
+                    <div class="hy-box">
+                        <strong>⚡ High-Yield Mnemonics:</strong>
+                        <ul><li>"T4 is the <strong>Traveling</strong> form (long half-life, tightly bound, systemic)" vs "T3 is the <strong>Tissue</strong> form (active at target)"</li><li>Total T4 &gt; total T3 in serum; but free T3 is more active — measuring free hormone is key for function</li></ul>
+                    </div>
+                </div>
+
+                <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)" id="deiodinases" style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                    <span class="section-chevron">▼</span> Deiodinases &amp; Peripheral Conversion
+                </h3>
+                <div class="section-body collapsed">
+                    <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ Peripheral tissues convert T4 → T3 via deiodinases. Type I deiodinase (liver, kidney, thyroid) is the main source of circulating T3. Type II (brain, pituitary, brown fat) generates local T3. In illness, type III predominates → converts T4 → rT3 (inactive) → sick euthyroid syndrome.</p>
+                    <h4 style="font-weight:600; margin-top:14px; margin-bottom:10px;">🔬 Three Types of Deiodinase</h4>
+                    <div class="h4-body">
+                        <ul><li><strong>Type I (D1):</strong> Liver, kidney, thyroid, pituitary. Removes outer-ring iodine from T4 → T3. Major source of circulating T3. Inhibited by PTU — clinically important.</li><li><strong>Type II (D2):</strong> Brain, pituitary, brown fat, placenta. Generates local T3 for tissue-specific effects. NOT inhibited by PTU (pituitary TSH feedback still works even during PTU therapy).</li><li><strong>Type III (D3):</strong> Placenta, brain, skin. Removes inner-ring iodine → converts T4 → rT3 (inactive) and T3 → T2 (inactive). Increased in critical illness → sick euthyroid syndrome (↓T3, ↑rT3, normal or ↓TSH).</li></ul>
+                        <hr class="section-rule">
+                    </div>
+                    <div class="exam-trap">
+                        <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                            ⚠️ TRAP: Sick Euthyroid Syndrome <span class="trap-chevron">▼</span>
+                        </div>
+                        <div class="trap-body collapsed">
+                            <ul><li>In critical illness: D3 activity increases → T4 → rT3 instead of T3</li><li>Labs: ↓T3, ↑rT3, normal/↓TSH, normal free T4</li><li>The patient is NOT hypothyroid — this is an adaptive response to severe illness. Do NOT treat with thyroid hormone.</li><li>Step 1 trap: TSH can be low → looks like secondary hypothyroidism. Key: the patient is critically ill. rT3 ↑ confirms sick euthyroid.</li></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)" id="carrier-proteins" style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                    <span class="section-chevron">▼</span> Carrier Proteins (TBG)
+                </h3>
+                <div class="section-body collapsed">
+                    <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ Thyroid hormones are highly hydrophobic and travel bound to plasma proteins. Thyroxine-binding globulin (TBG) is the primary carrier (70%). Only FREE hormone is biologically active. This is critical for interpreting labs: conditions that change TBG change total T4 but NOT free T4 or TSH.</p>
+                    <h4 style="font-weight:600; margin-top:14px; margin-bottom:10px;">🔬 TBG Changes That Affect Total T4</h4>
+                    <div class="h4-body">
+                        <table>
+                            <thead><tr><th>Condition</th><th>TBG</th><th>Total T4</th><th>Free T4</th><th>TSH</th><th>Clinical Status</th></tr></thead>
+                            <tbody>
+                                <tr><td>OCP / pregnancy / estrogen</td><td>↑</td><td>↑</td><td>Normal</td><td>Normal</td><td>Euthyroid</td></tr>
+                                <tr><td>Androgens / nephrotic syndrome</td><td>↓</td><td>↓</td><td>Normal</td><td>Normal</td><td>Euthyroid</td></tr>
+                                <tr><td>Primary hypothyroidism</td><td>Normal</td><td>↓</td><td>↓</td><td>↑</td><td>Hypothyroid</td></tr>
+                                <tr><td>Graves disease</td><td>Normal</td><td>↑</td><td>↑</td><td>↓</td><td>Hyperthyroid</td></tr>
+                            </tbody>
+                        </table>
+                        <hr class="section-rule">
+                    </div>
+                    <div class="exam-trap">
+                        <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                            ⚠️ TRAP: OCPs and Elevated Total T4 <span class="trap-chevron">▼</span>
+                        </div>
+                        <div class="trap-body collapsed">
+                            <ul><li>A woman on OCPs has total T4 of 18 (elevated) but no symptoms</li><li>Estrogen ↑ TBG synthesis → more bound T4 → total T4 elevated</li><li>But free T4 is NORMAL → pituitary sees normal free hormone → TSH is normal → patient is euthyroid</li><li>Classic Step 1 scenario: Do NOT diagnose hyperthyroidism based on total T4 alone. Always check free T4 and TSH.</li></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)" id="tsh-hpt" style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                    <span class="section-chevron">▼</span> TSH Signaling &amp; HPT Axis
+                </h3>
+                <div class="section-body collapsed">
+                    <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ TSH (thyroid-stimulating hormone) is a glycoprotein secreted by pituitary thyrotrophs under control of TRH. TSH binds a Gs-coupled receptor on follicular cells → ↑cAMP → activates all steps of thyroid hormone synthesis and secretion. Negative feedback by T3/T4 suppresses both TRH and TSH.</p>
+                    <h4 style="font-weight:600; margin-top:14px; margin-bottom:10px;">🔬 HPT Axis Cascade</h4>
+                    <div class="h4-body">
+                        <ol><li><strong>Hypothalamus:</strong> Releases TRH (thyrotropin-releasing hormone, a tripeptide) in response to low T3/T4 or cold stress</li><li><strong>Anterior pituitary (thyrotrophs):</strong> TRH binds Gq receptor → ↑IP3/DAG → ↑Ca2+ → releases TSH (a glycoprotein with α and β subunits; shares α with FSH, LH, hCG)</li><li><strong>Thyroid follicular cells:</strong> TSH binds TSH-receptor (TSHR, a Gs-coupled GPCR) → ↑adenylyl cyclase → ↑cAMP → PKA activation → stimulates: NIS expression, TPO activity, Tg synthesis, endocytosis of colloid, hormone secretion</li><li><strong>T3/T4 in blood:</strong> Rise in free T3/T4 feeds back to suppress TRH (hypothalamus) and TSH (pituitary)</li></ol>
+                        <hr class="section-rule">
+                    </div>
+                    <div class="exam-trap">
+                        <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                            ⚠️ TRAP: TSH Is the Most Sensitive Test <span class="trap-chevron">▼</span>
+                        </div>
+                        <div class="trap-body collapsed">
+                            <ul><li>TSH changes before free T4 in early thyroid disease because TSH is the most sensitive detector</li><li>Subclinical hypothyroidism: ↑TSH, normal free T4 (T4 still in normal range but pituitary is already straining)</li><li>Subclinical hyperthyroidism: ↓TSH, normal free T4</li><li>Always order TSH FIRST for thyroid disease screening. If TSH is abnormal, then check free T4.</li></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tyu-section">
+                    <h4 style="font-size:14px; font-weight:700; color:#1e3a5f; margin-bottom:14px;">🧠 Testing Your Understanding</h4>
+                    <ol style="margin-left:20px; font-size:14px; line-height:1.8; color:#1e293b;">
+                        <li style="margin-bottom:10px;">A woman taking oral contraceptives has a total T4 of 20 µg/dL (elevated) but feels completely normal. Explain why her TSH and free T4 are normal, and how estrogen mechanistically causes this lab pattern.</li>
+                        <li style="margin-bottom:10px;">A critically ill ICU patient has ↓T3, ↑rT3, and low-normal TSH. How would you distinguish sick euthyroid syndrome from true secondary hypothyroidism? What is the mechanism driving the rT3 elevation?</li>
+                    </ol>
+                </div>
+            </div><!-- /.lo-content -->
+        </section><!-- /#lo2 -->
+
+        <!-- ======================== LO3: THYROID HORMONE ACTION ======================== -->
+        <section class="lo-section" id="lo3">
+            <h2 class="lo-title" style="color:#1e3a5f; font-size:22px; margin-bottom:6px;">LO 5 — Thyroid Hormone Action</h2>
+            <p class="lo-subtitle" style="margin-bottom:28px;">Nuclear Receptors · TR-α / TR-β · Genomic Effects · HoyaDocs Endocrine Block</p>
+            <div class="lo-content">
+                <div class="lo-covered">
+                    <div class="lo-covered-title">Learning Objectives Covered</div>
+                    <ul><li><strong>LO 5:</strong> Describe thyroid hormone mechanism of action: TR-α and TR-β nuclear receptors, RXR heterodimerization, thyroid response element (TRE)-mediated gene regulation, and physiologic effects</li></ul>
+                </div>
+                <div class="lo-controls">
+                    <button onclick="expandAll()">Expand All</button>
+                    <button onclick="collapseAll()">Collapse All</button>
+                </div>
+                <div class="lo-toc">
+                    <div class="lo-toc-title">On This Page</div>
+                    <ol><li><a href="#nuclear-receptors">Nuclear Receptors (TR-α, TR-β)</a></li><li><a href="#genomic-action">Genomic Mechanism &amp; TRE</a></li><li><a href="#thyroid-effects">Physiologic Effects of T3</a></li></ol>
+                </div>
+
+                <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)" id="nuclear-receptors" style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                    <span class="section-chevron">▼</span> Nuclear Receptors (TR-α, TR-β)
+                </h3>
+                <div class="section-body collapsed">
+                    <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ Thyroid hormone receptors (TR) are nuclear hormone receptors — they are located inside the nucleus bound to DNA even without ligand. T3 (not T4) is the active ligand. There are two main isoforms: TR-α (heart/brain/bone) and TR-β (liver/pituitary/hypothalamus). This tissue distribution explains selective resistance in RTH syndrome.</p>
+                    <h4 style="font-weight:600; margin-top:14px; margin-bottom:10px;">🔬 TR-α vs TR-β Distribution</h4>
+                    <div class="h4-body">
+                        <table>
+                            <thead><tr><th>Isoform</th><th>Primary Tissues</th><th>Key Functions</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>TR-α</strong></td><td>Heart, skeletal muscle, bone, brain</td><td>Cardiac chronotropy/inotropy; bone turnover; CNS development</td></tr>
+                                <tr><td><strong>TR-β</strong></td><td>Liver, pituitary, hypothalamus, inner ear</td><td>Hepatic metabolism; TSH feedback (pituitary); hearing; lipid metabolism</td></tr>
+                            </tbody>
+                        </table>
+                        <hr class="section-rule">
+                    </div>
+                    <div class="exam-trap">
+                        <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                            ⚠️ TRAP: Resistance to Thyroid Hormone (RTH) <span class="trap-chevron">▼</span>
+                        </div>
+                        <div class="trap-body collapsed">
+                            <ul><li>RTH = mutation in TR-β → pituitary cannot sense T3 feedback → ↑TSH despite ↑T4/T3</li><li>Classic pattern: ↑TSH + ↑free T4 together (usually these move in opposite directions)</li><li>Patient may be clinically euthyroid because TR-α (in heart, brain) still works and T3 is elevated</li><li>Do NOT treat with antithyroid drugs — you'd make the patient hypothyroid without fixing the receptor defect</li></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)" id="genomic-action" style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                    <span class="section-chevron">▼</span> Genomic Mechanism &amp; TRE
+                </h3>
+                <div class="section-body collapsed">
+                    <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ TR acts as a transcription factor that binds DNA as a heterodimer with RXR (retinoid X receptor). Without T3, TR bound to TRE recruits co-repressors → gene silenced. With T3, co-repressors leave, co-activators join → gene transcribed. This dual role (repressor without ligand, activator with ligand) is unique to nuclear hormone receptors.</p>
+                    <h4 style="font-weight:600; margin-top:14px; margin-bottom:10px;">🔬 Step-by-Step Mechanism</h4>
+                    <div class="h4-body">
+                        <ol><li><strong>T3 enters the nucleus</strong> (T3 is lipophilic; crosses membranes freely)</li><li><strong>T3 binds TR</strong> in the nucleus → conformational change in TR</li><li><strong>TR-T3 complex heterodimerizes with RXR</strong> (RXR is the obligate partner)</li><li><strong>TR/RXR heterodimer binds TRE</strong> (thyroid response element) — specific DNA sequence in promoter of target genes</li><li><strong>Co-repressors displaced; co-activators recruited</strong> → HDAC leaves, HAT recruited → chromatin opens → RNA polymerase activated → gene transcribed</li></ol>
+                    </div>
+                    <h4 style="font-weight:600; margin-top:14px; margin-bottom:10px;">🔬 Key Target Genes</h4>
+                    <div class="h4-body">
+                        <ul><li><strong>Upregulated by T3:</strong> Na/K-ATPase (↑basal metabolic rate), β-adrenergic receptors (↑cardiac sensitivity), myosin heavy chain α (fast-twitch heart), lipase, GLUT transporters</li><li><strong>Downregulated by T3:</strong> TSH-β subunit (negative TRE at pituitary), myosin heavy chain β, TRH (negative feedback at hypothalamus)</li>
+                        <hr class="section-rule">
+                        </li></ul>
+                    </div>
+                </div>
+
+                <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)" id="thyroid-effects" style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                    <span class="section-chevron">▼</span> Physiologic Effects of T3
+                </h3>
+                <div class="section-body collapsed">
+                    <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ T3 is a calorigenic hormone that increases basal metabolic rate (BMR) by upregulating Na/K-ATPase. It also sensitizes the cardiovascular system to catecholamines, drives normal CNS development, and regulates bone turnover. Knowing these effects lets you predict hypo- and hyperthyroid symptoms.</p>
+                    <h4 style="font-weight:600; margin-top:14px; margin-bottom:10px;">🔬 Major Physiologic Effects</h4>
+                    <div class="h4-body">
+                        <table>
+                            <thead><tr><th>System</th><th>T3 Effect</th><th>Hypothyroid (↓T3)</th><th>Hyperthyroid (↑T3)</th></tr></thead>
+                            <tbody>
+                                <tr><td>Metabolic</td><td>↑BMR, ↑heat production</td><td>Cold intolerance, weight gain</td><td>Heat intolerance, weight loss</td></tr>
+                                <tr><td>Cardiovascular</td><td>↑HR, ↑contractility (↑β-AR)</td><td>Bradycardia, ↓CO</td><td>Tachycardia, palpitations, AF</td></tr>
+                                <tr><td>CNS (development)</td><td>Myelination, neuronal differentiation</td><td>Cretinism (neonatal), myxedema madness</td><td>Anxiety, tremor, insomnia</td></tr>
+                                <tr><td>GI</td><td>↑gut motility</td><td>Constipation</td><td>Diarrhea, ↑bowel frequency</td></tr>
+                                <tr><td>Skin/Hair</td><td>Normal turnover</td><td>Dry skin, coarse hair, myxedema</td><td>Warm moist skin, fine hair, hair loss</td></tr>
+                                <tr><td>Bone</td><td>Normal turnover</td><td>Delayed bone age</td><td>Osteoporosis, ↑bone turnover</td></tr>
+                                <tr><td>Lipids</td><td>↑LDL receptor expression</td><td>↑LDL, ↑cholesterol</td><td>↓LDL, ↓cholesterol</td></tr>
+                            </tbody>
+                        </table>
+                        <hr class="section-rule">
+                    </div>
+                    <div class="hy-box">
+                        <strong>⚡ High-Yield:</strong>
+                        <ul><li>T3 ↑ β-adrenergic receptors → hyperthyroid patients have exaggerated response to catecholamines → tachycardia even at rest. β-blockers treat the adrenergic symptoms in hyperthyroidism (propranolol also inhibits D1 → ↓T3)</li><li>Cretinism = neonatal hypothyroidism untreated → irreversible intellectual disability. Prevented by newborn T4 screening and early replacement.</li></ul>
+                    </div>
+                </div>
+
+                <div class="tyu-section">
+                    <h4 style="font-size:14px; font-weight:700; color:#1e3a5f; margin-bottom:14px;">🧠 Testing Your Understanding</h4>
+                    <ol style="margin-left:20px; font-size:14px; line-height:1.8; color:#1e293b;">
+                        <li style="margin-bottom:10px;">Why does TR bound to TRE in the absence of T3 actively REPRESS gene transcription rather than simply doing nothing? What structural feature of nuclear hormone receptors explains this?</li>
+                        <li style="margin-bottom:10px;">A patient with Resistance to Thyroid Hormone (RTH) has ↑TSH and ↑free T4. Why does the patient have tachycardia despite appearing euthyroid clinically? Use your knowledge of TR isoform distribution to explain.</li>
+                    </ol>
+                </div>
+            </div><!-- /.lo-content -->
+        </section><!-- /#lo3 -->
+
+        <!-- ======================== LO4: LABS & PHARM ======================== -->
+        <section class="lo-section" id="lo4">
+            <h2 class="lo-title" style="color:#1e3a5f; font-size:22px; margin-bottom:6px;">LO 6–7 — Labs &amp; Pharmacology</h2>
+            <p class="lo-subtitle" style="margin-bottom:28px;">TFT Interpretation · Antithyroid Drugs · Radioiodine · HoyaDocs Endocrine Block</p>
+            <div class="lo-content">
+                <div class="lo-covered">
+                    <div class="lo-covered-title">Learning Objectives Covered</div>
+                    <ul><li><strong>LO 6:</strong> Interpret thyroid function tests (TSH, free T4, total T4) in primary hypothyroidism, secondary hypothyroidism, hyperthyroidism, and euthyroid states</li><li><strong>LO 7:</strong> Describe the mechanisms of antithyroid drugs: PTU, methimazole, radioactive iodine (I-131), and perchlorate; explain why PTU is preferred in thyroid storm</li></ul>
+                </div>
+                <div class="lo-controls">
+                    <button onclick="expandAll()">Expand All</button>
+                    <button onclick="collapseAll()">Collapse All</button>
+                </div>
+                <div class="lo-toc">
+                    <div class="lo-toc-title">On This Page</div>
+                    <ol><li><a href="#tft-interp">TFT Interpretation</a></li><li><a href="#antithyroid-drugs">Antithyroid Drug Mechanisms</a></li></ol>
+                </div>
+
+                <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)" id="tft-interp" style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                    <span class="section-chevron">▼</span> TFT Interpretation
+                </h3>
+                <div class="section-body collapsed">
+                    <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ TSH is the single best screening test for thyroid disease. Because TSH changes BEFORE free T4 reaches abnormal levels (due to log-linear relationship), TSH is hypersensitive to small changes in thyroid function. The direction of TSH tells you where the problem is; free T4 tells you the severity.</p>
+                    <h4 style="font-weight:600; margin-top:14px; margin-bottom:10px;">🔬 TFT Pattern Table</h4>
+                    <div class="h4-body">
+                        <table>
+                            <thead><tr><th>Diagnosis</th><th>TSH</th><th>Free T4</th><th>Key Cause</th></tr></thead>
+                            <tbody>
+                                <tr><td>Primary hypothyroidism</td><td>↑↑</td><td>↓</td><td>Hashimoto, iodine deficiency, thyroidectomy, RAI</td></tr>
+                                <tr><td>Secondary hypothyroidism</td><td>↓</td><td>↓</td><td>Pituitary failure (↓TSH → ↓T4)</td></tr>
+                                <tr><td>Tertiary hypothyroidism</td><td>↓</td><td>↓</td><td>Hypothalamic failure (↓TRH → ↓TSH → ↓T4)</td></tr>
+                                <tr><td>Subclinical hypothyroidism</td><td>↑</td><td>Normal</td><td>Early thyroid failure; pituitary compensating</td></tr>
+                                <tr><td>Hyperthyroidism (primary)</td><td>↓↓</td><td>↑</td><td>Graves, toxic nodule, thyroiditis (early)</td></tr>
+                                <tr><td>Subclinical hyperthyroidism</td><td>↓</td><td>Normal</td><td>Early Graves, exogenous T4 excess</td></tr>
+                                <tr><td>RTH (TR-β mutation)</td><td>↑ or Normal</td><td>↑</td><td>Pituitary can't sense T3 feedback</td></tr>
+                                <tr><td>Sick euthyroid</td><td>↓ or Normal</td><td>Normal</td><td>Critical illness; ↑D3 → ↑rT3, ↓T3</td></tr>
+                                <tr><td>OCP / estrogen (euthyroid)</td><td>Normal</td><td>Normal (↑total T4)</td><td>↑TBG → more bound T4, free T4 unchanged</td></tr>
+                            </tbody>
+                        </table>
+                        <hr class="section-rule">
+                    </div>
+                    <div class="exam-trap">
+                        <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                            ⚠️ TRAP: ↑TSH + ↑T4 Together <span class="trap-chevron">▼</span>
+                        </div>
+                        <div class="trap-body collapsed">
+                            <ul><li>Normally TSH and T4 move in OPPOSITE directions (negative feedback)</li><li>If BOTH are ↑ → two possibilities: (1) TSH-secreting pituitary tumor (thyrotropinoma), (2) Resistance to thyroid hormone (RTH)</li><li>In both cases, the pituitary TSH secretion is inappropriate for the T4 level</li><li>Distinguish: RTH = normal MRI, patient may be euthyroid; TSH-oma = abnormal pituitary MRI, patient hyperthyroid</li></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)" id="antithyroid-drugs" style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                    <span class="section-chevron">▼</span> Antithyroid Drug Mechanisms
+                </h3>
+                <div class="section-body collapsed">
+                    <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ Antithyroid drugs reduce thyroid hormone production by blocking different steps: NIS inhibitors block iodide uptake; PTU and methimazole block TPO (organification + coupling); radioactive iodine destroys follicular cells; propranolol treats symptoms and blocks D1. PTU is preferred in thyroid storm because it also blocks peripheral T4→T3 conversion.</p>
+                    <h4 style="font-weight:600; margin-top:14px; margin-bottom:10px;">🔬 Drug Comparison Table</h4>
+                    <div class="h4-body">
+                        <table>
+                            <thead><tr><th>Drug</th><th>Mechanism</th><th>Key Clinical Use</th><th>Side Effects</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>PTU</strong></td><td>Blocks TPO (organification + coupling) AND inhibits type I deiodinase (↓T4→T3)</td><td>Thyroid storm (preferred); 1st trimester pregnancy</td><td>Agranulocytosis (rare), hepatotoxicity, vasculitis</td></tr>
+                                <tr><td><strong>Methimazole</strong></td><td>Blocks TPO (organification + coupling). Does NOT block deiodinase.</td><td>Graves disease (preferred long-term); 2nd/3rd trimester pregnancy</td><td>Agranulocytosis, aplasia cutis (fetal), hepatotoxicity</td></tr>
+                                <tr><td><strong>I-131 (RAI)</strong></td><td>Concentrated by NIS → emits β radiation → destroys follicular cells</td><td>Definitive treatment of Graves, toxic nodule</td><td>Hypothyroidism (intended or unintended), avoid in pregnancy</td></tr>
+                                <tr><td><strong>Perchlorate</strong></td><td>Competitive inhibitor of NIS → blocks iodide uptake</td><td>Research/diagnostic; perchlorate discharge test</td><td>Aplastic anemia (rare)</td></tr>
+                                <tr><td><strong>Lugol's iodine (KI)</strong></td><td>High iodide → Wolff-Chaikoff effect → ↓organification; also ↓vascularity of gland</td><td>Pre-op thyroidectomy; thyroid storm (adjunct)</td><td>Iodine toxicity, thyroid escape after 1–2 weeks</td></tr>
+                                <tr><td><strong>Propranolol</strong></td><td>β-blockade (↓adrenergic symptoms); also inhibits D1 (↓T4→T3 conversion)</td><td>Symptomatic relief in hyperthyroidism; thyroid storm adjunct</td><td>Bradycardia, bronchospasm (avoid in asthma)</td></tr>
+                            </tbody>
+                        </table>
+                        <hr class="section-rule">
+                    </div>
+                    <div class="exam-trap">
+                        <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                            ⚠️ TRAP: Why PTU in Thyroid Storm? <span class="trap-chevron">▼</span>
+                        </div>
+                        <div class="trap-body collapsed">
+                            <ul><li>In thyroid storm, you need to RAPIDLY reduce T3 levels. T4 has a 7-day half-life so stopping synthesis alone is too slow.</li><li>PTU blocks D1 → immediately ↓peripheral T4→T3 conversion → faster drop in active T3</li><li>Methimazole only blocks synthesis (TPO), so it takes longer to work when there's already a T4 reservoir</li><li>Propranolol also blocks D1 and is given together with PTU in thyroid storm</li></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tyu-section">
+                    <h4 style="font-size:14px; font-weight:700; color:#1e3a5f; margin-bottom:14px;">🧠 Testing Your Understanding</h4>
+                    <ol style="margin-left:20px; font-size:14px; line-height:1.8; color:#1e293b;">
+                        <li style="margin-bottom:10px;">A patient with Graves disease is started on methimazole. Four weeks later, TSH is still suppressed and free T4 remains elevated. Is this expected? Explain the pharmacokinetic reason why antithyroid drugs take weeks to normalize thyroid hormone levels.</li>
+                        <li style="margin-bottom:10px;">A pregnant woman in her 8th week has newly diagnosed Graves disease. Which antithyroid drug would you prescribe, and why? What would you switch to in the 2nd trimester, and why?</li>
+                    </ol>
+                </div>
+            </div><!-- /.lo-content -->
+        </section><!-- /#lo4 -->
+
+        <!-- ======================== LO5: GRAVES DISEASE ======================== -->
+        <section class="lo-section" id="lo5">
+            <h2 class="lo-title" style="color:#1e3a5f; font-size:22px; margin-bottom:6px;">LO 8 — Graves Disease</h2>
+            <p class="lo-subtitle" style="margin-bottom:28px;">Pathophysiology · TSI · Clinical Features · Treatment · HoyaDocs Endocrine Block</p>
+            <div class="lo-content">
+                <div class="lo-covered">
+                    <div class="lo-covered-title">Learning Objectives Covered</div>
+                    <ul><li><strong>LO 8:</strong> Describe the pathophysiology, clinical features, laboratory findings, and treatment of Graves disease</li></ul>
+                </div>
+                <div class="lo-controls">
+                    <button onclick="expandAll()">Expand All</button>
+                    <button onclick="collapseAll()">Collapse All</button>
+                </div>
+                <div class="lo-toc">
+                    <div class="lo-toc-title">On This Page</div>
+                    <ol><li><a href="#graves-patho">Pathophysiology &amp; TSI Mechanism</a></li><li><a href="#graves-clinical">Clinical Features</a></li><li><a href="#graves-labs">Laboratory Findings</a></li><li><a href="#graves-treatment">Treatment</a></li></ol>
+                </div>
+
+                <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)" id="graves-patho" style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                    <span class="section-chevron">▼</span> Pathophysiology &amp; TSI Mechanism
+                </h3>
+                <div class="section-body collapsed">
+                    <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ Graves disease is the most common cause of hyperthyroidism. It is an autoimmune disease in which IgG autoantibodies (TSI — thyroid-stimulating immunoglobulins) bind and chronically activate the TSH receptor. Unlike TSH (which is pulsatile), TSI stimulates the receptor continuously → unregulated T3/T4 production → suppressed TSH via negative feedback.</p>
+                    <h4 style="font-weight:600; margin-top:14px; margin-bottom:10px;">🔬 Mechanism of TSI</h4>
+                    <div class="h4-body">
+                        <ul><li><strong>TSI (also called TRAb — TSH receptor antibodies):</strong> IgG autoantibodies produced by autoreactive B cells</li><li>TSI binds the TSH receptor (TSHR) on follicular cells → acts as a <em>permanent agonist</em> — continuously activates Gs/cAMP pathway</li><li>Result: ALL TSH-dependent steps are constitutively active → ↑NIS, ↑TPO, ↑Tg synthesis, ↑endocytosis → ↑↑T3/T4</li><li>High T3/T4 feeds back to SUPPRESS TSH at pituitary (negative feedback is intact) → TSH is very low in Graves</li><li>TSI does NOT respond to the negative feedback that suppresses TSH — this is why TSH is low but T4/T3 are high</li></ul>
+                        <hr class="section-rule">
+                    </div>
+                    <div class="exam-trap">
+                        <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                            ⚠️ TRAP: Graves vs Toxic Nodule <span class="trap-chevron">▼</span>
+                        </div>
+                        <div class="trap-body collapsed">
+                            <ul><li>Both cause ↓TSH + ↑free T4 + hyperthyroid symptoms. How do you tell them apart?</li><li><strong>Graves:</strong> Diffuse uptake on radioiodine scan (whole gland is activated by TSI); positive TSI; exophthalmos; pretibial myxedema</li><li><strong>Toxic nodule:</strong> Focal "hot" uptake on radioiodine scan (one autonomous nodule takes up iodine; rest of gland suppressed). No exophthalmos or pretibial myxedema. TSI negative.</li></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)" id="graves-clinical" style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                    <span class="section-chevron">▼</span> Clinical Features
+                </h3>
+                <div class="section-body collapsed">
+                    <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ Graves presents with three findings UNIQUE to this condition (not seen in other forms of hyperthyroidism): exophthalmos, pretibial myxedema, and diffuse toxic goiter. These are driven by the autoimmune process (TSI and associated fibroblast stimulation), not by excess thyroid hormone itself.</p>
+                    <h4 style="font-weight:600; margin-top:14px; margin-bottom:10px;">🔬 Hyperthyroid Symptoms (Any Cause)</h4>
+                    <div class="h4-body">
+                        <ul><li>Tachycardia, palpitations, atrial fibrillation (elevated β-AR sensitivity)</li><li>Weight loss despite increased appetite (↑BMR)</li><li>Heat intolerance, excessive sweating</li><li>Tremor, anxiety, insomnia</li><li>Diarrhea / increased stool frequency</li><li>Warm, moist skin; fine hair; hair thinning</li><li>Proximal muscle weakness (thyrotoxic myopathy)</li></ul>
+                    </div>
+                    <h4 style="font-weight:600; margin-top:14px; margin-bottom:10px;">🔬 Graves-Specific Features</h4>
+                    <div class="h4-body">
+                        <ul><li><strong>Diffuse toxic goiter:</strong> Entire thyroid uniformly enlarged and hypervascular (bruit may be heard). Driven by TSI stimulation of TSH receptor throughout the gland.</li><li><strong>Exophthalmos (proptosis):</strong> Protrusion of eyeballs due to glycosaminoglycan deposition and fibroblast proliferation in the retro-orbital space. Mediated by TSH receptor expression on orbital fibroblasts stimulated by TSI. Can persist even after treatment of hyperthyroidism.</li><li><strong>Pretibial myxedema (dermopathy):</strong> Raised, non-pitting, violaceous plaque on the anterior shins (NOT because of myxedema of hypothyroidism — same word, different mechanism!). Caused by glycosaminoglycan accumulation driven by TSI acting on dermal fibroblasts.</li><li><strong>Acropachy (rare):</strong> Clubbing of fingers + periosteal new bone formation. Very rare, but pathognomonic of Graves when present.</li>
+                        <hr class="section-rule">
+                        </li></ul>
+                    </div>
+                    <div class="exam-trap">
+                        <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                            ⚠️ TRAP: Pretibial Myxedema Is NOT Hypothyroid <span class="trap-chevron">▼</span>
+                        </div>
+                        <div class="trap-body collapsed">
+                            <ul><li>The term "myxedema" refers to the mucopolysaccharide (glycosaminoglycan) deposits — it occurs in BOTH hypothyroidism (generalized) AND Graves disease (pretibial)</li><li>Graves pretibial myxedema = localized to shins, raised violaceous plaque, present in a HYPERTHYROID patient with TSI</li><li>Hypothyroid myxedema = generalized non-pitting edema, periorbital puffiness, generalized thickening of skin — different distribution, different mechanism</li></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)" id="graves-labs" style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                    <span class="section-chevron">▼</span> Laboratory Findings
+                </h3>
+                <div class="section-body collapsed">
+                    <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ TFTs show suppressed TSH with elevated free T4 (and often elevated free T3). Positive TSI (or TRAb) confirms the autoimmune cause. Radioiodine uptake scan shows DIFFUSE, elevated uptake throughout the gland (vs focal hot nodule in toxic nodule).</p>
+                    <h4 style="font-weight:600; margin-top:14px; margin-bottom:10px;">🔬 Lab Pattern</h4>
+                    <div class="h4-body">
+                        <ul><li><strong>TSH:</strong> Very low (↓↓) — suppressed by high T3/T4</li><li><strong>Free T4:</strong> ↑↑</li><li><strong>Free T3:</strong> Often disproportionately ↑ (because TSI stimulates gland to preferentially secrete T3)</li><li><strong>TSI (thyroid-stimulating immunoglobulins):</strong> Positive — confirms Graves</li><li><strong>TRAb (TSH receptor antibodies):</strong> Often used interchangeably with TSI; technically measures binding, while TSI measures stimulating activity</li><li><strong>Radioiodine uptake (RAIU) scan:</strong> Diffusely ↑↑ uptake throughout both lobes (100% of gland activated)</li>
+                        <hr class="section-rule">
+                        </li></ul>
+                    </div>
+                </div>
+
+                <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)" id="graves-treatment" style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                    <span class="section-chevron">▼</span> Treatment
+                </h3>
+                <div class="section-body collapsed">
+                    <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ Three definitive treatment options for Graves: (1) antithyroid drugs (methimazole, PTU), (2) radioactive iodine (I-131), and (3) thyroidectomy. There is no option that selectively destroys the autoimmune process — all treatments reduce thyroid hormone. Definitive treatments (RAI, surgery) often result in iatrogenic hypothyroidism requiring lifelong T4 replacement.</p>
+                    <h4 style="font-weight:600; margin-top:14px; margin-bottom:10px;">🔬 Treatment Options Comparison</h4>
+                    <div class="h4-body">
+                        <table>
+                            <thead><tr><th>Treatment</th><th>Mechanism</th><th>Preferred When</th><th>Key Consideration</th></tr></thead>
+                            <tbody>
+                                <tr><td>Methimazole</td><td>Blocks TPO → ↓T3/T4 synthesis</td><td>Young patients, mild disease, first-line for most</td><td>Risk of relapse after stopping (~50%). Watch for agranulocytosis.</td></tr>
+                                <tr><td>PTU</td><td>Blocks TPO + D1 (↓T4→T3)</td><td>Thyroid storm; 1st trimester pregnancy</td><td>More side effects than methimazole; hepatotoxicity</td></tr>
+                                <tr><td>I-131 (RAI)</td><td>Destroys follicular cells with β radiation</td><td>Definitive treatment (most common in USA)</td><td>Often causes hypothyroidism; avoid in pregnancy, active exophthalmos</td></tr>
+                                <tr><td>Thyroidectomy</td><td>Removes the gland</td><td>Large goiter, suspicious nodule, pregnancy where drugs fail, RAI contraindicated</td><td>Risks: recurrent laryngeal nerve injury, hypoparathyroidism</td></tr>
+                                <tr><td>Propranolol</td><td>β-blockade + blocks D1</td><td>Symptomatic control (NOT definitive)</td><td>Given short-term until TSH normalizes</td></tr>
+                            </tbody>
+                        </table>
+                        <hr class="section-rule">
+                    </div>
+                    <div class="usmle-summary">
+                        <div class="usmle-header">🎯 USMLE Pearl: When TSI Is Still High After Treatment</div>
+                        <ul><li>After RAI or thyroidectomy, TSI remains elevated for months — the autoimmune process isn't cured</li><li>This is why exophthalmos can WORSEN after RAI (radioiodine may ↑TSI transiently)</li><li>Patients need lifelong T4 replacement and ophthalmology follow-up if exophthalmos is present</li><li>~50% of patients relapse after stopping antithyroid drugs (meaning they still have TSI driving the disease)</li></ul>
+                    </div>
+                </div>
+
+                <div class="tyu-section">
+                    <h4 style="font-size:14px; font-weight:700; color:#1e3a5f; margin-bottom:14px;">🧠 Testing Your Understanding</h4>
+                    <ol style="margin-left:20px; font-size:14px; line-height:1.8; color:#1e293b;">
+                        <li style="margin-bottom:10px;">Why does pretibial myxedema occur on the shins specifically? What cells are involved and what is the underlying mediator? Why is it localized to that body region?</li>
+                        <li style="margin-bottom:10px;">A patient with Graves disease is treated with radioactive iodine and becomes hypothyroid. Six months later, her exophthalmos has worsened. Explain why this can happen and what mechanism drives it.</li>
+                    </ol>
+                </div>
+            </div><!-- /.lo-content -->
+        </section><!-- /#lo5 -->
+
+        <!-- ======================== PRACTICE QUESTIONS ======================== -->
+        <section class="practice-section lo-section" id="practice">
+            <h2 class="lo-title" style="color:#1e3a5f; font-size:22px; margin-bottom:6px;">Practice Questions</h2>
+            <p class="lo-subtitle" style="margin-bottom:28px;">Lecture 2 — Thyroid Physiology · HoyaDocs Endocrine Block</p>
+            <div class="lo-content">
+
+                <div class="practice-question">
+                    <h4>Question 1</h4>
+                    <p>A researcher isolates follicular cells from a thyroid gland and notes that the T:S (thyroid-to-serum iodide) ratio is approximately 500. Which of the following is most likely responsible for this elevated ratio?</p>
+                    <p class="option">A) Increased pendrin activity at the apical membrane</p>
+                    <p class="option">B) High-dose TSH stimulation of the NIS symporter</p>
+                    <p class="option">C) Increased TPO-mediated oxidation of iodide in the colloid</p>
+                    <p class="option">D) Inhibition of lysosomal proteolysis of thyroglobulin</p>
+                    <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Correct Answer: B</strong>
+                        <p style="margin-top:10px;">The T:S ratio reflects NIS activity, which is stimulated by TSH via Gs/cAMP. Normal T:S ≈ 25; with TSH stimulation it rises to ~500. Pendrin (A) transports iodide to the apical lumen but is not the rate-limiting concentrating step. TPO (C) organifies iodide but doesn't determine the concentration gradient. Lysosomal proteolysis (D) affects hormone release, not uptake.</p>
+                    </div>
+                </div>
+
+                <div class="practice-question">
+                    <h4>Question 2</h4>
+                    <p>A 7-year-old boy in a mountainous, iodine-deficient region has a visible neck mass that moves with swallowing. TSH is 18 mIU/L (elevated), free T4 is low. His mother has the same condition. What is the most likely mechanism?</p>
+                    <p class="option">A) TSI autoantibodies stimulating the TSH receptor</p>
+                    <p class="option">B) TPO mutation preventing organification</p>
+                    <p class="option">C) Iodine deficiency → ↓T3/T4 → ↑TSH → goiter</p>
+                    <p class="option">D) Autonomous nodule secreting T4 independently</p>
+                    <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Correct Answer: C</strong>
+                        <p style="margin-top:10px;">Iodine deficiency → ↓T3/T4 synthesis → ↓negative feedback on pituitary → ↑TSH → TSH stimulates follicular cell hypertrophy and hyperplasia → goiter (compensatory enlargement). TSI (A) is Graves disease, causing hyperthyroidism with goiter. TPO mutation (B) would present from birth, not in an iodine-deficient region. Autonomous nodule (D) would suppress TSH, not elevate it.</p>
+                    </div>
+                </div>
+
+                <div class="practice-question">
+                    <h4>Question 3</h4>
+                    <p>A patient is given pertechnetate (99mTcO4−) for thyroid imaging. Imaging shows the gland takes up the tracer but there is no organification. Which of the following explains why pertechnetate is useful for imaging despite not being incorporated into thyroid hormone?</p>
+                    <p class="option">A) Pertechnetate blocks NIS but is taken up by other membrane channels</p>
+                    <p class="option">B) Pertechnetate is transported into follicular cells via NIS but is not a TPO substrate</p>
+                    <p class="option">C) Pertechnetate is organified by TPO but rapidly effluxes before hormone synthesis</p>
+                    <p class="option">D) Pertechnetate stimulates TSH receptor and enters via endocytosis</p>
+                    <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Correct Answer: B</strong>
+                        <p style="margin-top:10px;">Pertechnetate enters follicular cells via NIS (it has the same charge and size as iodide) → concentrated inside the cell → can be imaged. However, TPO cannot oxidize or organify pertechnetate, so it stays as free pertechnetate and is not incorporated into thyroglobulin. This is exactly what makes it useful: you can image NIS activity without delivering radiation to the thyroid tissue itself.</p>
+                    </div>
+                </div>
+
+                <div class="practice-question">
+                    <h4>Question 4</h4>
+                    <p>During thyroid hormone synthesis, thyroperoxidase (TPO) performs two distinct reactions. A patient with a complete loss-of-function TPO mutation would be expected to have which of the following lab findings?</p>
+                    <p class="option">A) ↑TSH, ↑free T4, positive TSI</p>
+                    <p class="option">B) ↑TSH, ↓free T4, positive perchlorate discharge test</p>
+                    <p class="option">C) ↓TSH, ↑free T4, diffuse goiter</p>
+                    <p class="option">D) Normal TSH, normal free T4, goiter due to TSI</p>
+                    <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Correct Answer: B</strong>
+                        <p style="margin-top:10px;">Without TPO, iodide cannot be organified into thyroglobulin. Unorganified iodide accumulates in the follicular cell but is not incorporated into hormone → ↓T3/T4 → ↑TSH → goiter. The perchlorate discharge test exploits this: perchlorate displaces unorganified (free) iodide from the gland; a positive test (large iodide discharge) indicates organification failure. TSI (A) causes hyperthyroidism. Low TSH + high T4 (C) is hyperthyroidism.</p>
+                    </div>
+                </div>
+
+                <div class="practice-question">
+                    <h4>Question 5</h4>
+                    <p>A patient's thyroid gland is surgically removed. Prior to surgery, the surgeon gives Lugol's iodine solution for 10 days. What is the primary rationale for this preoperative treatment?</p>
+                    <p class="option">A) Prevent postoperative hypothyroidism by storing iodine in the remnant gland</p>
+                    <p class="option">B) Exploit the Wolff-Chaikoff effect to reduce hormone synthesis and gland vascularity</p>
+                    <p class="option">C) Block NIS to prevent iodide uptake and reduce radiation exposure during surgery</p>
+                    <p class="option">D) Stimulate TSH secretion to optimize preoperative thyroid function</p>
+                    <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Correct Answer: B</strong>
+                        <p style="margin-top:10px;">High-dose iodide (Lugol's solution) exploits the Wolff-Chaikoff effect: excess iodide transiently inhibits TPO organification → ↓T3/T4 synthesis. Additionally, high iodide reduces gland vascularity (important to reduce intraoperative bleeding). The gland would normally escape this effect in 1–2 weeks, but that is sufficient for pre-surgical use. Lugol's does not prevent postoperative hypothyroidism (A) or block NIS specifically (C).</p>
+                    </div>
+                </div>
+
+                <div class="practice-question">
+                    <h4>Question 6</h4>
+                    <p>A 45-year-old woman is found on routine labs to have a total T4 of 20 µg/dL (elevated; normal 4.5–12.5) and a TSH of 1.8 mIU/L (normal). She has no symptoms. She is taking oral contraceptive pills. What explains her lab findings?</p>
+                    <p class="option">A) She has subclinical hyperthyroidism; methimazole should be started</p>
+                    <p class="option">B) Estrogen increases TBG → more bound T4 → elevated total T4 with normal free T4 and TSH</p>
+                    <p class="option">C) OCPs inhibit type I deiodinase → T4 accumulates because it cannot convert to T3</p>
+                    <p class="option">D) Estrogen directly stimulates thyroid hormone synthesis at the follicular cell level</p>
+                    <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Correct Answer: B</strong>
+                        <p style="margin-top:10px;">Estrogen (in OCPs) stimulates hepatic TBG synthesis → more TBG binds circulating T4 → total T4 rises. However, free T4 remains normal (the equilibrium adjusts), and TSH is normal because the pituitary senses free T4. This is a euthyroid state. No treatment needed. Classic Step 1 trap: always check free T4 + TSH, not just total T4.</p>
+                    </div>
+                </div>
+
+                <div class="practice-question">
+                    <h4>Question 7</h4>
+                    <p>A 55-year-old man is in the medical ICU following a myocardial infarction. Labs show: TSH = 0.3 mIU/L (slightly low), free T4 = 1.1 ng/dL (normal), T3 = 60 ng/dL (low), rT3 = 0.8 ng/mL (elevated). He has no prior thyroid disease. What is the most appropriate next step?</p>
+                    <p class="option">A) Start levothyroxine replacement for secondary hypothyroidism</p>
+                    <p class="option">B) Order anti-TPO antibodies to diagnose Hashimoto thyroiditis</p>
+                    <p class="option">C) No thyroid treatment; this pattern is sick euthyroid syndrome</p>
+                    <p class="option">D) Start PTU to block peripheral conversion of T4 to rT3</p>
+                    <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Correct Answer: C</strong>
+                        <p style="margin-top:10px;">Sick euthyroid syndrome: critical illness → ↑type III deiodinase activity → T4 converts to rT3 (inactive) instead of T3 → ↓T3, ↑rT3, normal free T4, TSH mildly low. This is adaptive — treating with thyroid hormone worsens outcomes. Free T4 is normal, confirming there is not true hypothyroidism. Levothyroxine (A) is contraindicated. PTU (D) would not help and is contraindicated in a sick patient.</p>
+                    </div>
+                </div>
+
+                <div class="practice-question">
+                    <h4>Question 8</h4>
+                    <p>A 32-year-old woman with Graves disease has a TSH of 0.02 mIU/L and free T4 of 4.5 ng/dL. She is started on methimazole. Which step in thyroid hormone synthesis does methimazole directly inhibit?</p>
+                    <p class="option">A) Iodide uptake via NIS on the basolateral membrane</p>
+                    <p class="option">B) Organification of iodide and coupling of MIT/DIT by TPO</p>
+                    <p class="option">C) Peripheral conversion of T4 to T3 by type I deiodinase</p>
+                    <p class="option">D) TSI binding to the TSH receptor on follicular cells</p>
+                    <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Correct Answer: B</strong>
+                        <p style="margin-top:10px;">Methimazole blocks TPO — it inhibits both the oxidation of iodide (organification) AND the coupling of MIT+DIT into T3/T4. It does not block NIS (A) — iodide still enters the cell but cannot be incorporated into thyroglobulin. Unlike PTU, methimazole does NOT block D1 (C) — this is the key mechanistic difference. TSI binding (D) is the primary Graves defect, but no drug currently blocks TSI-TSHR interaction clinically.</p>
+                    </div>
+                </div>
+
+                <div class="practice-question">
+                    <h4>Question 9</h4>
+                    <p>A 28-year-old woman in her 8th week of pregnancy is diagnosed with Graves disease. TSH = 0.01, free T4 = 5.0. Which antithyroid drug is preferred at this gestational age, and what is the primary reason?</p>
+                    <p class="option">A) Methimazole — because it also blocks peripheral T4→T3 conversion</p>
+                    <p class="option">B) PTU — because methimazole is associated with aplasia cutis and choanal atresia in 1st trimester</p>
+                    <p class="option">C) Radioactive iodine — safest option during pregnancy</p>
+                    <p class="option">D) Lugol's iodine — prevents fetal goiter by correcting iodine deficiency</p>
+                    <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Correct Answer: B</strong>
+                        <p style="margin-top:10px;">PTU is preferred in the 1st trimester of pregnancy because methimazole is associated with embryopathy (aplasia cutis — absent skin on scalp, and choanal/esophageal atresia) in the 1st trimester. After the 1st trimester, switch to methimazole because PTU carries higher risk of hepatotoxicity (maternal). RAI (C) is absolutely contraindicated in pregnancy (destroys fetal thyroid). Lugol's iodine (D) is inappropriate here.</p>
+                    </div>
+                </div>
+
+                <div class="practice-question">
+                    <h4>Question 10</h4>
+                    <p>A patient with hyperthyroidism is started on propranolol while awaiting a definitive treatment decision. Which TWO mechanisms explain why propranolol reduces thyroid hormone-related symptoms? Select the best answer covering both.</p>
+                    <p class="option">A) Blocks β-adrenergic receptors AND inhibits type I deiodinase (↓ T4 → T3 conversion)</p>
+                    <p class="option">B) Blocks NIS AND inhibits type II deiodinase at the pituitary</p>
+                    <p class="option">C) Inhibits TSH secretion AND blocks thyroid hormone nuclear receptors</p>
+                    <p class="option">D) Blocks TPO AND reduces TBG synthesis in the liver</p>
+                    <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Correct Answer: A</strong>
+                        <p style="margin-top:10px;">Propranolol provides symptomatic relief via β1-blockade (↓HR, ↓palpitations, ↓tremor) and reduces the active T3 level by inhibiting type I deiodinase (blocks peripheral T4→T3 conversion). This is especially valuable in thyroid storm. Propranolol does NOT block NIS (B), does not inhibit TSH (C), and does not block TPO (D). Note: selective β1-blockers like atenolol lack the D1 inhibition effect.</p>
+                    </div>
+                </div>
+
+                <div class="practice-question">
+                    <h4>Question 11</h4>
+                    <p>A medical student learns that thyroid hormone receptor (TR) actively REPRESSES gene transcription even in the absence of T3. Which molecular mechanism explains this observation?</p>
+                    <p class="option">A) Unliganded TR recruits histone acetyltransferases (HAT) → chromatin opens → repression</p>
+                    <p class="option">B) Unliganded TR bound to TRE recruits co-repressors containing histone deacetylase (HDAC) activity → chromatin condensed → repression</p>
+                    <p class="option">C) Unliganded TR is retained in the cytoplasm by heat shock proteins, unable to access the nucleus</p>
+                    <p class="option">D) Unliganded TR dimerizes with itself (homodimer) and blocks RXR binding to TRE</p>
+                    <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Correct Answer: B</strong>
+                        <p style="margin-top:10px;">Unlike steroid hormone receptors (which are cytoplasmic without ligand), TR is constitutively in the nucleus bound to DNA. Without T3, TR/RXR recruits co-repressor complexes that contain HDAC activity → deacetylate histones → chromatin condenses → transcription is silenced. When T3 binds, conformational change dismisses co-repressors and recruits co-activators (with HAT activity) → chromatin opens → transcription. HAT recruitment (A) is what happens WITH T3, not without.</p>
+                    </div>
+                </div>
+
+                <div class="practice-question">
+                    <h4>Question 12</h4>
+                    <p>A 35-year-old man has tachycardia, weight loss, and heat intolerance. Labs: TSH = 3.2 mIU/L (normal), free T4 = 4.8 ng/dL (elevated). MRI pituitary is normal. What is the most likely diagnosis?</p>
+                    <p class="option">A) Graves disease with early TSH suppression</p>
+                    <p class="option">B) Resistance to Thyroid Hormone (RTH) — TR-β mutation</p>
+                    <p class="option">C) TSH-secreting pituitary adenoma (thyrotropinoma)</p>
+                    <p class="option">D) Factitious hyperthyroidism from exogenous T4 ingestion</p>
+                    <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Correct Answer: B</strong>
+                        <p style="margin-top:10px;">↑Free T4 with NORMAL TSH (not suppressed) = inappropriate TSH secretion for the T4 level. RTH (TR-β mutation): the pituitary has mutant TR-β and cannot sense T3/T4 feedback → TSH is not suppressed despite high T4. However, TR-α (heart) is normal → high circulating T3 causes tachycardia and hyperthyroid symptoms. Normal MRI rules out thyrotropinoma (C). In Graves (A) and factitious T4 (D), TSH would be suppressed to near zero, not normal.</p>
+                    </div>
+                </div>
+
+                <div class="practice-question">
+                    <h4>Question 13</h4>
+                    <p>T3 upregulates β-adrenergic receptor expression in the heart. A patient with severe hyperthyroidism presents with heart failure from high-output tachycardia. Which drug would both (a) control the heart rate and (b) reduce active T3 levels?</p>
+                    <p class="option">A) Atenolol (selective β1-blocker)</p>
+                    <p class="option">B) Propranolol (non-selective β-blocker)</p>
+                    <p class="option">C) Metoprolol (selective β1-blocker)</p>
+                    <p class="option">D) Verapamil (calcium channel blocker)</p>
+                    <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Correct Answer: B</strong>
+                        <p style="margin-top:10px;">Propranolol is the non-selective β-blocker with the additional property of inhibiting type I deiodinase (D1) → ↓peripheral T4→T3 conversion → ↓active T3. Selective β1-blockers (atenolol, metoprolol) lack this D1 inhibitory effect. Verapamil (D) can reduce heart rate but does not block β-adrenergic overstimulation or D1. In hyperthyroid emergencies, propranolol is specifically preferred for both mechanisms.</p>
+                    </div>
+                </div>
+
+                <div class="practice-question">
+                    <h4>Question 14</h4>
+                    <p>A fetus is born in a region with severe iodine deficiency. The mother had untreated hypothyroidism throughout pregnancy. The infant has intellectual disability, short stature, and coarse facial features. What is the underlying molecular mechanism of the intellectual disability?</p>
+                    <p class="option">A) Excess cortisol crossing the placenta suppresses fetal ACTH</p>
+                    <p class="option">B) Inadequate T3 for TR-α-mediated myelination and neuronal differentiation during CNS development</p>
+                    <p class="option">C) High TSH crosses the placenta and causes fetal thyroid suppression</p>
+                    <p class="option">D) Iodine deficiency prevents formation of thyroglobulin in fetal follicular cells</p>
+                    <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Correct Answer: B</strong>
+                        <p style="margin-top:10px;">T3 is critical for CNS development — it drives myelination, axonal growth, and neuronal differentiation via TR-α receptors in the developing brain. Without adequate maternal T3 (which crosses the placenta before fetal thyroid function is established at ~10–12 weeks), the fetal brain is deprived during critical developmental windows → irreversible cretinism. This is why newborn TSH screening is performed — early T4 replacement prevents intellectual disability if started in the first 2–3 weeks of life.</p>
+                    </div>
+                </div>
+
+                <div class="practice-question">
+                    <h4>Question 15</h4>
+                    <p>A 42-year-old woman presents with fatigue, weight gain, cold intolerance, constipation, and coarse hair. Labs: TSH = 45 mIU/L, free T4 = 0.4 ng/dL, free T3 = 70 ng/dL (low). Anti-TPO antibodies are positive. What is the most likely diagnosis?</p>
+                    <p class="option">A) Secondary hypothyroidism from pituitary failure</p>
+                    <p class="option">B) Subclinical hypothyroidism</p>
+                    <p class="option">C) Primary hypothyroidism (Hashimoto thyroiditis)</p>
+                    <p class="option">D) Graves disease with hypothyroid phase</p>
+                    <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Correct Answer: C</strong>
+                        <p style="margin-top:10px;">↑↑TSH + ↓free T4 + positive anti-TPO antibodies = primary hypothyroidism from Hashimoto thyroiditis (autoimmune thyroid destruction). TSH is very high because the pituitary is working hard to stimulate a failing gland. Secondary hypothyroidism (A) would show ↓TSH + ↓free T4 (no TSH to drive the gland). Subclinical hypothyroidism (B) shows ↑TSH but normal free T4. Graves (D) causes hyperthyroidism, not hypothyroidism (although late-stage Graves can cause hypothyroidism if TSI depletes).</p>
+                    </div>
+                </div>
+
+                <div class="practice-question">
+                    <h4>Question 16</h4>
+                    <p>A 58-year-old man undergoes pituitary surgery for a craniopharyngioma. Postoperatively, his TSH = 0.1 mIU/L and free T4 = 0.5 ng/dL. He feels fatigued. What is the most appropriate treatment?</p>
+                    <p class="option">A) Thyroid hormone replacement with levothyroxine (T4)</p>
+                    <p class="option">B) TSH replacement with recombinant human TSH</p>
+                    <p class="option">C) No treatment — TSH will recover after pituitary swelling resolves</p>
+                    <p class="option">D) Methimazole to block excess TBG binding</p>
+                    <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Correct Answer: A</strong>
+                        <p style="margin-top:10px;">↓TSH + ↓free T4 = secondary hypothyroidism (pituitary cannot produce TSH → thyroid is not stimulated → ↓T4). Treatment is levothyroxine (T4 replacement). Note: You CANNOT use TSH to monitor treatment in secondary hypothyroidism (pituitary is broken) — instead, monitor free T4 levels. Recombinant TSH (B) is used for RAI treatment preparation, not for ongoing replacement. Methimazole (D) would worsen the hypothyroidism.</p>
+                    </div>
+                </div>
+
+                <div class="practice-question">
+                    <h4>Question 17</h4>
+                    <p>A 38-year-old woman has a total T4 of 6.0 µg/dL (low) but free T4 = 1.2 ng/dL (normal) and TSH = 2.0 mIU/L (normal). She recently started testosterone therapy for hypoactive sexual desire. What explains her labs?</p>
+                    <p class="option">A) Testosterone inhibits NIS activity, reducing thyroid hormone synthesis</p>
+                    <p class="option">B) Androgens decrease hepatic TBG synthesis → less T4 bound → low total T4 with normal free T4</p>
+                    <p class="option">C) Testosterone directly stimulates type I deiodinase → T4 is rapidly converted → low total T4</p>
+                    <p class="option">D) Testosterone causes autoimmune thyroiditis, destroying follicular cells</p>
+                    <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Correct Answer: B</strong>
+                        <p style="margin-top:10px;">Androgens (and anabolic steroids, glucocorticoids, nephrotic syndrome) decrease hepatic TBG synthesis → less TBG available to bind T4 → total T4 falls. However, free T4 adjusts to remain normal (pituitary senses this and keeps TSH in range). This is the mirror image of the OCP scenario: OCP (estrogen) → ↑TBG → ↑total T4; androgens → ↓TBG → ↓total T4. Both are euthyroid states.</p>
+                    </div>
+                </div>
+
+                <div class="practice-question">
+                    <h4>Question 18</h4>
+                    <p>A patient in thyroid storm is given both PTU and propranolol. Which of the following best explains WHY PTU is preferred over methimazole in this acute setting?</p>
+                    <p class="option">A) PTU has a faster onset because it crosses the blood-brain barrier more readily</p>
+                    <p class="option">B) PTU also inhibits type I deiodinase, rapidly reducing circulating T3 in addition to blocking new synthesis</p>
+                    <p class="option">C) PTU is safer than methimazole in acute settings because it has fewer hepatic side effects</p>
+                    <p class="option">D) PTU directly blocks the TSH receptor, preventing TSI from stimulating the gland</p>
+                    <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Correct Answer: B</strong>
+                        <p style="margin-top:10px;">In thyroid storm, there is an enormous pre-formed T4 pool. Stopping synthesis alone (what both drugs do at TPO) will take weeks because T4 half-life is 7 days. PTU's extra mechanism — inhibiting D1 — immediately reduces T4→T3 conversion → rapidly lowers active T3 levels. This dual action (synthesis block + peripheral conversion block) makes PTU mechanistically superior to methimazole in the acute storm setting. PTU actually has MORE hepatotoxicity than methimazole (C) — it's chosen despite this side effect because of its D1 inhibition.</p>
+                    </div>
+                </div>
+
+                <div class="practice-question">
+                    <h4>Question 19</h4>
+                    <p>A 65-year-old man with toxic multinodular goiter is treated with radioactive iodine (I-131). The mechanism of I-131 therapy depends on which property of thyroid follicular cells?</p>
+                    <p class="option">A) Follicular cells express NIS and concentrate iodide intracellularly; I-131 β-radiation then destroys the cell</p>
+                    <p class="option">B) I-131 binds to thyroid hormone receptors and inhibits T3/T4-mediated gene transcription</p>
+                    <p class="option">C) I-131 is organified into rT3, which then accumulates and becomes cytotoxic</p>
+                    <p class="option">D) I-131 blocks TSH receptor signaling, preventing TSH-mediated cell growth</p>
+                    <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Correct Answer: A</strong>
+                        <p style="margin-top:10px;">I-131 is selectively concentrated in thyroid follicular cells via NIS. Once inside, I-131 undergoes β decay → emits high-energy β particles (electrons) → local radiation destroys follicular cells → hypothyroidism. The selectivity is entirely due to NIS: no other cell type concentrates iodide this way. This is why I-131 is a highly targeted therapy with minimal systemic toxicity. It is contraindicated in pregnancy (fetal thyroid expresses NIS by 10–12 weeks).</p>
+                    </div>
+                </div>
+
+                <div class="practice-question">
+                    <h4>Question 20</h4>
+                    <p>A 26-year-old woman presents with palpitations, weight loss, heat intolerance, and a diffusely enlarged thyroid with a bruit. Labs: TSH = 0.01 mIU/L, free T4 = 5.2 ng/dL. Radioiodine scan shows diffusely increased uptake bilaterally. Anti-TSH receptor antibodies are positive. What is the pathophysiologic basis of her illness?</p>
+                    <p class="option">A) CD8+ T cells destroying follicular cells → release of preformed T3/T4</p>
+                    <p class="option">B) IgG autoantibodies (TSI) that bind and constitutively activate the TSH receptor</p>
+                    <p class="option">C) Somatic mutation in the TSH receptor causing constitutive activation without ligand</p>
+                    <p class="option">D) Autonomous TSH secretion from a pituitary adenoma</p>
+                    <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Correct Answer: B</strong>
+                        <p style="margin-top:10px;">Graves disease = TSI (IgG autoantibodies) that mimic TSH by permanently activating the TSHR → Gs/cAMP → all synthesis steps constitutively upregulated → ↑↑T3/T4 → ↓↓TSH (negative feedback intact). Diffuse uptake confirms whole-gland activation (vs focal hot nodule from somatic TSHR mutation in C). Hashimoto-type destruction (A) causes hypothyroidism. TSH-oma (D) causes ↑TSH + ↑T4 together.</p>
+                    </div>
+                </div>
+
+                <div class="practice-question">
+                    <h4>Question 21</h4>
+                    <p>A 30-year-old woman with Graves disease has exophthalmos. Her ophthalmologist explains the mechanism. Which of the following best explains why exophthalmos occurs in Graves disease?</p>
+                    <p class="option">A) Excess T3 causes periorbital fat hypertrophy</p>
+                    <p class="option">B) TSI activates TSH receptors on retro-orbital fibroblasts → glycosaminoglycan deposition + inflammation → retro-orbital swelling → proptosis</p>
+                    <p class="option">C) High TSH levels stimulate orbital fibroblasts to produce mucopolysaccharides</p>
+                    <p class="option">D) Graves autoantibodies cross-react with retinal pigment epithelium, causing forward displacement of the globe</p>
+                    <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Correct Answer: B</strong>
+                        <p style="margin-top:10px;">Retro-orbital fibroblasts and adipocytes express TSH receptors. TSI cross-reacts with these receptors → activates fibroblasts → ↑glycosaminoglycan (hyaluronic acid) synthesis + lymphocyte infiltration → retro-orbital compartment expands → pushes the globe forward (proptosis). This is an AUTOIMMUNE process, not a direct thyroid hormone effect — which is why exophthalmos can persist or worsen even after treating hyperthyroidism. TSH (C) is LOW in Graves, not high.</p>
+                    </div>
+                </div>
+
+                <div class="practice-question">
+                    <h4>Question 22</h4>
+                    <p>A 34-year-old woman with Graves disease has a raised, non-pitting, violaceous plaque over her anterior shins. She is hyperthyroid. A medical student asks why this skin finding, called "pretibial myxedema," occurs if the patient is hyperthyroid rather than hypothyroid. What is the correct explanation?</p>
+                    <p class="option">A) Excess T3 directly stimulates dermal fibroblasts to overproduce collagen in dependent areas</p>
+                    <p class="option">B) TSI activates TSH receptors on dermal fibroblasts in the shins → ↑glycosaminoglycan deposition → localized skin thickening</p>
+                    <p class="option">C) Venous stasis in the legs causes fluid to accumulate, worsened by tachycardia</p>
+                    <p class="option">D) High TSH stimulates skin fibroblasts in gravity-dependent areas to increase mucopolysaccharide production</p>
+                    <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Correct Answer: B</strong>
+                        <p style="margin-top:10px;">Pretibial myxedema is caused by TSI (not TSH, not T3) acting on TSH receptor-expressing dermal fibroblasts in the shins → glycosaminoglycan accumulation → raised plaque. TSH is LOW in Graves (D is wrong). T3 doesn't directly cause this localized lesion (A is wrong). It is localized to the shins (not generalized edema) because of the higher concentration of TSH-receptor-positive fibroblasts in the pretibial dermis and possibly local hydrostatic and mechanical factors. The term "myxedema" refers to the mucopolysaccharide deposits — not hypothyroid state.</p>
+                    </div>
+                </div>
+
+                <div class="practice-question">
+                    <h4>Question 23</h4>
+                    <p>A 28-year-old woman with Graves disease undergoes radioiodine therapy and becomes hypothyroid, requiring levothyroxine. Three months later, her ophthalmologist notes worsening proptosis despite her TSH now being 2.0 (normal) on replacement. What is the most likely explanation?</p>
+                    <p class="option">A) Levothyroxine directly stimulates retro-orbital fibroblasts via TR-α</p>
+                    <p class="option">B) TSI levels remain elevated after RAI and continue to stimulate retro-orbital fibroblasts</p>
+                    <p class="option">C) Radioiodine-induced hypothyroidism causes TSH to rise and stimulate orbital fibroblasts</p>
+                    <p class="option">D) The levothyroxine dose is too high, causing subclinical hyperthyroidism</p>
+                    <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Correct Answer: B</strong>
+                        <p style="margin-top:10px;">RAI destroys thyroid follicular cells but does NOT eliminate the autoimmune process — TSI (the pathogenic antibody) persists and may even transiently rise after RAI. TSI continues to activate TSH receptors on retro-orbital fibroblasts → progressive glycosaminoglycan deposition → worsening exophthalmos. This is why patients with active Graves ophthalmopathy are often advised to use steroids or consider surgery/anti-VEGF before or instead of RAI. TSH is normal (C is wrong); T4 is appropriately replaced (D is wrong).</p>
+                    </div>
+                </div>
+
+                <div class="practice-question">
+                    <h4>Question 24</h4>
+                    <p>A 40-year-old woman with previously well-controlled Graves disease on methimazole has a sore throat and fever for 3 days. CBC shows WBC = 1.2 × 10³/µL (severe leukopenia) with near-absence of neutrophils. What is the most appropriate next step?</p>
+                    <p class="option">A) Increase the methimazole dose to overcome the infection</p>
+                    <p class="option">B) Stop methimazole immediately and initiate supportive care for agranulocytosis</p>
+                    <p class="option">C) Switch to PTU, which does not cause agranulocytosis</p>
+                    <p class="option">D) Start radioiodine immediately as a bridge therapy</p>
+                    <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Correct Answer: B</strong>
+                        <p style="margin-top:10px;">Agranulocytosis (WBC &lt;500 neutrophils/µL) is a rare but life-threatening side effect of BOTH methimazole AND PTU (0.1–0.5% incidence). Sore throat + fever = classic first presentation. Stop the offending drug IMMEDIATELY. Do NOT switch to PTU (C) — it shares the same risk. RAI can eventually be used for definitive treatment but not as an emergency bridge (D). Patients on thionamides should be warned to stop the drug and go to the ER immediately if they develop fever + sore throat.</p>
+                    </div>
+                </div>
+
+            </div><!-- /.lo-content -->
+        </section><!-- /#practice -->
+
+
+    </main><!-- /.main -->
+
+    <script>
+        function switchLO(event, loId) {
+            event.preventDefault();
+            // Hide all LO sections
+            document.querySelectorAll('.lo-section').forEach(s => s.classList.remove('active'));
+            // Deactivate all sidebar links
+            document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+            // Show the selected section
+            const section = document.getElementById(loId);
+            if (section) section.classList.add('active');
+            // Mark clicked link as active (walk up if needed)
+            let link = event.target;
+            while (link && !link.classList.contains('sidebar-link')) link = link.parentElement;
+            if (link) link.classList.add('active');
+            // Scroll main content back to top
+            const mainEl = document.querySelector('.main');
+            if (mainEl) mainEl.scrollTop = 0;
+        }
+
+        function toggleAnswer(btn) {
+            const answer = btn.nextElementSibling;
+            const isShowing = answer.classList.contains('show');
+            answer.classList.toggle('show');
+            btn.textContent = isShowing ? 'Reveal Answer' : 'Hide Answer';
+        }
+
+        function toggleFlip(card) { card.classList.toggle('flipped'); }
+
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+        const backToTopBtn = document.getElementById('backToTop');
+        if (backToTopBtn) {
+            window.addEventListener('scroll', () => {
+                backToTopBtn.classList.toggle('show', window.scrollY > 300);
+            });
+        }
+
+        document.querySelectorAll('#mindmap circle').forEach(node => {
+            node.style.cursor = 'pointer';
+            node.addEventListener('mouseenter', function() {
+                this.style.filter = 'brightness(1.2) drop-shadow(0 0 8px rgba(0,0,0,0.3))';
+            });
+            node.addEventListener('mouseleave', function() { this.style.filter = 'none'; });
+        });
+    
+    function toggleSection(h3El) {
+        h3El.classList.toggle('collapsed');
+        const body = h3El.nextElementSibling;
+        if (body && body.classList.contains('section-body')) {
+            body.classList.toggle('collapsed');
+        }
+    }
+
+    
+    function toggleTrap(headerEl) {
+        headerEl.classList.toggle('collapsed');
+        const body = headerEl.nextElementSibling;
+        if (body && body.classList.contains('trap-body')) {
+            body.classList.toggle('collapsed');
+        }
+    }
+
+    
+    function expandAll() {
+        document.querySelectorAll('.lo-section.active .section-body').forEach(el => el.classList.remove('collapsed'));
+        document.querySelectorAll('.lo-section.active .collapsible-h3').forEach(el => el.classList.remove('collapsed'));
+    }
+    function collapseAll() {
+        document.querySelectorAll('.lo-section.active .section-body').forEach(el => el.classList.add('collapsed'));
+        document.querySelectorAll('.lo-section.active .collapsible-h3').forEach(el => el.classList.add('collapsed'));
+    }
+
+
+    function toggleH5(h5El) {
+        h5El.classList.toggle('collapsed');
+        const body = h5El.nextElementSibling;
+        if (body && body.classList.contains('h5-body')) {
+            body.classList.toggle('collapsed');
+        }
+    }
+
+    function toggleMnemonic(headerEl) {
+        headerEl.classList.toggle('collapsed');
+        const body = headerEl.nextElementSibling;
+        if (body && body.classList.contains('mnemonic-body')) {
+            body.classList.toggle('collapsed');
+        }
+    }
+
+    function toggleH4(h4El) {
+        h4El.classList.toggle('collapsed');
+        const body = h4El.nextElementSibling;
+        if (body && body.classList.contains('section-body')) {
+            body.classList.toggle('collapsed');
+        }
+    }
+
+    // ── Build a complete standalone export document ─────────────────────
+    // Extracts the real page CSS + content, so all class-based styling works.
+    function buildExportDoc(forPrint) {
+        // 1. Snapshot & expand everything
+        const collapsedEls = Array.from(document.querySelectorAll('.collapsed'));
+        const hiddenSections = Array.from(document.querySelectorAll('.lo-section:not(.active)'));
+        hiddenSections.forEach(s => s.style.display = 'block');
+        collapsedEls.forEach(el => el.classList.remove('collapsed'));
+
+        // 2. Clone main content only (no sidebar)
+        const clone = document.querySelector('.main').cloneNode(true);
+
+        // 3. Restore page immediately (clone is independent)
+        hiddenSections.forEach(s => s.style.display = '');
+        collapsedEls.forEach(el => el.classList.add('collapsed'));
+
+        // 4. Strip all interactive chrome from clone
+        clone.querySelectorAll(
+            '.section-chevron, .h5-chevron, .mnemonic-chevron, .trap-chevron, ' +
+            '.export-actions, .sidebar-footer, .hub-return-btn, button'
+        ).forEach(el => el.remove());
+
+        // 5. Extract the page's own CSS (all <style> tags)
+        const pageCSS = Array.from(document.querySelectorAll('style'))
+            .map(s => s.textContent).join('\n');
+
+        // 6. Override CSS — force everything visible, remove layout constraints
+        const overrideCSS = `
+            * { box-sizing: border-box; }
+            body {
+                display: block !important;
+                overflow: visible !important;
+                height: auto !important;
+                background: white !important;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Calibri, sans-serif;
+            }
+            .main {
+                margin-left: 0 !important;
+                height: auto !important;
+                overflow: visible !important;
+                max-width: 100% !important;
+                padding: 24px 32px !important;
+            }
+            .lo-section {
+                display: block !important;
+                box-shadow: none !important;
+                animation: none !important;
+                ${forPrint ? 'page-break-before: always;' : ''}
+            }
+            .lo-section:first-child { page-break-before: auto !important; }
+            .section-body, .h4-body, .h5-body, .mnemonic-body, .trap-body {
+                display: block !important;
+            }
+            .collapsible-h3.collapsed .section-chevron,
+            .h5-subheading.collapsed .h5-chevron,
+            .mnemonic-toggle-header.collapsed .mnemonic-chevron,
+            .trap-header.collapsed .trap-chevron { transform: none !important; }
+            ${forPrint ? '@media print { .main { padding: 0 !important; } }' : ''}
+        `;
+
+        const ns = forPrint ? '' :
+            `xmlns:o='urn:schemas-microsoft-com:office:office'
+             xmlns:w='urn:schemas-microsoft-com:office:word'
+             xmlns='http://www.w3.org/TR/REC-html40'`;
+
+        return `<!DOCTYPE html>
+<html ${ns}>
+<head>
+    <meta charset="UTF-8">
+    <title>Lecture 2: Thyroid Physiology — HoyaDocs Endocrine Block</title>
+    <style>${pageCSS}</style>
+    <style>${overrideCSS}</style>
+</head>
+<body>
+${clone.outerHTML}
+</body>
+</html>`;
+    }
+
+    // ── Print / Save as PDF ─────────────────────────────────────────────
+    function printAll(btn) {
+        const origHTML = btn.innerHTML;
+        btn.innerHTML = '<span class="btn-icon">⏳</span>Opening…';
+        btn.disabled = true;
+
+        const html = buildExportDoc(true);
+
+        const win = window.open('', '_blank', 'width=960,height=750,scrollbars=yes');
+        if (!win) {
+            alert('Pop-ups are blocked. Please allow pop-ups for this page, then try again.');
+            btn.innerHTML = origHTML;
+            btn.disabled = false;
+            return;
+        }
+
+        win.document.open();
+        win.document.write(html);
+        win.document.close();
+
+        // Auto-trigger print dialog once content is loaded
+        win.onload = function() {
+            setTimeout(() => {
+                win.focus();
+                win.print();
+            }, 1800);
+        };
+
+        btn.innerHTML = origHTML;
+        btn.disabled = false;
+    }
+
+    // ── Download Word Doc (.doc) ────────────────────────────────────────
+    function downloadWord(btn) {
+        const origHTML = btn.innerHTML;
+        btn.innerHTML = '<span class="btn-icon">⏳</span>Building…';
+        btn.disabled = true;
+
+        const html = buildExportDoc(false);
+
+        const blob = new Blob(['\ufeff', html], { type: 'application/msword' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Lec02-Thyroid-Physiology.doc';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        btn.innerHTML = origHTML;
+        btn.disabled = false;
+    }
+
+    </script>
+</body>
+</html>
