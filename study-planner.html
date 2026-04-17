@@ -1,0 +1,2089 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>HoyaDocs | GI Study Planner</title>
+<script>(function(){const t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --sb:#0d2416;--sb-hover:rgba(255,255,255,.07);--sb-line:rgba(255,255,255,.09);
+  --bg:#f4f8f5;--surface:#fff;--ink:#0f172a;--ink-2:#334155;--ink-3:#64748b;--rule:#e2e8f0;
+  --accent:#166534;--accent-2:#15803d;--accent-light:#edfdf4;--accent-br:#a7f3c9;
+  --card-sh:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --pill-h:28px;--radius:10px;
+  --c-ih-bg:#FFF9E6;--c-ih-br:#F0C040;--c-ih-tx:#7B4F00;
+  --c-bc-bg:#EEF4FF;--c-bc-br:#B8D0F5;--c-bc-tx:#1F4B99;
+  --c-bb-bg:#EDFDF4;--c-bb-br:#A7F3C9;--c-bb-tx:#166534;
+  --c-pt-bg:#FFF1EE;--c-pt-br:#FFBDAD;--c-pt-tx:#C0380A;
+  --c-ph-bg:#FAF0FF;--c-ph-br:#DFB4FE;--c-ph-tx:#6A0DAD;
+  --c-sk-bg:#FFF7EE;--c-sk-br:#F5C88A;--c-sk-tx:#854D0E;
+  --c-fa-bg:#FFEDEE;--c-fa-br:#FCA5A5;--c-fa-tx:#991B1B;
+}
+[data-theme="dark"]{
+  --bg:#0a1f10;--surface:#122b1a;--ink:#f1f5f9;--ink-2:#cbd5e1;--ink-3:#94a3b8;--rule:#1e4a2a;
+  --accent:#4ade80;--accent-2:#22c55e;--accent-light:#0a2218;--accent-br:#1a5c35;
+  --card-sh:0 2px 8px rgba(0,0,0,.4);
+  --c-ih-bg:#2a2000;--c-ih-br:#856404;--c-ih-tx:#FCD34D;
+  --c-bc-bg:#0f1e3a;--c-bc-br:#1e3a6b;--c-bc-tx:#6BA3E8;
+  --c-bb-bg:#0a1f12;--c-bb-br:#14532d;--c-bb-tx:#4ADE80;
+  --c-pt-bg:#2a0f0a;--c-pt-br:#7f1d1d;--c-pt-tx:#FCA5A5;
+  --c-ph-bg:#1a0a2a;--c-ph-br:#4c1d95;--c-ph-tx:#C4B5FD;
+  --c-sk-bg:#2a1800;--c-sk-br:#78350f;--c-sk-tx:#FCD34D;
+  --c-fa-bg:#2a0a0a;--c-fa-br:#991B1B;--c-fa-tx:#FCA5A5;
+}
+html,body{height:100%}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+input[type=checkbox]{accent-color:var(--accent);width:15px;height:15px;cursor:pointer}
+
+/* ── SHELL ── */
+.shell{min-height:100vh}
+
+
+
+/* ── MAIN ── */
+.main{flex:1;display:flex;flex-direction:column;min-width:0;overflow:hidden}
+
+/* ── TOP BAR ── */
+.topbar{display:flex;align-items:center;gap:16px;padding:14px 28px;
+  border-bottom:1px solid rgba(255,255,255,.08);background:#0d2416;position:sticky;top:0;z-index:50}
+.topbar h1{font-size:1.25rem;font-weight:800;color:#fff;line-height:1.2}
+.topbar-sub{font-size:.68rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:1px}
+.topbar-back{font-size:.82rem;font-weight:700;letter-spacing:.02em;color:rgba(255,255,255,.65);
+  display:flex;align-items:center;gap:5px;white-space:nowrap;transition:color .15s}
+.topbar-back:hover{color:rgba(255,255,255,.95)}
+.topbar-icon-btn{display:flex;align-items:center;gap:6px;padding:5px 10px;border-radius:7px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);cursor:pointer;
+  font-size:.75rem;color:rgba(255,255,255,.8);font-family:inherit;white-space:nowrap}
+.topbar-icon-btn:hover{background:rgba(255,255,255,.15);color:#fff}
+.topbar-badge{font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:20px;
+  background:var(--accent-light);color:var(--accent);border:1px solid var(--accent-br)}
+
+/* ── TABS ── */
+.tab-nav{display:flex;align-items:center;gap:2px;padding:12px 28px 0;background:var(--surface);border-bottom:1px solid var(--rule)}
+.tab-btn{padding:9px 18px;font-size:.82rem;font-weight:600;border:none;background:none;
+  color:var(--ink-3);border-bottom:2px solid transparent;transition:color .15s,border-color .15s;margin-bottom:-1px}
+.tab-btn.active{color:var(--accent);border-color:var(--accent)}
+.tab-btn:hover:not(.active){color:var(--ink-2)}
+.tab-panel{display:none;padding:24px 28px 48px;overflow-y:auto}
+.tab-panel.active{display:block}
+
+/* ── CARDS / SURFACES ── */
+.card{background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);
+  box-shadow:var(--card-sh);overflow:hidden}
+.card-header{padding:14px 18px;border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:10px}
+.card-body{padding:16px 18px}
+
+/* ── STAT GRID ── */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:22px}
+.stat-box{background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);
+  padding:16px 18px;box-shadow:var(--card-sh)}
+.stat-num{font-size:1.8rem;font-weight:800;color:var(--accent);line-height:1}
+.stat-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);margin-top:4px}
+.stat-sub{font-size:.78rem;color:var(--ink-2);margin-top:3px}
+
+/* ── PROGRESS BAR ── */
+.prog-bar-wrap{background:var(--rule);border-radius:6px;height:8px;overflow:hidden;flex:1}
+.prog-bar{height:100%;border-radius:6px;background:var(--accent);transition:width .4s}
+
+/* ── RESOURCE LEGEND ── */
+.res-legend{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.res-pill{display:flex;align-items:center;gap:5px;padding:4px 11px;border-radius:20px;font-size:.75rem;font-weight:600;border:1px solid}
+.res-pill.IH{background:var(--c-ih-bg);border-color:var(--c-ih-br);color:var(--c-ih-tx)}
+.res-pill.BC{background:var(--c-bc-bg);border-color:var(--c-bc-br);color:var(--c-bc-tx)}
+.res-pill.BB{background:var(--c-bb-bg);border-color:var(--c-bb-br);color:var(--c-bb-tx)}
+.res-pill.PT{background:var(--c-pt-bg);border-color:var(--c-pt-br);color:var(--c-pt-tx)}
+.res-pill.PH{background:var(--c-ph-bg);border-color:var(--c-ph-br);color:var(--c-ph-tx)}
+.res-pill.SK{background:var(--c-sk-bg);border-color:var(--c-sk-br);color:var(--c-sk-tx)}
+.res-pill.FA{background:var(--c-fa-bg);border-color:var(--c-fa-br);color:var(--c-fa-tx)}
+
+/* ── LECTURE CARDS ── */
+.lec-grid{display:flex;flex-direction:column;gap:12px}
+.lec-card{background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);
+  box-shadow:var(--card-sh);overflow:hidden;transition:box-shadow .15s}
+.lec-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.lec-card-header{display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer;
+  border-bottom:1px solid var(--rule);user-select:none}
+.lec-card-header:hover{background:rgba(0,0,0,.02)}
+[data-theme="dark"] .lec-card-header:hover{background:rgba(255,255,255,.02)}
+.lec-num{font-size:.72rem;font-weight:800;color:var(--ink-3);min-width:42px}
+.lec-date-badge{font-size:.68rem;font-weight:600;padding:2px 8px;border-radius:12px;
+  background:var(--accent-light);color:var(--accent);border:1px solid var(--accent-br);white-space:nowrap}
+.subj-badge{font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:12px;white-space:nowrap}
+.subj-Phys{background:#EEF4FF;color:#1F4B99;border:1px solid #C7D9F5}
+.subj-Path{background:#FFF1EE;color:#C0380A;border:1px solid #FFBDAD}
+.subj-Anat{background:#EDFDF4;color:#166534;border:1px solid #A7F3C9}
+.subj-Embr{background:#FAF0FF;color:#6A0DAD;border:1px solid #DFB4FE}
+.subj-Hist{background:#FFF7EE;color:#854D0E;border:1px solid #F5C88A}
+.subj-Pharm{background:#F5F0FF;color:#6d28d9;border:1px solid #d8b4fe}
+.subj-Micro{background:#F0F9FF;color:#0C4A6E;border:1px solid #BAE6FD}
+.subj-DRT{background:#F0FFF4;color:#14532D;border:1px solid #BBF7D0}
+[data-theme="dark"] .subj-Phys{background:#0f1e3a;color:#6BA3E8;border-color:#1e3a6b}
+[data-theme="dark"] .subj-Path{background:#2a0f0a;color:#FCA5A5;border-color:#7f1d1d}
+[data-theme="dark"] .subj-Anat{background:#0a1f12;color:#4ADE80;border-color:#14532d}
+[data-theme="dark"] .subj-Embr{background:#1a0a2a;color:#C4B5FD;border-color:#4c1d95}
+[data-theme="dark"] .subj-Hist{background:#2a1800;color:#FCD34D;border-color:#78350f}
+[data-theme="dark"] .subj-Pharm{background:#1a1033;color:#a78bfa;border-color:#4c1d95}
+[data-theme="dark"] .subj-Micro{background:#0a1a2a;color:#7DD3FC;border-color:#1e3a6b}
+[data-theme="dark"] .subj-DRT{background:#0a2010;color:#86EFAC;border-color:#166534}
+.lec-title{font-size:.88rem;font-weight:600;flex:1;min-width:0}
+.lec-mini-prog{display:flex;align-items:center;gap:8px;min-width:100px}
+.lec-pct{font-size:.72rem;font-weight:700;color:var(--accent);min-width:28px;text-align:right}
+.lec-chevron{font-size:.7rem;color:var(--ink-3);transition:transform .2s;margin-left:4px}
+.lec-watch-stat{font-size:.68rem;color:var(--ink-3);white-space:nowrap;margin-right:4px}
+.lec-card.open .lec-chevron{transform:rotate(180deg)}
+.lec-body{display:none;padding:0 16px 14px}
+.lec-card.open .lec-body{display:block}
+
+/* ── RESOURCE ROWS ── */
+.res-row{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:7px;
+  margin-top:6px;border:1px solid transparent;transition:background .15s}
+.res-row.IH{background:var(--c-ih-bg);border-color:var(--c-ih-br)}
+.res-row.BC{background:var(--c-bc-bg);border-color:var(--c-bc-br)}
+.res-row.BB{background:var(--c-bb-bg);border-color:var(--c-bb-br)}
+.res-row.PT{background:var(--c-pt-bg);border-color:var(--c-pt-br)}
+.res-row.PH{background:var(--c-ph-bg);border-color:var(--c-ph-br)}
+.res-row.SK{background:var(--c-sk-bg);border-color:var(--c-sk-br)}
+.res-row.FA{background:var(--c-fa-bg);border-color:var(--c-fa-br)}
+.res-row.na{background:transparent;border-color:var(--rule);opacity:.45}
+.res-row.not-included{opacity:.55;filter:grayscale(.4)}
+.res-include-btn{font-size:.68rem;font-weight:700;padding:2px 9px;border-radius:12px;
+  border:1.5px solid;cursor:pointer;transition:all .15s;white-space:nowrap}
+.res-include-btn.IH{background:var(--c-ih-bg);border-color:var(--c-ih-br);color:var(--c-ih-tx)}
+.res-include-btn.BC{background:var(--c-bc-bg);border-color:var(--c-bc-br);color:var(--c-bc-tx)}
+.res-include-btn.BB{background:var(--c-bb-bg);border-color:var(--c-bb-br);color:var(--c-bb-tx)}
+.res-include-btn.PT{background:var(--c-pt-bg);border-color:var(--c-pt-br);color:var(--c-pt-tx)}
+.res-include-btn.PH{background:var(--c-ph-bg);border-color:var(--c-ph-br);color:var(--c-ph-tx)}
+.res-include-btn.SK{background:var(--c-sk-bg);border-color:var(--c-sk-br);color:var(--c-sk-tx)}
+.res-include-btn.FA{background:var(--c-fa-bg);border-color:var(--c-fa-br);color:var(--c-fa-tx)}
+.res-include-btn.not-inc{background:transparent;border-color:var(--rule);color:var(--ink-3)}
+.res-label{font-size:.78rem;font-weight:600;min-width:120px;color:var(--ink-2)}
+.res-module{font-size:.72rem;color:var(--ink-3);flex:1}
+.res-time{font-size:.7rem;color:var(--ink-3);white-space:nowrap}
+.res-tasks{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.task-check{display:flex;align-items:center;gap:4px;font-size:.7rem;color:var(--ink-2);
+  background:rgba(255,255,255,.6);border:1px solid rgba(0,0,0,.08);padding:2px 7px;
+  border-radius:12px;white-space:nowrap}
+[data-theme="dark"] .task-check{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1)}
+.task-check.done{background:var(--accent-light);border-color:var(--accent-br)}
+.warn-pill{font-size:.68rem;font-weight:700;padding:2px 9px;border-radius:12px;
+  background:#FFF1EE;color:#C0380A;border:1px solid #FFBDAD}
+
+/* ── DAY PLANNER ── */
+.day-group{margin-bottom:20px}
+.day-header{display:flex;align-items:center;gap:12px;padding:10px 14px;
+  background:var(--sb);border-radius:8px;color:#fff;margin-bottom:8px}
+.day-label{font-size:.88rem;font-weight:700}
+.day-week{font-size:.72rem;color:rgba(255,255,255,.6)}
+.day-stat{font-size:.75rem;color:rgba(255,255,255,.75);margin-left:auto}
+.day-tasks{display:flex;flex-direction:column;gap:4px}
+/* day-task-row base style is in the CALENDAR section below */
+.dtask-lec{font-size:.68rem;font-weight:700;color:var(--ink-3)}
+.dtask-type-pill{font-size:.65rem;font-weight:700;padding:1px 7px;border-radius:10px;border:1px solid;white-space:nowrap}
+.dtask-title{color:var(--ink-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dtask-time{font-size:.7rem;color:var(--ink-3);white-space:nowrap;min-width:48px;text-align:right}
+.dtask-cb{display:flex;align-items:center;gap:3px;font-size:.68rem;color:var(--ink-3);white-space:nowrap}
+.day-summary-row{display:flex;align-items:center;gap:10px;padding:7px 12px;
+  border-radius:7px;background:var(--rule);margin-top:4px;font-size:.75rem;color:var(--ink-2)}
+
+/* ── ANKI TAB ── */
+.anki-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.anki-res-card{background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);overflow:hidden;box-shadow:var(--card-sh)}
+.anki-res-header{padding:11px 16px;font-size:.82rem;font-weight:700;display:flex;align-items:center;gap:8px}
+.anki-res-body{padding:8px 0}
+.anki-row{display:flex;align-items:center;gap:8px;padding:5px 16px;font-size:.76rem}
+.anki-row:hover{background:var(--bg)}
+.anki-lec{color:var(--ink-3);min-width:52px;font-weight:600}
+.anki-count{font-weight:700;color:var(--ink);min-width:42px;text-align:right}
+.anki-sess{color:var(--ink-3);min-width:70px}
+.anki-bar-wrap{flex:1;background:var(--rule);border-radius:4px;height:6px;overflow:hidden}
+.anki-bar{height:100%;border-radius:4px}
+.anki-row.not-sel .anki-count{color:var(--ink-3)}
+.anki-row.not-sel .anki-lec{opacity:.5}
+.anki-done-cb{display:flex;align-items:center;gap:4px;font-size:.68rem;color:var(--ink-3)}
+
+/* ── UTILITY ── */
+.section-title{font-size:1rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.section-title span{font-size:.75rem;font-weight:500;color:var(--ink-3)}
+.empty-state{text-align:center;padding:40px 20px;color:var(--ink-3);font-size:.85rem}
+.btn-sm{padding:5px 13px;border-radius:7px;font-size:.78rem;font-weight:600;border:1px solid;cursor:pointer;transition:all .15s}
+.btn-reset{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.7)}
+.btn-reset:hover{border-color:#f87171;color:#f87171;background:rgba(239,68,68,.15)}
+.max-warn{font-size:.72rem;color:#C0380A;font-weight:600;display:none}
+.limit-tip{font-size:.72rem;color:var(--ink-3);padding:6px 10px;background:var(--bg);border-radius:6px;margin-top:8px}
+
+/* ── WEEK FILTER ── */
+.week-filter{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+.wf-btn{padding:5px 14px;border-radius:20px;font-size:.78rem;font-weight:600;
+  border:1.5px solid var(--rule);background:var(--surface);color:var(--ink-3);cursor:pointer;transition:all .15s}
+.wf-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.wf-btn:hover:not(.active){border-color:var(--accent);color:var(--accent)}
+
+/* ── CALENDAR ENHANCEMENTS ── */
+.cal-week-hdr{margin:6px 0 14px;display:flex;align-items:center;gap:12px}
+.cal-week-hdr::before,.cal-week-hdr::after{content:'';flex:1;height:2px;background:var(--sb);border-radius:2px;opacity:.15}
+.cal-week-hdr span{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;
+  color:#fff;padding:5px 18px;border-radius:20px;background:var(--sb);white-space:nowrap}
+.day-task-row{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:7px;
+  border:1px solid var(--rule);background:var(--surface);font-size:.78rem;flex-wrap:wrap}
+.day-task-row.done-row{opacity:.6}
+.day-task-row.review-row{background:var(--accent-light);border-color:var(--accent-br)}
+.day-task-row.anki-row{background:var(--c-ph-bg);border-color:var(--c-ph-br)}
+.day-task-row.ih-row{background:var(--c-ih-bg);border-color:var(--c-ih-br)}
+.day-task-row.watch-BC{background:var(--c-bc-bg);border-color:var(--c-bc-br)}
+.day-task-row.watch-BB{background:var(--c-bb-bg);border-color:var(--c-bb-br)}
+.day-task-row.watch-PT{background:var(--c-pt-bg);border-color:var(--c-pt-br)}
+.day-task-row.watch-PH{background:var(--c-ph-bg);border-color:var(--c-ph-br)}
+.day-task-row.watch-SK{background:var(--c-sk-bg);border-color:var(--c-sk-br)}
+.day-task-row.lp-row{background:var(--accent-light);border-color:var(--accent-br)}
+.day-task-row.cu-row{background:var(--bg);border-color:var(--rule)}
+.cal-pill{font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:10px;border:1px solid;white-space:nowrap;flex-shrink:0}
+.cal-pill.IH{background:var(--c-ih-bg);border-color:var(--c-ih-br);color:var(--c-ih-tx)}
+.cal-pill.BC{background:var(--c-bc-bg);border-color:var(--c-bc-br);color:var(--c-bc-tx)}
+.cal-pill.BB{background:var(--c-bb-bg);border-color:var(--c-bb-br);color:var(--c-bb-tx)}
+.cal-pill.PT{background:var(--c-pt-bg);border-color:var(--c-pt-br);color:var(--c-pt-tx)}
+.cal-pill.PH{background:var(--c-ph-bg);border-color:var(--c-ph-br);color:var(--c-ph-tx)}
+.cal-pill.SK{background:var(--c-sk-bg);border-color:var(--c-sk-br);color:var(--c-sk-tx)}
+.cal-pill.REV{background:var(--accent-light);border-color:var(--accent-br);color:var(--accent)}
+.cal-pill.MIDDAY{background:var(--c-ih-bg);border-color:var(--c-ih-br);color:var(--c-ih-tx)}
+.cal-pill.AFTERNOON{background:var(--c-bc-bg);border-color:var(--c-bc-br);color:var(--c-bc-tx)}
+.cal-pill.ANK{background:var(--c-ph-bg);border-color:var(--c-ph-br);color:var(--c-ph-tx)}
+.cal-pill.LP{background:var(--accent-light);border-color:var(--accent-br);color:var(--accent)}
+.cal-pill.PHQ{background:#FFF3E0;border-color:#FFB74D;color:#E65100}
+[data-theme="dark"] .cal-pill.PHQ{background:#3d1f00;border-color:#b86800;color:#FFB74D}
+.cal-pill.CU{background:var(--bg);border-color:var(--rule);color:var(--ink-3)}
+.day-task-row.midday-row{background:var(--c-ih-bg);border-color:var(--c-ih-br)}
+.day-task-row.afternoon-row{background:var(--c-bc-bg);border-color:var(--c-bc-br)}
+.day-task-row.phq-row{background:#FFF3E0;border-color:#FFB74D}
+[data-theme="dark"] .day-task-row.phq-row{background:#3d1f00;border-color:#b86800}
+.cal-label{flex:1;color:var(--ink-2);font-size:.78rem;min-width:0}
+.cal-note{font-size:.67rem;color:var(--ink-3);font-style:italic}
+.cal-time{font-size:.7rem;color:var(--ink-3);white-space:nowrap;margin-left:auto}
+.cal-cards{font-size:.68rem;color:var(--c-ph-tx);font-weight:600;white-space:nowrap}
+.cal-cb{display:flex;align-items:center;gap:4px;font-size:.7rem;color:var(--ink-3);white-space:nowrap;flex-shrink:0}
+.weekend-header{background:#1a3d28 !important}
+
+/* ── THIS WEEK TAB ── */
+.week-cal-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:24px}
+@media(max-width:900px){.week-cal-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.week-cal-grid{grid-template-columns:1fr}}
+.wday-col{background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);
+  box-shadow:var(--card-sh);overflow:hidden}
+.wday-col.today-col{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-br)}
+.wday-hdr{padding:9px 12px;background:var(--sb);color:#fff;font-size:.78rem;font-weight:700;
+  display:flex;align-items:baseline;gap:6px}
+.wday-hdr.today-hdr{background:var(--accent)}
+.wday-date-sub{font-size:.65rem;opacity:.6;font-weight:400}
+.wday-lecs{padding:6px 8px;display:flex;flex-direction:column;gap:4px;min-height:40px}
+.wday-lec-row{display:flex;gap:6px;padding:5px 6px;border-radius:5px;
+  background:var(--bg);border:1px solid var(--rule);align-items:flex-start}
+.wday-lec-row:hover{background:var(--accent-light)}
+.wday-time{font-size:.65rem;font-weight:700;color:var(--ink-3);min-width:34px;padding-top:2px;flex-shrink:0}
+.wday-lec-info{min-width:0}
+.wday-lec-name{font-size:.72rem;font-weight:600;color:var(--ink);line-height:1.3}
+.wday-lec-name a{color:var(--ink);text-decoration:none}
+.wday-lec-name a:hover{color:var(--accent)}
+.wday-lec-meta{font-size:.64rem;color:var(--ink-3);margin-top:2px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.wday-course-tag{font-size:.6rem;font-weight:700;padding:1px 5px;border-radius:8px;white-space:nowrap}
+.wday-none{font-size:.72rem;color:var(--ink-3);padding:8px 4px;font-style:italic}
+
+/* backlog section */
+.backlog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.backlog-card{background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);
+  overflow:hidden;box-shadow:var(--card-sh)}
+.backlog-card-hdr{padding:8px 12px;background:#FFF9E6;border-bottom:1px solid #F0C040;
+  font-size:.75rem;font-weight:700;color:#7B4F00;display:flex;justify-content:space-between;align-items:center}
+[data-theme="dark"] .backlog-card-hdr{background:#2a2000;border-color:#856404;color:#FCD34D}
+.backlog-rem{font-size:.7rem;font-weight:800;color:#C0380A;background:#FFF1EE;padding:2px 7px;
+  border-radius:10px;border:1px solid #FFBDAD}
+[data-theme="dark"] .backlog-rem{background:#2a0f0a;border-color:#7f1d1d;color:#FCA5A5}
+.backlog-rows{padding:6px 10px;display:flex;flex-direction:column;gap:4px}
+.backlog-row{display:flex;align-items:center;gap:7px;padding:4px 0;font-size:.73rem;
+  border-bottom:1px solid var(--rule)}
+.backlog-row:last-child{border-bottom:none}
+.backlog-res-pill{font-size:.62rem;font-weight:700;padding:1px 6px;border-radius:8px;border:1px solid;white-space:nowrap}
+.backlog-min{color:#C0380A;font-weight:700;font-size:.7rem;margin-left:auto;white-space:nowrap}
+
+/* ── BC SUBCHAPTERS ── */
+.bc-subs-wrap{display:flex;flex-direction:column;gap:2px;margin-top:6px;padding-left:12px;border-left:2px solid var(--c-bc-br)}
+.bc-sub-row{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:6px;
+  background:rgba(24,90,219,.05);font-size:.74rem;color:var(--c-bc-tx)}
+[data-theme="dark"] .bc-sub-row{background:rgba(107,163,232,.06)}
+.bc-sub-row.done-sub{background:rgba(24,90,219,.12);text-decoration:line-through;opacity:.65}
+[data-theme="dark"] .bc-sub-row.done-sub{background:rgba(107,163,232,.12)}
+.bc-sub-cb{display:flex;align-items:center;gap:5px;font-size:.7rem;color:var(--c-bc-tx);white-space:nowrap;flex-shrink:0}
+.bc-sub-label{flex:1;min-width:0}
+.bc-xref{font-size:.67rem;color:var(--ink-3);font-style:italic;padding:4px 8px;margin-top:2px}
+.bc-no-subs{font-size:.72rem;color:var(--ink-3);font-style:italic;padding:4px 8px;margin-top:2px}
+
+/* ── BB SUBCHAPTERS ── */
+.bb-subs-wrap{display:flex;flex-direction:column;gap:2px;margin-top:6px;padding-left:12px;border-left:2px solid var(--c-bb-br)}
+.bb-sub-row{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:6px;
+  background:rgba(22,101,52,.05);font-size:.74rem;color:var(--c-bb-tx)}
+[data-theme="dark"] .bb-sub-row{background:rgba(74,222,128,.06)}
+.bb-sub-row.done-sub{background:rgba(22,101,52,.12);text-decoration:line-through;opacity:.65}
+[data-theme="dark"] .bb-sub-row.done-sub{background:rgba(74,222,128,.12)}
+.bb-sub-cb{display:flex;align-items:center;gap:5px;font-size:.7rem;color:var(--c-bb-tx);white-space:nowrap;flex-shrink:0}
+.bb-sub-label{flex:1;min-width:0}
+.bb-xref{font-size:.67rem;color:var(--ink-3);font-style:italic;padding:4px 8px;margin-top:2px}
+.bb-no-subs{font-size:.72rem;color:var(--ink-3);font-style:italic;padding:4px 8px;margin-top:2px}
+
+/* ── PT SUBCHAPTERS ── */
+.pt-subs-wrap{display:flex;flex-direction:column;gap:2px;margin-top:6px;padding-left:12px;border-left:2px solid var(--c-pt-br)}
+.pt-sub-row{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:6px;
+  background:rgba(192,56,10,.05);font-size:.74rem;color:var(--c-pt-tx)}
+[data-theme="dark"] .pt-sub-row{background:rgba(252,165,165,.06)}
+.pt-sub-row.done-sub{background:rgba(192,56,10,.12);text-decoration:line-through;opacity:.65}
+[data-theme="dark"] .pt-sub-row.done-sub{background:rgba(252,165,165,.12)}
+.pt-sub-cb{display:flex;align-items:center;gap:5px;font-size:.7rem;color:var(--c-pt-tx);white-space:nowrap;flex-shrink:0}
+.pt-sub-label{flex:1;min-width:0}
+.pt-xref{font-size:.67rem;color:var(--ink-3);font-style:italic;padding:4px 8px;margin-top:2px}
+.pt-no-subs{font-size:.72rem;color:var(--ink-3);font-style:italic;padding:4px 8px;margin-top:2px}
+
+/* ── PH SUBCHAPTERS ── */
+.ph-subs-wrap{display:flex;flex-direction:column;gap:2px;margin-top:6px;padding-left:12px;border-left:2px solid var(--c-ph-br)}
+.ph-sub-row{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:6px;
+  background:rgba(106,13,173,.05);font-size:.74rem;color:var(--c-ph-tx)}
+[data-theme="dark"] .ph-sub-row{background:rgba(196,181,253,.06)}
+.ph-sub-row.done-sub{background:rgba(106,13,173,.12);text-decoration:line-through;opacity:.65}
+[data-theme="dark"] .ph-sub-row.done-sub{background:rgba(196,181,253,.12)}
+.ph-sub-cb{display:flex;align-items:center;gap:5px;font-size:.7rem;color:var(--c-ph-tx);white-space:nowrap;flex-shrink:0}
+.ph-sub-label{flex:1;min-width:0}
+.ph-xref{font-size:.67rem;color:var(--ink-3);font-style:italic;padding:4px 8px;margin-top:2px}
+.ph-no-subs{font-size:.72rem;color:var(--ink-3);font-style:italic;padding:4px 8px;margin-top:2px}
+
+/* ── SK SUBCHAPTERS ── */
+.sk-subs-wrap{display:flex;flex-direction:column;gap:2px;margin-top:6px;padding-left:12px;border-left:2px solid var(--c-sk-br)}
+.sk-sub-row{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:6px;
+  background:rgba(133,77,14,.05);font-size:.74rem;color:var(--c-sk-tx)}
+[data-theme="dark"] .sk-sub-row{background:rgba(252,211,77,.06)}
+.sk-sub-row.done-sub{background:rgba(133,77,14,.12);text-decoration:line-through;opacity:.65}
+[data-theme="dark"] .sk-sub-row.done-sub{background:rgba(252,211,77,.12)}
+.sk-sub-cb{display:flex;align-items:center;gap:5px;font-size:.7rem;color:var(--c-sk-tx);white-space:nowrap;flex-shrink:0}
+.sk-sub-label{flex:1;min-width:0}
+.sk-xref{font-size:.67rem;color:var(--ink-3);font-style:italic;padding:4px 8px;margin-top:2px}
+.sk-no-subs{font-size:.72rem;color:var(--ink-3);font-style:italic;padding:4px 8px;margin-top:2px}
+
+/* ── FA SUBCHAPTERS ── */
+.fa-subs-wrap{display:flex;flex-direction:column;gap:2px;margin-top:6px;padding-left:12px;border-left:2px solid var(--c-fa-br)}
+.fa-sub-row{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:6px;
+  background:rgba(153,27,27,.05);font-size:.74rem;color:var(--c-fa-tx)}
+[data-theme="dark"] .fa-sub-row{background:rgba(252,165,165,.06)}
+.fa-sub-row.done-sub{background:rgba(153,27,27,.12);text-decoration:line-through;opacity:.65}
+[data-theme="dark"] .fa-sub-row.done-sub{background:rgba(252,165,165,.12)}
+.fa-sub-cb{display:flex;align-items:center;gap:5px;font-size:.7rem;color:var(--c-fa-tx);white-space:nowrap;flex-shrink:0}
+.fa-sub-label{flex:1;min-width:0}
+.fa-xref{font-size:.67rem;color:var(--ink-3);font-style:italic;padding:4px 8px;margin-top:2px}
+
+/* ── MOBILE ── */
+@media(max-width:700px){
+  /* Topbar */
+  .topbar{padding:10px 14px;gap:8px;flex-wrap:wrap}
+  .topbar h1{font-size:1rem}
+  .topbar-back{font-size:.72rem}
+  .topbar-sub{font-size:.6rem}
+  .topbar-icon-btn{font-size:.68rem;padding:4px 8px;gap:4px}
+  .topbar-icon-btn.hide-mobile{display:none}
+  .btn-reset{font-size:.68rem;padding:4px 8px}
+
+  /* Tab nav */
+  .tab-nav{padding:8px 12px 0;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tab-btn{padding:8px 12px;font-size:.75rem;white-space:nowrap}
+  .topbar-badge{font-size:.65rem;padding:2px 8px;margin-left:auto;flex-shrink:0}
+
+  /* Tab panels */
+  .tab-panel{padding:14px 12px 40px}
+
+  /* Stat grid */
+  .stat-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .stat-num{font-size:1.4rem}
+
+  /* Lecture card headers — stack badges below title */
+  .lec-card-header{flex-wrap:wrap;gap:6px;padding:10px 12px}
+  .lec-title{order:1;width:100%;min-width:0}
+  .lec-num{order:0;font-size:.65rem}
+  .lec-date-badge,.subj-badge{order:0;font-size:.62rem}
+  .lec-mini-prog{order:2;margin-left:auto}
+  .lec-watch-stat{order:2;font-size:.62rem}
+  .lec-chevron{order:0}
+
+  /* Resource rows */
+  .res-row{flex-wrap:wrap;gap:6px}
+  .res-label{min-width:90px;font-size:.72rem}
+  .res-module{font-size:.65rem}
+  .res-tasks{flex-wrap:wrap}
+
+  /* Lecture planner header */
+  .section-title{flex-wrap:wrap;font-size:.9rem}
+  .planner-actions{flex-wrap:wrap;gap:6px}
+
+  /* This Week cal */
+  .week-cal-grid{grid-template-columns:1fr}
+  .backlog-card{padding:10px 12px}
+
+  /* Dashboard res bars */
+  .res-bar-label{font-size:.7rem;min-width:80px}
+}
+
+@media(max-width:480px){
+  .topbar h1{font-size:.9rem}
+  .tab-btn{padding:7px 10px;font-size:.7rem}
+  .stat-grid{grid-template-columns:1fr}
+  /* Hide less critical topbar buttons on very small screens */
+  .topbar-icon-btn.hide-xs{display:none}
+}
+
+/* EMBED MODE (loaded inside Daily Checklist iframe) */
+body.embed-mode .topbar-back,
+body.embed-mode .embed-hide { display: none !important; }
+/* Hide the entire top banner when embedded — the parent provides the shell */
+body.embed-mode .topbar { display: none !important; }
+body.embed-mode .main { padding-top: 0; }
+/* Hide the planner's internal tab-nav when embedded — the parent provides tabs */
+body.embed-mode .tab-nav .tab-btn { display: none !important; }
+body.embed-mode .tab-nav { padding: 0; margin: 0 0 10px; border-bottom: none; justify-content: flex-end; }
+body.embed-mode #topbar-pct { margin-left: 0 !important; margin-bottom: 0 !important; }
+</style>
+</head>
+<body>
+<div class="shell">
+
+<!-- ── MAIN ── -->
+<div class="main">
+  <div class="topbar">
+    <div style="display:flex;flex-direction:column;gap:2px;flex:1">
+      <a href="https://strettyit10.github.io/Block4-GI/" class="topbar-back">HoyaDocs ↗</a>
+      <h1 style="flex:unset">Study Planner</h1>
+      <div class="topbar-sub">Block 4 · GI</div>
+    </div>
+    <a href="https://docs.google.com/spreadsheets/d/1oMKX3NlM3xTTb3RDQ7VQsGdDEwuwEbfoX2mf09r-6K8/edit?usp=sharing" target="_blank" class="topbar-icon-btn hide-mobile embed-hide">📋 Block 4 Checklist ↗</a>
+    <button class="topbar-icon-btn" onclick="toggleTheme()">🌙 Dark Mode</button>
+  </div>
+
+  <!-- TAB NAV -->
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('thisweek')" data-tab="thisweek">📅 This Week</button>
+    <button class="tab-btn" onclick="switchTab('planner')" data-tab="planner">🧠 ADHD Planner</button>
+    <button class="tab-btn" onclick="switchTab('customplanner')" data-tab="customplanner">🎨 Customizable Lecture Planner</button>
+    <span style="margin-left:auto;margin-bottom:6px" class="topbar-badge" id="topbar-pct">0% Complete</span>
+  </div>
+
+  <!-- Hidden dashboard scaffolding (retained for renderDashboard side effects: topbar % badge) -->
+  <div class="tab-panel" id="tab-dashboard" style="display:none !important">
+    <div class="stat-grid" id="stat-grid"></div>
+    <div id="res-progress-bars"></div>
+    <div id="week-progress-bars"></div>
+  </div>
+
+  <!-- ══ TAB 2: ADHD PLANNER ══ -->
+  <div class="tab-panel" id="tab-planner">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+      <div class="section-title" style="margin-bottom:0">🧠 ADHD Planner <span>Focused view · only the resources prescribed in your Daily Checklist</span></div>
+      <div class="planner-actions" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <button class="btn-sm" style="background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700" onclick="loadHoyaDocsPlan()" title="Load the recommended resources for each lecture based on the HoyaDocs study strategy">⭐ Load HoyaDocs Plan</button>
+        <button class="btn-sm" style="background:var(--surface);border-color:var(--rule);color:var(--ink-2);font-weight:600" onclick="exportData()">⬇ Export Data</button>
+        <button class="btn-sm" style="background:var(--surface);border-color:var(--rule);color:var(--ink-2);font-weight:600" onclick="document.getElementById('import-input').click()">⬆ Import Data</button>
+        <input type="file" id="import-input" accept=".json" style="display:none" onchange="importData(this)">
+        <button class="btn-sm" style="background:var(--accent-light);border-color:var(--accent-br);color:var(--accent);font-weight:600" onclick="exportToHTML()">⬇ Export HTML</button>
+        <button class="btn-sm btn-reset" onclick="confirmReset()">↺ Reset All</button>
+      </div>
+    </div>
+    <div class="limit-tip" style="margin-bottom:14px">
+      🧠 <strong>ADHD Planner</strong> shows only the resources currently included for each lecture — matching what's in your Daily Checklist. Track <strong>Watch / Anki / Last Pass</strong> and use <strong>Practice Problems</strong> dropdowns below each lecture. Need to add or remove a resource? Use the <strong>🎨 Customizable Lecture Planner</strong> tab.
+    </div>
+    <div class="week-filter">
+      <button class="wf-btn active" onclick="filterWeek('all',this)">All Weeks</button>
+      <button class="wf-btn" onclick="filterWeek('Wk 1',this)">Week 1</button>
+      <button class="wf-btn" onclick="filterWeek('Wk 2',this)">Week 2</button>
+      <button class="wf-btn" onclick="filterWeek('Wk 3',this)">Week 3</button>
+    </div>
+    <div class="lec-grid" id="lec-grid"></div>
+  </div>
+
+  <!-- ══ TAB 2b: CUSTOMIZABLE LECTURE PLANNER ══ -->
+  <div class="tab-panel" id="tab-customplanner">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+      <div class="section-title" style="margin-bottom:0">🎨 Customizable Lecture Planner <span>Select or deselect any number of resources for each lecture</span></div>
+      <div class="planner-actions" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <button class="btn-sm" style="background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700" onclick="loadHoyaDocsPlan()" title="Load the recommended resources for each lecture based on the HoyaDocs study strategy">⭐ Load HoyaDocs Plan</button>
+        <button class="btn-sm" style="background:var(--surface);border-color:var(--rule);color:var(--ink-2);font-weight:600" onclick="exportData()">⬇ Export Data</button>
+        <button class="btn-sm" style="background:var(--surface);border-color:var(--rule);color:var(--ink-2);font-weight:600" onclick="document.getElementById('import-input-custom').click()">⬆ Import Data</button>
+        <input type="file" id="import-input-custom" accept=".json" style="display:none" onchange="importData(this)">
+        <button class="btn-sm" style="background:var(--accent-light);border-color:var(--accent-br);color:var(--accent);font-weight:600" onclick="exportToHTML()">⬇ Export HTML</button>
+        <button class="btn-sm btn-reset" onclick="confirmReset()">↺ Reset All</button>
+      </div>
+    </div>
+    <div class="limit-tip" style="margin-bottom:14px">
+      🎨 <strong>Customizable Lecture Planner</strong> — toggle <strong>any number</strong> of resources (no cap). Every resource available for a lecture appears here, including those not currently in your Daily Checklist. Changes sync instantly to the ADHD Planner and Daily Checklist.
+    </div>
+    <div class="week-filter">
+      <button class="wf-btn active" onclick="filterWeek('all',this)">All Weeks</button>
+      <button class="wf-btn" onclick="filterWeek('Wk 1',this)">Week 1</button>
+      <button class="wf-btn" onclick="filterWeek('Wk 2',this)">Week 2</button>
+      <button class="wf-btn" onclick="filterWeek('Wk 3',this)">Week 3</button>
+    </div>
+    <div class="lec-grid" id="lec-grid-custom"></div>
+  </div>
+
+
+  <!-- ══ TAB 3: THIS WEEK ══ -->
+  <div class="tab-panel active" id="tab-thisweek">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+      <div class="section-title" style="margin-bottom:0">📅 This Week <span id="thisweek-range"></span></div>
+    </div>
+
+    <div class="week-cal-grid" id="thisweek-cal"></div>
+
+    <!-- Hidden scaffolding retained so renderThisWeek() backlog writes don't crash -->
+    <div style="display:none">
+      <span id="prevweek-label"></span>
+      <div id="backlog-empty"></div>
+      <div id="backlog-grid"></div>
+    </div>
+  </div>
+
+
+</div><!-- /main -->
+</div><!-- /shell -->
+
+<script>
+// ══════════════════════════════════════════════════════════════
+//  DATA
+// ══════════════════════════════════════════════════════════════
+const LECTURES = [
+  {id:0, num:"1", week:"Wk 1", date:"Mon Apr 6", subj:"Phys", title:"IL GI Overview",
+   ihMin:60,
+   res:{BC:{label:"Bootcamp Ch. 2 + 1 more",min:27,subs:["2.02 Tongue and Gustation", "2.06 Salivary Glands"],anki:41},BB:{label:"B&B Ch. 1 + 1 more",min:33,subs:["1.04 Gastrointestinal Tract", "1.06 Salivary Glands"],anki:94},PT:null,PH:{label:"Physeo (2 topics)",min:49,subs:["physeo-phys 5.01 Gastrointestinal Overview", "physeo-phys 5.05 Hormones"],anki:111},SK:null,FA:{label:"FA Ch. 2 + 1 more",min:0,subs:["2.03 Digestive tract anatomy", "3.01 Gastrointestinal regulatory substances"],anki:121}},
+   qids:[],
+   anki:{BC:41,BB:94,PH:111,FA:121}},
+  {id:1, num:"2", week:"Wk 1", date:"Mon Apr 6", subj:"Phys", title:"Introduction / Motility",
+   ihMin:60,
+   res:{BC:{label:"Bootcamp Ch. 8 + 3 more",min:55,subs:["8.01 General Principles Duodenum", "8.02 Jejunum and Ileum General Principles", "9.01 General Overview", "9.02 Pectinate Line"],anki:57},BB:{label:"B&B Ch. 2 + 1 more",min:38,subs:["2.03 Gastrointestinal Secretions", "2.04 Gastrointestinal Hormones"],anki:146},PT:null,PH:{label:"Physeo (2 topics)",min:49,subs:["physeo-phys 5.01 Gastrointestinal Overview", "physeo-phys 5.05 Hormones"],anki:111},SK:null,FA:{label:"FA Ch. 2 + 2 more",min:0,subs:["2.03 Digestive tract anatomy", "2.09 Pectinate line", "3.01 Gastrointestinal regulatory substances"],anki:148}},
+   qids:[828, 14890, 6705, 15652, 1258, 11860],
+   anki:{BC:57,BB:146,PH:111,FA:148}},
+  {id:2, num:"3", week:"Wk 1", date:"Mon Apr 6", subj:"Anat", title:"Anterior Abdominal Wall / Hernia",
+   ihMin:60,
+   res:{BC:{label:"Bootcamp Ch. 10 + 4 more",min:33,subs:["10.01 General Principles of Hernias", "10.02 Inguinal Hernias", "10.03 Femoral Hernias", "10.04 Diaphragmatic Hernias", "10.05 Spigelian Hernias"],anki:46},BB:{label:"B&B Ch. 1 + 1 more",min:30,subs:["1.02 Gastrointestinal Anatomy", "1.07 Hernias"],anki:70},PT:null,PH:null,SK:null,FA:{label:"FA Ch. 2 + 3 more",min:0,subs:["2.01 Retroperitoneal structures", "2.12 Femoral region", "2.13 Inguinal canal", "2.15 Hernias"],anki:55}},
+   qids:[11850, 417, 418, 8669, 14880, 11817, 11803],
+   anki:{BC:46,BB:70,FA:55}},
+  {id:3, num:"4", week:"Wk 1", date:"Mon Apr 6", subj:"Hist", title:"Esoph / Stomach / Intestines (Histology)",
+   ihMin:60,
+   res:{BC:{label:"Bootcamp Ch. 3 + 4 more",min:84,subs:["3.01 General Principles Esophagus", "4.01 General Principles", "4.04 Gastric Cells", "8.01 General Principles Duodenum", "8.02 Jejunum and Ileum General Principles"],anki:101},BB:{label:"B&B 1.04 Gastrointestinal Tract",min:19,subs:["1.04 Gastrointestinal Tract"],anki:59},PT:null,PH:null,SK:null,FA:{label:"FA Ch. 2 + 1 more",min:0,subs:["2.03 Digestive tract anatomy", "2.04 Digestive tract histology"],anki:89}},
+   qids:[278, 1143, 122, 14878, 14892, 286, 1546, 331, 128, 1467, 409, 1662, 306, 129, 284],
+   anki:{BC:101,BB:59,FA:89}},
+  {id:4, num:"5 & 6", week:"Wk 1", date:"Mon Apr 6", subj:"Phys", title:"IL Bile Workshop & Making a Micelle",
+   ihMin:60,
+   res:{BC:{label:"Bootcamp Ch. 6 + 4 more",min:61,subs:["6.01 General Principles Biliary System", "6.03 General Principles of Hyperbilirubinemia", "6.06 Bile Acids", "6.07 Cholelithiasis", "6.10 Acute Cholecystitis"],anki:78},BB:{label:"B&B Ch. 2 + 3 more",min:81,subs:["2.01 Bile", "2.02 Bilirubin", "3.06 Gallstones", "3.07 Biliary Disorders"],anki:183},PT:null,PH:{label:"Physeo (2 topics)",min:48,subs:["physeo-phys 5.03 Liver & Bilirubin Metabolism", "physeo-phys 5.04 Gallbladder"],anki:99},SK:null,FA:{label:"FA Ch. 2 + 2 more",min:0,subs:["2.11 Biliary structures", "3.08 Bile", "3.09 Bilirubin"],anki:49}},
+   qids:[317, 79, 81, 396, 164, 67, 71, 77, 78, 412, 11739, 363, 165, 87],
+   anki:{BC:78,BB:183,PH:99,FA:49}},
+  {id:5, num:"7", week:"Wk 1", date:"Mon Apr 6", subj:"Embr", title:"IL GI Primer",
+   ihMin:60,
+   res:{BC:{label:"Bootcamp Ch. 1 + 2 more",min:37,subs:["1.01 General Embyrology", "1.02 Midgut Development", "1.03 Foregut Development"],anki:46},BB:{label:"B&B 1.01 Gastrointestinal Embryology",min:28,subs:["1.01 Gastrointestinal Embryology"],anki:105},PT:null,PH:null,SK:null,FA:{label:"FA Ch. 1 + 1 more",min:0,subs:["1.01 Normal gastrointestinal embryology", "1.06 Pancreas and spleen embryology"],anki:15}},
+   qids:[12198],
+   anki:{BC:46,BB:105,FA:15}},
+  {id:6, num:"8", week:"Wk 1", date:"Tue Apr 7", subj:"Anat", title:"Abdominal Viscera I: GI Tract",
+   ihMin:60,
+   res:{BC:{label:"Bootcamp Ch. 8 + 2 more",min:43,subs:["8.01 General Principles Duodenum", "8.02 Jejunum and Ileum General Principles", "9.01 General Overview"],anki:50},BB:{label:"B&B Ch. 1 + 2 more",min:48,subs:["1.02 Gastrointestinal Anatomy", "1.03 Gastrointestinal Blood Supply", "1.04 Gastrointestinal Tract"],anki:150},PT:null,PH:null,SK:null,FA:{label:"FA Ch. 2 + 4 more",min:0,subs:["2.03 Digestive tract anatomy", "2.05 Abdominal aorta and branches", "2.06 Gastrointestinal blood supply and innervation", "2.07 Celiac trunk", "2.08 Portosystemic anastomoses"],anki:128}},
+   qids:[11775, 1319, 1525, 1832, 7584, 319, 8587, 14837, 2022, 11753, 8574, 303],
+   anki:{BC:50,BB:150,FA:128}},
+  {id:7, num:"9 & 10", week:"Wk 1", date:"Tue Apr 7", subj:"Phys", title:"Secretions I & II",
+   ihMin:60,
+   res:{BC:{label:"Bootcamp Ch. 4 + 9 more",min:129,subs:["4.01 General Principles", "4.04 Gastric Cells", "4.05 Gastric Acid And Gastrin", "4.06 Pepsinogen Histamine Somatostatin", "4.09 Parietal Cell Physiology", "4.22 Antacids", "7.01 General Principles", "7.02 Exocrine Pancreas", "2.06 Salivary Glands", "2.08 Salivary Gland Tumors"],anki:169},BB:{label:"B&B Ch. 2 + 2 more",min:53,subs:["2.03 Gastrointestinal Secretions", "2.04 Gastrointestinal Hormones", "2.05 Exocrine Pancreas"],anki:193},PT:null,PH:{label:"Physeo (3 topics)",min:58,subs:["physeo-phys 5.02 Exocrine Pancreas & Metabolism", "physeo-phys 5.05 Hormones", "physeo-phys 5.06 Satiety & Hunger"],anki:103},SK:null,FA:{label:"FA Ch. 3 + 2 more",min:0,subs:["3.01 Gastrointestinal regulatory substances", "3.02 Gastrointestinal secretory products", "3.04 Pancreatic secretions"],anki:150}},
+   qids:[1397, 358, 808, 126, 8425, 1971, 1603, 15018, 1938, 12068, 304],
+   anki:{BC:169,BB:193,PH:103,FA:150}},
+  {id:8, num:"12", week:"Wk 1", date:"Wed Apr 8", subj:"Embr", title:"GI Embryology",
+   ihMin:60,
+   res:{BC:{label:"Bootcamp Ch. 1 + 7 more",min:95,subs:["1.01 General Embyrology", "1.02 Midgut Development", "1.03 Foregut Development", "1.04 Ventral And Abdominal Wall Defects", "1.05 Tracheoesophageal Defects", "1.06 Hypertrophic Pyloric Stenosis", "1.07 Intestinal And Biliary Atresia", "1.08 Pancreatic Anomalies"],anki:144},BB:{label:"B&B 1.01 Gastrointestinal Embryology",min:28,subs:["1.01 Gastrointestinal Embryology"],anki:105},PT:null,PH:null,SK:null,FA:{label:"FA Ch. 1 + 5 more",min:0,subs:["1.01 Normal gastrointestinal embryology", "1.02 Ventral wall defects", "1.03 Tracheoesophageal anomalies", "1.04 Intestinal atresia", "1.05 Hypertrophic pyloric stenosis", "1.06 Pancreas and spleen embryology"],anki:69}},
+   qids:[321, 1744, 318, 322, 329, 838, 11962],
+   anki:{BC:144,BB:105,FA:69}},
+  {id:9, num:"13", week:"Wk 1", date:"Wed Apr 8", subj:"Anat", title:"Abdominal Viscera II: Liver & Pancreas",
+   ihMin:60,
+   res:{BC:{label:"Bootcamp Ch. 5 + 3 more",min:55,subs:["5.01 Hepatic Anatomy And Metabolism", "7.01 General Principles", "6.01 General Principles Biliary System", "6.03 General Principles of Hyperbilirubinemia"],anki:35},BB:{label:"B&B Ch. 1 + 1 more",min:30,subs:["1.03 Gastrointestinal Blood Supply", "1.05 Liver Gallbladder and Pancreas"],anki:99},PT:null,PH:{label:"Physeo (3 topics)",min:75,subs:["physeo-phys 5.02 Exocrine Pancreas & Metabolism", "physeo-phys 5.03 Liver & Bilirubin Metabolism", "physeo-phys 5.04 Gallbladder"],anki:144},SK:null,FA:{label:"FA Ch. 2 + 3 more",min:0,subs:["2.05 Abdominal aorta and branches", "2.06 Gastrointestinal blood supply and innervation", "2.10 Liver tissue architecture", "2.11 Biliary structures"],anki:80}},
+   qids:[437, 80, 11760, 1875, 10583],
+   anki:{BC:35,BB:99,PH:144,FA:80}},
+  {id:10, num:"14", week:"Wk 1", date:"Wed Apr 8", subj:"Phys", title:"Overview of the Liver",
+   ihMin:60,
+   res:{BC:{label:"Bootcamp Ch. 5 + 11 more",min:175,subs:["5.01 Hepatic Anatomy And Metabolism", "5.02 Hepatic Microarchitecture", "5.03 Hepatic Zones", "5.13 Cirrhosis Fundamental Pathophysiology", "5.14 Cirrhosis Advanced Pathophysiology", "5.15 Cirrhosis Clinical Diagnostics", "5.17 Pathophysiology of Portal Hypertension", "5.18 Portal HTN Presentation and SAAG", "5.23 Additional Liver Masses", "6.01 General Principles Biliary System", "6.03 General Principles of Hyperbilirubinemia", "6.06 Bile Acids"],anki:220},BB:{label:"B&B Ch. 2 + 3 more",min:93,subs:["2.01 Bile", "2.02 Bilirubin", "3.02 Liver Disease", "3.03 Cirrhosis"],anki:219},PT:null,PH:{label:"Physeo (2 topics)",min:48,subs:["physeo-phys 5.03 Liver & Bilirubin Metabolism", "physeo-phys 5.04 Gallbladder"],anki:99},SK:null,FA:{label:"FA Ch. 2 + 2 more",min:0,subs:["2.10 Liver tissue architecture", "3.08 Bile", "3.09 Bilirubin"],anki:61}},
+   qids:[7215, 70, 101, 1807],
+   anki:{BC:220,BB:219,PH:99,FA:61}},
+  {id:11, num:"15", week:"Wk 1", date:"Thu Apr 9", subj:"Path", title:"Esophagus / Stomach Disease",
+   ihMin:60,
+   res:{BC:{label:"Bootcamp Ch. 3 + 15 more",min:209,subs:["3.02 Esophageal Motility", "3.03 Achalasia", "3.04 Additional Disorders of Esophageal Motility", "3.05 Gastroesophageal Reflux Disease", "3.06 Barrett Esophagus", "3.07 Esophagitis", "3.08 Plummer Vinson Syndrome Zenker Diverticulum", "3.09 Additional Causes Of Dysphagia", "3.10 Esophageal Barotrauma and Bleeding", "3.11 Esophageal Malignancy", "4.12 Gastritis Overview", "4.13 Acute Erosive Gastritis Stress Ulcers and Chronic Gastritis", "4.14 Helicobacter Pylori Infection", "4.16 Peptic Ulcer Disease", "4.19 Gastric Malignancy Overview", "4.20 Gastric adenocarcinoma GIST and MALT Lymphoma"],anki:352},BB:{label:"B&B Ch. 3 + 1 more",min:54,subs:["3.01 Esophageal Disorders", "3.08 Gastric Disorders"],anki:209},PT:{label:"Pathoma Ch. 10 + 3 more",min:78,subs:["10.01 Oral Cavity", "10.02 Salivary Gland", "10.03 Esophagus", "10.04 Stomach"],anki:225},PH:{label:"Physeo (4 topics)",min:46,subs:["physeo-path 6.01 Oral Cavity", "physeo-path 6.02 Salivary Glands", "physeo-path 6.03 Esophagus", "physeo-path 6.04 Stomach"],anki:222},SK:{label:"Sketchy Ch. 5 + 1 more",min:10,subs:["Xref: sketchy-micro 5.09 09 Helicobacter pylori", "Xref: sketchy-micro 3.01 01 Candida albicans"],anki:57},FA:{label:"FA Ch. 4 + 9 more",min:0,subs:["4.02 Achalasia", "4.03 Other esophageal pathologies", "4.04 Barrett esophagus", "4.05 Esophageal cancer", "4.06 Gastritis", "4.07 Ménétrier disease", "4.08 Gastric cancer", "4.09 Peptic ulcer disease", "4.10 Ulcer complications", "4.18 Zenker diverticulum"],anki:263}},
+   qids:[282, 7228, 11548, 14879, 283, 14891, 307, 130, 291, 292, 1604, 1918, 7710, 125, 305, 586],
+   anki:{BC:352,BB:209,PT:225,PH:222,FA:263,SK:57}},
+  {id:12, num:"16 & 17", week:"Wk 1", date:"Thu Apr 9", subj:"Phys", title:"Digestion / Absorption I & II",
+   ihMin:60,
+   res:{BC:{label:"Bootcamp Ch. 8 + 1 more",min:26,subs:["8.04 Nutrient Absorption", "8.14 Additional Malabsorption Disorders"],anki:52},BB:{label:"B&B Ch. 2 + 1 more",min:46,subs:["2.01 Bile", "3.09 Malabsorption"],anki:95},PT:null,PH:{label:"Physeo (2 topics)",min:51,subs:["physeo-phys 5.01 Gastrointestinal Overview", "physeo-phys 5.02 Exocrine Pancreas & Metabolism"],anki:106},SK:null,FA:{label:"FA Ch. 3 + 4 more",min:0,subs:["*Protein Absorption", "3.05 Carbohydrate absorption", "3.06 Vitamin and mineral absorption", "3.07 Peyer patches", "3.08 Bile"],anki:55}},
+   qids:[327, 400, 1068, 1605, 394, 133, 134, 1072, 323, 1907, 755, 1709, 1581, 124, 1806],
+   anki:{BC:52,BB:95,PH:106,FA:55}},
+  {id:13, num:"19 & 20", week:"Wk 1", date:"Fri Apr 10", subj:"Path", title:"Intestinal Pathology I & II",
+   ihMin:60,
+   res:{BC:{label:"Bootcamp Ch. 8 + 15 more",min:194,subs:["8.09 Celiac Disease Pathophysiology", "8.10 Celiac Disease Presentation and Diagnostics", "8.14 Additional Malabsorption Disorders", "8.15 Mesenteric Ischemia", "8.16 Meckel Diverticulum", "8.17 Intussusception", "9.04 Crohn Disease", "9.05 Ulcerative Colitis", "9.08 Diverticulosis and Diverticulitis", "9.09 Hirschsprung Disease", "9.10 Volvulus", "9.12 Colon Ischemia", "9.13 Colonic Polyps", "9.14 Colorectal Carcinogenesis Molecular Pathway", "9.15 Colorectal Cancer", "9.16 Polyposis Syndrome"],anki:301},BB:{label:"B&B Ch. 3 + 4 more",min:103,subs:["3.09 Malabsorption", "3.12 Intestinal Disorders", "3.13 Inflammatory Bowel Disease", "3.14 Colon Cancer", "3.15 Carcinoid Tumors"],anki:317},PT:{label:"Pathoma Ch. 10 + 4 more",min:82,subs:["10.05 Small Bowel", "10.06 Appendix", "10.07 Inflammatory Bowel Disease", "10.08 Colon", "10.09 Colorectal Carcinoma"],anki:303},PH:{label:"Physeo (5 topics)",min:46,subs:["physeo-path 6.05 Small Bowel", "physeo-path 6.06 Appendix", "physeo-path 6.07 Inflammatory Bowel Disease", "physeo-path 6.08 Diseases Of Colon", "physeo-path 6.09 Colon Polyps Carcinoma"],anki:258},SK:{label:"Sketchy Ch. 1 + 2 more",min:0,subs:["Xref: sketchy-micro 1.02 02 Entamoeba histolytica", "Xref: sketchy-micro 1.07 07 Streptococcus gallolyticus (Group D Strep)", "Xref: sketchy-micro 3.01 01 Trypanosoma cruzi"],anki:47},FA:{label:"FA Ch. 4 + 16 more",min:0,subs:["4.12 Malabsorption syndromes", "4.13 Inflammatory bowel diseases", "4.15 Irritable bowel syndrome", "4.16 Appendicitis", "4.17 Diverticula of the GI tract", "4.18 Zenker diverticulum", "4.19 Meckel diverticulum", "4.20 Hirschsprung disease", "4.21 Malrotation", "4.22 Intussusception", "4.23 Volvulus", "4.25 Other intestinal disorders", "4.26 Colonic polyps", "4.27 Polyposis syndromes", "4.28 Lynch syndrome", "4.29 Colorectal cancer", "4.30 Molecular pathogenesis of colorectal cancer"],anki:465}},
+   qids:[15535, 255, 7229, 11839, 426, 7573, 11782, 190, 1475, 1400, 88, 1926, 309, 424, 324, 326, 364, 1398, 6510, 413, 427, 430, 253, 257, 411, 420, 421, 428, 431, 432, 790, 15011, 15012, 15020, 17004, 17005, 415, 14900, 14907, 15021, 16070, 644, 1074, 54, 11771, 11840, 57, 330, 1332, 404, 405, 406, 407, 408, 1597, 1783, 416, 1479, 1485, 429, 1251, 12047, 281, 328, 414, 59, 2028, 9920, 15603, 1169, 402, 12062, 410, 131, 132, 279],
+   anki:{BC:301,BB:317,PT:303,PH:258,FA:465,SK:47}},
+  {id:14, num:"21", week:"Wk 2", date:"Mon Apr 13", subj:"Pharm", title:"Poisoning Conference & Cases",
+   ihMin:60,
+   res:{BC:null,BB:{label:"B&B 3.16 Gastrointestinal Pharmacology",min:23,subs:["3.16 Gastrointestinal Pharmacology"],anki:52},PT:null,PH:null,SK:{label:"Sketchy Ch. 1 + 2 more",min:37,subs:["sketchy-pharm 1.01 Antiemetic Agents", "Xref: sketchy-micro 2.03 03 Clostridium botulinum", "Xref: sketchy-micro 2.04 04 Clostridium perfringens"],anki:65},FA:null},
+   qids:[],
+   anki:{BB:52,SK:65}},
+  {id:15, num:"22", week:"Wk 2", date:"Tue Apr 14", subj:"Path", title:"GI Lab",
+   ihMin:60,
+   res:{BC:{label:"Bootcamp 4.01 General Principles",min:18,subs:["4.01 General Principles"],anki:23},BB:null,PT:{label:"Pathoma Ch. 10 + 8 more",min:160,subs:["10.01 Oral Cavity", "10.02 Salivary Gland", "10.03 Esophagus", "10.04 Stomach", "10.05 Small Bowel", "10.06 Appendix", "10.07 Inflammatory Bowel Disease", "10.08 Colon", "10.09 Colorectal Carcinoma"],anki:528},PH:{label:"Physeo (7 topics)",min:79,subs:["physeo-path 6.03 Esophagus", "physeo-path 6.04 Stomach", "physeo-path 6.05 Small Bowel", "physeo-path 6.06 Appendix", "physeo-path 6.07 Inflammatory Bowel Disease", "physeo-path 6.08 Diseases Of Colon", "physeo-path 6.09 Colon Polyps Carcinoma"],anki:435},SK:null,FA:null},
+   qids:[287],
+   anki:{BC:23,PT:528,PH:435}},
+  {id:16, num:"23 & 24", week:"Wk 2", date:"Tue Apr 14", subj:"Pharm", title:"Treatment: PUD / GERD & Other GI Disorders",
+   ihMin:60,
+   res:{BC:{label:"Bootcamp Ch. 4 + 3 more",min:61,subs:["4.21 Proton Pump Inhibitors and H2 Antagonists", "4.22 Antacids", "4.23 Additional Gastric Pharmacology", "3.05 Gastroesophageal Reflux Disease"],anki:66},BB:{label:"B&B Ch. 3 + 1 more",min:46,subs:["3.01 Esophageal Disorders", "3.16 Gastrointestinal Pharmacology"],anki:132},PT:null,PH:{label:"Physeo (13 topics)",min:92,subs:["physeo-pharm 11.01 Histamine-2 (H2) Blockers", "physeo-pharm 11.02 Proton Pump Inhibitors", "physeo-pharm 11.03 Antacids", "physeo-pharm 11.04 Bismuth and Sucralfate", "physeo-pharm 11.05 Misoprostol", "physeo-pharm 11.06 Octreotide", "physeo-pharm 11.07 Sulfasalazine", "physeo-pharm 11.08 Loperamide and Diphenoxylate", "physeo-pharm 11.09 Ondansetron", "physeo-pharm 11.10 Metoclopramide", "physeo-pharm 11.11 Orlistat", "physeo-pharm 11.12 Laxatives", "physeo-pharm 11.13 Aprepitant"],anki:126},SK:{label:"Sketchy Ch. 1 + 4 more",min:70,subs:["sketchy-pharm 1.01 Antiemetic Agents", "sketchy-pharm 1.02 H2 Receptor Blockers & PPIs", "sketchy-pharm 1.03 Laxatives", "sketchy-pharm 1.04 Antidiarrheal Agents", "Xref: sketchy-micro 5.09 09 Helicobacter pylori"],anki:117},FA:{label:"FA Ch. 5 + 12 more",min:0,subs:["*Cholestatic Drugs", "*Emesis Physiology", "5.02 H2 Blockers", "5.03 Proton pump inhibitors", "5.04 Antacids", "5.05 Bismuth sucralfate", "5.06 Misoprostol", "5.07 Octreotide", "5.08 Sulfasalazine", "5.09 Loperamide diphenoxylate", "5.10 Antiemetics", "5.11 Orlistat", "5.12 Anticonstipation drugs"],anki:109}},
+   qids:[1358, 10999, 865, 1706, 11591, 14872, 14873, 14877, 1290, 175, 1817, 1766, 1778, 881],
+   anki:{BC:66,BB:132,PH:126,SK:117,FA:109}},
+  {id:17, num:"25", week:"Wk 2", date:"Wed Apr 15", subj:"Micro", title:"GI Infections",
+   ihMin:60,
+   res:{BC:{label:"Bootcamp 9.05 Ulcerative Colitis",min:15,subs:["9.05 Ulcerative Colitis"],anki:14},BB:{label:"B&B 3.12 Intestinal Disorders",min:23,subs:["3.12 Intestinal Disorders"],anki:75},PT:null,PH:null,SK:{label:"Sketchy Ch. 2 + 20 more",min:103,subs:["sketchy-micro 2.01 01 Bacillus anthracis & cereus", "sketchy-micro 2.03 03 Clostridium botulinum", "sketchy-micro 2.04 04 Clostridium perfringens", "sketchy-micro 2.05 05 Clostridioides difficile", "sketchy-micro 2.07 07 Listeria monocytogenes", "sketchy-micro 5.01 01 Klebsiella pneumoniae, Enterobacter spp., Serratia marcescens", "sketchy-micro 5.02 02 Salmonella Part 1 Introduction to Salmonella & NTS", "sketchy-micro 5.03 03 Salmonella Part 2 Typhoidal Salmonella", "sketchy-micro 5.04 04 Shigella spp.", "sketchy-micro 5.05 05 Escherichia coli (ETEC, EHEC)", "sketchy-micro 5.06 06 Yersinia enterocolitica & pestis", "sketchy-micro 5.07 07 Campylobacter jejuni", "sketchy-micro 5.08 08 Vibrio spp.", "sketchy-micro 5.09 09 Helicobacter pylori", "sketchy-micro 1.05 05 Hepatitis A Virus (PicoRNAviridae)", "sketchy-micro 1.06 06 Norovirus & Norwalk Virus (Caliciviridae)", "sketchy-micro 2.08 08 Rotavirus & Colorado Tick Fever Virus (Reoviridae)", "sketchy-micro 11.01 01 Clostridioides difficile [Old Version]", "sketchy-micro 11.05 05 Vibrio spp. [Old Version]", "sketchy-micro 11.06 06 Salmonella enteritidis & typhi [Retired Video]", "Xref: sketchy-micro 1.07 07 Streptococcus gallolyticus (Group D Strep)"],anki:415},FA:null},
+   qids:[1098, 1100, 1136, 1422, 6731, 15244, 1396, 10401, 15049],
+   anki:{BC:14,BB:75,SK:415}},
+  {id:18, num:"26", week:"Wk 2", date:"Wed Apr 15", subj:"Micro", title:"Parasitology",
+   ihMin:60,
+   res:{BC:null,BB:{label:"B&B 3.12 Intestinal Disorders",min:23,subs:["3.12 Intestinal Disorders"],anki:75},PT:null,PH:{label:"Physeo physeo-pharm 3.01 Malathion, Permethrin,",min:6,subs:["physeo-pharm 3.01 Malathion, Permethrin, & Lindane"],anki:12},SK:{label:"Sketchy Ch. 1 + 8 more",min:0,subs:["sketchy-micro 1.01 01 Giardia lamblia", "sketchy-micro 1.02 02 Entamoeba histolytica", "sketchy-micro 1.03 03 Cryptosporidium spp.", "sketchy-micro 5.01 01 Intestinal Nematodes - Enterobius, Ancylostoma, Necator, Ascaris, Strongyloides, and Trichinella", "sketchy-micro FAadd Trichuris trichiura (whipworm)", "sketchy-micro 6.01 01 Cestodes", "sketchy-micro 6.02 02 Trematodes", "Xref: sketchy-micro 2.01 01 Toxoplasma gondii", "Xref: sketchy-micro 3.01 01 Trypanosoma cruzi"],anki:209},FA:null},
+   qids:[7642, 8873],
+   anki:{BB:75,PH:12,SK:209}},
+  {id:19, num:"28", week:"Wk 2", date:"Thu Apr 16", subj:"Path", title:"Intestinal Path. Case Review",
+   ihMin:60,
+   res:{BC:{label:"Bootcamp Ch. 9 + 3 more",min:50,subs:["9.13 Colonic Polyps", "9.14 Colorectal Carcinogenesis Molecular Pathway", "9.15 Colorectal Cancer", "9.16 Polyposis Syndrome"],anki:90},BB:{label:"B&B Ch. 3 + 2 more",min:67,subs:["3.12 Intestinal Disorders", "3.13 Inflammatory Bowel Disease", "3.14 Colon Cancer"],anki:225},PT:{label:"Pathoma Ch. 10 + 2 more",min:31,subs:["10.07 Inflammatory Bowel Disease", "10.08 Colon", "10.09 Colorectal Carcinoma"],anki:172},PH:{label:"Physeo (3 topics)",min:28,subs:["physeo-path 6.07 Inflammatory Bowel Disease", "physeo-path 6.08 Diseases Of Colon", "physeo-path 6.09 Colon Polyps Carcinoma"],anki:128},SK:null,FA:{label:"FA Ch. 4 + 5 more",min:0,subs:["4.13 Inflammatory bowel diseases", "4.26 Colonic polyps", "4.27 Polyposis syndromes", "4.28 Lynch syndrome", "4.29 Colorectal cancer", "4.30 Molecular pathogenesis of colorectal cancer"],anki:173}},
+   qids:[],
+   anki:{BC:90,BB:225,PT:172,PH:128,FA:173}},
+  {id:20, num:"29", week:"Wk 2", date:"Thu Apr 16", subj:"Anat", title:"Retroperitoneum",
+   ihMin:60,
+   res:{BC:{label:"Bootcamp 7.01 General Principles",min:11,subs:["7.01 General Principles"],anki:6},BB:{label:"B&B Ch. 1 + 1 more",min:29,subs:["1.02 Gastrointestinal Anatomy", "1.03 Gastrointestinal Blood Supply"],anki:91},PT:null,PH:null,SK:null,FA:{label:"FA Ch. 2 + 1 more",min:0,subs:["2.01 Retroperitoneal structures", "2.05 Abdominal aorta and branches"],anki:36}},
+   qids:[],
+   anki:{BC:6,BB:91,FA:36}},
+  {id:21, num:"33", week:"Wk 3", date:"Mon Apr 20", subj:"Hist", title:"Liver & Biliary Tract (Histology)",
+   ihMin:60,
+   res:{BC:null,BB:{label:"B&B 1.05 Liver Gallbladder and Pancreas",min:12,subs:["1.05 Liver Gallbladder and Pancreas"],anki:36},PT:null,PH:null,SK:null,FA:{label:"FA Ch. 2 + 1 more",min:0,subs:["2.10 Liver tissue architecture", "2.11 Biliary structures"],anki:32}},
+   qids:[],
+   anki:{BB:36,FA:32}},
+  {id:22, num:"34 & 35", week:"Wk 3", date:"Tue Apr 21", subj:"Path", title:"Liver Disease I & II",
+   ihMin:60,
+   res:{BC:{label:"Bootcamp Ch. 5 + 13 more",min:188,subs:["5.04 Alcohol Induced Hepatitis Pathophysiology and Presentation", "5.05 Alcohol Induced Hepatitis Diagnostics and Histopathology", "5.07 Autoimmune Hepatitis", "5.08 Wilson Disease", "5.09 Hemochromatosis", "5.10 Alpha 1 Antitrypsin Deficiency and Ischemic Hepatitis 10 Alpha 1 Antitrypsin Deficiency and Ischemic Hepatitis", "5.12 Inhaled Anesthetic Toxicity Acute Viral Hepatitis", "5.13 Cirrhosis Fundamental Pathophysiology", "5.14 Cirrhosis Advanced Pathophysiology", "5.15 Cirrhosis Clinical Diagnostics", "5.17 Pathophysiology of Portal Hypertension", "5.18 Portal HTN Presentation and SAAG", "5.21 Spontaneous Bacterial Peritonitis Peritoneal Carcinomatosis and SAAG", "5.22 Hepatocellular Carcinoma"],anki:248},BB:{label:"B&B Ch. 3 + 3 more",min:71,subs:["3.02 Liver Disease", "3.03 Cirrhosis", "3.04 Liver Tumors", "3.05 Wilson's Disease and Hemochromatosis"],anki:201},PT:{label:"Pathoma 11.03 Liver",min:42,subs:["11.03 Liver"],anki:169},PH:{label:"Physeo (3 topics)",min:40,subs:["physeo-path 6.12 Jaundice", "physeo-path 6.13 Cirrhosis Liver Cancer", "physeo-path 6.14 Other Liver Conditions"],anki:201},SK:{label:"Sketchy Ch. 1 + 9 more",min:0,subs:["sketchy-micro 1.05 05 Hepatitis A Virus (PicoRNAviridae)", "sketchy-micro 1.08 08 Hepatitis C Virus (Flaviviridae)", "sketchy-micro 3.12 12 Hepatitis B Viral Basics & Infectious Diseases (Hepadnaviridae)", "sketchy-micro 3.13 13 Hepatitis B Viral Life Cycle (Hepadnaviridae)", "sketchy-micro 4.01 01 Hepatitis A Virus (PicoRNAviridae) [Old Version]", "sketchy-micro 4.02 02 Hepatitis B Virus (HepaDNAviridae) [Old Version]", "sketchy-micro 4.03 03 Hepatitis C Virus (Flaviviridae) [Old Version]", "Xref: sketchy-micro 1.02 02 Entamoeba histolytica", "Xref: sketchy-micro 6.02 02 Trematodes", "Xref: sketchy-micro 3.02 02 Aspergillus fumigatus"],anki:250},FA:{label:"FA Ch. 4 + 16 more",min:0,subs:["4.31 Cirrhosis and portal hypertension", "4.32 Spontaneous bacterial peritonitis", "4.33 Serum markers of liver pathology", "4.34 Reye syndrome", "4.35 Alcoholic liver disease", "4.36 Nonalcoholic fatty liver disease", "4.37 Autoimmune hepatitis", "4.38 Hepatic encephalopathy", "4.39 Liver tumors", "4.40 Budd-Chiari syndrome", "4.41 alpha1-antitrypsin deficiency", "4.42 Jaundice", "4.44 Benign neonatal hyperbilirubinemia", "4.45 Biliary atresia", "4.46 Hereditary hyperbilirubinemias", "4.47 Wilson disease", "4.48 Hemochromatosis"],anki:285}},
+   qids:[369, 370, 99, 100, 368, 7214, 8547, 11661, 1701, 391, 393, 102, 8578, 366, 372, 1863, 365, 367, 375, 386, 388, 1927, 15144, 47, 56, 15024, 1537, 401, 403],
+   anki:{BC:248,BB:201,PT:169,PH:201,FA:285,SK:250}},
+  {id:23, num:"36", week:"Wk 3", date:"Tue Apr 21", subj:"DRT", title:"Liver Enzymes",
+   ihMin:60,
+   res:{BC:null,BB:{label:"B&B Ch. 2 + 1 more",min:53,subs:["2.02 Bilirubin", "3.02 Liver Disease"],anki:148},PT:null,PH:{label:"Physeo physeo-phys 5.03 Liver & Bilirubin Metab",min:31,subs:["physeo-phys 5.03 Liver & Bilirubin Metabolism"],anki:62},SK:null,FA:{label:"FA Ch. 4 + 1 more",min:0,subs:["4.33 Serum markers of liver pathology", "4.42 Jaundice"],anki:32}},
+   qids:[1423, 362],
+   anki:{BB:148,PH:62,FA:32}},
+  {id:24, num:"38", week:"Wk 3", date:"Wed Apr 22", subj:"Path", title:"Pancreas Disease",
+   ihMin:60,
+   res:{BC:{label:"Bootcamp Ch. 7 + 5 more",min:93,subs:["7.01 General Principles", "7.04 Acute Pancreatitis", "7.05 Complications of Pancreatitis", "7.06 Chronic Pancreatitis", "7.07 Pancreatic Adenocarcinoma", "7.08 Pancreatic Neuroendocrine Tumors"],anki:120},BB:{label:"B&B Ch. 2 + 2 more",min:48,subs:["2.05 Exocrine Pancreas", "3.10 Acute Pancreatitis", "3.11 Chronic Pancreatitis & Pancreatic Cancer"],anki:138},PT:{label:"Pathoma 11.01 Exocrine Pancreas",min:14,subs:["11.01 Exocrine Pancreas"],anki:60},PH:{label:"Physeo physeo-path 6.10 Pancreas",min:8,subs:["physeo-path 6.10 Pancreas"],anki:60},SK:null,FA:{label:"FA Ch. 4 + 2 more",min:0,subs:["*Pancreatic VIPoma", "4.52 Pancreatitis", "4.53 Pancreatic adenocarcinoma"],anki:64}},
+   qids:[433, 434, 435, 438, 439, 440, 441, 1547, 1738, 11795, 436],
+   anki:{BC:120,BB:138,PT:60,PH:60,FA:64}},
+  {id:25, num:"39", week:"Wk 3", date:"Wed Apr 22", subj:"Path", title:"Liver / Pancreas Lab",
+   ihMin:60,
+   res:{BC:{label:"Bootcamp Ch. 6 + 7 more",min:122,subs:["6.07 Cholelithiasis", "6.10 Acute Cholangitis", "6.10 Acute Cholecystitis", "6.12 Acute Cholangitis", "6.13 Primary Sclerosing Cholangitis", "6.14 Primary Biliary Cholangitis", "5.21 Spontaneous Bacterial Peritonitis Peritoneal Carcinomatosis and SAAG", "5.22 Hepatocellular Carcinoma"],anki:125},BB:{label:"B&B Ch. 3 + 2 more",min:44,subs:["3.04 Liver Tumors", "3.06 Gallstones", "3.07 Biliary Disorders"],anki:116},PT:{label:"Pathoma Ch. 11 + 1 more",min:53,subs:["11.02 Gallbladder & Biliary Tract", "11.03 Liver"],anki:224},PH:{label:"Physeo physeo-path 6.11 Gallbladder Biliary Tract",min:17,subs:["physeo-path 6.11 Gallbladder Biliary Tract"],anki:54},SK:null,FA:{label:"FA Ch. 4 + 3 more",min:0,subs:["4.39 Liver tumors", "4.49 Biliary tract disease", "4.50 Cholelithiasis and related pathologies", "4.51 Cholangiocarcinoma"],anki:159}},
+   qids:[],
+   anki:{BC:125,BB:116,PT:224,PH:54,FA:159}},
+  {id:26, num:"40", week:"Wk 3", date:"Fri Apr 24", subj:"Phys", title:"PSW: Cholera / Lactose Intolerance",
+   ihMin:60,
+   res:{BC:{label:"Bootcamp Ch. 8 + 6 more",min:81,subs:["8.01 General Principles Duodenum", "8.02 Jejunum and Ileum General Principles", "8.04 Nutrient Absorption", "8.09 Celiac Disease Pathophysiology", "8.10 Celiac Disease Presentation and Diagnostics", "8.11 Lactose Intolerance", "8.14 Additional Malabsorption Disorders"],anki:119},BB:{label:"B&B Ch. 2 + 1 more",min:42,subs:["2.03 Gastrointestinal Secretions", "3.09 Malabsorption"],anki:116},PT:null,PH:{label:"Physeo (2 topics)",min:51,subs:["physeo-phys 5.01 Gastrointestinal Overview", "physeo-phys 5.02 Exocrine Pancreas & Metabolism"],anki:106},SK:{label:"Sketchy Ch. 5 + 1 more",min:6,subs:["Xref: sketchy-micro 5.08 08 Vibrio spp.", "Xref: sketchy-micro 11.05 05 Vibrio spp. [Old Version]"],anki:40},FA:{label:"FA Ch. 3 + 2 more",min:0,subs:["3.05 Carbohydrate absorption", "3.06 Vitamin and mineral absorption", "4.12 Malabsorption syndromes"],anki:105}},
+   qids:[],
+   anki:{BC:119,BB:116,PH:106,FA:105,SK:40}}
+];
+
+const DAY_GROUPS = [
+  {day:"Mon Apr 6",  week:"Week 1", ids:[0,1,2,3,4,5]},
+  {day:"Tue Apr 7",  week:"Week 1", ids:[6,7]},
+  {day:"Wed Apr 8",  week:"Week 1", ids:[8,9,10]},
+  {day:"Thu Apr 9",  week:"Week 1", ids:[11,12]},
+  {day:"Fri Apr 10", week:"Week 1", ids:[13]},
+  {day:"Mon Apr 13", week:"Week 2", ids:[14]},
+  {day:"Tue Apr 14", week:"Week 2", ids:[15,16]},
+  {day:"Wed Apr 15", week:"Week 2", ids:[17,18]},
+  {day:"Thu Apr 16", week:"Week 2", ids:[19,20]},
+  {day:"Mon Apr 20", week:"Week 3", ids:[21]},
+  {day:"Tue Apr 21", week:"Week 3", ids:[22,23]},
+  {day:"Wed Apr 22", week:"Week 3", ids:[24,25]},
+  {day:"Fri Apr 24", week:"Week 3", ids:[26]},
+];
+
+// Expert-recommended resources per lecture (id → [res1, res2])
+const RECOMMENDED = {
+  0:['BC','PH'], 1:['BC','PH'], 2:['BB','PH'], 3:['BC','BB'],
+  4:['BC','PH'], 5:['BB','PH'], 6:['BB','PH'], 7:['BC','BB'],
+  8:['BB','PH'], 9:['BB','PH'], 10:['BC','PH'], 11:['PT','PH'],
+  12:['BC','PH'], 13:['PT','PH'], 14:['BB','SK'], 15:['PT','PH'],
+  16:['PH','SK'], 17:['BB','PH'], 18:['BB','PH'], 19:['BB','PH'],
+  20:['BB','PH'], 21:['BC','BB'], 22:['PT','PH'], 23:['BC','BB'],
+  24:['PT','PH'], 25:['PT','PH'], 26:['BC','PH']
+};
+
+// 3-week optimized calendar
+// Anki: 3 slots/day — morning reviews 1hr, midday new cards 30min, afternoon new cards 1hr
+// Day budgets (self-study, NOT counting mandatory IH class time):
+//   Mon/Fri ≤8hrs | Wed ≤8hrs incl 1.5hr PHQ | Tue/Thu ≤6hrs | Sat: Anki+PHQ only | Sun: Anki only
+const CALENDAR_DAYS = [
+  // ═══════════════════════════ WEEK 1 ═══════════════════════════
+  {date:"Mon Apr 6", week:"Week 1", isWeekend:false, tasks:[
+    {key:"d1-ank-m",  type:"anki", slot:"morning",   label:"🌅 Morning Reviews — first day, queue minimal", min:60},
+    {key:"d1-ih1",    type:"ih",   label:"IH Lec 1 · GI Overview", min:60},
+    {key:"d1-ih2",    type:"ih",   label:"IH Lec 2 · Introduction & Motility", min:60},
+    {key:"d1-ih3",    type:"ih",   label:"IH Lec 3 · Anterior Abdominal Wall & Hernia", min:60},
+    {key:"d1-ih4",    type:"ih",   label:"IH Lec 4 · Esoph/Stomach/Intestines Histology", min:60},
+    {key:"d1-ih56",   type:"ih",   label:"IH Lec 5&6 · IL Bile Workshop & Making a Micelle", min:120},
+    {key:"d1-ih7",    type:"ih",   label:"IH Lec 7 · IL GI Primer (Embryology)", min:60},
+    {key:"d1-w1",     type:"watch", res:"PH", label:"Physeo Phys 5.1 & 5.6 · GI Physiology (Lec 1+2)", min:69},
+    {key:"d1-ank-d",  type:"anki", slot:"midday",    label:"☀️ Midday New Cards — PH Phys 5.1&5.6 (Lec 1+2): cards 1–25", min:30, cards:25},
+    {key:"d1-ank-af", type:"anki", slot:"afternoon", label:"🌆 Afternoon New Cards — PH Phys 5.1&5.6 (Lec 1+2): cards 26–50", min:60, cards:25},
+  ]},
+  {date:"Tue Apr 7", week:"Week 1", isWeekend:false, tasks:[
+    {key:"d2-ank-m",  type:"anki", slot:"morning",   label:"🌅 Morning Reviews — clear all due cards", min:60},
+    {key:"d2-ih8",    type:"ih",   label:"IH Lec 8 · Abdominal Viscera I: GI Tract", min:60},
+    {key:"d2-ih910",  type:"ih",   label:"IH Lec 9&10 · Secretions I & II", min:120},
+    {key:"d2-w1",     type:"watch", res:"BC", label:"Bootcamp Ch. 2 · Oral Cavity & Esophagus (Lec 1+4)", min:30},
+    {key:"d2-w2",     type:"watch", res:"BB", label:"B&B · Anatomy — Hernia & Abdominal Wall (Lec 3)", min:42},
+    {key:"d2-w3",     type:"watch", res:"BB", label:"B&B · GI Embryology (Lec 7)", min:105},
+    {key:"d2-ank-d",  type:"anki", slot:"midday",    label:"☀️ Midday New Cards — BC Ch.2 Oral Cavity (Lec 1+4): cards 1–25", min:30, cards:25},
+    {key:"d2-ank-af", type:"anki", slot:"afternoon", label:"🌆 Afternoon New Cards — BB Anatomy Lec 3+7: cards 1–50", min:60, cards:50},
+  ]},
+  {date:"Wed Apr 8", week:"Week 1", isWeekend:false, tasks:[
+    {key:"d3-ank-m",  type:"anki", slot:"morning",   label:"🌅 Morning Reviews — clear all due cards", min:60},
+    {key:"d3-phq",    type:"phq",  label:"Power Hour Questions — GI Week 1 material", min:90},
+    {key:"d3-ih12",   type:"ih",   label:"IH Lec 12 · GI Embryology", min:60},
+    {key:"d3-ih13",   type:"ih",   label:"IH Lec 13 · Abdominal Viscera II: Liver & Pancreas", min:60},
+    {key:"d3-ih14",   type:"ih",   label:"IH Lec 14 · Overview of the Liver", min:60},
+    {key:"d3-w1",     type:"watch", res:"BC", label:"Bootcamp Ch. 5&6 · Liver & Biliary System (Lec 5&6)", min:90},
+    {key:"d3-w2",     type:"watch", res:"PH", label:"Physeo Anat. 4 · Abdominal Anatomy (Lec 3+8+13)", min:129},
+    {key:"d3-ank-d",  type:"anki", slot:"midday",    label:"☀️ Midday New Cards — BC Ch.5&6 Liver/Biliary (Lec 5&6): cards 1–25", min:30, cards:25},
+    {key:"d3-ank-af", type:"anki", slot:"afternoon", label:"🌆 Afternoon New Cards — PH Anat.4 (Lec 3+8+13): cards 1–50", min:60, cards:50},
+  ]},
+  {date:"Thu Apr 9", week:"Week 1", isWeekend:false, tasks:[
+    {key:"d4-ank-m",  type:"anki", slot:"morning",   label:"🌅 Morning Reviews — clear all due cards", min:60},
+    {key:"d4-ih15",   type:"ih",   label:"IH Lec 15 · Esophagus & Stomach Disease", min:60},
+    {key:"d4-ih1617", type:"ih",   label:"IH Lec 16&17 · Digestion & Absorption I & II", min:120},
+    {key:"d4-w1",     type:"watch", res:"BC", label:"Bootcamp Ch. 8&9 · Small/Large Intestine (Lec 2)", min:45},
+    {key:"d4-w2",     type:"watch", res:"PT", label:"Pathoma Ch. 10 GI Tract · Esoph/Stomach (Lec 15)", min:78},
+    {key:"d4-w3",     type:"watch", res:"BC", label:"Bootcamp Ch. 2,4,7 · Oral/Stomach/Pancreas (Lec 9&10)", min:60},
+    {key:"d4-ank-d",  type:"anki", slot:"midday",    label:"☀️ Midday New Cards — BC Ch.8&9 Sm/Lg Intestine (Lec 2): cards 1–25", min:30, cards:25},
+    {key:"d4-ank-af", type:"anki", slot:"afternoon", label:"🌆 Afternoon New Cards — BC Oral/Stom/Panc (Lec 9&10): cards 1–50", min:60, cards:50},
+  ]},
+  {date:"Fri Apr 10", week:"Week 1", isWeekend:false, tasks:[
+    {key:"d5-ank-m",  type:"anki", slot:"morning",   label:"🌅 Morning Reviews — clear all due cards", min:60},
+    {key:"d5-ih1920", type:"ih",   label:"IH Lec 19&20 · Intestinal Pathology I & II", min:120},
+    {key:"d5-w1",     type:"watch", res:"PT", label:"Pathoma Ch. 10 GI Tract · Intestinal Path (Lec 19&20)", min:78},
+    {key:"d5-w2",     type:"watch", res:"PH", label:"Physeo Path 6.1–6.4 · Esoph/Stomach Path (Lec 15)", min:111},
+    {key:"d5-w3",     type:"watch", res:"BC", label:"Bootcamp Ch. 8 · Small Intestine — supplement (Lec 16&17)", min:50},
+    {key:"d5-ank-d",  type:"anki", slot:"midday",    label:"☀️ Midday New Cards — PT Ch.10 GI Tract (Lec 15+19&20): cards 1–25", min:30, cards:25},
+    {key:"d5-ank-af", type:"anki", slot:"afternoon", label:"🌆 Afternoon New Cards — PH Path 6.1–6.4 (Lec 15): cards 1–50", min:60, cards:50},
+  ]},
+  {date:"Sat Apr 11", week:"Week 1", isWeekend:true, tasks:[
+    {key:"d6-ank-m",  type:"anki", slot:"morning",   label:"🌅 Morning Reviews — clear all due cards", min:60},
+    {key:"d6-phq",    type:"phq",  label:"Power Hour Questions — 3-hr block (Week 1 & 2 material)", min:180},
+    {key:"d6-ank-d",  type:"anki", slot:"midday",    label:"☀️ Midday New Cards — BC Liver/Biliary (Lec 5&6): cards 26–50", min:30, cards:25},
+    {key:"d6-ank-af", type:"anki", slot:"afternoon", label:"🌆 Afternoon New Cards — BC Oral/Stom/Panc (Lec 9&10): cards 51–100", min:60, cards:50},
+  ]},
+  {date:"Sun Apr 12", week:"Week 1", isWeekend:true, tasks:[
+    {key:"d7-ank-m",  type:"anki", slot:"morning",   label:"🌅 Morning Reviews — catch-up / free day", min:60},
+    {key:"d7-ank-d",  type:"anki", slot:"midday",    label:"☀️ Midday New Cards — PH Path 6.1–6.4 (Lec 15): cards 51–75", min:30, cards:25},
+    {key:"d7-ank-af", type:"anki", slot:"afternoon", label:"🌆 Afternoon New Cards — PT Ch.10 GI Tract: cards 26–50", min:60, cards:25},
+  ]},
+
+  // ═══════════════════════════ WEEK 2 ═══════════════════════════
+  {date:"Mon Apr 13", week:"Week 2", isWeekend:false, tasks:[
+    {key:"d8-ank-m",  type:"anki", slot:"morning",   label:"🌅 Morning Reviews — clear all due cards", min:60},
+    {key:"d8-ih21",   type:"ih",   label:"IH Lec 21 · Poisoning Conference & Cases", min:60},
+    {key:"d8-w1",     type:"watch", res:"PH", label:"Physeo Path 6.5–6.9 · Intestinal Path Part 1 (Lec 19&20)", min:129},
+    {key:"d8-w2",     type:"watch", res:"PH", label:"Physeo Pharm. 11 · GI Pharmacology (Lec 21)", min:120},
+    {key:"d8-w3",     type:"watch", res:"SK", label:"Sketchy 5.1 · Antiemetics & GI Motility (Lec 21)", min:19},
+    {key:"d8-ank-d",  type:"anki", slot:"midday",    label:"☀️ Midday New Cards — PH Path 6.5–6.9 (Lec 19&20): cards 1–25", min:30, cards:25},
+    {key:"d8-ank-af", type:"anki", slot:"afternoon", label:"🌆 Afternoon New Cards — PH Pharm.11 + SK Antiemetics (Lec 21): cards 1–50", min:60, cards:50},
+  ]},
+  {date:"Tue Apr 14", week:"Week 2", isWeekend:false, tasks:[
+    {key:"d9-ank-m",  type:"anki", slot:"morning",   label:"🌅 Morning Reviews — clear all due cards", min:60},
+    {key:"d9-ih22",   type:"ih",   label:"IH Lec 22 · GI Lab", min:60},
+    {key:"d9-ih2324", type:"ih",   label:"IH Lec 23&24 · Treatment: PUD/GERD & GI Disorders", min:120},
+    {key:"d9-w1",     type:"watch", res:"BB", label:"B&B · Physiol + Clinical — Digestion (Lec 16&17)", min:115},
+    {key:"d9-w2",     type:"watch", res:"PT", label:"Pathoma Ch. 10 — key sections for GI Lab (Lec 22)", min:40},
+    {key:"d9-ank-d",  type:"anki", slot:"midday",    label:"☀️ Midday New Cards — BB Digestion Physiol (Lec 16&17): cards 1–25", min:30, cards:25},
+    {key:"d9-ank-af", type:"anki", slot:"afternoon", label:"🌆 Afternoon New Cards — BB Digestion Physiol (Lec 16&17): cards 26–50", min:60, cards:25},
+  ]},
+  {date:"Wed Apr 15", week:"Week 2", isWeekend:false, tasks:[
+    {key:"d10-ank-m",  type:"anki", slot:"morning",   label:"🌅 Morning Reviews — clear all due cards", min:60},
+    {key:"d10-phq",    type:"phq",  label:"Power Hour Questions — Lec 1–17 range", min:90},
+    {key:"d10-ih25",   type:"ih",   label:"IH Lec 25 · GI Infections", min:60},
+    {key:"d10-ih26",   type:"ih",   label:"IH Lec 26 · Parasitology", min:60},
+    {key:"d10-w1",     type:"watch", res:"PH", label:"Physeo Path 6.3–6.5 & 6.8 · GI Lab Path Part 1 (Lec 22)", min:87},
+    {key:"d10-w2",     type:"watch", res:"SK", label:"Sketchy 5.1–5.4 · GI Pharmacology (Lec 23&24)", min:60},
+    {key:"d10-ank-d",  type:"anki", slot:"midday",    label:"☀️ Midday New Cards — SK GI Pharm (Lec 23&24): cards 1–25", min:30, cards:25},
+    {key:"d10-ank-af", type:"anki", slot:"afternoon", label:"🌆 Afternoon New Cards — PH Path Lec 22: cards 1–50", min:60, cards:50},
+  ]},
+  {date:"Thu Apr 16", week:"Week 2", isWeekend:false, tasks:[
+    {key:"d11-ank-m",  type:"anki", slot:"morning",   label:"🌅 Morning Reviews — clear all due cards", min:60},
+    {key:"d11-ih28",   type:"ih",   label:"IH Lec 28 · Intestinal Path Case Review", min:60},
+    {key:"d11-ih29",   type:"ih",   label:"IH Lec 29 · Retroperitoneum", min:60},
+    {key:"d11-w1",     type:"watch", res:"BB", label:"B&B · Clinical — GI Infections (Lec 25+26) Part 1", min:72},
+    {key:"d11-w2",     type:"watch", res:"PH", label:"Physeo Path 6.14 · GI Infections (Lec 25+26)", min:95},
+    {key:"d11-ank-d",  type:"anki", slot:"midday",    label:"☀️ Midday New Cards — BB Clinical Lec 25+26: cards 1–25", min:30, cards:25},
+    {key:"d11-ank-af", type:"anki", slot:"afternoon", label:"🌆 Afternoon New Cards — PH Path 6.14 Lec 25+26: cards 1–50", min:60, cards:50},
+  ]},
+  {date:"Fri Apr 17", week:"Week 2", isWeekend:false, tasks:[
+    {key:"d12-ank-m",  type:"anki", slot:"morning",   label:"🌅 Morning Reviews — clear all due cards", min:60},
+    {key:"d12-w1",     type:"watch", res:"BB", label:"B&B · Clinical — GI Infections (Lec 25+26) Part 2", min:72},
+    {key:"d12-w2",     type:"watch", res:"BB", label:"B&B · Clinical — Intestinal Path Review (Lec 28)", min:150},
+    {key:"d12-w3",     type:"watch", res:"BB", label:"B&B · Anatomy — Retroperitoneum (Lec 29)", min:42},
+    {key:"d12-ank-d",  type:"anki", slot:"midday",    label:"☀️ Midday New Cards — BB Clinical Lec 28+29: cards 1–25", min:30, cards:25},
+    {key:"d12-ank-af", type:"anki", slot:"afternoon", label:"🌆 Afternoon New Cards — PH Path 6.7–6.9 Colorectal (Lec 28): cards 1–50", min:60, cards:50},
+  ]},
+  {date:"Sat Apr 18", week:"Week 2", isWeekend:true, tasks:[
+    {key:"d13-ank-m",  type:"anki", slot:"morning",   label:"🌅 Morning Reviews — clear all due cards (peak ~90–120)", min:60},
+    {key:"d13-phq",    type:"phq",  label:"Power Hour Questions — 3-hr block (Week 2 material)", min:180},
+    {key:"d13-ank-d",  type:"anki", slot:"midday",    label:"☀️ Midday New Cards — BC Liver/Biliary (Lec 5&6): cards 51–75", min:30, cards:25},
+    {key:"d13-ank-af", type:"anki", slot:"afternoon", label:"🌆 Afternoon New Cards — BB Clinical Lec 28+29: cards 26–75", min:60, cards:50},
+  ]},
+  {date:"Sun Apr 19", week:"Week 2", isWeekend:true, tasks:[
+    {key:"d14-ank-m",  type:"anki", slot:"morning",   label:"🌅 Morning Reviews — catch-up / free day", min:60},
+    {key:"d14-ank-d",  type:"anki", slot:"midday",    label:"☀️ Midday New Cards — SK GI Pharm (Lec 23&24): cards 26–50", min:30, cards:25},
+    {key:"d14-ank-af", type:"anki", slot:"afternoon", label:"🌆 Afternoon New Cards — PH Path 6.14 Lec 25+26: cards 51–100", min:60, cards:50},
+  ]},
+
+  // ═══════════════════════════ WEEK 3 ═══════════════════════════
+  {date:"Mon Apr 20", week:"Week 3", isWeekend:false, tasks:[
+    {key:"d15-ank-m",  type:"anki", slot:"morning",   label:"🌅 Morning Reviews — clear all due cards", min:60},
+    {key:"d15-ih33",   type:"ih",   label:"IH Lec 33 · Liver & Biliary Tract Histology", min:60},
+    {key:"d15-w1",     type:"watch", res:"BC", label:"Bootcamp Ch. 6 · Biliary System (Lec 33)", min:44},
+    {key:"d15-w2",     type:"watch", res:"BB", label:"B&B · Anatomy — Liver Histology (Lec 33)", min:71},
+    {key:"d15-lp1",    type:"lastpass", label:"Last Pass: Lec 15–17 — Esoph/Stomach Path, Digestion", min:45},
+    {key:"d15-lp2",    type:"lastpass", label:"Last Pass: Lec 19–20 — Intestinal Pathology", min:30},
+    {key:"d15-ank-d",  type:"anki", slot:"midday",    label:"☀️ Midday New Cards — BC Biliary (Lec 33): cards 1–25", min:30, cards:25},
+    {key:"d15-ank-af", type:"anki", slot:"afternoon", label:"🌆 Afternoon New Cards — BB Anatomy Lec 33: all 71 cards", min:60, cards:71},
+  ]},
+  {date:"Tue Apr 21", week:"Week 3", isWeekend:false, tasks:[
+    {key:"d16-ank-m",  type:"anki", slot:"morning",   label:"🌅 Morning Reviews — clear all due cards", min:60},
+    {key:"d16-ih3435", type:"ih",   label:"IH Lec 34&35 · Liver Disease I & II", min:120},
+    {key:"d16-ih36",   type:"ih",   label:"IH Lec 36 · Liver Enzymes (DRT)", min:60},
+    {key:"d16-w1",     type:"watch", res:"PT", label:"Pathoma Ch. 11 · Hepatobiliary Disease (Lec 34&35)", min:65},
+    {key:"d16-w2",     type:"watch", res:"PH", label:"Physeo Path 6.11–6.13 · Liver Pathology (Lec 34&35)", min:80},
+    {key:"d16-ank-d",  type:"anki", slot:"midday",    label:"☀️ Midday New Cards — PT Ch.11 Hepatobil (Lec 34&35): cards 1–25", min:30, cards:25},
+    {key:"d16-ank-af", type:"anki", slot:"afternoon", label:"🌆 Afternoon New Cards — PH Path 6.11–6.13 (Lec 34&35): cards 1–50", min:60, cards:50},
+  ]},
+  {date:"Wed Apr 22", week:"Week 3", isWeekend:false, tasks:[
+    {key:"d17-ank-m",  type:"anki", slot:"morning",   label:"🌅 Morning Reviews — clear all due cards", min:60},
+    {key:"d17-phq",    type:"phq",  label:"Power Hour Questions — Lec 21–29 range", min:90},
+    {key:"d17-ih38",   type:"ih",   label:"IH Lec 38 · Pancreas Disease", min:60},
+    {key:"d17-ih39",   type:"ih",   label:"IH Lec 39 · Liver & Pancreas Lab", min:60},
+    {key:"d17-w1",     type:"watch", res:"BC", label:"Bootcamp Ch. 5 · Liver Enzymes (Lec 36)", min:55},
+    {key:"d17-w2",     type:"watch", res:"BB", label:"B&B · Physiology — Liver Enzymes (Lec 36)", min:91},
+    {key:"d17-lp1",    type:"lastpass", label:"Last Pass: Lec 21–24 — Poisoning/Pharm, GI Lab, PUD/GERD", min:40},
+    {key:"d17-ank-d",  type:"anki", slot:"midday",    label:"☀️ Midday New Cards — BC Liver (Lec 36): cards 1–25", min:30, cards:25},
+    {key:"d17-ank-af", type:"anki", slot:"afternoon", label:"🌆 Afternoon New Cards — BB Physiol Lec 36: all 91 cards", min:60, cards:91},
+  ]},
+  {date:"Thu Apr 23", week:"Week 3", isWeekend:false, tasks:[
+    {key:"d18-ank-m",  type:"anki", slot:"morning",   label:"🌅 Morning Reviews — clear all due cards (peak ~80–120)", min:60},
+    {key:"d18-w1",     type:"watch", res:"PT", label:"Pathoma Ch. 11 · Pancreas Disease (Lec 38+39)", min:65},
+    {key:"d18-w2",     type:"watch", res:"PH", label:"Physeo Path 6.10 · Pancreatic Pathology (Lec 38)", min:60},
+    {key:"d18-ank-d",  type:"anki", slot:"midday",    label:"☀️ Midday New Cards — PT Ch.11 Pancreas (Lec 38+39): cards 26–50", min:30, cards:25},
+    {key:"d18-ank-af", type:"anki", slot:"afternoon", label:"🌆 Afternoon New Cards — PH Path 6.10 Pancreas (Lec 38): all 60 cards", min:60, cards:60},
+  ]},
+  {date:"Fri Apr 24", week:"Week 3", isWeekend:false, tasks:[
+    {key:"d19-ank-m",  type:"anki", slot:"morning",   label:"🌅 Morning Reviews — exam week incoming", min:60},
+    {key:"d19-ih40",   type:"ih",   label:"IH Lec 40 · PSW: Cholera & Lactose Intolerance", min:60},
+    {key:"d19-w1",     type:"watch", res:"BC", label:"Bootcamp Ch. 8 · Small Intestine (Lec 40)", min:50},
+    {key:"d19-w2",     type:"watch", res:"PH", label:"Physeo Phys. 5.1 · GI Physiology Review (Lec 40)", min:61},
+    {key:"d19-lp1",    type:"lastpass", label:"Last Pass: Lec 25–29 — Infections, Parasitology, Retroperitoneum", min:50},
+    {key:"d19-lp2",    type:"lastpass", label:"Last Pass: Lec 33–36 — Liver Histology, Liver Disease, Enzymes", min:50},
+    {key:"d19-lp3",    type:"lastpass", label:"Last Pass: Lec 38–40 — Pancreas Disease, Lab, Cholera/Lactose", min:45},
+    {key:"d19-ank-d",  type:"anki", slot:"midday",    label:"☀️ Midday New Cards — BC Small Intestine (Lec 40): cards 1–25", min:30, cards:25},
+    {key:"d19-ank-af", type:"anki", slot:"afternoon", label:"🌆 Afternoon New Cards — PH Phys.5.1 (Lec 40): all 61 cards", min:60, cards:61},
+  ]},
+];
+
+const RES_META = {
+  IH:{label:"In-House",  emoji:"🏥",cls:"IH"},
+  BC:{label:"Bootcamp",  emoji:"🔵",cls:"BC"},
+  BB:{label:"Boards & Beyond",emoji:"🟢",cls:"BB"},
+  PT:{label:"Pathoma",   emoji:"🔴",cls:"PT"},
+  FA:{label:"First Aid", emoji:"❤️",cls:"FA"},
+  PH:{label:"Physeo",    emoji:"🟣",cls:"PH"},
+  SK:{label:"Sketchy",   emoji:"🟤",cls:"SK"},
+};
+const TP_RES = ['BC','BB','PT','FA','PH','SK'];
+const TASKS  = ['watch','ankiSetUp'];
+const TASK_LABELS = {watch:'Watch',ankiSetUp:'Anki Set Up'};
+const STORAGE_KEY = 'gi-planner-v2';
+
+// ══════════════════════════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════════════════════════
+let STATE = {};
+
+function defaultPP(){ return {uworld:'Not Started',activeLearning:'Not Started',drillHub:'Not Started',qbank:'Not Started'}; }
+
+// Resources that support per-subchapter checkboxes (any resource with a subs[] array)
+const SUBS_RES = ['BC','BB','PT','PH','SK','FA'];
+
+function resHasSubs(l, r){
+  return Array.isArray(l.res?.[r]?.subs) && l.res[r].subs.length > 0;
+}
+
+function resDefaultSubs(l, r){
+  // Returns an array of false values matching subchapter count
+  const subs=l.res?.[r]?.subs||[];
+  return subs.map(()=>false);
+}
+
+// Back-compat aliases
+function bcDefaultSubs(l){ return resDefaultSubs(l,'BC'); }
+function bbDefaultSubs(l){ return resDefaultSubs(l,'BB'); }
+
+function defaultState(){
+  const s={};
+  LECTURES.forEach(l=>{
+    s[l.id]={IH:{included:true,watch:false,ankiSetUp:false}};
+    TP_RES.forEach(r=>{
+      if(SUBS_RES.includes(r) && resHasSubs(l,r)){
+        s[l.id][r]={included:false,ankiSetUp:false,subs:resDefaultSubs(l,r)};
+      } else {
+        s[l.id][r]={included:false,watch:false,ankiSetUp:false};
+      }
+    });
+    s[l.id].practiceProblems=defaultPP();
+  });
+  return s;
+}
+
+function loadState(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(raw) STATE=JSON.parse(raw);
+    else STATE=defaultState();
+  } catch(e){ STATE=defaultState(); }
+  // Ensure all keys exist + migrate practiceProblems + migrate per-subchapter arrays
+  LECTURES.forEach(l=>{
+    if(!STATE[l.id]) STATE[l.id]=defaultState()[l.id];
+    if(!STATE[l.id].IH) STATE[l.id].IH={included:true,watch:false,ankiSetUp:false};
+    TP_RES.forEach(r=>{
+      const hasSubs = SUBS_RES.includes(r) && resHasSubs(l,r);
+      if(!STATE[l.id][r]){
+        if(hasSubs) STATE[l.id][r]={included:false,ankiSetUp:false,subs:resDefaultSubs(l,r)};
+        else STATE[l.id][r]={included:false,watch:false,ankiSetUp:false};
+      } else if(hasSubs){
+        // Migrate: ensure subs array exists with correct length
+        const expected=(l.res[r].subs||[]).length;
+        if(!Array.isArray(STATE[l.id][r].subs)){
+          // Old format had watch:bool — seed subs based on old watch value
+          const oldWatch=STATE[l.id][r].watch||false;
+          STATE[l.id][r].subs=Array(expected).fill(oldWatch);
+          delete STATE[l.id][r].watch;
+        } else if(STATE[l.id][r].subs.length!==expected){
+          // Resize: pad with false or trim
+          const cur=STATE[l.id][r].subs;
+          STATE[l.id][r].subs=Array.from({length:expected},(_,i)=>cur[i]||false);
+        }
+        if(STATE[l.id][r].ankiSetUp===undefined) STATE[l.id][r].ankiSetUp=false;
+      }
+    });
+    if(!STATE[l.id].practiceProblems) STATE[l.id].practiceProblems=defaultPP();
+    else{
+      const pp=STATE[l.id].practiceProblems;
+      ['uworld','activeLearning','drillHub','qbank'].forEach(k=>{ if(!pp[k]) pp[k]='Not Started'; });
+    }
+    // Sanity: don't mark a resource as included if the lecture doesn't offer it
+    TP_RES.forEach(r=>{
+      if(STATE[l.id][r] && STATE[l.id][r].included && !l.res[r]){
+        STATE[l.id][r].included=false;
+      }
+    });
+  });
+}
+
+function saveState(){
+  try{ localStorage.setItem(STORAGE_KEY,JSON.stringify(STATE)); } catch(e){}
+}
+
+// ══════════════════════════════════════════════════════════════
+//  STATS HELPERS
+// ══════════════════════════════════════════════════════════════
+function lecState(id){ return STATE[id]; }
+
+function countThirdParty(id){
+  return TP_RES.filter(r=>STATE[id][r].included).length;
+}
+
+function resAllSubsWatched(id, r){
+  const ls=STATE[id]; const lec=LECTURES.find(l=>l.id===id);
+  const subs=lec.res?.[r]?.subs||[];
+  if(!subs.length) return false;
+  const stateSubs=(ls[r]&&ls[r].subs)||[];
+  if(stateSubs.length===0) return false;
+  return stateSubs.every(v=>v===true);
+}
+
+// Back-compat
+function bcAllSubsWatched(id){ return resAllSubsWatched(id,'BC'); }
+function bbAllSubsWatched(id){ return resAllSubsWatched(id,'BB'); }
+
+function lecWatchStats(id){
+  const ls=STATE[id];
+  const lec=LECTURES.find(l=>l.id===id);
+  let tot=0, done=0;
+  if(ls.IH.included){ tot+=lec.ihMin; if(ls.IH.watch) done+=lec.ihMin; }
+  TP_RES.forEach(r=>{
+    if(!ls[r].included||!lec.res[r]) return;
+    const m=lec.res[r].min||0;
+    tot+=m;
+    if(SUBS_RES.includes(r) && resHasSubs(lec,r)){
+      if(resAllSubsWatched(id,r)) done+=m;
+    } else {
+      if(ls[r].watch) done+=m;
+    }
+  });
+  return {tot, done, remaining:tot-done};
+}
+
+function lecProgress(id){
+  const ls=STATE[id];
+  let tot=0,done=0;
+  const PP_KEYS=['uworld','activeLearning','drillHub','qbank'];
+  const lec=LECTURES.find(l=>l.id===id);
+  // IH — only if included
+  if(ls.IH.included){
+    TASKS.forEach(t=>{ tot++; if(ls.IH[t]) done++; });
+  }
+  // Third-party
+  TP_RES.forEach(r=>{
+    if(!ls[r].included||!lec.res[r]) return;
+    if(SUBS_RES.includes(r) && resHasSubs(lec,r)){
+      // Each subchapter watch = 1 task; ankiSetUp = 1 task
+      const subs=lec.res[r].subs||[];
+      subs.forEach((_,i)=>{ tot++; if((ls[r].subs||[])[i]) done++; });
+      tot++; if(ls[r].ankiSetUp) done++;
+    } else {
+      TASKS.forEach(t=>{ tot++; if(ls[r][t]) done++; });
+    }
+  });
+  // Practice problems — 2 points each: +1 for 1st Pass, +1 for RTG!
+  if(ls.practiceProblems){
+    PP_KEYS.forEach(k=>{
+      const v=ls.practiceProblems[k]||'Not Started';
+      tot+=2;
+      if(v!=='Not Started') done++;
+      if(v==='RTG!') done++;
+    });
+  }
+  return {tot,done,pct:tot?Math.round(done/tot*100):0};
+}
+
+function globalStats(){
+  let totalTasks=0,doneTasks=0,totalMin=0,doneMin=0,selectedLecs=0;
+  let byRes={IH:{tot:0,done:0},BC:{tot:0,done:0},BB:{tot:0,done:0},PT:{tot:0,done:0},FA:{tot:0,done:0},PH:{tot:0,done:0},SK:{tot:0,done:0}};
+  let byWeek={'Wk 1':{tot:0,done:0},'Wk 2':{tot:0,done:0},'Wk 3':{tot:0,done:0}};
+  let ankiSelected=0;
+
+  const PP_KEYS=['uworld','activeLearning','drillHub','qbank'];
+  LECTURES.forEach(l=>{
+    const ls=STATE[l.id];
+    const wk=l.week;
+    // IH — only if included
+    if(ls.IH.included){
+      totalMin+=l.ihMin; if(ls.IH.watch) doneMin+=l.ihMin;
+      TASKS.forEach(t=>{
+        totalTasks++;byRes.IH.tot++;byWeek[wk].tot++;
+        if(ls.IH[t]){doneTasks++;byRes.IH.done++;byWeek[wk].done++;}
+      });
+    }
+    // 3rd party
+    TP_RES.forEach(r=>{
+      if(!ls[r].included||!l.res[r]) return;
+      selectedLecs++;
+      const m=l.res[r].min||0;
+      if(SUBS_RES.includes(r) && resHasSubs(l,r)){
+        totalMin+=m;
+        if(resAllSubsWatched(l.id,r)) doneMin+=m;
+        const subs=l.res[r].subs||[];
+        subs.forEach((_,i)=>{
+          totalTasks++;byRes[r].tot++;byWeek[wk].tot++;
+          if((ls[r].subs||[])[i]){doneTasks++;byRes[r].done++;byWeek[wk].done++;}
+        });
+        // ankiSetUp
+        totalTasks++;byRes[r].tot++;byWeek[wk].tot++;
+        if(ls[r].ankiSetUp){doneTasks++;byRes[r].done++;byWeek[wk].done++;}
+      } else {
+        totalMin+=m; if(ls[r].watch) doneMin+=m;
+        TASKS.forEach(t=>{
+          totalTasks++;byRes[r].tot++;byWeek[wk].tot++;
+          if(ls[r][t]){doneTasks++;byRes[r].done++;byWeek[wk].done++;}
+        });
+      }
+      if(l.anki&&l.anki[r]) ankiSelected+=l.anki[r];
+    });
+    // Practice problems — 2 points each: +1 for 1st Pass, +1 for RTG!
+    if(ls.practiceProblems){
+      PP_KEYS.forEach(k=>{
+        const v=ls.practiceProblems[k]||'Not Started';
+        totalTasks+=2;byWeek[wk].tot+=2;
+        if(v!=='Not Started'){doneTasks++;byWeek[wk].done++;}
+        if(v==='RTG!'){doneTasks++;byWeek[wk].done++;}
+      });
+    }
+  });
+  return {totalTasks,doneTasks,totalMin,doneMin,selectedLecs,byRes,byWeek,ankiSelected,
+    pct:totalTasks?Math.round(doneTasks/totalTasks*100):0};
+}
+
+// ══════════════════════════════════════════════════════════════
+//  RENDER DASHBOARD
+// ══════════════════════════════════════════════════════════════
+function renderDashboard(){
+  const s=globalStats();
+  document.getElementById('topbar-pct').textContent=s.pct+'% Complete';
+
+  const grid=document.getElementById('stat-grid');
+  const hrs=(s.totalMin/60).toFixed(1);
+  const doneHrs=(s.doneMin/60).toFixed(1);
+  grid.innerHTML=`
+    <div class="stat-box"><div class="stat-num">${s.pct}%</div><div class="stat-label">Overall Progress</div><div class="stat-sub">${s.doneTasks} / ${s.totalTasks} tasks</div></div>
+    <div class="stat-box"><div class="stat-num">${doneHrs}h</div><div class="stat-label">Hours Completed</div><div class="stat-sub">of ${hrs}h selected</div></div>
+    <div class="stat-box"><div class="stat-num">${s.selectedLecs}</div><div class="stat-label">3rd-Party Selections</div><div class="stat-sub">across 27 lectures</div></div>
+    <div class="stat-box"><div class="stat-num">${s.ankiSelected.toLocaleString()}</div><div class="stat-label">Anki Cards Selected</div><div class="stat-sub">~${Math.round(s.ankiSelected/50)} sessions @ 50/day</div></div>
+  `;
+
+  // Resource bars
+  const resBars=document.getElementById('res-progress-bars');
+  resBars.innerHTML='';
+  Object.entries(s.byRes).forEach(([r,{tot,done}])=>{
+    if(!tot) return;
+    const pct=Math.round(done/tot*100);
+    const m=RES_META[r];
+    resBars.innerHTML+=`
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:.75rem;min-width:110px;font-weight:600">${m.emoji} ${m.label}</span>
+        <div class="prog-bar-wrap"><div class="prog-bar" style="width:${pct}%"></div></div>
+        <span style="font-size:.72rem;color:var(--ink-3);min-width:36px;text-align:right">${pct}%</span>
+      </div>`;
+  });
+
+  // Week bars
+  const weekBars=document.getElementById('week-progress-bars');
+  weekBars.innerHTML='';
+  [['Wk 1','Mon Apr 6 – Fri Apr 10'],['Wk 2','Mon Apr 13 – Thu Apr 16'],['Wk 3','Mon Apr 20 – Fri Apr 24']].forEach(([wk,dates])=>{
+    const {tot,done}=s.byWeek[wk];
+    const pct=tot?Math.round(done/tot*100):0;
+    weekBars.innerHTML+=`
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="min-width:110px"><div style="font-size:.75rem;font-weight:600">${wk}</div><div style="font-size:.65rem;color:var(--ink-3)">${dates}</div></div>
+        <div class="prog-bar-wrap"><div class="prog-bar" style="width:${pct}%"></div></div>
+        <span style="font-size:.72rem;color:var(--ink-3);min-width:36px;text-align:right">${pct}%</span>
+      </div>`;
+  });
+}
+
+// ══════════════════════════════════════════════════════════════
+//  RENDER LECTURE PLANNER
+// ══════════════════════════════════════════════════════════════
+function renderLecturePlanner(weekFilter, mode, gridId){
+  mode = mode || 'adhd';
+  gridId = gridId || (mode === 'custom' ? 'lec-grid-custom' : 'lec-grid');
+  const grid=document.getElementById(gridId);
+  if(!grid) return;
+  grid.innerHTML='';
+
+  LECTURES.forEach(l=>{
+    if(weekFilter&&weekFilter!=='all'&&l.week!==weekFilter) return;
+    const ls=STATE[l.id];
+    const {pct}=lecProgress(l.id);
+    const {tot:wTot,done:wDone,remaining:wRem}=lecWatchStats(l.id);
+    const tpCount=countThirdParty(l.id);
+
+    const card=document.createElement('div');
+    card.className='lec-card';
+    card.id=mode==='custom' ? `lec-card-${l.id}-custom` : `lec-card-${l.id}`;
+    card.dataset.lecId=l.id;
+    card.dataset.mode=mode;
+
+    // Header
+    card.innerHTML=`
+      <div class="lec-card-header" onclick="toggleLecCard(this)">
+        <span class="lec-num">Lec ${l.num}</span>
+        <span class="lec-date-badge">${l.date}</span>
+        <span class="subj-badge subj-${l.subj}">${l.subj}</span>
+        <span class="lec-title">${l.title}</span>
+        <div class="lec-mini-prog">
+          <div class="prog-bar-wrap" style="min-width:60px"><div class="prog-bar" style="width:${pct}%"></div></div>
+          <span class="lec-pct">${pct}%</span>
+        </div>
+        <span class="lec-watch-stat" id="lec-watch-${l.id}${mode==='custom'?'-custom':''}">📺 ${wDone}/${wTot} min &middot; <span style="color:${wRem===0?'var(--accent)':'#f59e0b'}">${wRem} min left</span></span>
+        <span class="lec-chevron">▼</span>
+      </div>
+      <div class="lec-body">
+        ${buildResRows(l, ls, tpCount, mode)}
+      </div>`;
+
+    grid.appendChild(card);
+  });
+}
+
+function renderBothPlanners(weekFilter){
+  renderLecturePlanner(weekFilter, 'adhd', 'lec-grid');
+  renderLecturePlanner(weekFilter, 'custom', 'lec-grid-custom');
+}
+
+function buildResRows(l, ls, tpCount, mode){
+  mode = mode || 'adhd';
+  let html='';
+
+  // Practice Problems section — shown FIRST
+  const PP_DEFS=[
+    {key:'uworld',         label:'UWorld'},
+    {key:'activeLearning', label:'Lecture Drill'},
+    {key:'drillHub',       label:'Lecture Active Drill Hub'},
+    {key:'qbank',          label:'Lecture Qbank'},
+  ];
+  const PP_OPTS=['Not Started','1st Pass','Completed < 60%','Completed < 75%','RTG!'];
+  const pp=ls.practiceProblems||{};
+  html+=`<div class="pp-section" style="margin-bottom:10px;padding:10px 12px;background:var(--bg);border-radius:8px;border:1px solid var(--rule)">
+    <div style="font-size:.75rem;font-weight:700;color:var(--ink-2);margin-bottom:8px">🎯 Practice Problems</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+    ${PP_DEFS.map(p=>{
+      const val=pp[p.key]||'Not Started';
+      return `<div style="display:flex;flex-direction:column;gap:3px;min-width:150px;flex:1">
+        <label style="font-size:.68rem;font-weight:600;color:var(--ink-3)">${p.label}</label>
+        <select class="pp-sel pp-sel-${l.id}-${p.key}" data-lid="${l.id}" data-pkey="${p.key}"
+          style="${ppSelectStyle(val)}"
+          onchange="setPracticeProb(${l.id},'${p.key}',this.value)">
+          ${PP_OPTS.map(o=>`<option value="${o}"${o===val?' selected':''}>${o}</option>`).join('')}
+        </select>
+      </div>`;
+    }).join('')}
+    </div>
+  </div>`;
+
+  // In-House row — always shown
+  html+=buildRow('IH', l, ls, true);
+
+  // Third-party rows
+  // ADHD mode: only show INCLUDED resources (keeps view focused on what's actually prescribed)
+  // Custom mode: show ALL resources, including not-included (with "+ Include" button) and NA
+  TP_RES.forEach(r=>{
+    if(!l.res[r]){
+      if(mode==='custom') html+=buildRowNA(r);
+      return;
+    }
+    if(mode==='adhd' && !ls[r].included) return; // hide in ADHD view
+    html+=buildRow(r, l, ls, false, tpCount);
+  });
+
+  if(mode==='adhd'){
+    // Quick-add row: list the available-but-not-included resources as chips the user can click
+    const available = TP_RES.filter(r=>l.res[r] && !ls[r].included);
+    if(available.length){
+      html+=`<div class="adhd-add-row" style="margin-top:10px;padding:10px 12px;background:var(--bg);border-radius:8px;border:1px dashed var(--rule);display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+        <span style="font-size:.72rem;color:var(--ink-3);font-weight:600">+ Add optional:</span>
+        ${available.map(r=>`<button class="res-include-btn not-inc" style="font-size:.72rem;padding:4px 10px" onclick="toggleResource(${l.id},'${r}')">${RES_META[r].emoji||''} + ${RES_META[r].label||r}</button>`).join('')}
+      </div>`;
+    }
+  }
+
+  return html;
+}
+
+function buildRow(r, l, ls, isIH, tpCount){
+  const meta=RES_META[r];
+  const inc=ls[r].included;
+  const rowCls=inc?r:'not-included '+r;
+  const cards=l.anki?.[r]||0;
+
+  let incBtn='';
+  if(!isIH){
+    const btnLabel=inc?'✓ Selected':'+ Include';
+    const btnCls=inc?`res-include-btn ${r}`:`res-include-btn not-inc`;
+    incBtn=`<button class="${btnCls}" onclick="toggleResource(${l.id},'${r}')">${btnLabel}</button>`;
+  } else {
+    const btnLabel=inc?'✓ In-House':'+ In-House';
+    const btnCls=inc?`res-include-btn IH`:`res-include-btn not-inc`;
+    incBtn=`<button class="${btnCls}" onclick="toggleResource(${l.id},'IH')">${btnLabel}</button>`;
+  }
+
+  const modLabel=isIH?l.title:(l.res[r]?.label||'');
+  const timeStr=l.res[r]?.min?`${l.res[r].min} min`:isIH?`${l.ihMin} min`:'TBD';
+
+  // ── Resource with subchapters: special layout (BC/BB/PT/PH/SK) ──
+  if(!isIH && SUBS_RES.includes(r) && resHasSubs(l,r)){
+    const rSubs=l.res[r].subs||[];
+    const rXref=l.res[r].xref||'';
+    const rLower=r.toLowerCase();
+    let subsHtml='';
+    if(inc){
+      // Anki set up at the top level
+      const ankiChecked=ls[r].ankiSetUp;
+      const ankiDoneCls=ankiChecked?' done':'';
+      const ankiTask=`<label class="task-check${ankiDoneCls}">
+        <input type="checkbox" ${ankiChecked?'checked':''} onchange="setTask(${l.id},'${r}','ankiSetUp',this.checked)">
+        Anki Set Up
+      </label>`;
+      if(cards>0){
+        subsHtml+=`<div class="res-tasks" style="padding-top:2px">${ankiTask}<span style="font-size:.68rem;color:var(--ink-3);margin-left:4px">📚 ${cards} cards</span></div>`;
+      } else {
+        subsHtml+=`<div class="res-tasks" style="padding-top:2px">${ankiTask}</div>`;
+      }
+      // Subchapter rows
+      const subRows=rSubs.map((subLabel,i)=>{
+        const watched=(ls[r].subs||[])[i]||false;
+        const doneCls=watched?' done-sub':'';
+        return `<div class="${rLower}-sub-row${doneCls}">
+          <label class="${rLower}-sub-cb">
+            <input type="checkbox" ${watched?'checked':''} onchange="setResSub(${l.id},'${r}',${i},this.checked)">
+            Watch
+          </label>
+          <span class="${rLower}-sub-label">${subLabel}</span>
+        </div>`;
+      }).join('');
+      subsHtml+=`<div class="${rLower}-subs-wrap">${subRows}</div>`;
+      if(rXref){
+        subsHtml+=`<div class="${rLower}-xref">ℹ ${rXref}</div>`;
+      }
+    } else {
+      subsHtml=`<span style="font-size:.72rem;color:var(--ink-3)">Select to enable tasks</span>`;
+    }
+
+    return `<div class="res-row ${rowCls}" id="row-${l.id}-${r}" style="flex-wrap:wrap;gap:6px">
+      <div style="display:flex;align-items:center;gap:10px;width:100%;flex-wrap:wrap">
+        ${incBtn}
+        <span class="res-label">${meta.emoji} ${meta.label}</span>
+        <span class="res-module">${modLabel}</span>
+        <span class="res-time">${timeStr}</span>
+      </div>
+      <div style="width:100%;padding-left:2px">${subsHtml}</div>
+    </div>`;
+  }
+
+  // ── Standard row (IH + non-BC/BB resources) ──
+  let tasks='';
+  if(inc||isIH){
+    TASKS.forEach(t=>{
+      const checked=ls[r][t];
+      const doneCls=checked?' done':'';
+      tasks+=`<label class="task-check${doneCls}">
+        <input type="checkbox" ${checked?'checked':''} onchange="setTask(${l.id},'${r}','${t}',this.checked)">
+        ${TASK_LABELS[t]}
+      </label>`;
+    });
+    if(cards>0&&!isIH){
+      tasks+=`<span style="font-size:.68rem;color:var(--ink-3);margin-left:4px">📚 ${cards} cards</span>`;
+    }
+  } else {
+    tasks=`<span style="font-size:.72rem;color:var(--ink-3)">Select to enable tasks</span>`;
+  }
+
+  return `<div class="res-row ${rowCls}" id="row-${l.id}-${r}">
+    ${incBtn}
+    <span class="res-label">${meta.emoji} ${meta.label}</span>
+    <span class="res-module">${modLabel}</span>
+    <span class="res-time">${timeStr}</span>
+    <div class="res-tasks">${tasks}</div>
+  </div>`;
+}
+
+function buildRowNA(r){
+  const meta=RES_META[r];
+  return `<div class="res-row na">
+    <span class="res-include-btn not-inc" style="cursor:default;opacity:.5">N/A</span>
+    <span class="res-label" style="opacity:.5">${meta.emoji} ${meta.label}</span>
+    <span class="res-module" style="font-size:.72rem;color:var(--ink-3)">Not available for this lecture</span>
+  </div>`;
+}
+
+function ppSelectStyle(val){
+  const base='font-size:.72rem;padding:4px 8px;border-radius:6px;border:1.5px solid;cursor:pointer;width:100%;font-family:inherit;';
+  if(val==='RTG!')            return base+'background:#EDFDF4;border-color:#A7F3C9;color:#166534;font-weight:700';
+  if(val==='Completed < 75%') return base+'background:#EEF4FF;border-color:#B8D0F5;color:#1F4B99';
+  if(val==='Completed < 60%') return base+'background:#FFF1EE;border-color:#FFBDAD;color:#C0380A';
+  if(val==='1st Pass')        return base+'background:#FFF9E6;border-color:#F0C040;color:#7B4F00';
+  return base+'background:var(--surface);border-color:var(--rule);color:var(--ink)';
+}
+
+function setPracticeProb(id, key, val){
+  if(!STATE[id].practiceProblems) STATE[id].practiceProblems=defaultPP();
+  STATE[id].practiceProblems[key]=val;
+  saveState();
+  // Update select styling in-place (no full re-render needed)
+  const sel=document.querySelector(`.pp-sel-${id}-${key}`);
+  if(sel) sel.style.cssText=ppSelectStyle(val);
+  updateLecHeader(id);
+  renderDashboard();
+}
+
+function setResSub(id, r, subIdx, val){
+  if(!STATE[id][r]) return;
+  if(!Array.isArray(STATE[id][r].subs)) STATE[id][r].subs=[];
+  STATE[id][r].subs[subIdx]=val;
+  saveState();
+  updateLecHeader(id);
+  renderDashboard();
+  // Update the sub row styling in-place
+  const rLower=r.toLowerCase();
+  const wrap=document.querySelector(`#row-${id}-${r} .${rLower}-subs-wrap`);
+  if(wrap){
+    const rows=wrap.querySelectorAll(`.${rLower}-sub-row`);
+    if(rows[subIdx]) rows[subIdx].classList.toggle('done-sub',val);
+  }
+}
+
+// Back-compat aliases
+function setBCSub(id, subIdx, val){ setResSub(id,'BC',subIdx,val); }
+function setBBSub(id, subIdx, val){ setResSub(id,'BB',subIdx,val); }
+
+function toggleLecCard(idOrEl){
+  // Accept either an id (legacy) or the header element (new)
+  let card;
+  if(typeof idOrEl === 'number' || typeof idOrEl === 'string'){
+    card = document.getElementById(`lec-card-${idOrEl}`);
+  } else if(idOrEl && idOrEl.closest){
+    card = idOrEl.closest('.lec-card');
+  }
+  if(card) card.classList.toggle('open');
+}
+
+function toggleResource(id, r){
+  const ls=STATE[id];
+  const wasInc=ls[r].included;
+  ls[r].included=!wasInc;
+  saveState();
+  const lec=LECTURES.find(l=>l.id===id);
+  const newTp=countThirdParty(id);
+  // Re-render BOTH card bodies (ADHD + Custom tabs may each have a copy)
+  document.querySelectorAll(`[id="lec-card-${id}"] .lec-body, [id="lec-card-${id}-custom"] .lec-body`).forEach(body=>{
+    const mode = body.closest('[id$="-custom"]') ? 'custom' : 'adhd';
+    body.innerHTML=buildResRows(lec,ls,newTp,mode);
+  });
+  updateLecHeader(id);
+  renderDashboard();
+}
+
+function setTask(id, r, task, val){
+  STATE[id][r][task]=val;
+  saveState();
+  updateLecHeader(id);
+  renderDashboard();
+  // Update task-check styling
+  const label=document.querySelector(`#row-${id}-${r} input[onchange*="${task}"]`);
+  if(label) label.closest('.task-check').classList.toggle('done',val);
+}
+
+function updateLecHeader(id){
+  const {pct}=lecProgress(id);
+  const {tot:wTot,done:wDone,remaining:wRem}=lecWatchStats(id);
+  // Update BOTH ADHD + Custom copies if present
+  [`lec-card-${id}`, `lec-card-${id}-custom`].forEach(cid=>{
+    const bar=document.querySelector(`#${cid} .prog-bar`);
+    const pctEl=document.querySelector(`#${cid} .lec-pct`);
+    if(bar) bar.style.width=pct+'%';
+    if(pctEl) pctEl.textContent=pct+'%';
+  });
+  [`lec-watch-${id}`, `lec-watch-${id}-custom`].forEach(wid=>{
+    const watchEl=document.getElementById(wid);
+    if(watchEl) watchEl.innerHTML=`📺 ${wDone}/${wTot} min &middot; <span style="color:${wRem===0?'var(--accent)':'#f59e0b'}">${wRem} min left</span>`;
+  });
+}
+
+function filterWeek(wk, btn){
+  // Scope to the week-filter bar that contains the button
+  const bar = btn.closest('.week-filter');
+  if(bar) bar.querySelectorAll('.wf-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  // Determine which tab this filter belongs to
+  const panel = btn.closest('.tab-panel');
+  if(panel && panel.id === 'tab-customplanner'){
+    renderLecturePlanner(wk, 'custom', 'lec-grid-custom');
+  } else {
+    renderLecturePlanner(wk, 'adhd', 'lec-grid');
+  }
+}
+
+
+// ══════════════════════════════════════════════════════════════
+//  TAB SWITCHING
+// ══════════════════════════════════════════════════════════════
+function switchTab(name){
+  document.querySelectorAll('.tab-btn').forEach(b=>{
+    b.classList.toggle('active',b.dataset.tab===name);
+  });
+  document.querySelectorAll('.tab-panel').forEach(p=>{
+    p.classList.toggle('active',p.id==='tab-'+name);
+  });
+  if(name==='dashboard') renderDashboard();
+  if(name==='thisweek') renderThisWeek();
+  if(name==='planner') renderLecturePlanner(undefined,'adhd','lec-grid');
+  if(name==='customplanner') renderLecturePlanner(undefined,'custom','lec-grid-custom');
+}
+
+// ══════════════════════════════════════════════════════════════
+//  THEME / RESET
+// ══════════════════════════════════════════════════════════════
+function toggleTheme(){
+  const curr=document.documentElement.getAttribute('data-theme');
+  const next=curr==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',next);
+  localStorage.setItem('theme',next);
+}
+
+function confirmReset(){
+  if(confirm('Reset ALL progress and selections? This cannot be undone.')){
+    STATE=defaultState();
+    saveState();
+    init();
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════════════════════
+// Seed recommended resources on very first load
+function seedRecommended(){
+  const hasAny=LECTURES.some(l=>TP_RES.some(r=>STATE[l.id][r].included));
+  if(hasAny) return; // User already has selections — don't override
+  Object.entries(RECOMMENDED).forEach(([id,recs])=>{
+    const lec=LECTURES.find(l=>String(l.id)===String(id));
+    if(!lec) return;
+    recs.forEach(r=>{
+      // Only include if the resource actually exists for this lecture
+      if(STATE[id]&&STATE[id][r]&&lec.res[r]) STATE[id][r].included=true;
+    });
+    // Fallback: if NO third-party resources got included but some are available,
+    // include the first available so the ADHD view isn't empty for this lecture.
+    const incCount = TP_RES.filter(r=>STATE[id][r].included).length;
+    if(incCount===0){
+      TP_RES.forEach(r=>{ if(lec.res[r] && STATE[id][r]) STATE[id][r].included=true; });
+    }
+  });
+  saveState();
+}
+
+// Force-load the HoyaDocs recommended study plan (overrides current selections
+// for lectures in the RECOMMENDED map, but preserves task progress and IH).
+function loadHoyaDocsPlan(){
+  const msg = 'Load the HoyaDocs recommended study plan?\n\n'
+    + 'This will set each lecture to use the recommended resource combo '
+    + '(e.g. Physeo + Bootcamp for Phys lectures, Pathoma + B&B for Path, etc.).\n\n'
+    + 'Your task progress (watch, Anki set-up, subsections) is preserved. '
+    + 'Any resources you had selected outside the plan will be unchecked.';
+  if(!confirm(msg)) return;
+  Object.entries(RECOMMENDED).forEach(([id,recs])=>{
+    if(!STATE[id]) return;
+    const lec=LECTURES.find(l=>String(l.id)===String(id));
+    TP_RES.forEach(r=>{
+      if(!STATE[id][r]) return;
+      // Only include if the resource actually exists for this lecture
+      STATE[id][r].included = recs.includes(r) && !!(lec && lec.res[r]);
+    });
+    // Fallback: if no resources were included but some are available for this lecture,
+    // include everything available so the ADHD view isn't empty.
+    const incCount = TP_RES.filter(r=>STATE[id][r].included).length;
+    if(incCount===0 && lec){
+      TP_RES.forEach(r=>{ if(lec.res[r] && STATE[id][r]) STATE[id][r].included=true; });
+    }
+  });
+  saveState();
+  // Re-render everything — planner cards (both views), dashboard, this-week
+  if(typeof renderBothPlanners==='function') renderBothPlanners();
+  else if(typeof renderLecturePlanner==='function') renderLecturePlanner();
+  if(typeof renderDashboard==='function') renderDashboard();
+  if(typeof renderThisWeek==='function') renderThisWeek();
+  // Flash confirmation
+  const btns = document.querySelectorAll('[onclick^="loadHoyaDocsPlan"]');
+  btns.forEach(b=>{
+    const old = b.innerHTML;
+    b.innerHTML = '✓ Plan Loaded';
+    b.style.background = '#10b981';
+    b.style.color = '#fff';
+    setTimeout(()=>{ b.innerHTML = old; b.style.background=''; b.style.color=''; }, 2000);
+  });
+}
+
+// Detect embed mode (when loaded inside the Daily Checklist iframe)
+function applyEmbedMode(){
+  try {
+    const params = new URLSearchParams(location.search);
+    if(params.get('embed') === '1'){
+      document.body.classList.add('embed-mode');
+    }
+  } catch(e) {}
+}
+applyEmbedMode();
+
+// In embed mode, switch to the tab requested by the parent on first load.
+function applyInitialEmbedTab(){
+  try {
+    const params = new URLSearchParams(location.search);
+    if(params.get('embed') !== '1') return;
+    const t = params.get('tab');
+    if(t && ['thisweek','planner','customplanner','dashboard'].includes(t) && typeof switchTab === 'function'){
+      switchTab(t);
+    }
+  } catch(e) {}
+}
+
+// When embedded, listen for cloud-sync events from the parent. The parent
+// pulls fresh state from Firestore after Google sign-in, writes it to
+// localStorage, then posts a message telling us to reload.
+function reloadPlannerFromLocalStorage(){
+  try {
+    // loadState() reads STORAGE_KEY from localStorage and reassigns STATE.
+    if(typeof loadState === 'function') loadState();
+    if(typeof renderBothPlanners === 'function') renderBothPlanners();
+    else if(typeof renderLecturePlanner === 'function') renderLecturePlanner();
+    if(typeof renderDashboard === 'function') renderDashboard();
+    if(typeof renderThisWeek === 'function') renderThisWeek();
+  } catch(e) { console.error('Planner reload error:', e); }
+}
+window.addEventListener('message', (ev) => {
+  if(!ev || !ev.data) return;
+  if(ev.data.type === 'hoyadocs-planner-reload'){
+    reloadPlannerFromLocalStorage();
+  } else if(ev.data.type === 'hoyadocs-switch-tab' && ev.data.tab){
+    if(typeof switchTab === 'function' && ['thisweek','dashboard','planner','customplanner'].includes(ev.data.tab)){
+      switchTab(ev.data.tab);
+    }
+  }
+});
+// Also catch cross-document storage events (belt-and-suspenders)
+window.addEventListener('storage', (ev) => {
+  if(ev.key === 'gi-planner-v2'){
+    reloadPlannerFromLocalStorage();
+  }
+});
+
+
+// ══════════════════════════════════════════════════════════════
+//  EXPORT TO HTML (formatted, interactive)
+// ══════════════════════════════════════════════════════════════
+function exportToHTML(){
+  const PP_DEFS=[
+    {key:'uworld',        label:'UWorld'},
+    {key:'activeLearning',label:'Lecture Drill'},
+    {key:'drillHub',      label:'Lecture Active Drill Hub'},
+    {key:'qbank',         label:'Lecture Qbank'},
+  ];
+  const PP_OPTS=['Not Started','1st Pass','Completed \u003c 60%','Completed \u003c 75%','RTG!'];
+  const ALL_RES=['IH','BC','BB','PT','PH','SK'];
+  const RES_LABELS={
+    IH:'\u{1F3E5} In-House',
+    BC:'\u{1F535} Bootcamp',
+    BB:'\u{1F7E2} Boards & Beyond',
+    PT:'\u{1F534} Pathoma',
+    PH:'\u{1F7E3} Physeo',
+    SK:'\u{1F7E4} Sketchy',
+  };
+  const RC={
+    IH:{bg:'#f0f9f4',br:'#a7f3d0',tx:'#065f46'},
+    BC:{bg:'#eff6ff',br:'#bfdbfe',tx:'#1e40af'},
+    BB:{bg:'#f0fdf4',br:'#bbf7d0',tx:'#166534'},
+    PT:{bg:'#fff1f2',br:'#fecdd3',tx:'#9f1239'},
+    PH:{bg:'#f5f3ff',br:'#ddd6fe',tx:'#5b21b6'},
+    SK:{bg:'#fef3c7',br:'#fde68a',tx:'#92400e'},
+  };
+
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  function ppInlineStyle(val){
+    const base='font-size:.72rem;padding:4px 8px;border-radius:6px;border:1.5px solid;cursor:pointer;font-family:inherit;min-width:150px;';
+    if(val==='RTG!')            return base+'background:#EDFDF4;border-color:#A7F3C9;color:#166534;font-weight:700';
+    if(val==='Completed < 75%') return base+'background:#EEF4FF;border-color:#B8D0F5;color:#1F4B99';
+    if(val==='Completed < 60%') return base+'background:#FFF1EE;border-color:#FFBDAD;color:#C0380A';
+    if(val==='1st Pass')        return base+'background:#FFF9E6;border-color:#F0C040;color:#7B4F00';
+    return base+'background:#F8FAFC;border-color:#CBD5E1;color:#64748B';
+  }
+
+  // Build per-week, per-lecture HTML
+  const weeks=[...new Set(LECTURES.map(l=>l.week))];
+  let bodyHtml='';
+
+  weeks.forEach(wk=>{
+    const wkLecs=LECTURES.filter(l=>l.week===wk);
+    let cardsHtml='';
+
+    wkLecs.forEach(l=>{
+      const ls=STATE[l.id];
+      const {pct}=lecProgress(l.id);
+
+      /* ── Practice Problems ── */
+      let ppRows='';
+      PP_DEFS.forEach(p=>{
+        const val=(ls.practiceProblems&&ls.practiceProblems[p.key])||'Not Started';
+        const opts=PP_OPTS.map(o=>'<option value="'+esc(o)+'"'+(o===val?' selected':'')+'>'+esc(o)+'</option>').join('');
+        ppRows+='<div class="pp-row">'
+          +'<label class="pp-lbl">'+esc(p.label)+'</label>'
+          +'<select class="pp-sel" style="'+ppInlineStyle(val)+'" onchange="updatePP(this)">'+opts+'</select>'
+          +'</div>';
+      });
+
+      /* ── Resources ── */
+      let resRows='';
+      ALL_RES.forEach(r=>{
+        const isIH=r==='IH';
+        const avail=isIH||!!l.res[r];
+        if(!avail) return;
+        const inc=ls[r].included;
+        const watch=ls[r].watch;
+        const anki=ls[r].ankiSetUp;
+        const lid='L'+l.id+'_'+r;
+        const rc=RC[r];
+        let minTag='';
+        if(isIH&&l.ihMin) minTag=' <span class="res-min">('+l.ihMin+' min)</span>';
+        else if(!isIH&&l.res[r]&&l.res[r].min) minTag=' <span class="res-min">('+l.res[r].min+' min)</span>';
+        resRows+='<div class="res-row" style="background:'+rc.bg+';border-color:'+rc.br+'">'
+          +'<div class="res-hdr">'
+          +'<span class="res-name" style="color:'+rc.tx+'">'+RES_LABELS[r]+minTag+'</span>'
+          +'<select class="yn-sel" onchange="toggleChecks(\''+lid+'\',this.value)">'
+          +'<option'+(inc?' selected':'')+'>Yes</option>'
+          +'<option'+(!inc?' selected':'')+'>No</option>'
+          +'</select>'
+          +'</div>'
+          +'<div class="res-checks" id="'+lid+'-chk" style="display:'+(inc?'flex':'none')+'">'
+          +'<label class="chk-lbl"><input type="checkbox"'+(watch?' checked':'')+'>&#8202;Watch</label>'
+          +'<label class="chk-lbl"><input type="checkbox"'+(anki?' checked':'')+'>&#8202;Anki Set Up</label>'
+          +'</div>'
+          +'</div>';
+      });
+
+      const pctColor=pct>=80?'#166534':pct>=50?'#1e40af':'#9a3412';
+      cardsHtml+='<div class="lec-card">'
+        +'<div class="lec-hdr">'
+        +'<div class="lec-meta-row">'
+        +'<span class="lec-num">Lec '+esc(l.num)+'</span>'
+        +'<span class="lec-date">'+esc(l.date)+'</span>'
+        +'<span class="lec-subj">'+esc(l.subj)+'</span>'
+        +'<div class="prog-wrap">'
+        +'<div class="prog-bar"><div class="prog-fill" style="width:'+pct+'%;background:'+pctColor+'"></div></div>'
+        +'<span class="prog-pct" style="color:'+pctColor+'">'+pct+'%</span>'
+        +'</div>'
+        +'</div>'
+        +'<div class="lec-title">'+esc(l.title)+'</div>'
+        +'</div>'
+        +'<div class="lec-body">'
+        +'<div class="section pp-section"><div class="sec-hdr">\uD83D\uDCDD Practice Problems</div>'+ppRows+'</div>'
+        +'<div class="section res-section"><div class="sec-hdr">\uD83D\uDCDA Resources</div>'+resRows+'</div>'
+        +'</div>'
+        +'</div>';
+    });
+
+    bodyHtml+='<div class="week-block">'
+      +'<div class="week-hdr">'+esc(wk)+'</div>'
+      +cardsHtml
+      +'</div>';
+  });
+
+  const exportDate=new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+
+  const CSS=`
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:#f8fafc;color:#1e293b;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:214px;height:100vh;background:#0d2416;padding:22px 16px 28px;display:flex;flex-direction:column;overflow-y:auto}
+.sb-brand{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-bottom:4px}
+.sb-brand-name{font-size:.75rem;font-weight:700;letter-spacing:.04em;opacity:.75;color:#fff}
+.sb-crest{font-size:.85rem}
+.sb-title{font-size:.92rem;font-weight:800;color:#fff;line-height:1.2;margin-bottom:3px}
+.sb-sub{font-size:.68rem;color:rgba(255,255,255,.45);font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:18px}
+.sb-divider{height:1px;background:rgba(255,255,255,.1);margin:10px 0}
+.sb-info{margin-top:auto;background:rgba(255,255,255,.07);border-radius:8px;padding:10px 12px}
+.sb-info p{font-size:.68rem;color:rgba(255,255,255,.5);line-height:1.6}
+.sb-info strong{color:rgba(255,255,255,.8)}
+.main{margin-left:214px;padding:32px 36px 72px;max-width:1140px}
+.page-hdr{margin-bottom:26px}
+.page-hdr h1{font-size:1.45rem;font-weight:800;color:#0d2416}
+.page-hdr p{font-size:.8rem;color:#64748b;margin-top:4px}
+.week-block{margin-bottom:34px}
+.week-hdr{font-size:.75rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#0d2416;border-left:3px solid #0d2416;padding-left:10px;margin-bottom:13px}
+.lec-card{background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;margin-bottom:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.lec-hdr{background:#f8fafc;border-bottom:1.5px solid #e2e8f0;padding:12px 18px}
+.lec-meta-row{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:7px}
+.lec-num{font-size:.63rem;font-weight:700;background:#0d2416;color:#fff;border-radius:5px;padding:2px 7px;white-space:nowrap}
+.lec-date{font-size:.7rem;color:#64748b;font-weight:500}
+.lec-subj{font-size:.63rem;font-weight:600;background:#e2e8f0;color:#475569;border-radius:4px;padding:2px 6px}
+.prog-wrap{display:flex;align-items:center;gap:7px;margin-left:auto}
+.prog-bar{width:80px;height:6px;background:#e2e8f0;border-radius:99px;overflow:hidden;flex-shrink:0}
+.prog-fill{height:100%;border-radius:99px}
+.prog-pct{font-size:.7rem;font-weight:700;min-width:32px;text-align:right;white-space:nowrap}
+.lec-title{font-size:.93rem;font-weight:700;color:#1e293b;line-height:1.3}
+.lec-body{display:grid;grid-template-columns:1fr 1fr}
+.section{padding:14px 18px}
+.res-section{border-left:1.5px solid #e2e8f0}
+.sec-hdr{font-size:.67rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#94a3b8;margin-bottom:9px}
+.pp-row{display:flex;align-items:center;gap:10px;margin-bottom:7px;flex-wrap:wrap}
+.pp-lbl{font-size:.72rem;font-weight:600;color:#475569;min-width:148px;flex:1}
+.pp-sel{font-size:.72rem;padding:4px 8px;border-radius:6px;border:1.5px solid;cursor:pointer;font-family:inherit;min-width:150px}
+.res-row{border:1.5px solid;border-radius:8px;padding:9px 11px;margin-bottom:7px}
+.res-hdr{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.res-name{font-size:.77rem;font-weight:600}
+.res-min{font-size:.67rem;font-weight:400;opacity:.7}
+.yn-sel{font-size:.71rem;padding:3px 7px;border-radius:6px;border:1.5px solid #cbd5e1;cursor:pointer;font-family:inherit;background:#fff}
+.res-checks{display:flex;gap:14px;margin-top:7px;flex-wrap:wrap}
+.chk-lbl{font-size:.74rem;font-weight:500;color:#475569;display:flex;align-items:center;gap:4px;cursor:pointer}
+.chk-lbl input{cursor:pointer;accent-color:#0d2416}
+@media(max-width:680px){.sidebar{display:none}.main{margin-left:0;padding:16px}.lec-body{grid-template-columns:1fr}.res-section{border-left:none;border-top:1.5px solid #e2e8f0}}
+`;
+
+  const JS=`
+function toggleChecks(lid,val){
+  var el=document.getElementById(lid+'-chk');
+  if(el) el.style.display=val==='Yes'?'flex':'none';
+}
+function updatePP(sel){
+  var val=sel.value;
+  var base='font-size:.72rem;padding:4px 8px;border-radius:6px;border:1.5px solid;cursor:pointer;font-family:inherit;min-width:150px;';
+  if(val==='RTG!')               sel.style.cssText=base+'background:#EDFDF4;border-color:#A7F3C9;color:#166534;font-weight:700';
+  else if(val==='Completed < 75%') sel.style.cssText=base+'background:#EEF4FF;border-color:#B8D0F5;color:#1F4B99';
+  else if(val==='Completed < 60%') sel.style.cssText=base+'background:#FFF1EE;border-color:#FFBDAD;color:#C0380A';
+  else if(val==='1st Pass')        sel.style.cssText=base+'background:#FFF9E6;border-color:#F0C040;color:#7B4F00';
+  else                              sel.style.cssText=base+'background:#F8FAFC;border-color:#CBD5E1;color:#64748B';
+}
+`;
+
+  const html='<!DOCTYPE html>\n'
+    +'<html lang="en">\n'
+    +'<head>\n'
+    +'<meta charset="UTF-8">\n'
+    +'<meta name="viewport" content="width=device-width,initial-scale=1.0">\n'
+    +'<title>GI Lecture Planner \u2014 Export</title>\n'
+    +'<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">\n'
+    +'<style>'+CSS+'</style>\n'
+    +'</head>\n'
+    +'<body>\n'
+    +'<div class="sidebar">\n'
+    +'  <div class="sb-brand"><span class="sb-brand-name">HoyaDocs</span><span class="sb-crest">\uD83C\uDFE5</span></div>\n'
+    +'  <div class="sb-title">GI Study Planner</div>\n'
+    +'  <div class="sb-sub">Block 4 \u00b7 GI</div>\n'
+    +'  <div class="sb-divider"></div>\n'
+    +'  <div class="sb-info"><p><strong>Lecture Export</strong><br>'+exportDate+'</p></div>\n'
+    +'</div>\n'
+    +'<div class="main">\n'
+    +'<div class="page-hdr"><h1>GI Lecture Planner</h1><p>Exported '+exportDate+' \u00b7 Dropdowns &amp; checkboxes are interactive</p></div>\n'
+    +bodyHtml
+    +'</div>\n'
+    +'<script>'+JS+'<\/script>\n'
+    +'</body>\n'
+    +'</html>';
+
+  const blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download='GI_LecturePlanner_'+new Date().toISOString().slice(0,10)+'.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// ══════════════════════════════════════════════════════════════
+//  EXPORT / IMPORT DATA BACKUP
+// ══════════════════════════════════════════════════════════════
+function exportData(){
+  const payload=JSON.stringify({version:1,savedAt:new Date().toISOString(),state:STATE},null,2);
+  const blob=new Blob([payload],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download='GI_Planner_Backup_'+new Date().toISOString().slice(0,10)+'.json';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function importData(input){
+  const file=input.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const parsed=JSON.parse(e.target.result);
+      if(!parsed.state) throw new Error('Invalid backup file — no state found.');
+      if(!confirm('This will replace your current progress with the imported data. Continue?')) return;
+      STATE=parsed.state;
+      saveState();
+      renderThisWeek();
+      renderDashboard();
+      renderBothPlanners();
+      alert('Progress imported successfully!');
+    } catch(err){
+      alert('Import failed: '+err.message);
+    } finally{
+      input.value=''; // reset so the same file can be re-imported if needed
+    }
+  };
+  reader.readAsText(file);
+}
+
+function init(){
+  loadState();
+  seedRecommended();
+  renderThisWeek();
+  renderDashboard();
+  renderBothPlanners();
+  applyInitialEmbedTab();
+}
+
+// ══════════════════════════════════════════════════════════════
+//  THIS WEEK TAB
+// ══════════════════════════════════════════════════════════════
+const GI_LECTURES = [{"d":"2026-04-06","title":"IL GI Overview","lecturer":"Mulroney","start":"08:00","end":"08:30","course":"Phys","location":"Pre-recorded","link":"https://georgetown.instructure.com/courses/228454/pages/il-gi-overview"},{"d":"2026-04-06","title":"Introduction/Motility","lecturer":"Mulroney","start":"09:00","end":"10:00","course":"Phys","location":"GA-2/4","link":"https://georgetown.instructure.com/courses/228454/pages/introduction-slash-motility"},{"d":"2026-04-06","title":"Anterior Abdominal Wall/Hernia","lecturer":"Uren","start":"10:00","end":"11:00","course":"Anat","location":"GA-2/4","link":"https://georgetown.instructure.com/courses/228454/pages/anterior-abdominal-wall-slash-hernia"},{"d":"2026-04-06","title":"Esophagus/Stomach/Intestines","lecturer":"Notario","start":"11:00","end":"12:00","course":"Hist","location":"GA-2/4","link":"https://georgetown.instructure.com/courses/228454/pages/esophagus-slash-stomach-slash-intestines"},{"d":"2026-04-06","title":"IL Bile Workshop with Quizzes","lecturer":"Mulroney","start":"13:00","end":"14:00","course":"Phys","location":"Pre-recorded","link":"https://georgetown.instructure.com/courses/228454/pages/il-bile-workshop-and-making-a-micelle"},{"d":"2026-04-06","title":"IL Making a Micelle","lecturer":"Mulroney","start":"14:00","end":"14:15","course":"Phys","location":"Pre-recorded","link":"https://georgetown.instructure.com/courses/228454/pages/il-bile-workshop-and-making-a-micelle"},{"d":"2026-04-06","title":"IL GI Primer","lecturer":"Gallicano","start":"14:30","end":"15:00","course":"Embr","location":"Pre-recorded","link":"https://georgetown.instructure.com/courses/218027/pages/block-4-primer-materials"},{"d":"2026-04-07","title":"Abdominal Viscera I: Gastrointestinal Tract","lecturer":"Uren","start":"09:00","end":"10:00","course":"Anat","location":"GA-2/4","link":"https://georgetown.instructure.com/courses/228454/pages/abdominal-viscera-i-gastrointestinal-tract"},{"d":"2026-04-07","title":"Secretions I","lecturer":"Mulroney","start":"10:00","end":"11:00","course":"Phys","location":"GA-2/4","link":"https://georgetown.instructure.com/courses/228454/pages/secretions-i-ii"},{"d":"2026-04-07","title":"Secretions II","lecturer":"Mulroney","start":"11:00","end":"12:00","course":"Phys","location":"GA-2/4","link":"https://georgetown.instructure.com/courses/228454/pages/secretions-i-ii"},{"d":"2026-04-07","title":"GA Lab #1: Abdominal Wall and Inguinal Region","lecturer":"GA Faculty","start":"13:00","end":"17:00","course":"Anat","location":"GA Labs","link":"https://georgetown.instructure.com/courses/218039/pages/gi-ga-lab-2"},{"d":"2026-04-08","title":"GI Embryology","lecturer":"Coker","start":"09:00","end":"10:00","course":"Embr","location":"GA-2/4","link":"https://georgetown.instructure.com/courses/228454/pages/gi-embryology"},{"d":"2026-04-08","title":"Abdominal Viscera II: Liver and Pancreas","lecturer":"Uren","start":"10:00","end":"11:00","course":"Anat","location":"GA-2/4","link":"https://georgetown.instructure.com/courses/228454/pages/abdominal-viscera-ii-liver-and-pancreas"},{"d":"2026-04-08","title":"Overview of the Liver","lecturer":"Mulroney","start":"11:00","end":"12:00","course":"Phys","location":"GA-2/4","link":"https://georgetown.instructure.com/courses/228454/pages/overview-of-the-liver"},{"d":"2026-04-08","title":"Optional Block 3 Post-Exam Review","lecturer":"N/A","start":"13:30","end":"15:30","course":"N/A","location":"GA-2/4","link":""},{"d":"2026-04-09","title":"Esophagus/Stomach Disease","lecturer":"Zeck","start":"09:00","end":"10:00","course":"Path","location":"GA-2/4","link":"https://georgetown.instructure.com/courses/228454/pages/esophagus-slash-stomach-disease"},{"d":"2026-04-09","title":"Digestion/Absorption I","lecturer":"Mulroney","start":"10:00","end":"11:00","course":"Phys","location":"GA-2/4","link":"https://georgetown.instructure.com/courses/228454/pages/digestion-slash-absorption-i-ii"},{"d":"2026-04-09","title":"Digestion/Absorption II","lecturer":"Mulroney","start":"11:00","end":"12:00","course":"Phys","location":"GA-2/4","link":"https://georgetown.instructure.com/courses/228454/pages/digestion-slash-absorption-i-ii"},{"d":"2026-04-09","title":"GA Lab #2: Peritoneal Cavity and Foregut Derivatives","lecturer":"GA Faculty","start":"13:00","end":"17:00","course":"Anat","location":"GA Labs","link":"https://georgetown.instructure.com/courses/218039/pages/gi-ga-lab-2"},{"d":"2026-04-10","title":"Intestinal Pathology I","lecturer":"Zeck","start":"09:00","end":"10:00","course":"Path","location":"GA-2/4","link":"https://georgetown.instructure.com/courses/228454/pages/intestinal-pathology-i"},{"d":"2026-04-10","title":"Intestinal Pathology II","lecturer":"Zeck","start":"10:00","end":"11:00","course":"Path","location":"GA-2/4","link":"https://georgetown.instructure.com/courses/228454/pages/intestinal-pathology-ii"},{"d":"2026-04-10","title":"MANDATORY Foundational Rounds","lecturer":"N/A","start":"11:00","end":"12:00","course":"N/A","location":"DML","link":"https://georgetown.instructure.com/courses/218100/pages/block-4-foundational-rounds"},{"d":"2026-04-13","title":"Poisoning Conference and Cases","lecturer":"Clancy","start":"13:00","end":"14:30","course":"Pharm","location":"GA-2/4","link":""},{"d":"2026-04-14","title":"GI Lab","lecturer":"Furlong","start":"09:00","end":"10:00","course":"Path","location":"Zoom","link":""},{"d":"2026-04-14","title":"Treatment of Peptic Ulcer Slides","lecturer":"Mulroney","start":"10:00","end":"11:00","course":"Pharm","location":"Zoom","link":"https://georgetown.instructure.com/courses/228454/pages/treatment-of-peptic-ulcer-gerd-and-other-gi-disorders"},{"d":"2026-04-14","title":"Treatment of GERD and Other GI Disorders","lecturer":"Mulroney","start":"11:00","end":"12:00","course":"Pharm","location":"Zoom","link":"https://georgetown.instructure.com/courses/228454/pages/treatment-of-peptic-ulcer-gerd-and-other-gi-disorders"},{"d":"2026-04-14","title":"GI Development Primer Quiz DUE 11:59","lecturer":"N/A","start":"17:00","end":"17:30","course":"Embr","location":"N/A","link":""},{"d":"2026-04-15","title":"GI Infections","lecturer":"Kumar, P.","start":"09:00","end":"10:30","course":"Micro","location":"Zoom","link":""},{"d":"2026-04-15","title":"Parasitology","lecturer":"Timpone","start":"10:30","end":"12:00","course":"Micro","location":"Zoom","link":""},{"d":"2026-04-15","title":"GA Lab #3: Midgut and Hindgut Derivatives","lecturer":"GA Faculty","start":"13:00","end":"17:00","course":"Anat","location":"GA Labs","link":"https://georgetown.instructure.com/courses/218039/pages/gi-ga-lab-2"},{"d":"2026-04-16","title":"Intestinal Pathology Case Review","lecturer":"Mattar","start":"09:00","end":"10:00","course":"Path","location":"GA-2/4","link":"https://georgetown.instructure.com/courses/228454/pages/intestinal-pathology-case-review"},{"d":"2026-04-16","title":"Retroperitoneum","lecturer":"Uren","start":"10:00","end":"11:00","course":"Anat","location":"GA-2/4","link":"https://georgetown.instructure.com/courses/228454/pages/retroperitoneum"},{"d":"2026-04-16","title":"Medically Assisted Nutrition and Hydration: Ethical Issues and Clinical Grounding","lecturer":"Sheehan","start":"13:00","end":"14:00","course":"Ethics","location":"Pre-recorded","link":"https://georgetown.instructure.com/courses/228454/pages/medically-assisted-nutrition-and-hydration-ethical-issues-and-clinical-grounding"},{"d":"2026-04-16","title":"IL Trudy's Ulcer","lecturer":"Mulroney","start":"14:00","end":"15:00","course":"Phys","location":"Pre-recorded","link":"https://georgetown.instructure.com/courses/228454/pages/il-trudys-ulcer-2"},{"d":"2026-04-17","title":"Abdominal Pain","lecturer":"Alimi","start":"09:00","end":"10:00","course":"DRT","location":"GA-2/4","link":""},{"d":"2026-04-17","title":"MANDATORY Foundational Round","lecturer":"N/A","start":"11:00","end":"12:00","course":"N/A","location":"DML","link":"https://georgetown.instructure.com/courses/218100/pages/block-4-foundational-rounds"},{"d":"2026-04-20","title":"Liver and Biliary Tract","lecturer":"Djakiew","start":"11:00","end":"12:00","course":"Hist","location":"GA-2/4","link":""},{"d":"2026-04-21","title":"Liver Disease I","lecturer":"Furlong","start":"09:00","end":"10:00","course":"Path","location":"GA-2/4","link":""},{"d":"2026-04-21","title":"Liver Disease II","lecturer":"Furlong","start":"10:00","end":"11:00","course":"Path","location":"GA-2/4","link":""},{"d":"2026-04-21","title":"Liver Enzymes","lecturer":"Thomas","start":"11:00","end":"12:00","course":"DRT","location":"GA-2/4","link":""},{"d":"2026-04-21","title":"GA Lab #4: Posterior Abdominal Wall","lecturer":"GA Faculty","start":"13:00","end":"16:00","course":"Anat","location":"GA Labs","link":"https://georgetown.instructure.com/courses/218039/pages/gi-ga-lab-2"},{"d":"2026-04-21","title":"Optional GA Review with Dr. Uren","lecturer":"Uren","start":"16:00","end":"17:00","course":"Anat","location":"LA-6","link":""},{"d":"2026-04-21","title":"Poisoning Cases DUE 11:59pm","lecturer":"N/A","start":"17:00","end":"17:30","course":"Pharm","location":"N/A","link":""},{"d":"2026-04-22","title":"Pancreas Disease","lecturer":"Wood","start":"09:00","end":"10:00","course":"Path","location":"Zoom","link":""},{"d":"2026-04-22","title":"Liver/Pancreas Lab","lecturer":"Furlong","start":"10:00","end":"11:00","course":"Path","location":"Zoom","link":""},{"d":"2026-04-22","title":"Mandatory Education Case Review Group A (Iron overload)","lecturer":"Path Resident","start":"13:00","end":"14:00","course":"Path","location":"Zoom","link":""},{"d":"2026-04-23","title":"Mandatory Education Case Review Group B (Iron overload)","lecturer":"Path Resident","start":"13:00","end":"14:00","course":"Path","location":"Zoom","link":""},{"d":"2026-04-24","title":"PSW Cholera/Lactose Intolerance","lecturer":"Mulroney","start":"09:00","end":"10:00","course":"Phys","location":"GA-2/4","link":"https://georgetown.instructure.com/courses/228454/pages/psw-cholera-slash-lactose-intolerance"},{"d":"2026-04-24","title":"MANDATORY Foundational Rounds","lecturer":"N/A","start":"11:00","end":"12:00","course":"N/A","location":"DML","link":"https://georgetown.instructure.com/courses/218100/pages/block-4-foundational-rounds"},{"d":"2026-04-24","title":"Optional GI GA Practical Review (Snowball","lecturer":"Coker","start":"13:00","end":"14:30","course":"Anat","location":"GA Labs","link":""},{"d":"2026-04-26","title":"Trudy's Ulcer Assignment DUE 11:59pm","lecturer":"Mulroney","start":"17:00","end":"17:30","course":"Phys","location":"N/A","link":""},{"d":"2026-04-27","title":"GI GA Written Exam","lecturer":"N/A","start":"09:00","end":"09:45","course":"Anat","location":"LA-6","link":""},{"d":"2026-04-27","title":"GI GA Practical Exam","lecturer":"N/A","start":"10:00","end":"17:00","course":"Anat","location":"GA Labs","link":""},{"d":"2026-04-27","title":"IL Clinical Conundrum - Mr. Q","lecturer":"Verbesey","start":"13:00","end":"14:00","course":"Phys","location":"Assignment","link":"https://georgetown.instructure.com/courses/228454/pages/clinical-conundrum"},{"d":"2026-04-28","title":"Module Wrap-Up","lecturer":"Carroll","start":"09:00","end":"10:00","course":"Path","location":"GA-2/4","link":""},{"d":"2026-04-29","title":"PE-Advanced Abdominal Exam","lecturer":"Alimi","start":"13:00","end":"14:00","course":"CP","location":"GA-2/4","link":""},{"d":"2026-04-29","title":"Abdominal Imaging","lecturer":"Krishnan","start":"14:00","end":"15:00","course":"DRT","location":"GA-2/4","link":"https://georgetown.instructure.com/courses/228454/pages/abdominal-imaging"},{"d":"2026-04-30","title":"Mandatory - Clinical Conundrum - Mr. Q","lecturer":"Verbesey","start":"09:00","end":"10:00","course":"Phys","location":"GA-2/4","link":""},{"d":"2026-05-01","title":"PSW Chronic Pancreatitis","lecturer":"Mulroney","start":"10:00","end":"11:00","course":"Phys","location":"GA-2/4","link":"https://georgetown.instructure.com/courses/228454/pages/psw-chronic-pancreatitis"},{"d":"2026-05-01","title":"MANDATORY Foundational Rounds","lecturer":"N/A","start":"11:00","end":"12:00","course":"N/A","location":"DML","link":"https://georgetown.instructure.com/courses/218100/pages/block-4-foundational-rounds"},{"d":"2026-05-02","title":"Phys Quiz Open","lecturer":"Mulroney","start":"09:00","end":"10:00","course":"Phys","location":"N/A","link":""},{"d":"2026-05-03","title":"Phys Quiz DUE at 11:59pm","lecturer":"Mulroney","start":"09:00","end":"10:00","course":"Phys","location":"N/A","link":""},{"d":"2026-05-05","title":"GI POCUS","lecturer":"Poon","start":"13:00","end":"14:00","course":"CP","location":"GA-2/4","link":""},{"d":"2026-05-07","title":"MANDATORY - Path Gross Conference","lecturer":"Path Resident","start":"13:00","end":"14:00","course":"Path","location":"GA-2/4","link":""},{"d":"2026-05-08","title":"MANDATORY Foundational Rounds","lecturer":"N/A","start":"11:00","end":"12:00","course":"N/A","location":"DML","link":"https://georgetown.instructure.com/courses/218100/pages/block-4-foundational-rounds"},{"d":"2026-05-08","title":"Optional Phys Quiz Review","lecturer":"Mulroney","start":"12:00","end":"12:30","course":"Phys","location":"N/A","link":""},{"d":"2026-05-15","title":"Optional GI & RPD GA Written Post-Exam Review","lecturer":"GA Faculty","start":"12:00","end":"12:30","course":"N/A","location":"LA-6","link":""},{"d":"2026-05-15","title":"Optional Review with Dr. Mulroney","lecturer":"Mulroney","start":"13:00","end":"14:00","course":"Phys/Pharm","location":"Zoom","link":""},{"d":"2026-05-17","title":"Radiology Case Assignment DUE at 11:59 PM","lecturer":"N/A","start":"09:30","end":"10:00","course":"DRT","location":"N/A","link":""},{"d":"2026-05-18","title":"DRT Mandatory Session A - Radiology Review","lecturer":"Thakkar/Haji-Momenian","start":"15:00","end":"16:30","course":"DRT","location":"See DRT","link":""},{"d":"2026-05-20","title":"DRT Mandatory Session B - Radiology Review","lecturer":"Thakkar/Haji-Momenian","start":"14:30","end":"16:00","course":"DRT","location":"See DRT","link":""},{"d":"2026-05-22","title":"MANDATORY Foundational Rounds","lecturer":"N/A","start":"11:00","end":"12:00","course":"N/A","location":"DML","link":"https://georgetown.instructure.com/courses/218100/pages/block-4-foundational-rounds"},{"d":"2026-06-01","title":"GI Module Exam","lecturer":"N/A","start":"09:00","end":"13:00","course":"N/A","location":"N/A","link":""}];
+
+const COURSE_TAG_MAP = {
+  'Phys':  ['#dbeafe','#1e40af'], 'Anat':  ['#dcfce7','#166534'],
+  'Path':  ['#ffe4e6','#9f1239'], 'Pharm': ['#d1fae5','#065f46'],
+  'Embr':  ['#ede9fe','#5b21b6'], 'Hist':  ['#f3e8ff','#6b21a8'],
+  'Micro': ['#fef3c7','#92400e'], 'DRT':   ['#dbeafe','#1e3a8a'],
+  'Ethics':['#fce7f3','#9d174d'], 'CP':    ['#e0f2fe','#0369a1'],
+  'N/A':   ['#f1f5f9','#64748b'],
+};
+
+function isoMonday(d){
+  // Returns a new Date set to Monday 00:00 of the week containing d
+  const day=d.getDay(); // 0=Sun,1=Mon,...
+  const diff=day===0?-6:1-day;
+  const m=new Date(d);
+  m.setDate(d.getDate()+diff);
+  m.setHours(0,0,0,0);
+  return m;
+}
+
+function toISODate(d){
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function fmtDate(d){
+  return d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+}
+
+function renderThisWeek(){
+  const now=new Date();
+  const todayISO=toISODate(now);
+
+  // ── current week Mon-Fri ─────────────────────────────────
+  const mon=isoMonday(now);
+  const weekDays=[];
+  for(let i=0;i<5;i++){
+    const d=new Date(mon);
+    d.setDate(mon.getDate()+i);
+    weekDays.push(d);
+  }
+
+  const rangeEl=document.getElementById('thisweek-range');
+  if(rangeEl) rangeEl.textContent=`${fmtDate(weekDays[0])} – ${fmtDate(weekDays[4])}`;
+
+  // ── render calendar ──────────────────────────────────────
+  const cal=document.getElementById('thisweek-cal');
+  cal.innerHTML='';
+  const DAY_NAMES=['Mon','Tue','Wed','Thu','Fri'];
+  weekDays.forEach((d,i)=>{
+    const iso=toISODate(d);
+    const isToday=iso===todayISO;
+    const dayLecs=GI_LECTURES.filter(l=>l.d===iso);
+
+    const lecsHtml=dayLecs.length===0
+      ?`<div class="wday-none">No lectures</div>`
+      :dayLecs.map(l=>{
+          const [bg,tx]=COURSE_TAG_MAP[l.course]||COURSE_TAG_MAP['N/A'];
+          const name=l.link
+            ?`<a href="${l.link}" target="_blank" rel="noopener">${l.title}</a>`
+            :l.title;
+          const who=(l.lecturer&&l.lecturer!=='N/A')?l.lecturer:'';
+          const loc=(l.location&&l.location!=='N/A'&&l.location!=='N/A')?l.location:'';
+          const meta=[who,loc].filter(Boolean).join(' · ');
+          return `<div class="wday-lec-row">
+            <div class="wday-time">${l.start}</div>
+            <div class="wday-lec-info">
+              <div class="wday-lec-name">${name}</div>
+              <div class="wday-lec-meta">
+                <span class="wday-course-tag" style="background:${bg};color:${tx}">${l.course}</span>
+                ${meta?`<span>${meta}</span>`:''}
+              </div>
+            </div>
+          </div>`;
+        }).join('');
+
+    cal.innerHTML+=`<div class="wday-col${isToday?' today-col':''}">
+      <div class="wday-hdr${isToday?' today-hdr':''}">
+        ${DAY_NAMES[i]}${isToday?' · Today':''}
+        <span class="wday-date-sub">${d.toLocaleDateString('en-US',{month:'short',day:'numeric'})}</span>
+      </div>
+      <div class="wday-lecs">${lecsHtml}</div>
+    </div>`;
+  });
+
+  // ── previous week backlog ────────────────────────────────
+  const prevMon=new Date(mon);
+  prevMon.setDate(mon.getDate()-7);
+  const prevFri=new Date(prevMon);
+  prevFri.setDate(prevMon.getDate()+4);
+
+  const prevLbl=document.getElementById('prevweek-label');
+  if(prevLbl) prevLbl.textContent=`${fmtDate(prevMon)} – ${fmtDate(prevFri)}`;
+
+  // Week label strings matching LECTURES data (Wk 1 / Wk 2 / Wk 3)
+  // Map ISO Mon dates to week labels
+  const WEEK_MONS={
+    '2026-04-06':'Wk 1','2026-04-13':'Wk 2','2026-04-20':'Wk 3'
+  };
+  const prevMonISO=toISODate(prevMon);
+  const prevWkLabel=WEEK_MONS[prevMonISO]||null;
+
+  const backlogGrid=document.getElementById('backlog-grid');
+  const backlogEmpty=document.getElementById('backlog-empty');
+  backlogGrid.innerHTML='';
+
+  if(!prevWkLabel){
+    backlogEmpty.style.display='block';
+    return;
+  }
+
+  const prevLecs=LECTURES.filter(l=>l.week===prevWkLabel);
+  let anyBacklog=false;
+
+  prevLecs.forEach(l=>{
+    const ls=STATE[l.id];
+    const rows=[];
+
+    // IH
+    if(ls.IH.included&&!ls.IH.watch){
+      rows.push({res:'IH',label:'🏥 In-House',min:l.ihMin});
+    }
+    // TP resources
+    TP_RES.forEach(r=>{
+      if(!ls[r].included||!l.res[r]||ls[r].watch) return;
+      const m=RES_META[r];
+      rows.push({res:r,label:`${m.emoji} ${m.label}`,min:l.res[r].min||0});
+    });
+
+    if(!rows.length) return;
+    anyBacklog=true;
+
+    const totalRem=rows.reduce((a,r)=>a+r.min,0);
+    const rowsHtml=rows.map(r=>{
+      const resMeta=r.res==='IH'
+        ?{bg:'var(--c-ih-bg)',br:'var(--c-ih-br)',tx:'var(--c-ih-tx)'}
+        :{bg:`var(--c-${r.res.toLowerCase()}-bg)`,br:`var(--c-${r.res.toLowerCase()}-br)`,tx:`var(--c-${r.res.toLowerCase()}-tx)`};
+      return `<div class="backlog-row">
+        <span class="backlog-res-pill" style="background:${resMeta.bg};border-color:${resMeta.br};color:${resMeta.tx}">${r.label}</span>
+        <span class="backlog-min">${r.min} min</span>
+      </div>`;
+    }).join('');
+
+    backlogGrid.innerHTML+=`<div class="backlog-card">
+      <div class="backlog-card-hdr">
+        <div><span style="font-size:.65rem;color:var(--ink-3);font-weight:400;margin-right:4px">Lec ${l.num}</span>${l.title}</div>
+        <span class="backlog-rem">${totalRem} min left</span>
+      </div>
+      <div class="backlog-rows">${rowsHtml}</div>
+    </div>`;
+  });
+
+  backlogEmpty.style.display=anyBacklog?'none':'block';
+}
+
+
+init();
+</script>
+</body>
+</html>
