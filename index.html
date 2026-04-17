@@ -19,10 +19,10 @@
        DESIGN TOKENS — light mode defaults
     ══════════════════════════════════════ */
     :root {
-      --sb:         #1c1400;
+      --sb:         #2e2405;
       --sb-hover:   rgba(255,255,255,0.07);
       --sb-line:    rgba(255,255,255,0.09);
-      --bg:         #fefbf0;
+      --bg:         #FEFCE8;
       --surface:    #ffffff;
       --ink:        #0f172a;
       --ink-2:      #334155;
@@ -30,26 +30,26 @@
       --rule:       #e2e8f0;
       --card-sh:    0 1px 3px rgba(0,0,0,0.05);
       --bc-blue-bg: #eef4ff; --bc-blue-br: #c7d9f5; --bc-blue-tx: #1f4b99;
-      --bc-grn-bg:  #edfdf4; --bc-grn-br:  #a7f3c9; --bc-grn-tx:  #166534;
-      --bc-ros-bg:  #fff1f2; --bc-ros-br:  #fda4af; --bc-ros-tx:  #9f1239;
+      --bc-grn-bg:  #fff1f2; --bc-grn-br:  #fde68a; --bc-grn-tx:  #CA8A04;
+      --bc-ros-bg:  #fff1f2; --bc-ros-br:  #fde68a; --bc-ros-tx:  #CA8A04;
       --bc-pur-bg:  #f5f0ff; --bc-pur-br:  #d8b4fe; --bc-pur-tx:  #6d28d9;
-      --hero-em:    #854d0e;
+      --hero-em:    #CA8A04;
     }
 
     /* ── DARK MODE ── */
     [data-theme="dark"] {
-      --bg:         #1a1200;
-      --surface:    #261d08;
+      --bg:         #1e1800;
+      --surface:    #3d2f08;
       --ink:        #f1f5f9;
       --ink-2:      #cbd5e1;
       --ink-3:      #94a3b8;
-      --rule:       #4a3510;
+      --rule:       #5b4608;
       --card-sh:    0 1px 3px rgba(0,0,0,0.4);
       --bc-blue-bg: #1a2744; --bc-blue-br: #2d4a8a; --bc-blue-tx: #6ba3e8;
-      --bc-grn-bg:  #0a2218; --bc-grn-br:  #1a5c35; --bc-grn-tx:  #5dbf87;
-      --bc-ros-bg:  #250a12; --bc-ros-br:  #6b1a2e; --bc-ros-tx:  #e06b8a;
+      --bc-grn-bg:  #1f1700; --bc-grn-br:  #7a5f10; --bc-grn-tx:  #fbbf24;
+      --bc-ros-bg:  #250a12; --bc-ros-br:  #5b4608; --bc-ros-tx:  #fbbf24;
       --bc-pur-bg:  #1a1033; --bc-pur-br:  #4c1d95; --bc-pur-tx:  #a78bfa;
-      --hero-em:    #fbbf24;
+      --hero-em:    #EAB308;
     }
 
     html, body { height: 100%; }
@@ -95,17 +95,6 @@
       letter-spacing: -0.01em; flex: 1;
       text-shadow: 0 1px 8px rgba(0,0,0,0.25);
     }
-
-    .dark-toggle {
-      width: 28px; height: 28px; border-radius: 7px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.82rem; color: rgba(255,255,255,0.7);
-      flex-shrink: 0;
-      transition: background 0.14s;
-    }
-    .dark-toggle:hover { background: rgba(255,255,255,0.16); }
 
     .sb-block {
       font-size: 0.72rem; font-weight: 500;
@@ -211,6 +200,31 @@
 
     .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; }
 
+    /* ── HERO JUMP BUTTONS ── */
+    .hero-jump {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+      margin-top: 6px;
+    }
+    @media (max-width: 1024px) { .hero-jump { grid-template-columns: repeat(2, 1fr); } }
+    .hero-jump-btn {
+      display: flex; align-items: center; justify-content: center; gap: 7px;
+      padding: 10px 14px; border-radius: 10px;
+      background: var(--surface); border: 1px solid var(--rule);
+      font-size: 0.82rem; font-weight: 700; color: var(--ink-2);
+      box-shadow: var(--card-sh);
+      transition: border-color 0.15s, color 0.15s, transform 0.15s, background 0.15s;
+      text-align: center; line-height: 1.2;
+    }
+    .hero-jump-btn:hover {
+      border-color: var(--hero-em); color: var(--hero-em);
+      transform: translateY(-1px);
+    }
+    .hero-jump-icon { font-size: 1rem; line-height: 1; }
+    @media (max-width: 680px) {
+      .hero-jump { grid-template-columns: 1fr; }
+      .hero-jump-btn { padding: 8px 12px; font-size: 0.78rem; }
+    }
+
     .hero-tag {
       display: inline-flex; align-items: center; gap: 5px;
       padding: 5px 12px; border-radius: 999px;
@@ -228,9 +242,9 @@
       letter-spacing: -0.02em; color: var(--ink); white-space: nowrap;
     }
 
-    .section-divider-line { flex: 1; height: 1px; background: #854d0e; }
+    .section-divider-line { flex: 1; height: 1px; background: #CA8A04; }
 
-    .section-block { margin-bottom: 48px; }
+    .section-block { margin-bottom: 36px; }
 
     /* ══════════════════════════════════════
        BENTO STUDY TOOL CARDS
@@ -238,55 +252,56 @@
     .bento {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 14px;
+      gap: 12px;
     }
+    .bento-3 { grid-template-columns: repeat(3, 1fr); }
 
     .bcard {
-      border-radius: 20px; padding: 24px;
+      border-radius: 14px; padding: 16px;
       display: flex; flex-direction: column;
       border: 1px solid transparent;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       position: relative; overflow: hidden;
     }
-    .bcard:hover { transform: translateY(-3px); }
+    .bcard:hover { transform: translateY(-2px); }
 
     .bcard-watermark {
-      position: absolute; bottom: -14px; right: -8px;
-      font-size: 6.5rem; opacity: 0.06;
+      position: absolute; bottom: -10px; right: -6px;
+      font-size: 4.8rem; opacity: 0.06;
       pointer-events: none; user-select: none; line-height: 1;
     }
 
-    .bcard-header { display: flex; align-items: center; gap: 13px; margin-bottom: 12px; }
+    .bcard-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
 
     .bcard-icon {
-      width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0;
+      width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
       background: rgba(255,255,255,0.75);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.10);
-      display: flex; align-items: center; justify-content: center; font-size: 1.45rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
     }
-    .bcard-feature .bcard-icon { width: 56px; height: 56px; font-size: 1.7rem; }
+    .bcard-feature .bcard-icon { width: 42px; height: 42px; font-size: 1.3rem; }
 
     .bcard-header-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
 
     .bcard-label {
-      font-size: 0.62rem; font-weight: 700;
+      font-size: 0.58rem; font-weight: 700;
       letter-spacing: 0.10em; text-transform: uppercase; opacity: 0.65;
     }
 
     .bcard h3 {
-      font-size: 1.05rem; font-weight: 800;
-      letter-spacing: -0.025em; color: var(--ink); margin: 0; line-height: 1.2;
+      font-size: 0.92rem; font-weight: 800;
+      letter-spacing: -0.02em; color: var(--ink); margin: 0; line-height: 1.2;
     }
-    .bcard-feature h3 { font-size: 1.2rem; }
+    .bcard-feature h3 { font-size: 1rem; }
 
     .bcard p {
-      font-size: 0.845rem; color: var(--ink-2);
-      line-height: 1.65; flex: 1; margin-bottom: 20px;
+      font-size: 0.76rem; color: var(--ink-2);
+      line-height: 1.5; flex: 1; margin-bottom: 12px;
     }
 
     .bcard-cta {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 0.82rem; font-weight: 700;
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 0.72rem; font-weight: 700;
       transition: gap 0.14s; align-self: flex-start;
     }
     .bcard:hover .bcard-cta { gap: 10px; }
@@ -299,13 +314,54 @@
     .bc-green:hover { box-shadow: 0 12px 40px rgba(22,101,52,0.14), 0 3px 10px rgba(22,101,52,0.07); }
     .bc-green .bcard-cta, .bc-green .bcard-label { color: var(--bc-grn-tx); }
 
-    .bc-rose  { background: var(--bc-ros-bg); border-color: var(--bc-ros-br); }
-    .bc-rose:hover  { box-shadow: 0 12px 40px rgba(159,18,57,0.14), 0 3px 10px rgba(159,18,57,0.07); }
-    .bc-rose  .bcard-cta, .bc-rose  .bcard-label { color: var(--bc-ros-tx); }
+    /* Exam Study Tools cards — pink background + original darker pink outline */
+    .bc-rose  { background: #fff1f2; border-color: #fda4af; }
+    .bc-rose:hover  {
+      border-color: #fb7185;
+      background: #ffe4e6;
+      box-shadow: 0 12px 40px rgba(159,18,57,0.14), 0 3px 10px rgba(159,18,57,0.07);
+    }
+    /* Updated font styling for EXAM · 01/02/03 labels and Open Section / Coming Soon CTAs */
+    .bc-rose .bcard-label {
+      color: #5b4608;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      opacity: 1;
+      font-family: 'Inter', -apple-system, sans-serif;
+    }
+    .bc-rose .bcard-cta {
+      color: #5b4608;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      font-family: 'Inter', -apple-system, sans-serif;
+    }
+    .bc-rose h3 { color: #3d2f08; }
+    .bc-rose p  { color: #5b4608; opacity: 0.82; }
 
     .bc-purple { background: var(--bc-pur-bg); border-color: var(--bc-pur-br); }
     .bc-purple:hover { box-shadow: 0 12px 40px rgba(109,40,217,0.14), 0 3px 10px rgba(109,40,217,0.07); }
     .bc-purple .bcard-cta, .bc-purple .bcard-label { color: var(--bc-pur-tx); }
+
+    .bc-dkpurple { background: #4c1d95; border-color: #6d28d9; color: #f1f5f9; }
+    .bc-dkpurple:hover { box-shadow: 0 12px 40px rgba(76,29,149,0.35), 0 3px 10px rgba(76,29,149,0.2); }
+    .bc-dkpurple h3 { color: #f1f5f9; }
+    .bc-dkpurple p  { color: #e9d5ff; }
+    .bc-dkpurple .bcard-label { color: #c4b5fd; }
+    .bc-dkpurple .bcard-cta   { color: #4ade80; }
+    .bc-dkpurple .bcard-icon  { background: rgba(255,255,255,0.18); }
+    .bc-dkpurple .bcard-watermark { color: #fff; }
+
+    .bc-dark { background: #5b4608; border-color: #854d0e; color: #f1f5f9; }
+    .bc-dark:hover { box-shadow: 0 12px 40px rgba(91,70,8,0.35), 0 3px 10px rgba(91,70,8,0.2); }
+    .bc-dark h3 { color: #f1f5f9; }
+    .bc-dark p  { color: #fef3c7; }
+    .bc-dark .bcard-label { color: #fde68a; }
+    .bc-dark .bcard-cta   { color: #fef08a; }
+    .bc-dark .bcard-icon  { background: rgba(255,255,255,0.18); }
+    .bc-dark .bcard-watermark { color: #fff; }
 
     /* ══════════════════════════════════════
        UTILITY ROWS
@@ -366,22 +422,35 @@
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 500;
       background: var(--surface);
       border-top: 1px solid var(--rule);
-      padding: 8px 0 max(8px, env(safe-area-inset-bottom));
+      padding: 6px 8px max(8px, env(safe-area-inset-bottom));
       box-shadow: 0 -4px 20px rgba(0,0,0,0.10);
       transition: background 0.2s, border-color 0.2s;
     }
 
-    .mobile-nav-items { display: flex; justify-content: space-around; }
+    .mobile-nav-group { padding: 4px 2px; }
+    .mobile-nav-group + .mobile-nav-group {
+      border-top: 1px solid var(--rule);
+      margin-top: 2px; padding-top: 6px;
+    }
+    .mobile-nav-label {
+      font-size: 0.58rem; font-weight: 800;
+      letter-spacing: 0.10em; text-transform: uppercase;
+      color: var(--ink-3); padding: 0 6px 4px;
+    }
+
+    .mobile-nav-items { display: flex; justify-content: space-around; gap: 4px; }
 
     .mobile-nav-item {
+      flex: 1; min-width: 0;
       display: flex; flex-direction: column; align-items: center; gap: 3px;
-      padding: 4px 10px; color: var(--ink-3);
-      font-size: 0.6rem; font-weight: 600; letter-spacing: 0.02em;
+      padding: 4px 6px; color: var(--ink-3);
+      font-size: 0.58rem; font-weight: 600; letter-spacing: 0.02em;
+      text-align: center; line-height: 1.15;
       transition: color 0.13s;
     }
-    .mobile-nav-item:hover { color: #854d0e; }
+    .mobile-nav-item:hover { color: #CA8A04; }
 
-    .mobile-nav-icon { font-size: 1.25rem; line-height: 1; }
+    .mobile-nav-icon { font-size: 1.2rem; line-height: 1; }
 
     /* ══════════════════════════════════════
        RESPONSIVE
@@ -404,25 +473,29 @@
       /* Hide quick-access links from top bar on mobile — accessed via bottom nav */
       .sb-ext-link { display: none; }
 
-      .main-inner { padding: 24px 18px 100px; }
+      .main-inner { padding: 24px 18px 160px; }
 
       /* Move feedback FAB above mobile nav */
-      .feedback-fab { top: auto; bottom: 72px; right: 16px; font-size: 0.74rem; padding: 6px 12px; }
+      .feedback-fab { top: auto; bottom: 140px; right: 16px; font-size: 0.74rem; padding: 6px 12px; }
 
       .mobile-nav { display: flex; }
     }
 
+    @media (max-width: 900px) {
+      .bento-3 { grid-template-columns: 1fr 1fr; }
+    }
+
     @media (max-width: 680px) {
-      .bento { grid-template-columns: 1fr; }
+      .bento, .bento-3 { grid-template-columns: 1fr; }
       .bcard-feature { grid-row: span 1; }
 
       /* Give Today's Lectures a bounded height when stacked */
       .today-lec-scroll { max-height: 260px; }
 
       /* Slightly more compact cards */
-      .bcard { padding: 18px; border-radius: 16px; }
-      .bcard h3 { font-size: 0.98rem; }
-      .bcard-icon { width: 40px; height: 40px; font-size: 1.2rem; }
+      .bcard { padding: 14px; border-radius: 12px; }
+      .bcard h3 { font-size: 0.9rem; }
+      .bcard-icon { width: 32px; height: 32px; font-size: 1rem; }
 
       .workflow-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
       .wf-item { padding: 0; border-right: none; border-bottom: 1px solid var(--rule); padding-bottom: 20px; }
@@ -450,6 +523,68 @@
     .lec-tag { display: inline-block; padding: 1px 5px; border-radius: 4px; font-size: 0.66rem; font-weight: 700; margin-right: 4px; }
     .lec-none { font-size: 0.82rem; color: var(--ink-3); font-style: italic; padding: 4px 0; }
 
+    /* ══════════════════════════════════════
+       MINI CHECKLIST LINK CARD
+    ══════════════════════════════════════ */
+    .mini-link-card {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 14px;
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      text-decoration: none;
+      transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s, background 0.15s;
+      box-shadow: var(--card-sh);
+    }
+    .mini-link-card:hover {
+      border-color: var(--ink-3);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .mlc-icon {
+      flex-shrink: 0;
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.05rem;
+      background: var(--bc-grn-bg);
+      border: 1px solid var(--bc-grn-br);
+      border-radius: 8px;
+    }
+    .mlc-body { flex: 1; min-width: 0; }
+    .mlc-title {
+      font-size: 0.84rem; font-weight: 700; color: var(--ink);
+      line-height: 1.25;
+    }
+    .mlc-desc {
+      font-size: 0.7rem; color: var(--ink-3);
+      margin-top: 2px; line-height: 1.3;
+    }
+    .mlc-arrow {
+      flex-shrink: 0; font-size: 1rem; font-weight: 700;
+      color: var(--bc-grn-tx);
+    }
+
+    /* Themed mini variant — warm cream-gold (champagne, not banana) with dark brown outline */
+    .mini-link-card.mlc-themed {
+      background: #FAF3D8;
+      border-color: #5b4608;
+      border-width: 1.5px;
+    }
+    .mini-link-card.mlc-themed:hover { border-color: #854d0e; background: #F3E8C3; }
+    .mini-link-card.mlc-themed .mlc-icon {
+      background: rgba(255,255,255,0.75);
+      border-color: rgba(255,255,255,0.55);
+    }
+    .mini-link-card.mlc-themed .mlc-title { color: #5b4608; }
+    .mini-link-card.mlc-themed .mlc-arrow { color: #5b4608; }
+
+    /* "Coming Soon" placeholder — dimmed, non-interactive */
+    .mini-link-card.mlc-coming-soon {
+      opacity: 0.55;
+      cursor: default;
+      pointer-events: none;
+    }
+
   </style>
 </head>
 <body>
@@ -458,18 +593,43 @@
   <!-- ══ SIDEBAR ══ -->
   <aside class="sidebar">
     <div class="sb-brand">
-      <span class="sb-name">HoyaDocs</span>
-      <button class="dark-toggle" id="darkToggle" onclick="toggleDark()" title="Toggle dark mode">🌙</button>
+      <a href="https://hoyadocs.com/" class="sb-name">HoyaDocs</a>
     </div>
     <div class="sb-block">Block 4 - Endocrine</div>
 
     <div class="sb-rule"></div>
 
-    <div class="sb-section-label">Lecture Guides</div>
+    <div class="sb-section-label">Quick Links</div>
     <nav class="sb-nav">
       <a class="sb-link" href="./lecture-guides/index.html">
         <span class="sb-link-icon sb-icon-teal">📖</span>
         Lecture Guides
+      </a>
+      <a class="sb-link" href="https://strettyit10.github.io/Block4-Endocrine/active-recall-hub.html" target="_blank" rel="noopener">
+        <span class="sb-link-icon sb-icon-green">🎯</span>
+        Active Drills
+      </a>
+    </nav>
+
+    <div class="sb-rule"></div>
+
+    <div class="sb-section-label">Tools</div>
+    <nav class="sb-nav">
+      <a class="sb-link" href="./planning/daily_checklist.html">
+        <span class="sb-link-icon sb-icon-green">✅</span>
+        Daily Checklist
+      </a>
+      <a class="sb-link" href="./anki_package_parser_v10.html">
+        <span class="sb-link-icon sb-icon-amber">🃏</span>
+        Anki Mapping
+      </a>
+      <a class="sb-link" href="./resource-mapping/HoyaDocs-UWorld-QID-Mapping.xlsx">
+        <span class="sb-link-icon sb-icon-teal">📊</span>
+        UWorld QID Mapping
+      </a>
+      <a class="sb-link" href="./resource-mapping/Endocrine_Resource_Mapping.xlsx">
+        <span class="sb-link-icon sb-icon-green">📑</span>
+        Resource Mapping
       </a>
     </nav>
 
@@ -496,145 +656,252 @@
         <p class="hero-eyebrow">HoyaDocs · Endocrine</p>
         <h1 class="hero-title">Endocrine <em>Study Hub.</em></h1>
         <p class="hero-sub">In-house exam prep and USMLE Step 1 review — all your tools in one place.</p>
+        <div class="hero-jump">
+          <a class="hero-jump-btn" href="#lecture-tools"><span class="hero-jump-icon">📘</span>Lecture Study Tools</a>
+          <a class="hero-jump-btn" href="#mapping-tools"><span class="hero-jump-icon">🗂</span>3rd Party Mapping</a>
+          <a class="hero-jump-btn" href="#exam-tools"><span class="hero-jump-icon">🩺</span>Exam Study Tools</a>
+          <a class="hero-jump-btn" href="https://hoyadocs.com/"><span class="hero-jump-icon">🏠</span>Return to HoyaDocs Main Page</a>
+        </div>
       </section>
 
-      <!-- LECTURE SPECIFIC TOOLS -->
+      <!-- LECTURE STUDY TOOLS -->
       <div class="section-block" id="lecture-tools">
         <div class="section-divider">
           <span class="section-divider-text">Lecture Study Tools</span>
           <div class="section-divider-line"></div>
         </div>
-        <div class="bento">
+        <div class="bento bento-3">
 
-          <div style="display:flex; flex-direction:column; gap:14px;">
+          <!-- Column 1: Calendar (spans full column height) -->
+          <div style="display:flex; flex-direction:column; gap:12px;">
 
-            <a class="bcard bc-blue" href="./study-planner.html" style="flex:1;">
-              <span class="bcard-watermark">📋</span>
+            <div class="bcard bc-blue" style="flex:1;">
+              <span class="bcard-watermark">📅</span>
               <div class="bcard-header">
-                <div class="bcard-icon">📋</div>
+                <div class="bcard-icon">📅</div>
                 <div class="bcard-header-text">
-                  <span class="bcard-label">Planning · 01</span>
-                  <h3>Endocrine Study Planner</h3>
+                  <span class="bcard-label" id="today-date-lbl">Today</span>
+                  <h3>Today's Endocrine Lectures</h3>
                 </div>
               </div>
-              <p>Select resources per lecture, track Prep / Watch / Anki / Last Pass tasks, day-by-day schedule, and Anki card counts — all with progress tracking.</p>
-              <span class="bcard-cta">Open planner →</span>
-            </a>
+              <div id="today-lec-list" class="today-lec-scroll">
+                <div class="lec-none">Loading…</div>
+              </div>
+            </div>
 
-            <a class="bcard bc-purple" href="./resource-mapping/endocrine_resource_hub.html" style="flex:1;">
-              <span class="bcard-watermark">🔗</span>
+          </div>
+
+          <!-- Column 2: Lecture Study Guides + Active Drills -->
+          <div style="display:flex; flex-direction:column; gap:12px;">
+
+            <a class="bcard bc-dark" href="./lecture-guides/index.html" style="flex:1;">
+              <span class="bcard-watermark">📖</span>
               <div class="bcard-header">
-                <div class="bcard-icon">🔗</div>
+                <div class="bcard-icon">📖</div>
                 <div class="bcard-header-text">
-                  <span class="bcard-label">Reference · 01</span>
-                  <h3>Lecture Specific Resources</h3>
+                  <span class="bcard-label">Lecture · 01</span>
+                  <h3>Lecture Study Guides</h3>
                 </div>
               </div>
-              <p>Per-lecture study guides, practice questions, UWorld QIDs, and Anki cards (In-House &amp; ANKing).</p>
+              <p>Per-lecture organized guides with key concepts, diagrams, and exam-focused notes.</p>
               <span class="bcard-cta">Open section →</span>
             </a>
 
-            <a class="bcard bc-purple" href="./resource-mapping/endocrine_mapping.html" style="flex:1;">
-              <span class="bcard-watermark">🗂</span>
+            <a class="bcard bc-dark" href="./active-recall-hub.html" style="flex:1;">
+              <span class="bcard-watermark">🎯</span>
               <div class="bcard-header">
-                <div class="bcard-icon">🗂</div>
+                <div class="bcard-icon">🎯</div>
                 <div class="bcard-header-text">
-                  <span class="bcard-label">Reference · 02</span>
-                  <h3>Lecture × 3rd Party Mapping</h3>
+                  <span class="bcard-label">Lecture · 02</span>
+                  <h3>Active Drills</h3>
                 </div>
               </div>
-              <p>3rd party resources mapped to each lecture — BnB, Bootcamp, Pathoma, Physeo, and Sketchy.</p>
+              <p>Gamified practice for vignettes, trap questions, mechanisms, and drug facts.</p>
               <span class="bcard-cta">Open section →</span>
             </a>
 
           </div>
 
-          <div class="bcard bc-blue">
-            <span class="bcard-watermark">📅</span>
-            <div class="bcard-header">
-              <div class="bcard-icon">📅</div>
-              <div class="bcard-header-text">
-                <span class="bcard-label" id="today-date-lbl">Today</span>
-                <h3>Today's Endocrine Lectures</h3>
+          <!-- Column 3: 4 themed quick-access minis -->
+          <div style="display:flex; flex-direction:column; gap:12px;">
+
+            <a class="mini-link-card mlc-themed" href="https://docs.google.com/spreadsheets/d/1SMDEGCMRUBjNL7vrkp1YLqKC_9CsNciMul-BcPU5yO4/edit?usp=sharing" target="_blank" rel="noopener">
+              <span class="mlc-icon">📋</span>
+              <div class="mlc-body">
+                <div class="mlc-title">Block 4 Endocrine Check List</div>
+                <div class="mlc-desc">Google sheet of Endocrine lectures</div>
               </div>
-            </div>
-            <div id="today-lec-list" class="today-lec-scroll">
-              <div class="lec-none">Loading…</div>
-            </div>
+              <span class="mlc-arrow">→</span>
+            </a>
+
+            <a class="mini-link-card mlc-themed" href="./planning/daily_checklist.html">
+              <span class="mlc-icon">✅</span>
+              <div class="mlc-body">
+                <div class="mlc-title">Daily Checklist</div>
+                <div class="mlc-desc">Daily study tasks & LOs</div>
+              </div>
+              <span class="mlc-arrow">→</span>
+            </a>
+
+            <a class="mini-link-card mlc-themed" href="./planning/lecture_planner.html">
+              <span class="mlc-icon">📅</span>
+              <div class="mlc-body">
+                <div class="mlc-title">Lecture Planning</div>
+                <div class="mlc-desc">Plan your lecture study week</div>
+              </div>
+              <span class="mlc-arrow">→</span>
+            </a>
+
+            <a class="mini-link-card mlc-themed mlc-coming-soon" aria-disabled="true">
+              <span class="mlc-icon">✨</span>
+              <div class="mlc-body">
+                <div class="mlc-title">Coming Soon</div>
+                <div class="mlc-desc">New study tool in development</div>
+              </div>
+              <span class="mlc-arrow">→</span>
+            </a>
+
           </div>
 
         </div>
       </div>
 
-      <!-- STUDY TOOLS -->
-      <div class="section-block" id="study-tools">
+      <!-- 3RD PARTY × LECTURE MAPPING -->
+      <div class="section-block" id="mapping-tools">
         <div class="section-divider">
-          <span class="section-divider-text">Study Tools</span>
+          <span class="section-divider-text">3rd Party × Lecture Mapping</span>
           <div class="section-divider-line"></div>
         </div>
-        <div class="bento">
+        <div class="bento bento-3">
 
-
-          <a class="bcard bc-green" href="./active-recall-hub.html">
-            <span class="bcard-watermark">🎯</span>
+          <a class="bcard bc-purple" href="./resource-mapping/endocrine_mapping.html">
+            <span class="bcard-watermark">🗂</span>
             <div class="bcard-header">
-              <div class="bcard-icon">🎯</div>
+              <div class="bcard-icon">🗂</div>
               <div class="bcard-header-text">
-                <span class="bcard-label">Foundational · 02</span>
-                <h3>Active Recall Drills</h3>
+                <span class="bcard-label">Mapping · 01</span>
+                <h3>Lecture × 3rd Party Mapping</h3>
               </div>
             </div>
-            <p>Gamified practice for recognizing vignettes, trap questions, mechanisms, and drug facts.</p>
+            <p>3rd party resources mapped to each lecture — BnB, Bootcamp, Pathoma, Physeo, and Sketchy.</p>
             <span class="bcard-cta">Open section →</span>
           </a>
 
-          <a class="bcard bc-rose" href="./question-banks/">
+          <a class="bcard bc-purple" href="./resource-mapping/endocrine_resource_hub.html">
+            <span class="bcard-watermark">🔗</span>
+            <div class="bcard-header">
+              <div class="bcard-icon">🔗</div>
+              <div class="bcard-header-text">
+                <span class="bcard-label">Mapping · 02</span>
+                <h3>Lecture Specific Resources</h3>
+              </div>
+            </div>
+            <p>Per-lecture study guides, practice questions, UWorld QIDs, and Anki cards.</p>
+            <span class="bcard-cta">Open section →</span>
+          </a>
+
+          <a class="bcard bc-purple" href="./resource-explorer.html">
+            <span class="bcard-watermark">🔍</span>
+            <div class="bcard-header">
+              <div class="bcard-icon">🔍</div>
+              <div class="bcard-header-text">
+                <span class="bcard-label">Mapping · 03</span>
+                <h3>Resource Explorer</h3>
+              </div>
+            </div>
+            <p>Pick your resources and explore mapped tags, card counts, and watch times — with Excel export.</p>
+            <span class="bcard-cta">Open explorer →</span>
+          </a>
+
+          <a class="bcard bc-dkpurple" href="./resource-mapping/HoyaDocs-UWorld-QID-Mapping.xlsx">
+            <span class="bcard-watermark">📊</span>
+            <div class="bcard-header">
+              <div class="bcard-icon">📊</div>
+              <div class="bcard-header-text">
+                <span class="bcard-label">Mapping · 04</span>
+                <h3>UWorld QID Mapping</h3>
+              </div>
+            </div>
+            <p>Spreadsheet of UWorld QIDs mapped to each Endocrine lecture for targeted review.</p>
+            <span class="bcard-cta">Download xlsx →</span>
+          </a>
+
+          <a class="bcard bc-dkpurple" href="./resource-mapping/Endocrine_Resource_Mapping.xlsx">
+            <span class="bcard-watermark">📊</span>
+            <div class="bcard-header">
+              <div class="bcard-icon">📊</div>
+              <div class="bcard-header-text">
+                <span class="bcard-label">Mapping · 05</span>
+                <h3>Resource Mapping</h3>
+              </div>
+            </div>
+            <p>Master spreadsheet of all 3rd party resources mapped to Endocrine lectures.</p>
+            <span class="bcard-cta">Download xlsx →</span>
+          </a>
+
+          <a class="bcard bc-purple" href="./anki_package_parser_v10.html">
+            <span class="bcard-watermark">🃏</span>
+            <div class="bcard-header">
+              <div class="bcard-icon">🃏</div>
+              <div class="bcard-header-text">
+                <span class="bcard-label">Mapping · 06</span>
+                <h3>Anki Mapping</h3>
+              </div>
+            </div>
+            <p>Upload an Anki deck (.apkg) and extract out the relevant tags — map cards to your lectures.</p>
+            <span class="bcard-cta">Open tool →</span>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- EXAM STUDY TOOLS -->
+      <div class="section-block" id="exam-tools">
+        <div class="section-divider">
+          <span class="section-divider-text">Exam Study Tools</span>
+          <div class="section-divider-line"></div>
+        </div>
+        <div class="bento bento-3">
+
+          <a class="bcard bc-rose" href="https://strettyit10.github.io/Block4-Endocrine/QuestionBank.html">
             <span class="bcard-watermark">🩺</span>
             <div class="bcard-header">
               <div class="bcard-icon">🩺</div>
               <div class="bcard-header-text">
-                <span class="bcard-label">Application · 03</span>
-                <h3>Coming Soon! Board-Style Practice</h3>
+                <span class="bcard-label">Exam · 01</span>
+                <h3>Board-Style Practice</h3>
               </div>
             </div>
             <p>Exam-oriented question sets and external QBank links organized in one place.</p>
             <span class="bcard-cta">Open section →</span>
           </a>
 
-        </div>
-      </div>
+          <a class="bcard bc-rose" href="./study-guides/">
+            <span class="bcard-watermark">📘</span>
+            <div class="bcard-header">
+              <div class="bcard-icon">📘</div>
+              <div class="bcard-header-text">
+                <span class="bcard-label">Exam · 02</span>
+                <h3>Coming Soon! Subject Based HY Study Guides</h3>
+              </div>
+            </div>
+            <p>Summary notes, curated review pages, and structured study documents for in-house and Step 1 prep.</p>
+            <span class="bcard-cta">Coming soon →</span>
+          </a>
 
-      <!-- UTILITIES -->
-      <div class="section-block" id="utilities">
-        <div class="section-divider">
-          <span class="section-divider-text">Utilities</span>
-          <div class="section-divider-line"></div>
-        </div>
-        <div class="util-list">
-          <a class="util-row" href="./study-guides/">
-            <div class="util-icon ui-purple">📘</div>
-            <div class="util-text">
-              <strong>Coming Soon! Endocrine Exam HY Study Guides</strong>
-              <span>Summary notes, curated review pages, concept breakdowns, and structured Endocrine study documents for both in-house and Step 1 prep.</span>
+          <a class="bcard bc-rose" href="#">
+            <span class="bcard-watermark">🧬</span>
+            <div class="bcard-header">
+              <div class="bcard-icon">🧬</div>
+              <div class="bcard-header-text">
+                <span class="bcard-label">Exam · 03</span>
+                <h3>Coming Soon! Databases</h3>
+              </div>
             </div>
-            <span class="util-arrow">→</span>
+            <p>High-yield tables, fact banks, and reference repositories for quick lookup.</p>
+            <span class="bcard-cta">Coming soon →</span>
           </a>
-          <a class="util-row" href="#">
-            <div class="util-icon ui-amber">🧬</div>
-            <div class="util-text">
-              <strong>Coming Soon! Databases</strong>
-              <span>High-yield tables, fact banks, and reference repositories for quick lookup.</span>
-            </div>
-            <span class="util-arrow">→</span>
-          </a>
-          <a class="util-row" href="#">
-            <div class="util-icon ui-purple">⚡</div>
-            <div class="util-text">
-              <strong>Coming Soon! Quick Reference</strong>
-              <span>Tabbed high-yield pages — Endocrine anatomy, classic presentations, key labs, and more.</span>
-            </div>
-            <span class="util-arrow">→</span>
-          </a>
+
         </div>
       </div>
 
@@ -686,51 +953,53 @@
 
 <!-- ══ MOBILE BOTTOM NAV ══ -->
 <nav class="mobile-nav">
-  <div class="mobile-nav-items">
-    <a class="mobile-nav-item" href="#hero">
-      <span class="mobile-nav-icon">🏠</span>Home
-    </a>
-    <a class="mobile-nav-item" href="#lecture-tools">
-      <span class="mobile-nav-icon">📅</span>Lectures
-    </a>
-    <a class="mobile-nav-item" href="#study-tools">
-      <span class="mobile-nav-icon">📘</span>Study
-    </a>
-    <a class="mobile-nav-item" href="#utilities">
-      <span class="mobile-nav-icon">📊</span>Utilities
-    </a>
-    <a class="mobile-nav-item" href="https://www.uworld.com/" target="_blank" rel="noopener">
-      <span class="mobile-nav-icon">🩺</span>UWorld
-    </a>
+
+  <div class="mobile-nav-group">
+    <div class="mobile-nav-label">Quick Links</div>
+    <div class="mobile-nav-items">
+      <a class="mobile-nav-item" href="./lecture-guides/index.html">
+        <span class="mobile-nav-icon">📖</span>Lecture Guides
+      </a>
+      <a class="mobile-nav-item" href="https://strettyit10.github.io/Block4-Endocrine/active-recall-hub.html" target="_blank" rel="noopener">
+        <span class="mobile-nav-icon">🎯</span>Active Drills
+      </a>
+    </div>
   </div>
+
+  <div class="mobile-nav-group">
+    <div class="mobile-nav-label">Tools</div>
+    <div class="mobile-nav-items">
+      <a class="mobile-nav-item" href="./planning/daily_checklist.html">
+        <span class="mobile-nav-icon">✅</span>Daily Checklist
+      </a>
+      <a class="mobile-nav-item" href="./anki_package_parser_v10.html">
+        <span class="mobile-nav-icon">🃏</span>Anki Mapping
+      </a>
+      <a class="mobile-nav-item" href="./resource-mapping/HoyaDocs-UWorld-QID-Mapping.xlsx">
+        <span class="mobile-nav-icon">📊</span>UWorld QID Mapping
+      </a>
+      <a class="mobile-nav-item" href="./resource-mapping/Endocrine_Resource_Mapping.xlsx">
+        <span class="mobile-nav-icon">📑</span>Resource Mapping
+      </a>
+    </div>
+  </div>
+
 </nav>
 
 <script>
-  // ── Dark mode toggle ──
-  function toggleDark() {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    const next = isDark ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-    document.getElementById('darkToggle').textContent = next === 'dark' ? '☀️' : '🌙';
-  }
-
-  // Set correct icon on load
-  document.addEventListener('DOMContentLoaded', function () {
-    const t = document.documentElement.getAttribute('data-theme');
-    document.getElementById('darkToggle').textContent = t === 'dark' ? '☀️' : '🌙';
-  });
-
-  // ── Today's Lectures ──
-  const LECTURES = [];
+  // ── Today's Endocrine Lectures ──
+  const ENDOCRINE_LECTURES = [{"d":"2026-04-20","title":"Module Introduction/Introduction to Hormones","lecturer":"Danielsen","start":"09:00","end":"10:00","course":"Bioch","location":"","link":""},{"d":"2026-04-20","title":"Hypothalamic Pituitary Hormone Relationships I","lecturer":"Watson","start":"10:00","end":"11:00","course":"Phys","location":"","link":""},{"d":"2026-04-22","title":"Hypothalamic Pituitary Hormone Relationships II","lecturer":"Watson","start":"11:00","end":"12:00","course":"Phys","location":"","link":""},{"d":"2026-04-23","title":"IL - Adrenal Hormone Synthesis and Action","lecturer":"Danielsen","start":"09:00","end":"09:30","course":"Biochem","location":"","link":""},{"d":"2026-04-23","title":"IL - Sex Steroid Synthesis and Action","lecturer":"Danielsen","start":"09:30","end":"10:00","course":"Biochem","location":"","link":""},{"d":"2026-04-24","title":"Mandatory - Adrenal and Sex Steroid Hormone Synthesis & Action","lecturer":"Danielsen","start":"10:00","end":"11:00","course":"Biochem","location":"","link":""},{"d":"2026-04-28","title":"Posterior Pituitary Hormones","lecturer":"Sherman","start":"10:00","end":"11:00","course":"Phys, Bioch","location":"","link":""},{"d":"2026-04-29","title":"Pituitary Pathology","lecturer":"Santi","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-12","title":"Thyroid/Parathyroid/Adrenal","lecturer":"Notario","start":"10:00","end":"11:00","course":"Hist","location":"","link":""},{"d":"2026-05-12","title":"Thyroid Hormone Synthesis and Action","lecturer":"Danielsen","start":"11:00","end":"12:00","course":"Bioch","location":"","link":""},{"d":"2026-05-13","title":"Thyroid and Parathyroid Pathology","lecturer":"Wieneke","start":"10:00","end":"11:00","course":"Path","location":"","link":""},{"d":"2026-05-14","title":"Pancreatic Hormone Synthesis, Action and Regulation","lecturer":"Danielsen","start":"09:00","end":"10:00","course":"Phys, Bioch","location":"","link":""},{"d":"2026-05-14","title":"Diagnosis and Treatment of Pituitary and Thyroid Disorders","lecturer":"Jonklaas","start":"10:00","end":"11:00","course":"DRT, Pharm","location":"","link":""},{"d":"2026-05-15","title":"Mandatory TBL - Growth and Thyroid Hormones CCS","lecturer":"Watson","start":"10:00","end":"11:00","course":"Phys","location":"","link":""},{"d":"2026-05-18","title":"Mandatory - Endocrinology, Gender Identity & Ethics Panel Discussion","lecturer":"Panel","start":"13:00","end":"15:00","course":"Bioch","location":"","link":""},{"d":"2026-05-19","title":"Pathophysiology of Diabetes Mellitus","lecturer":"Furlong","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-19","title":"Diabetes Type 1 Diagnosis and Treatment","lecturer":"Janicic","start":"10:00","end":"11:00","course":"DRT, Pharm","location":"","link":""},{"d":"2026-05-19","title":"Diabetes Type 2 Diagnosis and Treatment","lecturer":"Janicic","start":"11:00","end":"12:00","course":"DRT, Pharm","location":"","link":""},{"d":"2026-05-20","title":"Hypothalamic-Pituitary-Adrenal Axis","lecturer":"Watson","start":"10:00","end":"11:00","course":"Phys","location":"","link":""},{"d":"2026-05-20","title":"Adrenal Pathology","lecturer":"Wieneke","start":"11:00","end":"12:00","course":"Path","location":"","link":""},{"d":"2026-05-20","title":"Diagnosis and Treatment of Adrenal Disorders","lecturer":"Sharma","start":"13:00","end":"14:30","course":"DRT, Pharm","location":"","link":""},{"d":"2026-05-22","title":"Mandatory - Case Discussion: Pituitary & Thyroid Disorders","lecturer":"Jonklaas","start":"10:00","end":"11:00","course":"DRT, Pharm","location":"","link":""},{"d":"2026-05-27","title":"Integrated Learning Session: Stress, Stress Hormones & Pathophysiology Integration","lecturer":"Watson","start":"13:00","end":"14:30","course":"Phys","location":"","link":""},{"d":"2026-05-28","title":"Endocrine Lab","lecturer":"Furlong","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-28","title":"Diabetes Clinical Cases","lecturer":"Janicic","start":"10:00","end":"11:00","course":"DRT, Pharm","location":"","link":""},{"d":"2026-05-28","title":"Mandatory - Longitudinal Case Wrap-Up","lecturer":"Multi","start":"11:00","end":"12:00","course":"Phys, DRT, Pharm","location":"","link":""}];
 
   const COURSE_TAG = {
-    'Phys':  ['#dbeafe','#1e40af'], 'Anat':  ['#dcfce7','#166534'],
-    'Path':  ['#ffe4e6','#9f1239'], 'Pharm': ['#d1fae5','#065f46'],
-    'Embr':  ['#ede9fe','#5b21b6'], 'Hist':  ['#f3e8ff','#6b21a8'],
-    'Micro': ['#fef3c7','#92400e'], 'DRT':   ['#dbeafe','#1e3a8a'],
-    'Ethics':['#fce7f3','#9d174d'], 'CP':    ['#e0f2fe','#0369a1'],
-    'N/A':   ['#f1f5f9','#64748b'],
+    'Phys':       ['#dbeafe','#1e40af'], 'Anat':       ['#dcfce7','#854d0e'],
+    'Path':       ['#ffe4e6','#CA8A04'], 'Pharm':      ['#d1fae5','#065f46'],
+    'Embr':       ['#ede9fe','#5b21b6'], 'Embr-HS':    ['#ede9fe','#5b21b6'],
+    'Hist':       ['#f3e8ff','#6b21a8'], 'Micro':      ['#fef3c7','#92400e'],
+    'DRT':        ['#dbeafe','#1e3a8a'], 'Ethics':     ['#fce7f3','#9d174d'],
+    'CP':         ['#e0f2fe','#0369a1'], 'HS':         ['#ffe4e6','#CA8A04'],
+    'EBM':        ['#fef3c7','#92400e'], 'Bioch':      ['#d1fae5','#065f46'],
+    'Phys-Bioch': ['#dbeafe','#1e40af'],
+    'N/A':        ['#f1f5f9','#64748b'],
   };
 
   function renderTodayLectures() {
@@ -746,7 +1015,7 @@
     const list = document.getElementById('today-lec-list');
     if (!list) return;
 
-    const rows = LECTURES.filter(l => l.d === todayStr);
+    const rows = ENDOCRINE_LECTURES.filter(l => l.d === todayStr);
     if (!rows.length) {
       list.innerHTML = '<div class="lec-none">No lectures scheduled today.</div>';
       return;
