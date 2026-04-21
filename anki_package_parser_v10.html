@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anki Package Parser</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: system-ui, sans-serif; max-width: 1100px; margin: 2rem auto; padding: 0 1rem; background: #fff; color: #111; }
+  .page-title { font-size: 20px; font-weight: 500; margin: 0 0 2px; }
+  .page-sub { font-size: 13px; color: #777; margin: 0 0 0.75rem; }
+  #drop-zone { border: 1.5px dashed #aaa; border-radius: 12px; padding: 2.5rem; text-align: center; cursor: pointer; background: #f7f7f5; margin: 1rem 0; transition: background 0.15s; }
+  #drop-zone:hover, #drop-zone.drag-over { background: #e8f0fb; border-color: #4a7fcb; }
+  #drop-zone input { display: none; }
+  #drop-zone p { margin: 4px 0; font-size: 14px; color: #555; }
+  .hint { font-size: 12px; color: #888; margin-top: 6px; }
+  .config-grid { display: grid; grid-template-columns: auto 1fr; gap: 8px 12px; align-items: center; margin: 0.75rem 0; max-width: 600px; }
+  .config-grid label { font-size: 13px; color: #555; white-space: nowrap; }
+  select, input[type=text] { padding: 6px 10px; border: 0.5px solid #ccc; border-radius: 8px; background: #fff; color: #111; font-size: 13px; width: 100%; }
+  .preview-block { grid-column: 1 / -1; background: #f7f7f5; border-radius: 8px; border: 0.5px solid #ddd; padding: 8px 12px; }
+  .preview-label { font-size: 11px; color: #888; margin-bottom: 4px; }
+  .preview-tag { font-size: 12px; font-family: monospace; color: #111; word-break: break-all; }
+  .seg-matched { color: #777; }
+  #status { font-size: 13px; color: #555; min-height: 18px; margin: 0.25rem 0; }
+  .status-err { color: #c0392b !important; }
+  #summary { display: flex; gap: 10px; margin: 0.75rem 0; flex-wrap: wrap; }
+  .stat { background: #f7f7f5; border-radius: 8px; padding: 0.6rem 1rem; }
+  .stat .val { font-size: 20px; font-weight: 500; }
+  .stat .lbl { font-size: 12px; color: #555; margin-top: 2px; }
+  .tab-bar { display: flex; border-bottom: 1px solid #e5e5e5; margin: 0.5rem 0 0; }
+  .tab { padding: 7px 16px; font-size: 13px; cursor: pointer; color: #777; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+  .tab:hover { color: #111; }
+  .tab.active { color: #111; border-bottom-color: #4a7fcb; font-weight: 500; }
+  .panel { display: none; padding-top: 0.75rem; }
+  .panel.active { display: block; }
+  .toolbar { display: flex; gap: 8px; margin: 0 0 0.75rem; flex-wrap: wrap; align-items: center; }
+  #search { flex: 1; min-width: 180px; padding: 6px 10px; border: 0.5px solid #ccc; border-radius: 8px; font-size: 13px; }
+  button { padding: 6px 14px; border: 0.5px solid #ccc; border-radius: 8px; background: #fff; color: #111; font-size: 13px; cursor: pointer; }
+  button:hover { background: #f7f7f5; }
+  button.primary { background: #e8f0fb; color: #1a4fa0; border-color: #a0bce8; }
+  #table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; table-layout: fixed; }
+  th { background: #f7f7f5; text-align: left; padding: 8px 10px; font-weight: 500; font-size: 12px; color: #555; border-bottom: 1px solid #e5e5e5; cursor: pointer; user-select: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  th:hover { color: #111; }
+  td { padding: 7px 10px; border-bottom: 0.5px solid #eee; vertical-align: top; overflow: hidden; }
+  td.truncate { text-overflow: ellipsis; white-space: nowrap; }
+  td.mapped-cell { font-size: 12px; color: #555; text-overflow: ellipsis; white-space: nowrap; }
+  td.mapped-cell .mapped-num { font-family: monospace; color: #999; margin-right: 4px; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #f7f7f5; }
+  .tag-cell { font-size: 11px; color: #777; font-family: monospace; word-break: break-all; }
+  .count-cell { font-weight: 500; text-align: center; }
+  #empty { text-align: center; padding: 3rem; color: #aaa; font-size: 14px; }
+  .tree-toolbar { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .tree-toolbar button { font-size: 12px; padding: 4px 10px; }
+  .tree { font-size: 13px; line-height: 1.7; }
+  .tree-row { display: flex; align-items: baseline; gap: 6px; padding: 2px 4px; cursor: pointer; border-radius: 6px; }
+  .tree-row:hover { background: #f7f7f5; }
+  .tog { font-size: 10px; color: #aaa; width: 12px; flex-shrink: 0; }
+  .t-resource { font-weight: 500; color: #111; }
+  .t-l1 { color: #555; }
+  .t-group { font-weight: 500; color: #111; }
+  .t-heading { font-weight: 500; color: #111; }
+  .t-chapter { color: #555; font-weight: 500; }
+  .t-subnum { font-size: 11px; color: #aaa; flex-shrink: 0; min-width: 34px; font-family: monospace; }
+  .t-subchapter { color: #555; }
+  .t-tag { font-family: monospace; font-size: 11px; color: #999; word-break: break-all; }
+  .t-arrow { color: #ccc; font-size: 11px; flex-shrink: 0; }
+  .tree-children { padding-left: 18px; border-left: 0.5px solid #e5e5e5; margin-left: 5px; }
+  .tree-children.collapsed { display: none; }
+  .leaf-row { display: flex; align-items: baseline; gap: 6px; padding: 2px 4px; flex-wrap: nowrap; border-radius: 6px; }
+  .leaf-row:hover { background: #f7f7f5; }
+  .leaf-indent { width: 12px; flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<p class="page-title">Anki package parser</p>
+<p class="page-sub">Extract hierarchy and card counts from an .apkg file</p>
+
+<div class="config-grid">
+  <label>Third-party resource</label>
+  <select id="prefix-select" onchange="onConfigChange()">
+    <optgroup label="Bootcamp">
+      <option value="bootcamp|#AK_Step1_v12::#Bootcamp">Bootcamp</option>
+    </optgroup>
+    <optgroup label="Sketchy">
+      <option value="sketchy|#AK_Step1_v12::#SketchyMicro">SketchyMicro</option>
+      <option value="sketchy|#AK_Step1_v12::#SketchyPharm">SketchyPharm</option>
+      <option value="sketchy|#AK_Step1_v12::#SketchyPath">SketchyPath</option>
+      <option value="sketchy|#AK_Step1_v12::#SketchyPhysiology">SketchyPhysiology</option>
+      <option value="sketchy|#AK_Step1_v12::#SketchyAnatomy">SketchyAnatomy</option>
+    </optgroup>
+    <optgroup label="In-House">
+      <option value="sketchy|GUSOM">GUSOM</option>
+      <option value="inhouse2|Block4">Block 4</option>
+      <option value="depth4|AnkiHub_Optional::Georgetown::Block4">Georgetown Block4 (AnkiHub)</option>
+    </optgroup>
+    <optgroup label="Other">
+      <option value="subject|#AK_Step1_v12::#B&B">Boards &amp; Beyond (B&amp;B)</option>
+      <option value="subject|#AK_Step1_v12::#FirstAid">First Aid</option>
+      <option value="subject|#AK_Step1_v12::Pathoma">Pathoma</option>
+      <option value="subject|#AK_Step1_v12::Physeo">Physeo</option>
+      <option value="custom|">Custom…</option>
+    </optgroup>
+  </select>
+
+  <label id="subject-label">Subject <span style="font-size:11px;color:#aaa">(must match tag exactly)</span></label>
+  <input type="text" id="subject-input" placeholder="e.g. Endocrinology, Reproductive…" value="Endocrinology" oninput="onConfigChange()">
+
+  <label id="custom-base-label" style="display:none">Custom prefix</label>
+  <input type="text" id="custom-base-input" placeholder="e.g. #AK_Step1_v12::MySource" style="display:none" oninput="onConfigChange()">
+  <label id="custom-depth-label" style="display:none">Levels after prefix</label>
+  <select id="custom-depth-select" style="display:none" onchange="onConfigChange()">
+    <option value="2">2 — Chapter → Subchapter</option>
+    <option value="3">3 — Heading → Chapter → Subchapter</option>
+    <option value="4">4 — Group → Heading → Chapter → Subchapter</option>
+  </select>
+
+  <div class="preview-block">
+    <div class="preview-label">Matching tags that look like:</div>
+    <div class="preview-tag" id="tag-preview"></div>
+  </div>
+</div>
+
+<div id="drop-zone" onclick="document.getElementById('file-input').click()" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+  <input type="file" id="file-input" accept=".apkg,.zip" onchange="handleFile(this.files[0])">
+  <div style="font-size:28px;margin-bottom:8px">📦</div>
+  <p style="font-weight:500;color:#111">Drop your .apkg file here</p>
+  <p>or click to browse</p>
+  <p class="hint">Anki package files (.apkg) only</p>
+</div>
+
+<div id="status"></div>
+<div id="summary" style="display:none"></div>
+
+<div id="results" style="display:none">
+  <div class="tab-bar">
+    <div class="tab active" onclick="switchTab('table')">Table</div>
+    <div class="tab" onclick="switchTab('tree')">Hierarchy map</div>
+  </div>
+  <div id="panel-table" class="panel active">
+    <div class="toolbar">
+      <input id="search" type="text" placeholder="Search…" oninput="renderTable()">
+      <button onclick="exportCSV()">Export CSV</button>
+      <button class="primary" onclick="exportTSV()">Export for Google Sheets / Excel</button>
+    </div>
+    <div id="table-wrap"></div>
+  </div>
+  <div id="panel-tree" class="panel">
+    <div class="tree-toolbar">
+      <button onclick="setAllTree(true)">Expand all</button>
+      <button onclick="setAllTree(false)">Collapse all</button>
+      <button onclick="exportHierarchyText()">Export as text</button>
+      <button onclick="exportHierarchyJSON()">Export as JSON</button>
+    </div>
+    <div id="tree-wrap" class="tree"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.2/sql-wasm.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fzstd@0.1.0/umd/index.js"></script>
+<script>
+let allRows = [], sortCol = 0, sortDir = 1, cachedNoteRows = null;
+
+function label(s) { return s.replace(/_/g, ' '); }
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function getNum(s) { const m = s.match(/^(\d+)/); return m ? parseInt(m[1], 10) : null; }
+function formatNum(a, b) { return (a !== null && b !== null) ? `${a}.${String(b).padStart(2,'0')}` : ''; }
+function mappedLabel(chRaw, subRaw) { const n = formatNum(getNum(chRaw), getNum(subRaw)); return n ? `${n} ${label(subRaw)}` : label(subRaw); }
+function slug(s) { return s.replace(/[^a-zA-Z0-9_-]/g,'_'); }
+
+function getMode() { return document.getElementById('prefix-select').value.split('|')[0]; }
+function getBasePrefix() {
+  const [mode, base] = document.getElementById('prefix-select').value.split('|');
+  return mode === 'custom' ? document.getElementById('custom-base-input').value.trim() : base;
+}
+function getResourceDisplayName() {
+  const [mode, base] = document.getElementById('prefix-select').value.split('|');
+  if (mode === 'custom') return document.getElementById('custom-base-input').value.split('::').pop() || 'Resource';
+  const map = {
+    '#AK_Step1_v12::#Bootcamp':'Bootcamp',
+    '#AK_Step1_v12::#SketchyMicro':'SketchyMicro','#AK_Step1_v12::#SketchyPharm':'SketchyPharm',
+    '#AK_Step1_v12::#SketchyPath':'SketchyPath','#AK_Step1_v12::#SketchyPhysiology':'SketchyPhysiology',
+    '#AK_Step1_v12::#SketchyAnatomy':'SketchyAnatomy',
+    '#AK_Step1_v12::#B&B':'B&B','#AK_Step1_v12::#FirstAid':'First Aid',
+    '#AK_Step1_v12::Pathoma':'Pathoma','#AK_Step1_v12::Physeo':'Physeo',
+    'GUSOM':'GUSOM','Block4':'Block 4',
+    'AnkiHub_Optional::Georgetown::Block4':'Georgetown Block4'
+  };
+  return map[base] || base.split('::').pop();
+}
+function getDepth() {
+  const mode = getMode();
+  if (mode === 'sketchy') return 3;
+  if (mode === 'depth4') return 4;
+  if (mode === 'inhouse2') return 2;
+  if (mode === 'custom') return parseInt(document.getElementById('custom-depth-select').value, 10);
+  return 2;
+}
+function getSubject() { return document.getElementById('subject-input').value.trim(); }
+function getFullPrefix() {
+  const base = getBasePrefix(), mode = getMode();
+  if (!base) return '';
+  if (mode === 'sketchy' || mode === 'depth4' || mode === 'inhouse2' || mode === 'custom') return base + '::';
+  const sub = getSubject();
+  return sub ? `${base}::${sub}::` : `${base}::`;
+}
+
+function updatePreview() {
+  const base = getBasePrefix() || '#AK_Step1_v12::Resource';
+  const mode = getMode(), depth = getDepth(), sub = getSubject() || '<Subject>';
+  let preview;
+  if (mode === 'sketchy' || (mode === 'custom' && depth === 3))
+    preview = `<span class="seg-matched">${esc(base)}::</span><strong>&lt;Heading&gt;</strong>::<strong>&lt;Chapter&gt;</strong>::<strong>&lt;Subchapter&gt;</strong>`;
+  else if (mode === 'depth4')
+    preview = `<span class="seg-matched">${esc(base)}::</span><strong>&lt;Subject&gt;</strong>::<strong>&lt;Heading&gt;</strong>::<strong>&lt;Chapter&gt;</strong>::<strong>&lt;Subchapter&gt;</strong>`;
+  else if (mode === 'custom' && depth === 4)
+    preview = `<span class="seg-matched">${esc(base)}::</span><strong>&lt;Group&gt;</strong>::<strong>&lt;Heading&gt;</strong>::<strong>&lt;Chapter&gt;</strong>::<strong>&lt;Subchapter&gt;</strong>`;
+  else if (mode === 'custom')
+    preview = `<span class="seg-matched">${esc(base)}::</span><strong>&lt;Chapter&gt;</strong>::<strong>&lt;Subchapter&gt;</strong>`;
+  else if (mode === 'inhouse2')
+    preview = `<span class="seg-matched">${esc(base)}::</span><strong>&lt;Chapter&gt;</strong>::<strong>&lt;Subchapter&gt;</strong>`;
+  else
+    preview = `<span class="seg-matched">${esc(base)}::${esc(sub)}::</span><strong>&lt;Chapter&gt;</strong>::<strong>&lt;Subchapter&gt;</strong>`;
+  document.getElementById('tag-preview').innerHTML = preview;
+}
+
+function onConfigChange() {
+  const mode = getMode(), isCustom = mode === 'custom', needsSubject = !isCustom && mode !== 'inhouse2' && mode !== 'sketchy' && mode !== 'depth4' && (mode === 'bootcamp' || mode === 'subject');
+  document.getElementById('subject-label').style.display = needsSubject ? '' : 'none';
+  document.getElementById('subject-input').style.display = needsSubject ? '' : 'none';
+  document.getElementById('custom-base-label').style.display = isCustom ? '' : 'none';
+  document.getElementById('custom-base-input').style.display = isCustom ? '' : 'none';
+  document.getElementById('custom-depth-label').style.display = isCustom ? '' : 'none';
+  document.getElementById('custom-depth-select').style.display = isCustom ? '' : 'none';
+  updatePreview();
+  if (cachedNoteRows) reparse();
+}
+
+function setStatus(msg, err) { const el = document.getElementById('status'); el.textContent = msg; el.className = err ? 'status-err' : ''; }
+function handleDragOver(e) { e.preventDefault(); document.getElementById('drop-zone').classList.add('drag-over'); }
+function handleDragLeave() { document.getElementById('drop-zone').classList.remove('drag-over'); }
+function handleDrop(e) { e.preventDefault(); document.getElementById('drop-zone').classList.remove('drag-over'); const f = e.dataTransfer.files[0]; if (f) handleFile(f); }
+
+async function getDbBytes(zip) {
+  const b = zip.file('collection.anki21b');
+  if (b) { setStatus('Decompressing collection (zstd)…'); const c = await b.async('uint8array'); if (window.fzstd) return window.fzstd.decompress(c); throw new Error('fzstd not available'); }
+  const a21 = zip.file('collection.anki21'); if (a21) return new Uint8Array(await a21.async('arraybuffer'));
+  const a2 = zip.file('collection.anki2'); if (a2) return new Uint8Array(await a2.async('arraybuffer'));
+  throw new Error('No collection database found in package');
+}
+
+async function handleFile(file) {
+  if (!file) return;
+  if (!file.name.endsWith('.apkg') && !file.name.endsWith('.zip')) { setStatus('Please upload an .apkg file.', true); return; }
+  setStatus('Reading file…');
+  try {
+    const buf = await file.arrayBuffer();
+    const zip = await JSZip.loadAsync(buf);
+    const dbBytes = await getDbBytes(zip);
+    setStatus('Loading database…');
+    const SQL = await initSqlJs({ locateFile: f => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.2/${f}` });
+    const db = new SQL.Database(dbBytes);
+    setStatus('Extracting tags…');
+    const res = db.exec("SELECT tags FROM notes WHERE tags != ''");
+    db.close();
+    cachedNoteRows = res.length ? res[0].values : [];
+    reparse(file.name);
+  } catch(e) { setStatus('Error: ' + e.message, true); console.error(e); }
+}
+
+function reparse(filename) {
+  if (!cachedNoteRows) return;
+  const prefix = getFullPrefix(), depth = getDepth();
+  if (!prefix) { setStatus('Please configure the resource above.', true); return; }
+  allRows = extractRows(cachedNoteRows, prefix, depth);
+  if (!allRows.length) {
+    setStatus(`No cards found matching: ${prefix}`, true);
+    document.getElementById('summary').style.display = 'none';
+    document.getElementById('results').style.display = 'none';
+    return;
+  }
+  setStatus(`Loaded ${filename || 'package'} — ${allRows.length} subchapters found.`);
+  showSummary(depth);
+  document.getElementById('results').style.display = 'block';
+  renderTable(depth); renderTree(depth);
+}
+
+function extractRows(noteRows, prefix, depth) {
+  const tagMap = {}, prefixLower = prefix.toLowerCase();
+  for (const row of noteRows) {
+    const tags = (row[0] || '').trim().split(/\s+/);
+    for (const rawTag of tags) {
+      if (!rawTag) continue;
+      const tag = rawTag;
+      const tagNorm = tag.startsWith('#') ? tag.slice(1) : tag;
+      if (!tagNorm.toLowerCase().startsWith(prefixLower)) continue;
+      const prefixNorm = prefixLower.startsWith('#') ? prefixLower.slice(1) : prefixLower;
+      const parts = tagNorm.slice(prefixNorm.length).split('::');
+      if (parts.length < depth || parts.slice(0, depth).some(p => !p)) continue;
+      const key = parts.slice(0, depth).join('|||') + '|||' + tag;
+      tagMap[key] = (tagMap[key] || 0) + 1;
+    }
+  }
+  return Object.entries(tagMap).map(([k, count]) => {
+    const parts = k.split('|||'), tag = parts[parts.length-1], L = parts.slice(0,-1);
+    if (depth === 4) return { group: L[0], heading: L[1], chapter: L[2], subchapter: L[3], count, tag };
+    if (depth === 3) return { group: null, heading: L[0], chapter: L[1], subchapter: L[2], count, tag };
+    return { group: null, heading: null, chapter: L[0], subchapter: L[1], count, tag };
+  }).sort((a,b) => {
+    if (a.group && b.group) { const g=a.group.localeCompare(b.group); if(g) return g; }
+    if (a.heading && b.heading) { const h=a.heading.localeCompare(b.heading); if(h) return h; }
+    const c=a.chapter.localeCompare(b.chapter); if(c) return c;
+    return a.subchapter.localeCompare(b.subchapter);
+  });
+}
+
+function showSummary(depth) {
+  const totalCards = allRows.reduce((s,r) => s+r.count, 0);
+  let html = '';
+  if (depth === 4) html += `<div class="stat"><div class="val">${new Set(allRows.map(r=>r.group)).size}</div><div class="lbl">Groups</div></div>`;
+  if (depth >= 3) html += `<div class="stat"><div class="val">${new Set(allRows.map(r=>(r.group||'')+r.heading)).size}</div><div class="lbl">Headings</div></div>`;
+  html += `<div class="stat"><div class="val">${new Set(allRows.map(r=>(r.group||'')+(r.heading||'')+r.chapter)).size}</div><div class="lbl">Chapters</div></div>`;
+  html += `<div class="stat"><div class="val">${allRows.length}</div><div class="lbl">Subchapters</div></div>`;
+  html += `<div class="stat"><div class="val">${totalCards.toLocaleString()}</div><div class="lbl">Total cards</div></div>`;
+  document.getElementById('summary').style.display = 'flex';
+  document.getElementById('summary').innerHTML = html;
+}
+
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelector(`.tab[onclick="switchTab('${name}')"]`).classList.add('active');
+  document.getElementById('panel-'+name).classList.add('active');
+}
+
+function getFiltered() {
+  const q = (document.getElementById('search').value||'').toLowerCase();
+  if (!q) return allRows;
+  return allRows.filter(r => (r.group||'').toLowerCase().includes(q)||(r.heading||'').toLowerCase().includes(q)||r.chapter.toLowerCase().includes(q)||r.subchapter.toLowerCase().includes(q)||r.tag.toLowerCase().includes(q));
+}
+function getSorted(rows, depth) {
+  const keys = depth===4 ? ['group','heading','chapter','subchapter','mapped','count','tag']
+              : depth===3 ? ['heading','chapter','subchapter','mapped','count','tag']
+              : ['chapter','subchapter','mapped','count','tag'];
+  return [...rows].sort((a,b) => {
+    const c=keys[sortCol];
+    if (c==='count') return sortDir*(a.count-b.count);
+    if (c==='mapped') return sortDir*mappedLabel(a.chapter,a.subchapter).localeCompare(mappedLabel(b.chapter,b.subchapter));
+    return sortDir*(a[c]||'').localeCompare(b[c]||'');
+  });
+}
+
+function renderTable(depth) {
+  depth = depth||getDepth();
+  const rows = getSorted(getFiltered(), depth), wrap = document.getElementById('table-wrap');
+  if (!rows.length) { wrap.innerHTML='<div id="empty">No results match your search.</div>'; return; }
+  const headers = depth===4 ? ['Group','Heading','Chapter','Subchapter','Mapped Subchapter','# Cards','Tag']
+                : depth===3 ? ['Heading','Chapter','Subchapter','Mapped Subchapter','# Cards','Tag']
+                : ['Chapter','Subchapter','Mapped Subchapter','# Cards','Tag'];
+  const colWidths = depth===4 ? ['110px','110px','120px','120px','150px','65px','']
+                  : depth===3 ? ['140px','140px','140px','160px','70px','']
+                  : ['160px','160px','180px','80px',''];
+  const arrs = headers.map((_,i)=>i===sortCol?(sortDir===1?' ↑':' ↓'):'');
+  const cols = colWidths.map(w=>w?`<col style="width:${w}">` : '<col>').join('');
+  wrap.innerHTML = `<table><colgroup>${cols}</colgroup>
+    <thead><tr>${headers.map((h,i)=>`<th onclick="sortBy(${i})">${h}${arrs[i]}</th>`).join('')}</tr></thead>
+    <tbody>${rows.map(r=>{
+      const num=formatNum(getNum(r.chapter),getNum(r.subchapter));
+      const mc=`<td class="mapped-cell">${num?`<span class="mapped-num">${esc(num)}</span>`:''}${esc(label(r.subchapter))}</td>`;
+      if (depth===4) return `<tr><td class="truncate">${esc(label(r.group))}</td><td class="truncate">${esc(label(r.heading))}</td><td class="truncate">${esc(label(r.chapter))}</td><td class="truncate">${esc(label(r.subchapter))}</td>${mc}<td class="count-cell">${r.count}</td><td class="tag-cell">${esc(r.tag)}</td></tr>`;
+      if (depth===3) return `<tr><td class="truncate">${esc(label(r.heading))}</td><td class="truncate">${esc(label(r.chapter))}</td><td class="truncate">${esc(label(r.subchapter))}</td>${mc}<td class="count-cell">${r.count}</td><td class="tag-cell">${esc(r.tag)}</td></tr>`;
+      return `<tr><td class="truncate">${esc(label(r.chapter))}</td><td class="truncate">${esc(label(r.subchapter))}</td>${mc}<td class="count-cell">${r.count}</td><td class="tag-cell">${esc(r.tag)}</td></tr>`;
+    }).join('')}</tbody></table>`;
+}
+function sortBy(col) { if(sortCol===col) sortDir*=-1; else {sortCol=col;sortDir=1;} renderTable(getDepth()); }
+
+function buildStructure(depth) {
+  const m={};
+  for (const r of allRows) {
+    if (depth===2) { if(!m[r.chapter]) m[r.chapter]=[]; m[r.chapter].push(r); }
+    else if (depth===3) { if(!m[r.heading]) m[r.heading]={}; if(!m[r.heading][r.chapter]) m[r.heading][r.chapter]=[]; m[r.heading][r.chapter].push(r); }
+    else { if(!m[r.group]) m[r.group]={}; if(!m[r.group][r.heading]) m[r.group][r.heading]={}; if(!m[r.group][r.heading][r.chapter]) m[r.group][r.heading][r.chapter]=[]; m[r.group][r.heading][r.chapter].push(r); }
+  }
+  return m;
+}
+
+function leafRows(chRaw, rows) {
+  const chNum=getNum(chRaw);
+  return rows.map(r=>{const n=formatNum(chNum,getNum(r.subchapter)); return `<div class="leaf-row"><span class="leaf-indent"></span><span class="t-subnum">${esc(n)}</span><span class="t-subchapter">${esc(label(r.subchapter))}</span><span class="t-arrow">→</span><span class="t-tag">${esc(r.tag)}</span></div>`;}).join('');
+}
+function chapterBlock(chRaw, rows, idPrefix) {
+  const cid=idPrefix+'_'+slug(chRaw);
+  return `<div class="tree-node"><div class="tree-row" onclick="toggleNode('${esc(cid)}')"><span class="tog" id="tog-${esc(cid)}">▾</span><span class="t-chapter">${esc(label(chRaw))}</span></div><div class="tree-children" id="ch-${esc(cid)}">${leafRows(chRaw,rows)}</div></div>`;
+}
+function headingBlock(hRaw, chMap, idPrefix) {
+  const hid=idPrefix+'_'+slug(hRaw);
+  const inner=Object.keys(chMap).sort().map(ch=>chapterBlock(ch,chMap[ch],hid)).join('');
+  return `<div class="tree-node"><div class="tree-row" onclick="toggleNode('${esc(hid)}')"><span class="tog" id="tog-${esc(hid)}">▾</span><span class="t-heading">${esc(label(hRaw))}</span></div><div class="tree-children" id="ch-${esc(hid)}">${inner}</div></div>`;
+}
+
+function renderTree(depth) {
+  depth=depth||getDepth();
+  const resourceName=getResourceDisplayName(), struct=buildStructure(depth);
+  let html='<div class="tree-node">';
+  if (depth===2) {
+    const subjectName = (getMode()==='custom' || getMode()==='inhouse2') ? '' : label(getSubject());
+    html+=`<div class="tree-row" onclick="toggleNode('root')"><span class="tog" id="tog-root">▾</span><span class="t-resource">${esc(resourceName)}</span>${subjectName?`<span class="t-arrow">→</span><span class="t-l1">${esc(subjectName)}</span>`:''}</div><div class="tree-children" id="ch-root">`;
+    html+=Object.keys(struct).sort().map(ch=>{
+      const cid='c_'+slug(ch);
+      return `<div class="tree-node"><div class="tree-row" onclick="toggleNode('${esc(cid)}')"><span class="tog" id="tog-${esc(cid)}">▾</span><span class="t-heading">${esc(label(ch))}</span></div><div class="tree-children" id="ch-${esc(cid)}">${leafRows(ch,struct[ch])}</div></div>`;
+    }).join('');
+    html+=`</div>`;
+  } else if (depth===3) {
+    html+=`<div class="tree-row" onclick="toggleNode('root')"><span class="tog" id="tog-root">▾</span><span class="t-resource">${esc(resourceName)}</span></div><div class="tree-children" id="ch-root">`;
+    html+=Object.keys(struct).sort().map(h=>headingBlock(h,struct[h],'h')).join('');
+    html+=`</div>`;
+  } else {
+    html+=`<div class="tree-row" onclick="toggleNode('root')"><span class="tog" id="tog-root">▾</span><span class="t-resource">${esc(resourceName)}</span></div><div class="tree-children" id="ch-root">`;
+    for (const grp of Object.keys(struct).sort()) {
+      const gid='g_'+slug(grp);
+      html+=`<div class="tree-node"><div class="tree-row" onclick="toggleNode('${esc(gid)}')"><span class="tog" id="tog-${esc(gid)}">▾</span><span class="t-group">${esc(label(grp))}</span></div><div class="tree-children" id="ch-${esc(gid)}">`;
+      html+=Object.keys(struct[grp]).sort().map(h=>headingBlock(h,struct[grp][h],gid)).join('');
+      html+=`</div></div>`;
+    }
+    html+=`</div>`;
+  }
+  html+='</div>';
+  document.getElementById('tree-wrap').innerHTML=html;
+}
+
+function toggleNode(id) { const ch=document.getElementById('ch-'+id),tog=document.getElementById('tog-'+id); if(!ch) return; ch.classList.toggle('collapsed'); tog.textContent=ch.classList.contains('collapsed')?'▸':'▾'; }
+function setAllTree(expand) { document.querySelectorAll('.tree-children').forEach(el=>el.classList.toggle('collapsed',!expand)); document.querySelectorAll('.tog').forEach(el=>el.textContent=expand?'▾':'▸'); }
+
+function buildHierarchy() {
+  const depth=getDepth(), resourceName=getResourceDisplayName(), struct=buildStructure(depth);
+  const subFn=(ch,rows)=>rows.map(r=>({number:formatNum(getNum(ch),getNum(r.subchapter)),subchapter:label(r.subchapter),tag:r.tag}));
+  const chFn=(chMap)=>Object.keys(chMap).sort().map(ch=>({chapter:label(ch),subchapters:subFn(ch,chMap[ch])}));
+  if (depth===2) return {resource:resourceName,subject:label(getSubject()),chapters:Object.keys(struct).sort().map(ch=>({chapter:label(ch),subchapters:subFn(ch,struct[ch])}))};
+  if (depth===3) return {resource:resourceName,headings:Object.keys(struct).sort().map(h=>({heading:label(h),chapters:chFn(struct[h])}))};
+  return {resource:resourceName,groups:Object.keys(struct).sort().map(g=>({group:label(g),headings:Object.keys(struct[g]).sort().map(h=>({heading:label(h),chapters:chFn(struct[g][h])}))}))};
+}
+
+function exportHierarchyText() {
+  const h=buildHierarchy(), lines=[];
+  const writeSubs=(subs,indent)=>subs.forEach(s=>lines.push(`${indent}* ${s.number?s.number+' ':''}${s.subchapter} → ${s.tag}`));
+  const writeChs=(chs,indent)=>chs.forEach(c=>{lines.push(`${indent}${c.chapter}`);writeSubs(c.subchapters,indent+'  ');});
+  if (h.groups) { lines.push(h.resource); h.groups.forEach(g=>{lines.push(`\n${g.group}`);g.headings.forEach(hd=>{lines.push(`  ${hd.heading}`);writeChs(hd.chapters,'    ');});}); }
+  else if (h.headings) { lines.push(h.resource); h.headings.forEach(hd=>{lines.push(`\n${hd.heading}`);writeChs(hd.chapters,'  ');}); }
+  else { lines.push(`${h.resource} → ${h.subject}`); writeChs(h.chapters,''); }
+  downloadText(lines.join('\n'),'hierarchy.txt');
+}
+function exportHierarchyJSON() { downloadText(JSON.stringify(buildHierarchy(),null,2),'hierarchy.json'); }
+
+function toDelimited(rows, sep, depth) {
+  const headers = depth===4 ? ['Group','Heading','Chapter','Subchapter','Mapped Subchapter','Number of Anki Cards','Tag']
+                : depth===3 ? ['Heading','Chapter','Subchapter','Mapped Subchapter','Number of Anki Cards','Tag']
+                : ['Chapter','Subchapter','Mapped Subchapter','Number of Anki Cards','Tag'];
+  const escape=v=>sep===','?`"${String(v).replace(/"/g,'""')}"`:String(v);
+  return [headers.join(sep),...rows.map(r=>{
+    const ml=mappedLabel(r.chapter,r.subchapter);
+    const base=depth===4?[label(r.group),label(r.heading),label(r.chapter),label(r.subchapter),ml,r.count,r.tag]
+              :depth===3?[label(r.heading),label(r.chapter),label(r.subchapter),ml,r.count,r.tag]
+              :[label(r.chapter),label(r.subchapter),ml,r.count,r.tag];
+    return base.map(escape).join(sep);
+  })].join('\n');
+}
+function downloadText(text,filename){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:'text/plain'}));a.download=filename;a.click();}
+function exportCSV(){const d=getDepth();downloadText(toDelimited(getSorted(getFiltered(),d),',',d),'anki_cards.csv');}
+function exportTSV(){const d=getDepth();downloadText(toDelimited(getSorted(getFiltered(),d),'\t',d),'anki_cards.tsv');}
+
+onConfigChange();
+</script>
+</body>
+</html>
