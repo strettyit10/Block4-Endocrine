@@ -1,0 +1,1841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Endocrine Hub Map · HoyaDocs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
+<style>
+  :root{
+    --bg:#0b1220;
+    --panel:#111a2e;
+    --card:#16213a;
+    --card-2:#1b2945;
+    --border:#273556;
+    --text:#eaf0ff;
+    --muted:#9aa9c6;
+    --accent:#f59e0b;        /* endocrine amber */
+    --accent-2:#fbbf24;
+    --ok:#34d399;
+    --warn:#f87171;
+    --info:#60a5fa;
+    --purple:#a78bfa;
+    --pink:#f472b6;
+    --teal:#2dd4bf;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'Inter',sans-serif}
+  a{color:var(--accent-2);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  header.hero{
+    background:
+      radial-gradient(1200px 400px at 10% -10%, rgba(245,158,11,.18), transparent 60%),
+      radial-gradient(900px 400px at 110% 10%, rgba(96,165,250,.15), transparent 60%),
+      linear-gradient(180deg, #0e1830, #0b1220);
+    border-bottom:1px solid var(--border);
+    padding:32px 40px 28px;
+  }
+  .brand{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+  .brand .dot{width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 18px rgba(245,158,11,.7)}
+  .brand .name{font-weight:800;letter-spacing:.04em;font-size:12px;color:var(--muted);text-transform:uppercase}
+  h1{margin:0 0 6px;font-size:34px;font-weight:800;letter-spacing:-.02em}
+  h1 .tag{color:var(--accent-2)}
+  header.hero p{margin:0;color:var(--muted);max-width:860px;line-height:1.55}
+
+  .tabs{display:flex;gap:8px;padding:18px 40px 0;border-bottom:1px solid var(--border);background:var(--panel)}
+  .tab{
+    background:transparent;color:var(--muted);border:1px solid transparent;
+    padding:10px 16px;border-radius:10px 10px 0 0;cursor:pointer;font:600 13px 'Inter',sans-serif;
+    border-bottom:none
+  }
+  .tab.active{background:var(--bg);color:var(--text);border-color:var(--border);position:relative;top:1px}
+  .tab:hover{color:var(--text)}
+
+  main{padding:28px 40px 60px;max-width:1400px;margin:0 auto}
+  section.view{display:none}
+  section.view.active{display:block}
+
+  .legend{
+    display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:10px;
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:22px
+  }
+  .legend .chip{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted)}
+  .legend .sw{width:14px;height:14px;border-radius:4px;border:1px solid #00000033}
+
+  .diagram-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;overflow:auto}
+  .mermaid{min-width:900px}
+
+  h2{margin:34px 0 10px;font-size:20px;letter-spacing:-.01em}
+  h2 .hint{font-size:12px;color:var(--muted);font-weight:500;margin-left:8px}
+  h3{margin:22px 0 8px;font-size:15px;color:var(--accent-2);letter-spacing:.02em;text-transform:uppercase;font-weight:700}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(320px,1fr));gap:14px}
+  .card{
+    background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;
+    transition:transform .12s ease, border-color .12s ease
+  }
+  .card:hover{transform:translateY(-1px);border-color:var(--accent)}
+  .card .title{font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:4px}
+  .card .title .badge{font-size:10px;padding:2px 7px;border-radius:99px;font-weight:700;letter-spacing:.03em}
+  .card .path{font:500 12px 'JetBrains Mono', monospace;color:var(--muted);word-break:break-all;margin-bottom:6px}
+  .card .desc{font-size:13px;color:#c9d4ec;line-height:1.5}
+  .card .links{margin-top:8px;font-size:12px}
+  .card .links a{margin-right:10px;color:var(--info)}
+
+  .badge-hub{background:#7c2d12;color:#fde68a}
+  .badge-page{background:#1e3a8a;color:#dbeafe}
+  .badge-tool{background:#064e3b;color:#bbf7d0}
+  .badge-src{background:#3b0764;color:#ede9fe}
+  .badge-tracker{background:#831843;color:#fce7f3}
+
+  details{background:var(--card-2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin:8px 0}
+  details summary{cursor:pointer;font-weight:600}
+  details[open] summary{color:var(--accent-2)}
+
+  .source-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+  .source-table th,.source-table td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top}
+  .source-table th{color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-size:11px;font-weight:700}
+  .source-table code{font:500 12px 'JetBrains Mono',monospace;color:#ffd791;background:#1a1030;padding:1px 6px;border-radius:4px}
+
+  .footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--border);color:var(--muted);font-size:12px}
+
+  /* Impact view */
+  .impact-card{
+    background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin:14px 0;
+  }
+  .impact-head{display:flex;flex-wrap:wrap;gap:12px;align-items:baseline;margin-bottom:6px}
+  .impact-head h3{margin:0;text-transform:none;font-size:17px;color:var(--text);letter-spacing:-.01em}
+  .impact-head .src-tag{font:600 11px 'JetBrains Mono',monospace;color:#fde68a;background:#451a03;border:1px solid #7c2d12;padding:3px 8px;border-radius:6px}
+  .impact-head .risk{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;border-radius:99px;border:1px solid transparent}
+  .risk-high{background:#450a0a;color:#fecaca;border-color:#7f1d1d}
+  .risk-med{background:#451a03;color:#fdba74;border-color:#9a3412}
+  .risk-low{background:#052e16;color:#86efac;border-color:#14532d}
+  .impact-card .blurb{color:#c9d4ec;font-size:13px;line-height:1.55;margin:4px 0 10px}
+  .impact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+  .impact-col h4{margin:0 0 6px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+  .impact-col ul{margin:0;padding-left:18px;font-size:13px;line-height:1.55}
+  .impact-col ul li{margin:3px 0}
+  .impact-col code{font:500 11px 'JetBrains Mono',monospace;color:#ffd791;background:#1a1030;padding:1px 5px;border-radius:4px}
+  .impact-col.primary h4{color:#fca5a5}
+  .impact-col.secondary h4{color:#fdba74}
+  .impact-col.tertiary h4{color:#86efac}
+
+  /* ===== Field-map view (data-integration style) ===== */
+  .fm-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:8px 0 14px;flex-wrap:wrap}
+  .fm-chips{display:flex;gap:6px;flex-wrap:wrap}
+  .fm-chip{
+    background:var(--panel);border:1px solid var(--border);color:var(--muted);
+    padding:5px 11px;border-radius:99px;font-size:12px;font-weight:600;cursor:pointer;user-select:none
+  }
+  .fm-chip:hover{color:var(--text);border-color:var(--accent)}
+  .fm-chip.active{background:var(--accent);color:#1b1205;border-color:var(--accent)}
+  .fm-legend{display:flex;gap:14px;color:var(--muted);font-size:12px;flex-wrap:wrap}
+  .fm-legend span{display:inline-flex;align-items:center;gap:6px}
+  .fm-dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+
+  .fieldmap-wrap{
+    position:relative;
+    background:#0d1628;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:22px;
+    overflow:hidden;
+  }
+  .fm-cols{
+    display:grid;
+    grid-template-columns: 1fr 1.05fr 1fr;
+    gap:50px;
+    position:relative;
+    z-index:2;
+  }
+  .fm-col{display:flex;flex-direction:column;gap:18px}
+  .fm-col-head{
+    font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    padding:0 4px 6px;border-bottom:1px dashed var(--border);margin-bottom:2px;
+    display:flex;align-items:baseline;justify-content:space-between
+  }
+  .fm-col-head span{font-weight:500;letter-spacing:.04em;text-transform:none;color:#5e7399;font-size:11px}
+
+  .fm-card{
+    background:linear-gradient(180deg,#172339,#111a2e);
+    border:1px solid #2a3a5c;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 2px 0 rgba(0,0,0,.2), 0 10px 24px -16px rgba(0,0,0,.6);
+    transition:border-color .12s ease, transform .12s ease;
+  }
+  .fm-card.highlight{border-color:var(--accent);transform:translateY(-1px)}
+  .fm-card.dim{opacity:.25}
+
+  .fm-card-head{
+    display:flex;align-items:center;gap:8px;
+    padding:9px 12px;
+    font-weight:700;font-size:13px;color:#eaf0ff;
+    border-bottom:1px solid #243355;
+    background:linear-gradient(180deg,#1e2c4d,#19253f);
+    cursor:pointer;
+    flex-wrap:wrap;
+  }
+  .fm-card-head .ic{font-size:14px;opacity:.9}
+  .fm-card-sub{flex-basis:100%;font-size:10px;font-weight:500;color:#7a8bac;letter-spacing:.04em}
+
+  .fm-src .fm-card-head{background:linear-gradient(180deg,#3b2c11,#2a1f0a);border-bottom-color:#5a4018}
+  .fm-src{border-color:#5a4018}
+  .fm-tgt .fm-card-head{background:linear-gradient(180deg,#0e2d49,#0a2239);border-bottom-color:#174169}
+  .fm-tgt{border-color:#174169}
+  .fm-xform{text-align:center;border-color:#1e4a38}
+  .fm-xform .fm-card-head{background:linear-gradient(180deg,#0f3d2d,#0a2e22);border-bottom-color:#195f45;justify-content:center}
+
+  /* Intermediate cards — both consume and emit */
+  .fm-mid{border-color:#1e4a5a}
+  .fm-mid .fm-card-head{background:linear-gradient(180deg,#0c3848,#091f2a);border-bottom-color:#195f75}
+  .fm-mid .fm-field{
+    padding-left:26px;padding-right:26px;
+    position:relative;justify-content:flex-start;text-align:left
+  }
+  .fm-mid .fm-field > .fm-pin{display:none}
+  .fm-mid .fm-field::before,
+  .fm-mid .fm-field::after{
+    content:'';
+    width:9px;height:9px;border-radius:50%;
+    background:#2dd4bf;border:1px solid #0d9488;
+    box-shadow:0 0 0 2px rgba(45,212,191,.18);
+    position:absolute;top:50%;transform:translateY(-50%);
+  }
+  .fm-mid .fm-field::before{left:10px}
+  .fm-mid .fm-field::after{right:10px}
+  .fm-mid .fm-field span:not(.fm-pin){flex:1;text-align:left}
+
+  /* Generator strip at top */
+  .fm-gen-strip{
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    background:#0d1628;border:1px dashed #273556;border-radius:12px;
+    padding:10px 14px;margin-bottom:14px;
+  }
+  .fm-gen-strip b{
+    color:#86efac;font-weight:800;font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;margin-right:4px
+  }
+  .fm-gen-strip code{
+    background:#0a2e22;border:1px solid #1e4a38;color:#86efac;
+    padding:4px 10px;border-radius:6px;font:600 11px 'JetBrains Mono',monospace
+  }
+  .fm-gen-strip .gen-hint{margin-left:auto;color:var(--muted);font-size:11px;font-style:italic}
+
+  /* Card collapse toggle */
+  .fm-toggle{
+    margin-left:auto;cursor:pointer;user-select:none;flex:0 0 22px;
+    width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;
+    border-radius:5px;color:var(--muted);font-size:12px;
+    transition:transform .2s ease,background .12s ease,color .12s ease;
+  }
+  .fm-toggle:hover{background:rgba(255,255,255,.08);color:var(--text)}
+  .fm-card.collapsed .fm-toggle{transform:rotate(-90deg)}
+  .fm-card.collapsed .fm-field{display:none}
+  .fm-card.collapsed .fm-subhead{display:none}
+  .fm-card.collapsed .fm-card-head{border-bottom:none}
+
+  /* data-hidden = content retained but not displayed (user-toggleable) */
+  .fm-field.data-hidden,
+  .fm-subhead.data-hidden{display:none}
+
+  /* Vendor subheaders inside a grouped card */
+  .fm-subhead{
+    padding:7px 12px 4px;
+    font:800 10px 'Inter',sans-serif;
+    color:#fbbf24;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    border-top:1px solid #1d2a47;
+    background:linear-gradient(180deg,rgba(251,191,36,.07),rgba(251,191,36,.02));
+  }
+  .fm-subhead:first-of-type{border-top:none}
+  .fm-subhead .label{display:inline-flex;align-items:center;gap:6px}
+  .fm-subhead .dim{color:#7a8bac;font-weight:500;text-transform:none;letter-spacing:.02em;margin-left:6px}
+
+  .fm-field{
+    display:flex;align-items:center;gap:10px;
+    padding:6px 12px;
+    font-size:12px;line-height:1.35;color:#d5dff3;
+    border-top:1px solid #1d2a47;
+    position:relative;
+    cursor:pointer;
+  }
+  .fm-field:first-of-type{border-top:none}
+  .fm-src .fm-field{justify-content:space-between}
+  .fm-tgt .fm-field{justify-content:flex-start}
+  .fm-field span:not(.fm-pin){flex:1}
+  .fm-field:hover{background:#16233e;color:#fff}
+  .fm-field.highlight{background:#1b2e55;color:#fff}
+  .fm-field.dim{opacity:.3}
+
+  .fm-pin{
+    width:9px;height:9px;border-radius:50%;
+    background:#38bdf8;border:1px solid #0ea5e9;flex:0 0 9px;
+    box-shadow:0 0 0 2px rgba(56,189,248,.15)
+  }
+  .fm-src .fm-pin{background:#fbbf24;border-color:#d97706;box-shadow:0 0 0 2px rgba(251,191,36,.18)}
+  .fm-tgt .fm-pin{background:#60a5fa;border-color:#2563eb;box-shadow:0 0 0 2px rgba(96,165,250,.18)}
+
+  .fm-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+  .fm-svg path{
+    fill:none;stroke-width:1.4;opacity:.55;
+    transition:opacity .15s ease, stroke-width .15s ease;
+  }
+  .fm-svg path.highlight{opacity:1;stroke-width:2.6;filter:drop-shadow(0 0 4px currentColor)}
+  .fm-svg path.dim{opacity:.07}
+  .fm-svg path.hidden{display:none}
+
+  /* category colors */
+  .fm-svg path.c-lo{stroke:#60a5fa;color:#60a5fa}
+  .fm-svg path.c-slide{stroke:#34d399;color:#34d399}
+  .fm-svg path.c-workbook{stroke:#f472b6;color:#f472b6}
+  .fm-svg path.c-anki{stroke:#f472b6;color:#f472b6;stroke-dasharray:4 3}
+  .fm-svg path.c-subj{stroke:#a78bfa;color:#a78bfa}
+  .fm-svg path.c-mapping{stroke:#fbbf24;color:#fbbf24}
+  .fm-svg path.c-xform{stroke:#64748b;color:#64748b;stroke-dasharray:2 4;opacity:.35}
+  .fm-svg path.c-derived{stroke:#a78bfa;color:#a78bfa;stroke-dasharray:6 3;opacity:.55}
+  .fm-field.not-covered{opacity:.35;font-style:italic}
+  .fm-field.not-covered .fm-pin{background:#475569;border-color:#334155;box-shadow:none}
+
+  .fm-select{
+    background:var(--panel);color:var(--text);border:1px solid var(--border);
+    padding:7px 10px;border-radius:8px;font:600 13px 'Inter',sans-serif;
+    min-width:340px;cursor:pointer;
+  }
+  .fm-select:focus{outline:none;border-color:var(--accent)}
+  .fm-tag{
+    font:600 11px 'JetBrains Mono',monospace;color:#fde68a;background:#451a03;
+    border:1px solid #7c2d12;padding:3px 8px;border-radius:6px;letter-spacing:.04em
+  }
+  .fm-field[hidden]{display:none !important}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="brand"><div class="dot"></div><div class="name">HoyaDocs · Block 4 · Endocrine</div></div>
+  <h1>Endocrine Hub <span class="tag">Map</span></h1>
+  <p>A bird's-eye view of every HTML in the endocrine study hub — how the pages link to each other, and which primary sources (lecture slides, learning objectives, Anki decks, workbooks, and practice banks) each tier pulls from.</p>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" data-view="fieldmap">Field mapping</button>
+  <button class="tab" data-view="impact">Source → impact (if I update…)</button>
+  <button class="tab" data-view="index">File index</button>
+</nav>
+
+<main>
+
+<!-- ================= LEGEND ================= -->
+<div class="legend">
+  <div class="chip"><span class="sw" style="background:#f59e0b"></span>Top-level hub (landing page)</div>
+  <div class="chip"><span class="sw" style="background:#60a5fa"></span>Per-lecture HTML (Hub 1 / 2 / 3 tier)</div>
+  <div class="chip"><span class="sw" style="background:#34d399"></span>Tool / utility page</div>
+  <div class="chip"><span class="sw" style="background:#a78bfa"></span>Primary source (PDF / DOCX / APKG / XLSX)</div>
+  <div class="chip"><span class="sw" style="background:#f472b6"></span>Hub-update tracker dashboard</div>
+</div>
+
+<!-- ================= VIEW 1: NAVIGATION FLOW ================= -->
+<!-- ================= VIEW 0: FIELD MAPPING (data-integration style) ================= -->
+<section class="view active" id="view-fieldmap">
+  <h2>Field-level data mapping <span class="hint" id="fm-hint">pick a lecture to see how its sources feed the HTML outputs</span></h2>
+
+  <div class="fm-toolbar">
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <label for="fm-lecture-select" style="font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.04em;text-transform:uppercase">Lecture</label>
+      <select id="fm-lecture-select" class="fm-select"></select>
+      <span id="fm-lecture-tag" class="fm-tag"></span>
+    </div>
+    <div class="fm-chips">
+      <span class="fm-chip" data-filter="all">Show all</span>
+      <span class="fm-chip" data-filter="lo">LO flows</span>
+      <span class="fm-chip" data-filter="slide">Slide flows</span>
+      <span class="fm-chip" data-filter="workbook">Workbook / Anki</span>
+      <span class="fm-chip" data-filter="mapping">Resource mapping</span>
+      <span class="fm-chip" data-filter="derived">Lecture-guide → drills</span>
+    </div>
+    <div class="fm-legend">
+      <span><span class="fm-dot" style="background:#60a5fa"></span>LO</span>
+      <span><span class="fm-dot" style="background:#34d399"></span>Slides</span>
+      <span><span class="fm-dot" style="background:#f472b6"></span>Workbook / Anki</span>
+      <span><span class="fm-dot" style="background:#fbbf24"></span>Mapping</span>
+      <span><span class="fm-dot" style="background:#a78bfa"></span>Derived (guide→drills)</span>
+    </div>
+  </div>
+
+  <div class="fm-gen-strip">
+    <b>Generators</b>
+    <code>hub-builder</code>
+    <code>hub-index-generator</code>
+    <code>hub3-generator</code>
+    <code>study-planner-generator</code>
+    <code>lecture-resource-mapper</code>
+    <span class="gen-hint">skills that produce the outputs below from the inputs to the left</span>
+  </div>
+
+  <div class="fieldmap-wrap" id="fieldmap-wrap">
+    <svg class="fm-svg" id="fm-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+
+    <div class="fm-cols">
+
+      <!-- =========== LEFT: SOURCES =========== -->
+      <div class="fm-col">
+        <div class="fm-col-head">Primary sources <span>inputs</span></div>
+
+        <div class="fm-card fm-src" data-card="inlec">
+          <div class="fm-card-head"><span class="ic">📝</span><span data-k="inlec_title"></span><span class="fm-toggle" title="Collapse / expand">▾</span><span class="fm-card-sub">Per Lecture / — LO docx + slide PDF</span></div>
+
+          <div class="fm-subhead"><span class="label">Learning Objectives</span></div>
+          <div class="fm-field" id="f-lo-1"><span data-k="obj1"></span><span class="fm-pin"></span></div>
+          <div class="fm-field" id="f-lo-2"><span data-k="obj2"></span><span class="fm-pin"></span></div>
+          <div class="fm-field" id="f-lo-3"><span data-k="obj3"></span><span class="fm-pin"></span></div>
+          <div class="fm-field" id="f-lo-4"><span data-k="obj4"></span><span class="fm-pin"></span></div>
+          <div class="fm-field" id="f-lo-5"><span data-k="obj5"></span><span class="fm-pin"></span></div>
+          <div class="fm-field" id="f-lo-6"><span data-k="obj6"></span><span class="fm-pin"></span></div>
+          <div class="fm-field" id="f-lo-7"><span data-k="obj7"></span><span class="fm-pin"></span></div>
+          <div class="fm-field" id="f-lo-8"><span data-k="obj8"></span><span class="fm-pin"></span></div>
+
+          <div class="fm-subhead data-hidden"><span class="label">Lecture Notes</span><span class="dim" data-k="slide_file"></span></div>
+          <div class="fm-field data-hidden" id="f-sl-1"><span data-k="sl1"></span><span class="fm-pin"></span></div>
+          <div class="fm-field data-hidden" id="f-sl-2"><span data-k="sl2"></span><span class="fm-pin"></span></div>
+          <div class="fm-field data-hidden" id="f-sl-3"><span data-k="sl3"></span><span class="fm-pin"></span></div>
+          <div class="fm-field data-hidden" id="f-sl-4"><span data-k="sl4"></span><span class="fm-pin"></span></div>
+          <div class="fm-field data-hidden" id="f-sl-5"><span data-k="sl5"></span><span class="fm-pin"></span></div>
+          <div class="fm-field data-hidden" id="f-sl-6"><span data-k="sl6"></span><span class="fm-pin"></span></div>
+        </div>
+
+        <div class="fm-card fm-src" data-card="subj">
+          <div class="fm-card-head"><span class="ic">📘</span><span data-k="subj_title"></span><span class="fm-toggle" title="Collapse / expand">▾</span><span class="fm-card-sub" data-k="subj_file"></span></div>
+          <div class="fm-field" id="f-sub-1"><span data-k="sub1"></span><span class="fm-pin"></span></div>
+          <div class="fm-field" id="f-sub-2"><span data-k="sub2"></span><span class="fm-pin"></span></div>
+        </div>
+
+        <div class="fm-card fm-src" data-card="thirdparty">
+          <div class="fm-card-head"><span class="ic">📚</span>3rd-Party Resources<span class="fm-toggle" title="Collapse / expand">▾</span><span class="fm-card-sub">Workbooks + Anki decks, grouped by vendor</span></div>
+
+          <div class="fm-subhead"><span class="label">BnB</span><span class="dim">Boards &amp; Beyond</span></div>
+          <div class="fm-field" id="f-wb-bnb"><span data-k="wb_bnb"></span><span class="fm-pin"></span></div>
+          <div class="fm-field" id="f-ak-bnb"><span data-k="ak_bnb"></span><span class="fm-pin"></span></div>
+
+          <div class="fm-subhead"><span class="label">Bootcamp</span><span class="dim">Bootcamp.com</span></div>
+          <div class="fm-field" id="f-wb-bc"><span data-k="wb_bc"></span><span class="fm-pin"></span></div>
+          <div class="fm-field" id="f-ak-bc"><span data-k="ak_bc"></span><span class="fm-pin"></span></div>
+
+          <div class="fm-subhead"><span class="label">First Aid</span><span class="dim">USMLE Step One</span></div>
+          <div class="fm-field" id="f-wb-fa"><span data-k="wb_fa"></span><span class="fm-pin"></span></div>
+          <div class="fm-field" id="f-ak-fa"><span data-k="ak_fa"></span><span class="fm-pin"></span></div>
+
+          <div class="fm-subhead"><span class="label">Pathoma</span><span class="dim">Sattar</span></div>
+          <div class="fm-field" id="f-wb-path"><span data-k="wb_path"></span><span class="fm-pin"></span></div>
+          <div class="fm-field" id="f-ak-path"><span data-k="ak_path"></span><span class="fm-pin"></span></div>
+
+          <div class="fm-subhead"><span class="label">Physeo</span><span class="dim">Physeo.com</span></div>
+          <div class="fm-field" id="f-wb-phy"><span data-k="wb_phy"></span><span class="fm-pin"></span></div>
+          <div class="fm-field" id="f-ak-phy"><span data-k="ak_phy"></span><span class="fm-pin"></span></div>
+
+          <div class="fm-subhead"><span class="label">Sketchy</span><span class="dim">SketchyMedical</span></div>
+          <div class="fm-field" id="f-wb-sk"><span data-k="wb_sk"></span><span class="fm-pin"></span></div>
+          <div class="fm-field" id="f-ak-sk"><span data-k="ak_sk"></span><span class="fm-pin"></span></div>
+        </div>
+
+        <div class="fm-card fm-src" data-card="addank">
+          <div class="fm-card-head"><span class="ic">🧩</span>Additional Anki Decks<span class="fm-toggle" title="Collapse / expand">▾</span><span class="fm-card-sub">In-House + 3rd-Party decks beyond the vendor set above</span></div>
+
+          <div class="fm-subhead"><span class="label">In House Decks</span><span class="dim">GUSOM · Block 4</span></div>
+          <div class="fm-field" id="f-in-gusom"><span data-k="in_gusom"></span><span class="fm-pin"></span></div>
+          <div class="fm-field" id="f-in-block4"><span data-k="in_block4"></span><span class="fm-pin"></span></div>
+
+          <div class="fm-subhead"><span class="label">3rd Party Decks</span><span class="dim">Duke · Michigan · AnkiHub optional</span></div>
+          <div class="fm-field" id="f-in-path"><span data-k="in_path"></span><span class="fm-pin"></span></div>
+          <div class="fm-field" id="f-in-mich"><span data-k="in_mich"></span><span class="fm-pin"></span></div>
+          <div class="fm-field" id="f-in-ahopt"><span data-k="in_ahopt"></span><span class="fm-pin"></span></div>
+        </div>
+      </div>
+
+      <!-- =========== MIDDLE: INTERMEDIATE (both input AND output) =========== -->
+      <div class="fm-col">
+        <div class="fm-col-head">Intermediate files <span>inputs + outputs</span></div>
+
+        <div class="fm-card fm-mid" data-card="lg">
+          <div class="fm-card-head"><span class="ic">📄</span><span data-k="t_lg_title"></span><span class="fm-toggle" title="Collapse / expand">▾</span><span class="fm-card-sub" data-k="t_lg_file"></span></div>
+          <div class="fm-field" id="t-lg-cover"><span class="fm-pin"></span><span>#cover</span></div>
+          <div class="fm-field" id="t-lg-obj1"><span class="fm-pin"></span><span data-k="t_obj1"></span></div>
+          <div class="fm-field" id="t-lg-obj2"><span class="fm-pin"></span><span data-k="t_obj2"></span></div>
+          <div class="fm-field" id="t-lg-obj3"><span class="fm-pin"></span><span data-k="t_obj3"></span></div>
+          <div class="fm-field" id="t-lg-obj4"><span class="fm-pin"></span><span data-k="t_obj4"></span></div>
+          <div class="fm-field" id="t-lg-obj5"><span class="fm-pin"></span><span data-k="t_obj5"></span></div>
+          <div class="fm-field" id="t-lg-obj6"><span class="fm-pin"></span><span data-k="t_obj6"></span></div>
+          <div class="fm-field" id="t-lg-obj7"><span class="fm-pin"></span><span data-k="t_obj7"></span></div>
+          <div class="fm-field" id="t-lg-obj8"><span class="fm-pin"></span><span data-k="t_obj8"></span></div>
+          <div class="fm-field" id="t-lg-cheat"><span class="fm-pin"></span><span>#cheatsheet</span></div>
+          <div class="fm-field" id="t-lg-quiz"><span class="fm-pin"></span><span>#quiz</span></div>
+          <div class="fm-field" id="t-lg-ref"><span class="fm-pin"></span><span>#references</span></div>
+          <div class="fm-field" id="t-lg-audit"><span class="fm-pin"></span><span>#audit</span></div>
+        </div>
+
+        <div class="fm-card fm-mid" data-card="xlsx">
+          <div class="fm-card-head"><span class="ic">📑</span>Resource Mapping Spreadsheet<span class="fm-toggle" title="Collapse / expand">▾</span><span class="fm-card-sub">Endocrine_Resource_Mapping.xlsx</span></div>
+          <div class="fm-field" id="f-rm-1"><span data-k="rm1"></span><span class="fm-pin"></span></div>
+          <div class="fm-field" id="f-rm-2"><span data-k="rm2"></span><span class="fm-pin"></span></div>
+        </div>
+
+        <div class="fm-card fm-mid" data-card="uworld">
+          <div class="fm-card-head"><span class="ic">🎯</span>UWorld QID Spreadsheet<span class="fm-toggle" title="Collapse / expand">▾</span><span class="fm-card-sub">HoyaDocs-UWorld-QID-Mapping.xlsx</span></div>
+          <div class="fm-field" id="f-uw-1"><span data-k="uw1"></span><span class="fm-pin"></span></div>
+          <div class="fm-field" id="f-uw-2"><span data-k="uw2"></span><span class="fm-pin"></span></div>
+        </div>
+      </div>
+
+      <!-- =========== RIGHT: TARGETS =========== -->
+      <div class="fm-col">
+        <div class="fm-col-head">HTML outputs <span>destinations</span></div>
+
+        <div class="fm-card fm-tgt" data-card="arkey">
+          <div class="fm-card-head"><span class="ic">✏️</span><span data-k="t_arkey_title"></span><span class="fm-toggle" title="Collapse / expand">▾</span><span class="fm-card-sub" data-k="t_arkey_file"></span></div>
+
+          <div class="fm-subhead"><span class="label">Active-Recall Drill</span><span class="dim" data-k="t_ar_file"></span></div>
+          <div class="fm-field" id="t-ar-1"><span class="fm-pin"></span><span>Q1 (Obj 1)</span></div>
+          <div class="fm-field" id="t-ar-2"><span class="fm-pin"></span><span>Q2 (Obj 2)</span></div>
+          <div class="fm-field" id="t-ar-3"><span class="fm-pin"></span><span>Q3 (Obj 3)</span></div>
+          <div class="fm-field" id="t-ar-4"><span class="fm-pin"></span><span>Q4 (Obj 4)</span></div>
+          <div class="fm-field" id="t-ar-5"><span class="fm-pin"></span><span>Q5 (Obj 5)</span></div>
+          <div class="fm-field" id="t-ar-6"><span class="fm-pin"></span><span>Q6 (Obj 6)</span></div>
+          <div class="fm-field" id="t-ar-7"><span class="fm-pin"></span><span>Q7 (Obj 7)</span></div>
+          <div class="fm-field" id="t-ar-8"><span class="fm-pin"></span><span>Q8 (Obj 8)</span></div>
+
+          <div class="fm-subhead"><span class="label">Answer Key</span><span class="dim" data-k="t_key_file"></span></div>
+          <div class="fm-field" id="t-key-all"><span class="fm-pin"></span><span data-k="t_key_row"></span></div>
+        </div>
+
+        <div class="fm-card fm-tgt" data-card="td1">
+          <div class="fm-card-head"><span class="ic">🎯</span><span data-k="t_h1_title"></span><span class="fm-toggle" title="Collapse / expand">▾</span><span class="fm-card-sub" data-k="t_h1_file"></span></div>
+          <div class="fm-field" id="t-h1-all"><span class="fm-pin"></span><span data-k="t_h1_row"></span></div>
+        </div>
+
+        <div class="fm-card fm-tgt" data-card="td2">
+          <div class="fm-card-head"><span class="ic">🎯</span><span data-k="t_h2_title"></span><span class="fm-toggle" title="Collapse / expand">▾</span><span class="fm-card-sub" data-k="t_h2_file"></span></div>
+          <div class="fm-field" id="t-h2-all"><span class="fm-pin"></span><span data-k="t_h2_row"></span></div>
+        </div>
+
+        <div class="fm-card fm-tgt" data-card="td3">
+          <div class="fm-card-head"><span class="ic">🩺</span><span data-k="t_h3_title"></span><span class="fm-toggle" title="Collapse / expand">▾</span><span class="fm-card-sub" data-k="t_h3_file"></span></div>
+          <div class="fm-field" id="t-h3-all"><span class="fm-pin"></span><span data-k="t_h3_row"></span></div>
+        </div>
+
+        <div class="fm-card fm-tgt" data-card="map">
+          <div class="fm-card-head"><span class="ic">🗺</span>Resource Mapping Matrix<span class="fm-toggle" title="Collapse / expand">▾</span><span class="fm-card-sub">resource-mapping/endocrine_mapping.html</span></div>
+          <div class="fm-field" id="t-map-row"><span class="fm-pin"></span><span data-k="t_map_row"></span></div>
+          <div class="fm-field" id="t-map-topics"><span class="fm-pin"></span><span data-k="t_map_topics"></span></div>
+        </div>
+
+        <div class="fm-card fm-tgt" data-card="rhub">
+          <div class="fm-card-head"><span class="ic">🗂</span>Resource Hub Catalog<span class="fm-toggle" title="Collapse / expand">▾</span><span class="fm-card-sub">resource-mapping/endocrine_resource_hub.html</span></div>
+          <div class="fm-field" id="t-rhub-card"><span class="fm-pin"></span><span>Cards per 3rd-party source</span></div>
+          <div class="fm-field" id="t-rhub-row"><span class="fm-pin"></span><span data-k="t_rhub_row"></span></div>
+        </div>
+
+        <div class="fm-card fm-tgt" data-card="rexp">
+          <div class="fm-card-head"><span class="ic">🔍</span>Resource Explorer<span class="fm-toggle" title="Collapse / expand">▾</span><span class="fm-card-sub">resource-explorer.html</span></div>
+          <div class="fm-field" id="t-rexp-row"><span class="fm-pin"></span><span data-k="t_rexp_row"></span></div>
+          <div class="fm-field" id="t-rexp-hier"><span class="fm-pin"></span><span>Deck hierarchies + resource cards</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <p style="color:var(--muted);font-size:13px;margin-top:18px;max-width:960px;line-height:1.55">
+    <b>How to read this:</b> pick a lecture in the dropdown — every card rewrites to that lecture's sources and output filenames. Hover a field row to isolate its connections; hover a card header to highlight everything touching that file. Blue = Learning-Objective → section, green = slide-range → section body, pink = workbook/Anki citation (dashed for Anki), amber = resource-mapping matrix flow.
+  </p>
+</section>
+
+<!-- ================= VIEW 2B: SOURCE IMPACT ================= -->
+<section class="view" id="view-impact">
+  <h2>If I update this source, what HTMLs need review? <span class="hint">Reverse dependency map — change-impact view</span></h2>
+  <p style="color:var(--muted);max-width:900px;margin:6px 0 22px;line-height:1.55">
+    Read this view as: "If the file on the left changes, the HTMLs on the right need to be opened, reviewed, and likely regenerated." Items marked <span class="risk risk-high" style="padding:1px 7px">Primary</span> pull content <em>directly</em> from that source — they'll be wrong if not updated. Items marked <span class="risk risk-med" style="padding:1px 7px">Secondary</span> reference it indirectly. <span class="risk risk-low" style="padding:1px 7px">Downstream</span> items re-use the affected tier and should at least be spot-checked.
+  </p>
+
+  <!-- ========= Learning Objectives ========= -->
+  <div class="impact-card">
+    <div class="impact-head">
+      <span class="src-tag">Per Lecture / Learning Objectives / end##_LO_*.docx</span>
+      <h3>Learning-objective doc for a single lecture</h3>
+      <span class="risk risk-high">Highest-impact source</span>
+    </div>
+    <div class="blurb">LO docs are the <b>spine</b> of the entire 3-hub stack for that lecture. Every downstream page is organized around these objectives — an objective being added, renumbered, or reworded cascades everywhere.</div>
+    <div class="impact-grid">
+      <div class="impact-col primary">
+        <h4>Primary (must update)</h4>
+        <ul>
+          <li><code>lecture-guides/end##-&lt;slug&gt;.html</code> — sidebar, progress counter, #obj1…#objN sections, #cheatsheet, #quiz all match LO headings</li>
+          <li><code>active-lesson-drills/end##_active_recall.html</code> — drill questions are seeded per objective</li>
+          <li><code>active-lesson-drills/end##_key.html</code> — answer key mirrors drill</li>
+          <li><code>testing-drills/end##-hub1-&lt;slug&gt;.html</code></li>
+          <li><code>testing-drills/end##-hub2-&lt;slug&gt;.html</code></li>
+          <li><code>testing-drills/end##-hub3-&lt;slug&gt;.html</code> (vignettes anchored to LOs)</li>
+        </ul>
+      </div>
+      <div class="impact-col secondary">
+        <h4>Secondary (review)</h4>
+        <ul>
+          <li><code>lecture-guides/index.html</code> — lecture-card blurb text</li>
+          <li><code>active-recall-hub.html</code> — subject-tab blurbs referencing that lecture</li>
+          <li><code>StudyPlanner.html</code> — task checkboxes per lecture</li>
+          <li><code>resource-mapping/endocrine_mapping.html</code> — LO column in the matrix</li>
+          <li><code>resource-mapping/endocrine_resource_hub.html</code></li>
+        </ul>
+      </div>
+      <div class="impact-col tertiary">
+        <h4>Downstream / admin</h4>
+        <ul>
+          <li><code>hub-update-tracker/status.json</code> — rerun <code>scan.py</code> to refresh completeness</li>
+          <li><code>endALL-LO-All-Overall Module Objectives.docx</code> — keep master roll-up in sync</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========= Lecture slide PDF ========= -->
+  <div class="impact-card">
+    <div class="impact-head">
+      <span class="src-tag">Per Lecture / end##_&lt;topic&gt; / *.pdf</span>
+      <h3>Lecture slide deck for a single lecture</h3>
+      <span class="risk risk-high">Highest-impact source</span>
+    </div>
+    <div class="blurb">The slide deck is the authoritative content the Hub 1 guide teaches against. Wording tweaks or slide reorderings don't usually ripple, but <em>new slides, removed topics, or changed mechanisms</em> absolutely do.</div>
+    <div class="impact-grid">
+      <div class="impact-col primary">
+        <h4>Primary (must update)</h4>
+        <ul>
+          <li><code>lecture-guides/end##-&lt;slug&gt;.html</code> — all prose, diagrams, #cheatsheet, #references cite specific slides</li>
+          <li><code>lecture-guides/end##-*.html</code> #audit section — slide-by-slide source audit table</li>
+          <li><code>active-lesson-drills/end##_active_recall.html</code> — "Lecture ##" references</li>
+          <li><code>active-lesson-drills/end##_key.html</code></li>
+        </ul>
+      </div>
+      <div class="impact-col secondary">
+        <h4>Secondary (review)</h4>
+        <ul>
+          <li><code>testing-drills/end##-hub1|hub2|hub3-*.html</code> — question stems may cite specific slide facts</li>
+          <li><code>resource-mapping/endocrine_mapping.html</code> — slide-level references</li>
+        </ul>
+      </div>
+      <div class="impact-col tertiary">
+        <h4>Downstream / admin</h4>
+        <ul>
+          <li><code>Per Lecture/Learning Objectives/end##_LO_*.docx</code> — check if LOs need to change too</li>
+          <li><code>hub-update-tracker/content-cache.json</code> — invalidate cache</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========= Per Subject review ========= -->
+  <div class="impact-card">
+    <div class="impact-head">
+      <span class="src-tag">Per Subject / *.docx (Histo / Path / Physio / Pharm / Biochem)</span>
+      <h3>Subject-level review guide</h3>
+      <span class="risk risk-med">Cross-cutting source</span>
+    </div>
+    <div class="blurb">Subject review guides cut across lectures — a Path update can touch every lecture that has a pathology component (end08, end11, end16, end20, end24).</div>
+    <div class="impact-grid">
+      <div class="impact-col primary">
+        <h4>Primary (must update)</h4>
+        <ul>
+          <li>Every <code>lecture-guides/end##-*.html</code> whose subject tag matches — e.g. a Pharmacology update hits end13, end17, end18, end21, end22, end25</li>
+          <li><code>active-recall-hub.html</code> — the matching subject tab (#physio, #path, #histo, #biochem, #drt)</li>
+        </ul>
+      </div>
+      <div class="impact-col secondary">
+        <h4>Secondary (review)</h4>
+        <ul>
+          <li><code>testing-drills/*-hub2|hub3-*.html</code> for affected lectures</li>
+          <li><code>Per Subject/Endocrine_Checklist_Revised.xlsx</code></li>
+        </ul>
+      </div>
+      <div class="impact-col tertiary">
+        <h4>Downstream / admin</h4>
+        <ul>
+          <li><code>StudyPlanner.html</code> — if checklist headings changed</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========= 3rd Party workbook ========= -->
+  <div class="impact-card">
+    <div class="impact-head">
+      <span class="src-tag">3rd Party / Workbooks / *.pdf (BnB / Bootcamp / Pathoma / Physeo / Sketchy / First Aid)</span>
+      <h3>3rd-party workbook edition</h3>
+      <span class="risk risk-med">Cross-cutting source</span>
+    </div>
+    <div class="blurb">New edition or chapter reorg of a 3rd-party workbook. Hub 1 guides cite these directly in their References + Source Audit sections.</div>
+    <div class="impact-grid">
+      <div class="impact-col primary">
+        <h4>Primary (must update)</h4>
+        <ul>
+          <li>Every <code>lecture-guides/end##-*.html</code> #references + #audit section that cites that workbook</li>
+          <li><code>resource-mapping/endocrine_mapping.html</code> — column for that resource</li>
+          <li><code>resource-mapping/endocrine_resource_hub.html</code> — resource card</li>
+          <li><code>resource-mapping/DRAFT-&lt;resource&gt;-Mapping-FOR-REVIEW.md</code></li>
+        </ul>
+      </div>
+      <div class="impact-col secondary">
+        <h4>Secondary (review)</h4>
+        <ul>
+          <li><code>resource-mapping/Endocrine_Resource_Mapping.xlsx</code></li>
+          <li><code>resource-explorer.html</code></li>
+          <li>Corresponding Anki deck + hierarchy (may need re-export)</li>
+        </ul>
+      </div>
+      <div class="impact-col tertiary">
+        <h4>Downstream / admin</h4>
+        <ul>
+          <li><code>hub-update-tracker/mapping-status.json</code> — rerun <code>mapping_tracker.py</code></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========= Anki package ========= -->
+  <div class="impact-card">
+    <div class="impact-head">
+      <span class="src-tag">3rd Party / ANKing / *.apkg + *.tsv</span>
+      <h3>Anki deck update (BnB, Bootcamp, Physeo, Sketchy, FA, Pathoma, AnKing)</h3>
+      <span class="risk risk-med">Cross-cutting source</span>
+    </div>
+    <div class="blurb">When a card deck is updated, the mapping spreadsheets and inline "mapped cards" in Hub 1 audit tables are what break. The workbook PDFs are independent.</div>
+    <div class="impact-grid">
+      <div class="impact-col primary">
+        <h4>Primary (must update)</h4>
+        <ul>
+          <li><code>3rd Party/Hierarchy/&lt;deck&gt;-hierarchy.txt</code> — re-export hierarchy</li>
+          <li><code>3rd Party/Mapped-RunTime-Anki/&lt;deck&gt;-RT-AK-*.xlsx</code> — re-map card IDs</li>
+          <li><code>resource-mapping/endocrine_mapping.html</code></li>
+          <li><code>resource-mapping/endocrine_resource_hub.html</code></li>
+          <li>Every <code>lecture-guides/end##-*.html</code> #audit table that cites cards from that deck</li>
+        </ul>
+      </div>
+      <div class="impact-col secondary">
+        <h4>Secondary (review)</h4>
+        <ul>
+          <li><code>resource-explorer.html</code></li>
+          <li><code>anki_package_parser_v10.html</code> (when present)</li>
+          <li><code>resource-mapping/DRAFT-&lt;deck&gt;-Mapping-FOR-REVIEW.md</code></li>
+        </ul>
+      </div>
+      <div class="impact-col tertiary">
+        <h4>Downstream / admin</h4>
+        <ul>
+          <li><code>hub-update-tracker/dashboard.html</code>, <code>mapping-dashboard.html</code> — refresh tracker</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========= Resource mapping xlsx ========= -->
+  <div class="impact-card">
+    <div class="impact-head">
+      <span class="src-tag">resource-mapping / Endocrine_Resource_Mapping.xlsx</span>
+      <h3>Master resource-mapping spreadsheet</h3>
+      <span class="risk risk-high">Highest-impact source (meta-file)</span>
+    </div>
+    <div class="blurb">The xlsx is the single source of truth for "which 3rd-party resource covers which lecture" — it drives every mapping-flavored page and tool.</div>
+    <div class="impact-grid">
+      <div class="impact-col primary">
+        <h4>Primary (must regenerate)</h4>
+        <ul>
+          <li><code>resource-mapping/endocrine_mapping.html</code> — the matrix</li>
+          <li><code>resource-mapping/endocrine_resource_hub.html</code> — resource catalog</li>
+          <li><code>resource-explorer.html</code></li>
+          <li><code>resource-mapping-tool.html</code></li>
+        </ul>
+      </div>
+      <div class="impact-col secondary">
+        <h4>Secondary (review)</h4>
+        <ul>
+          <li>Every <code>lecture-guides/end##-*.html</code> #audit table (mapped-resource pills)</li>
+          <li><code>active-recall-hub.html</code> — subject tab blurbs</li>
+        </ul>
+      </div>
+      <div class="impact-col tertiary">
+        <h4>Downstream / admin</h4>
+        <ul>
+          <li><code>resource-mapping/DRAFT-*-Mapping-FOR-REVIEW.md</code> — update any draft in flight</li>
+          <li><code>hub-update-tracker/mapping-status.json</code></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========= UWorld QID mapping ========= -->
+  <div class="impact-card">
+    <div class="impact-head">
+      <span class="src-tag">resource-mapping / HoyaDocs-UWorld-QID-Mapping.xlsx</span>
+      <h3>UWorld QID → lecture mapping</h3>
+      <span class="risk risk-low">Narrow impact</span>
+    </div>
+    <div class="blurb">Only touches pages that expose UWorld QID recommendations.</div>
+    <div class="impact-grid">
+      <div class="impact-col primary">
+        <h4>Primary</h4>
+        <ul>
+          <li><code>resource-mapping/endocrine_mapping.html</code></li>
+          <li><code>resource-mapping/endocrine_resource_hub.html</code></li>
+        </ul>
+      </div>
+      <div class="impact-col secondary">
+        <h4>Secondary</h4>
+        <ul>
+          <li><code>testing-drills/*-hub3-*.html</code> — vignettes sometimes reference QID themes</li>
+        </ul>
+      </div>
+      <div class="impact-col tertiary">
+        <h4>Downstream</h4>
+        <ul><li>—</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========= Practice Problems ========= -->
+  <div class="impact-card">
+    <div class="impact-head">
+      <span class="src-tag">Practice Problems / *.pdf, *.docx  +  Practice Problems / 3rd Party / BRS</span>
+      <h3>In-house + BRS practice banks</h3>
+      <span class="risk risk-med">Hub 3 driver</span>
+    </div>
+    <div class="blurb">The question pools behind the USMLE-style vignettes. Changes here primarily affect Hub 3.</div>
+    <div class="impact-grid">
+      <div class="impact-col primary">
+        <h4>Primary (must update)</h4>
+        <ul>
+          <li>Every <code>testing-drills/end##-hub3-*.html</code></li>
+        </ul>
+      </div>
+      <div class="impact-col secondary">
+        <h4>Secondary (review)</h4>
+        <ul>
+          <li><code>testing-drills/end##-hub2-*.html</code> — longer mixed sets</li>
+          <li><code>active-recall-hub.html</code> — subject tab counts</li>
+        </ul>
+      </div>
+      <div class="impact-col tertiary">
+        <h4>Downstream / admin</h4>
+        <ul><li><code>hub-update-tracker/status.json</code></li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========= Calendar ========= -->
+  <div class="impact-card">
+    <div class="impact-head">
+      <span class="src-tag">logistics / Full-Lectures-Calendar.pdf</span>
+      <h3>Block calendar (dates / times / week layout)</h3>
+      <span class="risk risk-low">Schedule only</span>
+    </div>
+    <div class="blurb">Only affects pages that render the week-by-week schedule. Content pages are unaffected.</div>
+    <div class="impact-grid">
+      <div class="impact-col primary">
+        <h4>Primary</h4>
+        <ul>
+          <li><code>StudyPlanner.html</code> — weekly calendar grid</li>
+          <li><code>index.html</code> / <code>endocrine_hub_index.html</code> — schedule section</li>
+        </ul>
+      </div>
+      <div class="impact-col secondary">
+        <h4>Secondary</h4>
+        <ul><li><code>logistics/Endocrine_Checklist_Revised.xlsx</code></li></ul>
+      </div>
+      <div class="impact-col tertiary">
+        <h4>Downstream</h4>
+        <ul><li>—</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========= Checklist ========= -->
+  <div class="impact-card">
+    <div class="impact-head">
+      <span class="src-tag">logistics / Endocrine_Checklist_Revised.xlsx</span>
+      <h3>Master block checklist</h3>
+      <span class="risk risk-low">Schedule / tracking only</span>
+    </div>
+    <div class="blurb">Drives task-tracking widgets. Doesn't touch lecture content.</div>
+    <div class="impact-grid">
+      <div class="impact-col primary">
+        <h4>Primary</h4>
+        <ul>
+          <li><code>StudyPlanner.html</code></li>
+          <li><code>hub-update-tracker/dashboard.html</code></li>
+        </ul>
+      </div>
+      <div class="impact-col secondary">
+        <h4>Secondary</h4>
+        <ul><li><code>Per Subject/Endocrine_Checklist_Revised.xlsx</code> — keep duplicate in sync</li></ul>
+      </div>
+      <div class="impact-col tertiary">
+        <h4>Downstream</h4>
+        <ul><li>—</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========= Heatmap ========= -->
+  <h2 style="margin-top:34px">At-a-glance impact heatmap <span class="hint">● Primary  ◐ Secondary  ○ Downstream</span></h2>
+  <div style="overflow-x:auto">
+  <table class="source-table" style="min-width:1100px">
+    <thead>
+      <tr>
+        <th>Source ↓ / HTML →</th>
+        <th>lecture-guides/end##</th>
+        <th>active-lesson-drills/end##</th>
+        <th>testing-drills end##-hub1/2/3</th>
+        <th>active-recall-hub</th>
+        <th>lecture-guides/index</th>
+        <th>StudyPlanner</th>
+        <th>endocrine_mapping</th>
+        <th>endocrine_resource_hub</th>
+        <th>resource-explorer / -mapping-tool</th>
+        <th>hub-update-tracker/*</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><b>end##_LO_*.docx</b></td><td>●</td><td>●</td><td>●</td><td>◐</td><td>◐</td><td>◐</td><td>◐</td><td>○</td><td>○</td><td>○</td></tr>
+      <tr><td><b>end##_slides.pdf</b></td><td>●</td><td>●</td><td>◐</td><td>○</td><td>○</td><td>○</td><td>◐</td><td>○</td><td>—</td><td>○</td></tr>
+      <tr><td><b>Per Subject review</b></td><td>●</td><td>◐</td><td>◐</td><td>●</td><td>○</td><td>○</td><td>○</td><td>○</td><td>—</td><td>○</td></tr>
+      <tr><td><b>3rd Party Workbook</b></td><td>●</td><td>○</td><td>◐</td><td>○</td><td>—</td><td>—</td><td>●</td><td>●</td><td>◐</td><td>○</td></tr>
+      <tr><td><b>Anki .apkg + .tsv</b></td><td>◐</td><td>◐</td><td>○</td><td>○</td><td>—</td><td>—</td><td>●</td><td>●</td><td>●</td><td>◐</td></tr>
+      <tr><td><b>Hierarchy .txt</b></td><td>○</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>◐</td><td>◐</td><td>●</td><td>○</td></tr>
+      <tr><td><b>Mapped-RunTime-Anki xlsx</b></td><td>○</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>●</td><td>◐</td><td>●</td><td>◐</td></tr>
+      <tr><td><b>Endocrine_Resource_Mapping.xlsx</b></td><td>◐</td><td>—</td><td>—</td><td>◐</td><td>—</td><td>—</td><td>●</td><td>●</td><td>●</td><td>◐</td></tr>
+      <tr><td><b>UWorld-QID-Mapping.xlsx</b></td><td>—</td><td>—</td><td>◐</td><td>—</td><td>—</td><td>—</td><td>●</td><td>●</td><td>○</td><td>—</td></tr>
+      <tr><td><b>Practice Problems PDFs</b></td><td>○</td><td>○</td><td>●</td><td>◐</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>○</td></tr>
+      <tr><td><b>Full-Lectures-Calendar.pdf</b></td><td>—</td><td>—</td><td>—</td><td>—</td><td>○</td><td>●</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td><b>Endocrine_Checklist_Revised.xlsx</b></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>●</td><td>—</td><td>—</td><td>—</td><td>●</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3 style="margin-top:28px">Recommended change workflow</h3>
+  <ol style="color:#c9d4ec;line-height:1.7;max-width:900px">
+    <li><b>Identify the source tier</b> (LO, slide, subject, workbook, Anki, mapping, practice, schedule) — use the cards above.</li>
+    <li><b>Update the Primary column first</b> — these pages pull content directly and will be visibly wrong.</li>
+    <li><b>Spot-check Secondary</b> — usually small copy tweaks (blurbs, tab labels, matrix cells).</li>
+    <li><b>Re-run the trackers</b> in <code>hub-update-tracker/</code> (<code>python scan.py</code>, <code>python mapping_tracker.py</code>) to refresh JSON feeds the dashboards read.</li>
+    <li><b>Regenerate via the skills</b> — <code>hub-builder</code> / <code>hub-index-generator</code> / <code>hub3-generator</code> / <code>study-planner-generator</code> if the change is structural rather than content-level.</li>
+  </ol>
+</section>
+
+
+<!-- ================= VIEW 4: FILE INDEX ================= -->
+<section class="view" id="view-index">
+  <h2>Every HTML in the hub <span class="hint">Click to open locally</span></h2>
+
+  <h3>Top-level landing pages</h3>
+  <div class="grid">
+    <div class="card">
+      <div class="title"><span class="badge badge-hub">HUB</span> index.html</div>
+      <div class="path">./index.html</div>
+      <div class="desc">Block 4 master landing page — section anchors for lecture tools, exam tools, mapping tools.</div>
+      <div class="links"><a href="./index.html" target="_blank">open</a></div>
+    </div>
+    <div class="card">
+      <div class="title"><span class="badge badge-hub">HUB</span> endocrine_hub_index.html</div>
+      <div class="path">./endocrine_hub_index.html</div>
+      <div class="desc">Parallel landing page variant (same anchors/sections; alternative entry point).</div>
+      <div class="links"><a href="./endocrine_hub_index.html" target="_blank">open</a></div>
+    </div>
+    <div class="card">
+      <div class="title"><span class="badge badge-hub">HUB</span> active-recall-hub.html</div>
+      <div class="path">./active-recall-hub.html</div>
+      <div class="desc">Hub 2 directory — subject-tabbed (#biochem, #physio, #histo, #path, #drt) links to testing-drills.</div>
+      <div class="links"><a href="./active-recall-hub.html" target="_blank">open</a></div>
+    </div>
+    <div class="card">
+      <div class="title"><span class="badge badge-hub">HUB</span> StudyPlanner.html</div>
+      <div class="path">./StudyPlanner.html</div>
+      <div class="desc">Weekly calendar + per-lecture planner with task tracking, driven by the calendar PDF and LO docx list.</div>
+      <div class="links"><a href="./StudyPlanner.html" target="_blank">open</a></div>
+    </div>
+  </div>
+
+  <h3>Mid-tier directory pages</h3>
+  <div class="grid">
+    <div class="card">
+      <div class="title"><span class="badge badge-hub">DIR</span> lecture-guides/index.html</div>
+      <div class="path">./lecture-guides/index.html</div>
+      <div class="desc">Master directory of all 26 lecture guides — routes to Hub 1 guides and Hub 2 active-recall drills.</div>
+      <div class="links"><a href="./lecture-guides/index.html" target="_blank">open</a></div>
+    </div>
+    <div class="card">
+      <div class="title"><span class="badge badge-hub">DIR</span> endocrine_mapping.html</div>
+      <div class="path">./resource-mapping/endocrine_mapping.html</div>
+      <div class="desc">Lecture × 3rd-party resource matrix. Links back up to index.html and lecture-guides/index.html.</div>
+      <div class="links"><a href="./resource-mapping/endocrine_mapping.html" target="_blank">open</a></div>
+    </div>
+    <div class="card">
+      <div class="title"><span class="badge badge-hub">DIR</span> endocrine_resource_hub.html</div>
+      <div class="path">./resource-mapping/endocrine_resource_hub.html</div>
+      <div class="desc">Resource catalog page — cards for each 3rd-party source with links to workbooks & Anki exports.</div>
+      <div class="links"><a href="./resource-mapping/endocrine_resource_hub.html" target="_blank">open</a></div>
+    </div>
+  </div>
+
+  <h3>Per-lecture pages (Hub 1 · Hub 2 · Hub 3)</h3>
+  <div class="grid">
+    <div class="card">
+      <div class="title"><span class="badge badge-page">H1</span> Lecture guides</div>
+      <div class="path">./lecture-guides/end##-&lt;slug&gt;.html</div>
+      <div class="desc">One guide per lecture. Currently populated: end01 (intro to hormones), end02 (HP relationships I), end04 (adrenal synthesis), end05 (sex steroid synthesis). Internal anchors: #cover, #obj1..#objN, #cheatsheet, #quiz, #references, #audit.</div>
+      <div class="links">
+        <a href="./lecture-guides/end01-module-introduction-introduction-to-hormones.html" target="_blank">end01</a>
+        <a href="./lecture-guides/end02-hypothalamic-pituitary-hormone-relationships-i.html" target="_blank">end02</a>
+        <a href="./lecture-guides/end04-il-adrenal-hormone-synthesis-and-action.html" target="_blank">end04</a>
+        <a href="./lecture-guides/end05-il-sex-steroid-synthesis-and-action.html" target="_blank">end05</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="title"><span class="badge badge-page">H2</span> Active-lesson drills</div>
+      <div class="path">./active-lesson-drills/end##_active_recall.html + _key.html</div>
+      <div class="desc">Short-answer drill + answer key per lecture. Currently populated: end01, end02, end03, end04.</div>
+      <div class="links">
+        <a href="./active-lesson-drills/end01_active_recall.html" target="_blank">end01 drill</a>
+        <a href="./active-lesson-drills/end01_key.html" target="_blank">key</a>
+        <a href="./active-lesson-drills/end02_active_recall.html" target="_blank">end02</a>
+        <a href="./active-lesson-drills/end03_active_recall.html" target="_blank">end03</a>
+        <a href="./active-lesson-drills/end04_active_recall.html" target="_blank">end04</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="title"><span class="badge badge-page">H1/2/3</span> Testing drills</div>
+      <div class="path">./testing-drills/end##-hub1|hub2|hub3-&lt;slug&gt;.html</div>
+      <div class="desc">Three difficulty tiers per lecture. Each tier cross-links to its two siblings and up to active-recall-hub.</div>
+      <div class="links">
+        <a href="./testing-drills/end01-hub1-intro-to-hormones.html" target="_blank">end01 · hub1</a>
+        <a href="./testing-drills/end01-hub2-intro-to-hormones.html" target="_blank">hub2</a>
+        <a href="./testing-drills/end01-hub3-intro-to-hormones.html" target="_blank">hub3</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="title"><span class="badge badge-page">GAP</span> end05+ drills not yet built</div>
+      <div class="path">./active-lesson-drills/end05_active_recall.html <em>(and beyond)</em></div>
+      <div class="desc">Hub 1 lecture guides exist for end05 (sex steroids) and later lectures are on the horizon, but short-answer drills only go through end04 today. Gap to fill to keep the 3-hub pattern consistent.</div>
+    </div>
+  </div>
+
+  <h3>Tools & utilities</h3>
+  <div class="grid">
+    <div class="card">
+      <div class="title"><span class="badge badge-tool">TOOL</span> resource-explorer.html</div>
+      <div class="path">./resource-explorer.html</div>
+      <div class="desc">Browse 3rd-party hierarchies and mapping data.</div>
+      <div class="links"><a href="./resource-explorer.html" target="_blank">open</a></div>
+    </div>
+    <div class="card">
+      <div class="title"><span class="badge badge-tool">TOOL</span> resource-mapping-tool.html</div>
+      <div class="path">./resource-mapping-tool.html</div>
+      <div class="desc">Interactive editor for the Endocrine_Resource_Mapping.xlsx matrix.</div>
+      <div class="links"><a href="./resource-mapping-tool.html" target="_blank">open</a></div>
+    </div>
+    <div class="card">
+      <div class="title"><span class="badge badge-tool">TOOL</span> anki_package_parser_v10.html</div>
+      <div class="path">./anki_package_parser_v10.html <em>(referenced but not yet present)</em></div>
+      <div class="desc">Parses <code>.apkg</code> + hierarchy files. index.html and endocrine_hub_index.html link to it.</div>
+    </div>
+    <div class="card">
+      <div class="title"><span class="badge badge-tool">TOOL</span> hub-status-report.html</div>
+      <div class="path">./hub-update-tracker/hub-status-report.html</div>
+      <div class="desc">Build-status dashboard for hub completeness (uses status.json written by hub-update-tracker/scan.py). <em>index.html has a broken link to a root-level copy — file only exists inside the tracker folder.</em></div>
+      <div class="links"><a href="./hub-update-tracker/hub-status-report.html" target="_blank">open</a></div>
+    </div>
+  </div>
+
+  <h3>Hub-update tracker (internal)</h3>
+  <div class="grid">
+    <div class="card">
+      <div class="title"><span class="badge badge-tracker">TRK</span> dashboard.html</div>
+      <div class="path">./hub-update-tracker/dashboard.html</div>
+      <div class="desc">Main tracker dashboard (reads status.json).</div>
+      <div class="links"><a href="./hub-update-tracker/dashboard.html" target="_blank">open</a></div>
+    </div>
+    <div class="card">
+      <div class="title"><span class="badge badge-tracker">TRK</span> jv-dashboard.html</div>
+      <div class="path">./hub-update-tracker/jv-dashboard.html</div>
+      <div class="desc">Alternative "junior-varsity" dashboard view.</div>
+      <div class="links"><a href="./hub-update-tracker/jv-dashboard.html" target="_blank">open</a></div>
+    </div>
+    <div class="card">
+      <div class="title"><span class="badge badge-tracker">TRK</span> mapping-dashboard.html</div>
+      <div class="path">./hub-update-tracker/mapping-dashboard.html</div>
+      <div class="desc">Focused on mapping-status.json produced by mapping_tracker.py.</div>
+      <div class="links"><a href="./hub-update-tracker/mapping-dashboard.html" target="_blank">open</a></div>
+    </div>
+  </div>
+
+  <h2>Primary source folders <span class="hint">Not HTML — the content these pages are built from</span></h2>
+  <div class="grid">
+    <div class="card"><div class="title"><span class="badge badge-src">SRC</span> Per Lecture/</div>
+      <div class="path">./Per Lecture/end##_&lt;topic&gt;/*.pdf</div>
+      <div class="desc">Authoritative slide decks powering every Hub 1 guide.</div>
+    </div>
+    <div class="card"><div class="title"><span class="badge badge-src">SRC</span> Learning Objectives/</div>
+      <div class="path">./Per Lecture/Learning Objectives/*.docx</div>
+      <div class="desc">26 per-lecture LO docs + overall module LO. These define the Hub 1 objective structure and seed Hub 2 drill questions.</div>
+    </div>
+    <div class="card"><div class="title"><span class="badge badge-src">SRC</span> Per Subject/</div>
+      <div class="path">./Per Subject/*.docx, *.pdf, *.xlsx</div>
+      <div class="desc">Histo, Path, Physio, Pharm, Biochem review guides + drug table + clinical correlations + module checklist.</div>
+    </div>
+    <div class="card"><div class="title"><span class="badge badge-src">SRC</span> 3rd Party/ANKing/</div>
+      <div class="path">./3rd Party/ANKing/*.apkg, *.tsv, *.csv</div>
+      <div class="desc">BnB, Bootcamp, Physeo, Sketchy, First Aid, Pathoma, AnKing optional — the raw card decks. Referenced inline in Hub 1 source-audit tables.</div>
+    </div>
+    <div class="card"><div class="title"><span class="badge badge-src">SRC</span> 3rd Party/Hierarchy/</div>
+      <div class="path">./3rd Party/Hierarchy/*-hierarchy.txt</div>
+      <div class="desc">Deck-hierarchy dumps (one per resource). Feed the resource-explorer / anki-parser tools.</div>
+    </div>
+    <div class="card"><div class="title"><span class="badge badge-src">SRC</span> 3rd Party/Mapped-RunTime-Anki/</div>
+      <div class="path">./3rd Party/Mapped-RunTime-Anki/*.xlsx</div>
+      <div class="desc">Runtime "which card belongs to which lecture" spreadsheets — drive the endocrine_mapping.html matrix.</div>
+    </div>
+    <div class="card"><div class="title"><span class="badge badge-src">SRC</span> 3rd Party/Workbooks/</div>
+      <div class="path">./3rd Party/Workbooks/*.pdf</div>
+      <div class="desc">BnB Endo/Biochem/ID/Repro, Bootcamp Endo/Biochem/Micro/Repro, Pathoma, Physeo Path/Pharm/Physio GI, Sketchy Path/Pharm, First Aid. Referenced from Hub 1 "References" sections.</div>
+    </div>
+    <div class="card"><div class="title"><span class="badge badge-src">SRC</span> Practice Problems/</div>
+      <div class="path">./Practice Problems/*.pdf, *.docx + ./3rd Party/BRS</div>
+      <div class="desc">GUSOM old block exams, Endo pathology Qs, combined ENDO module Qs, pharm ENDO practice, histo practice, plus BRS Embryo/Histo/Path/Pharm.</div>
+    </div>
+    <div class="card"><div class="title"><span class="badge badge-src">SRC</span> resource-mapping/</div>
+      <div class="path">./resource-mapping/*.xlsx + DRAFT-*.md</div>
+      <div class="desc"><code>Endocrine_Resource_Mapping.xlsx</code>, <code>HoyaDocs-UWorld-QID-Mapping.xlsx</code>, and six draft markdown mappings (BnB / Bootcamp / First Aid / Pathoma / Physeo / Sketchy) awaiting review.</div>
+    </div>
+    <div class="card"><div class="title"><span class="badge badge-src">SRC</span> logistics/</div>
+      <div class="path">./logistics/</div>
+      <div class="desc"><code>Full-Lectures-Calendar.pdf</code> + <code>Endocrine_Checklist_Revised.xlsx</code> → drives StudyPlanner.html week layout and the master checklist.</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <b>Broken / missing links spotted while mapping:</b>
+    <ul>
+      <li><code>index.html</code> and <code>endocrine_hub_index.html</code> link to <code>./hub-status-report.html</code> and <code>./anki_package_parser_v10.html</code>, but neither file exists at the repo root. The status report only lives inside <code>hub-update-tracker/</code>; the parser isn't checked in yet.</li>
+      <li><code>lecture-guides/index.html</code> lists <code>end01..end26</code> active-recall drills, but only <code>end01–end03</code> exist in <code>active-lesson-drills/</code>; end04+ still 404 (<code>end04_key.html</code> exists but no drill file yet).</li>
+      <li>Four Hub 1 guides exist (<code>end01, end02, end04, end05</code>) — <code>end03</code> and everything from <code>end06</code> onward haven't been authored yet.</li>
+      <li>Testing-drills only exist for <code>end01, end02, end03</code> (all three tiers per lecture).</li>
+      <li><code>lecture-guides/xxend01-*.html</code> and every <code>Archive/</code> folder hold deprecated versions — excluded from the map on purpose.</li>
+      <li><code>index.html</code> contains a literal <code>href="${l.link}"</code> — a template string that was never interpolated; the dynamic lecture-list block isn't wired up.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<script>
+  // Initialize Mermaid with dark-friendly theme
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: 'Inter, sans-serif',
+      primaryColor: '#1e293b',
+      primaryTextColor: '#eaf0ff',
+      primaryBorderColor: '#334155',
+      lineColor: '#64748b',
+      secondaryColor: '#111a2e',
+      tertiaryColor: '#16213a',
+      clusterBkg: '#0f1a30',
+      clusterBorder: '#273556',
+      edgeLabelBackground: '#0b1220',
+    },
+    flowchart: { htmlLabels: true, curve: 'basis', nodeSpacing: 40, rankSpacing: 60 }
+  });
+
+  // Tabs
+  document.querySelectorAll('.tab').forEach(t => {
+    t.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+      document.querySelectorAll('.view').forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+      document.getElementById('view-' + t.dataset.view).classList.add('active');
+      // redraw field-map lines if we just switched to it (elements need layout)
+      if (t.dataset.view === 'fieldmap') requestAnimationFrame(drawFieldMap);
+    });
+  });
+
+  // =============== LECTURE DATA ===============
+  const SUBJECT_REVIEWS = {
+    Physio:  {file:'Endocrine Physiology Review Guide NK.docx', sub:['Hormone-signaling overview','Receptor mechanisms / 2nd messengers']},
+    Path:    {file:'Endocrine Pathology Review Guide NK.docx',  sub:['Gland-specific pathology patterns','Neoplastic vs functional disease']},
+    Histo:   {file:'Endocrine Histology Review Guide NK.docx',  sub:['Gland histology overview','Cell-type morphology']},
+    Pharm:   {file:'GUSOM-Pharmacology-ReviewGuideNK.docx',     sub:['Drug-class mechanisms','Indications + adverse effects']},
+    Biochem: {file:'GUSOM-Biochem-StudyGuide.docx',             sub:['Hormone biochemistry','Synthesis + degradation pathways']},
+    TBL:     {file:'ENDO Clinical Correlations.docx.pdf',       sub:['Integrated case framework','Lab workup approach']},
+    Ethics:  {file:'ENDO Clinical Correlations.docx.pdf',       sub:['Professionalism framework','Ethics principles']},
+    Lab:     {file:'Endocrine Histology Review Guide NK.docx',  sub:['Gross + histo correlates','Slide interpretation']}
+  };
+
+  // Compact per-lecture data — everything else is derived
+  const LECTURES = {
+    end01:{t:'Module Intro & Intro to Hormones',lec:'Kothmann',sj:'Physio',folder:'end01_intro-hormones',slug:'module-introduction-intro-to-hormones',
+      lo:'end01_LO_Kothmann_Intro to Hormones Objectives.docx',
+      sd:'01_Endo_2026_Kothmann_Module Intro & Intro to Hormones.pdf',
+      O:['Signaling modes (endo/para/auto/neuro)','Hormone classes (peptide / steroid / AA)','Catecholamines (synthesis + action)','Steroid synthesis pathway','Carrier proteins / free hormone','Receptors (GPCR / nuclear / RTK)','Hormone sensitivity / regulation'],
+      S:['Slides 1–5 — cover + module overview','Slides 6–14 — signaling modes','Slides 15–24 — hormone classes','Slides 25–32 — catecholamines','Slides 33–42 — steroid synthesis','Slides 43–50 — carriers + receptors'],
+      wb:{bnb:'Endo Ch 1–2 — hormone basics + receptors',bc:'Endo Ch 1 — hormones overview',fa:'Endocrine HY basics pp 337–342',path:'Ch 15 — endocrine intro',phy:'—',sk:'—'},
+      ak:{bnb:'::Endo::Intro + ::Receptors',bc:'::Bootcamp::Endo::Hormone basics',fa:'::FirstAid::Endo::Physiology',path:'::Pathoma::Ch15::Endo intro',phy:'—',sk:'—'}},
+    end02:{t:'Hypothalamic-Pituitary Relationships I',lec:'Kothmann',sj:'Physio',folder:'end02_Hypothalamic-pituitary-hormones-I',slug:'hypothalamic-pituitary-hormone-relationships-i',
+      lo:'end02_LO_Kothmann_Hypothalamic-Pituitary Relationships (part 1) Objectives.docx',
+      sd:'02_Endo_2026_Kothmann_Hypothalamic-Pituitary Relationships (part 1).pdf',
+      O:['Hypothalamic nuclei + releasing hormones','Portal hypophyseal circulation','Anterior pituitary cell types','GH axis (GHRH/SRIF/IGF-1)','PRL axis + dopamine tone','Feedback loops (long / short / ultra-short)'],
+      S:['Slides 1–6 — cover + anatomy','Slides 7–15 — hypothalamic nuclei','Slides 16–24 — portal system','Slides 25–32 — ant pit cell types','Slides 33–40 — GH/IGF-1 axis','Slides 41–48 — PRL + feedback'],
+      wb:{bnb:'Endo Ch 3 — pituitary physiology',bc:'Endo Ch 2 — HP axis',fa:'Pituitary basics pp 343–345',path:'Ch 15 — pituitary anatomy',phy:'—',sk:'—'},
+      ak:{bnb:'::Endo::Pituitary::Ant',bc:'::Bootcamp::Endo::HP axis',fa:'::FirstAid::Endo::Ant pituitary',path:'::Pathoma::Ch15::Pituitary',phy:'—',sk:'—'}},
+    end03:{t:'Hypothalamic-Pituitary Relationships II',lec:'Kothmann',sj:'Physio',folder:'end03_Hypothalamic-pituitary-hormones-II',slug:'hypothalamic-pituitary-hormone-relationships-ii',
+      lo:'end03_LO_Hypothalamic-Pituitary Relationships (part 2) Objectives.docx',
+      sd:'03_Endo_2026_Kothmann_Hypothalamic-Pituitary Relationships (part 2).pdf',
+      O:['ACTH / cortisol axis','TSH / thyroid axis','FSH / LH + gonadal axis','Pulsatile vs tonic secretion','Diurnal + circadian rhythm','Integration across axes'],
+      S:['Slides 1–5 — recap','Slides 6–14 — ACTH axis','Slides 15–22 — TSH axis','Slides 23–30 — gonadotrophs','Slides 31–38 — pulsatility','Slides 39–46 — integration'],
+      wb:{bnb:'Endo Ch 4 — HP axes continued',bc:'Endo Ch 3 — axes detail',fa:'HP axes pp 345–348',path:'—',phy:'—',sk:'—'},
+      ak:{bnb:'::Endo::HP::Axes',bc:'::Bootcamp::Endo::Axes',fa:'::FirstAid::Endo::HP axes',path:'—',phy:'—',sk:'—'}},
+    end04:{t:'Adrenal Hormone Synthesis & Action',lec:'Kothmann',sj:'Physio',folder:'end04_Adrenal-Hormone-Synthesis',slug:'il-adrenal-hormone-synthesis-and-action',
+      lo:'end04_LO_Kothmann_Adrenal Hormone Synthesis & Action video Objectives.docx',
+      sd:'04_Endo_2026_Kothmann_Adrenal Hormone Synthesis & Action_video slides.pdf',
+      O:['Adrenal cortex zonation (GFR)','Cholesterol → pregnenolone (StAR/CYP11A1)','Mineralocorticoid synthesis (aldo)','Glucocorticoid synthesis (cortisol)','Androgen synthesis (DHEA)','Adrenal medulla — catecholamines'],
+      S:['Slides 1–5 — cover + zonation','Slides 6–14 — StAR + CYP11A1','Slides 15–22 — aldo pathway','Slides 23–30 — cortisol pathway','Slides 31–38 — androgen pathway','Slides 39–46 — medulla + catecholamines'],
+      wb:{bnb:'Endo Ch 7 — adrenal synth',bc:'Endo Ch 5 — adrenal synth',fa:'Adrenal pp 349–351',path:'Ch 15 — adrenal',phy:'—',sk:'—'},
+      ak:{bnb:'::Endo::Adrenal::Synth',bc:'::Bootcamp::Endo::Adrenal',fa:'::FirstAid::Endo::Adrenal',path:'::Pathoma::Ch15::Adrenal',phy:'—',sk:'—'}},
+    end05:{t:'Sex Steroid Synthesis & Action',lec:'Kothmann',sj:'Physio',folder:'end05_sex-steroid-synthesis',slug:'il-sex-steroid-synthesis-and-action',
+      lo:'end05_LO_Kothmann_Sex Steroid Synthesis & Action video Objectives.docx',
+      sd:'05_Endo_2026_Kothmann_Sex Steroid Synthesis & Action.pdf',
+      O:['Testicular testosterone synthesis','Ovarian estradiol synthesis (2-cell model)','Aromatase + peripheral conversion','5α-reductase + DHT','Nuclear receptor action','Regulation across the lifespan'],
+      S:['Slides 1–5 — cover','Slides 6–13 — testicular','Slides 14–21 — ovarian 2-cell','Slides 22–29 — aromatase','Slides 30–37 — 5α-reductase','Slides 38–45 — AR/ER action'],
+      wb:{bnb:'Repro Ch 2 — sex steroids',bc:'Repro Ch 1 — steroidogenesis',fa:'Repro pp 614–616',path:'—',phy:'—',sk:'—'},
+      ak:{bnb:'::Repro::Sex steroids',bc:'::Bootcamp::Repro::Steroids',fa:'::FirstAid::Repro::Steroids',path:'—',phy:'—',sk:'—'}},
+    end06:{t:'Adrenal & Sex Steroid Hormone Action',lec:'Kothmann',sj:'Physio',folder:'end06_Adrenal-sex-steroid-action',slug:'adrenal-sex-steroid-hormone-synthesis-action',
+      lo:'LO-Phys-Watson_Hypothalamic-Pituitary-Growth Hormone Axis Objectives.docx',
+      sd:'06_Endo_2026_Kothmann_Adrenal & sex steroid action.pdf',
+      O:['Mineralocorticoid receptor + aldosterone action','Glucocorticoid receptor + cortisol action','Androgen receptor + testosterone/DHT','Estrogen receptor α/β','Integrated stress response'],
+      S:['Slides 1–6 — cover','Slides 7–15 — MR/aldo','Slides 16–24 — GR/cortisol','Slides 25–33 — AR','Slides 34–42 — ER','Slides 43–50 — stress integration'],
+      wb:{bnb:'Endo Ch 8 — adrenal action',bc:'Endo Ch 6 — steroid action',fa:'Adrenal action pp 352–354',path:'Ch 15',phy:'—',sk:'—'},
+      ak:{bnb:'::Endo::Adrenal::Action',bc:'::Bootcamp::Endo::Adrenal action',fa:'::FirstAid::Endo::Steroid action',path:'::Pathoma::Ch15::Adrenal',phy:'—',sk:'—'}},
+    end07:{t:'Posterior Pituitary Hormones',lec:'Sherman',sj:'Biochem',folder:'end07_Posterior-Pituitary',slug:'posterior-pituitary-hormones',
+      lo:'end07-LO-Biochem-Sherman_Posterior Pituitary Hormones Objectives.pdf',
+      sd:'07_Endo_2026_Sherman_Posterior Pituitary Hormones.pdf',
+      O:['ADH synthesis + release','V1/V2 receptor signaling','Oxytocin synthesis + action','Osmoregulation + thirst','Clinical — DI vs SIADH'],
+      S:['Slides 1–5 — cover','Slides 6–13 — ADH synth','Slides 14–21 — V1/V2','Slides 22–29 — oxytocin','Slides 30–37 — osmoregulation','Slides 38–45 — DI/SIADH'],
+      wb:{bnb:'Endo Ch 5 — post pit',bc:'Endo Ch 4 — post pit',fa:'Post pit pp 345–346',path:'Ch 15 — post pit',phy:'—',sk:'—'},
+      ak:{bnb:'::Endo::Post pit',bc:'::Bootcamp::Endo::Post pit',fa:'::FirstAid::Endo::Post pit',path:'::Pathoma::Ch15::Post pit',phy:'—',sk:'—'}},
+    end08:{t:'Pituitary Pathology',lec:'Santi',sj:'Path',folder:'end08_Pituitary-Pathology',slug:'pituitary-pathology',
+      lo:'end08-LO-Path-Santi_Pituitary Pathology Objectives.docx',
+      sd:'08_Endo_2026_Santi_Pituitary Pathology.pdf',
+      O:['Pituitary adenoma classification','Prolactinoma','Acromegaly / gigantism','Cushing disease','Hypopituitarism + Sheehan','Empty sella / craniopharyngioma'],
+      S:['Slides 1–6 — cover','Slides 7–15 — adenoma classification','Slides 16–24 — prolactinoma','Slides 25–33 — acromegaly','Slides 34–42 — Cushing disease','Slides 43–50 — hypopit + sella'],
+      wb:{bnb:'Endo Ch 6 — pit path',bc:'Endo Ch 7 — pit path',fa:'Pituitary path pp 355–358',path:'Ch 15 — pit path',phy:'Physeo Endo Ch 2',sk:'—'},
+      ak:{bnb:'::Endo::Pit::Path',bc:'::Bootcamp::Endo::Pit path',fa:'::FirstAid::Endo::Pit path',path:'::Pathoma::Ch15::Pit path',phy:'::Physeo::Path::Pit',sk:'—'}},
+    end09:{t:'Thyroid, Parathyroid & Adrenal Histology',lec:'Notario',sj:'Histo',folder:'end09_Histology',slug:'thyroid-parathyroid-adrenal-histology',
+      lo:'end09-LO-Hist-Notario_Thyroid, Parathyroid, Adrenal Objectives.pdf',
+      sd:'09_Endo_2026_Notario_Thyroid Parathyroid Adrenal Histology.pdf',
+      O:['Thyroid follicle histology (follicular, C cells)','Parathyroid chief + oxyphil cells','Adrenal cortex zonation histology','Adrenal medulla chromaffin cells','Histologic correlates of pathology'],
+      S:['Slides 1–5 — cover','Slides 6–14 — thyroid follicles','Slides 15–22 — parathyroid','Slides 23–30 — adrenal cortex','Slides 31–38 — adrenal medulla','Slides 39–46 — pathology correlates'],
+      wb:{bnb:'—',bc:'—',fa:'Endocrine histo pp 334–336',path:'Ch 15 — histo overlay',phy:'—',sk:'—'},
+      ak:{bnb:'—',bc:'—',fa:'::FirstAid::Endo::Histo',path:'::Pathoma::Ch15::Histo',phy:'—',sk:'—'}},
+    end10:{t:'Thyroid Hormone Synthesis & Action',lec:'Danielsen',sj:'Biochem',folder:'end10_Thyroid-Hormone',slug:'thyroid-hormone-synthesis-and-action',
+      lo:'end10-LO-Biochem-Danielsen_Thyroid Hormone Synthesis and Action notes and Objectives.docx',
+      sd:'10_Endo_2026_Danielsen_Thyroid Hormone Synthesis & Action.pdf',
+      O:['Iodide trapping (NIS)','Thyroglobulin synth + iodination (TPO)','T3/T4 storage + release','Peripheral conversion (deiodinases)','Nuclear TR action','Clinical — hypo/hyper thyroid'],
+      S:['Slides 1–5 — cover','Slides 6–13 — NIS','Slides 14–21 — TPO','Slides 22–29 — T3/T4 release','Slides 30–37 — deiodinases','Slides 38–45 — TR action + clinical'],
+      wb:{bnb:'Endo Ch 9 — thyroid synth',bc:'Endo Ch 8 — thyroid',fa:'Thyroid pp 359–362',path:'Ch 15 — thyroid',phy:'—',sk:'—'},
+      ak:{bnb:'::Endo::Thyroid::Synth',bc:'::Bootcamp::Endo::Thyroid',fa:'::FirstAid::Endo::Thyroid',path:'::Pathoma::Ch15::Thyroid',phy:'—',sk:'—'}},
+    end11:{t:'Thyroid & Parathyroid Pathology',lec:'Wieneke',sj:'Path',folder:'end11_Thyroid-Para-Path',slug:'thyroid-and-parathyroid-pathology',
+      lo:'end11-LO-Path-Wieneke_Thyroid and Parathyroid Objectives.docx',
+      sd:'11_Endo_2026_Wieneke_Thyroid Parathyroid Path.pdf',
+      O:['Hashimoto vs Graves','Thyroid nodules + neoplasia','Papillary / follicular / medullary / anaplastic','Primary / secondary / tertiary hyperPTH','HypoPTH + pseudohypo','Calcium homeostasis overview'],
+      S:['Slides 1–6 — cover','Slides 7–16 — autoimmune thyroid','Slides 17–25 — nodules','Slides 26–34 — thyroid CA','Slides 35–43 — parathyroid path','Slides 44–52 — Ca homeostasis'],
+      wb:{bnb:'Endo Ch 10 — thyroid path',bc:'Endo Ch 9 — thyroid path',fa:'Thyroid path pp 363–368',path:'Ch 15 — thyroid path',phy:'Physeo Endo Ch 3',sk:'—'},
+      ak:{bnb:'::Endo::Thyroid::Path',bc:'::Bootcamp::Endo::Thyroid path',fa:'::FirstAid::Endo::Thyroid path',path:'::Pathoma::Ch15::Thyroid',phy:'::Physeo::Path::Thyroid',sk:'—'}},
+    end12:{t:'Pancreatic Hormone Synthesis, Action & Regulation',lec:'Kothmann',sj:'Physio',folder:'end12_Pancreas',slug:'pancreatic-hormone-synthesis-action-regulation',
+      lo:'LO-Phys-Watson_Hypothalamic-Pituitary-Thyroid Axis Objectives.docx',
+      sd:'12_Endo_2026_Kothmann_Pancreatic Hormone Synth.pdf',
+      O:['Islet cell types (α/β/δ/PP)','Insulin synthesis + release','Glucagon synthesis + action','Somatostatin + PP','Glucose counter-regulation'],
+      S:['Slides 1–5 — cover','Slides 6–13 — islet anatomy','Slides 14–22 — insulin','Slides 23–30 — glucagon','Slides 31–38 — somatostatin','Slides 39–46 — counter-reg'],
+      wb:{bnb:'Endo Ch 11 — pancreas',bc:'Endo Ch 10 — pancreas',fa:'Pancreas pp 369–371',path:'Ch 15 — pancreas',phy:'—',sk:'—'},
+      ak:{bnb:'::Endo::Pancreas',bc:'::Bootcamp::Endo::Pancreas',fa:'::FirstAid::Endo::Pancreas',path:'::Pathoma::Ch15::Pancreas',phy:'—',sk:'—'}},
+    end13:{t:'DRT — Diagnosis & Treatment of Pituitary & Thyroid Disorders',lec:'Jonklaas',sj:'Pharm',folder:'end13_DRT-Pit-Thy',slug:'drt-pituitary-and-thyroid-disorders',
+      lo:'end13-LO-Pharm-Jonklaas_Diagnosis & Treatment of Pituitary and Thyroid Disorders Objectives.docx',
+      sd:'13_Endo_2026_Jonklaas_DRT Pit & Thyroid.pdf',
+      O:['Levothyroxine / liothyronine','Antithyroid drugs (PTU, methimazole)','Bromocriptine / cabergoline','Somatostatin analogs (octreotide)','GH / GH antagonists','Labs & diagnostic algorithms'],
+      S:['Slides 1–6 — cover','Slides 7–16 — thyroid replacement','Slides 17–26 — antithyroid','Slides 27–35 — dopamine agonists','Slides 36–44 — somatostatin','Slides 45–54 — GH + labs'],
+      wb:{bnb:'Endo Ch 12 — pharm pit/thyroid',bc:'Endo Ch 11 — pharm',fa:'Endo pharm pp 372–376',path:'—',phy:'—',sk:'Sketchy Pharm — thyroid drugs'},
+      ak:{bnb:'::Endo::Pharm::Pit Thy',bc:'::Bootcamp::Endo::Pharm',fa:'::FirstAid::Endo::Pharm',path:'—',phy:'—',sk:'::Sketchy::Pharm::Thyroid'}},
+    end14:{t:'TBL — Growth & Thyroid Hormones CCS',lec:'Kothmann',sj:'TBL',folder:'end14_TBL',slug:'tbl-growth-and-thyroid-hormones-ccs',
+      lo:'endALL-LO-All-Overall Module Objectives.docx',
+      sd:'14_Endo_2026_Kothmann_TBL Growth Thyroid.pdf',
+      O:['Short stature workup','Thyroid function interpretation','Drug selection for hypo/hyper thyroid','Integration across HP-thyroid axis'],
+      S:['Slides 1–5 — TBL intro','Slides 6–15 — short stature case','Slides 16–25 — TFT case','Slides 26–35 — drug choice case','Slides 36–42 — debrief'],
+      wb:{bnb:'—',bc:'—',fa:'pp 372–376',path:'—',phy:'—',sk:'—'},
+      ak:{bnb:'—',bc:'—',fa:'::FirstAid::Endo::TBL',path:'—',phy:'—',sk:'—'}},
+    end15:{t:'Gender Identity — Ethics Panel',lec:'Panel',sj:'Ethics',folder:'end15_Ethics',slug:'gender-identity-ethics-panel',
+      lo:'endALL-LO-All-Overall Module Objectives.docx',
+      sd:'15_Endo_2026_Panel_Gender Identity Ethics.pdf',
+      O:['Gender identity — terminology','Standards of care (WPATH)','Gender-affirming hormone therapy','Professional / ethical framework'],
+      S:['Slides 1–5 — intro','Slides 6–15 — terminology','Slides 16–25 — WPATH standards','Slides 26–35 — hormone therapy','Slides 36–42 — ethics framework'],
+      wb:{bnb:'—',bc:'—',fa:'—',path:'—',phy:'—',sk:'—'},
+      ak:{bnb:'—',bc:'—',fa:'—',path:'—',phy:'—',sk:'—'}},
+    end16:{t:'Pathophysiology of Diabetes Mellitus',lec:'Furlong',sj:'Path',folder:'end16_Diabetes-Pathophys',slug:'pathophysiology-of-diabetes-mellitus',
+      lo:'end16-LO-Path-Furlong_Pathophys of Diabetes Mellitus Objectives.docx',
+      sd:'16_Endo_2026_Furlong_Pathophys Diabetes.pdf',
+      O:['Type 1 DM — autoimmune β-cell loss','Type 2 DM — insulin resistance','MODY + secondary DM','Acute complications (DKA, HHS)','Chronic — micro/macrovascular','Lab diagnosis (A1c, OGTT)'],
+      S:['Slides 1–6 — cover','Slides 7–16 — T1DM','Slides 17–26 — T2DM','Slides 27–35 — MODY','Slides 36–44 — acute complications','Slides 45–54 — chronic complications'],
+      wb:{bnb:'Endo Ch 13 — diabetes path',bc:'Endo Ch 12 — diabetes',fa:'Diabetes pp 377–381',path:'Ch 15 — diabetes',phy:'Physeo Endo Ch 4',sk:'—'},
+      ak:{bnb:'::Endo::Diabetes::Path',bc:'::Bootcamp::Endo::Diabetes',fa:'::FirstAid::Endo::Diabetes',path:'::Pathoma::Ch15::Diabetes',phy:'::Physeo::Path::Diabetes',sk:'—'}},
+    end17:{t:'Type 1 Diabetes — Diagnosis & Treatment',lec:'Janicic',sj:'Pharm',folder:'end17_T1DM',slug:'diabetes-type-1-diagnosis-and-treatment',
+      lo:'end17-18-LO-Pharm-Janicic_Type I &  II Diabetes Objectives.docx',
+      sd:'17_Endo_2026_Janicic_T1DM.pdf',
+      O:['Insulin types (rapid/short/int/long)','Basal-bolus regimens','Insulin pump + CGM','DKA management','Hypoglycemia management'],
+      S:['Slides 1–5 — cover','Slides 6–15 — insulin types','Slides 16–25 — regimens','Slides 26–34 — pump/CGM','Slides 35–43 — DKA','Slides 44–52 — hypoglycemia'],
+      wb:{bnb:'Endo Ch 14 — insulins',bc:'Endo Ch 13 — insulins',fa:'Insulins pp 382–384',path:'—',phy:'—',sk:'Sketchy Pharm — insulin'},
+      ak:{bnb:'::Endo::Pharm::Insulin',bc:'::Bootcamp::Endo::Insulin',fa:'::FirstAid::Endo::Insulin',path:'—',phy:'—',sk:'::Sketchy::Pharm::Insulin'}},
+    end18:{t:'Type 2 Diabetes — Diagnosis & Treatment',lec:'Janicic',sj:'Pharm',folder:'end18_T2DM',slug:'diabetes-type-2-diagnosis-and-treatment',
+      lo:'end17-18-LO-Pharm-Janicic_Type I &  II Diabetes Objectives.docx',
+      sd:'18_Endo_2026_Janicic_T2DM.pdf',
+      O:['Metformin (biguanide)','Sulfonylureas / meglitinides','DPP-4 / GLP-1 / SGLT-2','Thiazolidinediones','A1c targets + stepwise algorithm','Combination therapy'],
+      S:['Slides 1–6 — cover','Slides 7–15 — metformin','Slides 16–24 — secretagogues','Slides 25–33 — incretin/SGLT2','Slides 34–42 — TZDs','Slides 43–52 — A1c + algorithms'],
+      wb:{bnb:'Endo Ch 15 — T2DM pharm',bc:'Endo Ch 14 — T2DM',fa:'T2DM pharm pp 385–390',path:'—',phy:'—',sk:'Sketchy Pharm — oral DM'},
+      ak:{bnb:'::Endo::Pharm::T2DM',bc:'::Bootcamp::Endo::T2DM',fa:'::FirstAid::Endo::T2DM',path:'—',phy:'—',sk:'::Sketchy::Pharm::T2DM'}},
+    end19:{t:'Hypothalamic-Pituitary-Adrenal Axis',lec:'Watson',sj:'Physio',folder:'end19_HPA',slug:'hypothalamic-pituitary-adrenal-axis',
+      lo:'end19-LO-Phys-Watson_Hypothalamic-Pituitary-Adrenal Axis Objectives.docx',
+      sd:'19_Endo_2026_Watson_HPA Axis.pdf',
+      O:['CRH → ACTH → cortisol axis','Cortisol actions (metabolic, immune, CV)','Negative feedback loops','Diurnal variation + stress response','Testing — dex suppression, cosyntropin'],
+      S:['Slides 1–5 — cover','Slides 6–14 — axis anatomy','Slides 15–24 — cortisol actions','Slides 25–33 — feedback','Slides 34–42 — diurnal','Slides 43–51 — dx testing'],
+      wb:{bnb:'Endo Ch 16 — HPA',bc:'Endo Ch 15 — HPA',fa:'HPA axis pp 391–393',path:'—',phy:'—',sk:'—'},
+      ak:{bnb:'::Endo::HPA',bc:'::Bootcamp::Endo::HPA',fa:'::FirstAid::Endo::HPA',path:'—',phy:'—',sk:'—'}},
+    end20:{t:'Adrenal Pathology',lec:'Wieneke',sj:'Path',folder:'end20_Adrenal-Path',slug:'adrenal-pathology',
+      lo:'end20-LO-Path-Wieneke_Adrenal Pathology Objectives.docx',
+      sd:'20_Endo_2026_Wieneke_Adrenal Path.pdf',
+      O:['Cushing syndrome (all causes)','Primary hyperaldosteronism (Conn)','CAH (21-, 11-, 17-hydroxylase)','Addison + adrenal crisis','Pheochromocytoma / paraganglioma','Adrenal masses + incidentaloma'],
+      S:['Slides 1–6 — cover','Slides 7–16 — Cushing','Slides 17–25 — Conn','Slides 26–34 — CAH','Slides 35–43 — Addison','Slides 44–53 — pheo + masses'],
+      wb:{bnb:'Endo Ch 17 — adrenal path',bc:'Endo Ch 16 — adrenal path',fa:'Adrenal path pp 394–398',path:'Ch 15 — adrenal',phy:'Physeo Endo Ch 5',sk:'—'},
+      ak:{bnb:'::Endo::Adrenal::Path',bc:'::Bootcamp::Endo::Adrenal path',fa:'::FirstAid::Endo::Adrenal path',path:'::Pathoma::Ch15::Adrenal',phy:'::Physeo::Path::Adrenal',sk:'—'}},
+    end21:{t:'DRT — Diagnosis & Treatment of Adrenal Disorders',lec:'Sharma',sj:'Pharm',folder:'end21_DRT-Adrenal',slug:'drt-adrenal-disorders',
+      lo:'end21-LO-Pharm-Sharma_Diagnosis and Treatment Adrenal Disorders Objectives.docx',
+      sd:'21_Endo_2026_Sharma_DRT Adrenal.pdf',
+      O:['Glucocorticoid replacement','Mineralocorticoid replacement (fludrocortisone)','Cortisol-lowering agents (ketoconazole, metyrapone)','Aldosterone antagonists','α/β-blockade in pheo'],
+      S:['Slides 1–5 — cover','Slides 6–15 — gluco replacement','Slides 16–25 — mineralo','Slides 26–34 — cortisol inhibitors','Slides 35–43 — aldo antagonists','Slides 44–52 — pheo pharm'],
+      wb:{bnb:'Endo Ch 18 — adrenal pharm',bc:'Endo Ch 17 — adrenal pharm',fa:'Adrenal pharm pp 399–401',path:'—',phy:'—',sk:'Sketchy Pharm — steroids'},
+      ak:{bnb:'::Endo::Pharm::Adrenal',bc:'::Bootcamp::Endo::Adrenal pharm',fa:'::FirstAid::Endo::Adrenal pharm',path:'—',phy:'—',sk:'::Sketchy::Pharm::Steroids'}},
+    end22:{t:'TBL — Pituitary & Thyroid Case Discussion',lec:'Jonklaas',sj:'TBL',folder:'end22_TBL',slug:'pituitary-thyroid-case-discussion',
+      lo:'end22-LO-Pharm-Jonklaas_TBL Case Discussion Pituitary & Thyroid Disorders Objectives.doc',
+      sd:'22_Endo_2026_Jonklaas_TBL Pit Thyroid Case.pdf',
+      O:['Case synthesis — pituitary disorders','Case synthesis — thyroid disorders','Lab interpretation','Treatment decision-making'],
+      S:['Slides 1–5 — intro','Slides 6–15 — pit case','Slides 16–25 — thyroid case','Slides 26–35 — labs','Slides 36–44 — treatment'],
+      wb:{bnb:'—',bc:'—',fa:'—',path:'—',phy:'—',sk:'—'},
+      ak:{bnb:'—',bc:'—',fa:'—',path:'—',phy:'—',sk:'—'}},
+    end23:{t:'Stress, Stress Hormones & Pathophys Integration',lec:'Watson',sj:'Physio',folder:'end23_Stress',slug:'ils-stress-stress-hormones-pathophysiology',
+      lo:'end23-LO-Phys-Watson_Stress, Stress Hormones & Pathophysiology Integration Objectives.docx',
+      sd:'23_Endo_2026_Watson_Stress Hormones.pdf',
+      O:['Acute vs chronic stress responses','Cortisol + catecholamine integration','Metabolic effects of chronic stress','Immune effects of cortisol','Clinical — adrenal fatigue myth + real dz'],
+      S:['Slides 1–5 — cover','Slides 6–14 — stress axes','Slides 15–23 — hormone integration','Slides 24–32 — metabolism','Slides 33–41 — immune','Slides 42–50 — clinical'],
+      wb:{bnb:'Endo Ch 19 — stress',bc:'Endo Ch 18 — stress',fa:'pp 402–404',path:'—',phy:'—',sk:'—'},
+      ak:{bnb:'::Endo::Stress',bc:'::Bootcamp::Endo::Stress',fa:'::FirstAid::Endo::Stress',path:'—',phy:'—',sk:'—'}},
+    end24:{t:'Endocrine Pathology Lab',lec:'Furlong',sj:'Lab',folder:'end24_Path-Lab',slug:'endocrine-lab',
+      lo:'end24-LO-Path-Furlong_ Endocrine Path Lab Objectives.docx',
+      sd:'24_Endo_2026_Furlong_Path Lab.pdf',
+      O:['Gross adrenal pathology','Gross thyroid pathology','Gross pituitary pathology','Histo correlates across slides'],
+      S:['Slides 1–5 — intro','Slides 6–15 — adrenal specimens','Slides 16–25 — thyroid specimens','Slides 26–35 — pit specimens','Slides 36–44 — histo review'],
+      wb:{bnb:'—',bc:'—',fa:'—',path:'Ch 15 — gross pearls',phy:'—',sk:'—'},
+      ak:{bnb:'—',bc:'—',fa:'—',path:'::Pathoma::Ch15::Gross',phy:'—',sk:'—'}},
+    end25:{t:'Diabetes Clinical Cases',lec:'Janicic',sj:'TBL',folder:'end25_DM-Cases',slug:'diabetes-clinical-cases',
+      lo:'end25-LO-Pharm-Janicic_Diabetes Clinical Cases Objectives.doc',
+      sd:'25_Endo_2026_Janicic_DM Clinical Cases.pdf',
+      O:['T1DM case — pump management','T2DM case — drug selection','DKA case — fluid/insulin/K','Hypoglycemia case'],
+      S:['Slides 1–5 — intro','Slides 6–15 — T1DM case','Slides 16–25 — T2DM case','Slides 26–35 — DKA case','Slides 36–44 — hypoglycemia'],
+      wb:{bnb:'—',bc:'—',fa:'pp 377–390',path:'—',phy:'—',sk:'—'},
+      ak:{bnb:'—',bc:'—',fa:'::FirstAid::Endo::DM cases',path:'—',phy:'—',sk:'—'}},
+    end26:{t:'Longitudinal Case Wrap-Up',lec:'Panel',sj:'TBL',folder:'end26_Longitudinal',slug:'longitudinal-case-wrap-up',
+      lo:'endALL-LO-All-Overall Module Objectives.docx',
+      sd:'26_Endo_2026_Panel_Longitudinal Wrap-Up.pdf',
+      O:['Integrated endocrine case walkthrough','Block synthesis','Exam prep + debrief'],
+      S:['Slides 1–5 — intro','Slides 6–20 — integrated case','Slides 21–30 — synthesis','Slides 31–38 — exam prep'],
+      wb:{bnb:'—',bc:'—',fa:'Block summary pp 337–404',path:'—',phy:'—',sk:'—'},
+      ak:{bnb:'—',bc:'—',fa:'—',path:'—',phy:'—',sk:'—'}}
+  };
+
+  // =============== MAPPING BUILDER ===============
+  // [sourceFieldId, targetFieldId, category] — rebuilt per lecture
+  function buildMappings(L) {
+    const m = [];
+    const n = L.O.length;
+    const mid = Math.ceil(n/2);
+    // LOs feed the lecture guide directly; the drill + key are built FROM the guide,
+    // so drop direct LO → drill/key arrows and let the lineage flow LO → lg → drill.
+    for (let i=1;i<=n;i++) {
+      m.push([`f-lo-${i}`,`t-lg-obj${i}`,'lo']);
+    }
+    // Bulk targets — testing drills still have some direct LO lines
+    m.push(['f-lo-1','t-h1-all','lo']);
+    m.push([`f-lo-${n}`,'t-h1-all','lo']);
+    m.push([`f-lo-${mid}`,'t-h2-all','lo']);
+    m.push([`f-lo-${n}`,'t-h2-all','lo']);
+    m.push(['f-lo-1','t-h3-all','lo']);
+    m.push([`f-lo-${n}`,'t-h3-all','lo']);
+    m.push(['f-lo-1','t-lg-quiz','lo']);
+    m.push([`f-lo-${n}`,'t-lg-quiz','lo']);
+    // Slides
+    m.push(['f-sl-1','t-lg-cover','slide']);
+    for (let i=2;i<=Math.min(6,n+1);i++) m.push([`f-sl-${i}`,`t-lg-obj${i-1}`,'slide']);
+    // Subject review → cheatsheet + obj bodies (multi-line so the flow is visible)
+    m.push(['f-sub-1','t-lg-cheat','subj']);
+    m.push(['f-sub-1','t-lg-obj1','subj']);
+    m.push(['f-sub-2',`t-lg-obj${Math.min(n,3)}`,'subj']);
+    m.push(['f-sub-2',`t-lg-obj${n}`,'subj']);
+    m.push(['f-sub-2','t-lg-audit','subj']);
+    // Workbooks → references + obj bodies (only if that resource covers the lecture)
+    const wbs = ['bnb','bc','fa','path','phy','sk'];
+    wbs.forEach((k,idx)=>{
+      if (L.wb[k] && L.wb[k] !== '—') {
+        m.push([`f-wb-${k}`,'t-lg-ref','workbook']);
+        m.push([`f-wb-${k}`,`t-lg-obj${Math.min(n, idx+1)}`,'workbook']);
+      }
+    });
+    // Anki decks → #audit + mapping row/hub
+    wbs.forEach((k)=>{
+      if (L.ak[k] && L.ak[k] !== '—') {
+        m.push([`f-ak-${k}`,'t-lg-audit','anki']);
+      }
+    });
+    if (L.ak.bnb && L.ak.bnb !== '—') m.push(['f-ak-bnb','t-map-row','anki']);
+    if (L.ak.bc  && L.ak.bc  !== '—') m.push(['f-ak-bc','t-rhub-card','anki']);
+
+    // Additional Anki Decks (in-house GUSOM + Block 4) → lecture guide (audit + obj bodies)
+    m.push(['f-in-gusom','t-lg-audit','anki']);
+    m.push(['f-in-gusom','t-lg-obj1','anki']);
+    m.push(['f-in-gusom',`t-lg-obj${n}`,'anki']);
+    m.push(['f-in-gusom','t-map-row','anki']);
+    m.push(['f-in-gusom','t-rhub-card','anki']);
+    m.push(['f-in-block4','t-lg-audit','anki']);
+    m.push(['f-in-block4',`t-lg-obj${mid}`,'anki']);
+    m.push(['f-in-block4','t-map-row','anki']);
+    // Additional Anki Decks (3rd-party optional)
+    m.push(['f-in-path','t-lg-audit','anki']);
+    m.push(['f-in-path','t-map-row','anki']);
+    m.push(['f-in-mich','t-lg-audit','anki']);
+    m.push(['f-in-mich','t-rhub-card','anki']);
+    m.push(['f-in-ahopt','t-lg-audit','anki']);
+
+    // UWorld QID Mapping → matrix + rhub + Hub 3 vignettes
+    m.push(['f-uw-1','t-map-row','mapping']);
+    m.push(['f-uw-1','t-rhub-card','mapping']);
+    m.push(['f-uw-1','t-h3-all','mapping']);
+    m.push(['f-uw-2','t-map-row','mapping']);
+    m.push(['f-uw-2','t-h3-all','mapping']);
+
+    // LOs populate the resource-mapping xlsx (topic column) and UWorld QID xlsx (topic mapping)
+    m.push(['f-lo-1','f-rm-1','mapping']);
+    if (n>=3) m.push([`f-lo-${mid}`,'f-rm-1','mapping']);
+    m.push([`f-lo-${n}`,'f-rm-1','mapping']);
+    m.push(['f-lo-1','f-uw-2','mapping']);
+    m.push([`f-lo-${n}`,'f-uw-2','mapping']);
+    // LOs also directly feed the Resource Hub Catalog — per-lecture row + card descriptions
+    m.push(['f-lo-1','t-rhub-row','mapping']);
+    m.push(['f-lo-1','t-rhub-card','mapping']);
+    if (n>=3) m.push([`f-lo-${mid}`,'t-rhub-row','mapping']);
+    m.push([`f-lo-${n}`,'t-rhub-row','mapping']);
+    m.push([`f-lo-${n}`,'t-rhub-card','mapping']);
+
+    // 3rd-party workbooks populate the resource-coverage cells of the xlsx
+    ['bnb','bc','fa','path','phy','sk'].forEach(k=>{
+      if (L.wb[k] && L.wb[k] !== '—') m.push([`f-wb-${k}`,'f-rm-2','workbook']);
+      if (L.ak[k] && L.ak[k] !== '—') m.push([`f-ak-${k}`,'f-rm-2','anki']);
+    });
+    // In-house Anki decks also populate coverage cells
+    m.push(['f-in-gusom','f-rm-2','anki']);
+    m.push(['f-in-block4','f-rm-2','anki']);
+    m.push(['f-in-path','f-rm-2','anki']);
+
+    // Resource-explorer pulls from xlsx + hierarchy + Anki hierarchy
+    m.push(['f-rm-1','t-rexp-row','mapping']);
+    m.push(['f-rm-2','t-rexp-row','mapping']);
+    m.push(['f-uw-1','t-rexp-row','mapping']);
+    m.push(['f-ak-bnb','t-rexp-hier','anki']);
+    m.push(['f-ak-bc','t-rexp-hier','anki']);
+    m.push(['f-ak-fa','t-rexp-hier','anki']);
+    m.push(['f-in-gusom','t-rexp-hier','anki']);
+    m.push(['f-in-block4','t-rexp-hier','anki']);
+
+    // Resource mapping xlsx
+    m.push(['f-rm-1','t-map-row','mapping']);
+    m.push(['f-rm-2','t-map-row','mapping']);
+    m.push(['f-rm-1','t-rhub-card','mapping']);
+    m.push(['f-rm-2','t-lg-audit','mapping']);
+
+    // DERIVED: lecture-guide → drill & testing HTMLs (the guide is the primary source for drills)
+    for (let i=1;i<=n;i++) {
+      m.push([`t-lg-obj${i}`,`t-ar-${i}`,'derived']);
+    }
+    // Guide → answer key (references + audit supply the rationale)
+    m.push(['t-lg-ref','t-key-all','derived']);
+    m.push(['t-lg-audit','t-key-all','derived']);
+    m.push([`t-lg-obj${mid}`,'t-key-all','derived']);
+    m.push([`t-lg-obj${n}`,'t-key-all','derived']);
+    m.push(['t-lg-quiz','t-h1-all','derived']);
+    m.push(['t-lg-cheat','t-h1-all','derived']);
+    m.push(['t-lg-obj1','t-h2-all','derived']);
+    m.push([`t-lg-obj${n}`,'t-h2-all','derived']);
+    m.push([`t-lg-obj${mid}`,'t-h3-all','derived']);
+    m.push(['t-lg-audit','t-h3-all','derived']);
+
+    // COMPLETE OUTPUT LINEAGE — every HTML output shows every primary source that feeds it
+
+    // Resource Mapping Spreadsheet informs coverage of all three testing drills
+    m.push(['f-rm-1','t-h1-all','mapping']);
+    m.push(['f-rm-1','t-h2-all','mapping']);
+    m.push(['f-rm-1','t-h3-all','mapping']);
+    m.push(['f-rm-2','t-h2-all','mapping']);
+    m.push(['f-rm-2','t-h3-all','mapping']);
+
+    // 3rd-party workbooks → testing drills (Q content source)
+    ['bnb','bc','fa','path','phy','sk'].forEach(k => {
+      if (L.wb[k] && L.wb[k] !== '—') {
+        m.push([`f-wb-${k}`,'t-h1-all','workbook']);
+        m.push([`f-wb-${k}`,'t-h2-all','workbook']);
+        m.push([`f-wb-${k}`,'t-h3-all','workbook']);
+      }
+    });
+
+    // 3rd-party Anki decks → testing drills (flashcard framing for h2 & h3)
+    ['bnb','bc','fa','path','phy','sk'].forEach(k => {
+      if (L.ak[k] && L.ak[k] !== '—') {
+        m.push([`f-ak-${k}`,'t-h2-all','anki']);
+        m.push([`f-ak-${k}`,'t-h3-all','anki']);
+      }
+    });
+
+    // In-House + Additional Anki decks → testing drills
+    m.push(['f-in-gusom','t-h1-all','anki']);
+    m.push(['f-in-gusom','t-h2-all','anki']);
+    m.push(['f-in-block4','t-h2-all','anki']);
+    m.push(['f-in-block4','t-h3-all','anki']);
+    m.push(['f-in-path','t-h3-all','anki']);
+
+    // Subject review → Hub 1 testing drill (subject-level framing)
+    m.push(['f-sub-1','t-h1-all','subj']);
+    m.push(['f-sub-2','t-h1-all','subj']);
+
+    // Slides → active-recall drill (direct slide-fact recall)
+    m.push(['f-sl-1','t-ar-1','slide']);
+    if (n >= 2) m.push(['f-sl-2','t-ar-2','slide']);
+    if (n >= 3) m.push([`f-sl-3`,`t-ar-3`,'slide']);
+    // UWorld QID → active-recall drill key (answer-key rationale)
+    m.push(['f-uw-2','t-key-all','mapping']);
+
+    return m;
+  }
+
+  let currentMappings = [];
+
+  // =============== RENDER LECTURE ===============
+  function setK(k, v) {
+    document.querySelectorAll(`[data-k="${k}"]`).forEach(el => el.textContent = v || '');
+  }
+  // Remove professor names from displayed filenames (data stays intact in LECTURES)
+  const PROF_NAMES = ['Kothmann','Watson','Jonklaas','Janicic','Wieneke','Danielsen','Santi','Notario','Sherman','Furlong','Sharma','Altayeb','Panel'];
+  function stripProf(s) {
+    if (!s) return s;
+    PROF_NAMES.forEach(p => {
+      // remove "_Name_", "_Name.", " Name ", "-Name-" etc.
+      s = s.replace(new RegExp(`[_\\s-]+${p}([_\\s.-]|$)`, 'g'), '$1');
+    });
+    return s.replace(/__/g,'_').replace(/\s{2,}/g,' ').trim();
+  }
+  function renderLecture(key) {
+    const L = LECTURES[key];
+    if (!L) return;
+    const subj = SUBJECT_REVIEWS[L.sj] || SUBJECT_REVIEWS.Physio;
+
+    // Sources — headers use friendly titles, sub-lines expose the actual filenames
+    setK('inlec_title', `In House ${key} Lecture Materials`);
+    setK('lo_title',    `In House ${key} Learning Objectives`);
+    setK('lo_file',     stripProf(L.lo));
+    L.O.forEach((o,i)=> setK(`obj${i+1}`, `Obj ${i+1} — ${o}`));
+    for (let i=L.O.length+1;i<=8;i++) setK(`obj${i}`, '');
+    setK('slide_title', `In House ${key} Lecture Notes`);
+    setK('slide_file',  stripProf(L.sd));
+    L.S.forEach((s,i)=> setK(`sl${i+1}`, s));
+    for (let i=L.S.length+1;i<=6;i++) setK(`sl${i}`, '');
+    setK('subj_title',  `In House Subject Review — ${L.sj}`);
+    setK('subj_file',   subj.file);
+    setK('sub1', subj.sub[0]);
+    setK('sub2', subj.sub[1]);
+    const wbLabel = (name, v) => v && v !== '—' ? `${name} — ${v}` : `${name} — (not covered)`;
+    setK('wb_bnb',  wbLabel('BnB Endo Book',   L.wb.bnb));
+    setK('wb_bc',   wbLabel('Bootcamp Endo',   L.wb.bc));
+    setK('wb_fa',   wbLabel('First Aid Step 1',L.wb.fa));
+    setK('wb_path', wbLabel('Pathoma',         L.wb.path));
+    setK('wb_phy',  wbLabel('Physeo',          L.wb.phy));
+    setK('wb_sk',   wbLabel('Sketchy',         L.wb.sk));
+    const akLabel = (file, v) => v && v !== '—' ? `${file} → ${v}` : `${file} — (not mapped)`;
+    setK('ak_bnb',  akLabel('bnb-endocrine.apkg',      L.ak.bnb));
+    setK('ak_bc',   akLabel('bootcamp-endocrine.apkg', L.ak.bc));
+    setK('ak_fa',   akLabel('firstaid-endocrine.apkg', L.ak.fa));
+    setK('ak_path', akLabel('duke-pathoma-all.apkg',   L.ak.path));
+    setK('ak_phy',  akLabel('physeo-pathology.apkg',   L.ak.phy));
+    setK('ak_sk',   akLabel('sketchy-pharm.apkg',      L.ak.sk));
+    setK('rm1', `${key} row — resource coverage`);
+    setK('rm2', 'LO topic cells + BnB/Bootcamp/FA/Pathoma/Physeo/Sketchy coverage');
+    // In-house Anki
+    const n2 = key.replace('end','');
+    setK('in_gusom',  `gusom-all.apkg → ::GUSOM::Endo::${L.t.split(' ')[0]}`);
+    setK('in_block4', `block4-all.apkg → ::Block4::Endo::L${n2}`);
+    setK('in_path',   'duke-pathoma-all.apkg → ::Pathoma::Endo');
+    setK('in_mich',   'michigan-blue-atlas-all.apkg → (anatomy overlay)');
+    setK('in_ahopt',  'ankihub-optional-block4.apkg → ::AnkiHub::Optional::Block4');
+    // UWorld QID
+    setK('uw1', `${key} QID set — LO-mapped question IDs`);
+    setK('uw2', 'Per-QID → LO-topic cells (feed hub3 vignettes)');
+
+    // Targets — friendly titles on line 1, filenames on line 2
+    setK('t_lg_title',  `${key} Lecture Guide`);
+    setK('t_lg_file',   `lecture-guides/${key}-${L.slug}.html`);
+    setK('t_arkey_title', `${key} Active-Recall Drill + Key`);
+    setK('t_arkey_file',  `active-lesson-drills/${key}_*.html`);
+    setK('t_ar_file',     `active-lesson-drills/${key}_active_recall.html`);
+    setK('t_key_file',    `active-lesson-drills/${key}_key.html`);
+    setK('t_key_row',     `A1–A${L.O.length}`);
+    setK('t_h1_title',  `${key} Hub 1 Testing Drill`);
+    setK('t_h1_file',   `testing-drills/${key}-hub1-${L.slug}.html`);
+    setK('t_h1_row',    `Questions — Obj 1–${L.O.length}`);
+    setK('t_h2_title',  `${key} Hub 2 Testing Drill`);
+    setK('t_h2_file',   `testing-drills/${key}-hub2-${L.slug}.html`);
+    setK('t_h2_row',    `Mixed sets — Obj 1–${L.O.length}`);
+    setK('t_h3_title',  `${key} Hub 3 Testing Drill`);
+    setK('t_h3_file',   `testing-drills/${key}-hub3-${L.slug}.html`);
+    setK('t_h3_row',    `Vignettes — Obj 1–${L.O.length}`);
+    setK('t_map_row',  `${key} row — resource cells`);
+    setK('t_map_topics', `${key} — LO topic column (seeded by objectives)`);
+    setK('t_rhub_row',  `${key} row — LO topics + resource coverage`);
+    setK('t_rexp_row',  `${key} row — hierarchy + deck card links`);
+    L.O.forEach((o,i)=>{
+      const short = o.split(/[\(\-–—]/)[0].trim().slice(0,38);
+      setK(`t_obj${i+1}`, `#obj${i+1} — ${short}`);
+    });
+    for (let i=L.O.length+1;i<=8;i++) setK(`t_obj${i}`, '');
+
+    // Hide extra rows beyond this lecture's counts
+    for (let i=1;i<=8;i++) {
+      const show = i <= L.O.length;
+      ['f-lo-','t-lg-obj','t-ar-'].forEach(p => {
+        const el = document.getElementById(`${p}${i}`);
+        if (el) el.hidden = !show;
+      });
+    }
+    for (let i=1;i<=6;i++) {
+      const el = document.getElementById(`f-sl-${i}`);
+      if (el) el.hidden = i > L.S.length;
+    }
+    // Workbook/Anki: always visible — mark "not covered" rows with dimmed style
+    const wks = ['bnb','bc','fa','path','phy','sk'];
+    wks.forEach(k=>{
+      const wEl = document.getElementById(`f-wb-${k}`);
+      const aEl = document.getElementById(`f-ak-${k}`);
+      const wNC = !L.wb[k] || L.wb[k] === '—';
+      const aNC = !L.ak[k] || L.ak[k] === '—';
+      if (wEl) { wEl.hidden = false; wEl.classList.toggle('not-covered', wNC); }
+      if (aEl) { aEl.hidden = false; aEl.classList.toggle('not-covered', aNC); }
+    });
+
+    // Update header + tag
+    document.getElementById('fm-lecture-tag').textContent = `${key.toUpperCase()} · ${L.sj}`;
+    document.getElementById('fm-hint').textContent = `${key} — ${L.t}`;
+
+    // Rebuild mapping array + redraw
+    currentMappings = buildMappings(L);
+    requestAnimationFrame(drawFieldMap);
+  }
+
+  // Generators are now shown as a top strip (not drawn as SVG arrows)
+
+  const fmSvg = document.getElementById('fm-svg');
+  const fmWrap = document.getElementById('fieldmap-wrap');
+
+  function center(el, side) {
+    // side = 'right' or 'left' — anchor on the card edge.
+    // If the field's parent card is collapsed, anchor at the card header instead
+    // so that connections stay visible as a consolidated line to the card.
+    // If the field itself is data-hidden (user chose to hide its details),
+    // also anchor at the card header so the lineage line still draws.
+    const card = el.closest && el.closest('.fm-card');
+    let refEl = el;
+    const collapsed = card && card.classList.contains('collapsed');
+    const dataHidden = el.classList && el.classList.contains('data-hidden');
+    if (collapsed || dataHidden) {
+      refEl = (card && card.querySelector('.fm-card-head')) || card || el;
+    }
+    const r = refEl.getBoundingClientRect();
+    const wr = fmWrap.getBoundingClientRect();
+    const y = r.top + r.height/2 - wr.top;
+    const x = side === 'right' ? (r.right - wr.left) : (r.left - wr.left);
+    return { x, y };
+  }
+
+  function bezier(p1, p2, mode) {
+    if (mode === 'loopRight') {
+      const cx = Math.max(p1.x, p2.x) + 80;
+      return `M ${p1.x} ${p1.y} C ${cx} ${p1.y}, ${cx} ${p2.y}, ${p2.x} ${p2.y}`;
+    }
+    if (mode === 'loopLeft') {
+      const cx = Math.min(p1.x, p2.x) - 80;
+      return `M ${p1.x} ${p1.y} C ${cx} ${p1.y}, ${cx} ${p2.y}, ${p2.x} ${p2.y}`;
+    }
+    const dx = Math.max(60, (p2.x - p1.x) * 0.45);
+    return `M ${p1.x} ${p1.y} C ${p1.x+dx} ${p1.y}, ${p2.x-dx} ${p2.y}, ${p2.x} ${p2.y}`;
+  }
+
+  function drawFieldMap(){
+    if (!fmSvg || !fmWrap) return;
+    const wr = fmWrap.getBoundingClientRect();
+    fmSvg.setAttribute('viewBox', `0 0 ${wr.width} ${wr.height}`);
+    fmSvg.setAttribute('width', wr.width);
+    fmSvg.setAttribute('height', wr.height);
+    fmSvg.innerHTML = '';
+
+    // 1. Field-to-field content mappings (from currentMappings)
+    currentMappings.forEach((m) => {
+      const src = document.getElementById(m[0]);
+      const tgt = document.getElementById(m[1]);
+      if (!src || !tgt) return;
+      if (src.hidden || tgt.hidden) return;
+      const srcCard = src.closest('.fm-card');
+      const tgtCard = tgt.closest('.fm-card');
+      const srcMid = srcCard && srcCard.classList.contains('fm-mid');
+      const tgtMid = tgtCard && tgtCard.classList.contains('fm-mid');
+      // Same-column routing: middle → middle loops out to the right
+      const pathMode = (srcMid && tgtMid) ? 'loopRight' : null;
+      const p1 = center(src, 'right');
+      const p2 = center(tgt, 'left');
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', bezier(p1, p2, pathMode));
+      path.setAttribute('class', 'c-' + m[2]);
+      path.dataset.src = m[0];
+      path.dataset.tgt = m[1];
+      path.dataset.cat = m[2];
+      fmSvg.appendChild(path);
+    });
+    // Re-apply active filter after redraw
+    applyFilter(activeFilter);
+
+  }
+
+  // ============ INTERACTIONS ============
+  function highlightFromField(fieldId) {
+    const paths = fmSvg.querySelectorAll('path');
+    const fields = document.querySelectorAll('.fm-field');
+    const cards = document.querySelectorAll('.fm-card');
+    const connected = new Set([fieldId]);
+    const cardSet = new Set();
+    paths.forEach(p => {
+      if (p.dataset.src === fieldId || p.dataset.tgt === fieldId) {
+        p.classList.add('highlight');
+        p.classList.remove('dim');
+        connected.add(p.dataset.src); connected.add(p.dataset.tgt);
+      } else if (p.dataset.cat) {
+        p.classList.add('dim'); p.classList.remove('highlight');
+      }
+    });
+    fields.forEach(f => {
+      if (connected.has(f.id)) { f.classList.add('highlight'); f.classList.remove('dim'); cardSet.add(f.closest('.fm-card')); }
+      else { f.classList.add('dim'); f.classList.remove('highlight'); }
+    });
+    cards.forEach(c => {
+      if (cardSet.has(c) || c.classList.contains('fm-xform')) c.classList.remove('dim');
+      else c.classList.add('dim');
+    });
+  }
+  function clearHighlights(){
+    fmSvg.querySelectorAll('path').forEach(p => { p.classList.remove('highlight','dim'); });
+    document.querySelectorAll('.fm-field').forEach(f => f.classList.remove('highlight','dim'));
+    document.querySelectorAll('.fm-card').forEach(c => c.classList.remove('highlight','dim'));
+  }
+  document.querySelectorAll('.fm-field').forEach(f => {
+    f.addEventListener('mouseenter', () => highlightFromField(f.id));
+    f.addEventListener('mouseleave', clearHighlights);
+  });
+  document.querySelectorAll('.fm-card-head').forEach(h => {
+    h.addEventListener('mouseenter', () => {
+      const card = h.closest('.fm-card');
+      const ids = [...card.querySelectorAll('.fm-field')].map(f => f.id);
+      if (ids.length === 0) return;
+      const set = new Set(ids);
+      fmSvg.querySelectorAll('path').forEach(p => {
+        if (set.has(p.dataset.src) || set.has(p.dataset.tgt)) { p.classList.add('highlight'); p.classList.remove('dim'); }
+        else if (p.dataset.cat) { p.classList.add('dim'); p.classList.remove('highlight'); }
+      });
+    });
+    h.addEventListener('mouseleave', clearHighlights);
+  });
+
+  // Filter chips
+  let activeFilter = 'all';
+  function applyFilter(f) {
+    fmSvg.querySelectorAll('path').forEach(p => {
+      p.classList.remove('hidden');
+      if (f === 'all') return;
+      if (!p.dataset.cat) return;
+      if (f === 'workbook' && (p.dataset.cat === 'workbook' || p.dataset.cat === 'anki')) return;
+      if (p.dataset.cat !== f) p.classList.add('hidden');
+    });
+  }
+  document.querySelectorAll('.fm-chip').forEach(c => {
+    c.addEventListener('click', () => {
+      document.querySelectorAll('.fm-chip').forEach(x => x.classList.remove('active'));
+      c.classList.add('active');
+      activeFilter = c.dataset.filter;
+      applyFilter(activeFilter);
+    });
+  });
+  document.querySelector('.fm-chip[data-filter="all"]').classList.add('active');
+
+  // Collapse every card by default for a compact overview;
+  // leave 3rd-Party Resources expanded so its vendor subgroups are immediately visible.
+  document.querySelectorAll('.fm-card').forEach(c => c.classList.add('collapsed'));
+  const fmDefaultOpen = document.querySelector('.fm-card[data-card="thirdparty"]');
+  if (fmDefaultOpen) fmDefaultOpen.classList.remove('collapsed');
+
+  // Card collapse toggles
+  document.querySelectorAll('.fm-toggle').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const card = btn.closest('.fm-card');
+      if (!card) return;
+      card.classList.toggle('collapsed');
+      requestAnimationFrame(drawFieldMap);
+    });
+  });
+
+  // Populate lecture dropdown
+  const fmSelect = document.getElementById('fm-lecture-select');
+  Object.keys(LECTURES).forEach(k => {
+    const L = LECTURES[k];
+    const opt = document.createElement('option');
+    opt.value = k;
+    opt.textContent = `${k} — ${L.t}  ·  ${L.sj}`;
+    fmSelect.appendChild(opt);
+  });
+  fmSelect.addEventListener('change', () => renderLecture(fmSelect.value));
+
+  // Initial render
+  renderLecture('end01');
+
+  // Draw on load + resize
+  window.addEventListener('load', () => requestAnimationFrame(drawFieldMap));
+  window.addEventListener('resize', () => requestAnimationFrame(drawFieldMap));
+</script>
+
+</body>
+</html>
