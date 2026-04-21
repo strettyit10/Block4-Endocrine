@@ -199,10 +199,10 @@ table tr:hover td{background:#FFEDD5}
 </div>
 
 <div class="stats-bar">
-  <div class="stat-card"><div class="stat-num">16</div><div class="stat-label">Flashcards</div></div>
-  <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">MCQs</div></div>
-  <div class="stat-card"><div class="stat-num">4</div><div class="stat-label">Vignettes</div></div>
-  <div class="stat-card"><div class="stat-num">9</div><div class="stat-label">Traps</div></div>
+  <div class="stat-card"><div class="stat-num">18</div><div class="stat-label">Flashcards</div></div>
+  <div class="stat-card"><div class="stat-num">7</div><div class="stat-label">MCQs</div></div>
+  <div class="stat-card"><div class="stat-num">7</div><div class="stat-label">Vignettes</div></div>
+  <div class="stat-card"><div class="stat-num">11</div><div class="stat-label">Traps</div></div>
   <div class="stat-card"><div class="stat-num">9</div><div class="stat-label">Clin. Correlates</div></div>
   <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Ref Tables</div></div>
 </div>
@@ -212,14 +212,13 @@ table tr:hover td{background:#FFEDD5}
   <button class="tab-btn" onclick="switchTab('mcq',this)">MCQ</button>
   <button class="tab-btn" onclick="switchTab('vignettes',this)">Vignettes</button>
   <button class="tab-btn" onclick="switchTab('traps',this)">Step 1 Traps</button>
-  <button class="tab-btn" onclick="switchTab('clinical',this)">Clinical Correlates</button>
+  <button class="tab-btn" onclick="switchTab('clinical',this)">Clinical Correlates + HY Notes</button>
   <button class="tab-btn" onclick="switchTab('ref',this)">Reference</button>
-  <button class="tab-btn" onclick="switchTab('hynotes',this)">HY Testing Notes</button>
 </div>
 
 <!-- ══ STEP 1 FLASHCARDS ══════════════════════════════════════════════════ -->
 <div class="tab-content active" id="tab-flashcards">
-  <div class="fc-progress"><span>Click any card to flip · 16 Step-1 high-yield concepts</span><span class="prog-num">LOs 1–7 integrated</span></div>
+  <div class="fc-progress"><span>Click any card to flip · 18 Step-1 high-yield concepts</span><span class="prog-num">LOs 1–7 integrated</span></div>
   <div class="fc-grid">
 
     <div class="fc" onclick="flipCard(this)">
@@ -334,6 +333,20 @@ table tr:hover td{background:#FFEDD5}
       </div>
     </div>
 
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 2 — Regulated vs Constitutive Secretion</div><div class="fc-q">Define "regulated" vs "constitutive" hormone secretion. Why does this distinction matter clinically?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>REGULATED:</strong> hormone is synthesized, processed, and stored in secretory granules; release is triggered by Ca²⁺-dependent exocytosis upon a specific stimulus. Fast response (seconds).<br>• <em>Peptides, catecholamines, thyroid hormone</em> (all stored).<br><br><strong>CONSTITUTIVE:</strong> hormone is made <em>de novo</em> on demand and diffuses out immediately — no storage possible because it is lipid-soluble.<br>• <em>Steroids</em> (cortisol, aldosterone, sex steroids), <em>eicosanoids</em>.<br><br><strong>Clinical implications:</strong><br>• Stress → instant insulin/catecholamine release (stored, just dump granules).<br>• ACTH stimulation → cortisol takes <em>minutes–hours</em> (must synthesize de novo; StAR must shuttle cholesterol).<br>• Adrenal adenoma = <em>autonomous</em> constitutive steroid production → ACTH suppressed by feedback (as in subclinical Cushing's / cortisol-secreting incidentaloma).<br>• Why etomidate (blocks 11β-OH) can precipitate adrenal crisis within HOURS — there is no cortisol reserve to fall back on.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 2 — Oral Bioavailability by Class</div><div class="fc-q">Why can levothyroxine, cortisol, and estrogen be given ORALLY, while insulin and GH must be injected?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Solubility + stability determine the route:</strong><br><br><strong>LIPID-SOLUBLE hormones (PO works):</strong><br>• Steroids (hydrocortisone, prednisone, testosterone, estradiol)<br>• Thyroid hormone (levothyroxine, T3)<br>• Vitamin D (ergocalciferol, calcitriol)<br>→ Resistant to GI proteases + readily cross intestinal membrane + reach liver for carrier-protein binding.<br><br><strong>HYDROPHILIC PEPTIDES (must inject):</strong><br>• Insulin, GH, PTH (teriparatide), calcitonin, ACTH, GnRH analogs<br>→ Digested to amino acids in gut · poor membrane crossing · short ½-life in plasma.<br>→ Given SC, IM, IV, or via nasal spray (desmopressin).<br><br><strong>Catecholamines:</strong> also hydrophilic + extensive first-pass metabolism by MAO/COMT → must give IV (epinephrine in anaphylaxis) or nebulized (albuterol).<br><br><strong>Exceptions &amp; pearls:</strong> oral insulin is in clinical trials with absorption-enhancing nanocarriers. Conjugated estrogens (Premarin) must bypass aggressive first-pass metabolism — transdermal estrogen avoids this and lowers VTE risk.</div></div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -342,7 +355,7 @@ table tr:hover td{background:#FFEDD5}
   <div class="mcq-intro"><strong>Step 1-Style MCQs:</strong> Select the best answer — your choice locks in and the explanation appears automatically. <span style="color:#2E7D32">Green</span> = correct, <span style="color:#C62828">Red</span> = incorrect.</div>
 
   <div class="mcq-item">
-    <div class="mcq-num">Question 1 of 6 — Catecholamine Synthesis / Pheo</div>
+    <div class="mcq-num">Question 1 of 7 — Catecholamine Synthesis / Pheo</div>
     <div class="mcq-stem">A 34-year-old woman presents with episodic palpitations, severe headaches, and diaphoresis. BP in the ED is 210/120 mmHg; between episodes it is 128/82. Abdominal CT shows a 3 cm adrenal mass. 24-hour urine demonstrates markedly elevated metanephrines. Which enzyme's activity is most increased by neoplastic chromaffin cells in this tumor?</div>
     <div class="mcq-opts">
       <div class="mcq-opt" onclick="answerMCQ(this,true)"><span class="opt-letter">A</span>Tyrosine hydroxylase</div>
@@ -355,7 +368,7 @@ table tr:hover td{background:#FFEDD5}
   </div>
 
   <div class="mcq-item">
-    <div class="mcq-num">Question 2 of 6 — Steroid Biosynthesis / CAH</div>
+    <div class="mcq-num">Question 2 of 7 — Steroid Biosynthesis / CAH</div>
     <div class="mcq-stem">A 3-week-old female neonate presents with vomiting, poor feeding, and ambiguous genitalia. Labs: Na⁺ 128, K⁺ 6.4, glucose 52 mg/dL. Serum 17-hydroxyprogesterone is markedly elevated. Which of the following enzymes is most likely deficient?</div>
     <div class="mcq-opts">
       <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>11β-hydroxylase</div>
@@ -368,7 +381,7 @@ table tr:hover td{background:#FFEDD5}
   </div>
 
   <div class="mcq-item">
-    <div class="mcq-num">Question 3 of 6 — Free Hormone Hypothesis</div>
+    <div class="mcq-num">Question 3 of 7 — Free Hormone Hypothesis</div>
     <div class="mcq-stem">A 28-year-old pregnant woman at 18 weeks has total T4 of 18.4 μg/dL (upper limit normal 12) but feels well. Her pulse is 82, reflexes normal, and she has no tremor. TSH is 1.3 mIU/L. Which of the following is the most appropriate next step?</div>
     <div class="mcq-opts">
       <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>Start methimazole for hyperthyroidism</div>
@@ -381,7 +394,7 @@ table tr:hover td{background:#FFEDD5}
   </div>
 
   <div class="mcq-item">
-    <div class="mcq-num">Question 4 of 6 — GPCR Signaling / Pseudohypopara</div>
+    <div class="mcq-num">Question 4 of 7 — GPCR Signaling / Pseudohypopara</div>
     <div class="mcq-stem">A 22-year-old woman with short stature, round face, and shortened 4th/5th metacarpals has Ca²⁺ 6.8 mg/dL, Pi 6.2 mg/dL, and PTH 220 pg/mL. Infusion of synthetic PTH fails to raise urinary cAMP. Which of the following is the most likely molecular defect?</div>
     <div class="mcq-opts">
       <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>Autoimmune destruction of parathyroid glands</div>
@@ -394,7 +407,7 @@ table tr:hover td{background:#FFEDD5}
   </div>
 
   <div class="mcq-item">
-    <div class="mcq-num">Question 5 of 6 — Receptor Sensitivity / Resistance</div>
+    <div class="mcq-num">Question 5 of 7 — Receptor Sensitivity / Resistance</div>
     <div class="mcq-stem">A 48-year-old obese man with BMI 36 has fasting glucose 148 mg/dL, HbA1c 8.1%, and fasting insulin level 42 μIU/mL (normal 2–25). His fasting C-peptide is 4.8 ng/mL (normal). Over the next 5 years his fasting insulin progressively declines and his glucose worsens. Which statement best explains this trajectory?</div>
     <div class="mcq-opts">
       <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>Autoimmune destruction of pancreatic β-cells has occurred</div>
@@ -407,7 +420,20 @@ table tr:hover td{background:#FFEDD5}
   </div>
 
   <div class="mcq-item">
-    <div class="mcq-num">Question 6 of 6 — C-peptide / Factitious Hypoglycemia</div>
+    <div class="mcq-num">Question 6 of 7 · LO 2 — Structure &amp; Bioavailability</div>
+    <div class="mcq-stem">A 52-year-old woman with primary hypothyroidism takes daily oral levothyroxine with good effect. Her husband, who has type 1 diabetes, must inject his insulin subcutaneously. A medical student asks why one hormone is effective orally and the other is not. Which property of the two hormones BEST explains this difference?</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>Insulin has a larger molecular weight than T4, which prevents intestinal absorption</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,true)"><span class="opt-letter">B</span>T4 is lipid-soluble (hydrophobic) and resistant to GI proteases; insulin is a hydrophilic peptide rapidly degraded by gut proteases</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">C</span>Insulin requires active transport across the intestinal lumen that is saturated at normal doses</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">D</span>T4 is stored in thyroglobulin, which protects it during digestion</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">E</span>Insulin is subject to first-pass hepatic metabolism but T4 is not</div>
+    </div>
+    <div class="mcq-exp"><strong>B.</strong> This question tests <strong>structure → solubility → bioavailability</strong>. Hormone classification predicts the pharmacokinetic route. <em>Lipid-soluble</em> hormones (steroids, thyroid hormone, vitamin D) resist GI proteolysis AND cross intestinal membranes readily → oral dosing works (levothyroxine, prednisone, ethinyl estradiol). <em>Hydrophilic peptide</em> hormones (insulin, GH, PTH, calcitonin, GnRH analogs) are hydrolyzed by pepsin/trypsin within minutes and cannot cross the intestinal epithelium → must be given parenterally. (A) Molecular weight contributes but is not the mechanistic reason. (C) Insulin is not absorbed by any transporter-mediated mechanism. (D) Thyroglobulin is the thyroid's INTERNAL storage form; it is not ingested with levothyroxine. (E) First-pass metabolism is a separate issue (it affects some oral steroids — e.g., transdermal estrogen avoids it).</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 7 of 7 — C-peptide / Factitious Hypoglycemia</div>
     <div class="mcq-stem">A 32-year-old nurse presents with episodic diaphoresis, confusion, and fingerstick glucose of 38 mg/dL. Labs obtained during the episode: insulin 85 μIU/mL (HIGH), C-peptide 0.3 ng/mL (LOW), pro-insulin undetectable. Which of the following best explains these findings?</div>
     <div class="mcq-opts">
       <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>Insulinoma of the pancreas</div>
@@ -426,7 +452,7 @@ table tr:hover td{background:#FFEDD5}
   <div class="vig-intro"><strong>Vignette MCQs:</strong> Longer clinical scenarios integrating multiple LOs. Select your best answer — explanation reveals on click.</div>
 
   <div class="vig-item">
-    <div class="vig-num">Vignette 1 of 4 — Molar Pregnancy / hCG-TSH</div>
+    <div class="vig-num">Vignette 1 of 7 — Molar Pregnancy / hCG-TSH</div>
     <div class="vig-stem">A 28-year-old woman at 14 weeks' gestation presents with severe hyperemesis, palpitations, and tremor. BP 148/92, pulse 118, fine tremor, warm moist skin. <strong>TSH &lt;0.01 mIU/L</strong>; free T4 elevated. β-hCG is 530,000 mIU/mL. Ultrasound reveals an enlarged uterus with a "snowstorm" appearance and no fetal heart tones. Thyroid autoantibodies are negative.</div>
     <div class="vig-opts">
       <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Graves disease coincident with pregnancy</div>
@@ -439,7 +465,7 @@ table tr:hover td{background:#FFEDD5}
   </div>
 
   <div class="vig-item">
-    <div class="vig-num">Vignette 2 of 4 — CAH with HTN (11β)</div>
+    <div class="vig-num">Vignette 2 of 7 — CAH with HTN (11β)</div>
     <div class="vig-stem">A 5-year-old girl presents with virilization (clitoromegaly, pubic hair) and hypertension (BP 142/88, 99th percentile). Labs: K⁺ 2.9 mEq/L, renin suppressed, aldosterone low, but 11-deoxycorticosterone (DOC) and 11-deoxycortisol are markedly elevated. 17-hydroxyprogesterone is also elevated but androgens (DHEA) are very high.</div>
     <div class="vig-opts">
       <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>21-hydroxylase deficiency</div>
@@ -452,7 +478,7 @@ table tr:hover td{background:#FFEDD5}
   </div>
 
   <div class="vig-item">
-    <div class="vig-num">Vignette 3 of 4 — Nephrogenic DI from Lithium</div>
+    <div class="vig-num">Vignette 3 of 7 — Nephrogenic DI from Lithium</div>
     <div class="vig-stem">A 55-year-old man with bipolar disorder on lithium presents with polyuria (urine output 8 L/day) and polydipsia. Serum Na⁺ 152, urine osmolality 120 mOsm/kg. After water deprivation, urine osm rises minimally to 180. After desmopressin (DDAVP), urine osm still does not rise above 200 mOsm/kg.</div>
     <div class="vig-opts">
       <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Central diabetes insipidus</div>
@@ -465,7 +491,7 @@ table tr:hover td{background:#FFEDD5}
   </div>
 
   <div class="vig-item">
-    <div class="vig-num">Vignette 4 of 4 — Carrier Proteins / OCPs &amp; Cortisol</div>
+    <div class="vig-num">Vignette 4 of 7 — Carrier Proteins / OCPs &amp; Cortisol</div>
     <div class="vig-stem">A 26-year-old woman taking combined oral contraceptives is referred for "high cortisol." Morning total serum cortisol is 32 μg/dL (upper normal 22). She has no features of Cushing's (no weight gain, striae, moon facies, HTN, or hyperglycemia). 24-hour urine free cortisol is NORMAL. Late-night salivary cortisol is NORMAL. Dexamethasone suppression test suppresses cortisol fully.</div>
     <div class="vig-opts">
       <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Cushing's syndrome (pituitary origin)</div>
@@ -475,6 +501,45 @@ table tr:hover td{background:#FFEDD5}
       <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Cyclic Cushing syndrome</div>
     </div>
     <div class="vig-exp"><strong>C — Estrogen ↑ CBG.</strong> OCP estrogen drives hepatic CBG (transcortin) synthesis → more circulating carrier → ↑TOTAL cortisol. But the FREE (biologically active) fraction is UNCHANGED. Hence no clinical Cushing syndrome features. Confirmation: <span class="vig-buzzword">normal urine free cortisol</span>, <span class="vig-buzzword">normal late-night salivary cortisol</span>, <span class="vig-buzzword">dexamethasone suppression intact</span>. Directly tests LO 5 (carrier protein effect on hormone activity and half-life — NOT on biological effect).</div>
+  </div>
+
+  <div class="vig-item">
+    <div class="vig-num">Vignette 5 of 7 · LO 6/7 — Acromegaly (GH → IGF-1)</div>
+    <div class="vig-stem">A 52-year-old man presents with <strong>progressive enlargement of hands, feet, and jaw</strong>; his wedding ring and shoes no longer fit. He also reports headaches, oily skin, and carpal tunnel syndrome. Labs: fasting GH 45 ng/mL (markedly elevated), IGF-1 680 ng/mL (markedly elevated, age-adjusted). Oral glucose tolerance test FAILS to suppress GH. MRI brain shows a 1.8-cm pituitary macroadenoma.</div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Primary IGF-1-secreting hepatic tumor</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Ectopic GHRH-secreting carcinoid tumor</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Pituitary adenoma autonomously secreting GH → hepatic IGF-1 production</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Laron syndrome (GH receptor defect)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Primary liver disease with reduced IGF-1 clearance</div>
+    </div>
+    <div class="vig-exp"><strong>C — Pituitary GH adenoma.</strong> Classic acromegaly. GH signals through the <span class="vig-buzzword">JAK2-STAT5</span> pathway on hepatocytes → IGF-1 synthesis → somatic growth. Both GH and IGF-1 are elevated; GH does NOT suppress on glucose (loss of negative feedback = autonomous tumor). Distinguishes from Laron (D) — which would have ↑GH but ↓IGF-1 due to GH receptor defect. Ectopic GHRH (B) is rare and would show ↑↑GHRH on sampling. Tests LO 6 (receptor signaling: JAK-STAT) and LO 7 (feedback regulation / autonomous secretion).</div>
+  </div>
+
+  <div class="vig-item">
+    <div class="vig-num">Vignette 6 of 7 · LO 6/7 — Laron Syndrome (GH Receptor Mutation)</div>
+    <div class="vig-stem">A 6-year-old boy is brought to clinic for <strong>severe growth failure</strong> — he is two feet shorter than peers and has a characteristic <strong>doll-like facies</strong> with prominent forehead and saddle nose. Labs: GH 58 ng/mL (HIGH), IGF-1 28 ng/mL (VERY LOW for age). He responds poorly to exogenous GH therapy. Parents are of normal stature but are consanguineous.</div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Pituitary GH deficiency (isolated)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Hypothalamic GHRH deficiency</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Laron syndrome — GH receptor mutation (hormone resistance)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>IGF-1 receptor mutation</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Chronic undernutrition</div>
+    </div>
+    <div class="vig-exp"><strong>C — Laron syndrome.</strong> The paradigm of <span class="vig-buzzword">hormone resistance</span>: high hormone + low effect due to a <em>receptor defect</em>. GH receptor mutation (autosomal recessive — hence consanguinity) → GH cannot activate hepatic JAK2-STAT5 → no IGF-1 synthesis → growth failure. Serum GH rises further because feedback from IGF-1 is lost. Exogenous GH is useless (same broken receptor). Treatment: <em>recombinant IGF-1 (mecasermin)</em>, bypassing the receptor defect. This is the key conceptual inverse of Type 2 DM resistance at a different receptor. Tests LO 6 (receptor signaling) + LO 7 (hormone resistance).</div>
+  </div>
+
+  <div class="vig-item">
+    <div class="vig-num">Vignette 7 of 7 · LO 5/7 — T4 → T3 Conversion / Deiodinase</div>
+    <div class="vig-stem">A 35-year-old woman with Hashimoto hypothyroidism has been on levothyroxine 125 μg/d for 2 years. She continues to report <strong>fatigue, cold intolerance, and weight gain</strong> despite biochemical "correction." Labs: total T4 9.2 μg/dL (normal), free T4 1.1 ng/dL (normal), TSH 0.5 mIU/L (low-normal), <strong>total T3 65 ng/dL (low; normal 80–200)</strong>. She is genotyped and found to have a polymorphism in <em>DIO2</em> (type 2 deiodinase).</div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Increase levothyroxine dose to push free T4 higher</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Start methimazole — she is biochemically hyperthyroid</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Impaired T4 → T3 conversion; consider combination T4/T3 therapy</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Order radioactive iodine uptake to evaluate thyroid</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>She has non-thyroidal illness (low T3 is incidental)</div>
+    </div>
+    <div class="vig-exp"><strong>C — impaired peripheral conversion.</strong> Most thyroid hormone action requires conversion of T4 (storage/prohormone) → T3 (active form) by <span class="vig-buzzword">deiodinases</span>. <em>D1</em> (liver/kidney) makes circulating T3; <em>D2</em> (brain, pituitary, BAT) generates local intracellular T3; <em>D3</em> inactivates to rT3. DIO2 polymorphisms reduce peripheral T3 generation → symptoms despite normal T4. Some patients benefit from <em>liothyronine (synthetic T3)</em> or combined T4/T3 preparations. Tests LO 5 (hormone metabolism) and LO 7 (tissue-specific hormone action). A — would push free T4 supraphysiologic without fixing T3 deficit. B/D — she is not hyperthyroid. E — polymorphism explanation fits better than NTI given chronicity.</div>
   </div>
 
 </div>
@@ -573,6 +638,26 @@ table tr:hover td{background:#FFEDD5}
     <div class="trap-exp"><strong>FALSE — reversed.</strong> Insulin resistance shifts the curve to the <strong>RIGHT</strong> (higher EC50). More hormone is required for half-maximal response. A LEFT shift would mean more sensitivity (hypersensitive receptor, achieve max response at lower hormone levels) — the opposite of resistance.</div>
   </div>
 
+  <div class="trap-card">
+    <div class="trap-num">Trap 10 · LO 2 — Storage / Constitutive Release</div>
+    <div class="trap-statement">"Because steroid hormones are stored preformed in secretory granules, the adrenal cortex can deliver a burst of cortisol within seconds of an ACTH stimulus — faster than it can make new hormone."</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn" onclick="judgeTrap(this,true)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> <strong>Steroid hormones are NOT stored</strong> (lipid-soluble — cannot be packaged in membrane-bound granules). Adrenal cortex secretion is <strong>constitutive / de novo</strong>: ACTH arrives → StAR transports cholesterol to the inner mitochondrial membrane → desmolase begins the cascade → cortisol appears within <em>minutes–hours</em>, peaking ~30–60 min later. The only cholesterol <em>substrate</em> pool is lipid droplets in cortical cells — not hormone itself. This is why etomidate infusions (11β-OH inhibitor) can precipitate adrenal crisis: there is no reserve to fall back on. Contrast: peptides + catecholamines + thyroid hormone ARE pre-stored and CAN release in seconds.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 11 · LO 2 — Structure / Oral Bioavailability</div>
+    <div class="trap-statement">"Because peptide hormones like insulin and GH are large proteins, their primary barrier to oral absorption is simply their molecular size, not their structure or solubility."</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn" onclick="judgeTrap(this,true)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> The primary problem is not size — it's <strong>structure and solubility</strong>. Peptide hormones are hydrophilic and held together by peptide bonds that are <em>rapidly hydrolyzed by gut proteases</em> (pepsin, trypsin, chymotrypsin). Even small peptides (e.g., TRH, 3 AA) cannot reach circulation orally. By contrast, lipid-soluble hormones — steroids (cortisol ~362 Da, estradiol ~272 Da), thyroid hormone (T4 ~777 Da), vitamin D — are resistant to proteolysis (no peptide bonds) AND cross lipid bilayers readily, so they are effective PO. Classic pharmacology rule: <em>class → solubility → route of administration</em>.</div>
+  </div>
+
 </div>
 
 <!-- ══ CLINICAL CORRELATES ══════════════════════════════════════════════════ -->
@@ -656,6 +741,122 @@ table tr:hover td{background:#FFEDD5}
     <div class="cc-detail"><strong>Why this matters:</strong> Horsley/Murray's work proved the principle that a molecule secreted by a gland could travel through blood to restore function at a distant organ. The earlier Berthold rooster experiment (1849) had already shown that reimplanted testes restored secondary sex characteristics without nervous connections — establishing the blood-borne nature of endocrine signaling.<br><br>These historical foundations underpin every modern endocrine replacement therapy: insulin for T1DM, levothyroxine for hypothyroidism, hydrocortisone for Addison's, testosterone/estrogen for hypogonadism, recombinant GH for deficiency. Today, levothyroxine is one of the most commonly prescribed drugs in the United States — a direct descendant of Horsley's thyroid extract.</div>
   </div>
 
+  <!-- ═══ DISEASE → MECHANISM INTERACTIVE DRILL ═════════════════════════════ -->
+  <div style="margin-top:28px;padding-top:20px;border-top:3px solid #EA580C;">
+    <h2 style="font-family:'Crimson Pro',Georgia,serif;font-size:1.4em;color:#7C2D12;margin-bottom:6px;">Disease → Mechanism Drill</h2>
+    <div style="color:#5A5A5A;font-size:.9em;margin-bottom:18px;line-height:1.55;">Click a disease on the left, then click its molecular mechanism on the right. Correct pairs turn green; wrong pairs flash red.</div>
+  </div>
+
+  <!-- Disease → Mechanism Set 1 -->
+  <div class="match-set" style="background:#FFFFFF;border:1px solid #FED7AA;border-left:4px solid #EA580C;border-radius:6px;padding:22px;margin-bottom:20px;">
+    <div class="match-set-title" style="font-family:'Crimson Pro',Georgia,serif;font-size:1.05em;font-weight:700;color:#7C2D12;margin-bottom:4px;">CC Drill 1 — Endocrine Disease → Molecular Mechanism</div>
+    <div class="match-set-hint" style="font-size:.79em;color:#7A7060;margin-bottom:14px;font-style:italic;">Match each clinical syndrome to the underlying molecular defect.</div>
+    <div class="match-cols" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div>
+        <div class="match-col-label" style="font-size:.7em;font-weight:700;color:#EA580C;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Disease</div>
+        <div class="match-item" onclick="selectMatch(this,'cc1')" data-pair="1" style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px;">Pheochromocytoma</div>
+        <div class="match-item" onclick="selectMatch(this,'cc1')" data-pair="2" style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px;">21-hydroxylase deficiency (CAH)</div>
+        <div class="match-item" onclick="selectMatch(this,'cc1')" data-pair="3" style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px;">Pseudohypoparathyroidism 1a</div>
+        <div class="match-item" onclick="selectMatch(this,'cc1')" data-pair="4" style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px;">McCune-Albright syndrome</div>
+        <div class="match-item" onclick="selectMatch(this,'cc1')" data-pair="5" style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px;">Nephrogenic DI</div>
+        <div class="match-item" onclick="selectMatch(this,'cc1')" data-pair="6" style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px;">Type 2 DM (insulin resistance)</div>
+      </div>
+      <div>
+        <div class="match-col-label" style="font-size:.7em;font-weight:700;color:#EA580C;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Molecular Mechanism</div>
+        <div class="match-item" onclick="selectMatch(this,'cc1')" data-pair="4" style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px;">Somatic activating GNAS mutation (mosaic) → constitutive Gsα / cAMP</div>
+        <div class="match-item" onclick="selectMatch(this,'cc1')" data-pair="6" style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px;">Chronic hyperinsulinemia → insulin receptor downregulation + post-receptor defects</div>
+        <div class="match-item" onclick="selectMatch(this,'cc1')" data-pair="1" style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px;">Chromaffin cell tumor → ↑tyrosine hydroxylase → massive catecholamines</div>
+        <div class="match-item" onclick="selectMatch(this,'cc1')" data-pair="3" style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px;">Inactivating Gsα (GNAS) mutation → PTH resistance at kidney/bone (↑PTH, ↓Ca)</div>
+        <div class="match-item" onclick="selectMatch(this,'cc1')" data-pair="5" style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px;">V2 receptor or aquaporin-2 defect (lithium, hypercalcemia, mutation)</div>
+        <div class="match-item" onclick="selectMatch(this,'cc1')" data-pair="2" style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px;">CYP21 enzyme deficiency → ↓cortisol + ↓aldosterone + ↑androgens (17-OHP accumulates)</div>
+      </div>
+    </div>
+    <div class="match-score" style="margin-top:12px;font-size:.83em;color:#7A7060;">Score: <span class="correct-count" id="cc1-score">0</span>/6 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('cc1')" style="background:none;border:1px solid #FED7AA;color:#7A7060;padding:7px 16px;border-radius:5px;cursor:pointer;font-size:.8em;font-weight:600;font-family:inherit;margin-top:10px;transition:all .2s;">Reset</button>
+  </div>
+
+  <!-- Disease → Mechanism Set 2 -->
+  <div class="match-set" style="background:#FFFFFF;border:1px solid #FED7AA;border-left:4px solid #EA580C;border-radius:6px;padding:22px;margin-bottom:20px;">
+    <div class="match-set-title" style="font-family:'Crimson Pro',Georgia,serif;font-size:1.05em;font-weight:700;color:#7C2D12;margin-bottom:4px;">CC Drill 2 — Carrier / Feedback / Conversion Scenarios</div>
+    <div class="match-set-hint" style="font-size:.79em;color:#7A7060;margin-bottom:14px;font-style:italic;">Match each scenario to the correct carrier-protein, feedback, or hormone-conversion explanation.</div>
+    <div class="match-cols" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div>
+        <div class="match-col-label" style="font-size:.7em;font-weight:700;color:#EA580C;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Clinical Scenario</div>
+        <div class="match-item" onclick="selectMatch(this,'cc2')" data-pair="1" style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px;">Pregnant woman, ↑total T4, normal free T4, euthyroid</div>
+        <div class="match-item" onclick="selectMatch(this,'cc2')" data-pair="2" style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px;">Molar pregnancy with hyperthyroidism + suppressed TSH</div>
+        <div class="match-item" onclick="selectMatch(this,'cc2')" data-pair="3" style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px;">Factitious hypoglycemia — ↑insulin, ↓C-peptide</div>
+        <div class="match-item" onclick="selectMatch(this,'cc2')" data-pair="4" style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px;">Addisonian crisis — hypotension refractory to pressors</div>
+        <div class="match-item" onclick="selectMatch(this,'cc2')" data-pair="5" style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px;">Patient on levothyroxine with normal T4 but low T3</div>
+      </div>
+      <div>
+        <div class="match-col-label" style="font-size:.7em;font-weight:700;color:#EA580C;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Explanation</div>
+        <div class="match-item" onclick="selectMatch(this,'cc2')" data-pair="4" style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px;">Loss of permissive cortisol → catecholamines can't vasoconstrict</div>
+        <div class="match-item" onclick="selectMatch(this,'cc2')" data-pair="1" style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px;">Estrogen ↑ hepatic TBG → ↑total T4, free T4 unchanged (free-hormone hypothesis)</div>
+        <div class="match-item" onclick="selectMatch(this,'cc2')" data-pair="5" style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px;">Impaired peripheral T4 → T3 conversion (DIO2 polymorphism; may need T3)</div>
+        <div class="match-item" onclick="selectMatch(this,'cc2')" data-pair="2" style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px;">hCG-β shares α-subunit with TSH → cross-activates TSH receptor at very high hCG</div>
+        <div class="match-item" onclick="selectMatch(this,'cc2')" data-pair="3" style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px;">Exogenous insulin bypasses proinsulin processing → no C-peptide made</div>
+      </div>
+    </div>
+    <div class="match-score" style="margin-top:12px;font-size:.83em;color:#7A7060;">Score: <span class="correct-count" id="cc2-score">0</span>/5 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('cc2')" style="background:none;border:1px solid #FED7AA;color:#7A7060;padding:7px 16px;border-radius:5px;cursor:pointer;font-size:.8em;font-weight:600;font-family:inherit;margin-top:10px;transition:all .2s;">Reset</button>
+  </div>
+
+  <!-- ═══ HIGH-YIELD TESTING NOTES (merged) ═════════════════════════════════ -->
+  <div style="margin-top:28px;padding-top:20px;border-top:3px solid #EA580C;">
+    <h2 style="font-family:'Crimson Pro',Georgia,serif;font-size:1.4em;color:#7C2D12;margin-bottom:6px;">High-Yield Testing Notes</h2>
+    <div style="color:#5A5A5A;font-size:.9em;margin-bottom:18px;line-height:1.55;">Pattern-matching, buzzwords, and quick rules that recur on Step 1. These complement the mechanism-heavy clinical correlates above.</div>
+  </div>
+
+  <div class="hy-card">
+    <div class="hy-card-title">Buzzword → Diagnosis <span class="hy-badge buzzword">Pattern Bank</span></div>
+    <div class="hy-card-body">
+      <strong>"Snowstorm uterus" + hyperthyroid:</strong> hCG-mediated hyperthyroidism in molar pregnancy.<br>
+      <strong>"Round face, short 4th/5th metacarpals, ↑PTH + ↓Ca":</strong> Pseudohypoparathyroidism 1a (Gsα loss).<br>
+      <strong>"Coast of Maine" café-au-lait + precocious puberty:</strong> McCune-Albright.<br>
+      <strong>"Episodic HTN + headache + sweating":</strong> Pheochromocytoma (5 P's).<br>
+      <strong>"Virilized female + salt-wasting":</strong> 21-hydroxylase deficiency CAH.<br>
+      <strong>"Virilized female + HTN + hypokalemia":</strong> 11β-hydroxylase deficiency CAH.<br>
+      <strong>"Ambiguous male + HTN":</strong> 17α-hydroxylase deficiency CAH.<br>
+      <strong>"Pregnant + ↑total T4 + normal free T4":</strong> Increased TBG from estrogen (euthyroid).<br>
+      <strong>"Factitious hypoglycemia":</strong> ↑Insulin + ↓C-peptide = exogenous insulin.
+    </div>
+  </div>
+
+  <div class="hy-card">
+    <div class="hy-card-title">Rate-Limiting Enzymes (Must Know) <span class="hy-badge testing">High-Yield</span></div>
+    <div class="hy-card-body">
+      <strong>Catecholamine synthesis:</strong> <em>Tyrosine hydroxylase</em> (Tyr → L-DOPA; cofactor: BH4).<br>
+      <strong>Steroid biosynthesis:</strong> <em>Desmolase (CYP11A1)</em>; regulated by StAR protein + ACTH.<br>
+      <strong>Vitamin D activation:</strong> <em>1α-hydroxylase</em> in renal PCT; ↑ by PTH, ↓ by FGF23.<br>
+      <strong>Heme synthesis:</strong> ALA synthase (mitochondrial; vitamin B6-dependent).<br>
+      <strong>Cholesterol synthesis:</strong> HMG-CoA reductase (target of statins).
+    </div>
+  </div>
+
+  <div class="hy-card">
+    <div class="hy-card-title">Receptor Signaling Mnemonics <span class="hy-badge">Memory Hook</span></div>
+    <div class="hy-card-body">
+      <strong>Gs (↑cAMP):</strong> <em>"FLAT ChAMP"</em> — FSH, LH, ACTH, TSH, CRH, hCG, ADH (V2), MSH, PTH (+ GHRH, glucagon, β-adrenergic).<br>
+      <strong>Gq (IP3/DAG/Ca):</strong> <em>"HAVe 1 M&amp;M"</em> — H1-histamine, α₁-adrenergic, V1-ADH, 1st order: M1/M3 muscarinic, TRH/GnRH, oxytocin, angiotensin II, gastrin.<br>
+      <strong>Gi (↓cAMP):</strong> M2 muscarinic, α₂-adrenergic, D2 dopamine, somatostatin, opioids.<br>
+      <strong>RTK:</strong> Insulin, IGF-1, FGF23 + growth factor family.<br>
+      <strong>JAK-STAT:</strong> "Acidophils" (GH, PRL) + cytokines.
+    </div>
+  </div>
+
+  <div class="hy-card">
+    <div class="hy-card-title">Trap Corner <span class="hy-badge trap">Common Errors</span></div>
+    <div class="hy-card-body">
+      <strong>Do NOT confuse:</strong> α/β subunits of glycoprotein hormones (α shared, β unique).<br>
+      <strong>Do NOT confuse:</strong> Up-regulation vs. down-regulation — "lots of hormone = lose receptors."<br>
+      <strong>Do NOT confuse:</strong> Total vs. free hormone — only free is active.<br>
+      <strong>Do NOT confuse:</strong> Thyroid hormone is NOT a steroid (it's an amine); it just ACTS like one (nuclear receptor).<br>
+      <strong>Do NOT confuse:</strong> Carbidopa blocks PERIPHERAL DOPA decarboxylase (doesn't cross BBB). L-DOPA crosses BBB; dopamine does NOT.<br>
+      <strong>Do NOT confuse:</strong> PNMT is only in adrenal medulla — sympathetic nerves release NE.<br>
+      <strong>Do NOT confuse:</strong> StAR (shuttle) vs. desmolase (enzyme) — both on step 1 of steroid synthesis, but different molecules.
+    </div>
+  </div>
+
 </div>
 
 <!-- ══ REFERENCE ══════════════════════════════════════════════════════════ -->
@@ -713,61 +914,6 @@ table tr:hover td{background:#FFEDD5}
 
 </div>
 
-<!-- ══ HY NOTES ══════════════════════════════════════════════════════════ -->
-<div class="tab-content" id="tab-hynotes">
-  <div class="hy-intro"><strong>High-Yield Testing Notes:</strong> Pattern-matching, buzzwords, and quick rules that recur on Step 1.</div>
-
-  <div class="hy-card">
-    <div class="hy-card-title">Buzzword → Diagnosis <span class="hy-badge buzzword">Pattern Bank</span></div>
-    <div class="hy-card-body">
-      <strong>"Snowstorm uterus" + hyperthyroid:</strong> hCG-mediated hyperthyroidism in molar pregnancy.<br>
-      <strong>"Round face, short 4th/5th metacarpals, ↑PTH + ↓Ca":</strong> Pseudohypoparathyroidism 1a (Gsα loss).<br>
-      <strong>"Coast of Maine" café-au-lait + precocious puberty:</strong> McCune-Albright.<br>
-      <strong>"Episodic HTN + headache + sweating":</strong> Pheochromocytoma (5 P's).<br>
-      <strong>"Virilized female + salt-wasting":</strong> 21-hydroxylase deficiency CAH.<br>
-      <strong>"Virilized female + HTN + hypokalemia":</strong> 11β-hydroxylase deficiency CAH.<br>
-      <strong>"Ambiguous male + HTN":</strong> 17α-hydroxylase deficiency CAH.<br>
-      <strong>"Pregnant + ↑total T4 + normal free T4":</strong> Increased TBG from estrogen (euthyroid).<br>
-      <strong>"Factitious hypoglycemia":</strong> ↑Insulin + ↓C-peptide = exogenous insulin.
-    </div>
-  </div>
-
-  <div class="hy-card">
-    <div class="hy-card-title">Rate-Limiting Enzymes (Must Know) <span class="hy-badge testing">High-Yield</span></div>
-    <div class="hy-card-body">
-      <strong>Catecholamine synthesis:</strong> <em>Tyrosine hydroxylase</em> (Tyr → L-DOPA; cofactor: BH4).<br>
-      <strong>Steroid biosynthesis:</strong> <em>Desmolase (CYP11A1)</em>; regulated by StAR protein + ACTH.<br>
-      <strong>Vitamin D activation:</strong> <em>1α-hydroxylase</em> in renal PCT; ↑ by PTH, ↓ by FGF23.<br>
-      <strong>Heme synthesis:</strong> ALA synthase (mitochondrial; vitamin B6-dependent).<br>
-      <strong>Cholesterol synthesis:</strong> HMG-CoA reductase (target of statins).
-    </div>
-  </div>
-
-  <div class="hy-card">
-    <div class="hy-card-title">Receptor Signaling Mnemonics <span class="hy-badge">Memory Hook</span></div>
-    <div class="hy-card-body">
-      <strong>Gs (↑cAMP):</strong> <em>"FLAT ChAMP"</em> — FSH, LH, ACTH, TSH, CRH, hCG, ADH (V2), MSH, PTH (+ GHRH, glucagon, β-adrenergic).<br>
-      <strong>Gq (IP3/DAG/Ca):</strong> <em>"HAVe 1 M&amp;M"</em> — H1-histamine, α₁-adrenergic, V1-ADH, 1st order: M1/M3 muscarinic, TRH/GnRH, oxytocin, angiotensin II, gastrin.<br>
-      <strong>Gi (↓cAMP):</strong> M2 muscarinic, α₂-adrenergic, D2 dopamine, somatostatin, opioids.<br>
-      <strong>RTK:</strong> Insulin, IGF-1, FGF23 + growth factor family.<br>
-      <strong>JAK-STAT:</strong> "Acidophils" (GH, PRL) + cytokines.
-    </div>
-  </div>
-
-  <div class="hy-card">
-    <div class="hy-card-title">Trap Corner <span class="hy-badge trap">Common Errors</span></div>
-    <div class="hy-card-body">
-      <strong>Do NOT confuse:</strong> α/β subunits of glycoprotein hormones (α shared, β unique).<br>
-      <strong>Do NOT confuse:</strong> Up-regulation vs. down-regulation — "lots of hormone = lose receptors."<br>
-      <strong>Do NOT confuse:</strong> Total vs. free hormone — only free is active.<br>
-      <strong>Do NOT confuse:</strong> Thyroid hormone is NOT a steroid (it's an amine); it just ACTS like one (nuclear receptor).<br>
-      <strong>Do NOT confuse:</strong> Carbidopa blocks PERIPHERAL DOPA decarboxylase (doesn't cross BBB). L-DOPA crosses BBB; dopamine does NOT.<br>
-      <strong>Do NOT confuse:</strong> PNMT is only in adrenal medulla — sympathetic nerves release NE.<br>
-      <strong>Do NOT confuse:</strong> StAR (shuttle) vs. desmolase (enzyme) — both on step 1 of steroid synthesis, but different molecules.
-    </div>
-  </div>
-
-</div>
 
 <div class="footer">
   <a href="../active-recall-hub.html">← Active Recall Hub</a> &nbsp;·&nbsp; END01 Hub 2 — Step 1 Extensions &nbsp;·&nbsp; HoyaDocs Endocrine Block
@@ -828,6 +974,70 @@ function toggleCC(btn){
   const detail=btn.nextElementSibling;
   detail.classList.toggle('open');
   btn.textContent=detail.classList.contains('open')?'Collapse':'Expand mechanism';
+}
+
+// Matching (Clinical Correlates Disease→Mechanism drill)
+let matchState={};
+function selectMatch(el,setId){
+  if(el.classList.contains('matched-correct'))return;
+  if(!matchState[setId])matchState[setId]={selected:null,correct:0};
+  const state=matchState[setId];
+  if(!state.selected){
+    state.selected=el;
+    el.style.background='#FFEDD5';
+    el.style.borderColor='#EA580C';
+    el.style.color='#7C2D12';
+    el.style.fontWeight='600';
+    return;
+  }
+  if(state.selected===el){
+    el.style.background='#FFF7ED';
+    el.style.borderColor='#FED7AA';
+    el.style.color='#2C2C2C';
+    el.style.fontWeight='';
+    state.selected=null;
+    return;
+  }
+  const a=state.selected,b=el;
+  if(a.dataset.pair===b.dataset.pair){
+    [a,b].forEach(x=>{
+      x.classList.add('matched-correct');
+      x.style.background='#F1F8F2';
+      x.style.borderColor='#66BB6A';
+      x.style.color='#2E7D32';
+      x.style.cursor='default';
+      x.style.fontWeight='';
+    });
+    state.correct++;
+    const scoreEl=document.getElementById(setId+'-score');
+    if(scoreEl)scoreEl.textContent=state.correct;
+  }else{
+    [a,b].forEach(x=>{
+      const orig=x.style.background;
+      x.style.background='#FEF5F5';
+      x.style.borderColor='#EF5350';
+      setTimeout(()=>{
+        x.style.background='#FFF7ED';
+        x.style.borderColor='#FED7AA';
+        x.style.color='#2C2C2C';
+        x.style.fontWeight='';
+      },500);
+    });
+  }
+  state.selected=null;
+}
+function resetMatch(setId){
+  matchState[setId]={selected:null,correct:0};
+  document.querySelectorAll('[onclick*="selectMatch(this,\''+setId+'\')"]').forEach(el=>{
+    el.classList.remove('matched-correct');
+    el.style.background='#FFF7ED';
+    el.style.borderColor='#FED7AA';
+    el.style.color='#2C2C2C';
+    el.style.cursor='pointer';
+    el.style.fontWeight='';
+  });
+  const scoreEl=document.getElementById(setId+'-score');
+  if(scoreEl)scoreEl.textContent='0';
 }
 </script>
 </body>

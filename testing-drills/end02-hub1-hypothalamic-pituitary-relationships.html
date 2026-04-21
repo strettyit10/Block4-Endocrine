@@ -142,6 +142,26 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
 .ref-table .key{color:#854D0E;font-weight:600}
 .ref-note{background:#FFFDF0;border:1px solid #F3E4B2;border-radius:5px;padding:13px 18px;font-size:.83em;color:#5A5A5A;line-height:1.6;margin-top:10px}
 .ref-note strong{color:#854D0E}
+/* ── MCQ (Reference-tab drill) ── */
+.mcq-intro{background:#FFFDF0;border:1px solid #F3E4B2;border-radius:6px;padding:14px 18px;margin-bottom:20px;font-size:.84em;color:#5A5A5A;line-height:1.6}
+.mcq-intro strong{color:#854D0E}
+.mcq-item{background:#FFFFFF;border:1px solid #E8DCB8;border-left:4px solid #854D0E;border-radius:6px;padding:22px;margin-bottom:18px}
+.mcq-num{font-size:.68em;font-weight:700;color:#D97706;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.mcq-stem{font-size:.93em;color:#2C2C2C;line-height:1.7;margin-bottom:14px;background:#FFFDF0;padding:14px;border-radius:5px;border-left:3px solid #D97706}
+.mcq-stem strong{color:#854D0E}
+.mcq-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.mcq-opt{background:#FEFBF0;border:1px solid #E8DCB8;border-radius:5px;padding:10px 14px;cursor:pointer;font-size:.88em;color:#2C2C2C;transition:all .18s;display:flex;align-items:flex-start;gap:10px}
+.mcq-opt:hover:not(.locked){border-color:#D97706;background:#FFFDF0}
+.mcq-opt.correct{background:#F1F8F2;border-color:#2E7D32;color:#1B5E20}
+.mcq-opt.wrong{background:#FEF5F5;border-color:#C62828;color:#B71C1C}
+.mcq-opt.locked{cursor:default}
+.opt-letter{font-weight:700;color:#854D0E;flex-shrink:0;width:18px}
+.mcq-opt.correct .opt-letter{color:#2E7D32}
+.mcq-opt.wrong .opt-letter{color:#C62828}
+.mcq-exp{background:#FFFDF0;border-left:3px solid #D97706;border-radius:5px;padding:12px 16px;font-size:.84em;color:#5A5A5A;line-height:1.7;display:none;margin-top:12px}
+.mcq-exp.show{display:block}
+.mcq-exp strong{color:#854D0E}
+
 .footer{text-align:center;font-size:.78em;color:#7A7060;border-top:2px solid #E8DCB8;padding-top:16px;margin-top:32px}
 .footer a{color:#854D0E;text-decoration:none;font-weight:600}
 .footer a:hover{color:#D97706;text-decoration:underline}
@@ -183,11 +203,12 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
 </div>
 
 <div class="stats-bar">
-  <div class="stat-card"><div class="stat-num">22</div><div class="stat-label">Flashcards</div></div>
+  <div class="stat-card"><div class="stat-num">31</div><div class="stat-label">Flashcards</div></div>
   <div class="stat-card"><div class="stat-num">12</div><div class="stat-label">Fill-in-Blank</div></div>
-  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Ordering Drills</div></div>
-  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Match Sets</div></div>
+  <div class="stat-card"><div class="stat-num">5</div><div class="stat-label">Ordering Drills</div></div>
+  <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">Match Sets</div></div>
   <div class="stat-card"><div class="stat-num">10</div><div class="stat-label">Test Traps</div></div>
+  <div class="stat-card"><div class="stat-num">5</div><div class="stat-label">Ref MCQs</div></div>
 </div>
 
 <div class="tab-nav">
@@ -196,12 +217,13 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
   <button class="tab-btn" onclick="switchTab('ordering',this)">Ordering</button>
   <button class="tab-btn" onclick="switchTab('matching',this)">Matching</button>
   <button class="tab-btn" onclick="switchTab('traps',this)">Test Traps</button>
+  <button class="tab-btn" onclick="switchTab('refmcq',this)">Reference MCQs</button>
   <button class="tab-btn" onclick="switchTab('reference',this)">Reference</button>
 </div>
 
 <!-- ══ FLASHCARDS ══════════════════════════════════════════════════════════ -->
 <div class="tab-pane active" id="tab-flashcards">
-  <div class="fc-progress"><span>Click a card to flip · <span class="prog-num">22</span> cards total</span><span>LOs 1–6</span></div>
+  <div class="fc-progress"><span>Click a card to flip · <span class="prog-num">31</span> cards total</span><span>LOs 1–6 + Receptor Signaling Review</span></div>
   <div class="fc-grid">
 
     <div class="fc" onclick="flipCard(this)">
@@ -355,6 +377,71 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
       <div class="fc-inner">
         <div class="fc-front"><div class="fc-label">LO 4 — ADH Functions</div><div class="fc-q">List the three major physiologic functions of ADH (vasopressin) and where each receptor subtype acts.</div><div class="fc-flip-hint">tap to flip</div></div>
         <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>1. Water retention</strong> — V2 receptor (Gs/cAMP) on renal collecting duct principal cells → ↑ aquaporin-2 insertion → water reabsorption. MAIN physiologic role.<br><br><strong>2. Vasoconstriction</strong> — V1 receptor (Gq/IP3/Ca²⁺) on vascular smooth muscle → vasoconstriction at high ADH levels (e.g., hemorrhagic shock, "vasopressin" pressor therapy).<br><br><strong>3. Anterior pituitary ACTH co-regulation</strong> — V1b/V3 receptor on corticotropes, synergistic with CRH.<br><br>Also contributes to body temperature regulation and peripheral vascular tone. Triggered by ↑ plasma osmolarity (OVLT) and ↓ effective circulating volume (baroreceptor reflex).</div></div>
+      </div>
+    </div>
+
+    <!-- ═══ STEP 1 EXTENSION — Receptor Signaling Review ════════════════════════ -->
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Receptor #1 · LO 4 — Gs</div><div class="fc-q">Gs-coupled GPCRs — what second messenger? Name 5 hypothalamic / pituitary hormones that use Gs.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Gs → ↑adenylyl cyclase → ↑cAMP → PKA</strong><br><br><strong>Hormones (pituitary &amp; targets):</strong><br>• <em>TSH</em> (thyroid) · <em>ACTH</em> (adrenal fasciculata) · <em>LH</em>, <em>FSH</em> (gonad) · <em>ADH-V2</em> (kidney collecting duct) · <em>PTH</em> (bone/kidney) · <em>CRH</em>, <em>GHRH</em> (pituitary targets) · <em>β-adrenergic</em> · calcitonin · glucagon<br><br>Mnemonic: <strong>"FLAT ChAMP"</strong> → FSH, LH, ACTH, TSH, CRH, hCG, ADH, MSH, PTH + GHRH/glucagon.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Receptor #2 · LO 4 — Gi</div><div class="fc-q">Gi-coupled GPCRs — what second messenger? Give 3 endocrine examples.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Gi → ↓adenylyl cyclase → ↓cAMP</strong> (suppresses Gs-like signals)<br><br>Examples: <em>somatostatin</em> (suppresses GH, TSH), <em>dopamine D2</em> (suppresses prolactin — the tonic inhibition), <em>α₂-adrenergic</em>, <em>M2/M4</em>, <em>opioids</em>.<br><br><strong>Pertussis toxin</strong> ADP-ribosylates Gi → locks it OFF → relief of Gi inhibition → functional ↑cAMP (whooping cough mechanism).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Receptor #3 · LO 4 — Gq</div><div class="fc-q">Gq-coupled GPCRs — what second messengers? List the hypothalamic / pituitary hormones that use Gq.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Gq → ↑phospholipase C → IP3 (→ Ca²⁺) + DAG (→ PKC)</strong><br><br><strong>Hypothalamic/pituitary axis hormones on Gq:</strong><br>• <em>GnRH</em> (pituitary gonadotropes) · <em>TRH</em> (thyrotropes, lactotropes) · <em>ADH-V1a</em> (vascular smooth muscle) · <em>oxytocin</em> (uterus, myoepithelium) · <em>α₁-adrenergic</em> · angiotensin II · gastrin.<br><br>Mnemonic: <strong>"HAVe 1 GTO"</strong> — H1, α₁, V1, M1, GnRH, TRH, Oxytocin.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Receptor #4 · LO 4 — RTK</div><div class="fc-q">Receptor tyrosine kinase signaling — what is the mechanism, and what endocrine hormones use it?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Ligand binds → receptor <strong>dimerizes</strong> → autophosphorylation of intracellular tyrosines → docking of adaptor proteins → <strong>Ras/MAPK</strong> (growth/differentiation) OR <strong>PI3K/Akt</strong> (metabolic).<br><br>Hormones: <em>insulin</em>, <em>IGF-1</em>, <em>EGF</em>, <em>PDGF</em>, <em>FGF</em> (including FGFR3 — activating mutation = achondroplasia, gain-of-function). Tested at the H-P axis by <em>FGF23</em> which lowers vitamin D activation (kidney).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Receptor #5 · LO 4 — JAK-STAT</div><div class="fc-q">JAK-STAT pathway — which anterior pituitary hormones use it, and what is the key kinase pair?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>JAK2 → STAT5</strong> is the classic endocrine pair.<br><br><strong>Acidophil pituitary hormones:</strong> <em>growth hormone (GH)</em>, <em>prolactin (PRL)</em>.<br>Plus <em>erythropoietin (EPO)</em>, <em>thrombopoietin (TPO)</em>, <em>leptin</em>, cytokines, interferons, G-CSF.<br><br><strong>Mechanism:</strong> ligand binds → cytokine receptor dimerizes → recruits (doesn't possess) JAK2 → JAK2 phosphorylates receptor + STAT5 → STAT5 dimerizes → nucleus → transcription.<br><br><strong>Laron syndrome</strong>: GH receptor mutation → no JAK2 recruitment → no IGF-1 → growth failure despite ↑↑GH.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Receptor #6 · LO 4 — Guanylyl Cyclase</div><div class="fc-q">Which endocrine hormones signal through membrane guanylyl cyclase, and what is the second messenger?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Membrane guanylyl cyclase → ↑cGMP → protein kinase G (PKG)</strong><br><br>Hormones: <em>ANP</em> (atrial) and <em>BNP</em> (brain/ventricular) natriuretic peptides → released on atrial/ventricular stretch → natriuresis + vasodilation + ↓aldosterone + ↓renin.<br><br>Also: <em>NO</em> (nitric oxide) activates SOLUBLE (cytoplasmic) guanylyl cyclase — same downstream pathway, different receptor.<br><br><strong>Clinical:</strong> BNP elevated in heart failure (diagnostic/prognostic marker).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Receptor #7 · LO 4/5 — Nuclear Receptor Superfamily</div><div class="fc-q">What are the four major ligand classes for nuclear receptors?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>1. Steroid hormones</strong> — cortisol (GR), aldosterone (MR), estrogen (ER), progesterone (PR), testosterone/DHT (AR)<br><strong>2. Thyroid hormone</strong> — T3 via TR (heterodimer with RXR)<br><strong>3. Vitamin D</strong> — 1,25-(OH)₂-D via VDR (heterodimer with RXR)<br><strong>4. Retinoic acid</strong> — via RAR (heterodimer with RXR)<br><br>All are <em>ligand-gated transcription factors</em> with DBD, LBD, TAD domains. Orphan receptor PPAR binds fatty acids + fibrates (α) / TZDs (γ). Relevant at the H-P axis: feedback of steroid/thyroid hormone back onto hypothalamus/pituitary via nuclear receptors.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">hCG-TSH Cross-Reactivity · LO 4 (#17)</div><div class="fc-q">Which subunit do hCG and TSH share, and what is the clinical consequence at high hCG?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Both are glycoprotein hormones with an <strong>identical α-subunit</strong>; β-subunits are unique (β-hCG = pregnancy test marker). At massively elevated hCG levels (<em>molar pregnancy, choriocarcinoma, hyperemesis gravidarum</em>, hCG &gt; ~100,000 mIU/mL), partial β-similarity allows hCG to cross-activate the <strong>TSH receptor</strong> → thyroid hormone release → <em>hCG-mediated hyperthyroidism</em> with suppressed TSH. Resolves after tumor evacuation.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Regulated vs Constitutive · LO 2/4 (#19)</div><div class="fc-q">Distinguish REGULATED vs CONSTITUTIVE hormone secretion, and place each hypothalamic/pituitary hormone class into the correct bucket.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>REGULATED:</strong> hormone is pre-stored in secretory granules; released by Ca²⁺-triggered exocytosis on stimulus. Fast (seconds).<br>• <em>All anterior pituitary hormones</em> (GH, PRL, ACTH, TSH, LH, FSH) — stored in secretory granules<br>• <em>Posterior pituitary hormones</em> — ADH, oxytocin stored in Herring bodies<br>• <em>Hypothalamic releasing hormones</em> — TRH, CRH, GnRH, GHRH (+ somatostatin, dopamine) stored at axon terminals<br>• <em>Adrenal medulla</em> catecholamines in chromaffin granules<br><br><strong>CONSTITUTIVE:</strong> no storage possible; hormone made de novo on demand and diffuses out immediately.<br>• <em>Adrenal cortex steroids</em> (cortisol, aldosterone, DHEA) — made from cholesterol via StAR/desmolase when stimulated<br>• <em>Sex steroids</em> (testosterone, estradiol)<br><br>Rule: lipid-soluble = can't be packaged in membrane granules = constitutive.</div></div>
       </div>
     </div>
 
@@ -602,6 +689,54 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
       </ol>
     </div>
   </div>
+
+  <!-- Drill 4: Reference Tab — Feedback Loop Hierarchy -->
+  <div class="order-drill">
+    <div class="drill-title">Drill 4 · LO 5 — Order Feedback Loops from LONGEST Reach to SHORTEST (Reference Tab)</div>
+    <div class="drill-hint">Tests "Feedback Loop Hierarchy" from the Reference tab. Place from longest path to shortest.</div>
+    <div class="order-list" id="order-list-4" ondragover="event.preventDefault()" ondrop="dropItem(event,'order-list-4')">
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-4')" data-pos="2"><span class="item-grip">⠿</span><span class="item-text">Short loop — Pituitary hormone → hypothalamus (ACTH → ↓CRH)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-4')" data-pos="3"><span class="item-grip">⠿</span><span class="item-text">Ultra-short loop — Hypothalamic hormone → ITSELF (CRH → ↓CRH)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-4')" data-pos="1"><span class="item-grip">⠿</span><span class="item-text">Long loop — Target-organ hormone → hypothalamus + pituitary (cortisol → ↓CRH + ↓ACTH)</span></div>
+    </div>
+    <div class="order-actions">
+      <button class="order-check-btn" onclick="checkOrder('order-list-4','order-fb-4')">Check Order</button>
+      <button class="order-ghost-btn" onclick="showOrderAnswer('order-ans-4')">Show Answer</button>
+    </div>
+    <div class="order-feedback" id="order-fb-4"></div>
+    <div class="order-answer" id="order-ans-4">
+      <ol>
+        <li><span>Long loop</span> — end-organ hormone travels farthest to reach both hypothalamus &amp; pituitary</li>
+        <li><span>Short loop</span> — pituitary hormone reaches back to hypothalamus only</li>
+        <li><span>Ultra-short loop</span> — local axon-collateral self-inhibition (generates pulsatility)</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Drill 5: Reference Tab — Primary / Secondary / Tertiary Diagnostic Workup -->
+  <div class="order-drill">
+    <div class="drill-title">Drill 5 · LO 6 — Hypothyroidism Diagnostic Workup (Reference Tab)</div>
+    <div class="drill-hint">Tests "Primary / Secondary / Tertiary Rule." Arrange the logical diagnostic sequence when evaluating a patient with low free T4.</div>
+    <div class="order-list" id="order-list-5" ondragover="event.preventDefault()" ondrop="dropItem(event,'order-list-5')">
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-5')" data-pos="3"><span class="item-grip">⠿</span><span class="item-text">If TSH is LOW or inappropriately normal → order TRH stimulation test or MRI (central disease)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-5')" data-pos="1"><span class="item-grip">⠿</span><span class="item-text">Confirm low free T4 (biologically active fraction)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-5')" data-pos="4"><span class="item-grip">⠿</span><span class="item-text">Check TRH: if low → TERTIARY (hypothalamic); if high → SECONDARY (pituitary)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-5')" data-pos="2"><span class="item-grip">⠿</span><span class="item-text">Measure TSH: if HIGH → PRIMARY hypothyroidism (gland failure; Hashimoto's)</span></div>
+    </div>
+    <div class="order-actions">
+      <button class="order-check-btn" onclick="checkOrder('order-list-5','order-fb-5')">Check Order</button>
+      <button class="order-ghost-btn" onclick="showOrderAnswer('order-ans-5')">Show Answer</button>
+    </div>
+    <div class="order-feedback" id="order-fb-5"></div>
+    <div class="order-answer" id="order-ans-5">
+      <ol>
+        <li><span>Confirm low free T4</span></li>
+        <li><span>Measure TSH</span> — high = PRIMARY (gland); low/normal suggests CENTRAL</li>
+        <li><span>If central, order TRH stim / MRI</span></li>
+        <li><span>Interpret TRH:</span> low = TERTIARY (hypothalamic); high = SECONDARY (pituitary)</li>
+      </ol>
+    </div>
+  </div>
 </div>
 
 <!-- ══ MATCHING ═══════════════════════════════════════════════════════════ -->
@@ -675,6 +810,82 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
     </div>
     <div class="match-score">Score: <span class="correct-count" id="ms3-score">0</span>/4 correct</div>
     <button class="match-reset-btn" onclick="resetMatch('ms3')">Reset</button>
+  </div>
+
+  <!-- Set 4: Receptor-Pathway Matcher (from Biochem L1 Step 1 Hub) -->
+  <div class="match-set">
+    <div class="match-set-title">Set 4 — Receptor-Pathway Matcher (Challenge Drill)</div>
+    <div class="match-set-hint">Match each hormone group to the receptor mechanism + second messenger it uses. Essential integration for Hub 2 pathology.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Hormone Group</div>
+        <div class="match-item" onclick="selectMatch(this,'ms4')" data-pair="1">TSH · ACTH · LH/FSH · PTH · ADH(V2) · glucagon</div>
+        <div class="match-item" onclick="selectMatch(this,'ms4')" data-pair="2">Somatostatin · α₂-adrenergic · dopamine D2</div>
+        <div class="match-item" onclick="selectMatch(this,'ms4')" data-pair="3">GnRH · TRH · ADH(V1a) · oxytocin · α₁-adrenergic</div>
+        <div class="match-item" onclick="selectMatch(this,'ms4')" data-pair="4">GH · prolactin · EPO · cytokines</div>
+        <div class="match-item" onclick="selectMatch(this,'ms4')" data-pair="5">ANP · BNP</div>
+        <div class="match-item" onclick="selectMatch(this,'ms4')" data-pair="6">Insulin · IGF-1 · EGF · PDGF · FGF</div>
+      </div>
+      <div>
+        <div class="match-col-label">Receptor Pathway</div>
+        <div class="match-item" onclick="selectMatch(this,'ms4')" data-pair="6">RTK — autophosphorylation → Ras/MAPK or PI3K/Akt</div>
+        <div class="match-item" onclick="selectMatch(this,'ms4')" data-pair="3">Gq-coupled GPCR → IP3/DAG ↑ → Ca²⁺/PKC</div>
+        <div class="match-item" onclick="selectMatch(this,'ms4')" data-pair="1">Gs-coupled GPCR → cAMP ↑ → PKA</div>
+        <div class="match-item" onclick="selectMatch(this,'ms4')" data-pair="5">Membrane guanylyl cyclase → cGMP ↑ → PKG</div>
+        <div class="match-item" onclick="selectMatch(this,'ms4')" data-pair="4">JAK2-STAT5 (cytokine receptor, no intrinsic kinase)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms4')" data-pair="2">Gi-coupled GPCR → cAMP ↓</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="ms4-score">0</span>/6 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('ms4')">Reset</button>
+  </div>
+
+  <!-- Set 5: Reference Tab — Hypothyroid Axis Pattern → Diagnosis -->
+  <div class="match-set">
+    <div class="match-set-title">Set 5 · LO 6 — Hypothyroid Axis Pattern → Diagnosis (Reference Tab)</div>
+    <div class="match-set-hint">Tests the "Primary / Secondary / Tertiary Rule" reference table. Match each lab pattern to the correct level of axis failure.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Lab Pattern</div>
+        <div class="match-item" onclick="selectMatch(this,'ms5')" data-pair="1">↓ T4, ↑↑ TSH, ↑ TRH</div>
+        <div class="match-item" onclick="selectMatch(this,'ms5')" data-pair="2">↓ T4, ↓ TSH, ↑ TRH</div>
+        <div class="match-item" onclick="selectMatch(this,'ms5')" data-pair="3">↓ T4, ↓ TSH, ↓ TRH</div>
+        <div class="match-item" onclick="selectMatch(this,'ms5')" data-pair="4">Normal T4, ↓ TSH, normal TRH (on oral prednisone)</div>
+      </div>
+      <div>
+        <div class="match-col-label">Level / Diagnosis</div>
+        <div class="match-item" onclick="selectMatch(this,'ms5')" data-pair="3">TERTIARY — hypothalamic failure (e.g., tumor, radiation, Sheehan variant)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms5')" data-pair="1">PRIMARY — gland failure (Hashimoto, post-ablation, iodine deficiency)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms5')" data-pair="4">Exogenous steroid → long-loop suppression of CRH/ACTH (not thyroid axis per se)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms5')" data-pair="2">SECONDARY — pituitary failure (adenoma, apoplexy, Sheehan)</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="ms5-score">0</span>/4 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('ms5')">Reset</button>
+  </div>
+
+  <!-- Set 6: Reference Tab — Circumventricular Organ → Function -->
+  <div class="match-set">
+    <div class="match-set-title">Set 6 · LO 1/2 — Circumventricular Organ → Function (Reference Tab)</div>
+    <div class="match-set-hint">Tests the "Circumventricular Organs" reference table. Match each brain region lacking a BBB to its principal endocrine role.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">CVO / Region</div>
+        <div class="match-item" onclick="selectMatch(this,'ms6')" data-pair="1">Median eminence</div>
+        <div class="match-item" onclick="selectMatch(this,'ms6')" data-pair="2">Neurohypophysis (posterior pituitary)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms6')" data-pair="3">OVLT (organum vasculosum of the lamina terminalis)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms6')" data-pair="4">Pineal gland</div>
+      </div>
+      <div>
+        <div class="match-col-label">Function</div>
+        <div class="match-item" onclick="selectMatch(this,'ms6')" data-pair="4">Secretes melatonin (circadian entrainment)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms6')" data-pair="3">Senses plasma osmolarity → drives ADH release + thirst</div>
+        <div class="match-item" onclick="selectMatch(this,'ms6')" data-pair="1">First capillary plexus of hypophyseal portal system (hypothalamic releasers enter)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms6')" data-pair="2">Axon terminals from SON/PVN release ADH + oxytocin (Herring bodies)</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="ms6-score">0</span>/4 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('ms6')">Reset</button>
   </div>
 </div>
 
@@ -784,6 +995,77 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
 
 </div>
 
+<!-- ══ REFERENCE MCQs ═════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-refmcq">
+  <div class="mcq-intro"><strong>Reference Tab MCQs:</strong> Five Step 1-style questions testing the Reference tables directly. Select the best answer — the explanation reveals automatically.</div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 1 of 5 · LO 2 — Hypothalamic Nucleus → Hormone</div>
+    <div class="mcq-stem">Per the "Hypothalamic Nuclei &amp; Their Hormones" reference table, a lesion specifically affecting the <strong>supraoptic nucleus (SON)</strong> would most severely impair secretion of which hormone?</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">A</span>Oxytocin (primary source)</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,true)"><span class="opt-letter">B</span>ADH / vasopressin (primary source)</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">C</span>CRH</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">D</span>Dopamine (PIH)</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">E</span>Somatostatin</div>
+    </div>
+    <div class="mcq-exp"><strong>B.</strong> Per the table, <strong>SON</strong> is the primary source of <em>ADH</em> (with some oxytocin). PVN (A) is primarily oxytocin (also CRH, TRH). CRH is from PVN (parvocellular part). Dopamine (D) is from arcuate nucleus. Somatostatin (E) is from periventricular nucleus. SON-specific injury → central DI without affecting labor/lactation as severely.</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 2 of 5 · LO 4 — Pituitary Cell Identification</div>
+    <div class="mcq-stem">Per the "Anterior Pituitary Hormones" reference table, a pituitary tumor biopsy shows acidophilic (eosin-pink) cells. Which TWO hormones are the most likely products?</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">A</span>ACTH and TSH</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">B</span>FSH and LH</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,true)"><span class="opt-letter">C</span>GH and prolactin</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">D</span>ADH and oxytocin</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">E</span>ACTH and prolactin</div>
+    </div>
+    <div class="mcq-exp"><strong>C.</strong> Acidophils = somatotropes (GH) + lactotropes (prolactin). Basophils ("B-FLAT") = FSH, LH, ACTH, TSH. ADH/oxytocin (D) are posterior pituitary (neurohypophysis) — not made by adenohypophyseal cells. Acidophilic tumors are among the most common pituitary adenomas (prolactinoma ~50%, GH-secreting ~15%).</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 3 of 5 · LO 5 — Feedback Hierarchy</div>
+    <div class="mcq-stem">Per the "Feedback Loop Hierarchy" reference table, which of the following is the BEST example of ULTRA-SHORT loop feedback?</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">A</span>Cortisol inhibits ACTH and CRH</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">B</span>ACTH inhibits CRH at the hypothalamus</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,true)"><span class="opt-letter">C</span>CRH inhibits its own release via axon collaterals in the hypothalamus</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">D</span>Mid-cycle estradiol surge triggers an LH surge</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">E</span>Exogenous prednisone suppresses endogenous cortisol</div>
+    </div>
+    <div class="mcq-exp"><strong>C.</strong> Per the table, <em>ultra-short</em> loop = hypothalamic hormone inhibits ITSELF via axon collaterals. This creates pulsatile release (prevents receptor desensitization at the pituitary). A and E = long loop (target-organ hormone or its analog acts on hypothalamus+pituitary). B = short loop (pituitary hormone → hypothalamus). D = positive feedback.</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 4 of 5 · LO 6 — Primary / Secondary / Tertiary</div>
+    <div class="mcq-stem">Per the "Primary / Secondary / Tertiary Rule" reference table, a patient has cortisol 3 μg/dL (low), ACTH &lt; 5 pg/mL (very low), and CRH fails to rise after insulin-induced hypoglycemia. Which level of the axis is failing?</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">A</span>Primary adrenal insufficiency (Addison's)</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">B</span>Secondary (pituitary) adrenal insufficiency</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,true)"><span class="opt-letter">C</span>Tertiary (hypothalamic) adrenal insufficiency</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">D</span>Exogenous glucocorticoid excess</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">E</span>Cushing syndrome</div>
+    </div>
+    <div class="mcq-exp"><strong>C — Tertiary.</strong> Per the rule: the problem is where the hormone LEVEL DROPS FIRST; everything downstream falls. Here cortisol ↓, ACTH ↓, AND CRH is unresponsive → the hypothalamus is the primary site of failure (tertiary). Primary (A) would have ↑↑ACTH; secondary (B) would have normal/↑ CRH but failure of pituitary ACTH response. Exogenous steroid (D) would suppress via long-loop feedback but CRH would still be detectable and responsive on withdrawal.</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 5 of 5 · LO 1/4 — Three Hypothalamic Output Pathways</div>
+    <div class="mcq-stem">Per the "Three Hypothalamic Output Pathways" reference table, which pathway enables the fastest endocrine response to an acute stressor (seconds, not minutes)?</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">A</span>Hypophyseal portal system to anterior pituitary</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">B</span>Direct axonal projection to posterior pituitary</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,true)"><span class="opt-letter">C</span>Sympathetic preganglionic fibers to adrenal medulla chromaffin cells</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">D</span>Retrograde transport to the limbic system</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">E</span>CSF-mediated delivery via the choroid plexus</div>
+    </div>
+    <div class="mcq-exp"><strong>C.</strong> The sympathetic pathway is unique among hypothalamic outputs: preganglionic fibers synapse directly onto adrenal medulla chromaffin cells (a modified sympathetic ganglion — no postganglionic neuron). ACh triggers exocytosis of preformed epinephrine (80%) + NE (20%) within seconds → "fight-or-flight." Portal system (A) and posterior-pituitary pathway (B) are also rapid but rely on cell synthesis/vesicular release; seconds-scale catecholamine dumping is the fastest endocrine reflex in the body.</div>
+  </div>
+
+</div>
+
 <!-- ══ REFERENCE ══════════════════════════════════════════════════════════ -->
 <div class="tab-pane" id="tab-reference">
 
@@ -876,6 +1158,64 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
         <tr><td class="key">Sympathetic nervous system</td><td>Adrenal medulla (and other SNS targets)</td><td>Direct preganglionic innervation → chromaffin cells</td><td>Fight-or-flight → epinephrine/NE release in seconds</td></tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">USMLE Map — Core Concept → Step 1 Extension</div>
+    <table class="ref-table">
+      <thead><tr><th>Core LO</th><th>Step 1 Extension</th><th>High-Yield Associations</th><th>Keywords</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="key">Hormone classes &amp; synthesis</td>
+          <td>Steroid synthesis (de novo / constitutive); peptide storage (granules / regulated); POMC post-translational cleavage → ACTH + α-MSH + β-endorphin</td>
+          <td>Carcinoid (ectopic hormone); paraneoplastic Cushing's (ectopic ACTH from SCLC); Addison's hyperpigmentation (↑POMC → ↑MSH)</td>
+          <td>POMC, ectopic hormone, constitutive, regulated</td>
+        </tr>
+        <tr>
+          <td class="key">Receptor types &amp; binding</td>
+          <td>Gs / Gi / Gq signaling; RTK &amp; JAK-STAT; guanylyl cyclase; nuclear receptors (steroids, T3, vitamin D, retinoids)</td>
+          <td>McCune-Albright (Gs ↑); achondroplasia (FGFR3 ↑); cholera (Gs ON); pertussis (Gi OFF); hyperprolactinemia (D2 antagonism)</td>
+          <td>cAMP, IP3/DAG, cGMP, RTK, JAK-STAT, nuclear receptor</td>
+        </tr>
+        <tr>
+          <td class="key">Second messengers &amp; Kd</td>
+          <td>cAMP (Gs), cGMP (GC), IP3/DAG (Gq), tyrosine phosphorylation (RTK); STAT phosphorylation (JAK); receptor desensitization</td>
+          <td>Leuprolide flare (receptor downregulation); ANP/BNP natriuresis (cGMP/PKG); chronic opioid tachyphylaxis</td>
+          <td>desensitization, downregulation, second messenger, affinity, Kd</td>
+        </tr>
+        <tr>
+          <td class="key">Nuclear receptors</td>
+          <td>Ligand binding → coactivator recruitment → chromatin remodeling → transcription; SERMs = tissue-selective via coactivator availability</td>
+          <td>Tamoxifen (ER SERM); raloxifene (SERM); RU-486 (PR antagonist); glucocorticoid therapy (GR agonism)</td>
+          <td>SERM, coactivator, ER, PR, GR</td>
+        </tr>
+        <tr>
+          <td class="key">Hormone measurement</td>
+          <td>Immunoassays (RIA, ELISA); cross-reactivity (hCG → TSH assay); serial testing (ACTH + dexamethasone suppression)</td>
+          <td>Molar pregnancy thyrotoxicosis (hCG/TSH cross-reactivity); ectopic ACTH + non-suppression; POMC processing (ACTH + MSH)</td>
+          <td>immunoassay, cross-reactivity, dexamethasone suppression</td>
+        </tr>
+        <tr>
+          <td class="key">Carrier proteins &amp; hormone transport</td>
+          <td>Steroid carriers (SHBG, CBG, albumin); hydrophobic hormones use carriers; hydrophilic peptides don't. Bioavailability differs by solubility</td>
+          <td>OCPs (oral estrogen); insulin must be injected; GH injected; levothyroxine oral</td>
+          <td>SHBG, CBG, bioavailability, first-pass metabolism</td>
+        </tr>
+        <tr>
+          <td class="key">Feedback &amp; control</td>
+          <td>Negative feedback (cortisol → ↓ACTH); loss of feedback → hormone ↑ (Addison's, McCune-Albright); continuous agonism → receptor downregulation</td>
+          <td>Addison's (ACTH ↑, cortisol ↓, no feedback); ectopic ACTH (no dex suppression); stalk section → ↑PRL</td>
+          <td>negative feedback, downregulation, flare, autonomous secretion</td>
+        </tr>
+        <tr>
+          <td class="key">G-protein signaling, toxins, molecular diseases</td>
+          <td>Cholera (Gs ON); pertussis (Gi OFF); McCune-Albright (Gs activating); achondroplasia (FGFR3 gain-of-function); leuprolide (continuous GnRH → receptor downregulation)</td>
+          <td>Rice-water diarrhea (cholera); whooping cough (pertussis); precocious puberty (McCune-Albright); short limbs (achondroplasia); medical castration (leuprolide)</td>
+          <td>ADP-ribosylation, Gs, Gi, GNAS, FGFR3, leuprolide, flare</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="ref-note"><strong>How to use this map:</strong> each row pairs a Hub 1 core concept with its downstream Step 1 expansion — follow a concept left → right to anticipate USMLE integrations that appear in Hub 2.</div>
   </div>
 
 </div>
@@ -1002,6 +1342,19 @@ function judgeTrap(btn,correct){
   btn.classList.add(isCorrect?'sel-correct':'sel-wrong');
   const exp=card.querySelector('.trap-exp');
   exp.className='trap-exp '+(isCorrect?'show-c':'show-w');
+}
+
+// Reference-tab MCQ handler
+function answerRefMCQ(el,correct){
+  const item=el.closest('.mcq-item');
+  const opts=item.querySelectorAll('.mcq-opt');
+  opts.forEach(o=>o.classList.add('locked'));
+  el.classList.add(correct?'correct':'wrong');
+  opts.forEach(o=>{
+    if(o!==el&&o.getAttribute('onclick').includes(',true)')) o.classList.add('correct');
+  });
+  const exp=item.querySelector('.mcq-exp');
+  exp.classList.add('show');
 }
 </script>
 </body>

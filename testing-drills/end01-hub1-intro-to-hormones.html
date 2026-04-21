@@ -175,6 +175,26 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
 .ref-note{background:#FFFDF0;border:1px solid #F3E4B2;border-radius:5px;padding:13px 18px;font-size:.83em;color:#5A5A5A;line-height:1.6;margin-top:10px}
 .ref-note strong{color:#854D0E}
 
+/* ── MCQ (Reference-tab drill) ── */
+.mcq-intro{background:#FFFDF0;border:1px solid #F3E4B2;border-radius:6px;padding:14px 18px;margin-bottom:20px;font-size:.84em;color:#5A5A5A;line-height:1.6}
+.mcq-intro strong{color:#854D0E}
+.mcq-item{background:#FFFFFF;border:1px solid #E8DCB8;border-left:4px solid #854D0E;border-radius:6px;padding:22px;margin-bottom:18px}
+.mcq-num{font-size:.68em;font-weight:700;color:#D97706;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.mcq-stem{font-size:.93em;color:#2C2C2C;line-height:1.7;margin-bottom:14px;background:#FFFDF0;padding:14px;border-radius:5px;border-left:3px solid #D97706}
+.mcq-stem strong{color:#854D0E}
+.mcq-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.mcq-opt{background:#FEFBF0;border:1px solid #E8DCB8;border-radius:5px;padding:10px 14px;cursor:pointer;font-size:.88em;color:#2C2C2C;transition:all .18s;display:flex;align-items:flex-start;gap:10px}
+.mcq-opt:hover:not(.locked){border-color:#D97706;background:#FFFDF0}
+.mcq-opt.correct{background:#F1F8F2;border-color:#2E7D32;color:#1B5E20}
+.mcq-opt.wrong{background:#FEF5F5;border-color:#C62828;color:#B71C1C}
+.mcq-opt.locked{cursor:default}
+.opt-letter{font-weight:700;color:#854D0E;flex-shrink:0;width:18px}
+.mcq-opt.correct .opt-letter{color:#2E7D32}
+.mcq-opt.wrong .opt-letter{color:#C62828}
+.mcq-exp{background:#FFFDF0;border-left:3px solid #D97706;border-radius:5px;padding:12px 16px;font-size:.84em;color:#5A5A5A;line-height:1.7;display:none;margin-top:12px}
+.mcq-exp.show{display:block}
+.mcq-exp strong{color:#854D0E}
+
 /* ── FOOTER ── */
 .footer{text-align:center;font-size:.78em;color:#7A7060;border-top:2px solid #E8DCB8;padding-top:16px;margin-top:32px}
 .footer a{color:#854D0E;text-decoration:none;font-weight:600}
@@ -218,11 +238,12 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
 </div>
 
 <div class="stats-bar">
-  <div class="stat-card"><div class="stat-num">21</div><div class="stat-label">Flashcards</div></div>
-  <div class="stat-card"><div class="stat-num">12</div><div class="stat-label">Fill-in-Blank</div></div>
-  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Ordering Drills</div></div>
-  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Match Sets</div></div>
-  <div class="stat-card"><div class="stat-num">9</div><div class="stat-label">Test Traps</div></div>
+  <div class="stat-card"><div class="stat-num">48</div><div class="stat-label">Flashcards</div></div>
+  <div class="stat-card"><div class="stat-num">14</div><div class="stat-label">Fill-in-Blank</div></div>
+  <div class="stat-card"><div class="stat-num">5</div><div class="stat-label">Ordering Drills</div></div>
+  <div class="stat-card"><div class="stat-num">8</div><div class="stat-label">Match Sets</div></div>
+  <div class="stat-card"><div class="stat-num">19</div><div class="stat-label">Test Traps</div></div>
+  <div class="stat-card"><div class="stat-num">5</div><div class="stat-label">Ref MCQs</div></div>
 </div>
 
 <div class="tab-nav">
@@ -231,12 +252,13 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
   <button class="tab-btn" onclick="switchTab('ordering',this)">Ordering</button>
   <button class="tab-btn" onclick="switchTab('matching',this)">Matching</button>
   <button class="tab-btn" onclick="switchTab('traps',this)">Test Traps</button>
+  <button class="tab-btn" onclick="switchTab('refmcq',this)">Reference MCQs</button>
   <button class="tab-btn" onclick="switchTab('reference',this)">Reference</button>
 </div>
 
 <!-- ══ FLASHCARDS ══════════════════════════════════════════════════════════ -->
 <div class="tab-pane active" id="tab-flashcards">
-  <div class="fc-progress"><span>Click a card to flip · <span class="prog-num">21</span> cards total</span><span>LOs 1–7</span></div>
+  <div class="fc-progress"><span>Click a card to flip · <span class="prog-num">48</span> cards total</span><span>LOs 1–7 · Biochem L1 Anki Bank</span></div>
   <div class="fc-grid">
 
     <div class="fc" onclick="flipCard(this)">
@@ -383,6 +405,197 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
       <div class="fc-inner">
         <div class="fc-front"><div class="fc-label">LO 1 — Target Cells &amp; Specificity</div><div class="fc-q">Hormones reach nearly every cell in the body via the bloodstream — so what determines which cells respond?</div><div class="fc-flip-hint">tap to flip</div></div>
         <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Receptors create specificity.</strong> A "target cell" is simply a cell that expresses the receptor for a given hormone. Cells without the receptor are effectively deaf to the hormone's signal, even though the hormone physically reaches them.<br><br><strong>Consequences:</strong><br>• A tissue's sensitivity profile depends entirely on which receptors it expresses.<br>• Pharmacologic blockers (e.g., spironolactone at the mineralocorticoid receptor) work by occupying the target receptor.<br>• Receptor cross-reactivity (hCG at TSH-R in molar pregnancy; cortisol at MR when 11β-HSD2 is overwhelmed) explains unexpected clinical phenotypes.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 2 — Regulated vs Constitutive</div><div class="fc-q">Define "regulated" vs "constitutive" hormone secretion. Which hormone classes use each pathway?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>REGULATED secretion:</strong> hormone is <em>pre-synthesized</em>, packaged into secretory granules/vesicles, and released by Ca²⁺-triggered exocytosis ONLY upon stimulus. Fast (seconds).<br>• <em>Peptides</em> (insulin, ACTH, GH, PTH) — in secretory granules<br>• <em>Catecholamines</em> — in chromaffin granules<br>• <em>Thyroid hormone</em> — stored bound to <em>thyroglobulin</em> in colloid (unique: intra-lumenal store)<br><br><strong>CONSTITUTIVE secretion:</strong> hormone is synthesized <em>de novo</em> on demand, cannot be stored, diffuses out immediately as it is made. Slow (min–hr).<br>• <em>Steroids</em> — cholesterol → hormone via StAR + enzymes<br>• <em>Eicosanoids</em> — arachidonic acid → PGs/LTs, locally<br><br>Rule of thumb: <strong>Lipid-soluble = can't be stored in vesicles → constitutive.</strong></div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 2 — Storage Forms by Class</div><div class="fc-q">Name the SPECIFIC storage form/location for each major hormone class.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Peptide/protein hormones</strong> → stored as pre-formed hormone in <em>secretory granules</em> (RER → Golgi → granule). Example: insulin in β-cell granules with C-peptide.<br><br><strong>Catecholamines</strong> → stored in <em>chromaffin granules</em> / synaptic vesicles. Dopamine β-hydroxylase works INSIDE the granule to make NE.<br><br><strong>Thyroid hormone</strong> → stored extracellularly (unique!) as <em>iodinated thyroglobulin</em> in follicular <em>colloid</em>. Released by proteolysis of thyroglobulin. Largest hormone store in the body — months of supply.<br><br><strong>Steroid hormones</strong> → <em>NOT STORED</em>. Synthesized de novo from cholesterol when stimulated (StAR → desmolase). Cholesterol droplets are the substrate store, not a hormone store.<br><br><strong>Eicosanoids</strong> → NOT stored. Made locally on demand from membrane arachidonic acid.</div></div>
+      </div>
+    </div>
+
+    <!-- ═══ ANKI BANK — GUSOM Biochem L1 Cards ═══════════════════════════════ -->
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Anki #25 · LO 3 — Catecholamine Control</div><div class="fc-q">Catecholamine production by neuroendocrine cells in the adrenal medulla is controlled by _____ ganglionic _____ fibers.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Preganglionic sympathetic</strong> fibers. Adrenal chromaffin cells are modified postganglionic neurons — they receive direct preganglionic cholinergic input (ACh via nicotinic receptors) and dump Epi/NE straight into the bloodstream, bypassing the usual two-neuron chain.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Anki #32 · LO 3 — Rate-Limiting Step</div><div class="fc-q">The rate-limiting step of catecholamine synthesis is _____.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Tyrosine hydroxylase</strong> (Tyr → L-DOPA). Most regulated, BH4-dependent, feedback-inhibited by catecholamines. α-methyltyrosine (metyrosine) blocks this enzyme (pre-op pheo).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Anki #33 · LO 2 — Peptide Types</div><div class="fc-q">Peptide hormones can be categorized into _____ and _____.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Glycoproteins</strong> (TSH, LH, FSH, hCG — carbohydrate-modified) and <strong>short polypeptides / small proteins</strong> (insulin, GH, PTH, ADH, oxytocin, ACTH).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Anki #35 · LO 2/6 — Class → Receptor</div><div class="fc-q">Hormones classified as _____ determine whether they bind to membrane or intracellular receptors.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Hormone class / chemical type</strong> determines receptor location. Water-soluble (peptides, catecholamines) → membrane. Lipid-soluble (steroids, thyroid, vitamin D) → intracellular/nuclear.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Anki #37 · LO 1 — Juxtacrine</div><div class="fc-q">_____ signaling involves direct cell-to-cell contact via growth factors and cytokines.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Juxtacrine</strong> signaling. Requires membrane-bound ligand on one cell binding a receptor on an adjacent cell. Examples: Notch–Delta in development; membrane-bound TNF-α; EGF family members tethered to donor cell surface.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Anki #39 · LO 2 — Glycoprotein Subunits</div><div class="fc-q">Glycoprotein hormones (FSH, LH, TSH, hCG) share a common _____ subunit and differ in _____ subunit.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Shared <strong>alpha (α)</strong> subunit; unique <strong>beta (β)</strong> subunit confers specificity. Clinical: hCG-β is what pregnancy tests detect; hCG cross-reacts with TSH-R in molar pregnancy (high hCG → thyrotoxicosis).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Anki #40 · LO 6 — Receptor Location</div><div class="fc-q">Steroid hormones act via _____ receptors; peptide hormones act via _____ receptors.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Intracellular / nuclear</strong> receptors (steroids) → alter gene transcription (slow, durable).<br><strong>Membrane</strong> receptors (peptides) → GPCR, RTK, JAK-STAT → second messengers (fast).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Anki #42 · LO 6 — Nuclear Receptor Superfamily</div><div class="fc-q">Nuclear receptors belong to the _____ superfamily.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Ligand-gated transcription factor</strong> superfamily. Members: steroid receptors (GR, MR, AR, ER, PR), thyroid hormone receptor (TR), vitamin D receptor (VDR), retinoic acid receptor (RAR/RXR), PPAR. All have DBD, LBD, TAD domains.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Anki #52 · LO 3 — Catecholamine Pathway</div><div class="fc-q">Tyrosine → _____ → _____ → _____ → _____.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Tyrosine → L-DOPA → Dopamine → Norepinephrine → Epinephrine</strong><br>Enzymes: TH (rate-limiting, BH4) → DOPA decarboxylase (B6) → Dopamine β-hydroxylase (in vesicle, Vit C, Cu²⁺) → PNMT (adrenal medulla, cortisol-induced).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Anki #59 · LO 4 — Vitamin D Activation</div><div class="fc-q">Vitamin D is activated in two _____ reactions: _____ (liver) and _____ (kidney).</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Two <strong>hydroxylation</strong> reactions: <strong>25-hydroxylation</strong> in liver → 25-OH-D (calcidiol; storage form) then <strong>1α-hydroxylation</strong> in kidney PCT → 1,25-(OH)₂-D (calcitriol; active form). Kidney step is rate-limiting — ↑ by PTH, ↓ Pi, ↓ Ca²⁺; ↓ by FGF23.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Anki #60 · LO 6 — Vitamin D Receptor</div><div class="fc-q">1,25-diOH-D acts via a _____ receptor.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Nuclear (intracellular) receptor</strong> — VDR. Heterodimerizes with RXR on vitamin-D-response elements (VDRE). Drives transcription of Ca²⁺-binding protein (calbindin), TRPV6, osteocalcin, etc.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Anki #61 · LO 2 — Steroid Storage</div><div class="fc-q">Steroid hormones are synthesized _____ and stored in _____.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>De novo</strong> (synthesized on demand; cannot be stored as hormone). Substrate cholesterol is stored in <strong>lipid droplets</strong> inside steroidogenic cells. Stimulated by ACTH (adrenal), LH (gonads) via cAMP → PKA → StAR phosphorylation.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Anki #62 · LO 2 — Peptide Storage</div><div class="fc-q">Peptide hormones stored in _____ are released by _____ signaling.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Stored in <strong>secretory granules (vesicles)</strong>; released by <strong>exocytosis</strong> (Ca²⁺-triggered, regulated secretion). Trigger → intracellular Ca²⁺ ↑ → granules fuse with membrane → contents dumped into blood.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Anki #63 · LO 2 — Catecholamine Storage</div><div class="fc-q">Catecholamines are stored preformed in _____ within chromaffin cells.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Vesicles / granules</strong> (chromaffin granules). Stored bound to chromogranin proteins + ATP. DβH inside the granule converts dopamine → NE. PNMT acts in cytosol to make Epi → re-enters granule.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Anki #64 · LO 2 — Thyroid Hormone Storage</div><div class="fc-q">Thyroid hormones are stored as _____ and released by _____.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Stored as iodinated <strong>thyroglobulin</strong> in follicular colloid (extracellular!). Released by <strong>proteolysis</strong> — colloid is endocytosed back into the follicular cell, lysosomes cleave Tg, free T3/T4 exit across basal membrane. Unique among hormones: the only extracellular hormone store.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Anki #65 · LO 5 — Deiodinase</div><div class="fc-q">Hormone _____ (T4 to T3) is catalyzed by tissue-specific _____ enzymes.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Metabolism / conversion</strong> catalyzed by <strong>deiodinases</strong>.<br>• <em>D1</em> — liver, kidney: makes plasma T3 (5′-deiodination)<br>• <em>D2</em> — brain, pituitary, BAT: local T3 (intracellular feedback)<br>• <em>D3</em> — placenta, fetal: inactivates to reverse T3 (rT3)<br>Starvation and illness increase D3 → euthyroid sick syndrome (↓ T3, ↑ rT3).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Anki #66 · LO 2/5 — Transport</div><div class="fc-q">_____ circulate free; _____ require carrier proteins.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Peptide hormones + catecholamines</strong> circulate FREE (hydrophilic, dissolve directly in plasma).<br><strong>Steroid hormones + thyroid hormone</strong> require CARRIER proteins (hydrophobic, would aggregate in plasma). Carriers: CBG, TBG, SHBG, DBP, albumin.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Anki #67 · LO 5 — Half-Life</div><div class="fc-q">_____ is the plasma half-life (t½) of a hormone.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Terminal elimination half-life</strong> — time for plasma hormone concentration to fall by 50%. Determined by metabolism + excretion + binding-protein protection. Peptides: minutes; catecholamines: seconds; cortisol: ~60–90 min; T4: ~7 days.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Anki #68 · LO 6 — Kd</div><div class="fc-q">_____ is the dissociation constant (lower = higher affinity).</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Kd</strong> (dissociation constant) = concentration of hormone at which 50% of receptors are bound. <em>Lower Kd = HIGHER affinity</em> (tighter binding, less hormone needed). Insulin receptor Kd ≈ 10⁻⁹ M (nanomolar-range affinity).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Anki #75 · LO 6 — Cross-Reactivity</div><div class="fc-q">Cross-reactivity occurs when _____ bind the same antibody.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Structurally similar molecules</strong> bind the same antibody. Relevant in immunoassays (can give false results). Clinical: hCG-β at TSH receptor → molar pregnancy thyrotoxicosis. hCG cross-reacts with LH receptor (shared α).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Anki #100 · LO 6 — Nuclear Receptor Domains</div><div class="fc-q">Nuclear receptors contain _____, _____, and _____ domains.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>DBD</strong> (DNA-binding domain — zinc fingers, binds HRE)<br><strong>LBD</strong> (ligand-binding domain — binds hormone)<br><strong>TAD</strong> (transactivation domain — recruits coactivators)<br>HSP90 holds receptor in cytoplasm until hormone binds; hormone binding releases HSP90 → dimerization → nuclear import → HRE binding → transcription.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Anki #101 · LO 1 — Endocrine</div><div class="fc-q">_____ signaling: hormones in bloodstream to distant tissues.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Endocrine</strong> signaling. Hormone secreted into blood → reaches distant target cells with appropriate receptors. Examples: insulin (pancreas → muscle/liver); cortisol (adrenal → whole body).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Anki #102 · LO 1 — Paracrine</div><div class="fc-q">_____ signaling: hormones act on nearby cells.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Paracrine</strong> signaling. Local diffusion to adjacent cells (does NOT enter blood). Example: somatostatin from δ-cells → α/β islet cells; histamine from ECL → parietal cells.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Anki #103 · LO 1 — Autocrine</div><div class="fc-q">_____ signaling: cell responds to its own signals.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Autocrine</strong> signaling. Cell secretes a hormone/factor that binds back to its own surface receptors. Examples: IGF-1 on some tumor cells (growth loop); IL-2 on T cells after activation.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Anki #104 · LO 5 — TBG &amp; Estrogen</div><div class="fc-q">Estrogen increases TBG → _____ T4 but _____ free T4.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Estrogen (pregnancy, OCPs) stimulates hepatic TBG synthesis. <strong>↑ Total T4</strong> (more carrier-bound) but <strong>normal free T4</strong> (biologically active fraction unchanged). Patient is EUTHYROID. Always measure FREE T4 — not total — to judge thyroid status.</div></div>
       </div>
     </div>
 
@@ -545,6 +758,36 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
       <div class="fib-feedback"></div>
     </div>
 
+    <div class="fib-card">
+      <div class="fib-num">FIB 13 — LO 2 (Storability)</div>
+      <div class="fib-prompt">Match each hormone class to its storage form: Peptide hormones are stored in <strong>_____________</strong>; catecholamines are stored in <strong>_____________</strong>; thyroid hormone is stored as iodinated <strong>_____________</strong> in follicular colloid; and steroid hormones are <strong>_____________</strong> (stored/not stored).</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="peptide store..." data-answers="secretory granules,secretory vesicles,granules,vesicles">
+        <input class="fib-input" type="text" placeholder="catecholamine store..." data-answers="chromaffin granules,chromaffin vesicles,granules,vesicles,chromaffin">
+        <input class="fib-input" type="text" placeholder="thyroid store..." data-answers="thyroglobulin,tg">
+        <input class="fib-input" type="text" placeholder="steroid store?" data-answers="not stored,no,none,never">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Hint: Steroids are made on demand — substrate (cholesterol) is stored, not the hormone itself.</div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 14 — LO 2 (Solubility)</div>
+      <div class="fib-prompt"><strong>Hydrophilic</strong> hormones (peptides + catecholamines) circulate <strong>_____________</strong> in plasma and bind <strong>_____________</strong> receptors. <strong>Hydrophobic</strong> hormones (steroids, thyroid hormone, vitamin D) circulate bound to <strong>_____________</strong> and bind <strong>_____________</strong> receptors.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="hydrophil plasma..." data-answers="free,unbound">
+        <input class="fib-input" type="text" placeholder="hydrophil recep..." data-answers="membrane,surface,cell surface,plasma membrane,gpcr">
+        <input class="fib-input" type="text" placeholder="hydrophob plasma..." data-answers="carriers,carrier proteins,carrier,binding proteins">
+        <input class="fib-input" type="text" placeholder="hydrophob recep..." data-answers="nuclear,intracellular,cytoplasmic">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Solubility predicts where the hormone lives, how it travels, and where it acts.</div>
+    </div>
+
   </div>
 </div>
 
@@ -638,6 +881,56 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
       </ol>
     </div>
   </div>
+
+  <!-- Drill 4: Reference Tab — Hormone Half-Life Ordering -->
+  <div class="order-drill">
+    <div class="drill-title">Drill 4 · LO 2/5 — Order Hormones by Half-Life (Shortest → Longest)</div>
+    <div class="drill-hint">Tests Reference tab → "Hormone Classes Master Comparison." Arrange from shortest to longest plasma ½-life.</div>
+    <div class="order-list" id="order-list-4" ondragover="event.preventDefault()" ondrop="dropItem(event,'order-list-4')">
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-4')" data-pos="3"><span class="item-grip">⠿</span><span class="item-text">Cortisol (60–90 min)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-4')" data-pos="1"><span class="item-grip">⠿</span><span class="item-text">Epinephrine (seconds)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-4')" data-pos="4"><span class="item-grip">⠿</span><span class="item-text">T4 / Thyroxine (~7 days)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-4')" data-pos="2"><span class="item-grip">⠿</span><span class="item-text">Insulin / ACTH (5–10 min)</span></div>
+    </div>
+    <div class="order-actions">
+      <button class="order-check-btn" onclick="checkOrder('order-list-4','order-fb-4')">Check Order</button>
+      <button class="order-ghost-btn" onclick="showOrderAnswer('order-ans-4')">Show Answer</button>
+    </div>
+    <div class="order-feedback" id="order-fb-4"></div>
+    <div class="order-answer" id="order-ans-4">
+      <ol>
+        <li><span>Epinephrine</span> — free in plasma, rapidly degraded by COMT/MAO (seconds)</li>
+        <li><span>Insulin / ACTH</span> — free peptides, filtered/degraded (minutes)</li>
+        <li><span>Cortisol</span> — carrier-bound (CBG) protects from degradation (60–90 min)</li>
+        <li><span>T4</span> — carrier-bound (TBG), slow deiodination (~7 days)</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Drill 5: Reference Tab — Receptor Response Speed -->
+  <div class="order-drill">
+    <div class="drill-title">Drill 5 · LO 6 — Order Receptor-Mediated Effects by Onset (Fastest → Slowest)</div>
+    <div class="drill-hint">Tests Reference tab → "Membrane Receptor Signaling Quick Map" + signaling speed.</div>
+    <div class="order-list" id="order-list-5" ondragover="event.preventDefault()" ondrop="dropItem(event,'order-list-5')">
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-5')" data-pos="2"><span class="item-grip">⠿</span><span class="item-text">GPCR second messenger (Gs → cAMP → PKA)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-5')" data-pos="4"><span class="item-grip">⠿</span><span class="item-text">Nuclear receptor / gene transcription (steroid, T3)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-5')" data-pos="1"><span class="item-grip">⠿</span><span class="item-text">Ligand-gated ion channel (nicotinic ACh)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-5')" data-pos="3"><span class="item-grip">⠿</span><span class="item-text">RTK / JAK-STAT (insulin, GH, prolactin)</span></div>
+    </div>
+    <div class="order-actions">
+      <button class="order-check-btn" onclick="checkOrder('order-list-5','order-fb-5')">Check Order</button>
+      <button class="order-ghost-btn" onclick="showOrderAnswer('order-ans-5')">Show Answer</button>
+    </div>
+    <div class="order-feedback" id="order-fb-5"></div>
+    <div class="order-answer" id="order-ans-5">
+      <ol>
+        <li><span>Ligand-gated ion channel</span> — milliseconds (fastest; direct channel gating)</li>
+        <li><span>GPCR → 2nd messenger</span> — seconds (one amplification step)</li>
+        <li><span>RTK / JAK-STAT</span> — minutes (phosphorylation cascade + enzyme induction)</li>
+        <li><span>Nuclear receptor</span> — hours to days (must alter gene transcription + make new protein)</li>
+      </ol>
+    </div>
+  </div>
 </div>
 
 <!-- ══ MATCHING ════════════════════════════════════════════════════════════ -->
@@ -694,28 +987,152 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
     <button class="match-reset-btn" onclick="resetMatch('ms2')">Reset</button>
   </div>
 
-  <!-- Set 3: Signaling Terms -->
+  <!-- Set 3: Hormone Class → Storage Form -->
   <div class="match-set">
-    <div class="match-set-title">Set 3 — Signaling Mode → Definition</div>
-    <div class="match-set-hint">Match each mode of intercellular communication to its defining feature.</div>
+    <div class="match-set-title">Set 3 — Hormone Class → Storage Form (LO 2)</div>
+    <div class="match-set-hint">Match each hormone class to HOW (and where) the body stores it before release.</div>
     <div class="match-cols">
       <div>
-        <div class="match-col-label">Signaling Mode</div>
-        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="1">Endocrine</div>
-        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="2">Paracrine</div>
-        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="3">Autocrine</div>
-        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="4">Neurocrine</div>
+        <div class="match-col-label">Hormone Class</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="1">Peptide / protein hormones</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="2">Catecholamines</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="3">Thyroid hormone (T3/T4)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="4">Steroid hormones</div>
       </div>
       <div>
-        <div class="match-col-label">Defining Feature</div>
-        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="3">Acts on the SAME cell that secreted it</div>
-        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="1">Released into blood to reach distant target</div>
-        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="4">Neuron releases hormone into blood (e.g., ADH)</div>
-        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="2">Diffuses to ADJACENT cell without entering blood</div>
+        <div class="match-col-label">Storage Form</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="3">Stored bound to thyroglobulin in colloid (extracellular)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="1">Pre-formed in secretory granules (regulated exocytosis)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="4">NOT stored — synthesized de novo on demand from cholesterol</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="2">Stored in chromaffin granules / synaptic vesicles</div>
       </div>
     </div>
     <div class="match-score">Score: <span class="correct-count" id="ms3-score">0</span>/4 correct</div>
     <button class="match-reset-btn" onclick="resetMatch('ms3')">Reset</button>
+  </div>
+
+  <!-- Set 4: Hormone → Solubility Class -->
+  <div class="match-set">
+    <div class="match-set-title">Set 4 — Classify by Solubility (LO 2)</div>
+    <div class="match-set-hint">Match each specific hormone to its solubility class. Remember: solubility predicts storage, transport, and receptor location.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Hormone</div>
+        <div class="match-item" onclick="selectMatch(this,'ms4')" data-pair="1">Insulin</div>
+        <div class="match-item" onclick="selectMatch(this,'ms4')" data-pair="1">Epinephrine</div>
+        <div class="match-item" onclick="selectMatch(this,'ms4')" data-pair="2">Cortisol</div>
+        <div class="match-item" onclick="selectMatch(this,'ms4')" data-pair="2">Testosterone</div>
+        <div class="match-item" onclick="selectMatch(this,'ms4')" data-pair="2">Thyroid hormone (T3/T4)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms4')" data-pair="2">Vitamin D (calcitriol)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms4')" data-pair="1">Growth hormone (GH)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms4')" data-pair="2">Estradiol</div>
+      </div>
+      <div>
+        <div class="match-col-label">Solubility Profile (click repeatedly)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms4')" data-pair="1">HYDROPHILIC · free in plasma · membrane receptor · stored in vesicles</div>
+        <div class="match-item" onclick="selectMatch(this,'ms4')" data-pair="2">HYDROPHOBIC · carrier-bound · intracellular/nuclear receptor · not stored (steroids)</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="ms4-score">0</span>/8 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('ms4')">Reset</button>
+  </div>
+
+  <!-- Set 5: Hormone → Receptor Type (Biochem L1 Challenge Drill) -->
+  <div class="match-set">
+    <div class="match-set-title">Set 5 — Hormone → Receptor Type (Challenge Drill)</div>
+    <div class="match-set-hint">Five representative hormones spanning all major receptor classes. Match each to its receptor type.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Hormone</div>
+        <div class="match-item" onclick="selectMatch(this,'ms6')" data-pair="1">LH</div>
+        <div class="match-item" onclick="selectMatch(this,'ms6')" data-pair="2">Cortisol</div>
+        <div class="match-item" onclick="selectMatch(this,'ms6')" data-pair="3">Insulin</div>
+        <div class="match-item" onclick="selectMatch(this,'ms6')" data-pair="4">ANP</div>
+        <div class="match-item" onclick="selectMatch(this,'ms6')" data-pair="5">T3 (triiodothyronine)</div>
+      </div>
+      <div>
+        <div class="match-col-label">Receptor / Pathway</div>
+        <div class="match-item" onclick="selectMatch(this,'ms6')" data-pair="3">Receptor tyrosine kinase (RTK)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms6')" data-pair="5">Nuclear thyroid hormone receptor (TR) — heterodimer with RXR</div>
+        <div class="match-item" onclick="selectMatch(this,'ms6')" data-pair="1">GPCR — Gs → ↑cAMP</div>
+        <div class="match-item" onclick="selectMatch(this,'ms6')" data-pair="4">Membrane guanylyl cyclase → ↑cGMP</div>
+        <div class="match-item" onclick="selectMatch(this,'ms6')" data-pair="2">Cytoplasmic glucocorticoid receptor (GR) → HRE</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="ms6-score">0</span>/5 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('ms6')">Reset</button>
+  </div>
+
+  <!-- Set 6: Signaling Terms (moved) -->
+  <div class="match-set">
+    <div class="match-set-title">Set 6 — Signaling Mode → Definition</div>
+    <div class="match-set-hint">Match each mode of intercellular communication to its defining feature.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Signaling Mode</div>
+        <div class="match-item" onclick="selectMatch(this,'ms5')" data-pair="1">Endocrine</div>
+        <div class="match-item" onclick="selectMatch(this,'ms5')" data-pair="2">Paracrine</div>
+        <div class="match-item" onclick="selectMatch(this,'ms5')" data-pair="3">Autocrine</div>
+        <div class="match-item" onclick="selectMatch(this,'ms5')" data-pair="4">Neurocrine</div>
+      </div>
+      <div>
+        <div class="match-col-label">Defining Feature</div>
+        <div class="match-item" onclick="selectMatch(this,'ms5')" data-pair="3">Acts on the SAME cell that secreted it</div>
+        <div class="match-item" onclick="selectMatch(this,'ms5')" data-pair="1">Released into blood to reach distant target</div>
+        <div class="match-item" onclick="selectMatch(this,'ms5')" data-pair="4">Neuron releases hormone into blood (e.g., ADH)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms5')" data-pair="2">Diffuses to ADJACENT cell without entering blood</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="ms5-score">0</span>/4 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('ms5')">Reset</button>
+  </div>
+
+  <!-- Set 7: Reference Tab — Catecholamine Enzyme → Cofactor/Key Fact -->
+  <div class="match-set">
+    <div class="match-set-title">Set 7 · LO 3 — Catecholamine Enzyme → Cofactor / Key Fact (Reference Tab)</div>
+    <div class="match-set-hint">Tests the "Catecholamine Biosynthesis Enzyme Map" from the Reference tab. Match each enzyme to its cofactor / board-relevant fact.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Enzyme</div>
+        <div class="match-item" onclick="selectMatch(this,'ms7')" data-pair="1">Tyrosine hydroxylase</div>
+        <div class="match-item" onclick="selectMatch(this,'ms7')" data-pair="2">DOPA decarboxylase (AADC)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms7')" data-pair="3">Dopamine β-hydroxylase</div>
+        <div class="match-item" onclick="selectMatch(this,'ms7')" data-pair="4">PNMT</div>
+      </div>
+      <div>
+        <div class="match-col-label">Cofactor / Key Fact</div>
+        <div class="match-item" onclick="selectMatch(this,'ms7')" data-pair="3">Vitamin C + Cu²⁺; acts INSIDE the vesicle</div>
+        <div class="match-item" onclick="selectMatch(this,'ms7')" data-pair="1">BH4 (tetrahydrobiopterin); RATE-LIMITING step</div>
+        <div class="match-item" onclick="selectMatch(this,'ms7')" data-pair="4">Cortisol-inducible; only in adrenal medulla</div>
+        <div class="match-item" onclick="selectMatch(this,'ms7')" data-pair="2">Vitamin B6 (PLP); inhibited peripherally by carbidopa</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="ms7-score">0</span>/4 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('ms7')">Reset</button>
+  </div>
+
+  <!-- Set 8: Reference Tab — EC50 / Dose-Response Shift → Clinical Scenario -->
+  <div class="match-set">
+    <div class="match-set-title">Set 8 · LO 7 — Dose-Response Curve Shift → Clinical Scenario (Reference Tab)</div>
+    <div class="match-set-hint">Tests the "Hormone Response Curves &amp; EC50" reference table. Match each curve change to its clinical example.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Curve Change</div>
+        <div class="match-item" onclick="selectMatch(this,'ms8')" data-pair="1">RIGHTWARD shift (↑EC50; receptor down-regulation)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms8')" data-pair="2">LEFTWARD shift (↓EC50; up-regulation)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms8')" data-pair="3">Lowered maximum plateau (receptor + post-receptor defect)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms8')" data-pair="4">Requires a second hormone for effect (permissiveness)</div>
+      </div>
+      <div>
+        <div class="match-col-label">Clinical Example</div>
+        <div class="match-item" onclick="selectMatch(this,'ms8')" data-pair="4">Addisonian crisis — cortisol permits catecholamine vasoconstriction</div>
+        <div class="match-item" onclick="selectMatch(this,'ms8')" data-pair="1">Early T2DM — chronic hyperinsulinemia → receptor loss</div>
+        <div class="match-item" onclick="selectMatch(this,'ms8')" data-pair="2">Denervation hypersensitivity; prolonged fasting → ↑insulin receptors</div>
+        <div class="match-item" onclick="selectMatch(this,'ms8')" data-pair="3">Late T2DM — β-cell exhaustion + severe insulin resistance</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="ms8-score">0</span>/4 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('ms8')">Reset</button>
   </div>
 </div>
 
@@ -813,6 +1230,177 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
       <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
     </div>
     <div class="trap-exp"><strong>FALSE.</strong> These are <strong>EICOSANOIDS</strong> — lipid-derived autacoids built from <em>arachidonic acid</em> (a 20-carbon fatty acid released from membrane phospholipids by phospholipase A2). They are hydrophobic lipid hormones — NOT peptides. Made LOCALLY by most cells, they act mostly paracrine/autocrine via membrane GPCRs. NSAIDs (COX inhibitors) and zileuton (lipoxygenase inhibitor) target these pathways.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 10 — LO 2 (Solubility)</div>
+    <div class="trap-statement">"Thyroid hormones (T3 and T4) act through membrane G-protein coupled receptors using cAMP as a second messenger."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Thyroid hormone is an <em>amine</em> structurally (derived from tyrosine + iodine), but it is <strong>HYDROPHOBIC</strong> — so it CROSSES the cell membrane and acts through <strong>NUCLEAR (intracellular) receptors</strong>, altering gene transcription. Thyroid-response elements pair with RXR on DNA. This is why thyroid hormone has a slow (hours–days) but durable effect. Classic trap: T3/T4 are amines but BEHAVE like steroids (lipid-soluble, carrier-bound to TBG, long half-life, nuclear receptor). The ONLY amine-derived hormone that uses nuclear receptors.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 11 — LO 2 (Solubility)</div>
+    <div class="trap-statement">"Catecholamines are lipid-soluble amines that circulate bound to a carrier protein and bind intracellular receptors."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Catecholamines (E, NE, DA) are <strong>HYDROPHILIC</strong> amines — despite being derived from tyrosine. They circulate <em>FREE</em> in plasma (no carrier protein), have a <em>very short</em> half-life (seconds–minutes), and bind <strong>membrane GPCRs</strong> (α and β adrenergic receptors → G-protein / cAMP / IP3 signaling). Thyroid hormone is the ONE amine that breaks this rule (hydrophobic, carrier-bound, nuclear receptor).</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 12 — LO 6 (Nuclear Receptors)</div>
+    <div class="trap-statement">"All steroid hormones act via nuclear receptors that function as ligand-gated transcription factors."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>TRUE.</strong> Steroid hormones (cortisol, aldosterone, estrogen, progesterone, testosterone) plus vitamin D, thyroid hormone, and retinoic acid all bind members of the <strong>nuclear receptor superfamily</strong> — these are ligand-activated transcription factors with three domains: DBD (zinc-finger), LBD, TAD. Some steroid receptors reside in cytoplasm bound to HSP90 until ligand binds; others (T3R, VDR) sit pre-bound to DNA as heterodimers with RXR. Rapid non-genomic effects of steroids exist too, but the classical mechanism is transcription.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 13 — LO 6 (Kd / Affinity)</div>
+    <div class="trap-statement">"A lower Kd indicates stronger hormone–receptor affinity."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>TRUE.</strong> Kd is the <em>dissociation constant</em> — the hormone concentration at which 50% of receptors are occupied. A low Kd means very little hormone is required to saturate receptors, i.e., HIGH affinity. Insulin receptor Kd ≈ 10⁻⁹ M (nanomolar affinity). Kd is INVERSELY related to affinity — easy to mix up with EC50 (which can be shifted by receptor number, not just intrinsic affinity).</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 14 — LO 5 (Carriers)</div>
+    <div class="trap-statement">"TBG binds T3 and T4 specifically; CBG is the main carrier for cortisol; DBP is the main carrier for vitamin D."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>TRUE.</strong> Each hydrophobic hormone has a preferred carrier: <em>TBG</em> → T3/T4; <em>CBG (transcortin)</em> → cortisol (also progesterone); <em>DBP</em> → 25-OH vitamin D; <em>SHBG</em> → testosterone, DHT, estradiol. Albumin binds ALL hydrophobic hormones loosely (low affinity, high capacity). Classical exam trap: measure FREE hormone when carrier protein shifts (pregnancy ↑TBG → ↑total T4 but normal free T4).</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 15 — LO 2 (Vitamin D)</div>
+    <div class="trap-statement">"Vitamin D (calcitriol) acts as a hormone through an intracellular / nuclear receptor similar to steroid hormones."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>TRUE.</strong> Calcitriol (1,25-(OH)₂-D₃) is a <em>secosteroid</em> — it is structurally a steroid with a broken B-ring, made from cholesterol via UV photolysis in skin. It binds the <strong>VDR</strong> (vitamin D receptor), a nuclear receptor that heterodimerizes with RXR on VDR-response elements. Like cortisol/estrogen it exerts delayed transcriptional effects (Ca²⁺-binding protein, TRPV6, osteocalcin).</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 16 — LO 6 (RXR Partners)</div>
+    <div class="trap-statement">"RXR heterodimerizes with RAR, VDR, TR, and PPAR receptors."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>TRUE.</strong> RXR (retinoid X receptor) is a "promiscuous" heterodimer partner for several nuclear receptors: <em>RAR</em> (retinoic acid), <em>VDR</em> (vitamin D), <em>TR</em> (thyroid hormone), <em>PPAR</em> (fatty acids / fibrates / TZDs), <em>LXR</em> (oxysterols). These heterodimers sit on DNA response elements awaiting hormone. Clinical: fibrates (PPAR-α), pioglitazone (PPAR-γ), levothyroxine (TR), isotretinoin (RAR) all converge on RXR-heterodimer signaling.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 17 — LO 7 (Concentration vs Effect)</div>
+    <div class="trap-statement">"Higher plasma hormone concentrations always indicate stronger biological effect at the target tissue."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Biological effect depends on the <em>receptor</em>, not just hormone level. Hormone resistance (Type 2 DM, androgen insensitivity, Laron dwarfism) has HIGH hormone and LOW effect because receptors are defective or downregulated. Only the <em>free</em> fraction is active (carrier-bound is inactive). Also: extreme receptor down-regulation can flatten the dose-response curve (lower plateau). Always interpret hormone levels in context of clinical effect + TSH/feedback axis.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 18 — LO 5 (Immunoassay)</div>
+    <div class="trap-statement">"In a radioimmunoassay (RIA), radio-labeled hormone competes with the patient's hormone for a fixed amount of antibody."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>TRUE.</strong> RIA is a <em>competitive</em> binding assay — more patient hormone means less labeled hormone bound to antibody → signal inversely correlates with hormone concentration. Invented by Rosalyn Yalow (Nobel, 1977). Modern descendent = ELISA (enzyme/color detection instead of radioisotope). IRMA (immunoradiometric) uses a <em>sandwich</em> format — unlabeled capture Ab + radio-labeled detector Ab; signal correlates DIRECTLY.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 19 — LO 2 (Glycoprotein Subunits)</div>
+    <div class="trap-statement">"Glycoprotein hormones share a common alpha subunit and differ in their beta subunit, which confers specificity."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>TRUE.</strong> The four glycoprotein hormones (TSH, LH, FSH, hCG) share an <em>identical α-subunit</em>. Each has a <em>unique β-subunit</em> that gives it biological specificity. This is why pregnancy tests measure β-hCG. Clinical implication: at extremely high hCG (molar pregnancy, choriocarcinoma), partial similarity between hCG-β and TSH-β causes TSH-receptor cross-reactivity → thyrotoxicosis without thyroid disease.</div>
+  </div>
+
+</div>
+
+<!-- ══ REFERENCE MCQs ═════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-refmcq">
+  <div class="mcq-intro"><strong>Reference Tab MCQs:</strong> Five Step 1-style questions that directly test the content of the Reference tables. Select the best answer — the explanation appears automatically.</div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 1 of 5 · LO 2 — Hormone Class Properties</div>
+    <div class="mcq-stem">A medical student reviews the Hormone Classes Master Comparison and asks: "Which class behaves like a steroid (carrier-bound, nuclear receptor, long half-life) despite being structurally an amine?"</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">A</span>Catecholamines</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,true)"><span class="opt-letter">B</span>Thyroid hormone (T3/T4)</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">C</span>Eicosanoids</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">D</span>Peptide hormones</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">E</span>Vitamin D</div>
+    </div>
+    <div class="mcq-exp"><strong>B — Thyroid hormone.</strong> Per the reference table, thyroid hormone is an amine (derived from tyrosine + iodine on thyroglobulin) but <em>behaves like a steroid</em>: hydrophobic, carrier-bound (TBG), long half-life (T4 ~7 days), nuclear receptor. Catecholamines (A) are hydrophilic amines with GPCR signaling. Eicosanoids (C) are lipid-derived but act locally via GPCRs. Vitamin D (E) is a secosteroid (also nuclear receptor) — correct in signaling but structurally a steroid, not an amine.</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 2 of 5 · LO 3 — Catecholamine Pharmacology</div>
+    <div class="mcq-stem">Per the Catecholamine Biosynthesis Enzyme Map, carbidopa is added to L-DOPA for Parkinson's treatment because carbidopa:</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">A</span>Inhibits tyrosine hydroxylase in the periphery</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,true)"><span class="opt-letter">B</span>Inhibits peripheral DOPA decarboxylase and does not cross the BBB</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">C</span>Inhibits central PNMT so NE is not converted to Epi</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">D</span>Inhibits dopamine β-hydroxylase inside CNS vesicles</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">E</span>Acts as a direct dopamine receptor agonist</div>
+    </div>
+    <div class="mcq-exp"><strong>B.</strong> The enzyme map shows DOPA decarboxylase (AADC) is the second step (L-DOPA → Dopamine). Carbidopa blocks this enzyme <em>only in the periphery</em> because it does not cross the BBB → more administered L-DOPA reaches the CNS, where central DOPA decarboxylase converts it to active dopamine. Bonus: less peripheral dopamine → fewer side effects (nausea, hypotension). α-methyltyrosine (metyrosine) is the drug that blocks TH (A) — used in pheo pre-op. PNMT (C) is only in adrenal medulla.</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 3 of 5 · LO 6 — Receptor Signaling Pathways</div>
+    <div class="mcq-stem">Per the Membrane Receptor Signaling Quick Map, which of the following hormone pairs <em>both</em> use the Gq → IP3/DAG/Ca²⁺ pathway?</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">A</span>Glucagon and PTH</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">B</span>Insulin and IGF-1</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,true)"><span class="opt-letter">C</span>GnRH and TRH</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">D</span>Somatostatin and α₂-adrenergic</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">E</span>GH and prolactin</div>
+    </div>
+    <div class="mcq-exp"><strong>C.</strong> Gq-coupled hormones per the table: GnRH, TRH, ADH-V1, angiotensin II, oxytocin, α₁-adrenergic, gastrin (mnemonic: "GOAT HAG"). Glucagon + PTH (A) use Gs → cAMP. Insulin + IGF-1 (B) use RTK. Somatostatin + α₂ (D) use Gi → ↓cAMP. GH + prolactin (E) use JAK-STAT.</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 4 of 5 · LO 5 — Carrier Proteins</div>
+    <div class="mcq-stem">Per the Carrier Proteins reference table, a 24-year-old woman on combined oral contraceptives has a total serum cortisol of 32 μg/dL (upper normal 22). She feels well and has no Cushing features. The BEST explanation is:</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">A</span>Estrogen directly activates the adrenal fasciculata</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,true)"><span class="opt-letter">B</span>Estrogen ↑ hepatic CBG → ↑ total cortisol; free cortisol is normal (free-hormone hypothesis)</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">C</span>Estrogen displaces cortisol from albumin, raising free cortisol</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">D</span>Estrogen blocks hepatic 11β-HSD → ↑ active cortisol</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">E</span>OCPs contain cortisone which cross-reacts with the cortisol assay</div>
+    </div>
+    <div class="mcq-exp"><strong>B.</strong> Per the Carrier Proteins table, CBG (transcortin) binds cortisol (and progesterone). Estrogen (pregnancy, OCPs) induces hepatic CBG synthesis → more carrier → ↑ TOTAL cortisol. Only the <em>free</em> fraction is biologically active → patient is eucortisolic. Always order 24-hr urine FREE cortisol or late-night salivary cortisol (free) — not total — to evaluate suspected Cushing in OCP users.</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 5 of 5 · LO 7 — Dose-Response Curve</div>
+    <div class="mcq-stem">Per the Hormone Response Curves reference table, an insulin dose-response curve in a patient with severe T2DM shows a RIGHTWARD shift with a LOWERED maximum response. Which single statement best explains this combination?</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">A</span>Increased receptor number (up-regulation)</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">B</span>Denervation hypersensitivity of muscle</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,true)"><span class="opt-letter">C</span>Receptor down-regulation PLUS post-receptor signaling defects (SOCS, IRS-1 serine phosphorylation) + lipotoxicity</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">D</span>Permissiveness of cortisol for insulin action</div>
+      <div class="mcq-opt" onclick="answerRefMCQ(this,false)"><span class="opt-letter">E</span>Increased affinity of IGF-1 receptor for insulin</div>
+    </div>
+    <div class="mcq-exp"><strong>C.</strong> Per the table, a pure rightward shift (↑EC50) indicates receptor down-regulation. When the maximum plateau ALSO falls, there is an additional post-receptor defect — SOCS protein induction, serine (rather than tyrosine) phosphorylation of IRS-1, and intramyocellular lipid accumulation (lipotoxicity) all impair GLUT4 translocation even if insulin finds receptors. Up-regulation (A) and denervation hypersensitivity (B) cause LEFT shifts. Cortisol permissiveness (D) is LO 7's separate concept (needed for another hormone's effect).</div>
   </div>
 
 </div>
@@ -1031,6 +1619,19 @@ function judgeTrap(btn,correct){
   btn.classList.add(isCorrect?'sel-correct':'sel-wrong');
   const exp=card.querySelector('.trap-exp');
   exp.className='trap-exp '+(isCorrect?'show-c':'show-w');
+}
+
+// Reference-tab MCQ handler
+function answerRefMCQ(el,correct){
+  const item=el.closest('.mcq-item');
+  const opts=item.querySelectorAll('.mcq-opt');
+  opts.forEach(o=>o.classList.add('locked'));
+  el.classList.add(correct?'correct':'wrong');
+  opts.forEach(o=>{
+    if(o!==el&&o.getAttribute('onclick').includes(',true)')) o.classList.add('correct');
+  });
+  const exp=item.querySelector('.mcq-exp');
+  exp.classList.add('show');
 }
 </script>
 </body>
