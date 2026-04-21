@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>END03 Hypothalamic-Pituitary Relationships II — Hub 1 Core Concepts</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;background:#FEFBF0;color:#2C2C2C;min-height:100vh;line-height:1.6}
+.topnav{background:#1C1400;border-bottom:3px solid #D97706;padding:0 28px;height:54px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-brand-text{font-family:'Crimson Pro',Georgia,serif;font-size:1.35em;font-weight:700;color:#FEF3C7;letter-spacing:.02em}
+.nav-brand-sub{font-size:.72em;color:#FBBF24;font-weight:500;margin-left:6px;letter-spacing:.04em;text-transform:uppercase}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.nav-back{display:inline-flex;align-items:center;gap:6px;font-size:.8em;color:rgba(255,255,255,0.7);font-weight:500;padding:6px 14px;border-radius:5px;border:1px solid rgba(255,255,255,0.2);text-decoration:none;transition:all .2s}
+.nav-back:hover{border-color:#FBBF24;color:#FBBF24}
+.container{max-width:1060px;margin:0 auto;padding:28px 24px}
+.header{background:#FFFFFF;border:1px solid #E8DCB8;border-radius:6px;padding:28px 32px;margin-bottom:24px;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#1C1400 0%,#D97706 50%,#1C1400 100%)}
+.hub-tag{display:inline-block;background:#1C1400;color:#FEF3C7;font-size:.7em;font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:4px 12px;border-radius:3px;margin-bottom:10px}
+.header h1{font-family:'Crimson Pro',Georgia,serif;font-size:2em;color:#854D0E;margin-bottom:6px;line-height:1.25;font-weight:700}
+.header h1 span{color:#B45309;font-weight:600;font-style:italic}
+.header .subtitle{color:#5A5A5A;font-size:.88em;line-height:1.6;margin-bottom:14px}
+.source-strip{display:flex;gap:8px;flex-wrap:wrap}
+.source-badge{background:#FEFBF0;border:1px solid #E8DCB8;border-radius:4px;padding:4px 10px;font-size:.75em;color:#5A5A5A}
+.source-badge strong{color:#854D0E}
+.hub-prog{background:#FFF;border:1px solid #E8DCB8;border-radius:6px;padding:12px 18px;margin-bottom:22px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hub-step{padding:7px 16px;border-radius:4px;font-size:.82em;font-weight:600}
+.hub-step.current{background:#854D0E;color:#FEF3C7}
+.hub-step.next{background:#FEFBF0;border:1px solid #E8DCB8;color:#7A7060;text-decoration:none;transition:all .2s}
+.hub-step.next:hover{border-color:#D97706;color:#B45309}
+.hub-arrow{color:#D97706;font-size:1em;font-weight:700}
+.hub-prog-label{font-size:.76em;color:#7A7060;margin-right:6px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:24px}
+.stat-card{background:#FFF;border:1px solid #E8DCB8;border-radius:6px;padding:14px;text-align:center}
+.stat-num{font-family:'Crimson Pro',Georgia,serif;font-size:1.8em;font-weight:700;color:#854D0E}
+.stat-label{font-size:.68em;color:#7A7060;text-transform:uppercase;letter-spacing:.08em;margin-top:2px;font-weight:600}
+.tab-nav{display:flex;gap:2px;flex-wrap:wrap;margin-bottom:26px;border-bottom:2px solid #E8DCB8}
+.tab-btn{background:none;border:none;color:#7A7060;font-size:.84em;font-weight:600;padding:11px 18px;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;margin-bottom:-2px;font-family:inherit}
+.tab-btn:hover{color:#854D0E}
+.tab-btn.active{color:#854D0E;border-bottom-color:#D97706}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+.fc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:16px}
+.fc{perspective:1000px;cursor:pointer;position:relative;z-index:1}
+.fc-inner{position:relative;transform-style:preserve-3d;transition:transform .5s,height .3s}
+.fc.flipped{z-index:10}
+.fc.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;top:0;left:0;right:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:6px;padding:22px}
+.fc-front{background:#FFFFFF;border:1px solid #E8DCB8;border-top:3px solid #854D0E}
+.fc-back{transform:rotateY(180deg);background:#FFFDF0;border:1px solid #D97706}
+.fc-label{font-size:.66em;font-weight:700;color:#D97706;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.fc-q{font-size:.92em;color:#2C2C2C;line-height:1.55}
+.fc-a{font-size:.88em;color:#2C2C2C;line-height:1.65}
+.fc-a strong{color:#854D0E}
+.fc-flip-hint{font-size:.67em;color:#9A9080;margin-top:10px;font-style:italic}
+.fc-progress{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:.82em;color:#7A7060}
+.fc-progress .prog-num{color:#854D0E;font-weight:700}
+.fib-list{display:flex;flex-direction:column;gap:16px}
+.fib-card{background:#FFFFFF;border:1px solid #E8DCB8;border-radius:6px;padding:22px;border-left:4px solid #854D0E}
+.fib-num{font-size:.68em;font-weight:700;color:#D97706;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.fib-prompt{font-size:.93em;color:#2C2C2C;line-height:1.65;margin-bottom:12px}
+.fib-prompt strong{color:#854D0E}
+.fib-hint{font-size:.8em;color:#7A7060;font-style:italic;margin-bottom:10px}
+.fib-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.fib-input{background:#FEFBF0;border:1px solid #E8DCB8;border-radius:5px;padding:9px 14px;color:#2C2C2C;font-size:.9em;font-family:inherit;min-width:200px;transition:border-color .2s}
+.fib-input:focus{outline:none;border-color:#D97706;background:#FFFDF0}
+.fib-input.correct{border-color:#2E7D32;background:#F1F8F2}
+.fib-input.incorrect{border-color:#C62828;background:#FEF5F5}
+.fib-btn{background:#854D0E;border:none;color:#FEF3C7;padding:9px 18px;border-radius:5px;cursor:pointer;font-size:.82em;font-weight:600;font-family:inherit}
+.fib-btn:hover{background:#9A5A10}
+.fib-reveal-btn{background:#FFF;border:1px solid #E8DCB8;color:#7A7060;padding:9px 16px;border-radius:5px;cursor:pointer;font-size:.82em;font-weight:600;font-family:inherit;transition:all .2s}
+.fib-reveal-btn:hover{border-color:#D97706;color:#B45309}
+.fib-feedback{font-size:.82em;margin-top:8px;padding:7px 12px;border-radius:4px;display:none}
+.fib-feedback.correct{background:#F1F8F2;border:1px solid #A5D6A7;color:#2E7D32;display:block}
+.fib-feedback.incorrect{background:#FEF5F5;border:1px solid #FFCDD2;color:#C62828;display:block}
+.ordering-intro,.match-intro,.trap-intro{background:#FFFDF0;border:1px solid #F3E4B2;border-radius:6px;padding:14px 18px;margin-bottom:20px;font-size:.84em;color:#5A5A5A;line-height:1.6}
+.ordering-intro strong,.match-intro strong,.trap-intro strong{color:#854D0E}
+.trap-intro{border-left:4px solid #D97706}
+.order-drill{background:#FFFFFF;border:1px solid #E8DCB8;border-left:4px solid #D97706;border-radius:6px;padding:22px;margin-bottom:20px}
+.drill-title{font-family:'Crimson Pro',Georgia,serif;font-size:1.05em;font-weight:700;color:#854D0E;margin-bottom:5px}
+.drill-hint{font-size:.79em;color:#7A7060;margin-bottom:14px;font-style:italic}
+.order-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;min-height:40px}
+.order-item{background:#FEFBF0;border:1px solid #E8DCB8;border-radius:5px;padding:12px 16px;cursor:grab;font-size:.86em;color:#2C2C2C;line-height:1.4;display:flex;align-items:flex-start;gap:10px;transition:all .15s;user-select:none}
+.order-item:active{cursor:grabbing}
+.order-item:hover{border-color:#D97706;background:#FFFDF0}
+.order-item.drag-over{border-color:#D97706;background:#FEF3C7;transform:scale(1.01)}
+.order-item .item-grip{color:#D97706;font-size:1.1em;flex-shrink:0;margin-top:1px}
+.order-item .item-text{flex:1}
+.order-item.correct-pos{background:#F1F8F2;border-color:#66BB6A}
+.order-item.wrong-pos{background:#FEF5F5;border-color:#EF5350;color:#991b1b}
+.order-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.order-check-btn{background:#854D0E;border:none;color:#FEF3C7;padding:9px 18px;border-radius:5px;cursor:pointer;font-size:.84em;font-weight:600;font-family:inherit}
+.order-check-btn:hover{background:#9A5A10}
+.order-ghost-btn{background:none;border:1px solid #E8DCB8;color:#7A7060;padding:9px 18px;border-radius:5px;cursor:pointer;font-size:.84em;font-weight:600;font-family:inherit}
+.order-ghost-btn:hover{border-color:#D97706;color:#B45309}
+.order-feedback{font-size:.84em;padding:8px 14px;border-radius:5px;margin-bottom:8px}
+.order-feedback.correct{background:#F1F8F2;border:1px solid #66BB6A;color:#2E7D32}
+.order-feedback.incorrect{background:#FEF5F5;border:1px solid #EF5350;color:#C62828}
+.order-answer{background:#FFFDF0;border:1px solid #F3E4B2;border-radius:5px;padding:14px 18px;font-size:.83em;margin-top:8px;display:none}
+.order-answer ol{padding-left:20px;line-height:1.9}
+.order-answer li span{color:#854D0E;font-weight:600}
+.match-set{background:#FFFFFF;border:1px solid #E8DCB8;border-left:4px solid #854D0E;border-radius:6px;padding:22px;margin-bottom:20px}
+.match-set-title{font-family:'Crimson Pro',Georgia,serif;font-size:1.05em;font-weight:700;color:#854D0E;margin-bottom:4px}
+.match-set-hint{font-size:.79em;color:#7A7060;margin-bottom:14px;font-style:italic}
+.match-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.match-cols{grid-template-columns:1fr}}
+.match-col-label{font-size:.7em;font-weight:700;color:#D97706;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.match-item{background:#FEFBF0;border:1px solid #E8DCB8;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px}
+.match-item:hover:not(.matched-correct):not(.matched-wrong){border-color:#D97706!important;background:#FFFDF0!important}
+.match-item.selected{border-color:#854D0E!important;background:#FEF3C7!important;color:#854D0E!important;font-weight:600}
+.match-item.matched-correct{border-color:#66BB6A!important;background:#F1F8F2!important;color:#2E7D32!important;cursor:default}
+.match-item.flash-wrong{animation:flashRed .5s ease forwards}
+@keyframes flashRed{0%{background:#FEF5F5;border-color:#EF5350}100%{background:#FEFBF0;border-color:#E8DCB8}}
+.match-score{margin-top:12px;font-size:.83em;color:#7A7060}
+.match-score .correct-count{color:#2E7D32;font-weight:700}
+.match-reset-btn{background:none;border:1px solid #E8DCB8;color:#7A7060;padding:7px 16px;border-radius:5px;cursor:pointer;font-size:.8em;font-weight:600;font-family:inherit;margin-top:10px}
+.match-reset-btn:hover{border-color:#D97706;color:#B45309}
+.trap-card{background:#FFFFFF;border:1px solid #E8DCB8;border-radius:6px;padding:22px;margin-bottom:18px;border-left:4px solid #D97706}
+.trap-num{font-size:.68em;font-weight:700;color:#D97706;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.trap-statement{font-family:'Crimson Pro',Georgia,serif;font-size:1em;color:#2C2C2C;line-height:1.55;margin-bottom:16px;background:#FFFDF0;border-radius:5px;padding:16px;border-left:3px solid #D97706;font-style:italic}
+.trap-btns{display:flex;gap:10px;margin-bottom:8px}
+.trap-btn{padding:9px 28px;border-radius:5px;border:2px solid;font-size:.9em;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+.trap-btn-true{background:none;border-color:#66BB6A;color:#2E7D32}
+.trap-btn-true:hover:not(:disabled){background:#F1F8F2;border-color:#43A047}
+.trap-btn-false{background:none;border-color:#EF5350;color:#C62828}
+.trap-btn-false:hover:not(:disabled){background:#FEF5F5;border-color:#E53935}
+.trap-btn:disabled{opacity:.5;cursor:not-allowed}
+.trap-btn.sel-correct{background:#F1F8F2;border-color:#43A047;color:#2E7D32}
+.trap-btn.sel-wrong{background:#FEF5F5;border-color:#E53935;color:#C62828}
+.trap-exp{padding:14px 18px;border-radius:5px;font-size:.87em;line-height:1.65;margin-top:4px;display:none}
+.trap-exp.show-c{background:#F1F8F2;border:1px solid #A5D6A7;color:#1B5E20;display:block}
+.trap-exp.show-w{background:#FEF5F5;border:1px solid #FFCDD2;color:#B71C1C;display:block}
+.trap-exp strong{color:#854D0E}
+.ref-section{margin-bottom:28px}
+.ref-title{font-family:'Crimson Pro',Georgia,serif;font-size:.95em;font-weight:700;color:#854D0E;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #D97706}
+.ref-table{width:100%;border-collapse:collapse;font-size:.84em}
+.ref-table th{background:#854D0E;color:#FEF3C7;font-weight:600;text-align:left;padding:10px 14px;font-size:.88em;letter-spacing:.03em}
+.ref-table td{padding:10px 14px;border-bottom:1px solid #F0E4C4;color:#2C2C2C;vertical-align:top;line-height:1.55;background:#FFF}
+.ref-table tr:nth-child(even) td{background:#FAF5E5}
+.ref-table .key{color:#854D0E;font-weight:600}
+.ref-note{background:#FFFDF0;border:1px solid #F3E4B2;border-radius:5px;padding:13px 18px;font-size:.83em;color:#5A5A5A;line-height:1.6;margin-top:10px}
+.ref-note strong{color:#854D0E}
+.footer{text-align:center;font-size:.78em;color:#7A7060;border-top:2px solid #E8DCB8;padding-top:16px;margin-top:32px}
+.footer a{color:#854D0E;text-decoration:none;font-weight:600}
+.footer a:hover{color:#D97706;text-decoration:underline}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <div class="nav-brand">
+    <span class="nav-brand-text">HoyaDocs</span>
+    <span class="nav-brand-sub">Endocrine Block</span>
+  </div>
+  <div class="nav-actions">
+    <a href="../active-recall-hub.html" class="nav-back">← Active Drill Hub</a>
+  </div>
+</nav>
+<div class="container">
+
+<div class="header">
+  <div class="hub-tag">Hub 1 — Core Concepts</div>
+  <h1>Hypothalamic–Pituitary Relationships II <span>Active Drills</span></h1>
+  <div class="subtitle">
+    Flashcards · Fill-in-Blank · Drag-and-Drop Ordering · Matching · Interactive Test Traps<br>
+    Lecture 03 · Endocrine Block · Growth Hormone Axis — LOs 1–5
+  </div>
+  <div class="source-strip">
+    <div class="source-badge"><strong>Primary:</strong> Hypothalamic-Pituitary Relationships (part 2) — GH Axis</div>
+    <div class="source-badge"><strong>LOs:</strong> 1–5</div>
+    <div class="source-badge"><strong>Review:</strong> BRS Physiology Ch. 9 · First Aid Endocrine</div>
+  </div>
+</div>
+
+<div class="hub-prog">
+  <span class="hub-prog-label">Hub Progression:</span>
+  <span class="hub-step current">Hub 1 — Core Concepts</span>
+  <span class="hub-arrow">→</span>
+  <a href="end03-hub2-hypothalamic-pituitary-relationships-ii.html" class="hub-step next">Hub 2 — Step 1 Extensions</a>
+  <span class="hub-arrow">→</span>
+  <a href="end03-hub3-hypothalamic-pituitary-relationships-ii.html" class="hub-step next">Hub 3 — Practice Questions</a>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-card"><div class="stat-num">16</div><div class="stat-label">Flashcards</div></div>
+  <div class="stat-card"><div class="stat-num">10</div><div class="stat-label">Fill-in-Blank</div></div>
+  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Ordering Drills</div></div>
+  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Match Sets</div></div>
+  <div class="stat-card"><div class="stat-num">8</div><div class="stat-label">Test Traps</div></div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('flashcards',this)">Flashcards</button>
+  <button class="tab-btn" onclick="switchTab('fib',this)">Fill-in-Blank</button>
+  <button class="tab-btn" onclick="switchTab('ordering',this)">Ordering</button>
+  <button class="tab-btn" onclick="switchTab('matching',this)">Matching</button>
+  <button class="tab-btn" onclick="switchTab('traps',this)">Test Traps</button>
+  <button class="tab-btn" onclick="switchTab('reference',this)">Reference</button>
+</div>
+
+<!-- ══ FLASHCARDS ══ -->
+<div class="tab-pane active" id="tab-flashcards">
+  <div class="fc-progress"><span>Click a card to flip · <span class="prog-num">16</span> cards total</span><span>LOs 1–5</span></div>
+  <div class="fc-grid">
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 1 — GH Pathway</div><div class="fc-q">Trace the GH signaling axis from hypothalamus → pituitary → liver → peripheral tissues.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Hypothalamus:</strong> ventromedial nucleus → GHRH (+); periventricular nucleus → somatostatin/GHIH (−)<br><strong>Anterior pituitary:</strong> somatotrope (acidophil) → GH (191-AA peptide)<br><strong>Liver:</strong> GH binds hepatic JAK2-STAT5 receptor → ↑IGF-1 (somatomedin C, 70-AA peptide)<br><strong>Target tissues:</strong> IGF-1 binds IGF-1R (RTK) on muscle, bone, cartilage, fat → mitogenic + anabolic + cell-survival effects</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 1 — Receptors &amp; Signaling</div><div class="fc-q">What receptor types do GH and IGF-1 use, and what pathways do they trigger?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>GH receptor:</strong> single-pass cytokine receptor → dimerizes on GH binding → <em>JAK2 / STAT5</em> pathway → gene transcription (e.g., IGF-1 synthesis)<br><br><strong>IGF-1 receptor:</strong> receptor TYROSINE KINASE (heterotetramer similar to insulin receptor) → autophosphorylation → IRS → PI3K/Akt + MAPK → anabolic + mitogenic effects<br><br><strong>GHRH &amp; somatostatin:</strong> both use GPCRs on somatotropes — GHRH via Gs (↑cAMP); somatostatin via Gi (↓cAMP).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 1 — Carriers</div><div class="fc-q">What carries GH and IGF-1 in the blood, and how does this affect their half-lives?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>GH:</strong> ~50% bound to <em>GHBP</em> (growth hormone binding protein — proteolytic fragment of the GH receptor). Despite binding, ½-life is short (~20 min) because GH is small enough to be filtered by the kidney.<br><br><strong>IGF-1:</strong> nearly 100% bound to <em>IGFBPs</em> (IGFBP-1 through -6; mainly IGFBP-3) → ½-life ~12 HOURS (&gt;30× longer than GH). <em>IGFBP proteases</em> free IGF-1 in target tissues to activate it.<br><br><strong>Clinical:</strong> IGF-1 is stable and integrates GH exposure over 24h — ideal for screening acromegaly.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 2 — Direct vs Indirect GH</div><div class="fc-q">Contrast the direct effects of GH vs. the indirect (IGF-1-mediated) effects.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Direct effects (GH itself — catabolic / diabetogenic):</strong><br>• ↑ lipolysis in adipose → ↑ FFAs<br>• ↓ glucose uptake in muscle + adipose (<strong>insulin resistance</strong>)<br>• ↑ hepatic gluconeogenesis → <strong>hyperglycemia</strong><br><br><strong>Indirect effects (via IGF-1 — anabolic / growth):</strong><br>• ↑ protein synthesis (amino acid uptake, RNA translation)<br>• ↑ chondrocyte proliferation in growth plates → LINEAR BONE GROWTH<br>• ↑ cell proliferation, ↓ apoptosis in most tissues<br>• ↑ organ size</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 2 — Diabetogenic Effect</div><div class="fc-q">Why is GH called a "diabetogenic" hormone, and how does this affect clinical populations?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">GH <em>reduces</em> insulin sensitivity in skeletal muscle and adipose → fewer GLUT4 transporters at membrane → glucose stays in blood → <strong>insulin resistance → hyperglycemia</strong>.<br><br>Useful between meals (keeps glucose available for CNS) but harmful when chronic.<br><br><strong>Acromegaly:</strong> ~30–50% develop glucose intolerance / type 2 diabetes. Dieback in diabetes control is often the first clue to acromegaly in a pre-existing diabetic.<br><br><strong>Insulin is PERMISSIVE for GH</strong>: insulin up-regulates hepatic GH receptors → needed to drive IGF-1 synthesis.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 2 — Tissue-Specific Effects</div><div class="fc-q">For each: liver, adipose, skeletal muscle, bone/cartilage — list GH and IGF-1 effects.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Liver:</strong> GH → IGF-1 synthesis (primary site); ↑ gluconeogenesis<br><strong>Adipose:</strong> GH → lipolysis, ↓ glucose uptake<br><strong>Skeletal muscle:</strong> GH → insulin resistance (↓ glucose uptake); IGF-1 → protein synthesis + hypertrophy<br><strong>Bone/cartilage:</strong> IGF-1 → chondrocyte proliferation at epiphyseal plates + osteoblast activity → LINEAR GROWTH (before epiphyseal closure)<br><br><em>Fed state:</em> balanced meal → insulin + AA → GH drives IGF-1 → growth<br><em>Fasted state:</em> low glucose → high GH → lipolysis + hyperglycemia (glucose-sparing)</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 3 — Pulsatility</div><div class="fc-q">Describe the normal pattern of GH secretion across 24 hours. When is the largest pulse?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Pulsatile:</strong> ~one pulse every 4 hours, driven by reciprocal pulses of GHRH (peaks) and somatostatin (troughs).<br><br><strong>Largest pulse:</strong> during <em>stage 4 / slow-wave (deep) sleep</em>, ~midnight in most people.<br><br><strong>Also stimulating:</strong> melatonin release (reinforces nocturnal pulse), exercise, stress (acute).<br><br><strong>Clinical implication:</strong> random daytime GH is unreliable — measure IGF-1 (integrated readout) for screening acromegaly/deficiency.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 3 — Lifetime Trajectory</div><div class="fc-q">How do baseline GH and IGF-1 levels change across the human lifespan?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Infancy/childhood:</strong> GH moderate; IGF-1 rises slowly<br><strong>Puberty:</strong> HIGHEST GH (and IGF-1) levels — sex steroids sharply increase GHRH/GH amplitude → adolescent growth spurt<br><strong>Adulthood:</strong> plateau at lower levels<br><strong>Senescence (elderly):</strong> further decline ("somatopause") — correlates with sarcopenia, ↑ visceral fat, bone loss<br><br>Sex steroids (estradiol, testosterone) are PERMISSIVE / stimulatory for GH — their decline in menopause/andropause contributes to the old-age decline.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 4 — Stimulators</div><div class="fc-q">List the major physiologic stimulators of GH release.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>↓ glucose</strong> (fasting, hypoglycemia)<br><strong>↓ free fatty acids</strong><br><strong>↑ amino acids</strong> (arginine is the classic provocation test)<br><strong>Fasting / prolonged caloric deprivation</strong><br><strong>Deep sleep</strong> (stage 4)<br><strong>Exercise</strong><br><strong>Stress</strong> (physiologic cortisol bursts)<br><strong>Sex steroids</strong> (estradiol, testosterone)<br><strong>Ghrelin</strong> (from stomach; potent GHS-R agonist)</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 4 — Inhibitors</div><div class="fc-q">List the major physiologic and pathologic inhibitors of GH.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>↑ glucose</strong> (hyperglycemia — basis of oral glucose tolerance test for acromegaly)<br><strong>↑ free fatty acids</strong><br><strong>Hypercortisolemia</strong> (chronic stress, Cushing syndrome → growth failure in children)<br><strong>Pregnancy</strong> (human placental lactogen/hPL, aka hCS, mimics GH and suppresses endogenous release)<br><strong>Somatostatin (GHIH)</strong> — the hypothalamic counter-regulator<br><strong>IGF-1 itself</strong> (long-loop feedback)<br><strong>GH itself</strong> (short + ultra-short loop)</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 4 — Feedback Loops</div><div class="fc-q">Map the three feedback loops in the GH axis. What suppresses what?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Long loop:</strong> IGF-1 → ↓ GHRH + ↓ GH; also stimulates somatostatin<br><br><strong>Short loop:</strong> GH → ↓ GHRH + ↑ somatostatin release from hypothalamus<br><br><strong>Ultra-short loop:</strong> GHRH autoinhibits; somatostatin autoinhibits → creates SHARP, pulsatile GH peaks with clean troughs<br><br><em>Why it matters:</em> pulsatility preserves target-tissue sensitivity. Continuous GH exposure (e.g., acromegaly) leads to receptor down-regulation and desensitization.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 5 — Pituitary Dwarfism</div><div class="fc-q">Define GH deficiency in children, its biochemistry, and the first-line treatment.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>GH deficiency (pituitary dwarfism):</strong> inadequate GH → <em>proportionate</em> short stature (limbs in proportion to trunk)<br><br><strong>Labs:</strong> LOW GH (after provocative stimulation e.g., arginine/insulin tolerance test) AND LOW IGF-1<br><br><strong>Tx:</strong> recombinant human GH (somatropin) subcutaneous, daily. Most effective BEFORE epiphyseal closure. Also used for Turner syndrome, Prader-Willi, chronic kidney disease.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 5 — Laron Syndrome</div><div class="fc-q">What is Laron syndrome, and how do labs differ from classic GH deficiency?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Laron syndrome = GH INSENSITIVITY</strong> (loss-of-function mutation of GH receptor; autosomal recessive).<br><br><strong>Phenotype:</strong> severe short stature (similar to dwarfism) + obesity + hypoglycemia + frontal bossing.<br><br><strong>Labs:</strong> <em>HIGH GH + LOW IGF-1</em> (pituitary makes GH, but liver can't respond → no IGF-1).<br><br><strong>Treatment:</strong> recombinant IGF-1 (<em>mecasermin</em>) — replaces the downstream mediator. GH replacement does NOT work here (receptor defect).<br><br>Dramatically, people with Laron are PROTECTED from cancer and diabetes.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 5 — Gigantism vs Acromegaly</div><div class="fc-q">What determines whether GH excess causes gigantism or acromegaly?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Gigantism:</strong> GH excess BEFORE epiphyseal closure → linear bone growth → extreme tall stature + organ enlargement.<br><strong>Acromegaly:</strong> GH excess AFTER epiphyseal closure → long bones can't grow in length, but thicken. Results in <em>jaw prognathism, frontal bossing, hand/foot enlargement, macroglossia, organomegaly, sleep apnea, cardiomegaly</em>.<br><br>Both usually from a <strong>GH-secreting pituitary adenoma</strong> (somatotrope adenoma) — the 2nd most common functional pituitary tumor (after prolactinoma).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 5 — Dx Workup</div><div class="fc-q">Best screening and confirmatory tests for acromegaly?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Screen:</strong> serum <em>IGF-1</em> (stable, integrates GH exposure over 24h; not pulsatile like GH itself)<br><br><strong>Confirm:</strong> <em>oral glucose tolerance test (OGTT)</em> — give 75g glucose, measure GH at 0/30/60/90/120 min. Normal: GH suppresses &lt;1 ng/mL. Acromegaly: GH does NOT suppress (tumor is feedback-independent).<br><br><strong>Localize:</strong> MRI sella after biochemical confirmation (~95% have pituitary adenoma).<br><br>Also check other anterior pituitary hormones (co-secretion, mass effects).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 5 — Treatment</div><div class="fc-q">List the treatment options for acromegaly in order of first to last choice.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>1. Surgery</strong> — transsphenoidal resection (first line; ~70% cure with microadenoma).<br><br><strong>2. Medical therapy</strong> (if surgery fails / unresectable):<br>• <em>Somatostatin analogs</em> — octreotide, lanreotide, pasireotide (↓ GH and shrink tumor)<br>• <em>Pegvisomant</em> — GH receptor ANTAGONIST (blocks peripheral effects; doesn't shrink tumor)<br>• <em>Cabergoline</em> — dopamine D2 agonist (some tumors co-secrete PRL)<br><br><strong>3. Radiation</strong> (stereotactic/gamma knife) — last resort; slow effect over years.</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ FIB ══ -->
+<div class="tab-pane" id="tab-fib">
+  <div class="fib-list">
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 01 — LO 1</div>
+      <div class="fib-prompt">Growth hormone is a <strong>_____________</strong>-AA peptide released from <strong>_____________</strong> cells (acidophils) of the anterior pituitary.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="length..." data-answers="191">
+        <input class="fib-input" type="text" placeholder="cell name..." data-answers="somatotrope,somatotropes,somatotroph,somatotrophs">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 02 — LO 1</div>
+      <div class="fib-prompt">GH binds a <strong>_____________</strong>-type receptor on hepatocytes, which activates the <strong>_____________</strong>-STAT5 pathway to induce synthesis of IGF-1 (also called <strong>_____________</strong> C).</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="receptor family..." data-answers="cytokine,class I cytokine,type I cytokine">
+        <input class="fib-input" type="text" placeholder="kinase..." data-answers="jak,jak2">
+        <input class="fib-input" type="text" placeholder="alternate IGF-1 name..." data-answers="somatomedin">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 03 — LO 1</div>
+      <div class="fib-prompt">GH has a short half-life of approximately <strong>_____________</strong> minutes, while IGF-1 has a much longer half-life of approximately <strong>_____________</strong> hours because it is bound to <strong>_____________</strong>.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="GH t½..." data-answers="20,15-20,20 min">
+        <input class="fib-input" type="text" placeholder="IGF t½..." data-answers="12">
+        <input class="fib-input" type="text" placeholder="carrier..." data-answers="igfbp,igfbp-3,igf binding protein">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 04 — LO 2</div>
+      <div class="fib-prompt">GH has DIRECT effects (catabolic): ↑ lipolysis, ↑ gluconeogenesis, and <strong>_____________</strong> on muscle/adipose — producing a <strong>_____________</strong> (blood-sugar-raising) effect. INDIRECT effects via IGF-1 are <strong>_____________</strong> (growth-promoting).</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="insulin effect..." data-answers="insulin resistance,resistance,decreased insulin sensitivity">
+        <input class="fib-input" type="text" placeholder="metabolic label..." data-answers="diabetogenic,hyperglycemic">
+        <input class="fib-input" type="text" placeholder="IGF effect..." data-answers="anabolic,anabolism,protein synthesis">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 05 — LO 3</div>
+      <div class="fib-prompt">The largest physiological GH pulse occurs during <strong>_____________</strong> sleep (stage 4). Across the lifespan, GH is HIGHEST during <strong>_____________</strong>, and declines in the elderly — a phenomenon called <strong>_____________</strong>.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="sleep type..." data-answers="deep,slow-wave,slow wave,stage 4">
+        <input class="fib-input" type="text" placeholder="life stage..." data-answers="puberty,adolescence">
+        <input class="fib-input" type="text" placeholder="decline name..." data-answers="somatopause">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 06 — LO 4</div>
+      <div class="fib-prompt">The gastric hormone <strong>_____________</strong> is a potent stimulator of GH release via the GHS-R receptor. Oral glucose SUPPRESSES GH in healthy subjects — the basis of the <strong>_____________</strong> diagnostic test for acromegaly.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="hunger hormone..." data-answers="ghrelin">
+        <input class="fib-input" type="text" placeholder="test name..." data-answers="ogtt,oral glucose tolerance test,oral glucose tolerance">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 07 — LO 4</div>
+      <div class="fib-prompt">Chronic hypercortisolemia (Cushing syndrome) <strong>_____________</strong> GH release and is a classic cause of <strong>_____________</strong> in children. Pregnancy also suppresses endogenous GH because placental <strong>_____________</strong> (hPL) acts like GH and feeds back on the hypothalamus.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="direction..." data-answers="inhibits,suppresses,decreases">
+        <input class="fib-input" type="text" placeholder="child finding..." data-answers="growth failure,short stature,growth arrest,failure to thrive">
+        <input class="fib-input" type="text" placeholder="placental hormone..." data-answers="lactogen,human placental lactogen,hcs,chorionic somatomammotropin">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 08 — LO 5</div>
+      <div class="fib-prompt">In Laron syndrome (GH receptor mutation), serum GH is <strong>_____________</strong> while IGF-1 is <strong>_____________</strong>. Treatment uses recombinant <strong>_____________</strong> (mecasermin) because GH replacement cannot bypass the receptor defect.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="GH level..." data-answers="high,elevated,↑,increased">
+        <input class="fib-input" type="text" placeholder="IGF level..." data-answers="low,decreased,↓">
+        <input class="fib-input" type="text" placeholder="drug..." data-answers="igf-1,igf,mecasermin">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 09 — LO 5</div>
+      <div class="fib-prompt">GH excess BEFORE epiphyseal closure causes <strong>_____________</strong>; AFTER closure it causes <strong>_____________</strong>. Screening test: <strong>_____________</strong>. Confirmatory test: oral glucose fails to suppress GH.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="pre-puberty..." data-answers="gigantism">
+        <input class="fib-input" type="text" placeholder="post-puberty..." data-answers="acromegaly">
+        <input class="fib-input" type="text" placeholder="screening marker..." data-answers="igf-1,igf1,insulin-like growth factor-1">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 10 — LO 5</div>
+      <div class="fib-prompt">First-line treatment for acromegaly is <strong>_____________</strong>. A somatostatin analog used as adjunct is <strong>_____________</strong>; a GH receptor antagonist is <strong>_____________</strong>.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="first line..." data-answers="surgery,transsphenoidal surgery,transsphenoidal resection,resection">
+        <input class="fib-input" type="text" placeholder="SST analog..." data-answers="octreotide,lanreotide,pasireotide">
+        <input class="fib-input" type="text" placeholder="receptor blocker..." data-answers="pegvisomant">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ ORDERING ══ -->
+<div class="tab-pane" id="tab-ordering">
+  <div class="ordering-intro"><strong>Instructions:</strong> Drag items into correct order, then click "Check Order." Use "Show Answer" if stuck.</div>
+
+  <div class="order-drill">
+    <div class="drill-title">Drill 1 — GH Signaling Cascade: Hypothalamus → Growing Bone</div>
+    <div class="drill-hint">Arrange the 6 steps from hypothalamic stimulus to cartilage proliferation.</div>
+    <div class="order-list" id="order-list-1" ondragover="event.preventDefault()" ondrop="dropItem(event,'order-list-1')">
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="3"><span class="item-grip">⠿</span><span class="item-text">Somatotropes release GH into systemic circulation</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="1"><span class="item-grip">⠿</span><span class="item-text">Ventromedial nucleus neurons release GHRH into the portal system</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="5"><span class="item-grip">⠿</span><span class="item-text">IGF-1 released from liver, travels bound to IGFBP-3</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="6"><span class="item-grip">⠿</span><span class="item-text">IGF-1 binds IGF-1R on chondrocytes → mitogenic signal → epiphyseal growth</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="2"><span class="item-grip">⠿</span><span class="item-text">GHRH binds Gs-coupled receptor on somatotropes → ↑cAMP</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="4"><span class="item-grip">⠿</span><span class="item-text">GH binds hepatic receptor → JAK2-STAT5 signaling → transcribe IGF-1 gene</span></div>
+    </div>
+    <div class="order-actions">
+      <button class="order-check-btn" onclick="checkOrder('order-list-1','order-fb-1')">Check Order</button>
+      <button class="order-ghost-btn" onclick="showOrderAnswer('order-ans-1')">Show Answer</button>
+    </div>
+    <div class="order-feedback" id="order-fb-1"></div>
+    <div class="order-answer" id="order-ans-1">
+      <ol>
+        <li><span>GHRH from ventromedial nucleus</span> → portal system</li>
+        <li><span>GHRH → Gs → ↑cAMP</span> on somatotropes</li>
+        <li><span>GH release</span> into systemic circulation</li>
+        <li><span>GH → hepatic JAK2-STAT5</span> → IGF-1 transcription</li>
+        <li><span>IGF-1 secreted</span> bound to IGFBP-3</li>
+        <li><span>IGF-1 → chondrocyte IGF-1R</span> → mitogenesis → linear growth</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="order-drill">
+    <div class="drill-title">Drill 2 — GH Feedback Loops From Target to Source</div>
+    <div class="drill-hint">Arrange from farthest-downstream to nearest-upstream feedback step.</div>
+    <div class="order-list" id="order-list-2" ondragover="event.preventDefault()" ondrop="dropItem(event,'order-list-2')">
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="3"><span class="item-grip">⠿</span><span class="item-text">Short loop: GH → ↓ GHRH + ↑ somatostatin at hypothalamus</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="1"><span class="item-grip">⠿</span><span class="item-text">Long loop: IGF-1 → ↓ GHRH at hypothalamus AND ↓ GH at pituitary</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="4"><span class="item-grip">⠿</span><span class="item-text">Ultra-short loop: GHRH and somatostatin self-inhibit via axon collaterals</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="2"><span class="item-grip">⠿</span><span class="item-text">Long loop (parallel): IGF-1 also stimulates somatostatin release</span></div>
+    </div>
+    <div class="order-actions">
+      <button class="order-check-btn" onclick="checkOrder('order-list-2','order-fb-2')">Check Order</button>
+      <button class="order-ghost-btn" onclick="showOrderAnswer('order-ans-2')">Show Answer</button>
+    </div>
+    <div class="order-feedback" id="order-fb-2"></div>
+    <div class="order-answer" id="order-ans-2">
+      <ol>
+        <li><span>Long loop</span>: IGF-1 → ↓ GHRH + ↓ GH</li>
+        <li><span>Long loop (parallel)</span>: IGF-1 → ↑ somatostatin</li>
+        <li><span>Short loop</span>: GH itself → ↓ GHRH + ↑ somatostatin</li>
+        <li><span>Ultra-short loop</span>: GHRH/somatostatin self-inhibit (pulsatility)</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="order-drill">
+    <div class="drill-title">Drill 3 — Acromegaly Diagnostic Workup</div>
+    <div class="drill-hint">Arrange the steps from clinical suspicion to definitive diagnosis and treatment planning.</div>
+    <div class="order-list" id="order-list-3" ondragover="event.preventDefault()" ondrop="dropItem(event,'order-list-3')">
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="4"><span class="item-grip">⠿</span><span class="item-text">MRI sella turcica to localize the adenoma</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="1"><span class="item-grip">⠿</span><span class="item-text">Clinical suspicion (jaw enlargement, macroglossia, ring/shoe size increase)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="5"><span class="item-grip">⠿</span><span class="item-text">Transsphenoidal surgical resection (first-line treatment)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="2"><span class="item-grip">⠿</span><span class="item-text">Screen: serum IGF-1 — elevated for age</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="3"><span class="item-grip">⠿</span><span class="item-text">Confirm: oral glucose tolerance test — GH fails to suppress &lt;1 ng/mL</span></div>
+    </div>
+    <div class="order-actions">
+      <button class="order-check-btn" onclick="checkOrder('order-list-3','order-fb-3')">Check Order</button>
+      <button class="order-ghost-btn" onclick="showOrderAnswer('order-ans-3')">Show Answer</button>
+    </div>
+    <div class="order-feedback" id="order-fb-3"></div>
+    <div class="order-answer" id="order-ans-3">
+      <ol>
+        <li><span>Clinical suspicion</span></li>
+        <li><span>Screen with IGF-1</span></li>
+        <li><span>Confirm with OGTT</span></li>
+        <li><span>MRI sella</span> to find adenoma</li>
+        <li><span>Transsphenoidal surgery</span></li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MATCHING ══ -->
+<div class="tab-pane" id="tab-matching">
+  <div class="match-intro"><strong>Instructions:</strong> Click an item on the left, then click its match on the right. Correct pairs turn green; wrong pairs flash red.</div>
+
+  <div class="match-set">
+    <div class="match-set-title">Set 1 — Tissue → Effect of GH (direct) or IGF-1 (indirect)</div>
+    <div class="match-set-hint">Match each tissue to the GH-axis action it experiences.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Tissue</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="1">Liver</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="2">Adipose</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="3">Skeletal muscle</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="4">Epiphyseal cartilage</div>
+      </div>
+      <div>
+        <div class="match-col-label">Action</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="4">IGF-1-driven chondrocyte proliferation → linear growth</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="1">GH-stimulated IGF-1 synthesis + gluconeogenesis</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="3">IGF-1 → protein synthesis; GH → insulin resistance</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="2">GH → lipolysis + ↓ glucose uptake</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="ms1-score">0</span>/4 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('ms1')">Reset</button>
+  </div>
+
+  <div class="match-set">
+    <div class="match-set-title">Set 2 — Regulator → Effect on GH Release</div>
+    <div class="match-set-hint">Match each factor to whether it stimulates or inhibits GH, and by what mechanism.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Regulator</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="1">Ghrelin (stomach)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="2">Hyperglycemia (OGTT)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="3">Deep sleep / melatonin</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="4">Chronic hypercortisolemia</div>
+      </div>
+      <div>
+        <div class="match-col-label">Effect</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="3">↑ GH via nocturnal pulse</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="1">↑ GH via GHS-R</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="4">↓ GH + growth failure in children</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="2">↓ GH (basis of OGTT diagnostic test)</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="ms2-score">0</span>/4 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('ms2')">Reset</button>
+  </div>
+
+  <div class="match-set">
+    <div class="match-set-title">Set 3 — Disorder → Biochemical Signature</div>
+    <div class="match-set-hint">Match each GH-axis disorder to its lab pattern.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Disorder</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="1">Classic GH deficiency (pituitary dwarfism)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="2">Laron syndrome (GH insensitivity)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="3">Acromegaly / gigantism</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="4">Pregnancy (normal)</div>
+      </div>
+      <div>
+        <div class="match-col-label">Lab Pattern</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="4">↓ endogenous GH; ↑ IGF-1 (from hPL action)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="1">↓ GH + ↓ IGF-1</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="3">↑ GH (non-suppressible w/ OGTT) + ↑ IGF-1</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="2">↑ GH + ↓ IGF-1</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="ms3-score">0</span>/4 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('ms3')">Reset</button>
+  </div>
+</div>
+
+<!-- ══ TRAPS ══ -->
+<div class="tab-pane" id="tab-traps">
+  <div class="trap-intro"><strong>Test Trap Mode:</strong> Each statement is TRUE or FALSE as written. Many reverse or mix facts that trip students up.</div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 01 — LO 1</div>
+    <div class="trap-statement">"Growth hormone exerts its anabolic, pro-growth effects on cartilage and muscle by binding directly to tissue cells without requiring a hepatic intermediate."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> GH's GROWTH-promoting effects are <em>indirect</em> — mediated by <strong>IGF-1</strong> synthesized in the liver in response to GH. GH's direct tissue effects are largely CATABOLIC/diabetogenic (lipolysis, insulin resistance, gluconeogenesis). Without a functional liver IGF-1 response (Laron syndrome), GH cannot drive growth.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 02 — LO 1</div>
+    <div class="trap-statement">"The GH receptor is a classic G-protein-coupled receptor that activates adenylyl cyclase via Gs."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> The GH receptor is a single-pass <strong>CYTOKINE receptor</strong> that dimerizes on ligand binding and signals via <em>JAK2 → STAT5</em>. GHRH — the HYPOTHALAMIC releasing hormone — uses a Gs GPCR on somatotropes, but that's a different receptor. Prolactin and GH share similar cytokine-receptor biology (which is why GH can weakly cross-activate the PRL receptor at high levels).</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 03 — LO 2</div>
+    <div class="trap-statement">"Growth hormone increases glucose uptake into skeletal muscle and adipose, thereby lowering serum glucose."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE — opposite.</strong> GH is <strong>diabetogenic</strong>: it DECREASES glucose uptake into muscle and adipose (causes insulin resistance) and INCREASES hepatic gluconeogenesis → raises serum glucose. Useful during fasting, but pathologic in chronic GH excess (acromegaly → ~30–50% develop diabetes).</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 04 — LO 3</div>
+    <div class="trap-statement">"The greatest physiologic pulse of growth hormone secretion occurs in the late afternoon, just before the largest meal of the day."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> The largest pulse occurs during <em>slow-wave (stage 4) sleep</em>, typically around <strong>midnight</strong>. Deep sleep + melatonin reinforce this surge. In fact, chronic sleep deprivation impairs GH secretion — one reason inadequate sleep blunts recovery from exercise and slows childhood growth.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 05 — LO 4</div>
+    <div class="trap-statement">"Oral glucose tolerance testing works as a confirmatory test for acromegaly because normal subjects show a rise in GH after glucose loading, while acromegalics show a fall."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE — reversed.</strong> Normal subjects SUPPRESS GH after oral glucose (hyperglycemia inhibits GH). Acromegalics <em>FAIL</em> to suppress because the tumor is feedback-independent. So the pattern is: normal ↓ GH; acromegaly GH stays high or even rises paradoxically.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 06 — LO 5</div>
+    <div class="trap-statement">"In Laron syndrome, treatment with recombinant GH effectively reverses short stature and metabolic abnormalities."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Laron = GH RECEPTOR mutation → GH cannot produce IGF-1. Giving more GH doesn't help. Treatment is recombinant <strong>IGF-1 (mecasermin)</strong>, which bypasses the defective receptor. Classic board distinction from classic GH deficiency (GH responds — use recombinant GH).</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 07 — LO 5</div>
+    <div class="trap-statement">"Patients with acromegaly typically die of central nervous system effects from the pituitary adenoma itself."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> The leading cause of death in acromegaly is <strong>CARDIOVASCULAR disease</strong> — GH-induced cardiomyopathy, HTN, and diabetes. Pituitary adenomas are benign; the tumor rarely kills directly. Treatment → markedly reduces mortality toward baseline.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 08 — LO 2/5</div>
+    <div class="trap-statement">"Cushing syndrome in children causes accelerated linear growth due to glucocorticoid-induced stimulation of GHRH neurons."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE — opposite.</strong> Chronic hypercortisolemia SUPPRESSES GH and directly inhibits bone growth → <strong>GROWTH FAILURE</strong> is a classic feature of pediatric Cushing syndrome. Children on prolonged high-dose steroids also show stunted growth. This is an important clinical distinction from obesity alone (which often accelerates linear growth slightly).</div>
+  </div>
+
+</div>
+
+<!-- ══ REFERENCE ══ -->
+<div class="tab-pane" id="tab-reference">
+
+  <div class="ref-section">
+    <div class="ref-title">GH Axis — The Big Picture</div>
+    <table class="ref-table">
+      <thead><tr><th>Level</th><th>Source</th><th>Hormone</th><th>Receptor / Signaling</th></tr></thead>
+      <tbody>
+        <tr><td class="key">Hypothalamus (+)</td><td>Ventromedial nucleus</td><td>GHRH</td><td>Gs → ↑cAMP on somatotropes</td></tr>
+        <tr><td class="key">Hypothalamus (−)</td><td>Periventricular nucleus</td><td>Somatostatin (GHIH)</td><td>Gi → ↓cAMP on somatotropes</td></tr>
+        <tr><td class="key">Pituitary</td><td>Somatotrope (acidophil)</td><td>GH (191 AA)</td><td>Cytokine receptor → JAK2/STAT5</td></tr>
+        <tr><td class="key">Liver</td><td>Hepatocytes</td><td>IGF-1 (somatomedin C, 70 AA)</td><td>Secreted; bound to IGFBP-3</td></tr>
+        <tr><td class="key">Peripheral</td><td>Muscle, bone, fat</td><td>IGF-1 action</td><td>IGF-1R (RTK) → PI3K/Akt + MAPK</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Direct (GH) vs. Indirect (IGF-1) Effects</div>
+    <table class="ref-table">
+      <thead><tr><th>Effect</th><th>Mediator</th><th>Tissue Action</th><th>Net Outcome</th></tr></thead>
+      <tbody>
+        <tr><td class="key">Linear bone growth</td><td>IGF-1</td><td>Chondrocyte proliferation at growth plates</td><td>↑ length (before epiphyseal closure)</td></tr>
+        <tr><td class="key">Protein synthesis</td><td>IGF-1</td><td>↑ AA uptake + translation in muscle</td><td>↑ lean mass</td></tr>
+        <tr><td class="key">Lipolysis</td><td>GH</td><td>Adipose lipase activation</td><td>↑ FFA release, weight redistribution</td></tr>
+        <tr><td class="key">Glucose uptake</td><td>GH</td><td>↓ GLUT4 in muscle + adipose</td><td>INSULIN RESISTANCE → hyperglycemia</td></tr>
+        <tr><td class="key">Gluconeogenesis</td><td>GH</td><td>↑ hepatic glucose output</td><td>↑ serum glucose</td></tr>
+        <tr><td class="key">Organ / soft-tissue growth</td><td>IGF-1</td><td>Generalized mitogenesis</td><td>Cardiomegaly, macroglossia in excess</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Stimulators vs. Inhibitors of GH Release</div>
+    <table class="ref-table">
+      <thead><tr><th>Stimulators (↑ GH)</th><th>Inhibitors (↓ GH)</th></tr></thead>
+      <tbody>
+        <tr><td>↓ glucose / fasting</td><td>↑ glucose (basis of OGTT)</td></tr>
+        <tr><td>↓ FFA</td><td>↑ FFA</td></tr>
+        <tr><td>↑ amino acids (esp. arginine)</td><td>Hypercortisolemia (chronic)</td></tr>
+        <tr><td>Deep sleep (stage 4)</td><td>Pregnancy (hPL mimics GH)</td></tr>
+        <tr><td>Exercise</td><td>IGF-1 (long loop)</td></tr>
+        <tr><td>Acute stress / physiologic cortisol</td><td>GH itself (short loop)</td></tr>
+        <tr><td>Sex steroids (E2, testosterone)</td><td>Obesity, dopamine agonists (variably)</td></tr>
+        <tr><td>Ghrelin (GHS-R)</td><td>Somatostatin / somatostatin analogs</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Four GH-Axis Disorders to Distinguish</div>
+    <table class="ref-table">
+      <thead><tr><th>Disorder</th><th>GH</th><th>IGF-1</th><th>Growth</th><th>Treatment</th></tr></thead>
+      <tbody>
+        <tr><td class="key">Classic GH deficiency</td><td>LOW</td><td>LOW</td><td>Short stature, proportionate</td><td>Recombinant GH (somatropin)</td></tr>
+        <tr><td class="key">Laron (GH insensitivity)</td><td>HIGH</td><td>LOW</td><td>Short stature, protected from cancer/DM</td><td>Recombinant IGF-1 (mecasermin)</td></tr>
+        <tr><td class="key">Gigantism (pre-closure)</td><td>HIGH (non-suppressible)</td><td>HIGH</td><td>Extreme tall stature, organomegaly</td><td>Surgery + SST analog + pegvisomant</td></tr>
+        <tr><td class="key">Acromegaly (post-closure)</td><td>HIGH (non-suppressible)</td><td>HIGH</td><td>Jaw / hands / feet / organ thickening</td><td>Surgery + SST analog + pegvisomant</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-note">
+    <strong>High-yield rule:</strong> "GH is diabetogenic; IGF-1 is anabolic." Most of what patients experience as "growth" comes from IGF-1. Most of what makes GH excess dangerous (glucose intolerance, cardiomegaly, insulin resistance) comes from the direct effects of GH itself.
+  </div>
+</div>
+
+<div class="footer">
+  <a href="../active-recall-hub.html">← Active Recall Hub</a> &nbsp;·&nbsp; END03 Hub 1 — Core Concepts &nbsp;·&nbsp; HoyaDocs Endocrine Block
+</div>
+
+</div>
+
+<script>
+function flipCard(fc){
+  const inner=fc.querySelector('.fc-inner');
+  const front=fc.querySelector('.fc-front');
+  const back=fc.querySelector('.fc-back');
+  fc.classList.toggle('flipped');
+  inner.style.height=(fc.classList.contains('flipped')?back:front).scrollHeight+'px';
+}
+function fixCardHeights(){
+  document.querySelectorAll('.fc').forEach(function(fc){
+    const inner=fc.querySelector('.fc-inner');
+    const front=fc.querySelector('.fc-front');
+    inner.style.height=front.scrollHeight+'px';
+  });
+}
+window.addEventListener('load',fixCardHeights);
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='flashcards') requestAnimationFrame(fixCardHeights);
+}
+function checkFib(btn){
+  const card=btn.closest('.fib-card');
+  const inputs=card.querySelectorAll('.fib-input');
+  const fb=card.querySelector('.fib-feedback');
+  let allCorrect=true;
+  inputs.forEach(inp=>{
+    const val=inp.value.trim().toLowerCase();
+    const accepted=inp.dataset.answers.split(',').map(a=>a.trim().toLowerCase());
+    if(accepted.some(a=>val.includes(a)||(a.includes(val)&&val.length>2))){
+      inp.classList.remove('incorrect');inp.classList.add('correct');
+    } else {
+      inp.classList.remove('correct');inp.classList.add('incorrect');allCorrect=false;
+    }
+  });
+  fb.className='fib-feedback '+(allCorrect?'correct':'incorrect');
+  fb.textContent=allCorrect?'✓ Correct!':'✗ Not quite — use Reveal to see the answer.';
+}
+function revealFib(btn){
+  const card=btn.closest('.fib-card');
+  const inputs=card.querySelectorAll('.fib-input');
+  inputs.forEach(inp=>{
+    const ans=inp.dataset.answers.split(',')[0];
+    inp.value=ans;inp.classList.add('correct');inp.classList.remove('incorrect');
+  });
+  const fb=card.querySelector('.fib-feedback');
+  fb.className='fib-feedback correct';fb.textContent='Answer revealed.';
+}
+let dragSrc=null;
+function dragStart(e){dragSrc=e.currentTarget;e.dataTransfer.effectAllowed='move';}
+function dropOnItem(e,listId){
+  e.preventDefault();e.stopPropagation();
+  const target=e.currentTarget;target.classList.remove('drag-over');
+  if(!dragSrc||dragSrc===target)return;
+  const list=document.getElementById(listId);
+  const items=Array.from(list.children);
+  const srcIdx=items.indexOf(dragSrc);
+  const tgtIdx=items.indexOf(target);
+  if(srcIdx<tgtIdx)list.insertBefore(dragSrc,target.nextSibling);
+  else list.insertBefore(dragSrc,target);
+}
+function dropItem(e,listId){e.preventDefault();}
+function checkOrder(listId,fbId){
+  const list=document.getElementById(listId);
+  const items=Array.from(list.children);
+  let correct=0;
+  items.forEach((item,idx)=>{
+    item.classList.remove('correct-pos','wrong-pos');
+    if(parseInt(item.dataset.pos)===idx+1){item.classList.add('correct-pos');correct++;}
+    else item.classList.add('wrong-pos');
+  });
+  const fb=document.getElementById(fbId);
+  fb.className='order-feedback '+(correct===items.length?'correct':'incorrect');
+  fb.textContent=correct===items.length?`✓ Perfect! All ${items.length} items in the correct order.`:`${correct}/${items.length} correct — keep trying or show the answer.`;
+}
+function showOrderAnswer(id){
+  const el=document.getElementById(id);
+  el.style.display=el.style.display==='block'?'none':'block';
+}
+let matchState={};
+function selectMatch(el,setId){
+  if(el.classList.contains('matched-correct'))return;
+  if(!matchState[setId])matchState[setId]={selected:null,score:0};
+  const state=matchState[setId];
+  if(state.selected===null){
+    document.querySelectorAll(`[onclick*="${setId}"].selected`).forEach(e=>e.classList.remove('selected'));
+    el.classList.add('selected');state.selected=el;
+  } else {
+    const prev=state.selected;
+    if(prev===el){el.classList.remove('selected');state.selected=null;return;}
+    if(prev.dataset.pair===el.dataset.pair){
+      prev.classList.remove('selected');prev.classList.add('matched-correct');
+      el.classList.add('matched-correct');state.selected=null;state.score++;
+      document.getElementById(setId+'-score').textContent=state.score;
+    } else {
+      [prev,el].forEach(e=>{e.classList.remove('selected');e.classList.add('flash-wrong');setTimeout(()=>e.classList.remove('flash-wrong'),500);});
+      state.selected=null;
+    }
+  }
+}
+function resetMatch(setId){
+  matchState[setId]={selected:null,score:0};
+  document.querySelectorAll(`[onclick*="${setId}"]`).forEach(e=>{e.classList.remove('matched-correct','selected','flash-wrong');});
+  document.getElementById(setId+'-score').textContent='0';
+}
+function judgeTrap(btn,correct){
+  const card=btn.closest('.trap-card');
+  const btns=card.querySelectorAll('.trap-btn');
+  btns.forEach(b=>b.disabled=true);
+  const userSaidTrue=btn.classList.contains('trap-btn-true');
+  const isCorrect=(userSaidTrue===correct);
+  btn.classList.add(isCorrect?'sel-correct':'sel-wrong');
+  const exp=card.querySelector('.trap-exp');
+  exp.className='trap-exp '+(isCorrect?'show-c':'show-w');
+}
+</script>
+</body>
+</html>

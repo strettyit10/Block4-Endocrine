@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>END01 Intro to Hormones — Hub 1 Core Concepts</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+/* ── BASE ── */
+body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;background:#FEFBF0;color:#2C2C2C;min-height:100vh;line-height:1.6}
+
+/* ── TOP NAV ── */
+.topnav{background:#1C1400;border-bottom:3px solid #D97706;padding:0 28px;height:54px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-brand-text{font-family:'Crimson Pro',Georgia,serif;font-size:1.35em;font-weight:700;color:#FEF3C7;letter-spacing:.02em}
+.nav-brand-sub{font-size:.72em;color:#FBBF24;font-weight:500;margin-left:6px;letter-spacing:.04em;text-transform:uppercase}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.nav-back{display:inline-flex;align-items:center;gap:6px;font-size:.8em;color:rgba(255,255,255,0.7);font-weight:500;padding:6px 14px;border-radius:5px;border:1px solid rgba(255,255,255,0.2);text-decoration:none;transition:all .2s}
+.nav-back:hover{border-color:#FBBF24;color:#FBBF24}
+
+/* ── CONTAINER ── */
+.container{max-width:1060px;margin:0 auto;padding:28px 24px}
+
+/* ── HEADER ── */
+.header{background:#FFFFFF;border:1px solid #E8DCB8;border-radius:6px;padding:28px 32px;margin-bottom:24px;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#1C1400 0%,#D97706 50%,#1C1400 100%)}
+.hub-tag{display:inline-block;background:#1C1400;color:#FEF3C7;font-family:'Source Sans 3',sans-serif;font-size:.7em;font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:4px 12px;border-radius:3px;margin-bottom:10px}
+.header h1{font-family:'Crimson Pro',Georgia,serif;font-size:2em;color:#854D0E;margin-bottom:6px;line-height:1.25;font-weight:700}
+.header h1 span{color:#B45309;font-weight:600;font-style:italic}
+.header .subtitle{color:#5A5A5A;font-size:.88em;line-height:1.6;margin-bottom:14px}
+.source-strip{display:flex;gap:8px;flex-wrap:wrap}
+.source-badge{background:#FEFBF0;border:1px solid #E8DCB8;border-radius:4px;padding:4px 10px;font-size:.75em;color:#5A5A5A}
+.source-badge strong{color:#854D0E}
+
+/* ── HUB PROGRESSION ── */
+.hub-prog{background:#FFF;border:1px solid #E8DCB8;border-radius:6px;padding:12px 18px;margin-bottom:22px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hub-step{padding:7px 16px;border-radius:4px;font-size:.82em;font-weight:600}
+.hub-step.current{background:#854D0E;color:#FEF3C7}
+.hub-step.next{background:#FEFBF0;border:1px solid #E8DCB8;color:#7A7060;text-decoration:none;transition:all .2s}
+.hub-step.next:hover{border-color:#D97706;color:#B45309}
+.hub-arrow{color:#D97706;font-size:1em;font-weight:700}
+.hub-prog-label{font-size:.76em;color:#7A7060;margin-right:6px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+
+/* ── STATS BAR ── */
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:24px}
+.stat-card{background:#FFF;border:1px solid #E8DCB8;border-radius:6px;padding:14px;text-align:center}
+.stat-num{font-family:'Crimson Pro',Georgia,serif;font-size:1.8em;font-weight:700;color:#854D0E}
+.stat-label{font-size:.68em;color:#7A7060;text-transform:uppercase;letter-spacing:.08em;margin-top:2px;font-weight:600}
+
+/* ── TAB NAV ── */
+.tab-nav{display:flex;gap:2px;flex-wrap:wrap;margin-bottom:26px;border-bottom:2px solid #E8DCB8;padding-bottom:0}
+.tab-btn{background:none;border:none;color:#7A7060;font-size:.84em;font-weight:600;padding:11px 18px;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;margin-bottom:-2px;font-family:inherit}
+.tab-btn:hover{color:#854D0E}
+.tab-btn.active{color:#854D0E;border-bottom-color:#D97706}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+
+/* ── FLASHCARDS ── */
+.fc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:16px}
+.fc{perspective:1000px;cursor:pointer;position:relative;z-index:1}
+.fc-inner{position:relative;transform-style:preserve-3d;transition:transform .5s,height .3s}
+.fc.flipped{z-index:10}
+.fc.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;top:0;left:0;right:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:6px;padding:22px}
+.fc-front{background:#FFFFFF;border:1px solid #E8DCB8;border-top:3px solid #854D0E}
+.fc-back{transform:rotateY(180deg);background:#FFFDF0;border:1px solid #D97706}
+.fc-label{font-size:.66em;font-weight:700;color:#D97706;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;font-family:'Source Sans 3',sans-serif}
+.fc-q{font-size:.92em;color:#2C2C2C;line-height:1.55}
+.fc-a{font-size:.88em;color:#2C2C2C;line-height:1.65}
+.fc-a strong{color:#854D0E}
+.fc-flip-hint{font-size:.67em;color:#9A9080;margin-top:10px;font-style:italic}
+.fc-progress{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:.82em;color:#7A7060}
+.fc-progress .prog-num{color:#854D0E;font-weight:700}
+
+/* ── FILL-IN-BLANK ── */
+.fib-list{display:flex;flex-direction:column;gap:16px}
+.fib-card{background:#FFFFFF;border:1px solid #E8DCB8;border-radius:6px;padding:22px;border-left:4px solid #854D0E}
+.fib-num{font-size:.68em;font-weight:700;color:#D97706;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.fib-prompt{font-size:.93em;color:#2C2C2C;line-height:1.65;margin-bottom:12px}
+.fib-prompt strong{color:#854D0E}
+.fib-hint{font-size:.8em;color:#7A7060;font-style:italic;margin-bottom:10px}
+.fib-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.fib-input{background:#FEFBF0;border:1px solid #E8DCB8;border-radius:5px;padding:9px 14px;color:#2C2C2C;font-size:.9em;font-family:inherit;min-width:200px;transition:border-color .2s}
+.fib-input:focus{outline:none;border-color:#D97706;background:#FFFDF0}
+.fib-input.correct{border-color:#2E7D32;background:#F1F8F2}
+.fib-input.incorrect{border-color:#C62828;background:#FEF5F5}
+.fib-btn{background:#854D0E;border:none;color:#FEF3C7;padding:9px 18px;border-radius:5px;cursor:pointer;font-size:.82em;font-weight:600;font-family:inherit;transition:background .2s}
+.fib-btn:hover{background:#9A5A10}
+.fib-reveal-btn{background:#FFF;border:1px solid #E8DCB8;color:#7A7060;padding:9px 16px;border-radius:5px;cursor:pointer;font-size:.82em;font-weight:600;font-family:inherit;transition:all .2s}
+.fib-reveal-btn:hover{border-color:#D97706;color:#B45309}
+.fib-feedback{font-size:.82em;margin-top:8px;padding:7px 12px;border-radius:4px;display:none}
+.fib-feedback.correct{background:#F1F8F2;border:1px solid #A5D6A7;color:#2E7D32;display:block}
+.fib-feedback.incorrect{background:#FEF5F5;border:1px solid #FFCDD2;color:#C62828;display:block}
+
+/* ── ORDERING ── */
+.ordering-intro{background:#FFFDF0;border:1px solid #F3E4B2;border-radius:6px;padding:14px 18px;margin-bottom:20px;font-size:.84em;color:#5A5A5A;line-height:1.6}
+.ordering-intro strong{color:#854D0E}
+.order-drill{background:#FFFFFF;border:1px solid #E8DCB8;border-left:4px solid #D97706;border-radius:6px;padding:22px;margin-bottom:20px}
+.drill-title{font-family:'Crimson Pro',Georgia,serif;font-size:1.05em;font-weight:700;color:#854D0E;margin-bottom:5px}
+.drill-hint{font-size:.79em;color:#7A7060;margin-bottom:14px;font-style:italic}
+.order-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;min-height:40px}
+.order-item{background:#FEFBF0;border:1px solid #E8DCB8;border-radius:5px;padding:12px 16px;cursor:grab;font-size:.86em;color:#2C2C2C;line-height:1.4;display:flex;align-items:flex-start;gap:10px;transition:all .15s;user-select:none}
+.order-item:active{cursor:grabbing}
+.order-item:hover{border-color:#D97706;background:#FFFDF0}
+.order-item.dragging{opacity:.6;border-style:dashed;border-color:#D97706}
+.order-item.drag-over{border-color:#D97706;background:#FEF3C7;transform:scale(1.01)}
+.order-item .item-grip{color:#D97706;font-size:1.1em;flex-shrink:0;margin-top:1px}
+.order-item .item-text{flex:1}
+.order-item.correct-pos{background:#F1F8F2;border-color:#66BB6A}
+.order-item.wrong-pos{background:#FEF5F5;border-color:#EF5350;color:#991b1b}
+.order-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.order-check-btn{background:#854D0E;border:none;color:#FEF3C7;padding:9px 18px;border-radius:5px;cursor:pointer;font-size:.84em;font-weight:600;font-family:inherit;transition:background .2s}
+.order-check-btn:hover{background:#9A5A10}
+.order-ghost-btn{background:none;border:1px solid #E8DCB8;color:#7A7060;padding:9px 18px;border-radius:5px;cursor:pointer;font-size:.84em;font-weight:600;font-family:inherit;transition:all .2s}
+.order-ghost-btn:hover{border-color:#D97706;color:#B45309}
+.order-feedback{font-size:.84em;padding:8px 14px;border-radius:5px;margin-bottom:8px}
+.order-feedback.correct{background:#F1F8F2;border:1px solid #66BB6A;color:#2E7D32}
+.order-feedback.incorrect{background:#FEF5F5;border:1px solid #EF5350;color:#C62828}
+.order-answer{background:#FFFDF0;border:1px solid #F3E4B2;border-radius:5px;padding:14px 18px;font-size:.83em;margin-top:8px;display:none}
+.order-answer ol{padding-left:20px;line-height:1.9}
+.order-answer li{color:#2C2C2C}
+.order-answer li span{color:#854D0E;font-weight:600}
+
+/* ── MATCHING ── */
+.match-intro{background:#FFFDF0;border:1px solid #F3E4B2;border-radius:6px;padding:14px 18px;margin-bottom:20px;font-size:.84em;color:#5A5A5A}
+.match-intro strong{color:#854D0E}
+.match-set{background:#FFFFFF;border:1px solid #E8DCB8;border-left:4px solid #854D0E;border-radius:6px;padding:22px;margin-bottom:20px}
+.match-set-title{font-family:'Crimson Pro',Georgia,serif;font-size:1.05em;font-weight:700;color:#854D0E;margin-bottom:4px}
+.match-set-hint{font-size:.79em;color:#7A7060;margin-bottom:14px;font-style:italic}
+.match-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.match-cols{grid-template-columns:1fr}}
+.match-col-label{font-size:.7em;font-weight:700;color:#D97706;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.match-item{background:#FEFBF0;border:1px solid #E8DCB8;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px}
+.match-item:hover:not(.matched-correct):not(.matched-wrong){border-color:#D97706!important;background:#FFFDF0!important}
+.match-item.selected{border-color:#854D0E!important;background:#FEF3C7!important;color:#854D0E!important;font-weight:600}
+.match-item.matched-correct{border-color:#66BB6A!important;background:#F1F8F2!important;color:#2E7D32!important;cursor:default}
+.match-item.flash-wrong{animation:flashRed .5s ease forwards}
+@keyframes flashRed{0%{background:#FEF5F5;border-color:#EF5350}100%{background:#FEFBF0;border-color:#E8DCB8}}
+.match-score{margin-top:12px;font-size:.83em;color:#7A7060}
+.match-score .correct-count{color:#2E7D32;font-weight:700}
+.match-reset-btn{background:none;border:1px solid #E8DCB8;color:#7A7060;padding:7px 16px;border-radius:5px;cursor:pointer;font-size:.8em;font-weight:600;font-family:inherit;margin-top:10px;transition:all .2s}
+.match-reset-btn:hover{border-color:#D97706;color:#B45309}
+
+/* ── TEST TRAPS ── */
+.trap-intro{background:#FFFDF0;border:1px solid #F3E4B2;border-left:4px solid #D97706;border-radius:6px;padding:14px 18px;margin-bottom:20px;font-size:.84em;color:#5A5A5A;line-height:1.6}
+.trap-intro strong{color:#854D0E}
+.trap-card{background:#FFFFFF;border:1px solid #E8DCB8;border-radius:6px;padding:22px;margin-bottom:18px;border-left:4px solid #D97706}
+.trap-num{font-size:.68em;font-weight:700;color:#D97706;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.trap-statement{font-family:'Crimson Pro',Georgia,serif;font-size:1em;color:#2C2C2C;line-height:1.55;margin-bottom:16px;background:#FFFDF0;border-radius:5px;padding:16px;border-left:3px solid #D97706;font-style:italic}
+.trap-btns{display:flex;gap:10px;margin-bottom:8px}
+.trap-btn{padding:9px 28px;border-radius:5px;border:2px solid;font-size:.9em;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+.trap-btn-true{background:none;border-color:#66BB6A;color:#2E7D32}
+.trap-btn-true:hover:not(:disabled){background:#F1F8F2;border-color:#43A047}
+.trap-btn-false{background:none;border-color:#EF5350;color:#C62828}
+.trap-btn-false:hover:not(:disabled){background:#FEF5F5;border-color:#E53935}
+.trap-btn:disabled{opacity:.5;cursor:not-allowed}
+.trap-btn.sel-correct{background:#F1F8F2;border-color:#43A047;color:#2E7D32}
+.trap-btn.sel-wrong{background:#FEF5F5;border-color:#E53935;color:#C62828}
+.trap-exp{padding:14px 18px;border-radius:5px;font-size:.87em;line-height:1.65;margin-top:4px;display:none}
+.trap-exp.show-c{background:#F1F8F2;border:1px solid #A5D6A7;color:#1B5E20;display:block}
+.trap-exp.show-w{background:#FEF5F5;border:1px solid #FFCDD2;color:#B71C1C;display:block}
+.trap-exp strong{color:#854D0E}
+
+/* ── REFERENCE ── */
+.ref-section{margin-bottom:28px}
+.ref-title{font-family:'Crimson Pro',Georgia,serif;font-size:.95em;font-weight:700;color:#854D0E;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #D97706}
+.ref-table{width:100%;border-collapse:collapse;font-size:.84em}
+.ref-table th{background:#854D0E;color:#FEF3C7;font-weight:600;text-align:left;padding:10px 14px;font-size:.88em;letter-spacing:.03em}
+.ref-table td{padding:10px 14px;border-bottom:1px solid #F0E4C4;color:#2C2C2C;vertical-align:top;line-height:1.55;background:#FFF}
+.ref-table tr:nth-child(even) td{background:#FAF5E5}
+.ref-table tr:hover td{background:#FFFDF0}
+.ref-table .key{color:#854D0E;font-weight:600}
+.ref-note{background:#FFFDF0;border:1px solid #F3E4B2;border-radius:5px;padding:13px 18px;font-size:.83em;color:#5A5A5A;line-height:1.6;margin-top:10px}
+.ref-note strong{color:#854D0E}
+
+/* ── FOOTER ── */
+.footer{text-align:center;font-size:.78em;color:#7A7060;border-top:2px solid #E8DCB8;padding-top:16px;margin-top:32px}
+.footer a{color:#854D0E;text-decoration:none;font-weight:600}
+.footer a:hover{color:#D97706;text-decoration:underline}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <div class="nav-brand">
+    <span class="nav-brand-text">HoyaDocs</span>
+    <span class="nav-brand-sub">Endocrine Block</span>
+  </div>
+  <div class="nav-actions">
+    <a href="../active-recall-hub.html" class="nav-back">← Active Drill Hub</a>
+  </div>
+</nav>
+<div class="container">
+
+<div class="header">
+  <div class="hub-tag">Hub 1 — Core Concepts</div>
+  <h1>Introduction to Hormones <span>Active Drills</span></h1>
+  <div class="subtitle">
+    Flashcards · Fill-in-Blank · Drag-and-Drop Ordering · Matching · Interactive Test Traps<br>
+    Lecture 01 · Endocrine Block · Module Intro &amp; Intro to Hormones — LOs 1–7
+  </div>
+  <div class="source-strip">
+    <div class="source-badge"><strong>Primary:</strong> Module Intro &amp; Intro to Hormones</div>
+    <div class="source-badge"><strong>LOs:</strong> Endocrine Block LOs 1–7</div>
+    <div class="source-badge"><strong>Review:</strong> BRS Physiology Ch. 9</div>
+    <div class="source-badge"><strong>Step 1:</strong> First Aid Endocrine — Hormone Basics</div>
+  </div>
+</div>
+
+<div class="hub-prog">
+  <span class="hub-prog-label">Hub Progression:</span>
+  <span class="hub-step current">Hub 1 — Core Concepts</span>
+  <span class="hub-arrow">→</span>
+  <a href="end01-hub2-intro-to-hormones.html" class="hub-step next">Hub 2 — Step 1 Extensions</a>
+  <span class="hub-arrow">→</span>
+  <a href="end01-hub3-intro-to-hormones.html" class="hub-step next">Hub 3 — Practice Questions</a>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-card"><div class="stat-num">16</div><div class="stat-label">Flashcards</div></div>
+  <div class="stat-card"><div class="stat-num">10</div><div class="stat-label">Fill-in-Blank</div></div>
+  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Ordering Drills</div></div>
+  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Match Sets</div></div>
+  <div class="stat-card"><div class="stat-num">8</div><div class="stat-label">Test Traps</div></div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('flashcards',this)">Flashcards</button>
+  <button class="tab-btn" onclick="switchTab('fib',this)">Fill-in-Blank</button>
+  <button class="tab-btn" onclick="switchTab('ordering',this)">Ordering</button>
+  <button class="tab-btn" onclick="switchTab('matching',this)">Matching</button>
+  <button class="tab-btn" onclick="switchTab('traps',this)">Test Traps</button>
+  <button class="tab-btn" onclick="switchTab('reference',this)">Reference</button>
+</div>
+
+<!-- ══ FLASHCARDS ══════════════════════════════════════════════════════════ -->
+<div class="tab-pane active" id="tab-flashcards">
+  <div class="fc-progress"><span>Click a card to flip · <span class="prog-num">16</span> cards total</span><span>LOs 1–7</span></div>
+  <div class="fc-grid">
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 1 — Signaling</div><div class="fc-q">Define and contrast the four modes of intercellular communication: endocrine, paracrine, autocrine, and neural.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Endocrine:</strong> hormone → BLOOD → distant target (e.g., insulin, TSH)<br><strong>Paracrine:</strong> acts on NEIGHBORING cells (e.g., somatostatin → α/β islet cells)<br><strong>Autocrine:</strong> acts on the SECRETING cell itself (e.g., IGF-1 on some tumors)<br><strong>Neural:</strong> rapid, short, via synapse (e.g., ACh at NMJ)<br><br>Neurocrine (hybrid) = neuron releases hormone into blood (e.g., ADH, oxytocin).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 2 — Classes</div><div class="fc-q">Name the three major hormone classes and give one defining feature and example of each.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Peptide/Protein:</strong> water-soluble, STORED in vesicles, membrane receptor — <em>insulin, GH, ACTH, TSH</em><br><br><strong>Steroid:</strong> lipid-soluble (from cholesterol), NOT stored (made on demand), nuclear receptor — <em>cortisol, aldosterone, estradiol, vitamin D</em><br><br><strong>Amine (tyrosine-derived):</strong> catecholamines (water-soluble, stored) + thyroid hormone (lipid-soluble, stored in colloid)</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 2 — Solubility</div><div class="fc-q">How does solubility predict hormone storage, circulation, and receptor location?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Water-soluble</strong> (peptides, catecholamines) → STORED in vesicles → travel FREE in plasma → short ½-life → MEMBRANE receptors (2nd messengers)<br><br><strong>Lipid-soluble</strong> (steroids, thyroid hormone) → NOT stored (or stored bound) → travel BOUND to carrier proteins → long ½-life → NUCLEAR receptors (gene transcription)</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 2 — Glycoproteins</div><div class="fc-q">What are the four glycoprotein hormones and what is the structural feature they share?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>TSH, LH, FSH, hCG</strong><br><br>Shared α-subunit (identical across all four).<br>Unique β-subunit confers specificity.<br><br>Clinical: hCG β-subunit similarity to TSH-β → molar pregnancy / choriocarcinoma can cause hyperthyroidism via TSH receptor cross-reactivity.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 3 — Catecholamines</div><div class="fc-q">Write out the catecholamine synthesis pathway from precursor to epinephrine, naming each enzyme.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Tyrosine →</strong> (tyrosine hydroxylase — RATE-LIMITING) <strong>→ L-DOPA →</strong> (DOPA decarboxylase, B6-dependent) <strong>→ Dopamine →</strong> (dopamine β-hydroxylase) <strong>→ Norepinephrine →</strong> (PNMT, cortisol-induced) <strong>→ Epinephrine</strong><br><br>PNMT = Phenylethanolamine-N-methyltransferase; only in adrenal medulla because local cortisol from cortex is required to induce it.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 3 — Rate-Limiting Step</div><div class="fc-q">Which enzyme is rate-limiting for catecholamine synthesis, and how is it regulated?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Tyrosine hydroxylase</strong> (Tyr → L-DOPA)<br><br>Requires <strong>BH4</strong> (tetrahydrobiopterin) as cofactor.<br>Feedback inhibited by end product (NE/DA).<br>Upregulated by sympathetic activity / phosphorylation.<br><br>Parkinson treatment = L-DOPA (bypasses this enzyme; crosses BBB).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 4 — Steroid Synthesis</div><div class="fc-q">What is the initial (rate-limiting) step of steroid biosynthesis? Which enzyme catalyzes it and what regulates it?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Cholesterol → Pregnenolone</strong><br>Enzyme: <strong>Desmolase (CYP11A1 / side-chain cleavage enzyme)</strong><br>Location: inner mitochondrial membrane<br><br><strong>Rate-limiting actually = StAR protein</strong> (transports cholesterol from outer → inner mito membrane). Without StAR, desmolase has no substrate.<br><br>Stimulated by: <strong>ACTH</strong> (adrenal), <strong>LH</strong> (gonads) via cAMP/PKA.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 4 — Steroid Classes</div><div class="fc-q">Name the five major classes of steroid hormones and where each is synthesized.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Mineralocorticoids</strong> (aldosterone) — zona glomerulosa<br><strong>Glucocorticoids</strong> (cortisol) — zona fasciculata<br><strong>Androgens</strong> (DHEA, androstenedione, T) — zona reticularis + gonads<br><strong>Estrogens</strong> (E2) — ovary granulosa, placenta<br><strong>Vitamin D</strong> (1,25-(OH)₂-D) — skin → liver → kidney<br><br>"GFR + sex + D" — all start from cholesterol.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 5 — Carriers</div><div class="fc-q">Match each carrier protein to its hormone: CBG, TBG, SHBG, DBP, albumin.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>CBG</strong> (transcortin) → <em>cortisol</em> (also binds progesterone)<br><strong>TBG</strong> → <em>T3 &amp; T4</em><br><strong>SHBG</strong> → <em>testosterone, estradiol, DHT</em><br><strong>DBP</strong> → <em>vitamin D / 25-OH-D</em><br><strong>Albumin</strong> → non-specific, low affinity, high capacity (all steroids, thyroid hormone)</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 5 — Free Hormone</div><div class="fc-q">State the free hormone hypothesis and give one clinical example of why it matters.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Only the FREE (unbound) fraction is biologically active</strong> and available to receptors. Carrier-bound hormone = inactive reservoir.<br><br><strong>Pregnancy:</strong> estrogen ↑↑ hepatic TBG → ↑total T4 — but free T4 unchanged → patient EUTHYROID despite high total T4.<br><br>Measure <strong>FREE T4</strong>, not total, to assess thyroid function in pregnancy or with OCPs.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 5 — Half-Life</div><div class="fc-q">Why do lipid-soluble hormones (cortisol, T4) have long half-lives while water-soluble hormones (insulin, ACTH) have short ones?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Carrier-bound hormones are <strong>protected from renal filtration and enzymatic degradation</strong> → slow release of free form → long ½-life (T4 ≈ 7 days; cortisol ≈ 60–90 min).<br><br>Water-soluble peptides circulate FREE → rapidly filtered/degraded by proteases → short ½-life (insulin ≈ 5 min; ACTH ≈ 10 min).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 6 — Receptor Types</div><div class="fc-q">Classify hormone receptors by location + signaling, and match hormone class to receptor type.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Membrane receptors</strong> (water-soluble hormones):<br>• GPCR → cAMP (Gs/Gi), IP3/DAG/Ca²⁺ (Gq)<br>• RTK → MAPK/PI3K (insulin, IGF, GF)<br>• JAK-STAT → cytokine receptors (GH, prolactin, leptin, EPO)<br><br><strong>Nuclear receptors</strong> (lipid-soluble hormones):<br>• Cytoplasmic → hormone binding → translocate to nucleus → bind HRE (steroids)<br>• Nuclear (pre-bound to DNA with RXR) → thyroid, vitamin D, retinoic acid</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 6 — GPCR Pathways</div><div class="fc-q">Name the three main G-protein subtypes and the second-messenger pathway each activates. Give one hormone that uses each.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Gs:</strong> ↑adenylyl cyclase → ↑cAMP → PKA — <em>glucagon, ACTH, LH, FSH, TSH, PTH, β-adrenergic</em><br><strong>Gi:</strong> ↓adenylyl cyclase → ↓cAMP — <em>somatostatin, α₂-adrenergic, opioids</em><br><strong>Gq:</strong> ↑PLC → IP3/DAG → Ca²⁺ + PKC — <em>GnRH, TRH, ADH (V1), angiotensin II, α₁-adrenergic</em><br><br>Mnemonic: "<strong>FLAT ChAMP</strong>" (Gs) · "<strong>HAVe 1 M&amp;M</strong>" (Gq)</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 7 — Down-regulation</div><div class="fc-q">Define receptor down-regulation and give a major clinical example.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Prolonged <strong>high hormone levels</strong> → cell reduces receptor number (internalization/degradation) + reduces post-receptor signaling → <strong>decreased sensitivity</strong> to that hormone.<br><br><strong>Classic example:</strong> Type 2 diabetes — chronic hyperinsulinemia → insulin receptor down-regulation → insulin resistance.<br><br>Opposite = up-regulation (low hormone → more receptors). E.g., denervation hypersensitivity.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 7 — Permissiveness</div><div class="fc-q">Define hormone permissiveness and give a high-yield example.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Permissiveness:</strong> one hormone is REQUIRED for another hormone's full effect, even though hormone A has no direct effect itself.<br><br><strong>Classic example:</strong> <em>Cortisol permits catecholamine vascular effects</em> → addisonian crisis presents with hypotension refractory to pressors because catecholamines can't vasoconstrict without permissive cortisol.<br><br>Also: T3 permits β-adrenergic sensitivity → tachycardia in hyperthyroidism.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 7 — Synthesis vs. Storage</div><div class="fc-q">Contrast hormones released by synthesis-on-demand vs. stored-and-released. Give one example of each.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Stored &amp; released on demand</strong> (FAST, seconds): peptides (insulin, glucagon, GH, ACTH) stored in vesicles; catecholamines in chromaffin granules; thyroid hormone in colloid.<br><br><strong>Synthesis-on-demand</strong> (SLOW, min–hr): <em>steroid hormones</em> — not stored; substrate + enzyme expression up-regulated when needed (e.g., ACTH → StAR induction → cortisol within minutes, peak hours).</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ FILL IN THE BLANK ══════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-fib">
+  <div class="fib-list">
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 01 — LO 1</div>
+      <div class="fib-prompt">A hormone that acts on the SECRETING cell itself is called <strong>_____________</strong> signaling, while one acting on an IMMEDIATE NEIGHBOR is called <strong>_____________</strong>.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="self-signal..." data-answers="autocrine">
+        <input class="fib-input" type="text" placeholder="neighbor..." data-answers="paracrine">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Hint: "auto" = self; "para" = alongside.</div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 02 — LO 2</div>
+      <div class="fib-prompt">Peptide hormones are synthesized as inactive <strong>_____________</strong>, cleaved in the RER/Golgi, and stored in secretory vesicles. Steroid hormones are NOT stored and must be <strong>_____________</strong> on demand from cholesterol.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="precursor name..." data-answers="preprohormones,prohormones,preprohormone,prohormone">
+        <input class="fib-input" type="text" placeholder="verb..." data-answers="synthesized,made,produced">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 03 — LO 2</div>
+      <div class="fib-prompt">The four glycoprotein hormones — TSH, LH, FSH, hCG — share an identical <strong>_____________</strong> subunit, with specificity conferred by the unique <strong>_____________</strong> subunit.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="shared..." data-answers="alpha,α,a">
+        <input class="fib-input" type="text" placeholder="unique..." data-answers="beta,β,b">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Hint: hCG-β cross-reactivity with TSH causes hyperthyroidism in molar pregnancy.</div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 04 — LO 3</div>
+      <div class="fib-prompt">The rate-limiting enzyme of catecholamine synthesis is <strong>_____________</strong>. The enzyme that converts norepinephrine → epinephrine is <strong>_____________</strong>, which is induced by cortisol.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="rate-limiting..." data-answers="tyrosine hydroxylase,th">
+        <input class="fib-input" type="text" placeholder="NE→E..." data-answers="pnmt,phenylethanolamine-n-methyltransferase">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Hint: PNMT is found only in the adrenal medulla because cortisol from the cortex induces it.</div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 05 — LO 4</div>
+      <div class="fib-prompt">All steroid hormones are derived from <strong>_____________</strong>. The initial (rate-limiting) step is cleavage of the side chain by <strong>_____________</strong>, facilitated by the <strong>_____________</strong> protein which shuttles substrate into mitochondria.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="precursor..." data-answers="cholesterol">
+        <input class="fib-input" type="text" placeholder="enzyme..." data-answers="desmolase,cyp11a1,scc,p450scc">
+        <input class="fib-input" type="text" placeholder="shuttle protein..." data-answers="star">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 06 — LO 5</div>
+      <div class="fib-prompt">According to the free hormone hypothesis, only the <strong>_____________</strong> fraction of a hormone is biologically active. In pregnancy, estrogen increases liver TBG production → <strong>total</strong> T4 rises but <strong>_____________</strong> T4 is unchanged.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="active fraction..." data-answers="free,unbound">
+        <input class="fib-input" type="text" placeholder="unchanged..." data-answers="free">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 07 — LO 5</div>
+      <div class="fib-prompt">Match the carrier: cortisol travels on <strong>_____________</strong>; testosterone/estradiol on <strong>_____________</strong>; thyroid hormone on <strong>_____________</strong>.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="cortisol..." data-answers="cbg,transcortin">
+        <input class="fib-input" type="text" placeholder="sex steroids..." data-answers="shbg">
+        <input class="fib-input" type="text" placeholder="T3/T4..." data-answers="tbg">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 08 — LO 6</div>
+      <div class="fib-prompt">Water-soluble hormones use <strong>_____________</strong> receptors and act through second messengers, producing <strong>FAST</strong> effects. Lipid-soluble hormones use <strong>_____________</strong> receptors and alter gene transcription, producing <strong>SLOW</strong> but long-lasting effects.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="water-sol..." data-answers="membrane,surface,cell surface,plasma membrane">
+        <input class="fib-input" type="text" placeholder="lipid-sol..." data-answers="nuclear,intracellular">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 09 — LO 6</div>
+      <div class="fib-prompt">Insulin binds a <strong>_____________</strong>-type receptor (tyrosine kinase). GH and prolactin use <strong>_____________</strong>-STAT signaling. PTH, ADH (V2), and glucagon use Gs → <strong>_____________</strong>.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="insulin type..." data-answers="rtk,receptor tyrosine kinase,tyrosine kinase">
+        <input class="fib-input" type="text" placeholder="cytokine pathway..." data-answers="jak">
+        <input class="fib-input" type="text" placeholder="Gs second msg..." data-answers="camp,cyclic amp,cyclic adenosine monophosphate">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 10 — LO 7</div>
+      <div class="fib-prompt">Prolonged exposure to HIGH hormone levels causes receptor <strong>_____________</strong>, which is the basis of insulin resistance in T2DM. Prolonged LOW levels cause receptor <strong>_____________</strong>, seen in denervation hypersensitivity.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="high→..." data-answers="down-regulation,downregulation,down regulation">
+        <input class="fib-input" type="text" placeholder="low→..." data-answers="up-regulation,upregulation,up regulation">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ ORDERING ════════════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-ordering">
+  <div class="ordering-intro">
+    <strong>Instructions:</strong> Drag and drop the items into the correct order, then click "Check Order." Use "Show Answer" if you get stuck.
+  </div>
+
+  <!-- Drill 1: Catecholamine Biosynthesis -->
+  <div class="order-drill">
+    <div class="drill-title">Drill 1 — Catecholamine Biosynthesis: Tyrosine → Epinephrine</div>
+    <div class="drill-hint">Arrange these six molecules in the correct synthetic order.</div>
+    <div class="order-list" id="order-list-1" ondragover="event.preventDefault()" ondrop="dropItem(event,'order-list-1')">
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="4"><span class="item-grip">⠿</span><span class="item-text">Norepinephrine</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="1"><span class="item-grip">⠿</span><span class="item-text">Tyrosine</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="5"><span class="item-grip">⠿</span><span class="item-text">Epinephrine</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="2"><span class="item-grip">⠿</span><span class="item-text">L-DOPA</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="3"><span class="item-grip">⠿</span><span class="item-text">Dopamine</span></div>
+    </div>
+    <div class="order-actions">
+      <button class="order-check-btn" onclick="checkOrder('order-list-1','order-fb-1')">Check Order</button>
+      <button class="order-ghost-btn" onclick="showOrderAnswer('order-ans-1')">Show Answer</button>
+    </div>
+    <div class="order-feedback" id="order-fb-1"></div>
+    <div class="order-answer" id="order-ans-1">
+      <ol>
+        <li><span>Tyrosine</span> — dietary amino acid, taken up by neurons/chromaffin cells</li>
+        <li><span>L-DOPA</span> — via tyrosine hydroxylase (RATE-LIMITING; BH4 cofactor)</li>
+        <li><span>Dopamine</span> — via DOPA decarboxylase (B6-dependent)</li>
+        <li><span>Norepinephrine</span> — via dopamine β-hydroxylase (inside vesicle)</li>
+        <li><span>Epinephrine</span> — via PNMT (only in adrenal medulla; cortisol-induced)</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Drill 2: Peptide Hormone Synthesis -->
+  <div class="order-drill">
+    <div class="drill-title">Drill 2 — Peptide Hormone Synthesis: Gene → Secretion</div>
+    <div class="drill-hint">Arrange these 6 steps from DNA transcription to release into blood.</div>
+    <div class="order-list" id="order-list-2" ondragover="event.preventDefault()" ondrop="dropItem(event,'order-list-2')">
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="3"><span class="item-grip">⠿</span><span class="item-text">Signal peptide cleaved in RER → prohormone</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="1"><span class="item-grip">⠿</span><span class="item-text">Gene transcribed → mRNA exported to cytoplasm</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="5"><span class="item-grip">⠿</span><span class="item-text">Vesicle stored until secretory stimulus (e.g., glucose for insulin)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="2"><span class="item-grip">⠿</span><span class="item-text">Ribosome translates mRNA → preprohormone (with signal peptide)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="4"><span class="item-grip">⠿</span><span class="item-text">Prohormone cleaved in Golgi → active hormone + C-peptide (insulin)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="6"><span class="item-grip">⠿</span><span class="item-text">Exocytosis into blood (Ca²⁺-dependent)</span></div>
+    </div>
+    <div class="order-actions">
+      <button class="order-check-btn" onclick="checkOrder('order-list-2','order-fb-2')">Check Order</button>
+      <button class="order-ghost-btn" onclick="showOrderAnswer('order-ans-2')">Show Answer</button>
+    </div>
+    <div class="order-feedback" id="order-fb-2"></div>
+    <div class="order-answer" id="order-ans-2">
+      <ol>
+        <li><span>Transcription</span> → mRNA</li>
+        <li><span>Translation on RER</span> → preprohormone (with signal peptide)</li>
+        <li><span>Signal peptide cleaved</span> in RER → prohormone</li>
+        <li><span>Golgi processing</span> → mature hormone + cleaved fragments (e.g., C-peptide)</li>
+        <li><span>Storage</span> in secretory vesicles</li>
+        <li><span>Regulated exocytosis</span> on stimulus (Ca²⁺-triggered)</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Drill 3: Steroid Signaling Cascade -->
+  <div class="order-drill">
+    <div class="drill-title">Drill 3 — Classical Steroid Hormone Signaling</div>
+    <div class="drill-hint">Arrange the events from hormone in blood to new protein in the cytoplasm.</div>
+    <div class="order-list" id="order-list-3" ondragover="event.preventDefault()" ondrop="dropItem(event,'order-list-3')">
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="4"><span class="item-grip">⠿</span><span class="item-text">Activated receptor dimerizes and translocates to nucleus</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="2"><span class="item-grip">⠿</span><span class="item-text">Free steroid diffuses across plasma membrane (lipid-soluble)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="6"><span class="item-grip">⠿</span><span class="item-text">mRNA translated → new protein (final physiologic effect)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="1"><span class="item-grip">⠿</span><span class="item-text">Steroid dissociates from carrier protein (CBG/SHBG/TBG) in tissue capillary</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="3"><span class="item-grip">⠿</span><span class="item-text">Binds cytoplasmic receptor → HSP90 released → conformational change</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="5"><span class="item-grip">⠿</span><span class="item-text">Receptor binds hormone-response element (HRE) → recruits coactivators → transcription</span></div>
+    </div>
+    <div class="order-actions">
+      <button class="order-check-btn" onclick="checkOrder('order-list-3','order-fb-3')">Check Order</button>
+      <button class="order-ghost-btn" onclick="showOrderAnswer('order-ans-3')">Show Answer</button>
+    </div>
+    <div class="order-feedback" id="order-fb-3"></div>
+    <div class="order-answer" id="order-ans-3">
+      <ol>
+        <li><span>Dissociation from carrier</span> (CBG/SHBG/TBG)</li>
+        <li><span>Diffusion across plasma membrane</span></li>
+        <li><span>Binds cytoplasmic receptor</span> (HSP90 released)</li>
+        <li><span>Dimerization + nuclear translocation</span></li>
+        <li><span>Binds HRE → transcription</span></li>
+        <li><span>Translation → new protein</span> (final effect)</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MATCHING ════════════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-matching">
+  <div class="match-intro">
+    <strong>Instructions:</strong> Click an item on the left, then click its match on the right. Correct pairs turn green; wrong pairs flash red.
+  </div>
+
+  <!-- Set 1: Hormone Class → Receptor Type -->
+  <div class="match-set">
+    <div class="match-set-title">Set 1 — Hormone → Receptor Type / Pathway</div>
+    <div class="match-set-hint">Match each hormone to the correct receptor type and/or signaling pathway.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Hormone</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="1">Insulin</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="2">Cortisol</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="3">Glucagon / ACTH / LH</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="4">Growth hormone / prolactin</div>
+      </div>
+      <div>
+        <div class="match-col-label">Receptor / Pathway</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="3">GPCR — Gs → ↑cAMP → PKA</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="4">JAK-STAT (cytokine receptor)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="1">Receptor tyrosine kinase (RTK)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="2">Cytoplasmic nuclear receptor → HRE</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="ms1-score">0</span>/4 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('ms1')">Reset</button>
+  </div>
+
+  <!-- Set 2: Carrier Protein -->
+  <div class="match-set">
+    <div class="match-set-title">Set 2 — Carrier Protein → Hormone Cargo</div>
+    <div class="match-set-hint">Match each carrier to its primary hormone substrate.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Carrier Protein</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="1">CBG (transcortin)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="2">TBG</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="3">SHBG</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="4">DBP</div>
+      </div>
+      <div>
+        <div class="match-col-label">Hormone Cargo</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="3">Testosterone / estradiol / DHT</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="1">Cortisol (also progesterone)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="4">25-hydroxy vitamin D</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="2">Thyroxine (T4) + T3</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="ms2-score">0</span>/4 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('ms2')">Reset</button>
+  </div>
+
+  <!-- Set 3: Signaling Terms -->
+  <div class="match-set">
+    <div class="match-set-title">Set 3 — Signaling Mode → Definition</div>
+    <div class="match-set-hint">Match each mode of intercellular communication to its defining feature.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Signaling Mode</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="1">Endocrine</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="2">Paracrine</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="3">Autocrine</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="4">Neurocrine</div>
+      </div>
+      <div>
+        <div class="match-col-label">Defining Feature</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="3">Acts on the SAME cell that secreted it</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="1">Released into blood to reach distant target</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="4">Neuron releases hormone into blood (e.g., ADH)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="2">Diffuses to ADJACENT cell without entering blood</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="ms3-score">0</span>/4 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('ms3')">Reset</button>
+  </div>
+</div>
+
+<!-- ══ TEST TRAPS ══════════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-traps">
+  <div class="trap-intro">
+    <strong>Test Trap Mode:</strong> Each statement is either TRUE or FALSE as written. Many are designed to catch common exam errors. Click T or F — then read the explanation carefully.
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 01 — LO 1</div>
+    <div class="trap-statement">"A paracrine signal is characterized by a hormone being secreted into the bloodstream and acting on nearby cells."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Paracrine signaling is defined by LOCAL DIFFUSION (no bloodstream entry) to NEIGHBORING cells. Endocrine = enters blood, acts distantly. The word "paracrine" literally means "alongside" — no circulation.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 02 — LO 2</div>
+    <div class="trap-statement">"Steroid hormones, unlike peptide hormones, are stored in secretory vesicles and released on demand."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Reversed! <strong>Peptides</strong> are stored preformed in vesicles → released within seconds of stimulus. <strong>Steroids</strong> are lipid-soluble and CANNOT be stored in vesicles; they must be SYNTHESIZED de novo from cholesterol after stimulus (delay of minutes to hours).</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 03 — LO 3</div>
+    <div class="trap-statement">"The rate-limiting enzyme in catecholamine biosynthesis is dopamine β-hydroxylase."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> The rate-limiting enzyme is <strong>tyrosine hydroxylase</strong> (Tyr → L-DOPA), which requires BH4 as a cofactor. Dopamine β-hydroxylase is a downstream step (DA → NE). Remember: rate-limiting = FIRST committed step in most biosynthetic pathways.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 04 — LO 3</div>
+    <div class="trap-statement">"PNMT converts norepinephrine to epinephrine and is found throughout the sympathetic nervous system."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> PNMT is found <strong>only in the adrenal medulla</strong>, not in peripheral sympathetic neurons. This is because PNMT expression requires <strong>high local cortisol</strong> from adrenal cortex (delivered via portal-like vasculature). That's why sympathetic neurons release mostly NE, while the adrenal medulla releases ~80% Epi.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 05 — LO 4</div>
+    <div class="trap-statement">"Cortisol, aldosterone, estrogen, and thyroid hormone all derive from cholesterol and share the same first enzymatic step."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> <strong>Thyroid hormone</strong> is NOT a steroid — it's an amine derived from tyrosine + iodine (on thyroglobulin). Cortisol, aldosterone, and estrogen ARE steroids derived from cholesterol via desmolase (CYP11A1). Classic trap: thyroid hormone behaves LIKE a steroid (lipid-soluble, carrier-bound, nuclear receptor) but is synthesized completely differently.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 06 — LO 5</div>
+    <div class="trap-statement">"A pregnant woman with elevated total T4 but normal free T4 is hyperthyroid and should be treated with methimazole."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> This is a classic free-hormone-hypothesis trap. Estrogen in pregnancy ↑hepatic TBG → more T4 binds carrier → <strong>total T4 rises, but free T4 is unchanged</strong>. Because only free hormone is bioactive, the patient is EUTHYROID. No treatment needed. Always assess thyroid status with FREE T4, not total.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 07 — LO 6</div>
+    <div class="trap-statement">"Nuclear receptors (like the glucocorticoid receptor) produce rapid effects within seconds because they act directly on ion channels."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Nuclear receptors act by altering <strong>gene transcription</strong> → mRNA → new protein → physiologic effect. This is a SLOW process (minutes to hours to days), not seconds. <strong>Rapid</strong> effects are characteristic of water-soluble hormones binding MEMBRANE receptors (GPCRs / RTKs) using second messengers.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 08 — LO 7</div>
+    <div class="trap-statement">"In insulin resistance, pancreatic β-cells respond by up-regulating insulin receptors on hepatocytes to compensate."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Chronic hyperinsulinemia DOWN-regulates insulin receptors (the problem, not the response). β-cells compensate by SECRETING MORE INSULIN, not by regulating peripheral receptors. Pancreatic β-cells cannot control hepatocyte receptor number — that's a local target-cell phenomenon driven by the high ambient hormone level.</div>
+  </div>
+
+</div>
+
+<!-- ══ REFERENCE ══════════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-reference">
+
+  <div class="ref-section">
+    <div class="ref-title">Hormone Classes — Master Comparison</div>
+    <table class="ref-table">
+      <thead><tr><th>Feature</th><th>Peptide/Protein</th><th>Steroid</th><th>Catecholamine</th><th>Thyroid Hormone</th></tr></thead>
+      <tbody>
+        <tr><td class="key">Precursor</td><td>Amino acids (gene-encoded)</td><td>Cholesterol</td><td>Tyrosine</td><td>Tyrosine + I₂ (on thyroglobulin)</td></tr>
+        <tr><td class="key">Solubility</td><td>Water-soluble</td><td>Lipid-soluble</td><td>Water-soluble</td><td>Lipid-soluble</td></tr>
+        <tr><td class="key">Stored?</td><td>YES (vesicles)</td><td>NO (made on demand)</td><td>YES (chromaffin granules)</td><td>YES (colloid, bound to thyroglobulin)</td></tr>
+        <tr><td class="key">Circulates</td><td>FREE</td><td>Carrier-bound (CBG, SHBG)</td><td>FREE (brief ½-life)</td><td>Carrier-bound (TBG)</td></tr>
+        <tr><td class="key">Half-life</td><td>Minutes</td><td>Hours</td><td>Seconds–minutes</td><td>Days (T4 ~7d)</td></tr>
+        <tr><td class="key">Receptor</td><td>Membrane (GPCR, RTK, JAK)</td><td>Cytoplasmic → nuclear</td><td>Membrane GPCR (α, β)</td><td>NUCLEAR (constitutive)</td></tr>
+        <tr><td class="key">Speed</td><td>Seconds–minutes</td><td>Hours–days</td><td>Seconds</td><td>Hours–days</td></tr>
+        <tr><td class="key">Examples</td><td>Insulin, GH, ACTH, TSH, glucagon, PRL, PTH</td><td>Cortisol, aldosterone, E2, T, vitamin D</td><td>NE, Epi, dopamine</td><td>T3, T4</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Catecholamine Biosynthesis — Enzyme Map</div>
+    <table class="ref-table">
+      <thead><tr><th>Step</th><th>Enzyme</th><th>Cofactor / Note</th><th>High-Yield Fact</th></tr></thead>
+      <tbody>
+        <tr><td class="key">Tyr → L-DOPA</td><td>Tyrosine hydroxylase</td><td>BH4</td><td><strong>RATE-LIMITING</strong>; L-DOPA bypasses in Parkinson treatment</td></tr>
+        <tr><td class="key">L-DOPA → DA</td><td>DOPA decarboxylase (AADC)</td><td>B6 (pyridoxal-phosphate)</td><td>Inhibited by carbidopa (peripherally) to preserve CNS effect</td></tr>
+        <tr><td class="key">DA → NE</td><td>Dopamine β-hydroxylase</td><td>Vitamin C, Cu²⁺</td><td>Occurs INSIDE vesicle (unique localization)</td></tr>
+        <tr><td class="key">NE → Epi</td><td>PNMT</td><td>Cortisol induction</td><td>ONLY in adrenal medulla; explains why sympathetic nerves = NE, medulla = Epi</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Membrane Receptor Signaling — Quick Map</div>
+    <table class="ref-table">
+      <thead><tr><th>Pathway</th><th>Second Messenger</th><th>Hormones (high-yield)</th></tr></thead>
+      <tbody>
+        <tr><td class="key">Gs → ↑cAMP → PKA</td><td>cAMP</td><td>Glucagon, ACTH, TSH, LH, FSH, PTH, CRH, β₁/β₂-adrenergic, calcitonin, ADH-V2</td></tr>
+        <tr><td class="key">Gi → ↓cAMP</td><td>cAMP ↓</td><td>Somatostatin, α₂-adrenergic, opioids, dopamine-D2</td></tr>
+        <tr><td class="key">Gq → IP3 + DAG</td><td>Ca²⁺, PKC</td><td>GnRH, TRH, ADH-V1, angiotensin II, oxytocin, α₁-adrenergic, gastrin ("GOAT HAG")</td></tr>
+        <tr><td class="key">RTK (MAPK / PI3K)</td><td>Phosphorylation cascade</td><td>Insulin, IGF-1, GF's (EGF, FGF, PDGF, VEGF), FGF23</td></tr>
+        <tr><td class="key">JAK-STAT</td><td>STAT transcription factors</td><td>GH, prolactin, leptin, cytokines, EPO, IFN, G-CSF</td></tr>
+        <tr><td class="key">Guanylyl cyclase</td><td>cGMP</td><td>ANP/BNP, NO (soluble GC)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Carrier Proteins — Match Your Hormone</div>
+    <table class="ref-table">
+      <thead><tr><th>Carrier</th><th>Hormone</th><th>Clinical Pearl</th></tr></thead>
+      <tbody>
+        <tr><td class="key">Albumin</td><td>All steroids + thyroid hormone (low affinity, high capacity)</td><td>Hypoalbuminemia → ↑free fraction transiently</td></tr>
+        <tr><td class="key">CBG / Transcortin</td><td>Cortisol (also progesterone)</td><td>Pregnancy / OCPs ↑ CBG → ↑ total cortisol; free is normal</td></tr>
+        <tr><td class="key">TBG</td><td>T4, T3</td><td>Pregnancy ↑TBG → ↑total T4, free T4 normal (euthyroid)</td></tr>
+        <tr><td class="key">SHBG</td><td>Testosterone, DHT, estradiol</td><td>Hyperthyroid / estrogen ↑SHBG → ↓free T; obesity / androgens ↓SHBG → ↑free estradiol</td></tr>
+        <tr><td class="key">DBP</td><td>25-OH-D (and 1,25-(OH)₂-D)</td><td>Delivers vitamin D to target tissues; low in nephrotic syndrome</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-note">
+    <strong>Big Picture:</strong> Solubility predicts almost everything — where the hormone is stored, how it travels, how fast it acts, where its receptor lives. Water-soluble ⇒ stored, free in plasma, membrane receptor, fast. Lipid-soluble ⇒ made-on-demand (or stored bound), carrier-bound, nuclear receptor, slow/durable.
+  </div>
+</div>
+
+<div class="footer">
+  <a href="../active-recall-hub.html">← Active Recall Hub</a> &nbsp;·&nbsp; END01 Hub 1 — Core Concepts &nbsp;·&nbsp; HoyaDocs Endocrine Block
+</div>
+
+</div><!-- /container -->
+
+<script>
+function flipCard(fc){
+  const inner=fc.querySelector('.fc-inner');
+  const front=fc.querySelector('.fc-front');
+  const back=fc.querySelector('.fc-back');
+  fc.classList.toggle('flipped');
+  inner.style.height=(fc.classList.contains('flipped')?back:front).scrollHeight+'px';
+}
+function fixCardHeights(){
+  document.querySelectorAll('.fc').forEach(function(fc){
+    const inner=fc.querySelector('.fc-inner');
+    const front=fc.querySelector('.fc-front');
+    inner.style.height=front.scrollHeight+'px';
+  });
+}
+window.addEventListener('load',fixCardHeights);
+// Tab switching
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='flashcards') requestAnimationFrame(fixCardHeights);
+}
+
+// FIB check
+function checkFib(btn){
+  const card=btn.closest('.fib-card');
+  const inputs=card.querySelectorAll('.fib-input');
+  const fb=card.querySelector('.fib-feedback');
+  let allCorrect=true;
+  inputs.forEach(inp=>{
+    const val=inp.value.trim().toLowerCase();
+    const accepted=inp.dataset.answers.split(',').map(a=>a.trim().toLowerCase());
+    if(accepted.some(a=>val.includes(a)||(a.includes(val)&&val.length>2))){
+      inp.classList.remove('incorrect');inp.classList.add('correct');
+    } else {
+      inp.classList.remove('correct');inp.classList.add('incorrect');allCorrect=false;
+    }
+  });
+  fb.className='fib-feedback '+(allCorrect?'correct':'incorrect');
+  fb.textContent=allCorrect?'✓ Correct!':'✗ Not quite — use Reveal to see the answer.';
+}
+function revealFib(btn){
+  const card=btn.closest('.fib-card');
+  const inputs=card.querySelectorAll('.fib-input');
+  inputs.forEach(inp=>{
+    const ans=inp.dataset.answers.split(',')[0];
+    inp.value=ans;inp.classList.add('correct');inp.classList.remove('incorrect');
+  });
+  const fb=card.querySelector('.fib-feedback');
+  fb.className='fib-feedback correct';fb.textContent='Answer revealed.';
+}
+
+// Drag-and-Drop Ordering
+let dragSrc=null;
+function dragStart(e){dragSrc=e.currentTarget;e.dataTransfer.effectAllowed='move';}
+function dropOnItem(e,listId){
+  e.preventDefault();e.stopPropagation();
+  const target=e.currentTarget;target.classList.remove('drag-over');
+  if(!dragSrc||dragSrc===target)return;
+  const list=document.getElementById(listId);
+  const items=Array.from(list.children);
+  const srcIdx=items.indexOf(dragSrc);
+  const tgtIdx=items.indexOf(target);
+  if(srcIdx<tgtIdx)list.insertBefore(dragSrc,target.nextSibling);
+  else list.insertBefore(dragSrc,target);
+}
+function dropItem(e,listId){e.preventDefault();}
+function checkOrder(listId,fbId){
+  const list=document.getElementById(listId);
+  const items=Array.from(list.children);
+  let correct=0;
+  items.forEach((item,idx)=>{
+    item.classList.remove('correct-pos','wrong-pos');
+    if(parseInt(item.dataset.pos)===idx+1){item.classList.add('correct-pos');correct++;}
+    else item.classList.add('wrong-pos');
+  });
+  const fb=document.getElementById(fbId);
+  fb.className='order-feedback '+(correct===items.length?'correct':'incorrect');
+  fb.textContent=correct===items.length?`✓ Perfect! All ${items.length} items in the correct order.`:`${correct}/${items.length} correct — keep trying or show the answer.`;
+}
+function showOrderAnswer(id){
+  const el=document.getElementById(id);
+  el.style.display=el.style.display==='block'?'none':'block';
+}
+
+// Matching
+let matchState={};
+function selectMatch(el,setId){
+  if(el.classList.contains('matched-correct'))return;
+  if(!matchState[setId])matchState[setId]={selected:null,score:0};
+  const state=matchState[setId];
+  if(state.selected===null){
+    document.querySelectorAll(`[onclick*="${setId}"].selected`).forEach(e=>e.classList.remove('selected'));
+    el.classList.add('selected');state.selected=el;
+  } else {
+    const prev=state.selected;
+    if(prev===el){el.classList.remove('selected');state.selected=null;return;}
+    if(prev.dataset.pair===el.dataset.pair){
+      prev.classList.remove('selected');prev.classList.add('matched-correct');
+      el.classList.add('matched-correct');state.selected=null;state.score++;
+      document.getElementById(setId+'-score').textContent=state.score;
+    } else {
+      [prev,el].forEach(e=>{e.classList.remove('selected');e.classList.add('flash-wrong');setTimeout(()=>e.classList.remove('flash-wrong'),500);});
+      state.selected=null;
+    }
+  }
+}
+function resetMatch(setId){
+  matchState[setId]={selected:null,score:0};
+  document.querySelectorAll(`[onclick*="${setId}"]`).forEach(e=>{e.classList.remove('matched-correct','selected','flash-wrong');});
+  document.getElementById(setId+'-score').textContent='0';
+}
+
+// Test Traps
+function judgeTrap(btn,correct){
+  const card=btn.closest('.trap-card');
+  const btns=card.querySelectorAll('.trap-btn');
+  btns.forEach(b=>b.disabled=true);
+  const userSaidTrue=btn.classList.contains('trap-btn-true');
+  const isCorrect=(userSaidTrue===correct);
+  btn.classList.add(isCorrect?'sel-correct':'sel-wrong');
+  const exp=card.querySelector('.trap-exp');
+  exp.className='trap-exp '+(isCorrect?'show-c':'show-w');
+}
+</script>
+</body>
+</html>

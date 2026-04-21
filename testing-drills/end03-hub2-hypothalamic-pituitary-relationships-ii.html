@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>END03 Hub #2 · Hypothalamic–Pituitary Relationships II — Step 1 Extensions</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;background:#FFF7ED;color:#2C2C2C;min-height:100vh;line-height:1.6}
+.topnav{background:#7C2D12;border-bottom:3px solid #EA580C;padding:0 28px;height:68px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-brand{display:flex;flex-direction:column;justify-content:center;gap:1px}
+.nav-brand-text{font-family:'Crimson Pro',Georgia,serif;font-size:1.55em;font-weight:700;color:#FFEDD5;letter-spacing:.02em;line-height:1.2}
+.nav-brand-sub{font-size:.85em;color:#FDBA74;font-weight:500;letter-spacing:.04em;text-transform:uppercase;line-height:1.2}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.nav-back{display:inline-flex;align-items:center;gap:6px;font-size:.8em;color:#fff;font-weight:600;padding:6px 14px;border-radius:5px;border:1px solid #EA580C;background:#EA580C;text-decoration:none;transition:all .2s}
+.nav-back:hover{background:#C2410C;border-color:#C2410C}
+.container{max-width:1060px;margin:0 auto;padding:28px 24px}
+.header{background:#FFFFFF;border:1px solid #FED7AA;border-radius:6px;padding:28px 32px;margin-bottom:24px;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#7C2D12 0%,#EA580C 50%,#7C2D12 100%)}
+.hub-tag{display:inline-block;background:#7C2D12;color:#FFEDD5;font-size:.82em;font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:5px 14px;border-radius:3px;margin-bottom:10px}
+.header h1{font-family:'Crimson Pro',Georgia,serif;font-size:2.3em;color:#7C2D12;margin-bottom:6px;line-height:1.25;font-weight:700}
+.header h1 span{color:#C2410C;font-weight:600;font-style:italic}
+.header .subtitle{color:#5A5A5A;font-size:.88em;line-height:1.6;margin-bottom:14px}
+.source-strip{display:flex;gap:8px;flex-wrap:wrap}
+.source-badge{background:#FFF7ED;border:1px solid #FED7AA;border-radius:4px;padding:5px 12px;font-size:.88em;color:#5A5A5A}
+.source-badge strong{color:#7C2D12}
+.hub-prog{background:#FFF;border:1px solid #FED7AA;border-radius:6px;padding:12px 18px;margin-bottom:22px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hub-step{padding:8px 18px;border-radius:4px;font-size:.92em;font-weight:600}
+.hub-step.done{background:#7C2D12;border:1px solid #7C2D12;color:#FFEDD5;text-decoration:none;transition:all .2s}
+.hub-step.done:hover{background:#9A3412;color:#fff}
+.hub-step.current{background:#7C2D12;color:#FFEDD5}
+.hub-step.next{background:#FFF7ED;border:1px solid #FED7AA;color:#7A7060;text-decoration:none;transition:all .2s}
+.hub-step.next:hover{border-color:#EA580C;color:#C2410C}
+.hub-arrow{color:#EA580C;font-size:1.1em;font-weight:700}
+.hub-prog-label{font-size:.88em;color:#7A7060;margin-right:6px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:24px}
+.stat-card{background:#FFF;border:1px solid #FED7AA;border-radius:6px;padding:14px;text-align:center}
+.stat-num{font-family:'Crimson Pro',Georgia,serif;font-size:2.1em;font-weight:700;color:#7C2D12}
+.stat-label{font-size:.8em;color:#7A7060;text-transform:uppercase;letter-spacing:.08em;margin-top:2px;font-weight:600}
+.tab-nav{display:flex;gap:2px;flex-wrap:wrap;margin-bottom:26px;border-bottom:2px solid #FED7AA}
+.tab-btn{background:none;border:none;color:#7A7060;font-size:.96em;font-weight:600;padding:12px 20px;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;margin-bottom:-2px;font-family:inherit}
+.tab-btn:hover{color:#7C2D12}
+.tab-btn.active{color:#7C2D12;border-bottom-color:#EA580C}
+.tab-content{display:none;animation:fi .25s ease}
+.tab-content.active{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.fc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:16px}
+.fc{perspective:1000px;cursor:pointer;position:relative;z-index:1}
+.fc-inner{position:relative;transform-style:preserve-3d;transition:transform .5s,height .3s}
+.fc.flipped{z-index:10}
+.fc.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;top:0;left:0;right:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:6px;padding:22px}
+.fc-front{background:#FFFFFF;border:1px solid #FED7AA;border-top:3px solid #7C2D12}
+.fc-back{transform:rotateY(180deg);background:#FFEDD5;border:1px solid #EA580C}
+.fc-label{font-size:.66em;font-weight:700;color:#EA580C;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.fc-q{font-size:.92em;color:#2C2C2C;line-height:1.55}
+.fc-a{font-size:.88em;color:#2C2C2C;line-height:1.65}
+.fc-a strong{color:#7C2D12}
+.fc-a em{color:#C2410C;font-style:normal}
+.fc-flip-hint{font-size:.67em;color:#9A9080;margin-top:10px;font-style:italic}
+.fc-progress{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:.82em;color:#7A7060}
+.fc-progress .prog-num{color:#7C2D12;font-weight:700}
+.mcq-item,.vig-item{background:#FFFFFF;border:1px solid #FED7AA;border-radius:6px;padding:22px;margin-bottom:18px}
+.mcq-num,.vig-num{font-size:.68em;font-weight:700;color:#EA580C;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.mcq-stem,.vig-stem{font-size:.93em;color:#2C2C2C;line-height:1.7;margin-bottom:14px;background:#FFEDD5;padding:14px;border-radius:6px;border-left:3px solid #EA580C}
+.mcq-stem strong,.vig-stem strong{color:#7C2D12}
+.mcq-opts,.vig-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.mcq-opt,.vig-opt{background:#FFF7ED;border:1px solid #FED7AA;border-radius:5px;padding:10px 14px;cursor:pointer;font-size:.88em;color:#2C2C2C;transition:all .18s;display:flex;align-items:flex-start;gap:10px}
+.mcq-opt:hover:not(.locked),.vig-opt:hover:not(.locked){border-color:#EA580C;background:#FFEDD5}
+.mcq-opt.correct,.vig-opt.correct{background:#F1F8F2;border-color:#2E7D32;color:#1B5E20}
+.mcq-opt.correct .opt-letter,.vig-opt.correct .vig-opt-letter{color:#2E7D32}
+.mcq-opt.wrong,.vig-opt.wrong{background:#FEF5F5;border-color:#C62828;color:#B71C1C}
+.mcq-opt.wrong .opt-letter,.vig-opt.wrong .vig-opt-letter{color:#C62828}
+.mcq-opt.locked,.vig-opt.locked{cursor:default}
+.opt-letter,.vig-opt-letter{font-weight:700;color:#7C2D12;flex-shrink:0;width:18px}
+.mcq-exp,.vig-exp{background:#FFEDD5;border-left:3px solid #EA580C;border-radius:6px;padding:12px 16px;font-size:.84em;color:#5A5A5A;line-height:1.7;display:none;margin-top:12px}
+.mcq-exp.show,.vig-exp.show{display:block}
+.mcq-exp strong,.vig-exp strong{color:#7C2D12}
+.vig-buzzword{color:#C2410C;font-weight:600}
+.cc-card{background:#FFFFFF;border:1px solid #FED7AA;border-radius:6px;padding:22px;margin-bottom:18px;border-left:4px solid #EA580C}
+.cc-tag{display:inline-block;background:#FFEDD5;border:1px solid #FED7AA;border-radius:4px;font-size:.68em;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7C2D12;padding:2px 8px;margin-bottom:10px}
+.cc-title{font-family:'Crimson Pro',Georgia,serif;font-size:1.1em;font-weight:700;color:#7C2D12;margin-bottom:10px}
+.cc-body{font-size:.88em;color:#5A5A5A;line-height:1.7}
+.cc-body strong{color:#2C2C2C}
+.cc-body em{color:#C2410C;font-style:normal}
+.cc-reveal{background:none;border:1px solid #FED7AA;color:#7A7060;padding:7px 14px;border-radius:5px;cursor:pointer;font-size:.8em;font-weight:600;font-family:inherit;margin-top:12px}
+.cc-reveal:hover{border-color:#EA580C;color:#C2410C;background:#FFEDD5}
+.cc-detail{display:none;margin-top:12px;padding:14px;background:#FFEDD5;border-radius:5px;border:1px solid #FED7AA;font-size:.85em;color:#2C2C2C;line-height:1.7}
+.cc-detail.open{display:block}
+.cc-detail strong{color:#7C2D12}
+.mcq-intro,.cc-intro,.vig-intro,.hy-intro,.trap-intro{background:#FFEDD5;border:1px solid #FED7AA;border-radius:6px;padding:14px 18px;margin-bottom:20px;font-size:.84em;color:#5A5A5A;line-height:1.6}
+.mcq-intro strong,.cc-intro strong,.vig-intro strong,.hy-intro strong,.trap-intro strong{color:#7C2D12}
+table{border-collapse:collapse;width:100%}
+table th{background:#7C2D12;color:#FFEDD5;font-weight:600;text-align:left;padding:10px 14px;font-size:.84em}
+table td{padding:10px 14px;border-bottom:1px solid #FED7AA;color:#2C2C2C;vertical-align:top;line-height:1.55;background:#FFF}
+table tr:nth-child(even) td{background:#FFF7ED}
+.trap-card{background:#FFF;border:1px solid #FED7AA;border-radius:6px;padding:22px;margin-bottom:18px;border-left:4px solid #EA580C}
+.trap-num{font-size:.68em;font-weight:700;color:#EA580C;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.trap-statement{font-size:.92em;color:#2C2C2C;line-height:1.6;margin-bottom:14px;background:#FFEDD5;padding:14px;border-radius:6px;border-left:3px solid #EA580C;font-weight:500}
+.trap-btns{display:flex;gap:10px;margin-bottom:14px}
+.trap-btn{background:none;border:1px solid #FED7AA;color:#7A7060;padding:10px 16px;border-radius:5px;cursor:pointer;font-weight:600;font-size:.84em;font-family:inherit;transition:all .2s}
+.trap-btn:hover:not(:disabled){border-color:#EA580C;color:#C2410C;background:#FFEDD5}
+.trap-btn:disabled{opacity:.5;cursor:default}
+.trap-btn.sel-correct{border-color:#2E7D32;background:#F1F8F2;color:#1B5E20}
+.trap-btn.sel-wrong{border-color:#C62828;background:#FEF5F5;color:#B71C1C}
+.trap-exp{background:#FFEDD5;border-left:3px solid #EA580C;border-radius:6px;padding:12px 16px;font-size:.84em;color:#5A5A5A;line-height:1.7;display:none}
+.trap-exp.show-c,.trap-exp.show-w{display:block}
+.trap-exp.show-w{border-left-color:#C62828;background:#FEF5F5;color:#B71C1C}
+.trap-exp strong{color:#7C2D12}
+.ref-section{margin-bottom:28px}
+.ref-title{font-family:'Crimson Pro',Georgia,serif;font-size:1.05em;font-weight:700;color:#7C2D12;margin-bottom:14px;padding-bottom:6px;border-bottom:2px solid #EA580C}
+.hy-card{background:#FFF;border:1px solid #FED7AA;border-radius:6px;padding:22px;margin-bottom:18px;border-left:4px solid #EA580C}
+.hy-card-title{font-family:'Crimson Pro',Georgia,serif;font-size:1em;font-weight:700;color:#7C2D12;margin-bottom:10px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.hy-card-body{font-size:.88em;color:#5A5A5A;line-height:1.7}
+.hy-card-body strong{color:#2C2C2C}
+.hy-badge{display:inline-block;font-size:.68em;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:3px 10px;border-radius:3px;background:#FFEDD5;color:#7C2D12}
+.hy-badge.trap{background:#FEF5F5;color:#C62828;border:1px solid #C62828}
+.hy-badge.buzzword{background:#FFF8E1;color:#F57F17;border:1px solid #F57F17}
+.hy-badge.testing{background:#E8F5E9;color:#2E7D32;border:1px solid #2E7D32}
+.footer{text-align:center;font-size:.78em;color:#7A7060;border-top:2px solid #FED7AA;padding-top:16px;margin-top:32px}
+.footer a{color:#7C2D12;text-decoration:none;font-weight:600}
+.footer a:hover{color:#EA580C;text-decoration:underline}
+@media(max-width:700px){.container{padding:14px}.header{padding:18px 16px}.header h1{font-size:1.5em}.fc-grid{grid-template-columns:1fr}.hub-prog{flex-direction:column;gap:6px;align-items:flex-start}.hub-arrow{display:none}.tab-btn{font-size:.82em;padding:8px 12px}}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <div class="nav-brand">
+    <span class="nav-brand-text">HoyaDocs</span>
+    <span class="nav-brand-sub">Endocrine Block</span>
+  </div>
+  <div class="nav-actions">
+    <a href="../active-recall-hub.html" class="nav-back">← Active Drill Hub</a>
+  </div>
+</nav>
+<div class="container">
+
+<div class="header">
+  <div class="hub-tag">Hub #2 — Step 1 Extensions</div>
+  <h1>Hypothalamic–Pituitary Relationships II <span>Step 1 Extensions</span></h1>
+  <div class="subtitle">Disease-focused flashcards, MCQs, and vignettes building on the GH axis foundation.</div>
+  <div class="source-strip">
+    <div class="source-badge"><strong>Diseases:</strong> Acromegaly · Gigantism · GH deficiency · Laron syndrome · MEN1 · Turner · Prader-Willi · Achondroplasia</div>
+    <div class="source-badge"><strong>Drugs:</strong> Somatropin · Mecasermin · Octreotide · Pasireotide · Pegvisomant · Cabergoline</div>
+    <div class="source-badge"><strong>Tests:</strong> IGF-1 · OGTT · Arginine / insulin tolerance · MRI sella</div>
+  </div>
+</div>
+
+<div class="hub-prog">
+  <span class="hub-prog-label">Hub Progression:</span>
+  <a href="end03-hub1-hypothalamic-pituitary-relationships-ii.html" class="hub-step done">Hub 1 ✓</a>
+  <span class="hub-arrow">→</span>
+  <span class="hub-step current">Hub 2 — Step 1 Extensions</span>
+  <span class="hub-arrow">→</span>
+  <a href="end03-hub3-hypothalamic-pituitary-relationships-ii.html" class="hub-step next">Hub 3 — Practice Questions</a>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-card"><div class="stat-num">14</div><div class="stat-label">Flashcards</div></div>
+  <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">MCQs</div></div>
+  <div class="stat-card"><div class="stat-num">4</div><div class="stat-label">Vignettes</div></div>
+  <div class="stat-card"><div class="stat-num">7</div><div class="stat-label">Traps</div></div>
+  <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">Clin. Correlates</div></div>
+  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Ref Tables</div></div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('flashcards',this)">Flashcards</button>
+  <button class="tab-btn" onclick="switchTab('mcq',this)">MCQ</button>
+  <button class="tab-btn" onclick="switchTab('vignettes',this)">Vignettes</button>
+  <button class="tab-btn" onclick="switchTab('traps',this)">Step 1 Traps</button>
+  <button class="tab-btn" onclick="switchTab('clinical',this)">Clinical Correlates</button>
+  <button class="tab-btn" onclick="switchTab('ref',this)">Reference</button>
+  <button class="tab-btn" onclick="switchTab('hynotes',this)">HY Testing Notes</button>
+</div>
+
+<!-- ══ FLASHCARDS ══ -->
+<div class="tab-content active" id="tab-flashcards">
+  <div class="fc-progress"><span>Click any card to flip · 14 Step-1 high-yield concepts</span><span class="prog-num">LOs 1–5 integrated</span></div>
+  <div class="fc-grid">
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Acromegaly — Features</div><div class="fc-q">Name at least 8 classic clinical features of acromegaly in adults.</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Soft tissue / bone:</strong> jaw prognathism, frontal bossing, macroglossia, large hands/feet (ring/shoe size ↑)<br><strong>Skin:</strong> skin tags (acrochordons), sweating, oily skin<br><strong>Heart:</strong> cardiomegaly → diastolic dysfunction → CHF (#1 cause of death)<br><strong>Airway:</strong> obstructive sleep apnea<br><strong>Neuro:</strong> carpal tunnel syndrome (soft-tissue swelling around median nerve)<br><strong>Metabolic:</strong> insulin resistance / T2DM<br><strong>GI:</strong> colonic polyps → ↑ colon cancer risk<br><strong>Visual:</strong> bitemporal hemianopia (if macroadenoma presses chiasm)</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Acromegaly — Mortality</div><div class="fc-q">What is the leading cause of death in untreated acromegaly, and why?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Cardiovascular disease</strong> — "acromegalic cardiomyopathy."<br><br><strong>Mechanism:</strong> chronic IGF-1 excess → biventricular hypertrophy, interstitial fibrosis → diastolic dysfunction → CHF. Add HTN, OSA, diabetes → accelerated atherosclerosis.<br><br>Other excess-mortality contributors: T2DM, colon cancer, stroke. Treatment that normalizes IGF-1 restores near-normal life expectancy.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Diagnostic Workup</div><div class="fc-q">A patient has clinical suspicion for acromegaly. Sequence: screening → confirmation → localization.</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Step 1 (screen):</strong> serum IGF-1 (elevated for age-matched reference)<br><strong>Step 2 (confirm):</strong> oral glucose tolerance test — give 75g glucose; measure GH at 0/30/60/90/120 min. Normal: GH suppresses &lt;1 ng/mL. Acromegaly: GH FAILS to suppress.<br><strong>Step 3 (localize):</strong> MRI sella turcica with contrast (~95% have a pituitary macroadenoma; some have microadenomas).<br><br>Also screen for: prolactin (co-secretion common), TFTs, ACTH/cortisol, FSH/LH — mass effects.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Treatment — First Line</div><div class="fc-q">Why is transsphenoidal surgery first-line for acromegaly and not for prolactinoma?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Prolactinoma:</strong> highly responsive to dopamine D2 agonists (cabergoline) → drug shrinks tumor AND normalizes PRL → SURGERY RARELY NEEDED.<br><br><strong>GH-secreting adenoma:</strong> NO equally effective medical therapy. Somatostatin analogs (octreotide) + pegvisomant can CONTROL hormone effects but rarely shrink the tumor to cure. Surgery offers the best chance of biochemical cure, especially for microadenomas (~70%).<br><br>Radiation is last-line (slow effect, high rate of hypopituitarism).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Medical Therapy Options</div><div class="fc-q">Compare octreotide, pegvisomant, and cabergoline for acromegaly treatment.</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Octreotide / lanreotide / pasireotide</strong> (SST analogs): bind SSTR-2/5 on somatotropes → ↓ GH release + tumor shrinkage (~30–50% shrinkage).<br>Side effects: cholelithiasis (↓ gallbladder motility), hyperglycemia, bradycardia.<br><br><strong>Pegvisomant</strong>: recombinant modified GH that binds GH receptor but BLOCKS signal transduction → peripheral GH effects blocked. Does NOT shrink tumor (monitor MRI).<br><br><strong>Cabergoline</strong>: D2 agonist — useful when tumor co-secretes prolactin (25% of somatotrope adenomas). Modest GH-lowering effect.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Laron Syndrome</div><div class="fc-q">Mechanism, phenotype, labs, treatment — and why patients are protected from cancer?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Mechanism:</strong> autosomal recessive loss-of-function mutation in GH receptor → liver cannot respond to GH → very low IGF-1.<br><strong>Phenotype:</strong> severe proportionate short stature, frontal bossing, saddle nose, obesity, hypoglycemia (IGF-1 drops insulin requirements), delayed puberty.<br><strong>Labs:</strong> HIGH GH + LOW IGF-1 (hallmark; flipped from classic GH deficiency).<br><strong>Tx:</strong> recombinant IGF-1 (<em>mecasermin</em>) — bypasses the receptor.<br><br><strong>Cancer protection:</strong> IGF-1 is pro-mitogenic + anti-apoptotic. Chronic IGF-1 deficiency in Laron dramatically reduces cancer incidence (observational Ecuadorian cohort studies).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Pituitary Dwarfism</div><div class="fc-q">Typical causes in children, testing algorithm, and treatment?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Causes:</strong> idiopathic (commonest), congenital (mutations in PROP1, PIT1, GHRH-R, GH1), brain tumors/surgery/radiation, autoimmune hypophysitis, craniopharyngioma.<br><br><strong>Testing:</strong> random GH is unreliable → use provocative tests — <em>arginine</em>, <em>insulin tolerance test</em> (induces hypoglycemia), clonidine, exercise. Healthy patient responds with GH surge; deficient patient does not. Low IGF-1 + IGFBP-3 are supporting.<br><br><strong>Tx:</strong> <em>recombinant human GH (somatropin)</em>, daily SC injection until near-final height or epiphyseal closure. Maximal benefit if started early.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Achondroplasia</div><div class="fc-q">Why is achondroplasia NOT treated with GH, and what molecular defect causes it?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Mechanism:</strong> autosomal dominant GAIN-of-function mutation in <em>FGFR3</em> — constitutively active fibroblast growth factor receptor 3 INHIBITS chondrocyte proliferation at growth plates. Growth plate is defective, not GH/IGF-1 signaling.<br><br><strong>Phenotype:</strong> short LIMBS (disproportionate — short arms/legs, normal trunk), large head with frontal bossing, trident hand, midface hypoplasia.<br><br><strong>Labs:</strong> NORMAL GH, NORMAL IGF-1. GH therapy does NOT help — the growth plate can't respond.<br><br>Emerging therapy: <em>vosoritide</em> (C-type natriuretic peptide analog) for growth promotion.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Turner Syndrome &amp; GH</div><div class="fc-q">Why is recombinant GH indicated in Turner syndrome despite normal GH axis function?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Turner (45,X) girls are NOT classically GH-deficient, but short stature is one of the most prominent features due to SHOX gene haploinsufficiency + gonadal failure (estrogen-deficient puberty growth spurt).<br><br><strong>GH therapy</strong> (off-label-to-approved): starting in early childhood can add 5–8 cm to final adult height. Used in combination with estrogen replacement at puberty. Similar empirical benefit in Prader-Willi, SHOX deficiency, SGA-without-catch-up, idiopathic short stature.<br><br>NOT effective in achondroplasia (growth plate problem), Laron (use IGF-1), or normal-variant short stature.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">MEN1 Association</div><div class="fc-q">What is MEN1, how does it relate to GH excess, and what's the classic triad?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>MEN1</strong> (autosomal dominant, tumor suppressor MEN1 gene) — classic "<em>3 P's</em>":<br>• <strong>P</strong>arathyroid hyperplasia → primary hyperparathyroidism (95% of MEN1)<br>• <strong>P</strong>ancreatic islet tumors (gastrinoma, insulinoma)<br>• <strong>P</strong>ituitary adenoma (30–40%; most commonly PROLACTINOMA but GH-secreting adenomas cause acromegaly at higher-than-background rates)<br><br><strong>Board tip:</strong> acromegaly + hypercalcemia + recurrent peptic ulcers → think MEN1.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">McCune-Albright &amp; GH</div><div class="fc-q">How does McCune-Albright syndrome sometimes cause GH excess?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">McCune-Albright = post-zygotic activating GNAS mutation → constitutively active Gsα in affected tissues.<br><br>If somatotropes are part of the mutation mosaic, they make GH independently of GHRH (Gsα is always "on") → GH excess → acromegaly or gigantism (depending on age).<br><br>Clinical triad: polyostotic fibrous dysplasia + coast-of-Maine café-au-lait + endocrine hyperfunction (precocious puberty most common; acromegaly + hyperthyroidism + Cushing also possible). All stem from the SAME GPCR defect affecting different Gs-coupled hormones in different tissues.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">GH Doping</div><div class="fc-q">Why do athletes abuse GH, and how is GH doping detected?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Sought effects:</strong> claimed ↑ lean mass, faster recovery, fat loss. Evidence for athletic performance benefit in adults is surprisingly weak, but cardiovascular/metabolic risks are real.<br><br><strong>Detection challenges:</strong><br>• Recombinant GH is identical to endogenous (22kDa isoform dominant; natural mix includes 20kDa).<br>• <em>Isoform ratio test</em>: exogenous GH shifts the ratio toward 22kDa<br>• <em>GH biomarkers</em>: IGF-1, P-III-NP — elevated persistently<br><br>Side effects: diabetes, carpal tunnel, joint pain, OSA, cardiomyopathy, theoretical cancer risk.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Ghrelin — The "Hunger" Hormone</div><div class="fc-q">How does ghrelin connect nutrition to the GH axis, and what is its clinical relevance?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Ghrelin:</strong> 28-AA peptide from stomach (X/A-like cells). Sole endogenous ligand for GHS-R (growth hormone secretagogue receptor).<br><br><strong>Actions:</strong><br>• ↑ GH release (potent, synergizes with GHRH)<br>• ↑ appetite (arcuate NPY/AgRP neurons)<br>• ↑ body weight, fat stores<br><br><strong>Clinical:</strong><br>• Ghrelin falls after bariatric surgery (gastric bypass) → ↓ appetite<br>• Prader-Willi syndrome has HIGH ghrelin → hyperphagia<br>• Ghrelin-receptor agonists (e.g., macimorelin) used as GH stimulation test for deficiency diagnosis.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Prader-Willi Syndrome</div><div class="fc-q">How does Prader-Willi relate to the GH axis, and why do patients benefit from GH therapy?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Prader-Willi:</strong> loss of paternal 15q11–13 expression (maternal-deletion; uniparental disomy; or imprinting error). Features:<br>• Neonatal hypotonia → feeding problems<br>• After age 1–2: insatiable hyperphagia → severe obesity<br>• Short stature (functional GH deficiency)<br>• Hypogonadotropic hypogonadism<br>• Intellectual disability, behavioral issues<br><br><strong>GH therapy:</strong> improves height, body composition (↓ fat mass, ↑ lean mass), muscle tone, bone density. FDA-approved indication — one of the landmark non-GHD pediatric uses.</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ MCQ ══ -->
+<div class="tab-content" id="tab-mcq">
+  <div class="mcq-intro"><strong>Step 1-Style MCQs:</strong> Single best answer. Explanations display automatically after your choice.</div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 1 of 6 — Acromegaly Screening</div>
+    <div class="mcq-stem">A 44-year-old man complains of increased ring size (over 3 years), worsening headaches, and new-onset obstructive sleep apnea. Exam: prominent jaw, wide nasal bridge, enlarged hands and feet, soft doughy palms. You suspect acromegaly. <strong>Which single initial test has the best combination of availability, sensitivity, and specificity?</strong></div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>Random morning serum growth hormone</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,true)"><span class="opt-letter">B</span>Serum IGF-1 (age and sex adjusted)</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">C</span>24-hour urine growth hormone</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">D</span>MRI of the pituitary gland</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">E</span>Arginine stimulation test</div>
+    </div>
+    <div class="mcq-exp"><strong>B — Serum IGF-1.</strong> GH is pulsatile and has a short ½-life (~20 min) → random GH can be normal in an acromegalic. IGF-1 is stable (t½ ~12h, bound to IGFBP) and integrates GH exposure → best SCREEN. MRI (D) is for LOCALIZATION after biochemical confirmation. OGTT confirms by showing non-suppressibility. Arginine stim (E) is for SUSPECTED GH DEFICIENCY, not excess.</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 2 of 6 — Acromegaly Confirmation</div>
+    <div class="mcq-stem">A 41-year-old woman has IGF-1 of 840 ng/mL (ULN 260). An oral glucose tolerance test is performed. At 120 minutes post-glucose, her GH remains at 2.8 ng/mL. <strong>Which of the following best explains this finding?</strong></div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>Normal physiologic response to oral glucose</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,true)"><span class="opt-letter">B</span>Autonomous GH secretion from a somatotrope adenoma unresponsive to physiologic feedback</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">C</span>Laron syndrome</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">D</span>Isolated IGF-1 overproduction from the liver</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">E</span>Exogenous GH use</div>
+    </div>
+    <div class="mcq-exp"><strong>B.</strong> Normal physiology: oral glucose suppresses GH below 1 ng/mL via long-loop feedback. <span class="vig-buzzword">Failure to suppress confirms autonomous secretion</span> — i.e., acromegaly from a pituitary adenoma. Laron syndrome (C) has HIGH GH (because of the receptor defect) but LOW IGF-1 — opposite biochemical pattern. Exogenous GH (E) would suppress endogenous GH via feedback, though it could confuse the assay. Direct LO 5 test.</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 3 of 6 — GH Deficiency in Child</div>
+    <div class="mcq-stem">A 7-year-old boy has height below the 1st percentile and growth velocity of 3 cm/year (normal ~5–7 cm/year). Bone age is delayed by 3 years. Random GH is 1.1 ng/mL; IGF-1 is 40 ng/mL (below age-matched reference). Insulin tolerance test: after inducing hypoglycemia (serum glucose 38 mg/dL), peak GH reaches only 3 ng/mL (normal response &gt;10 ng/mL). MRI is normal. <strong>Which of the following is the best next step?</strong></div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerMCQ(this,true)"><span class="opt-letter">A</span>Initiate recombinant human GH (somatropin)</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">B</span>Initiate recombinant IGF-1 (mecasermin)</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">C</span>Initiate octreotide</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">D</span>Reassure and observe — normal variant short stature</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">E</span>Start pegvisomant</div>
+    </div>
+    <div class="mcq-exp"><strong>A — Recombinant GH.</strong> Classic GH deficiency: low growth velocity, delayed bone age, low IGF-1, and blunted GH response to provocative stimulation. Intact GH receptor (no features of Laron; normal family history) means somatropin works well. Earlier initiation → better final adult height. Mecasermin (B) is for Laron (GH-receptor resistance). Octreotide (C) and pegvisomant (E) are for acromegaly.</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 4 of 6 — Laron Syndrome</div>
+    <div class="mcq-stem">A 5-year-old girl in a consanguineous family has severe proportionate short stature (height &lt;3 SD below the mean), frontal bossing, saddle nose, truncal obesity, and episodic hypoglycemia. Labs: <strong>GH 22 ng/mL (HIGH), IGF-1 12 ng/mL (LOW)</strong>, IGFBP-3 very low. Genetic testing reveals a homozygous inactivating mutation in <strong>GHR</strong>. <strong>Which of the following is the most appropriate treatment?</strong></div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>High-dose recombinant human GH</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,true)"><span class="opt-letter">B</span>Recombinant IGF-1 (mecasermin)</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">C</span>Oral glucose tolerance test and MRI sella</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">D</span>Recombinant GHRH (tesamorelin)</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">E</span>Thyroxine replacement</div>
+    </div>
+    <div class="mcq-exp"><strong>B — Mecasermin (recombinant IGF-1).</strong> Laron syndrome is a GH RECEPTOR defect. The pituitary makes GH normally (or more, because long-loop feedback is lost with low IGF-1) but the liver cannot respond. GH therapy (A) is useless — there's no functioning receptor. Treatment bypasses the receptor by replacing the downstream mediator IGF-1. Tests LO 5 and clinical distinction from classic GHD.</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 5 of 6 — Diabetes in Acromegaly</div>
+    <div class="mcq-stem">A 52-year-old woman with newly diagnosed acromegaly has fasting glucose of 168 mg/dL and HbA1c 7.9%. She had no prior diabetes. <strong>Which of the following is the most specific mechanism explaining her hyperglycemia?</strong></div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>Pancreatic β-cell destruction</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,true)"><span class="opt-letter">B</span>GH-induced insulin resistance at muscle and adipose tissue with ↑ hepatic gluconeogenesis</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">C</span>Adrenal cortisol excess from co-secretion</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">D</span>Glucagon overproduction by α-cells</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">E</span>Anti-insulin receptor antibodies</div>
+    </div>
+    <div class="mcq-exp"><strong>B.</strong> GH is <span class="vig-buzzword">diabetogenic</span>: DIRECT effects include ↓ GLUT4 translocation in muscle/adipose (insulin resistance) and ↑ hepatic gluconeogenesis. This is distinct from IGF-1's anabolic growth effects. ~30–50% of acromegalics develop diabetes/glucose intolerance. Treatment (tumor removal) often improves but may not fully reverse the diabetes if it's been long-standing. Directly tests LO 2.</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 6 of 6 — Medical Therapy Side Effects</div>
+    <div class="mcq-stem">A 58-year-old man with acromegaly cannot undergo transsphenoidal surgery due to cardiopulmonary comorbidities. He is started on monthly octreotide LAR (long-acting release). At 6 months, IGF-1 has decreased 60%, symptoms have improved, and tumor volume is ~30% smaller. However, he develops right upper quadrant pain and ultrasound reveals cholelithiasis. <strong>Which of the following best explains this side effect?</strong></div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>Direct toxic effect of octreotide on gallbladder epithelium</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,true)"><span class="opt-letter">B</span>Somatostatin analog suppression of CCK and gallbladder motility, promoting bile stasis</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">C</span>Octreotide-induced hypercholesterolemia</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">D</span>Autoimmune cholangitis triggered by the peptide</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">E</span>Secondary hyperparathyroidism from vitamin D malabsorption</div>
+    </div>
+    <div class="mcq-exp"><strong>B.</strong> Octreotide is a somatostatin analog. Somatostatin INHIBITS many GI hormones and motility, including CCK → ↓ gallbladder contraction → bile stasis → <span class="vig-buzzword">cholelithiasis/sludge</span> (20–30% of patients on long-term therapy). Other side effects: hyperglycemia or hypoglycemia, injection-site pain, steatorrhea, bradycardia, B12 deficiency. Integrates with LO 5 treatment pharmacology.</div>
+  </div>
+
+</div>
+
+<!-- ══ VIGNETTES ══ -->
+<div class="tab-content" id="tab-vignettes">
+  <div class="vig-intro"><strong>Vignette MCQs:</strong> Longer clinical scenarios integrating multiple LOs.</div>
+
+  <div class="vig-item">
+    <div class="vig-num">Vignette 1 of 4 — MEN1 Acromegaly</div>
+    <div class="vig-stem">A 36-year-old man presents with recurrent peptic ulcers (4 in the last 2 years) despite high-dose PPI therapy. His father died at 40 of acromegaly complications. Exam: enlarged jaw, coarse features, shoe size increased two full sizes over 6 years. Labs: Ca²⁺ 11.8 mg/dL (high), PTH 110 pg/mL (inappropriately normal-high), IGF-1 4× ULN, fasting gastrin 850 pg/mL. Ca²⁺ rises further after calcium infusion (Paradoxical Ca infusion test). <strong>Which genetic syndrome most likely unifies these findings?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>MEN 2A (medullary thyroid + pheo + hyperparathyroidism)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>MEN 2B (medullary thyroid + pheo + mucosal neuromas)</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>MEN 1 (parathyroid + pancreatic + pituitary)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Von Hippel-Lindau syndrome</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>McCune-Albright syndrome</div>
+    </div>
+    <div class="vig-exp"><strong>C — MEN 1.</strong> Classic "<span class="vig-buzzword">3 P's</span>": Parathyroid hyperplasia (hypercalcemia, ↑PTH) + Pancreatic endocrine tumor (gastrinoma → Zollinger-Ellison → recurrent ulcers) + Pituitary adenoma (GH-secreting → acromegaly). Autosomal dominant, tumor suppressor MEN1 gene on 11q13. Family history makes this near-certain. Screen relatives. MEN 2A/2B (A, B) are RET-associated and feature MEDULLARY thyroid cancer and pheo — not acromegaly or gastrinomas.</div>
+  </div>
+
+  <div class="vig-item">
+    <div class="vig-num">Vignette 2 of 4 — McCune-Albright with Acromegaly</div>
+    <div class="vig-stem">A 14-year-old girl has history of precocious puberty (menarche at age 4), large <strong>"coast of Maine"–bordered café-au-lait patch</strong> across her left flank, and a left femoral fibrous dysplasia lesion. Over the past 2 years she has grown 30 cm and developed prominent jaw and enlarged hands and feet. Labs: IGF-1 markedly elevated, GH fails to suppress with OGTT. MRI shows no discrete pituitary adenoma but diffuse pituitary enlargement. Genetic testing on affected bone biopsy reveals a postzygotic <strong>activating GNAS mutation</strong>. <strong>Which of the following best explains the GH excess?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Traditional somatotrope adenoma</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Constitutive activation of Gsα in mosaic somatotrope tissue → tonic cAMP → autonomous GH release</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Loss-of-function mutation in somatostatin receptor</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Ectopic GHRH production from the bone lesion</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Germline STAT5 activating mutation</div>
+    </div>
+    <div class="vig-exp"><strong>B — McCune-Albright GH excess.</strong> The same post-zygotic activating GNAS mutation that drives precocious puberty, fibrous dysplasia, and café-au-lait can affect somatotropes. GHRH binds a Gs-coupled receptor → normally requires GHRH ligand. Constitutively active Gsα → tonic cAMP → autonomous GH secretion without GHRH. Diffuse enlargement (not a discrete adenoma) is characteristic. Treatment is harder than typical acromegaly (no focal target for surgery); medical therapy with SST analogs / pegvisomant is often needed.</div>
+  </div>
+
+  <div class="vig-item">
+    <div class="vig-num">Vignette 3 of 4 — Achondroplasia Differential</div>
+    <div class="vig-stem">A 3-year-old boy is referred for short stature. He is below the 1st percentile for height. Exam: <strong>disproportionate short stature with short limbs, normal trunk length</strong>, large head with frontal bossing, midface hypoplasia, trident hand. Both parents are of normal height. Labs: normal GH provocative response, normal IGF-1, normal TSH. Genetic testing reveals a heterozygous <strong>FGFR3 p.G380R</strong> variant. <strong>Which treatment approach is most appropriate?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Initiate recombinant GH therapy</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Initiate recombinant IGF-1 (mecasermin)</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Vosoritide (C-type natriuretic peptide analog) + orthopedic / neurologic monitoring</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Octreotide</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Combined GH + aromatase inhibitor</div>
+    </div>
+    <div class="vig-exp"><strong>C.</strong> Buzzwords: <span class="vig-buzzword">disproportionate short limbs</span>, <span class="vig-buzzword">frontal bossing</span>, <span class="vig-buzzword">trident hand</span>, <span class="vig-buzzword">FGFR3</span> activating mutation. Achondroplasia is a GROWTH PLATE disease — constitutively active FGFR3 INHIBITS chondrocyte proliferation. GH/IGF-1 axis is NORMAL, and GH therapy is not effective because the plate itself can't respond to IGF-1. <em>Vosoritide</em> (FDA-approved CNP analog) antagonizes the FGFR3 pathway → improves growth. Important board distinction: GH deficiency / Laron / Turner → GH or IGF-1 helps. Achondroplasia → a different biology altogether.</div>
+  </div>
+
+  <div class="vig-item">
+    <div class="vig-num">Vignette 4 of 4 — Somatopause vs. Pathologic GHD</div>
+    <div class="vig-stem">A 68-year-old man feels increasingly fatigued, has lost 4 kg of muscle mass despite exercise, and has gained 5 kg of visceral fat. A marketing campaign is advertising "anti-aging GH therapy." His labs: IGF-1 at the lower limit of adult normal, TSH normal, morning cortisol normal, testosterone at the low end of normal. <strong>Which of the following statements best reflects the appropriate medical approach?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Initiate recombinant GH; physiologic decline is pathologic and reversible</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Start pegvisomant to block excessive GH-mediated aging</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Decline GH therapy: age-related GH decline ("somatopause") is not equivalent to pathologic GH deficiency; risks of GH (insulin resistance, edema, cardiomegaly, possible cancer) outweigh benefits</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Initiate IGF-1 therapy</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Initiate cabergoline</div>
+    </div>
+    <div class="vig-exp"><strong>C.</strong> Age-related decline in GH/IGF-1 (<em>somatopause</em>) is a normal biological phenomenon — NOT the same as documented hypopituitary GH deficiency. Trials of GH in older adults show modest body-composition benefits but significant rates of <span class="vig-buzzword">insulin resistance, edema, arthralgias, cardiomegaly</span>, and theoretical cancer risk. Organ-system aging is multifactorial; hormone therapy doesn't reverse it. GH is FDA-approved ONLY for documented GH deficiency — not anti-aging. Practical LO 3/5 application.</div>
+  </div>
+
+</div>
+
+<!-- ══ TRAPS ══ -->
+<div class="tab-content" id="tab-traps">
+  <div class="trap-intro"><strong>Step 1 Traps:</strong> Each statement is TRUE or FALSE — many reverse or mix facts that routinely trip students up.</div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 01 — GH Mechanism</div>
+    <div class="trap-statement">"Growth hormone exerts its effects on cartilage and bone by binding directly to receptors on chondrocytes to induce cell division."</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn" onclick="judgeTrap(this,true)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> GH stimulates the LIVER to produce IGF-1; it's IGF-1 that binds IGF-1R on chondrocytes to drive proliferation. This is why Laron syndrome (GH receptor on hepatocytes broken) produces short stature despite high GH — the mediator IGF-1 is missing.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 02 — GH Glucose Effect</div>
+    <div class="trap-statement">"Growth hormone improves glycemic control by enhancing insulin sensitivity in skeletal muscle and adipose tissue."</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn" onclick="judgeTrap(this,true)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE — opposite.</strong> GH is <span style="color:#C2410C"><strong>diabetogenic</strong></span>: it INDUCES insulin resistance in muscle/adipose and RAISES serum glucose via ↑ hepatic gluconeogenesis. Long-term GH excess causes T2DM. This is the key reason oral glucose is used to diagnose acromegaly (normal → GH suppresses; acromegaly → no suppression).</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 03 — OGTT Interpretation</div>
+    <div class="trap-statement">"In a healthy subject, oral glucose administration STIMULATES GH release — which is why it is used as a provocation test for GH deficiency."</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn" onclick="judgeTrap(this,true)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Oral glucose SUPPRESSES GH in healthy subjects. It's used to DIAGNOSE acromegaly — failure to suppress indicates autonomous secretion. For GH DEFICIENCY, provocation tests INDUCE hypoglycemia or use AMINO ACIDS (e.g., <em>arginine</em>, <em>insulin tolerance test</em>, clonidine, exercise) to STIMULATE GH.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 04 — Laron Syndrome</div>
+    <div class="trap-statement">"A child with Laron syndrome should be treated with high-dose recombinant GH because this overcomes the partial GH receptor defect."</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn" onclick="judgeTrap(this,true)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Laron = COMPLETE loss of GH receptor function. Giving more GH makes no difference — there's nothing for GH to bind. Treatment is <strong>recombinant IGF-1 (mecasermin)</strong>, which bypasses the defective receptor. Classic board distinction from "classic" GH deficiency (intact receptor, responds to somatropin).</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 05 — Achondroplasia</div>
+    <div class="trap-statement">"Achondroplasia results from GH deficiency; recombinant GH therapy is the mainstay of treatment."</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn" onclick="judgeTrap(this,true)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Achondroplasia = GAIN-of-function mutation in FGFR3 that INHIBITS chondrocyte proliferation at growth plates. GH and IGF-1 levels are NORMAL — the growth plate can't respond. GH therapy doesn't work. Newer therapy: vosoritide (CNP analog). Classic disproportionate short stature (short limbs, normal trunk, frontal bossing, trident hand).</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 06 — GH Pulsatility</div>
+    <div class="trap-statement">"The peak physiologic GH pulse occurs in the morning shortly after waking, as cortisol also peaks."</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn" onclick="judgeTrap(this,true)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> The peak GH pulse occurs during <em>stage 4 slow-wave sleep</em>, typically around midnight. Cortisol's circadian peak is in the EARLY MORNING (6–8 AM), so they are out of phase. Children with chronic sleep deprivation can develop growth failure in part from inadequate nocturnal GH pulses.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 07 — GH Doping Detection</div>
+    <div class="trap-statement">"Exogenous GH cannot be detected in athletes because recombinant GH is biochemically identical to all endogenous GH isoforms."</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn" onclick="judgeTrap(this,true)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Endogenous GH exists as a mix of isoforms (22 kDa — dominant, and 20 kDa plus minor variants). Recombinant GH is pure 22 kDa. The <em>isoform-ratio test</em> detects the shifted ratio. Biomarker tests (persistently elevated IGF-1 + P-III-NP) also improve detection sensitivity. Both are used in anti-doping protocols.</div>
+  </div>
+
+</div>
+
+<!-- ══ CLINICAL CORRELATES ══ -->
+<div class="tab-content" id="tab-clinical">
+  <div class="cc-intro"><strong>Clinical Correlates:</strong> Signature GH-axis diseases. Click "Expand" for mechanism-level detail.</div>
+
+  <div class="cc-card">
+    <div class="cc-tag">LO 5 · GH Excess</div>
+    <div class="cc-title">Acromegaly — The Post-Epiphyseal GH Excess</div>
+    <div class="cc-body">Insidious onset over years → classical features: jaw prognathism, macroglossia, soft-tissue overgrowth, cardiomegaly, T2DM, OSA. Cardiovascular disease is the leading cause of death; timely diagnosis &amp; treatment restore life expectancy.</div>
+    <button class="cc-reveal" onclick="toggleCC(this)">Expand mechanism</button>
+    <div class="cc-detail"><strong>Dx:</strong> IGF-1 screen → OGTT confirms (GH fails to suppress) → MRI sella for localization.<br><strong>Tx hierarchy:</strong><br>• <em>Surgery</em> (transsphenoidal) — first line; 70–90% microadenoma cure rate; ~30–50% macroadenoma cure.<br>• <em>Somatostatin analogs</em> (octreotide LAR, lanreotide, pasireotide) — reduce GH and shrink tumor in ~50%.<br>• <em>Pegvisomant</em> — GH receptor antagonist; normalizes IGF-1 in 90% but doesn't shrink tumor.<br>• <em>Cabergoline</em> — useful if PRL co-secretion or modest GH elevations.<br>• <em>Radiation</em> — last line; slow response, high rate of hypopituitarism.<br>Screen for co-existing colonic polyps (colonoscopy q5y), OSA, diabetes, cardiomyopathy.</div>
+  </div>
+
+  <div class="cc-card">
+    <div class="cc-tag">LO 5 · GH Deficiency</div>
+    <div class="cc-title">Pituitary Dwarfism — Classic GH Deficiency</div>
+    <div class="cc-body">Short stature with proportionate body segments, delayed bone age, normal birth size → growth velocity drops after age 1–2. Causes range from idiopathic to tumor/radiation to genetic defects (PROP1, PIT1, GHRH-R).</div>
+    <button class="cc-reveal" onclick="toggleCC(this)">Expand mechanism</button>
+    <div class="cc-detail"><strong>Workup:</strong><br>1. Careful growth charts (crossing percentiles, growth velocity &lt;5 cm/yr)<br>2. Check IGF-1 and IGFBP-3 (both age-adjusted)<br>3. Provocation test (ITT, arginine, clonidine, macimorelin) — peak GH &lt;10 ng/mL confirms<br>4. MRI pituitary<br>5. Screen other anterior pituitary axes<br><br><strong>Treatment:</strong> recombinant human GH (somatropin), daily SC injection, titrated to IGF-1 in the mid-normal range. Continue until near-final height or epiphyseal closure. Adult GH deficiency: consider replacement if quality-of-life / metabolic risk warrants.</div>
+  </div>
+
+  <div class="cc-card">
+    <div class="cc-tag">LO 5 · GH Receptor Defect</div>
+    <div class="cc-title">Laron Syndrome — The Cancer-Protective Dwarfism</div>
+    <div class="cc-body">Autosomal recessive GHR mutation → severe short stature despite HIGH GH. Observational cohorts in Ecuador demonstrate striking protection against malignancy and T2DM — consistent with the cancer-promoting effects of IGF-1.</div>
+    <button class="cc-reveal" onclick="toggleCC(this)">Expand mechanism</button>
+    <div class="cc-detail"><strong>Dx signature:</strong> HIGH GH + LOW IGF-1 + low IGFBP-3. Gene testing confirms GHR mutation.<br><strong>Tx:</strong> recombinant IGF-1 (<em>mecasermin</em>). Partial response — doesn't fully normalize height.<br><br><strong>Research implication:</strong> IGF-1 signaling is a classic longevity/cancer axis. Lower lifetime IGF-1 correlates with lower cancer and diabetes incidence (but also smaller body size and potential sarcopenia). Calorie restriction reduces IGF-1 in animals and may contribute to longevity effects.</div>
+  </div>
+
+  <div class="cc-card">
+    <div class="cc-tag">LO 5 · Syndromic</div>
+    <div class="cc-title">MEN 1 — The "3 P's" With Acromegaly</div>
+    <div class="cc-body">Parathyroid hyperplasia + Pancreatic endocrine tumor (gastrinoma most common) + Pituitary adenoma. ~30% of pituitary adenomas in MEN 1 are GH-secreting. Family history is key.</div>
+    <button class="cc-reveal" onclick="toggleCC(this)">Expand mechanism</button>
+    <div class="cc-detail">Autosomal dominant loss of MEN1 tumor suppressor (menin) on 11q13. Anyone presenting with acromegaly plus either recurrent peptic ulcers/hypercalcemia should prompt screening (MEN1 genetics + family). Compare MEN2A/2B (RET gene, features MEDULLARY thyroid + pheo — NOT acromegaly).<br><br>Screening in affected families: annual Ca²⁺ + PTH + gastrin + pituitary hormones + prolactin + IGF-1; MRI sella q3y.</div>
+  </div>
+
+  <div class="cc-card">
+    <div class="cc-tag">LO 5 · Short Stature DDx</div>
+    <div class="cc-title">Achondroplasia vs. Pituitary Dwarfism</div>
+    <div class="cc-body">Two classic pediatric short-stature syndromes with completely different biology. Distinguishing them is a core Step 1 skill.</div>
+    <button class="cc-reveal" onclick="toggleCC(this)">Expand mechanism</button>
+    <div class="cc-detail">
+      <strong>Pituitary dwarfism:</strong> PROPORTIONATE short stature; ↓GH, ↓IGF-1; growth plate is normal but understimulated. Treatment: recombinant GH.<br><br>
+      <strong>Achondroplasia:</strong> DISPROPORTIONATE short stature (short limbs, normal trunk); trident hand; frontal bossing; midface hypoplasia. Normal GH, normal IGF-1. Growth plate can't respond. FGFR3 mutation. Treatment: vosoritide (CNP analog).<br><br>
+      Other short-stature scenarios on Step 1:<br>• <em>Turner (45,X)</em>: short stature + streak gonads + webbed neck + coarctation. GH therapy indicated.<br>• <em>Prader-Willi</em>: hypotonic infant → obese hyperphagic child + GH deficiency. GH therapy indicated.<br>• <em>Constitutional delay</em>: delayed bone age, delayed puberty, family history of "late bloomers." Catches up. Reassure.<br>• <em>Familial short stature</em>: normal bone age, both parents short. Normal variant.
+    </div>
+  </div>
+
+  <div class="cc-card">
+    <div class="cc-tag">LO 3 · Lifetime Trajectory</div>
+    <div class="cc-title">Somatopause — Aging of the GH Axis</div>
+    <div class="cc-body">GH and IGF-1 decline with age. Associated with sarcopenia, ↑ visceral adiposity, bone loss. Tempting to "treat" — but GH replacement in elderly adults without documented deficiency causes more harm than benefit.</div>
+    <button class="cc-reveal" onclick="toggleCC(this)">Expand mechanism</button>
+    <div class="cc-detail">Mechanisms: decreased GHRH pulse amplitude, increased somatostatin tone, declining sex steroids. Lifestyle interventions (resistance exercise, adequate protein, good sleep) can partially offset sarcopenia without hormone therapy.<br><br><strong>Adult GH deficiency (true):</strong> post-pituitary surgery / radiation / tumor / hemorrhage → replacement may improve QoL, body composition, bone density — but cardiac effects must be monitored. NOT the same as somatopause.<br><br><strong>Ethical note:</strong> "Anti-aging" GH therapy is not evidence-based and is illegal to market as such in the United States.</div>
+  </div>
+
+</div>
+
+<!-- ══ REF ══ -->
+<div class="tab-content" id="tab-ref">
+
+  <div class="ref-section">
+    <div class="ref-title">GH-Axis Disorders — Rapid Comparison</div>
+    <table>
+      <thead><tr><th>Condition</th><th>Cause</th><th>GH</th><th>IGF-1</th><th>Height</th><th>First-Line Treatment</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Classic GH deficiency</strong></td><td>Pituitary failure (idiopathic, genetic, tumor)</td><td>LOW</td><td>LOW</td><td>Short, proportionate</td><td>Recombinant GH</td></tr>
+        <tr><td><strong>Laron syndrome</strong></td><td>GH receptor mutation</td><td>HIGH</td><td>LOW</td><td>Short, proportionate</td><td>Recombinant IGF-1 (mecasermin)</td></tr>
+        <tr><td><strong>Gigantism</strong></td><td>GH adenoma (pre-epiphyseal closure)</td><td>HIGH</td><td>HIGH</td><td>Tall, linear growth</td><td>Surgery ± SST analog</td></tr>
+        <tr><td><strong>Acromegaly</strong></td><td>GH adenoma (post-closure)</td><td>HIGH</td><td>HIGH</td><td>Jaw/hand/feet thickening</td><td>Surgery ± SST analog / pegvisomant</td></tr>
+        <tr><td><strong>Achondroplasia</strong></td><td>FGFR3 gain-of-function</td><td>Normal</td><td>Normal</td><td>Short, DISPROPORTIONATE limbs</td><td>Vosoritide (CNP analog)</td></tr>
+        <tr><td><strong>Turner syndrome</strong></td><td>45,X (SHOX + estrogen deficit)</td><td>Normal</td><td>Normal</td><td>Short, + stigmata</td><td>Recombinant GH + estrogen replacement</td></tr>
+        <tr><td><strong>Prader-Willi</strong></td><td>Paternal 15q11–13 loss</td><td>Low (functional)</td><td>Low-normal</td><td>Short + hyperphagic obesity</td><td>Recombinant GH</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Medical Therapy for GH Excess</div>
+    <table>
+      <thead><tr><th>Drug</th><th>Mechanism</th><th>Effect on Tumor</th><th>Effect on IGF-1</th><th>Key Side Effects</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Octreotide / Lanreotide</strong></td><td>SSTR-2/5 agonist → ↓ GH release</td><td>~30–50% shrinkage</td><td>↓ 50–70%</td><td>Cholelithiasis, hyperglycemia, bradycardia</td></tr>
+        <tr><td><strong>Pasireotide</strong></td><td>Pan-SSTR (including SSTR-5)</td><td>Similar shrinkage</td><td>↓ more potent</td><td>WORSE hyperglycemia than octreotide</td></tr>
+        <tr><td><strong>Pegvisomant</strong></td><td>GH receptor antagonist (peripheral)</td><td>No shrinkage (monitor MRI)</td><td>Normalizes in ~90%</td><td>LFT elevations, lipoatrophy at injection</td></tr>
+        <tr><td><strong>Cabergoline</strong></td><td>D2 agonist → variable ↓ GH</td><td>Variable</td><td>Modest ↓</td><td>Nausea, orthostasis; cardiac valvulopathy at high doses</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Tests for GH-Axis Dysfunction</div>
+    <table>
+      <thead><tr><th>Test</th><th>What It Measures</th><th>Indication</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Serum IGF-1</strong></td><td>Integrated GH exposure (age-adjusted)</td><td>Screen for acromegaly OR GHD (both directions)</td></tr>
+        <tr><td><strong>OGTT for GH</strong></td><td>Suppression of GH after 75g oral glucose</td><td>Confirm acromegaly (failure to suppress &lt;1 ng/mL)</td></tr>
+        <tr><td><strong>Insulin tolerance test</strong></td><td>Induces hypoglycemia → should stimulate GH + cortisol</td><td>Confirm GH deficiency (failure to respond); ALSO HPA assessment</td></tr>
+        <tr><td><strong>Arginine stimulation</strong></td><td>Arginine ↑ GH release</td><td>GHD testing (especially if ITT contraindicated)</td></tr>
+        <tr><td><strong>Macimorelin (oral GHS-R agonist)</strong></td><td>Simulates ghrelin — robust GH release</td><td>Adult GHD diagnosis (FDA-approved)</td></tr>
+        <tr><td><strong>MRI sella</strong></td><td>Anatomic localization</td><td>After biochemical confirmation of acromegaly or GHD</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- ══ HY NOTES ══ -->
+<div class="tab-content" id="tab-hynotes">
+  <div class="hy-intro"><strong>High-Yield Testing Notes:</strong> Pattern-matching, buzzwords, and rules that recur on Step 1.</div>
+
+  <div class="hy-card">
+    <div class="hy-card-title">Buzzword → Diagnosis <span class="hy-badge buzzword">Pattern Bank</span></div>
+    <div class="hy-card-body">
+      <strong>"Enlarged ring size + shoe size + jaw":</strong> Acromegaly.<br>
+      <strong>"Adult + new-onset diabetes + OSA + soft tissue overgrowth":</strong> Acromegaly (screen IGF-1).<br>
+      <strong>"High GH + LOW IGF-1 + severe short stature":</strong> Laron syndrome — use mecasermin.<br>
+      <strong>"Short limbs, normal trunk, frontal bossing, FGFR3":</strong> Achondroplasia — NOT a GH disorder.<br>
+      <strong>"Recurrent PUD + hypercalcemia + acromegaly":</strong> MEN 1.<br>
+      <strong>"Precocious puberty + café-au-lait + fibrous dysplasia + acromegaly":</strong> McCune-Albright (GNAS).<br>
+      <strong>"Neonatal hypotonia → obese child, short stature":</strong> Prader-Willi (GH therapy indicated).<br>
+      <strong>"Short girl, webbed neck, coarctation, primary amenorrhea":</strong> Turner (GH + estrogen).
+    </div>
+  </div>
+
+  <div class="hy-card">
+    <div class="hy-card-title">Rules of the GH Axis <span class="hy-badge testing">High-Yield</span></div>
+    <div class="hy-card-body">
+      <strong>Screen acromegaly with IGF-1</strong>, not random GH (pulsatile).<br>
+      <strong>Confirm acromegaly with OGTT</strong> — GH fails to suppress.<br>
+      <strong>Test GHD with provocation</strong> (ITT, arginine, macimorelin), NOT OGTT.<br>
+      <strong>Laron uses mecasermin</strong>, not GH.<br>
+      <strong>Achondroplasia is NOT a GH problem</strong> — FGFR3 / growth plate issue.<br>
+      <strong>GH is diabetogenic</strong> — screen acromegalics for T2DM; monitor glucose in all on GH therapy.<br>
+      <strong>Cardiovascular disease is the #1 cause of death in acromegaly.</strong><br>
+      <strong>SST analogs cause cholelithiasis.</strong><br>
+      <strong>Somatopause is normal</strong> — no "anti-aging" GH.
+    </div>
+  </div>
+
+  <div class="hy-card">
+    <div class="hy-card-title">Mnemonics <span class="hy-badge">Memory Hooks</span></div>
+    <div class="hy-card-body">
+      <strong>"GH Releases Up in the night"</strong>: peak secretion during deep sleep.<br>
+      <strong>"GH-IGF: Growth Happens Indirectly via Factor-1"</strong>: growth effects are IGF-1 mediated.<br>
+      <strong>"LaRon has a Receptor problem"</strong>: GH receptor mutation → HIGH GH, LOW IGF-1.<br>
+      <strong>"Acromegaly kills through the Heart"</strong>: leading cause of death = cardiovascular.<br>
+      <strong>"3 P's of MEN1"</strong>: Parathyroid, Pancreas, Pituitary.<br>
+      <strong>"Octreotide's GIFt"</strong>: Gallstones, Intestinal problems, blocks Flow of hormones.
+    </div>
+  </div>
+
+  <div class="hy-card">
+    <div class="hy-card-title">Traps Corner <span class="hy-badge trap">Common Errors</span></div>
+    <div class="hy-card-body">
+      <strong>Do NOT</strong> give GH for Laron (use IGF-1).<br>
+      <strong>Do NOT</strong> give GH for achondroplasia (use vosoritide).<br>
+      <strong>Do NOT</strong> confuse OGTT (acromegaly test) with ITT/arginine (GHD tests).<br>
+      <strong>Do NOT</strong> confuse MEN1 (Parathyroid/Pancreas/Pituitary) with MEN2 (Medullary thyroid/Pheo).<br>
+      <strong>Do NOT</strong> interpret somatopause as pathologic GHD.<br>
+      <strong>Do NOT</strong> reverse: GH is DIABETOGENIC; IGF-1 is anabolic.<br>
+      <strong>Do NOT</strong> forget to screen acromegalics for colon cancer (colonoscopy q5y).
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <a href="../active-recall-hub.html">← Active Recall Hub</a> &nbsp;·&nbsp; END03 Hub 2 — Step 1 Extensions &nbsp;·&nbsp; HoyaDocs Endocrine Block
+</div>
+
+</div>
+
+<script>
+function flipCard(fc){
+  const inner=fc.querySelector('.fc-inner');
+  const front=fc.querySelector('.fc-front');
+  const back=fc.querySelector('.fc-back');
+  fc.classList.toggle('flipped');
+  inner.style.height=(fc.classList.contains('flipped')?back:front).scrollHeight+'px';
+}
+function fixCardHeights(){
+  document.querySelectorAll('.fc').forEach(function(fc){
+    const inner=fc.querySelector('.fc-inner');
+    const front=fc.querySelector('.fc-front');
+    inner.style.height=front.scrollHeight+'px';
+  });
+}
+window.addEventListener('load',fixCardHeights);
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-content').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='flashcards') requestAnimationFrame(fixCardHeights);
+}
+function answerMCQ(el,correct){
+  const item=el.closest('.mcq-item,.vig-item');
+  const opts=item.querySelectorAll('.mcq-opt,.vig-opt');
+  opts.forEach(o=>o.classList.add('locked'));
+  el.classList.add(correct?'correct':'wrong');
+  opts.forEach(o=>{
+    if(o!==el&&o.getAttribute('onclick').includes(',true')) o.classList.add('correct');
+  });
+  const exp=item.querySelector('.mcq-exp,.vig-exp');
+  exp.classList.add('show');
+}
+function answerVig(el,correct){answerMCQ(el,correct);}
+function judgeTrap(btn,correct){
+  const card=btn.closest('.trap-card');
+  const btns=card.querySelectorAll('.trap-btn');
+  btns.forEach(b=>b.disabled=true);
+  btn.classList.add(correct?'sel-correct':'sel-wrong');
+  const exp=card.querySelector('.trap-exp');
+  exp.classList.add(correct?'show-c':'show-w');
+}
+function toggleCC(btn){
+  const detail=btn.nextElementSibling;
+  detail.classList.toggle('open');
+  btn.textContent=detail.classList.contains('open')?'Collapse':'Expand mechanism';
+}
+</script>
+</body>
+</html>

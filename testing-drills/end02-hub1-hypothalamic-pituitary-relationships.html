@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>END02 Hypothalamic-Pituitary Relationships I — Hub 1 Core Concepts</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;background:#FEFBF0;color:#2C2C2C;min-height:100vh;line-height:1.6}
+.topnav{background:#1C1400;border-bottom:3px solid #D97706;padding:0 28px;height:54px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-brand-text{font-family:'Crimson Pro',Georgia,serif;font-size:1.35em;font-weight:700;color:#FEF3C7;letter-spacing:.02em}
+.nav-brand-sub{font-size:.72em;color:#FBBF24;font-weight:500;margin-left:6px;letter-spacing:.04em;text-transform:uppercase}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.nav-back{display:inline-flex;align-items:center;gap:6px;font-size:.8em;color:rgba(255,255,255,0.7);font-weight:500;padding:6px 14px;border-radius:5px;border:1px solid rgba(255,255,255,0.2);text-decoration:none;transition:all .2s}
+.nav-back:hover{border-color:#FBBF24;color:#FBBF24}
+.container{max-width:1060px;margin:0 auto;padding:28px 24px}
+.header{background:#FFFFFF;border:1px solid #E8DCB8;border-radius:6px;padding:28px 32px;margin-bottom:24px;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#1C1400 0%,#D97706 50%,#1C1400 100%)}
+.hub-tag{display:inline-block;background:#1C1400;color:#FEF3C7;font-size:.7em;font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:4px 12px;border-radius:3px;margin-bottom:10px}
+.header h1{font-family:'Crimson Pro',Georgia,serif;font-size:2em;color:#854D0E;margin-bottom:6px;line-height:1.25;font-weight:700}
+.header h1 span{color:#B45309;font-weight:600;font-style:italic}
+.header .subtitle{color:#5A5A5A;font-size:.88em;line-height:1.6;margin-bottom:14px}
+.source-strip{display:flex;gap:8px;flex-wrap:wrap}
+.source-badge{background:#FEFBF0;border:1px solid #E8DCB8;border-radius:4px;padding:4px 10px;font-size:.75em;color:#5A5A5A}
+.source-badge strong{color:#854D0E}
+.hub-prog{background:#FFF;border:1px solid #E8DCB8;border-radius:6px;padding:12px 18px;margin-bottom:22px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hub-step{padding:7px 16px;border-radius:4px;font-size:.82em;font-weight:600}
+.hub-step.current{background:#854D0E;color:#FEF3C7}
+.hub-step.next{background:#FEFBF0;border:1px solid #E8DCB8;color:#7A7060;text-decoration:none;transition:all .2s}
+.hub-step.next:hover{border-color:#D97706;color:#B45309}
+.hub-arrow{color:#D97706;font-size:1em;font-weight:700}
+.hub-prog-label{font-size:.76em;color:#7A7060;margin-right:6px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:24px}
+.stat-card{background:#FFF;border:1px solid #E8DCB8;border-radius:6px;padding:14px;text-align:center}
+.stat-num{font-family:'Crimson Pro',Georgia,serif;font-size:1.8em;font-weight:700;color:#854D0E}
+.stat-label{font-size:.68em;color:#7A7060;text-transform:uppercase;letter-spacing:.08em;margin-top:2px;font-weight:600}
+.tab-nav{display:flex;gap:2px;flex-wrap:wrap;margin-bottom:26px;border-bottom:2px solid #E8DCB8}
+.tab-btn{background:none;border:none;color:#7A7060;font-size:.84em;font-weight:600;padding:11px 18px;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;margin-bottom:-2px;font-family:inherit}
+.tab-btn:hover{color:#854D0E}
+.tab-btn.active{color:#854D0E;border-bottom-color:#D97706}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+.fc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:16px}
+.fc{perspective:1000px;cursor:pointer;position:relative;z-index:1}
+.fc-inner{position:relative;transform-style:preserve-3d;transition:transform .5s,height .3s}
+.fc.flipped{z-index:10}
+.fc.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;top:0;left:0;right:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:6px;padding:22px}
+.fc-front{background:#FFFFFF;border:1px solid #E8DCB8;border-top:3px solid #854D0E}
+.fc-back{transform:rotateY(180deg);background:#FFFDF0;border:1px solid #D97706}
+.fc-label{font-size:.66em;font-weight:700;color:#D97706;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.fc-q{font-size:.92em;color:#2C2C2C;line-height:1.55}
+.fc-a{font-size:.88em;color:#2C2C2C;line-height:1.65}
+.fc-a strong{color:#854D0E}
+.fc-flip-hint{font-size:.67em;color:#9A9080;margin-top:10px;font-style:italic}
+.fc-progress{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:.82em;color:#7A7060}
+.fc-progress .prog-num{color:#854D0E;font-weight:700}
+.fib-list{display:flex;flex-direction:column;gap:16px}
+.fib-card{background:#FFFFFF;border:1px solid #E8DCB8;border-radius:6px;padding:22px;border-left:4px solid #854D0E}
+.fib-num{font-size:.68em;font-weight:700;color:#D97706;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.fib-prompt{font-size:.93em;color:#2C2C2C;line-height:1.65;margin-bottom:12px}
+.fib-prompt strong{color:#854D0E}
+.fib-hint{font-size:.8em;color:#7A7060;font-style:italic;margin-bottom:10px}
+.fib-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.fib-input{background:#FEFBF0;border:1px solid #E8DCB8;border-radius:5px;padding:9px 14px;color:#2C2C2C;font-size:.9em;font-family:inherit;min-width:200px;transition:border-color .2s}
+.fib-input:focus{outline:none;border-color:#D97706;background:#FFFDF0}
+.fib-input.correct{border-color:#2E7D32;background:#F1F8F2}
+.fib-input.incorrect{border-color:#C62828;background:#FEF5F5}
+.fib-btn{background:#854D0E;border:none;color:#FEF3C7;padding:9px 18px;border-radius:5px;cursor:pointer;font-size:.82em;font-weight:600;font-family:inherit;transition:background .2s}
+.fib-btn:hover{background:#9A5A10}
+.fib-reveal-btn{background:#FFF;border:1px solid #E8DCB8;color:#7A7060;padding:9px 16px;border-radius:5px;cursor:pointer;font-size:.82em;font-weight:600;font-family:inherit;transition:all .2s}
+.fib-reveal-btn:hover{border-color:#D97706;color:#B45309}
+.fib-feedback{font-size:.82em;margin-top:8px;padding:7px 12px;border-radius:4px;display:none}
+.fib-feedback.correct{background:#F1F8F2;border:1px solid #A5D6A7;color:#2E7D32;display:block}
+.fib-feedback.incorrect{background:#FEF5F5;border:1px solid #FFCDD2;color:#C62828;display:block}
+.ordering-intro,.match-intro,.trap-intro{background:#FFFDF0;border:1px solid #F3E4B2;border-radius:6px;padding:14px 18px;margin-bottom:20px;font-size:.84em;color:#5A5A5A;line-height:1.6}
+.ordering-intro strong,.match-intro strong,.trap-intro strong{color:#854D0E}
+.trap-intro{border-left:4px solid #D97706}
+.order-drill{background:#FFFFFF;border:1px solid #E8DCB8;border-left:4px solid #D97706;border-radius:6px;padding:22px;margin-bottom:20px}
+.drill-title{font-family:'Crimson Pro',Georgia,serif;font-size:1.05em;font-weight:700;color:#854D0E;margin-bottom:5px}
+.drill-hint{font-size:.79em;color:#7A7060;margin-bottom:14px;font-style:italic}
+.order-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;min-height:40px}
+.order-item{background:#FEFBF0;border:1px solid #E8DCB8;border-radius:5px;padding:12px 16px;cursor:grab;font-size:.86em;color:#2C2C2C;line-height:1.4;display:flex;align-items:flex-start;gap:10px;transition:all .15s;user-select:none}
+.order-item:active{cursor:grabbing}
+.order-item:hover{border-color:#D97706;background:#FFFDF0}
+.order-item.drag-over{border-color:#D97706;background:#FEF3C7;transform:scale(1.01)}
+.order-item .item-grip{color:#D97706;font-size:1.1em;flex-shrink:0;margin-top:1px}
+.order-item .item-text{flex:1}
+.order-item.correct-pos{background:#F1F8F2;border-color:#66BB6A}
+.order-item.wrong-pos{background:#FEF5F5;border-color:#EF5350;color:#991b1b}
+.order-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.order-check-btn{background:#854D0E;border:none;color:#FEF3C7;padding:9px 18px;border-radius:5px;cursor:pointer;font-size:.84em;font-weight:600;font-family:inherit}
+.order-check-btn:hover{background:#9A5A10}
+.order-ghost-btn{background:none;border:1px solid #E8DCB8;color:#7A7060;padding:9px 18px;border-radius:5px;cursor:pointer;font-size:.84em;font-weight:600;font-family:inherit}
+.order-ghost-btn:hover{border-color:#D97706;color:#B45309}
+.order-feedback{font-size:.84em;padding:8px 14px;border-radius:5px;margin-bottom:8px}
+.order-feedback.correct{background:#F1F8F2;border:1px solid #66BB6A;color:#2E7D32}
+.order-feedback.incorrect{background:#FEF5F5;border:1px solid #EF5350;color:#C62828}
+.order-answer{background:#FFFDF0;border:1px solid #F3E4B2;border-radius:5px;padding:14px 18px;font-size:.83em;margin-top:8px;display:none}
+.order-answer ol{padding-left:20px;line-height:1.9}
+.order-answer li span{color:#854D0E;font-weight:600}
+.match-set{background:#FFFFFF;border:1px solid #E8DCB8;border-left:4px solid #854D0E;border-radius:6px;padding:22px;margin-bottom:20px}
+.match-set-title{font-family:'Crimson Pro',Georgia,serif;font-size:1.05em;font-weight:700;color:#854D0E;margin-bottom:4px}
+.match-set-hint{font-size:.79em;color:#7A7060;margin-bottom:14px;font-style:italic}
+.match-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.match-cols{grid-template-columns:1fr}}
+.match-col-label{font-size:.7em;font-weight:700;color:#D97706;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.match-item{background:#FEFBF0;border:1px solid #E8DCB8;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px}
+.match-item:hover:not(.matched-correct):not(.matched-wrong){border-color:#D97706!important;background:#FFFDF0!important}
+.match-item.selected{border-color:#854D0E!important;background:#FEF3C7!important;color:#854D0E!important;font-weight:600}
+.match-item.matched-correct{border-color:#66BB6A!important;background:#F1F8F2!important;color:#2E7D32!important;cursor:default}
+.match-item.flash-wrong{animation:flashRed .5s ease forwards}
+@keyframes flashRed{0%{background:#FEF5F5;border-color:#EF5350}100%{background:#FEFBF0;border-color:#E8DCB8}}
+.match-score{margin-top:12px;font-size:.83em;color:#7A7060}
+.match-score .correct-count{color:#2E7D32;font-weight:700}
+.match-reset-btn{background:none;border:1px solid #E8DCB8;color:#7A7060;padding:7px 16px;border-radius:5px;cursor:pointer;font-size:.8em;font-weight:600;font-family:inherit;margin-top:10px}
+.match-reset-btn:hover{border-color:#D97706;color:#B45309}
+.trap-card{background:#FFFFFF;border:1px solid #E8DCB8;border-radius:6px;padding:22px;margin-bottom:18px;border-left:4px solid #D97706}
+.trap-num{font-size:.68em;font-weight:700;color:#D97706;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.trap-statement{font-family:'Crimson Pro',Georgia,serif;font-size:1em;color:#2C2C2C;line-height:1.55;margin-bottom:16px;background:#FFFDF0;border-radius:5px;padding:16px;border-left:3px solid #D97706;font-style:italic}
+.trap-btns{display:flex;gap:10px;margin-bottom:8px}
+.trap-btn{padding:9px 28px;border-radius:5px;border:2px solid;font-size:.9em;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+.trap-btn-true{background:none;border-color:#66BB6A;color:#2E7D32}
+.trap-btn-true:hover:not(:disabled){background:#F1F8F2;border-color:#43A047}
+.trap-btn-false{background:none;border-color:#EF5350;color:#C62828}
+.trap-btn-false:hover:not(:disabled){background:#FEF5F5;border-color:#E53935}
+.trap-btn:disabled{opacity:.5;cursor:not-allowed}
+.trap-btn.sel-correct{background:#F1F8F2;border-color:#43A047;color:#2E7D32}
+.trap-btn.sel-wrong{background:#FEF5F5;border-color:#E53935;color:#C62828}
+.trap-exp{padding:14px 18px;border-radius:5px;font-size:.87em;line-height:1.65;margin-top:4px;display:none}
+.trap-exp.show-c{background:#F1F8F2;border:1px solid #A5D6A7;color:#1B5E20;display:block}
+.trap-exp.show-w{background:#FEF5F5;border:1px solid #FFCDD2;color:#B71C1C;display:block}
+.trap-exp strong{color:#854D0E}
+.ref-section{margin-bottom:28px}
+.ref-title{font-family:'Crimson Pro',Georgia,serif;font-size:.95em;font-weight:700;color:#854D0E;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #D97706}
+.ref-table{width:100%;border-collapse:collapse;font-size:.84em}
+.ref-table th{background:#854D0E;color:#FEF3C7;font-weight:600;text-align:left;padding:10px 14px;font-size:.88em;letter-spacing:.03em}
+.ref-table td{padding:10px 14px;border-bottom:1px solid #F0E4C4;color:#2C2C2C;vertical-align:top;line-height:1.55;background:#FFF}
+.ref-table tr:nth-child(even) td{background:#FAF5E5}
+.ref-table .key{color:#854D0E;font-weight:600}
+.ref-note{background:#FFFDF0;border:1px solid #F3E4B2;border-radius:5px;padding:13px 18px;font-size:.83em;color:#5A5A5A;line-height:1.6;margin-top:10px}
+.ref-note strong{color:#854D0E}
+.footer{text-align:center;font-size:.78em;color:#7A7060;border-top:2px solid #E8DCB8;padding-top:16px;margin-top:32px}
+.footer a{color:#854D0E;text-decoration:none;font-weight:600}
+.footer a:hover{color:#D97706;text-decoration:underline}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <div class="nav-brand">
+    <span class="nav-brand-text">HoyaDocs</span>
+    <span class="nav-brand-sub">Endocrine Block</span>
+  </div>
+  <div class="nav-actions">
+    <a href="../active-recall-hub.html" class="nav-back">← Active Drill Hub</a>
+  </div>
+</nav>
+<div class="container">
+
+<div class="header">
+  <div class="hub-tag">Hub 1 — Core Concepts</div>
+  <h1>Hypothalamic–Pituitary Relationships I <span>Active Drills</span></h1>
+  <div class="subtitle">
+    Flashcards · Fill-in-Blank · Drag-and-Drop Ordering · Matching · Interactive Test Traps<br>
+    Lecture 02 · Endocrine Block · Hypothalamus &amp; Pituitary Anatomy, Hormones, &amp; Feedback — LOs 1–6
+  </div>
+  <div class="source-strip">
+    <div class="source-badge"><strong>Primary:</strong> Hypothalamic-Pituitary Relationships (part 1)</div>
+    <div class="source-badge"><strong>LOs:</strong> 1–6</div>
+    <div class="source-badge"><strong>Review:</strong> BRS Physiology Ch. 9 · First Aid Endocrine</div>
+  </div>
+</div>
+
+<div class="hub-prog">
+  <span class="hub-prog-label">Hub Progression:</span>
+  <span class="hub-step current">Hub 1 — Core Concepts</span>
+  <span class="hub-arrow">→</span>
+  <a href="end02-hub2-hypothalamic-pituitary-relationships.html" class="hub-step next">Hub 2 — Step 1 Extensions</a>
+  <span class="hub-arrow">→</span>
+  <a href="end02-hub3-hypothalamic-pituitary-relationships.html" class="hub-step next">Hub 3 — Practice Questions</a>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-card"><div class="stat-num">16</div><div class="stat-label">Flashcards</div></div>
+  <div class="stat-card"><div class="stat-num">10</div><div class="stat-label">Fill-in-Blank</div></div>
+  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Ordering Drills</div></div>
+  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Match Sets</div></div>
+  <div class="stat-card"><div class="stat-num">8</div><div class="stat-label">Test Traps</div></div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('flashcards',this)">Flashcards</button>
+  <button class="tab-btn" onclick="switchTab('fib',this)">Fill-in-Blank</button>
+  <button class="tab-btn" onclick="switchTab('ordering',this)">Ordering</button>
+  <button class="tab-btn" onclick="switchTab('matching',this)">Matching</button>
+  <button class="tab-btn" onclick="switchTab('traps',this)">Test Traps</button>
+  <button class="tab-btn" onclick="switchTab('reference',this)">Reference</button>
+</div>
+
+<!-- ══ FLASHCARDS ══════════════════════════════════════════════════════════ -->
+<div class="tab-pane active" id="tab-flashcards">
+  <div class="fc-progress"><span>Click a card to flip · <span class="prog-num">16</span> cards total</span><span>LOs 1–6</span></div>
+  <div class="fc-grid">
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 1 — Anatomy</div><div class="fc-q">Where is the pituitary gland located, what connects it to the hypothalamus, and through what two systems does the hypothalamus control each pituitary lobe?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Location:</strong> Sella turcica of the sphenoid bone (brain base)<br><strong>Connection:</strong> Infundibulum (pituitary stalk)<br><br><strong>Anterior pituitary (adenohypophysis):</strong> controlled by the <em>hypophyseal portal system</em> — releasing/inhibiting hormones reach it through a vascular route<br><strong>Posterior pituitary (neurohypophysis):</strong> controlled by <em>direct axonal projections</em> from hypothalamic neurons (ADH + oxytocin stored/released from nerve terminals)</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 1 — Portal System</div><div class="fc-q">Trace the route of a hypothalamic releasing hormone from secretion to its anterior pituitary target. Why does this system matter?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Hypothalamic neurons → <strong>median eminence</strong> (first capillary plexus) → hypophyseal portal veins → <strong>anterior pituitary</strong> (second capillary plexus) → target endocrine cells.<br><br><strong>Why it matters:</strong> allows VERY HIGH local concentrations of tiny amounts of releasing hormone without systemic exposure. The median eminence is a <em>circumventricular organ</em> (no BBB) — essential for this direct hypothalamus → AP communication.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 2 — PVN / SON</div><div class="fc-q">Which two hypothalamic nuclei make ADH and oxytocin, and how are the hormones transported?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Supraoptic nucleus (SON):</strong> primarily ADH (+ some oxytocin)<br><strong>Paraventricular nucleus (PVN):</strong> primarily oxytocin (+ some ADH, also CRH &amp; TRH for the AP)<br><br>Synthesized as preprohormones → packaged on neurophysin carriers → transported down axons → stored in <strong>Herring bodies</strong> at nerve terminals in posterior pituitary → released into fenestrated capillaries on stimulus.<br><br>Nicknamed the <strong>"nonapeptides"</strong> (9 amino acids each).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 2 — Hypothalamic Hormones</div><div class="fc-q">List the seven classical hypothalamic hormones that control the anterior pituitary, each with its target hormone.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>TRH</strong> → ↑TSH (+ ↑PRL)<br><strong>CRH</strong> → ↑ACTH<br><strong>GnRH</strong> → ↑FSH + ↑LH<br><strong>GHRH</strong> → ↑GH<br><strong>Somatostatin (GHIH)</strong> → ↓GH (+ ↓TSH)<br><strong>Dopamine (PIH)</strong> → ↓PRL (TONIC inhibition)<br><strong>GnIH</strong> → ↓FSH/LH</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 3 — Pituitary Lobes</div><div class="fc-q">What are the three embryologic/functional subdivisions of the pituitary, and their origins?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Adenohypophysis</strong> (anterior, <em>pars distalis</em>): derived from <strong>Rathke's pouch</strong> (oral ectoderm) → glandular epithelial tissue<br><strong>Pars intermedia</strong>: also from Rathke's pouch; secretes MSH; mostly non-functional in adults<br><strong>Neurohypophysis</strong> (posterior, <em>pars nervosa</em>): derived from <strong>neuroectoderm</strong> of the diencephalon → true neural tissue<br><br><em>Clinical:</em> Rathke's pouch remnants → craniopharyngioma (classic in children).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 3 — Histology</div><div class="fc-q">How do you distinguish acidophils, basophils, and chromophobes on H&amp;E, and which hormones do each secrete?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Acidophils</strong> (eosin-pink): <em>Somatotropes → GH</em>; <em>Lactotropes → PRL</em> (2 of 6 anterior hormones)<br><br><strong>Basophils</strong> (hematoxylin-blue): <em>Thyrotropes → TSH</em>; <em>Corticotropes → ACTH</em>; <em>Gonadotropes → FSH + LH</em> (4 of 6; "B-FLAT" → Basophils: FSH, LH, ACTH, TSH)<br><br><strong>Chromophobes</strong>: pale, non-staining; supporting / inactive / stem</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 3 — Neurohypophysis</div><div class="fc-q">What are Herring bodies and pituicytes, and what do they tell you about the posterior pituitary's embryology?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Herring bodies:</strong> eosinophilic swellings at axon terminals of SON/PVN neurons; store ADH and oxytocin granules ready for release.<br><strong>Pituicytes:</strong> glial support cells of the posterior lobe (similar to astrocytes).<br><br>Both confirm the posterior pituitary is <strong>NEURAL tissue</strong> (diencephalic origin), not glandular. Contrast with adenohypophysis which has discrete secretory cells.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 4 — Hormone Map</div><div class="fc-q">Name the six anterior pituitary hormones and classify each by cell type and peptide/glycoprotein chemistry.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Glycoproteins (shared α, unique β):</strong><br>• <em>TSH</em> (thyrotrope — basophil)<br>• <em>FSH</em> + <em>LH</em> (gonadotropes — basophil)<br><br><strong>POMC-derived peptide:</strong><br>• <em>ACTH</em> (corticotrope — basophil) — cleaved from POMC along with MSH &amp; β-endorphin<br><br><strong>Single-chain peptides:</strong><br>• <em>GH</em> (somatotrope — acidophil)<br>• <em>Prolactin</em> (lactotrope — acidophil)</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 4 — Prolactin Control</div><div class="fc-q">What is unique about prolactin's hypothalamic control, and what happens if the stalk is cut?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Prolactin is the <strong>only AP hormone under TONIC INHIBITION</strong> (by dopamine/PIH from the arcuate nucleus).<br><br><strong>Stalk section (or dopamine blockade):</strong> removes inhibition → <em>HYPERPROLACTINEMIA</em>.<br><br>Every other hypothalamic control is net stimulatory — so stalk section causes LOSS of all other AP hormones EXCEPT prolactin, which RISES.<br><br>Clinical drugs that ↑PRL: antipsychotics (D2 blockers), metoclopramide, methyldopa.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 5 — Negative Feedback</div><div class="fc-q">Define long, short, and ultra-short loop feedback with one concrete example of each.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Long loop:</strong> target organ hormone → hypothalamus AND/OR pituitary. <em>Cortisol → ↓CRH + ↓ACTH.</em><br><br><strong>Short loop:</strong> pituitary hormone → hypothalamus. <em>ACTH → ↓CRH.</em><br><br><strong>Ultra-short loop:</strong> hypothalamic hormone inhibits its own release via axon collaterals. <em>CRH → ↓CRH.</em> Creates <em>pulsatility</em> (prevents receptor desensitization).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 5 — Positive Feedback</div><div class="fc-q">Give two classic examples of positive feedback in the hypothalamic-pituitary system.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>1. LH surge (mid-cycle ovulation):</strong> Rising estradiol late in follicular phase SWITCHES from negative to <em>positive</em> feedback on GnRH/LH → massive LH surge → ovulation ~24h later.<br><br><strong>2. Oxytocin &amp; labor:</strong> Uterine stretch → oxytocin release → contractions → more cervical stretch → more oxytocin (Ferguson reflex). Terminates with delivery.<br><br>Both are <em>self-terminating</em> — positive feedback loops require an end-point to avoid runaway.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 6 — Primary vs. Secondary</div><div class="fc-q">Using the thyroid axis: what are the TRH, TSH, T4 patterns in primary hypothyroidism vs. secondary vs. tertiary?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Primary (gland failure):</strong> ↓T4, ↑↑TSH, ↑TRH<br><strong>Secondary (pituitary failure):</strong> ↓T4, ↓TSH, ↑TRH<br><strong>Tertiary (hypothalamic failure):</strong> ↓T4, ↓TSH, ↓TRH<br><br><strong>Rule:</strong> the problem is where the hormone LEVEL DROPS first — everything UPSTREAM rises (attempting to compensate); everything DOWNSTREAM falls. "Primary" = farthest downstream. Apply the same logic to cortisol/ACTH and sex steroid axes.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 6 — Exogenous Hormone</div><div class="fc-q">A patient on chronic oral prednisone — predict their CRH, ACTH, and endogenous cortisol levels. Why does sudden withdrawal cause crisis?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Pattern:</strong> ↓CRH, ↓ACTH, ↓endogenous cortisol — long-loop feedback suppresses the entire axis.<br><br><strong>Adrenal atrophy</strong> develops from chronic ACTH deficiency.<br><br><strong>Abrupt withdrawal:</strong> no endogenous cortisol + atrophied adrenal can't respond → <em>adrenal crisis</em> (hypotension, hypoglycemia, shock). Always TAPER steroids after prolonged use.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 6 — Exogenous Testosterone</div><div class="fc-q">In a young man using anabolic steroids — predict GnRH, LH/FSH, endogenous testosterone, sperm count, and testicular size.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Exogenous testosterone → long-loop suppression:<br>↓GnRH → ↓LH + ↓FSH → ↓endogenous testosterone (Leydig cells inactive) → <strong>testicular atrophy</strong><br><br>↓FSH → ↓ spermatogenesis → <strong>oligospermia/azoospermia</strong> (infertility)<br><br>Serum total T may look normal (exogenous replaces endogenous) but LH/FSH and intratesticular testosterone are suppressed. HCG (LH-like) is used to preserve fertility.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 4 — Posterior Hormones</div><div class="fc-q">What are the two physiologic stimuli for ADH release and the receptor/signaling used at its target?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Stimuli:</strong><br>1. ↑ plasma osmolarity (detected by osmoreceptors at OVLT — a circumventricular organ)<br>2. ↓ effective circulating volume (baroreceptor reflex)<br><br><strong>Receptors:</strong><br>• <em>V1</em> (vascular smooth muscle): Gq → IP3/DAG/Ca²⁺ → vasoconstriction<br>• <em>V2</em> (renal collecting duct): Gs → cAMP → PKA → aquaporin-2 insertion → water reabsorption</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">LO 5 — Pulsatility</div><div class="fc-q">Why must GnRH be delivered in PULSES rather than continuously, and what are the clinical implications?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Continuous GnRH → receptor DOWN-REGULATION</strong> on pituitary gonadotropes → LH/FSH output falls → "medical castration."<br><br><strong>Pulsatile GnRH (every ~60–90 min):</strong> maintains receptor sensitivity → normal LH/FSH release.<br><br><strong>Clinical applications:</strong><br>• <em>Leuprolide</em> (GnRH analog) — given CONTINUOUSLY suppresses HPG axis (prostate cancer, central precocious puberty, endometriosis)<br>• <em>Pulsatile leuprolide pump</em> — restores fertility in hypothalamic hypogonadism</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ FIB ═══════════════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-fib">
+  <div class="fib-list">
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 01 — LO 1</div>
+      <div class="fib-prompt">The pituitary gland sits in the <strong>_____________</strong> of the sphenoid bone and is connected to the hypothalamus by the <strong>_____________</strong> (pituitary stalk).</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="bony fossa..." data-answers="sella turcica,sella">
+        <input class="fib-input" type="text" placeholder="stalk name..." data-answers="infundibulum">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 02 — LO 1</div>
+      <div class="fib-prompt">The anterior pituitary is reached by hypothalamic hormones through the <strong>_____________</strong> system (vascular), whereas the posterior pituitary receives hormones via <strong>_____________</strong> projections (neural) from the hypothalamus.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="vascular route..." data-answers="hypophyseal portal,portal,hypophysial portal">
+        <input class="fib-input" type="text" placeholder="neural route..." data-answers="axonal,axon,direct axonal">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 03 — LO 2</div>
+      <div class="fib-prompt">ADH and oxytocin (the "<strong>_____________</strong>peptides") are synthesized in the <strong>_____________</strong> and <strong>_____________</strong> nuclei.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="number prefix..." data-answers="nona,9">
+        <input class="fib-input" type="text" placeholder="nucleus 1..." data-answers="supraoptic,son">
+        <input class="fib-input" type="text" placeholder="nucleus 2..." data-answers="paraventricular,pvn">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 04 — LO 3</div>
+      <div class="fib-prompt">The adenohypophysis is derived from <strong>_____________</strong> (a pouch of oral ectoderm), while the neurohypophysis is derived from <strong>_____________</strong>.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="pouch..." data-answers="rathke's pouch,rathkes pouch,rathke pouch,rathke">
+        <input class="fib-input" type="text" placeholder="origin..." data-answers="neuroectoderm,diencephalon,neural ectoderm">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Hint: Rathke's remnants can form craniopharyngiomas.</div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 05 — LO 3</div>
+      <div class="fib-prompt">Two of the six anterior pituitary hormones come from <strong>_____________</strong> cells (GH, prolactin), while four come from <strong>_____________</strong> cells (FSH, LH, ACTH, TSH — mnemonic "B-FLAT").</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="2-hormone cells..." data-answers="acidophil,acidophils,acidophilic">
+        <input class="fib-input" type="text" placeholder="4-hormone cells..." data-answers="basophil,basophils,basophilic">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 06 — LO 4</div>
+      <div class="fib-prompt">Prolactin is uniquely under <strong>_____________</strong> inhibition by <strong>_____________</strong> (released by arcuate-nucleus neurons). Drugs that block this neurotransmitter's D2 receptors cause <strong>_____________</strong>.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="type of inhibition..." data-answers="tonic,continuous">
+        <input class="fib-input" type="text" placeholder="neurotransmitter..." data-answers="dopamine,pih">
+        <input class="fib-input" type="text" placeholder="clinical effect..." data-answers="hyperprolactinemia,galactorrhea,elevated prolactin">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 07 — LO 4</div>
+      <div class="fib-prompt">TRH primarily stimulates TSH release but ALSO raises <strong>_____________</strong>, which is why primary hypothyroidism (high TRH) can present with galactorrhea. GHRH stimulates GH; somatostatin inhibits both GH and <strong>_____________</strong>.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="other hormone..." data-answers="prolactin,prl">
+        <input class="fib-input" type="text" placeholder="also inhibited..." data-answers="tsh">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 08 — LO 5</div>
+      <div class="fib-prompt">In the cortisol axis: cortisol exerts <strong>_____________</strong>-loop negative feedback on CRH and ACTH, ACTH exerts <strong>_____________</strong>-loop feedback on CRH, and CRH can inhibit its own release via <strong>_____________</strong>-loop feedback.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="cortisol loop..." data-answers="long">
+        <input class="fib-input" type="text" placeholder="ACTH loop..." data-answers="short">
+        <input class="fib-input" type="text" placeholder="CRH loop..." data-answers="ultra-short,ultrashort,ultra short">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 09 — LO 5</div>
+      <div class="fib-prompt">The LH surge at mid-cycle is driven by a switch from negative to <strong>_____________</strong> feedback by <strong>_____________</strong> on GnRH release.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="feedback type..." data-answers="positive">
+        <input class="fib-input" type="text" placeholder="hormone..." data-answers="estradiol,estrogen,e2">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 10 — LO 6</div>
+      <div class="fib-prompt">In secondary hypothyroidism (pituitary lesion): T4 is <strong>_____________</strong>, TSH is <strong>_____________</strong>, and TRH is <strong>_____________</strong>.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="T4..." data-answers="low,decreased,down,↓">
+        <input class="fib-input" type="text" placeholder="TSH..." data-answers="low,decreased,down,↓">
+        <input class="fib-input" type="text" placeholder="TRH..." data-answers="high,elevated,up,↑,increased">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Hint: in secondary, the problem is the pituitary; everything UPSTREAM compensates.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ ORDERING ═══════════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-ordering">
+  <div class="ordering-intro"><strong>Instructions:</strong> Drag and drop the items into the correct order, then click "Check Order." Use "Show Answer" if you get stuck.</div>
+
+  <div class="order-drill">
+    <div class="drill-title">Drill 1 — Hypophyseal Portal System: Hormone to Target</div>
+    <div class="drill-hint">Arrange the steps from hypothalamic neuron to anterior pituitary hormone release.</div>
+    <div class="order-list" id="order-list-1" ondragover="event.preventDefault()" ondrop="dropItem(event,'order-list-1')">
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="3"><span class="item-grip">⠿</span><span class="item-text">Hormone enters hypophyseal portal veins</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="1"><span class="item-grip">⠿</span><span class="item-text">Hypothalamic neuron secretes releasing hormone</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="5"><span class="item-grip">⠿</span><span class="item-text">Anterior pituitary cell releases tropic hormone into systemic circulation</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="2"><span class="item-grip">⠿</span><span class="item-text">Hormone enters first capillary plexus in the median eminence</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="4"><span class="item-grip">⠿</span><span class="item-text">Hormone reaches second capillary plexus in anterior pituitary and binds target receptor</span></div>
+    </div>
+    <div class="order-actions">
+      <button class="order-check-btn" onclick="checkOrder('order-list-1','order-fb-1')">Check Order</button>
+      <button class="order-ghost-btn" onclick="showOrderAnswer('order-ans-1')">Show Answer</button>
+    </div>
+    <div class="order-feedback" id="order-fb-1"></div>
+    <div class="order-answer" id="order-ans-1">
+      <ol>
+        <li><span>Hypothalamic neuron secretes releasing hormone</span></li>
+        <li><span>First capillary plexus in median eminence</span> (no BBB)</li>
+        <li><span>Portal veins</span> carry hormone down the stalk</li>
+        <li><span>Second capillary plexus in anterior pituitary</span> — binds cell-surface receptors</li>
+        <li><span>Anterior pituitary hormone released</span> into systemic circulation</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="order-drill">
+    <div class="drill-title">Drill 2 — Posterior Pituitary Hormone Release Pathway</div>
+    <div class="drill-hint">From gene transcription in the hypothalamus to ADH/oxytocin in the blood.</div>
+    <div class="order-list" id="order-list-2" ondragover="event.preventDefault()" ondrop="dropItem(event,'order-list-2')">
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="4"><span class="item-grip">⠿</span><span class="item-text">Granules accumulate in Herring bodies (axon terminals)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="1"><span class="item-grip">⠿</span><span class="item-text">SON/PVN neuron transcribes preprohormone gene</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="6"><span class="item-grip">⠿</span><span class="item-text">Hormone diffuses into fenestrated capillaries of posterior pituitary</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="2"><span class="item-grip">⠿</span><span class="item-text">Preprohormone cleaved to hormone + neurophysin carrier in secretory vesicles</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="5"><span class="item-grip">⠿</span><span class="item-text">Ca²⁺-dependent exocytosis triggered by action potential</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="3"><span class="item-grip">⠿</span><span class="item-text">Axonal transport down the infundibulum to posterior pituitary</span></div>
+    </div>
+    <div class="order-actions">
+      <button class="order-check-btn" onclick="checkOrder('order-list-2','order-fb-2')">Check Order</button>
+      <button class="order-ghost-btn" onclick="showOrderAnswer('order-ans-2')">Show Answer</button>
+    </div>
+    <div class="order-feedback" id="order-fb-2"></div>
+    <div class="order-answer" id="order-ans-2">
+      <ol>
+        <li><span>Gene transcription</span> in SON/PVN</li>
+        <li><span>Cleavage to hormone + neurophysin</span> in vesicles</li>
+        <li><span>Axonal transport</span> through infundibulum</li>
+        <li><span>Storage in Herring bodies</span></li>
+        <li><span>Ca²⁺-triggered exocytosis</span></li>
+        <li><span>Diffusion into fenestrated capillaries</span> → systemic release</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="order-drill">
+    <div class="drill-title">Drill 3 — Loss of Hypothalamic Stalk Function (Stalk Section)</div>
+    <div class="drill-hint">A traumatic injury severs the pituitary stalk. Arrange the predicted consequences in order of appearance.</div>
+    <div class="order-list" id="order-list-3" ondragover="event.preventDefault()" ondrop="dropItem(event,'order-list-3')">
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="3"><span class="item-grip">⠿</span><span class="item-text">Loss of TSH, ACTH, FSH, LH, GH — secondary failures develop over days to weeks</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="1"><span class="item-grip">⠿</span><span class="item-text">Loss of ADH delivery → central diabetes insipidus (within hours)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="2"><span class="item-grip">⠿</span><span class="item-text">Dopamine no longer reaches lactotropes → prolactin RISES (unique exception)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="4"><span class="item-grip">⠿</span><span class="item-text">Anterior pituitary atrophy from loss of trophic stimulation</span></div>
+    </div>
+    <div class="order-actions">
+      <button class="order-check-btn" onclick="checkOrder('order-list-3','order-fb-3')">Check Order</button>
+      <button class="order-ghost-btn" onclick="showOrderAnswer('order-ans-3')">Show Answer</button>
+    </div>
+    <div class="order-feedback" id="order-fb-3"></div>
+    <div class="order-answer" id="order-ans-3">
+      <ol>
+        <li><span>Central DI</span> (hours) — loss of ADH delivery</li>
+        <li><span>Hyperprolactinemia</span> (days) — loss of tonic dopamine inhibition (PRL is the exception!)</li>
+        <li><span>Secondary failures</span> of TSH/ACTH/FSH/LH/GH — loss of releasing hormones</li>
+        <li><span>Pituitary atrophy</span> (weeks) — absent trophic input</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MATCHING ═══════════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-matching">
+  <div class="match-intro"><strong>Instructions:</strong> Click an item on the left, then click its match on the right. Correct pairs turn green; wrong pairs flash red.</div>
+
+  <div class="match-set">
+    <div class="match-set-title">Set 1 — Hypothalamic Nucleus → Principal Hormone</div>
+    <div class="match-set-hint">Match the nucleus to its best-known hormone output.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Nucleus</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="1">Supraoptic (SON)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="2">Paraventricular (PVN)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="3">Arcuate</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="4">Periventricular</div>
+      </div>
+      <div>
+        <div class="match-col-label">Hormone</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="3">Dopamine (PIH) — inhibits prolactin</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="1">ADH (vasopressin) — primary source</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="4">Somatostatin (GHIH) — inhibits GH + TSH</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="2">Oxytocin — primary source; also CRH, TRH</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="ms1-score">0</span>/4 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('ms1')">Reset</button>
+  </div>
+
+  <div class="match-set">
+    <div class="match-set-title">Set 2 — Anterior Pituitary Cell → Hormone → Stain</div>
+    <div class="match-set-hint">Match each pituitary cell type to its hormone product (staining implied).</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Cell</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="1">Somatotrope</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="2">Lactotrope</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="3">Corticotrope</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="4">Gonadotrope</div>
+      </div>
+      <div>
+        <div class="match-col-label">Hormone (+ stain)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="4">FSH + LH (basophil)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="1">GH (acidophil)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="3">ACTH (basophil)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="2">Prolactin (acidophil)</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="ms2-score">0</span>/4 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('ms2')">Reset</button>
+  </div>
+
+  <div class="match-set">
+    <div class="match-set-title">Set 3 — Hypothalamic Releaser → Pituitary Target</div>
+    <div class="match-set-hint">Match each hypothalamic hormone to the anterior pituitary hormone it controls.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Hypothalamic</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="1">CRH</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="2">GnRH</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="3">GHRH</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="4">Dopamine / PIH</div>
+      </div>
+      <div>
+        <div class="match-col-label">Pituitary Effect</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="4">↓ Prolactin (tonic inhibition)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="1">↑ ACTH</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="3">↑ Growth hormone</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="2">↑ FSH + ↑ LH</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="ms3-score">0</span>/4 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('ms3')">Reset</button>
+  </div>
+</div>
+
+<!-- ══ TRAPS ══════════════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-traps">
+  <div class="trap-intro"><strong>Test Trap Mode:</strong> Each statement is TRUE or FALSE as written. Many reverse or mix facts that trip students up.</div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 01 — LO 1</div>
+    <div class="trap-statement">"The anterior pituitary is neural tissue derived from the diencephalon and is connected to the hypothalamus by direct axonal projections."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Anterior pituitary = <em>glandular epithelium</em> from <strong>Rathke's pouch</strong> (oral ectoderm) — connected via the <em>hypophyseal portal system</em> (vascular). The POSTERIOR pituitary is neural tissue from diencephalon with direct axonal projections. Reversed fact pattern.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 02 — LO 2</div>
+    <div class="trap-statement">"ADH and oxytocin are synthesized by the cell bodies of the posterior pituitary and stored in Herring bodies."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> ADH and oxytocin are synthesized in the <strong>hypothalamus</strong> (cell bodies in SON and PVN). They are TRANSPORTED down axons to the posterior pituitary, where Herring bodies (axon terminal swellings) store them for release. The posterior pituitary has NO secretory cell bodies — only terminals and pituicytes (glia).</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 03 — LO 3</div>
+    <div class="trap-statement">"Acidophils of the anterior pituitary release thyroid-stimulating hormone and adrenocorticotropic hormone."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Acidophils release <strong>GH and prolactin</strong> (only 2 hormones). TSH and ACTH come from <strong>basophils</strong> (along with FSH and LH). Mnemonic: <strong>"B-FLAT"</strong> — Basophils: FSH, LH, ACTH, TSH.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 04 — LO 4</div>
+    <div class="trap-statement">"Cutting the pituitary stalk causes a fall in all six anterior pituitary hormones, including prolactin."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> <strong>Prolactin RISES</strong> after stalk transection. Prolactin is the ONLY AP hormone under TONIC INHIBITION (dopamine/PIH from arcuate nucleus). Remove dopamine delivery → lactotropes unleashed → ↑PRL. All five others fall (loss of their releasing hormones). Classic boards fact.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 05 — LO 4</div>
+    <div class="trap-statement">"Continuous, non-pulsatile GnRH infusion is the best way to restore fertility in a patient with hypothalamic amenorrhea."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Continuous GnRH exposure <strong>DOWN-REGULATES</strong> pituitary GnRH receptors → paradoxical suppression of LH/FSH ("medical castration"). This is the mechanism of <em>leuprolide</em> for prostate cancer and endometriosis. <strong>PULSATILE</strong> GnRH (every 60–90 min via pump) restores normal gonadotropin rhythm and fertility.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 06 — LO 5</div>
+    <div class="trap-statement">"Ultra-short loop feedback refers to target-organ hormones inhibiting hypothalamic release."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Ultra-short = <strong>a hypothalamic hormone inhibiting ITS OWN release</strong> via axon collaterals (e.g., CRH → ↓CRH). Target-organ → hypothalamus is the <strong>LONG loop</strong>. Ultra-short generates pulsatility and prevents receptor desensitization.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 07 — LO 6</div>
+    <div class="trap-statement">"A patient with primary hypothyroidism will have low T4 AND low TSH."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> In PRIMARY hypothyroidism, the thyroid gland is the problem → T4 falls → loss of long-loop negative feedback → <strong>TSH RISES</strong> (and TRH rises). Low T4 + low TSH indicates <em>secondary</em> (pituitary) or <em>tertiary</em> (hypothalamic) failure.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 08 — LO 6</div>
+    <div class="trap-statement">"A patient on chronic prednisone has suppressed endogenous cortisol but normal ACTH and CRH because the pituitary doesn't sense synthetic steroids."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Exogenous glucocorticoids bind the SAME glucocorticoid receptor → full long-loop suppression of BOTH <strong>CRH and ACTH</strong>. Endogenous cortisol falls, adrenal atrophies. This is why steroids must be TAPERED — sudden cessation can precipitate adrenal crisis.</div>
+  </div>
+
+</div>
+
+<!-- ══ REFERENCE ══════════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-reference">
+
+  <div class="ref-section">
+    <div class="ref-title">Hypothalamic Nuclei &amp; Their Hormones</div>
+    <table class="ref-table">
+      <thead><tr><th>Nucleus</th><th>Hormone(s)</th><th>Target / Function</th></tr></thead>
+      <tbody>
+        <tr><td class="key">Supraoptic (SON)</td><td>ADH (primary), oxytocin</td><td>Posterior pituitary via axonal projection</td></tr>
+        <tr><td class="key">Paraventricular (PVN)</td><td>Oxytocin (primary), ADH, CRH, TRH</td><td>Post. pituitary + anterior pituitary (CRH/TRH via portal)</td></tr>
+        <tr><td class="key">Medial preoptic</td><td>GnRH</td><td>Anterior pituitary — FSH/LH</td></tr>
+        <tr><td class="key">Dorsomedial</td><td>GnIH</td><td>Anterior pituitary — inhibits FSH/LH</td></tr>
+        <tr><td class="key">Ventromedial</td><td>GHRH; satiety center</td><td>Anterior pituitary — GH; lesion → obesity/hyperphagia</td></tr>
+        <tr><td class="key">Periventricular</td><td>Somatostatin (GHIH)</td><td>Anterior pituitary — inhibits GH + TSH</td></tr>
+        <tr><td class="key">Arcuate</td><td>Dopamine (PIH); also some GnRH</td><td>Anterior pituitary — inhibits PRL</td></tr>
+        <tr><td class="key">Suprachiasmatic</td><td>Sets circadian rhythm</td><td>Pineal (indirectly via SNS → melatonin)</td></tr>
+        <tr><td class="key">Anterior / Posterior</td><td>Temperature regulation</td><td>Cooling (ant.) / heat conservation (post.)</td></tr>
+      </tbody>
+    </table>
+    <div class="ref-note"><strong>Board shortcut:</strong> "SON + PVN = posterior (nonapeptides); everything else = anterior via portal."</div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Anterior Pituitary Hormones — Cell, Control, Action</div>
+    <table class="ref-table">
+      <thead><tr><th>Hormone</th><th>Cell (stain)</th><th>↑ by</th><th>↓ by</th><th>Primary Target</th></tr></thead>
+      <tbody>
+        <tr><td class="key">TSH</td><td>Thyrotrope (basophil)</td><td>TRH</td><td>Somatostatin, dopamine, T3/T4 (long loop)</td><td>Thyroid → T3/T4</td></tr>
+        <tr><td class="key">ACTH</td><td>Corticotrope (basophil)</td><td>CRH, stress, ADH</td><td>Cortisol (long loop)</td><td>Adrenal cortex → cortisol</td></tr>
+        <tr><td class="key">FSH</td><td>Gonadotrope (basophil)</td><td>GnRH (pulsatile)</td><td>Inhibin, GnIH, sex steroids (long loop)</td><td>Gonads → gametogenesis</td></tr>
+        <tr><td class="key">LH</td><td>Gonadotrope (basophil)</td><td>GnRH (pulsatile)</td><td>Sex steroids (long loop); E2 surge = positive feedback</td><td>Gonads → sex hormones</td></tr>
+        <tr><td class="key">GH</td><td>Somatotrope (acidophil)</td><td>GHRH, ghrelin, hypoglycemia, stress</td><td>Somatostatin, IGF-1 (long loop), hyperglycemia</td><td>Liver → IGF-1; direct growth effects</td></tr>
+        <tr><td class="key">Prolactin</td><td>Lactotrope (acidophil)</td><td>TRH, suckling, pregnancy</td><td><strong>Dopamine — tonic</strong></td><td>Breast (lactation); inhibits GnRH</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Feedback Loop Hierarchy</div>
+    <table class="ref-table">
+      <thead><tr><th>Loop</th><th>Source → Target</th><th>Purpose</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td class="key">Long</td><td>Target-organ hormone → hypothalamus + pituitary</td><td>Set total hormone level</td><td>Cortisol → ↓CRH + ↓ACTH</td></tr>
+        <tr><td class="key">Short</td><td>Pituitary hormone → hypothalamus</td><td>Fine-tune day-to-day pattern</td><td>ACTH → ↓CRH</td></tr>
+        <tr><td class="key">Ultra-short</td><td>Hypothalamic hormone → itself (axon collaterals)</td><td>Generate PULSATILE release</td><td>CRH → ↓CRH; TRH → ↓TRH</td></tr>
+        <tr><td class="key">Positive</td><td>Rising target hormone → MORE hypothalamic/pituitary release</td><td>Trigger surges (short-lived)</td><td>E2 surge → ↑GnRH → LH surge → ovulation; oxytocin → labor</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Primary / Secondary / Tertiary Rule (LO 6)</div>
+    <table class="ref-table">
+      <thead><tr><th>State</th><th>Target Hormone</th><th>Pituitary Hormone</th><th>Hypothalamic Hormone</th></tr></thead>
+      <tbody>
+        <tr><td class="key">Primary hypo</td><td>LOW</td><td>HIGH ↑</td><td>HIGH ↑</td></tr>
+        <tr><td class="key">Secondary hypo</td><td>LOW</td><td>LOW ↓</td><td>HIGH ↑</td></tr>
+        <tr><td class="key">Tertiary hypo</td><td>LOW</td><td>LOW ↓</td><td>LOW ↓</td></tr>
+        <tr><td class="key">Primary hyper</td><td>HIGH</td><td>LOW ↓</td><td>LOW ↓</td></tr>
+        <tr><td class="key">Secondary hyper (adenoma)</td><td>HIGH</td><td>HIGH ↑</td><td>LOW ↓</td></tr>
+        <tr><td class="key">Exogenous hormone</td><td>High (drug) / endogenous LOW</td><td>LOW ↓</td><td>LOW ↓</td></tr>
+      </tbody>
+    </table>
+    <div class="ref-note"><strong>Read it like a thermostat:</strong> wherever the DYSFUNCTION is, every step UPSTREAM tries to compensate (rises in hypofunction, falls in hyperfunction); everything DOWNSTREAM of the problem falls/rises with it.</div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <a href="../active-recall-hub.html">← Active Recall Hub</a> &nbsp;·&nbsp; END02 Hub 1 — Core Concepts &nbsp;·&nbsp; HoyaDocs Endocrine Block
+</div>
+
+</div>
+
+<script>
+function flipCard(fc){
+  const inner=fc.querySelector('.fc-inner');
+  const front=fc.querySelector('.fc-front');
+  const back=fc.querySelector('.fc-back');
+  fc.classList.toggle('flipped');
+  inner.style.height=(fc.classList.contains('flipped')?back:front).scrollHeight+'px';
+}
+function fixCardHeights(){
+  document.querySelectorAll('.fc').forEach(function(fc){
+    const inner=fc.querySelector('.fc-inner');
+    const front=fc.querySelector('.fc-front');
+    inner.style.height=front.scrollHeight+'px';
+  });
+}
+window.addEventListener('load',fixCardHeights);
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='flashcards') requestAnimationFrame(fixCardHeights);
+}
+function checkFib(btn){
+  const card=btn.closest('.fib-card');
+  const inputs=card.querySelectorAll('.fib-input');
+  const fb=card.querySelector('.fib-feedback');
+  let allCorrect=true;
+  inputs.forEach(inp=>{
+    const val=inp.value.trim().toLowerCase();
+    const accepted=inp.dataset.answers.split(',').map(a=>a.trim().toLowerCase());
+    if(accepted.some(a=>val.includes(a)||(a.includes(val)&&val.length>2))){
+      inp.classList.remove('incorrect');inp.classList.add('correct');
+    } else {
+      inp.classList.remove('correct');inp.classList.add('incorrect');allCorrect=false;
+    }
+  });
+  fb.className='fib-feedback '+(allCorrect?'correct':'incorrect');
+  fb.textContent=allCorrect?'✓ Correct!':'✗ Not quite — use Reveal to see the answer.';
+}
+function revealFib(btn){
+  const card=btn.closest('.fib-card');
+  const inputs=card.querySelectorAll('.fib-input');
+  inputs.forEach(inp=>{
+    const ans=inp.dataset.answers.split(',')[0];
+    inp.value=ans;inp.classList.add('correct');inp.classList.remove('incorrect');
+  });
+  const fb=card.querySelector('.fib-feedback');
+  fb.className='fib-feedback correct';fb.textContent='Answer revealed.';
+}
+let dragSrc=null;
+function dragStart(e){dragSrc=e.currentTarget;e.dataTransfer.effectAllowed='move';}
+function dropOnItem(e,listId){
+  e.preventDefault();e.stopPropagation();
+  const target=e.currentTarget;target.classList.remove('drag-over');
+  if(!dragSrc||dragSrc===target)return;
+  const list=document.getElementById(listId);
+  const items=Array.from(list.children);
+  const srcIdx=items.indexOf(dragSrc);
+  const tgtIdx=items.indexOf(target);
+  if(srcIdx<tgtIdx)list.insertBefore(dragSrc,target.nextSibling);
+  else list.insertBefore(dragSrc,target);
+}
+function dropItem(e,listId){e.preventDefault();}
+function checkOrder(listId,fbId){
+  const list=document.getElementById(listId);
+  const items=Array.from(list.children);
+  let correct=0;
+  items.forEach((item,idx)=>{
+    item.classList.remove('correct-pos','wrong-pos');
+    if(parseInt(item.dataset.pos)===idx+1){item.classList.add('correct-pos');correct++;}
+    else item.classList.add('wrong-pos');
+  });
+  const fb=document.getElementById(fbId);
+  fb.className='order-feedback '+(correct===items.length?'correct':'incorrect');
+  fb.textContent=correct===items.length?`✓ Perfect! All ${items.length} items in the correct order.`:`${correct}/${items.length} correct — keep trying or show the answer.`;
+}
+function showOrderAnswer(id){
+  const el=document.getElementById(id);
+  el.style.display=el.style.display==='block'?'none':'block';
+}
+let matchState={};
+function selectMatch(el,setId){
+  if(el.classList.contains('matched-correct'))return;
+  if(!matchState[setId])matchState[setId]={selected:null,score:0};
+  const state=matchState[setId];
+  if(state.selected===null){
+    document.querySelectorAll(`[onclick*="${setId}"].selected`).forEach(e=>e.classList.remove('selected'));
+    el.classList.add('selected');state.selected=el;
+  } else {
+    const prev=state.selected;
+    if(prev===el){el.classList.remove('selected');state.selected=null;return;}
+    if(prev.dataset.pair===el.dataset.pair){
+      prev.classList.remove('selected');prev.classList.add('matched-correct');
+      el.classList.add('matched-correct');state.selected=null;state.score++;
+      document.getElementById(setId+'-score').textContent=state.score;
+    } else {
+      [prev,el].forEach(e=>{e.classList.remove('selected');e.classList.add('flash-wrong');setTimeout(()=>e.classList.remove('flash-wrong'),500);});
+      state.selected=null;
+    }
+  }
+}
+function resetMatch(setId){
+  matchState[setId]={selected:null,score:0};
+  document.querySelectorAll(`[onclick*="${setId}"]`).forEach(e=>{e.classList.remove('matched-correct','selected','flash-wrong');});
+  document.getElementById(setId+'-score').textContent='0';
+}
+function judgeTrap(btn,correct){
+  const card=btn.closest('.trap-card');
+  const btns=card.querySelectorAll('.trap-btn');
+  btns.forEach(b=>b.disabled=true);
+  const userSaidTrue=btn.classList.contains('trap-btn-true');
+  const isCorrect=(userSaidTrue===correct);
+  btn.classList.add(isCorrect?'sel-correct':'sel-wrong');
+  const exp=card.querySelector('.trap-exp');
+  exp.className='trap-exp '+(isCorrect?'show-c':'show-w');
+}
+</script>
+</body>
+</html>
