@@ -1,0 +1,643 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:sans-serif}
+body{background:#fff;color:#111;padding:16px;font-size:13px}
+h2{font-size:16px;font-weight:600;margin-bottom:4px}
+.sub{color:#666;font-size:12px;margin-bottom:14px}
+.resource-banner{background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:#1E40AF}
+.resource-banner strong{display:block;margin-bottom:2px;font-size:13px}
+.tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+.tab{padding:7px 14px;border-radius:20px;border:1.5px solid #CBD5E1;font-size:12px;cursor:pointer;background:#fff;color:#475569;font-weight:500}
+.tab.active{background:#1D4ED8;color:#fff;border-color:#1D4ED8}
+.panel{display:none}.panel.active{display:block}
+.sec{font-size:11px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.05em;margin:14px 0 6px}
+table{width:100%;border-collapse:collapse;margin-bottom:10px;font-size:12px}
+th{background:#F1F5F9;text-align:left;padding:7px 8px;font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:#475569;border:1px solid #E2E8F0;font-weight:600}
+td{padding:6px 8px;border:1px solid #E2E8F0;vertical-align:top}
+td input{width:100%;border:none;border-bottom:1.5px solid #e2e8f0;font-size:11px;background:transparent;outline:none;padding:1px 0;color:#1e293b}
+td input:focus{border-bottom-color:#1D4ED8}
+tr:nth-child(even) td{background:#FAFAFA}
+.rl{font-weight:600;font-size:11px;color:#1e293b;background:#F8FAFC!important;white-space:nowrap}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.f{margin-bottom:6px}
+.f label{font-size:10px;color:#94a3b8;display:block;margin-bottom:2px;text-transform:uppercase;letter-spacing:.03em}
+.f input{width:100%;border:none;border-bottom:1.5px solid #CBD5E1;font-size:12px;background:transparent;outline:none;padding:2px 0;color:#1e293b}
+.f input:focus{border-bottom-color:#1D4ED8}
+.f textarea{width:100%;border:1px solid #CBD5E1;border-radius:6px;font-size:12px;background:transparent;outline:none;padding:4px 6px;color:#1e293b;resize:vertical;min-height:52px}
+.f textarea:focus{border-color:#1D4ED8}
+.btn{background:#1D4ED8;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:13px;cursor:pointer;font-weight:500;margin-top:8px}
+.btn:hover{background:#1e40af}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.fb{margin-top:14px;display:none;border-radius:10px;overflow:hidden;border:1.5px solid #BFDBFE}.fb-header{background:#1D4ED8;color:#fff;font-size:11px;font-weight:700;padding:8px 14px;letter-spacing:.04em;text-transform:uppercase}.fb-row{display:grid;grid-template-columns:210px 1fr;border-bottom:1px solid #DBEAFE}.fb-row:last-child{border-bottom:none}.fb-row:nth-child(even){background:#F0F7FF}.fb-row:nth-child(odd){background:#fff}.fb-q{font-size:11px;font-weight:700;color:#1E40AF;padding:7px 10px;border-right:1px solid #DBEAFE;line-height:1.5}.fb-a{font-size:11px;color:#1E293B;padding:7px 10px;line-height:1.6}
+.warn{background:#FFFBEB;border-left:3px solid #F59E0B;padding:7px 10px;border-radius:0 6px 6px 0;font-size:11px;color:#92400E;margin:8px 0}
+.on-exam{background:#FEE2E2;border:1px solid #FDA4AF;border-radius:6px;padding:4px 10px;font-size:11px;color:#991B1B;font-weight:700;display:inline-block;margin-bottom:8px}
+.lo-tag{background:#EDE9FE;border:1px solid #C4B5FD;border-radius:5px;padding:2px 8px;font-size:10px;color:#5B21B6;font-weight:600;margin-bottom:6px;display:inline-block}
+.pq-box{background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;padding:10px 14px;margin-bottom:10px;font-size:12px}
+.pq-q{font-weight:600;margin-bottom:6px;color:#92400E}
+.pq-choices{margin-left:12px;margin-bottom:6px;color:#78350F;line-height:1.8}
+.pq-ans{display:none;background:#EFF6FF;border:1px solid #93C5FD;border-radius:6px;padding:6px 10px;font-size:11px;color:#1E40AF;margin-top:4px}
+.pq-btn{font-size:11px;padding:3px 10px;border-radius:5px;border:1px solid #2563EB;background:#DBEAFE;color:#1E40AF;cursor:pointer}
+.pq-btn:hover{background:#BFDBFE}
+.card{border:1px solid #E2E8F0;border-radius:10px;padding:12px 14px;margin-bottom:10px}
+
+@media(max-width:640px){
+  body{padding:10px;font-size:12px}
+  h2{font-size:14px}
+  .tabs{gap:4px}
+  .tab{padding:6px 10px;font-size:11px}
+  .fg,.fg3{grid-template-columns:1fr!important}
+  table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .fb-row{grid-template-columns:1fr;grid-template-rows:auto auto}
+  .fb-q{border-right:none;border-bottom:1px solid #DBEAFE}
+  .inline-blank{width:120px}
+  .pq-choices{margin-left:4px}
+  .btn{width:100%;text-align:center}
+}
+
+.hoyadocs-brand{font-size:14px;font-weight:700;color:#1D4ED8;letter-spacing:-0.02em;margin-bottom:12px}
+
+@media print{
+  @page{size:letter landscape;margin:0.35in 0.4in}
+  html,body{background:#fff!important}
+  body{padding:0;font-size:10px}
+  body > *:not(.panel){display:none!important}
+  .panel{display:block!important;page-break-before:always;break-before:page;page-break-inside:auto}
+  .panel:first-of-type{page-break-before:auto;break-before:auto}
+  .panel::before{content:"HoyaDocs";display:block;font-size:13px;font-weight:700;color:#1D4ED8;margin-bottom:8px;padding-bottom:4px;border-bottom:1.5px solid #1D4ED8;letter-spacing:-0.02em}
+  .btn,.pq-btn{display:none!important}
+  .sec{margin:5px 0 3px;font-size:9.5px}
+  table{margin-bottom:5px;font-size:10px;page-break-inside:avoid}
+  th{font-size:9px;padding:3px 4px}
+  td{padding:2px 4px;font-size:10px}
+  td input{font-size:10px;padding:0}
+  .on-exam{font-size:10px;padding:3px 7px;margin-bottom:5px;display:block;white-space:normal}
+  .warn{font-size:9.5px;padding:4px 7px;margin:3px 0}
+  .pq-box{font-size:9.5px;padding:5px 8px;margin-bottom:4px;page-break-inside:avoid}
+  .pq-ans{display:block!important;font-size:9px;margin-top:3px}
+  .pq-choices{line-height:1.5;margin-bottom:3px}
+  .fb{display:block!important}
+  .fg,.fg3{gap:6px}
+  .f{margin-bottom:3px}
+  .f label{font-size:9px}
+  .f input{font-size:10px;padding:0}
+  .card{padding:6px 8px;margin-bottom:6px}
+  .lo-tag{font-size:9px;padding:1px 6px;margin-bottom:3px}
+  .ki-text{font-size:9.5px!important;min-height:14px;padding:1px 2px;line-height:1.35}
+  a[href$=".html"]{display:none!important}
+}
+</style></head><body>
+
+<div class="hoyadocs-brand">HoyaDocs</div>
+
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:6px">
+  <h2 style="margin-bottom:0">Intro to Hormones — Active Recall</h2>
+  <div style="display:flex;gap:6px;flex-wrap:wrap">
+    <button onclick="window.print()" style="background:#1D4ED8;color:#fff;border:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap">&#128424; Print</button>
+    <a href="end01_key.html" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#14532d;color:#fff;text-decoration:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;white-space:nowrap">&#9989; View Answer Key</a>
+  </div>
+</div>
+<p class="sub">Built from Endocrine Lecture 01 (LOs 1&ndash;15, Kothmann). Close notes. Fill from memory. Reveal only after a genuine attempt.</p>
+
+<div class="resource-banner">
+  <strong>&#128214; Use alongside: Endocrine Lecture 01 &mdash; Intro to Hormones (HoyaDocs)</strong>
+  Focus on: 3 hormone classes (peptide/steroid/amine), signaling types (endocrine/paracrine/autocrine/nervous), glycoprotein &alpha;/&beta; subunits, catecholamine synthesis (TH = rate-limiting), vitamin D activation (skin &rarr; liver &rarr; kidney), retinoic acids, carrier proteins &amp; free-hormone hypothesis, membrane vs nuclear receptors, nuclear receptor Types 1 vs 2, RXR partners, immunoassays, Scatchard plot &amp; K<sub>d</sub>, pulsatile vs circadian release, C-peptide.
+</div>
+
+<div style="margin-bottom:14px">
+  <div style="font-size:12px;font-weight:600;margin-bottom:6px;color:#374151">SEED &mdash; name the 3 hormone classes + where each is made (from memory):</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:6px">
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">P ____ (made at ____)</div><input style="width:100%;border:none;border-bottom:1.5px solid #CBD5E1;font-size:12px;background:transparent;outline:none;padding:2px 0;color:#1e293b"></div>
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">S ____ (made from ____)</div><input style="width:100%;border:none;border-bottom:1.5px solid #CBD5E1;font-size:12px;background:transparent;outline:none;padding:2px 0;color:#1e293b"></div>
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">A ____ (made from ____)</div><input style="width:100%;border:none;border-bottom:1.5px solid #CBD5E1;font-size:12px;background:transparent;outline:none;padding:2px 0;color:#1e293b"></div>
+  </div>
+  <div style="font-size:11px;color:#6b7280;margin-top:4px">Plus: which amine is the <em>exception</em> that acts like a steroid (lipid-soluble, nuclear receptor)?</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="sw(0)">Classification &amp; Signaling</div>
+  <div class="tab" onclick="sw(1)">Synthesis &amp; Enzymes</div>
+  <div class="tab" onclick="sw(2)">Storage, Release &amp; Transport</div>
+  <div class="tab" onclick="sw(3)">Receptors</div>
+  <div class="tab" onclick="sw(4)">Measurement &amp; Kinetics</div>
+  <div class="tab" onclick="sw(5)">Practice Qs</div>
+</div>
+
+<!-- TAB 0: CLASSIFICATION & SIGNALING -->
+<div class="panel active" id="p0">
+<div class="lo-tag">LO 1, 2, 6</div>
+<div class="on-exam">ON EXAM &mdash; 3 hormone classes (peptide/steroid/amine) + solubility &rarr; receptor location rule; thyroid hormone exception; endocrine vs paracrine vs autocrine vs neuro (with examples); glycoprotein &alpha;/&beta; subunits; neuroendocrine overlap (hypothalamus, adrenal medulla, posterior pituitary)</div>
+
+<div class="sec">Signaling systems &mdash; fill each row (LO 2)</div>
+<table>
+  <tr><th>System</th><th>Route</th><th>Distance / speed</th><th>Classic example</th></tr>
+  <tr><td class="rl">Endocrine</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Paracrine</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Autocrine</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Nervous (synaptic)</td><td><input></td><td><input></td><td><input></td></tr>
+</table>
+<div class="warn">TRAP: <em>Autocrine</em> = cell signals itself (classic in cancer &mdash; tumor makes its own growth factor). <em>Paracrine</em> = cell signals neighbor. IGF-1 autocrine on tumor cells is a favorite stem.</div>
+
+<div class="sec">Three hormone classes &mdash; big-picture comparison (LO 1)</div>
+<table>
+  <tr><th>Property</th><th>Peptide / protein</th><th>Steroid</th><th>Amine</th></tr>
+  <tr><td class="rl">Chemical nature</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Solubility</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Synthesis location</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Storage?</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Receptor location</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Action speed</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Examples (&ge; 3)</td><td><input></td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">Thyroid hormone &mdash; the amine exception (LO 1)</div>
+<div class="fg">
+  <div class="f"><label>Why does T<sub>3</sub>/T<sub>4</sub> behave like a steroid (not like a catecholamine)?</label><input></div>
+  <div class="f"><label>Where is the T<sub>3</sub>/T<sub>4</sub> receptor located?</label><input></div>
+  <div class="f"><label>Action speed for thyroid hormone vs catecholamines?</label><input></div>
+  <div class="f"><label>What carrier protein transports T<sub>4</sub> in blood?</label><input></div>
+</div>
+
+<div class="sec">Glycoprotein hormones &mdash; subunit structure (LO 6)</div>
+<div class="fg">
+  <div class="f"><label>Four pituitary/placental glycoprotein hormones (name them)</label><input></div>
+  <div class="f"><label>&alpha;-subunit &mdash; identical or unique?</label><input></div>
+  <div class="f"><label>&beta;-subunit &mdash; what does it determine?</label><input></div>
+  <div class="f"><label>Clinical use of &beta;-hCG assay &mdash; why specifically &beta;?</label><input></div>
+</div>
+
+<div class="sec">Neuroendocrine overlap &mdash; name the system (LO 2)</div>
+<div class="fg">
+  <div class="f"><label>Hypothalamic neurons &rarr; portal blood &rarr; anterior pituitary (CRH, TRH, GnRH)</label><input></div>
+  <div class="f"><label>Preganglionic sympathetic &rarr; chromaffin cells &rarr; epinephrine into blood</label><input></div>
+  <div class="f"><label>Hypothalamic neurons &rarr; axon terminals in posterior pituitary &rarr; ADH / oxytocin</label><input></div>
+</div>
+<button class="btn" onclick="rev('fb0',a0)">Reveal answers</button>
+<div id="fb0" class="fb"></div>
+</div>
+
+<!-- TAB 1: SYNTHESIS & ENZYMES -->
+<div class="panel" id="p1">
+<div class="lo-tag">LO 3, 4, 5</div>
+<div class="on-exam">ON EXAM &mdash; peptide pathway (preprohormone &rarr; prohormone &rarr; active hormone; signal peptide cleaved in ER); steroid rate-limiting step (cholesterol &rarr; pregnenolone by CYP11A1 / desmolase; needs StAR); catecholamine pathway (Tyr &rarr; DOPA &rarr; DA &rarr; NE &rarr; Epi; TH rate-limiting; PNMT only in adrenal medulla); vitamin D (7-DHC &rarr; skin UVB &rarr; liver 25-OHase &rarr; kidney 1&alpha;-OHase); retinoic acid (Vit A &rarr; ATRA, treats APL)</div>
+
+<div class="sec">Peptide hormone synthesis &mdash; fill each step (LO 3, 7)</div>
+<table>
+  <tr><th>Step</th><th>Where?</th><th>What happens?</th></tr>
+  <tr><td class="rl">Preprohormone</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Prohormone</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Active hormone</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Signal peptide &mdash; fate?</td><td colspan="2"><input></td></tr>
+</table>
+
+<div class="sec">Steroid hormone synthesis (LO 3, 7)</div>
+<div class="fg">
+  <div class="f"><label>Parent molecule for ALL steroid hormones</label><input></div>
+  <div class="f"><label>Rate-limiting enzyme + substrate &rarr; product</label><input></div>
+  <div class="f"><label>What protein shuttles cholesterol into mitochondria? (regulated by ACTH)</label><input></div>
+  <div class="f"><label>Are steroids stored? If not, what controls release rate?</label><input></div>
+</div>
+
+<div class="sec">Catecholamine synthesis pathway (LO 4)</div>
+<table>
+  <tr><th>Substrate</th><th>Enzyme</th><th>Product</th><th>Clinical angle</th></tr>
+  <tr><td class="rl">Tyrosine</td><td><input></td><td>DOPA</td><td><input></td></tr>
+  <tr><td class="rl">DOPA</td><td><input></td><td>Dopamine</td><td><input></td></tr>
+  <tr><td class="rl">Dopamine</td><td><input></td><td>Norepinephrine</td><td><input></td></tr>
+  <tr><td class="rl">Norepinephrine</td><td><input></td><td>Epinephrine</td><td><input></td></tr>
+</table>
+<div class="warn">KEY: <strong>PNMT</strong> is induced by <strong>cortisol</strong> draining from the adrenal cortex &rarr; medulla via portal vessels &mdash; that's why only the adrenal medulla (not sympathetic neurons) makes epinephrine.</div>
+
+<div class="sec">Vitamin D synthesis / activation (LO 4)</div>
+<table>
+  <tr><th>Stage</th><th>Organ</th><th>Enzyme</th><th>Product</th></tr>
+  <tr><td class="rl">Start</td><td>Skin</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Hydroxylation 1</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Hydroxylation 2 (active)</td><td><input></td><td><input></td><td><input></td></tr>
+</table>
+<div class="fg">
+  <div class="f"><label>Which enzyme is up-regulated by PTH and low phosphate?</label><input></div>
+  <div class="f"><label>Dietary sources: D<sub>2</sub> vs D<sub>3</sub> &mdash; which is plant, which is animal?</label><input></div>
+</div>
+
+<div class="sec">Retinoic acids (LO 5)</div>
+<div class="fg">
+  <div class="f"><label>Parent vitamin &rarr; active form(s)</label><input></div>
+  <div class="f"><label>Receptor family (RAR vs RXR) &mdash; where do each bind?</label><input></div>
+  <div class="f"><label>ATRA treats which leukemia, and why?</label><input></div>
+  <div class="f"><label>Isotretinoin (13-cis-RA) &mdash; use + key teratogenic warning</label><input></div>
+</div>
+<button class="btn" onclick="rev('fb1',a1)">Reveal answers</button>
+<div id="fb1" class="fb"></div>
+</div>
+
+<!-- TAB 2: STORAGE, RELEASE & TRANSPORT -->
+<div class="panel" id="p2">
+<div class="lo-tag">LO 7, 8</div>
+<div class="on-exam">ON EXAM &mdash; stored &amp; ready (peptides, catecholamines) vs on-demand synthesis (steroids); pulsatile (GnRH, GH, LH) vs circadian (cortisol peak AM, nadir PM); C-peptide as marker of endogenous insulin; carrier proteins (SHBG, CBG, TBG, albumin); free-hormone hypothesis (only FREE hormone is active); pregnancy &rarr; TBG &uarr; &rarr; total T<sub>4</sub> &uarr; but free T<sub>4</sub> normal</div>
+
+<div class="sec">Storage-based vs synthesis-based release (LO 7)</div>
+<table>
+  <tr><th>Feature</th><th>Stored &amp; released (fast)</th><th>Synthesized on demand (slow)</th></tr>
+  <tr><td class="rl">Hormone class</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Trigger &rarr; release mechanism</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Time to peak in blood</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Classic examples</td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">Release patterns (LO 7)</div>
+<div class="fg">
+  <div class="f"><label>Pulsatile release &mdash; name 3 hormones</label><input></div>
+  <div class="f"><label>Why does continuous GnRH cause receptor downregulation? (clinical use?)</label><input></div>
+  <div class="f"><label>Circadian hormone &mdash; cortisol peak vs nadir (clock times)</label><input></div>
+  <div class="f"><label>C-peptide &mdash; what does it mark, and why useful clinically?</label><input></div>
+</div>
+
+<div class="sec">Carrier proteins in blood (LO 8)</div>
+<table>
+  <tr><th>Carrier</th><th>Binds</th><th>High-yield clinical link</th></tr>
+  <tr><td class="rl">SHBG</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">CBG (transcortin)</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">TBG</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Albumin</td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">Free-hormone hypothesis (LO 8)</div>
+<div class="fg">
+  <div class="f"><label>Which fraction is biologically active &mdash; bound or free?</label><input></div>
+  <div class="f"><label>Pregnancy / OCPs &rarr; TBG &uarr; &rarr; what happens to <em>total</em> T<sub>4</sub>?</label><input></div>
+  <div class="f"><label>What happens to <em>free</em> T<sub>4</sub> and TSH &mdash; patient clinically hypo, hyper, or euthyroid?</label><input></div>
+  <div class="f"><label>Why do you order FREE T<sub>4</sub> (not total) when binding-protein status is uncertain?</label><input></div>
+  <div class="f"><label>Liver failure / nephrotic syndrome &mdash; why total cortisol drops but free cortisol may be normal</label><input></div>
+</div>
+<button class="btn" onclick="rev('fb2',a2)">Reveal answers</button>
+<div id="fb2" class="fb"></div>
+</div>
+
+<!-- TAB 3: RECEPTORS -->
+<div class="panel" id="p3">
+<div class="lo-tag">LO 10, 11, 12, 13, 14</div>
+<div class="on-exam">ON EXAM &mdash; receptor definition (specific binding + biological response); solubility &rarr; location rule (water-soluble = surface; lipid-soluble = nuclear; thyroid EXCEPTION); membrane classes (GPCR, RTK, JAK-STAT, ligand-gated ion channel, guanylyl cyclase); nuclear receptors Type 1 (steroid: cytoplasm + HSP &rarr; homodimer &rarr; nucleus) vs Type 2 (TR/RAR/VDR bound to RXR already in nucleus); RXR partners; hormone binding &rarr; conformational change &rarr; HRE &rarr; transcription</div>
+
+<div class="sec">Define a receptor (endocrinologist's definition) (LO 11)</div>
+<div class="fg">
+  <div class="f"><label>Two required properties a molecule needs to be called a receptor</label><input></div>
+  <div class="f"><label>What distinguishes a <em>receptor</em> from a <em>binding protein</em> (e.g., TBG)?</label><input></div>
+</div>
+
+<div class="sec">Membrane vs nuclear receptor rules (LO 10)</div>
+<table>
+  <tr><th>Feature</th><th>Membrane (cell surface)</th><th>Nuclear (intracellular)</th></tr>
+  <tr><td class="rl">Ligand solubility</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Signal mechanism</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Action speed</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Ligand classes</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Exception (which hormone breaks the rule?)</td><td colspan="2"><input></td></tr>
+</table>
+
+<div class="sec">Membrane receptor families &mdash; name the signal mechanism (LO 10)</div>
+<div class="fg">
+  <div class="f"><label>GPCR (7-TM) &rarr; what G proteins and second messengers?</label><input></div>
+  <div class="f"><label>RTK (receptor tyrosine kinase) &mdash; classic hormones + downstream pathway</label><input></div>
+  <div class="f"><label>JAK-STAT &mdash; classic hormones + signal flow</label><input></div>
+  <div class="f"><label>Ligand-gated ion channel &mdash; example</label><input></div>
+  <div class="f"><label>Guanylyl cyclase &mdash; example hormone / toxin</label><input></div>
+</div>
+
+<div class="sec">Nuclear receptor groups &mdash; Type 1 vs Type 2 (LO 12, 14)</div>
+<table>
+  <tr><th>Feature</th><th>Type 1 &mdash; Steroid receptors</th><th>Type 2 &mdash; TR / RAR / VDR</th></tr>
+  <tr><td class="rl">Resting location</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Dimer formed with?</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Bound to HSP at rest?</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">DNA element</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Members (examples)</td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">RXR dimerization partners (LO 13)</div>
+<div class="fg">
+  <div class="f"><label>List at least 5 RXR dimerization partners</label><input></div>
+  <div class="f"><label>What is the general function of RXR heterodimers on DNA?</label><input></div>
+  <div class="f"><label>Clinical: PPAR-&gamma; agonists (TZDs, e.g., pioglitazone) &mdash; heterodimerize with what?</label><input></div>
+</div>
+
+<div class="sec">Role of hormone binding (LO 14)</div>
+<div class="fg">
+  <div class="f"><label>Hormone binds &rarr; name 3 downstream events for a steroid receptor</label><input></div>
+  <div class="f"><label>What "chaperone" releases when glucocorticoid binds GR?</label><input></div>
+  <div class="f"><label>Agonist vs antagonist binding &mdash; what's the structural difference in the LBD?</label><input></div>
+</div>
+<button class="btn" onclick="rev('fb3',a3)">Reveal answers</button>
+<div id="fb3" class="fb"></div>
+</div>
+
+<!-- TAB 4: MEASUREMENT & KINETICS -->
+<div class="panel" id="p4">
+<div class="lo-tag">LO 9, 15</div>
+<div class="on-exam">ON EXAM &mdash; immunoassay principle (Ab-based specificity); RIA (radiolabeled competitive); ELISA &amp; sandwich assays (2 Abs, high specificity); Scatchard plot (y = bound/free vs x = bound; slope = &minus;1/K<sub>d</sub>, x-int = B<sub>max</sub>); K<sub>d</sub> = [L] at 50% occupancy = inverse of affinity; semi-log plot gives sigmoidal curve; spare receptors (full response &lt; 100% occupancy)</div>
+
+<div class="sec">Methods for measuring hormones (LO 9)</div>
+<table>
+  <tr><th>Method</th><th>Principle</th><th>Signal detected</th><th>Use case</th></tr>
+  <tr><td class="rl">Radioimmunoassay (RIA)</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">ELISA (sandwich)</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Competitive immunoassay</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Mass spec (LC-MS/MS)</td><td><input></td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">Scatchard plot &amp; K<sub>d</sub> (LO 15)</div>
+<div class="fg">
+  <div class="f"><label>Axes of a Scatchard plot (x, y)</label><input></div>
+  <div class="f"><label>Slope of the line equals what?</label><input></div>
+  <div class="f"><label>X-intercept equals what?</label><input></div>
+  <div class="f"><label>K<sub>d</sub> definition (in words)</label><input></div>
+  <div class="f"><label>Low K<sub>d</sub> vs high K<sub>d</sub> &mdash; which means higher affinity?</label><input></div>
+  <div class="f"><label>Semi-log occupancy plot &mdash; what shape? At K<sub>d</sub> what % are occupied?</label><input></div>
+</div>
+
+<div class="sec">Spare receptors &amp; dose-response (LO 15)</div>
+<div class="fg">
+  <div class="f"><label>What does "spare receptors" mean clinically?</label><input></div>
+  <div class="f"><label>EC<sub>50</sub> vs K<sub>d</sub> &mdash; which is lower when spare receptors exist?</label><input></div>
+  <div class="f"><label>A competitive antagonist shifts the dose-response curve how?</label><input></div>
+  <div class="f"><label>A non-competitive antagonist does what instead?</label><input></div>
+</div>
+<button class="btn" onclick="rev('fb4',a4)">Reveal answers</button>
+<div id="fb4" class="fb"></div>
+</div>
+
+<!-- TAB 5: PRACTICE QUESTIONS -->
+<div class="panel" id="p5">
+<div class="lo-tag">LO 1&ndash;15 &middot; USMLE Step 1 Style</div>
+<div class="on-exam">8 questions &mdash; cover all LO groups. Use these after finishing all tabs.</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q1. A researcher isolates a novel hormone and finds it is water-soluble, stored in large secretory vesicles in the cell of origin, and elicits a biological response within seconds of injection. Its receptor is MOST likely located where, and the downstream mechanism MOST likely involves which of the following?</div>
+  <div class="pq-choices">
+    A. Nuclear receptor &rarr; direct transcription of hormone-response genes<br>
+    B. Cell-surface receptor &rarr; second-messenger cascade (e.g., cAMP, IP<sub>3</sub>)<br>
+    C. Cytoplasmic receptor bound to HSP90 &rarr; homodimerization &rarr; nuclear translocation<br>
+    D. Receptor complex bound to RXR in the nucleus &rarr; ligand-induced corepressor release<br>
+    E. Plasma carrier protein &rarr; hormone delivered to the liver for clearance
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>B &mdash; Cell-surface receptor with second-messenger cascade.</strong><br>Water-soluble + stored in vesicles + seconds-to-minutes action = classic <strong>peptide hormone</strong> profile. Peptides cannot cross the plasma membrane, so they must signal through membrane receptors (GPCR, RTK, JAK-STAT, ligand-gated ion channel, or guanylyl cyclase). A/C/D describe steroid or thyroid (lipid-soluble) signaling; E describes transport, not signaling.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q2. A 35-year-old woman is euthyroid clinically (normal TSH, no symptoms). Her total T<sub>4</sub> is elevated above the reference range. Review of systems reveals she recently became pregnant. Which of the following BEST explains her elevated total T<sub>4</sub>?</div>
+  <div class="pq-choices">
+    A. Autonomous thyroid hormone production from a toxic adenoma<br>
+    B. Estrogen-driven increase in thyroid-binding globulin (TBG) raises total T<sub>4</sub> while free T<sub>4</sub> remains normal<br>
+    C. Primary hypothyroidism with secondary TBG elevation<br>
+    D. Increased PNMT activity in the thyroid<br>
+    E. Elevated thyroid-stimulating antibodies crossing the placenta
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>B &mdash; Estrogen raises TBG &rarr; total T<sub>4</sub> &uarr; but free T<sub>4</sub> unchanged.</strong><br>Estrogen (pregnancy, OCPs) increases hepatic TBG synthesis. Because only <strong>free hormone is biologically active</strong> (free-hormone hypothesis), free T<sub>4</sub> and TSH stay in normal range and the patient is clinically euthyroid. Always order <strong>free T<sub>4</sub></strong> when binding-protein status is changing. Same principle: liver failure or nephrotic syndrome lowers TBG &rarr; total T<sub>4</sub> &darr; with normal free T<sub>4</sub>.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q3. A 28-year-old man presents with episodic headaches, palpitations, and severe hypertension. Plasma metanephrines are markedly elevated. An adrenal mass is identified. The tumor cells express high levels of phenylethanolamine N-methyltransferase (PNMT). Which of the following BEST explains why PNMT is uniquely active in the adrenal medulla (compared with sympathetic post-ganglionic neurons)?</div>
+  <div class="pq-choices">
+    A. The adrenal medulla lacks tyrosine hydroxylase, so it bypasses NE synthesis<br>
+    B. Only the medulla has dopamine &beta;-hydroxylase<br>
+    C. PNMT is induced by cortisol that drains from the adrenal cortex via a local portal system<br>
+    D. The medulla uses serotonin instead of dopamine as a precursor<br>
+    E. PNMT requires iodine, which is only concentrated in the medulla
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>C &mdash; Cortisol from the adrenal cortex induces PNMT.</strong><br>The adrenal cortex and medulla share a portal venous system; high local cortisol induces <strong>PNMT</strong> (NE &rarr; Epi). Sympathetic ganglia lack this cortisol exposure, so they secrete NE, not Epi. Pathway: Tyrosine &rarr; (TH, rate-limiting) &rarr; DOPA &rarr; DA &rarr; (DBH) &rarr; NE &rarr; (PNMT) &rarr; Epi. Clinical: pheochromocytoma &rarr; elevated metanephrines (NE/Epi metabolites).</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q4. A 68-year-old woman with chronic kidney disease has low serum calcium, high PTH, and low 1,25-dihydroxyvitamin D. Her 25-hydroxyvitamin D level is normal. Which enzymatic step is MOST likely impaired?</div>
+  <div class="pq-choices">
+    A. Skin conversion of 7-dehydrocholesterol to cholecalciferol<br>
+    B. Hepatic 25-hydroxylase activity<br>
+    C. Renal 1&alpha;-hydroxylase activity<br>
+    D. Intestinal absorption of vitamin D<br>
+    E. 24-hydroxylase activity in the kidney
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>C &mdash; Renal 1&alpha;-hydroxylase is impaired in CKD.</strong><br>Activation cascade: skin (7-DHC + UVB &rarr; cholecalciferol) &rarr; liver (25-hydroxylase &rarr; 25-OH D, the storage form) &rarr; <strong>kidney (1&alpha;-hydroxylase &rarr; 1,25-(OH)<sub>2</sub>D, the ACTIVE form)</strong>. Normal 25-OH D + low 1,25-(OH)<sub>2</sub>D localizes the defect to the kidney. 1&alpha;-hydroxylase is up-regulated by PTH &amp; low phosphate; this activation is lost with renal failure.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q5. A 42-year-old woman with acute promyelocytic leukemia (APL, t(15;17) PML-RAR&alpha;) is started on all-trans retinoic acid (ATRA). Which BEST describes ATRA's mechanism of action at the molecular level?</div>
+  <div class="pq-choices">
+    A. ATRA binds a cell-surface GPCR and generates cAMP<br>
+    B. ATRA binds retinoic acid receptor (RAR), which heterodimerizes with RXR on retinoic acid response elements (RAREs), releasing corepressors and allowing differentiation<br>
+    C. ATRA competitively inhibits androgen receptor binding<br>
+    D. ATRA is a covalent inhibitor of DNA methyltransferase<br>
+    E. ATRA induces proteasomal degradation of tyrosine kinase receptors
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>B &mdash; RAR/RXR heterodimer on RAREs drives differentiation.</strong><br>Retinoic acids signal via nuclear receptors: <strong>RAR and RXR</strong>. In APL, the PML-RAR&alpha; fusion traps the complex in a repressive state. Pharmacologic ATRA overwhelms the block, corepressors leave, coactivators are recruited, and promyelocytes differentiate into neutrophils. ATRA is the prototype "differentiation therapy." RXR heterodimerizes with RAR, VDR, TR, PPAR, LXR, FXR.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q6. A biochemist measures cortisol binding to the glucocorticoid receptor (GR) across a range of hormone concentrations. A Scatchard plot of the data yields a straight line with negative slope. If the slope is &minus;0.1 nM<sup>&minus;1</sup> and the x-intercept is 500 pmol/mg protein, which BEST describes K<sub>d</sub> and B<sub>max</sub>?</div>
+  <div class="pq-choices">
+    A. K<sub>d</sub> = 0.1 nM; B<sub>max</sub> = 500 pmol/mg<br>
+    B. K<sub>d</sub> = 10 nM; B<sub>max</sub> = 500 pmol/mg<br>
+    C. K<sub>d</sub> = 0.1 nM; B<sub>max</sub> = 250 pmol/mg<br>
+    D. K<sub>d</sub> = 500 nM; B<sub>max</sub> = 0.1 pmol/mg<br>
+    E. Cannot be calculated from a Scatchard plot
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>B &mdash; K<sub>d</sub> = 10 nM; B<sub>max</sub> = 500 pmol/mg.</strong><br>On a Scatchard plot (y = bound/free, x = bound): <strong>slope = &minus;1/K<sub>d</sub></strong> and <strong>x-intercept = B<sub>max</sub></strong>. Slope &minus;0.1 nM<sup>&minus;1</sup> &rarr; K<sub>d</sub> = 1 / 0.1 = 10 nM. X-intercept = 500 pmol/mg = B<sub>max</sub>. K<sub>d</sub> is the ligand concentration at which 50% of receptors are occupied &mdash; a <em>lower</em> K<sub>d</sub> means <em>higher</em> affinity.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q7. A 23-year-old woman has diabetes mellitus. Her physician wants to distinguish Type 1 from Type 2 and evaluate residual pancreatic &beta;-cell function. Which single laboratory test is MOST informative?</div>
+  <div class="pq-choices">
+    A. Serum insulin level<br>
+    B. Hemoglobin A1c<br>
+    C. C-peptide level<br>
+    D. Fasting glucagon<br>
+    E. Islet cell autoantibodies alone
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>C &mdash; C-peptide is the best marker of endogenous insulin secretion.</strong><br>Proinsulin is cleaved in the &beta;-cell into <strong>insulin + C-peptide</strong> in a 1:1 ratio. Exogenous insulin contains NO C-peptide. Thus: <strong>low/absent C-peptide</strong> = no endogenous production (Type 1, or factitious insulin use); <strong>elevated C-peptide</strong> = Type 2 or insulinoma. Insulin levels alone (A) cannot distinguish endogenous from injected.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q8. A researcher applies GnRH to cultured pituitary gonadotropes in two conditions: (1) brief pulsatile exposure every 60 minutes, and (2) continuous infusion for 24 hours. Which of the following best describes LH/FSH secretion in each condition?</div>
+  <div class="pq-choices">
+    A. Pulsatile &rarr; sustained LH/FSH release; continuous &rarr; sustained LH/FSH release<br>
+    B. Pulsatile &rarr; LH/FSH release maintained; continuous &rarr; receptor downregulation and suppressed LH/FSH (clinical basis of GnRH agonist therapy)<br>
+    C. Pulsatile &rarr; suppression; continuous &rarr; enhancement<br>
+    D. Both conditions identical &mdash; receptor density is the only determinant<br>
+    E. Neither condition produces measurable LH/FSH release
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>B &mdash; Pulsatile maintains LH/FSH; continuous causes desensitization.</strong><br>Pituitary gonadotropes require <strong>pulsatile</strong> GnRH (every ~60&ndash;90 min) to maintain normal LH/FSH secretion. <strong>Continuous</strong> GnRH (or long-acting GnRH agonists like leuprolide) desensitizes and downregulates the receptor &rarr; LH/FSH drops &rarr; "medical castration." This paradox is exploited clinically to treat prostate cancer, precocious puberty, endometriosis, and for IVF protocols.</div>
+</div>
+
+</div>
+
+<script>
+function sw(n){
+  document.querySelectorAll('.tab').forEach((t,i)=>{t.classList.toggle('active',i===n)});
+  document.querySelectorAll('.panel').forEach((p,i)=>{p.classList.toggle('active',i===n)});
+}
+
+const a0={
+  'Endocrine row':'Route: bloodstream | Distance/speed: long-range, slow (minutes–hours) | Example: insulin β-cells → muscle/liver; cortisol adrenal → liver',
+  'Paracrine row':'Route: local tissue diffusion (no blood) | Distance/speed: adjacent cells, moderate | Example: somatostatin (D-cells) inhibits α-cells (glucagon) + β-cells (insulin) within islet',
+  'Autocrine row':'Route: cell binds its own secretion | Distance/speed: same cell, fast | Example: IGF-1 on tumor cells (self-stimulation, cancer); IL-2 on activated T cells',
+  'Nervous row':'Route: neurotransmitter across synaptic cleft | Distance/speed: nanometers, milliseconds | Example: ACh at NMJ; NE at adrenergic synapse; dopamine in CNS',
+  'Peptide — chemical nature':'Amino acid polymers (short: ADH, ACTH; long: GH, insulin)',
+  'Steroid — chemical nature':'Lipid-soluble rings derived from cholesterol',
+  'Amine — chemical nature':'Derived from a single tyrosine (catecholamines; thyroid hormones)',
+  'Peptide — solubility':'Water-soluble; cannot cross plasma membrane',
+  'Steroid — solubility':'Lipid-soluble; diffuse through plasma + nuclear membrane',
+  'Amine — solubility':'Catecholamines water-soluble; thyroid lipid-soluble (EXCEPTION)',
+  'Peptide — synthesis':'Ribosomes on rough ER → packaged in vesicles via Golgi',
+  'Steroid — synthesis':'Smooth ER + mitochondria (CYP enzymes); starts with cholesterol',
+  'Amine — synthesis':'Catecholamines: cytosol of adrenal medulla / sympathetic neurons. Thyroid: colloid of thyroid follicle (thyroglobulin scaffold)',
+  'Peptide — storage':'YES — stored in large secretory vesicles, released on demand',
+  'Steroid — storage':'NO — made on demand (rate of release = rate of synthesis)',
+  'Amine — storage':'Catecholamines: vesicles. Thyroid: stored on thyroglobulin in follicular colloid (unique storage form)',
+  'Peptide — receptor':'Cell surface only (GPCR, RTK, JAK-STAT, etc.)',
+  'Steroid — receptor':'Intracellular / nuclear receptors',
+  'Amine — receptor':'Catecholamines: cell surface (α, β adrenergic = GPCR). Thyroid: NUCLEAR (exception)',
+  'Peptide — speed':'Seconds to minutes (second messengers)',
+  'Steroid — speed':'Hours to days (gene transcription)',
+  'Amine — speed':'Catecholamines: seconds. Thyroid: hours–days',
+  'Peptide — examples':'Insulin, glucagon, GH, PTH, ADH, oxytocin, ACTH, FSH, LH, TSH, hCG, GnRH, TRH, CRH, GHRH, somatostatin, ANP',
+  'Steroid — examples':'Cortisol, aldosterone, estrogen, progesterone, testosterone, DHEA, vitamin D',
+  'Amine — examples':'Epinephrine, norepinephrine, dopamine; T3, T4 (thyroid)',
+  'Thyroid behaves like steroid — why':'Thyroid hormone is lipid-soluble (iodinated tyrosine residues); crosses the plasma membrane like a steroid, NOT like a catecholamine',
+  'Thyroid receptor location':'Nuclear (TR, which heterodimerizes with RXR)',
+  'Thyroid vs catecholamine speed':'Thyroid: hours–days (gene transcription). Catecholamines: seconds (GPCR-driven second messengers)',
+  'T4 carrier protein':'Thyroxine-binding globulin (TBG) carries ~70% of T4; rest on albumin + transthyretin (TTR)',
+  'Four glycoprotein hormones':'TSH, FSH, LH, hCG (all heterodimeric α + β chains)',
+  'α-subunit identity':'IDENTICAL across all four hormones (shared α chain)',
+  'β-subunit identity':'UNIQUE — confers biologic specificity (and assay specificity)',
+  'β-hCG assay':'The β-subunit of hCG is unique; total-hCG immunoassays target β to avoid cross-reaction with LH/FSH/TSH (critical in early pregnancy detection)',
+  'Neuroendocrine — hypothalamus':'Neuroendocrine (hypothalamic-hypophyseal portal): neurons secrete hormone into blood → targets distant pituitary cells',
+  'Neuroendocrine — adrenal medulla':'Neuroendocrine: preganglionic sympathetic neuron (ACh) → chromaffin cells secrete epinephrine into systemic blood',
+  'Neuroendocrine — posterior pituitary':'Neurosecretion: hypothalamic neurons (SON, PVN) synthesize ADH/oxytocin → axons terminate in posterior pituitary → direct release into blood'
+};
+
+const a1={
+  'Preprohormone — where':'Ribosomes on rough ER',
+  'Preprohormone — what':'Initial translation product with signal peptide (directs protein to ER lumen)',
+  'Prohormone — where':'ER lumen → Golgi apparatus',
+  'Prohormone — what':'Signal peptide cleaved; prohormone packaged into secretory vesicles',
+  'Active hormone — where':'Secretory vesicles (and often in blood)',
+  'Active hormone — what':'Prohormone cleaved by prohormone convertases → active hormone + C-peptide (for insulin); vesicle releases on stimulation',
+  'Signal peptide fate':'Cleaved early in ER by signal peptidase; guides nascent polypeptide to the ER lumen, then discarded',
+  'Steroid parent':'Cholesterol',
+  'Steroid rate-limiting enzyme':'CYP11A1 (cholesterol side-chain cleavage = desmolase): Cholesterol → Pregnenolone',
+  'StAR protein':'Steroidogenic Acute Regulatory protein — shuttles cholesterol from outer to inner mitochondrial membrane; acutely induced by ACTH (via cAMP/PKA)',
+  'Steroid storage':'NO stockpile — release rate = synthesis rate; regulated by turning on CYP enzyme transcription (cortisol: min-hours lag)',
+  'TH — Tyr to DOPA':'Tyrosine hydroxylase (TH) = RATE-LIMITING step; requires BH4 | Clinical: TH deficiency → dopa-responsive dystonia',
+  'AADC — DOPA to DA':'Aromatic L-amino acid decarboxylase (AADC, "DOPA decarboxylase") | Clinical: L-DOPA for Parkinson (given with carbidopa = peripheral AADC inhibitor)',
+  'DBH — DA to NE':'Dopamine β-hydroxylase (DBH) in vesicles | Clinical: DBH deficiency → orthostatic hypotension, no NE/Epi',
+  'PNMT — NE to Epi':'Phenylethanolamine N-methyltransferase (PNMT) | Induced by cortisol; only in adrenal medulla (NOT sympathetic ganglia)',
+  'Vit D — skin step':'Enzyme: UVB photolysis (non-enzymatic) | Product: 7-dehydrocholesterol → cholecalciferol (Vit D3)',
+  'Vit D — liver step':'Organ: liver | Enzyme: 25-hydroxylase (CYP2R1) | Product: 25-OH vitamin D (calcidiol) — storage form, the one you measure for status',
+  'Vit D — kidney step':'Organ: kidney (PCT) | Enzyme: 1α-hydroxylase (CYP27B1) | Product: 1,25-(OH)2 vitamin D (calcitriol) — ACTIVE hormone',
+  'Vit D activation regulator':'1α-hydroxylase ↑ by PTH + low phosphate + low Ca²⁺; suppressed in CKD → explains low 1,25-D in CKD',
+  'D2 vs D3':'D2 (ergocalciferol) = plants/fungi; D3 (cholecalciferol) = animals + skin UVB synthesis',
+  'Retinoic acid parent':'Vitamin A (retinol) → retinal → all-trans retinoic acid (ATRA) + 9-cis-RA (also 13-cis = isotretinoin)',
+  'RAR vs RXR':'RAR binds ATRA + 9-cis-RA; RXR binds only 9-cis-RA. RAR/RXR heterodimers bind RAREs on DNA',
+  'ATRA treats':'Acute Promyelocytic Leukemia (APL, t(15;17) PML-RARα). ATRA releases corepressor block → differentiation of promyelocytes → neutrophils ("differentiation therapy")',
+  'Isotretinoin':'13-cis-RA (Accutane) — severe nodulocystic acne. HIGHLY TERATOGENIC (iPLEDGE monitoring; two forms of contraception required)'
+};
+
+const a2={
+  'Stored — hormone class':'Peptides + catecholamines (in vesicles)',
+  'On-demand — hormone class':'Steroids + thyroid (synthesis-limited)',
+  'Stored — trigger':'Stimulus → Ca²⁺ influx → vesicle exocytosis (fast)',
+  'On-demand — trigger':'Stimulus → transcription/enzyme activation → new synthesis (slow)',
+  'Stored — peak time':'Seconds to minutes',
+  'On-demand — peak time':'Minutes to hours (cortisol peaks ~15–30 min after ACTH stimulation)',
+  'Stored examples':'Insulin, ADH, epinephrine, ACTH',
+  'On-demand examples':'Cortisol, aldosterone, testosterone, estradiol, T3/T4 (stored uniquely on thyroglobulin)',
+  'Pulsatile hormones':'GnRH, LH, FSH, GH (night-peak pulses), TSH (nocturnal), insulin',
+  'Continuous GnRH':'Continuous GnRH → gonadotrope receptor downregulation & desensitization → LH/FSH ↓ ("medical castration"). Used clinically: GnRH agonists (leuprolide) for prostate CA, endometriosis, precocious puberty, IVF protocols',
+  'Cortisol circadian':'Peak ~6–8 AM (just before waking), nadir ~midnight. Test 8 AM cortisol for HPA axis screening',
+  'C-peptide':'Cleavage product of proinsulin (insulin : C-peptide = 1:1). C-peptide = marker of ENDOGENOUS insulin. Low/absent = T1DM or factitious insulin; elevated = T2DM or insulinoma',
+  'SHBG':'Binds sex steroids (testosterone > estradiol). Pregnancy/hyperthyroid → SHBG ↑; obesity/hypothyroid → SHBG ↓. Men: low SHBG → ↑ free T bioactivity',
+  'CBG row':'Binds cortisol (transcortin). Pregnancy/OCPs → CBG ↑ → total cortisol ↑, free normal. Liver failure / nephrotic syndrome → CBG ↓',
+  'TBG row':'Binds T4 (>70%) + some T3. Pregnancy/OCPs → TBG ↑ → total T4 ↑, free T4 normal (MUST order FREE T4)',
+  'Albumin row':'Low-affinity high-capacity carrier for most hormones; drops in liver/nephrotic disease → affects total but not free hormone',
+  'Active fraction':'FREE (unbound) hormone is the only biologically active fraction (Free-Hormone Hypothesis)',
+  'Pregnancy total T4':'Total T4 rises due to increased TBG (estrogen-driven hepatic TBG synthesis)',
+  'Pregnancy free T4 & TSH':'Free T4 remains in normal range; TSH typically low-normal in 1st trimester due to hCG α-subunit cross-stimulation, then normalizes — patient is euthyroid',
+  'Why free T4':'Total T4 reflects bound hormone (dependent on TBG), which varies with estrogen/albumin/illness. Free T4 reflects true thyroid status',
+  'Low CBG clinical':'Liver failure or nephrotic syndrome → CBG ↓ → total cortisol looks low but free cortisol may be normal → patient NOT adrenal insufficient. Use free cortisol or salivary cortisol'
+};
+
+const a3={
+  'Receptor — two properties':'(1) Specific, high-affinity, saturable binding of ligand; (2) Coupling of binding to a biological response (signal transduction)',
+  'Receptor vs binding protein':'Binding proteins (TBG, CBG, SHBG, albumin) carry hormones in blood but DO NOT trigger cellular response. Only receptors trigger signal transduction',
+  'Membrane — solubility':'Water-soluble ligands (peptides, catecholamines)',
+  'Nuclear — solubility':'Lipid-soluble ligands (steroids, thyroid, vitamin D, retinoic acid)',
+  'Membrane — mechanism':'Second messengers (cAMP, IP3/Ca²⁺, DAG, cGMP) + phosphorylation cascades',
+  'Nuclear — mechanism':'Direct gene transcription — receptor binds DNA hormone-response element (HRE)',
+  'Membrane — speed':'Seconds to minutes',
+  'Nuclear — speed':'Hours to days',
+  'Membrane — ligand classes':'Peptides + catecholamines; a few exceptions (e.g., neuropeptides)',
+  'Nuclear — ligand classes':'Steroids (glucocorticoid, mineralocorticoid, sex steroids); thyroid (T3); vitamin D (1,25-D); retinoic acid',
+  'Receptor exception':'THYROID hormone (amine) uses NUCLEAR receptor; VITAMIN D (a steroid precursor) — both break the "amine = surface / steroid = nuclear" rule in unique ways',
+  'GPCR':'7-transmembrane. Gs → ↑cAMP (glucagon, β-adrenergic, ACTH, TSH, LH, FSH, ADH V2). Gi → ↓cAMP (α2-adrenergic, M2, D2). Gq → IP3/DAG/Ca²⁺ (GnRH, TRH, α1, V1, oxytocin, ADH V1)',
+  'RTK':'Insulin, IGF-1, GH-R variants, EGF, FGF, PDGF, VEGF. Ligand → dimerization → autophosphorylation → MAPK (Ras/Raf/MEK/ERK) + PI3K-AKT pathways',
+  'JAK-STAT':'GH, prolactin, erythropoietin, leptin, cytokines (IL-2, IFN). Ligand → receptor dimer → JAK phosphorylates STAT → STAT dimer → nucleus → transcription',
+  'Ligand-gated ion channel':'Nicotinic ACh receptor (NMJ); GABA-A (Cl⁻); glycine receptor (Cl⁻); 5HT3 (Na⁺/K⁺)',
+  'Guanylyl cyclase':'ANP (membrane-bound GC-A → ↑cGMP → vasodilation, natriuresis); NO (soluble GC → ↑cGMP → vasodilation). Also: heat-stable enterotoxin → GC → diarrhea',
+  'Type 1 — location':'Cytoplasm, bound to HSP90 chaperone at rest',
+  'Type 2 — location':'Nucleus (already on DNA, bound to corepressors in absence of ligand)',
+  'Type 1 — dimer':'Homodimer (e.g., GR-GR, ER-ER, AR-AR)',
+  'Type 2 — dimer':'Heterodimer with RXR',
+  'Type 1 — HSP':'YES (HSP90 keeps receptor inactive until ligand binds and displaces HSP)',
+  'Type 2 — HSP':'NO HSP — receptor sits on DNA with a corepressor; ligand binding swaps corepressor for coactivator',
+  'Type 1 — DNA element':'Hormone-response element (HRE) as an inverted repeat (e.g., GRE, ARE, ERE)',
+  'Type 2 — DNA element':'Direct repeats (DR-3 for VDR, DR-4 for TR, DR-5 for RAR)',
+  'Type 1 — members':'Glucocorticoid (GR), Mineralocorticoid (MR), Estrogen (ER), Progesterone (PR), Androgen (AR)',
+  'Type 2 — members':'Thyroid hormone (TR), Vitamin D (VDR), Retinoic acid (RAR), PPAR, LXR, FXR — all RXR partners',
+  'RXR partners':'RAR (retinoic acid), TR (thyroid), VDR (vitamin D), PPAR (fibrates, TZDs), LXR (cholesterol), FXR (bile acids), CAR/PXR (xenobiotics). Mnemonic: "RXR Turns Receptors Permissively Loyal — Full Cycle"',
+  'RXR function':'Heterodimerization allows binding to direct-repeat response elements on DNA; serves as obligate partner that stabilizes DNA engagement + recruits coactivators/corepressors',
+  'PPAR-γ TZDs':'Pioglitazone/rosiglitazone bind PPAR-γ, which heterodimerizes with RXR → adipocyte differentiation + insulin sensitization. Same RXR principle as ATRA/thyroid',
+  'Hormone binding events':'(1) Conformational change in ligand-binding domain → (2) HSP90 release & receptor dimerization → (3) Nuclear translocation → (4) DNA binding (HRE) → (5) Coactivator recruitment → (6) RNA Pol II → transcription',
+  'GR chaperone':'HSP90 (plus HSP70, p23, immunophilins). Ligand binding releases HSP complex → GR-GR dimer translocates to nucleus',
+  'Agonist vs antagonist LBD':'Agonist: stabilizes helix-12 in "closed/active" position → coactivator surface exposed. Antagonist: helix-12 displaced → coactivator site blocked (or corepressor recruited). Basis of SERMs (tamoxifen)'
+};
+
+const a4={
+  'RIA — principle':'Radiolabeled hormone competes with sample hormone for Ab binding',
+  'RIA — signal':'Radioactivity (γ emission); inverse relationship with sample concentration',
+  'RIA — use':'Historical gold standard; very sensitive (pM); being replaced by ELISA/LC-MS',
+  'ELISA — principle':'Two Abs: capture Ab on plate + detection Ab with enzyme (HRP → colorimetric change)',
+  'ELISA — signal':'Absorbance (colorimetric) proportional to hormone concentration (direct relationship)',
+  'ELISA — use':'Most routine hormone assays (TSH, β-hCG, troponin, insulin, etc.); high sensitivity & specificity',
+  'Competitive — principle':'Sample hormone and labeled hormone compete for limited Ab sites (opposite of sandwich)',
+  'Competitive — signal':'Inverse to sample concentration (more sample → less label bound)',
+  'Competitive — use':'Small molecules with single epitope (steroids, thyroxine) that can\'t sandwich',
+  'Mass spec — principle':'Direct mass/charge measurement after chromatographic separation',
+  'Mass spec — signal':'m/z ratio; absolute quantitation via isotopic internal standard',
+  'Mass spec — use':'Gold standard for steroids (cortisol, testosterone in women/children, vit D); bypasses Ab cross-reactivity',
+  'Scatchard axes':'x-axis: [Bound hormone]; y-axis: [Bound] / [Free]',
+  'Scatchard slope':'Slope = −1 / Kd (steeper negative slope → lower Kd → higher affinity)',
+  'Scatchard x-intercept':'Bmax (maximum binding sites; total receptor density)',
+  'Kd definition':'Dissociation constant — the ligand concentration at which 50% of receptors are occupied. Inverse of affinity',
+  'Kd interpretation':'LOW Kd = HIGH affinity (needs less ligand for half-occupancy). HIGH Kd = LOW affinity',
+  'Semi-log plot':'Sigmoidal (S-shaped) curve. At ligand concentration = Kd, exactly 50% of receptors are occupied',
+  'Spare receptors':'Tissues have more receptors than needed to produce max response; full biologic effect can occur at <100% occupancy. EC50 < Kd',
+  'EC50 vs Kd':'With spare receptors: EC50 < Kd (half-max effect before half receptors occupied). No spare receptors: EC50 = Kd',
+  'Competitive antagonist':'Shifts dose-response curve RIGHT (↑ EC50), maximum response UNCHANGED. Surmountable by more agonist',
+  'Non-competitive antagonist':'DECREASES maximum response (↓ Vmax/Emax), EC50 often unchanged. NOT surmountable by more agonist (binds elsewhere or irreversibly)'
+};
+
+function rev(id,obj){
+  const el=document.getElementById(id);
+  el.style.display='block';
+  el.innerHTML='<strong>Answer key:</strong><br><br>'+Object.entries(obj).map(([k,v])=>`<b>${k}:</b> ${v}`).join('<br><br>');
+}
+</script>
+</body></html>

@@ -1,0 +1,438 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:sans-serif}
+body{background:#fff;color:#111;padding:16px;font-size:13px}
+h2{font-size:16px;font-weight:600;margin-bottom:4px}
+.sub{color:#666;font-size:12px;margin-bottom:14px}
+.resource-banner{background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:#1E40AF}
+.resource-banner strong{display:block;margin-bottom:2px;font-size:13px}
+.tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+.tab{padding:7px 14px;border-radius:20px;border:1.5px solid #CBD5E1;font-size:12px;cursor:pointer;background:#fff;color:#475569;font-weight:500}
+.tab.active{background:#1D4ED8;color:#fff;border-color:#1D4ED8}
+.panel{display:none}.panel.active{display:block}
+.sec{font-size:11px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.05em;margin:14px 0 6px}
+table{width:100%;border-collapse:collapse;margin-bottom:10px;font-size:12px}
+th{background:#F1F5F9;text-align:left;padding:7px 8px;font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:#475569;border:1px solid #E2E8F0;font-weight:600}
+td{padding:6px 8px;border:1px solid #E2E8F0;vertical-align:top}
+tr:nth-child(even) td{background:#FAFAFA}
+.rl{font-weight:600;font-size:11px;color:#1e293b;background:#F8FAFC!important;white-space:nowrap}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.f{margin-bottom:6px}
+.f label{font-size:10px;color:#94a3b8;display:block;margin-bottom:2px;text-transform:uppercase;letter-spacing:.03em}
+.warn{background:#FFFBEB;border-left:3px solid #F59E0B;padding:7px 10px;border-radius:0 6px 6px 0;font-size:11px;color:#92400E;margin:8px 0}
+.on-exam{background:#FEE2E2;border:1px solid #FDA4AF;border-radius:6px;padding:4px 10px;font-size:11px;color:#991B1B;font-weight:700;display:inline-block;margin-bottom:8px}
+.lo-tag{background:#EDE9FE;border:1px solid #C4B5FD;border-radius:5px;padding:2px 8px;font-size:10px;color:#5B21B6;font-weight:600;margin-bottom:6px;display:inline-block}
+.pq-box{background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;padding:10px 14px;margin-bottom:10px;font-size:12px}
+.pq-q{font-weight:600;margin-bottom:6px;color:#92400E}
+.pq-choices{margin-left:12px;margin-bottom:6px;color:#78350F;line-height:1.8}
+.pq-ans{background:#EFF6FF;border:1px solid #93C5FD;border-radius:6px;padding:6px 10px;font-size:11px;color:#1E40AF;margin-top:4px}
+.card{border:1px solid #E2E8F0;border-radius:10px;padding:12px 14px;margin-bottom:10px}
+
+@media(max-width:640px){
+  body{padding:10px;font-size:12px}
+  h2{font-size:14px}
+  .tabs{gap:4px}
+  .tab{padding:6px 10px;font-size:11px}
+  .fg,.fg3{grid-template-columns:1fr!important}
+  table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .pq-choices{margin-left:4px}
+}
+</style><style>
+.ki-text{
+  display:block;width:100%;min-height:18px;
+  border-bottom:1.5px solid #22c55e;
+  font-size:11px;background:#f0fdf4;color:#14532d;
+  font-weight:500;padding:3px 2px;line-height:1.6;
+  word-break:break-word;white-space:pre-wrap;
+  border-radius:0;
+}
+.ki-text.wu{font-size:12px;border-bottom-color:#22c55e;}
+.key-banner{background:#14532d;color:#fff;padding:10px 16px;border-radius:8px;margin-bottom:14px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
+
+.hoyadocs-brand{font-size:14px;font-weight:700;color:#1D4ED8;letter-spacing:-0.02em;margin-bottom:12px}
+
+@media print{
+  @page{size:letter landscape;margin:0.35in 0.4in}
+  html,body{background:#fff!important}
+  body{padding:0;font-size:10px}
+  body > *:not(.panel){display:none!important}
+  .panel{display:block!important;page-break-before:always;break-before:page;page-break-inside:auto}
+  .panel:first-of-type{page-break-before:auto;break-before:auto}
+  .panel::before{content:"HoyaDocs \2014 Answer Key";display:block;font-size:13px;font-weight:700;color:#1D4ED8;margin-bottom:8px;padding-bottom:4px;border-bottom:1.5px solid #1D4ED8;letter-spacing:-0.02em}
+  .sec{margin:5px 0 3px;font-size:9.5px}
+  table{margin-bottom:5px;font-size:10px;page-break-inside:avoid}
+  th{font-size:9px;padding:3px 4px}
+  td{padding:2px 4px;font-size:10px}
+  .on-exam{font-size:10px;padding:3px 7px;margin-bottom:5px;display:block;white-space:normal}
+  .warn{font-size:9.5px;padding:4px 7px;margin:3px 0}
+  .pq-box{font-size:9.5px;padding:5px 8px;margin-bottom:4px;page-break-inside:avoid}
+  .pq-ans{font-size:9px;margin-top:3px}
+  .pq-choices{line-height:1.5;margin-bottom:3px}
+  .fg,.fg3{gap:6px}
+  .f{margin-bottom:3px}
+  .f label{font-size:9px}
+  .card{padding:6px 8px;margin-bottom:6px}
+  .lo-tag{font-size:9px;padding:1px 6px;margin-bottom:3px}
+  .ki-text{font-size:9px!important;min-height:12px;padding:1px 2px;line-height:1.3}
+  .ki-text.wu{font-size:10px!important}
+  a[href$=".html"]{display:none!important}
+}
+</style></head><body>
+
+<div class="hoyadocs-brand">HoyaDocs</div>
+
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px">
+  <div class="key-banner" style="margin-bottom:0">&#9989; ANSWER KEY — all fields pre-filled. Use this to check your work.</div>
+  <div style="display:flex;gap:6px;flex-wrap:wrap">
+    <button onclick="window.print()" style="background:#1D4ED8;color:#fff;border:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap">&#128424; Print</button>
+    <a href="end02_active_recall.html" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#1e40af;color:#fff;text-decoration:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;white-space:nowrap">&larr; Active Recall</a>
+  </div>
+</div>
+<h2>Hypothalamic-Pituitary Relationships I — Answer Key</h2>
+<p class="sub">Built from Endocrine Lecture 02 (LOs 1&ndash;6, Kothmann). Use this to check your work after completing the active recall sheet.</p>
+
+<div class="resource-banner">
+  <strong>&#128214; Use alongside: Endocrine Lecture 02 &mdash; Hypothalamic-Pituitary Relationships Part 1 (HoyaDocs)</strong>
+  Focus on: embryology of anterior (Rathke&apos;s pouch) vs posterior (neural) pituitary; hypothalamic-hypophyseal portal system vs neural stalk; hypothalamic nuclei + hormones; 5 anterior pituitary cell types with acidophil/basophil staining; 6 axes and regulators; negative (long/short/ultra-short) vs positive feedback; primary/secondary/tertiary disease prediction; Sheehan, prolactinoma, craniopharyngioma, bitemporal hemianopsia.
+</div>
+
+<div style="margin-bottom:14px">
+  <div style="font-size:12px;font-weight:600;margin-bottom:6px;color:#374151">SEED &mdash; 5 anterior pituitary cell types + hormones:</div>
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:6px">
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">Somato____</div><div class="ki-text wu">Somatotroph &rarr; GH (acidophil)</div></div>
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">Lacto____</div><div class="ki-text wu">Lactotroph &rarr; Prolactin (acidophil)</div></div>
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">Cortico____</div><div class="ki-text wu">Corticotroph &rarr; ACTH (basophil; from POMC)</div></div>
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">Thyro____</div><div class="ki-text wu">Thyrotroph &rarr; TSH (basophil)</div></div>
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">Gonado____</div><div class="ki-text wu">Gonadotroph &rarr; FSH + LH (basophil)</div></div>
+  </div>
+  <div style="font-size:11px;color:#6b7280;margin-top:4px">Acidophils (GH, PRL) = &quot;GPA&quot;. Basophils (FSH, LH, ACTH, TSH) = &quot;B-FLAT&quot;.</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="sw(0)">Anatomy &amp; Connections</div>
+  <div class="tab" onclick="sw(1)">Hypothalamic Nuclei</div>
+  <div class="tab" onclick="sw(2)">Pituitary Histology</div>
+  <div class="tab" onclick="sw(3)">Hormones &amp; Regulators</div>
+  <div class="tab" onclick="sw(4)">Feedback &amp; Predictions</div>
+  <div class="tab" onclick="sw(5)">Practice Qs</div>
+</div>
+
+<!-- TAB 0 -->
+<div class="panel active" id="p0">
+<div class="lo-tag">LO 1</div>
+<div class="on-exam">ON EXAM &mdash; Rathke&apos;s pouch (oral ectoderm) &rarr; anterior; neural ectoderm (infundibulum) &rarr; posterior; anterior pit connects to hypothalamus via PORTAL SYSTEM only (no direct nerves); posterior pit connects via AXONS; sella turcica (sphenoid); optic chiasm sits above &rarr; bitemporal hemianopsia; craniopharyngioma = Rathke remnant; Sheehan = postpartum infarct</div>
+
+<div class="sec">Embryologic origins (LO 1)</div>
+<table>
+  <tr><th>Structure</th><th>Embryonic origin</th><th>Tissue type</th><th>Classic pathology / derivative</th></tr>
+  <tr><td class="rl">Anterior pit (adenohypophysis)</td><td><div class="ki-text">Oral (surface) ectoderm &mdash; Rathke&apos;s pouch (upward from primitive oral cavity)</div></td><td><div class="ki-text">Glandular epithelium (pars distalis, intermedia, tuberalis)</div></td><td><div class="ki-text">Craniopharyngioma (Rathke remnant); cystic, calcified suprasellar mass in kids</div></td></tr>
+  <tr><td class="rl">Posterior pit (neurohypophysis)</td><td><div class="ki-text">Neural ectoderm &mdash; downgrowth from floor of diencephalon (infundibulum)</div></td><td><div class="ki-text">Modified neural tissue: unmyelinated axons from SON+PVN, pituicytes, Herring bodies</div></td><td><div class="ki-text">Central DI after trauma/stalk injury (loss of ADH release)</div></td></tr>
+  <tr><td class="rl">Pars intermedia</td><td><div class="ki-text">Between parts; oral ectoderm origin (part of Rathke&apos;s)</div></td><td><div class="ki-text">Melanotrophs (cleave POMC &rarr; MSH); rudimentary in humans</div></td><td><div class="ki-text">Source of MSH; vestigial in humans; occasional cysts</div></td></tr>
+</table>
+
+<div class="sec">Hypothalamus &rarr; pituitary (LO 1)</div>
+<table>
+  <tr><th>Feature</th><th>Anterior (adenohypophysis)</th><th>Posterior (neurohypophysis)</th></tr>
+  <tr><td class="rl">Connection type</td><td><div class="ki-text">VASCULAR &mdash; hypothalamic-hypophyseal PORTAL system (no direct nerves)</div></td><td><div class="ki-text">NEURAL &mdash; axons from SON &amp; PVN pass through stalk directly to posterior pit</div></td></tr>
+  <tr><td class="rl">Signal travels via</td><td><div class="ki-text">Blood (releasing/inhibiting hormones in portal veins from median eminence)</div></td><td><div class="ki-text">Action potentials down axons &rarr; Ca<sup>2+</sup> influx &rarr; vesicle exocytosis at terminals</div></td></tr>
+  <tr><td class="rl">Hormones stored/released</td><td><div class="ki-text">GH, PRL, ACTH, TSH, LH, FSH (synthesized by anterior pit cells)</div></td><td><div class="ki-text">ADH + oxytocin (synthesized in hypothalamus; stored/released from posterior pit)</div></td></tr>
+  <tr><td class="rl">Does hypothalamus directly make?</td><td><div class="ki-text">NO &mdash; only REGULATES; anterior pit cells make their own hormones</div></td><td><div class="ki-text">YES &mdash; SON/PVN neurons synthesize ADH &amp; oxytocin; posterior pit just stores</div></td></tr>
+</table>
+<div class="warn">KEY: Anterior pit has NO direct neural input. Sectioning the stalk blocks anterior pituitary signaling (except prolactin, which is under <em>tonic inhibition</em> &mdash; so it paradoxically RISES).</div>
+
+<div class="sec">Vascular supply + anatomic neighbors (LO 1)</div>
+<div class="fg">
+  <div class="f"><label>Two pituitary arteries</label><div class="ki-text">Superior hypophyseal artery (anterior pit via portal system) + Inferior hypophyseal artery (posterior pit). Both branch from internal carotid</div></div>
+  <div class="f"><label>Bony fossa</label><div class="ki-text">Sella turcica (&quot;Turkish saddle&quot;) of the sphenoid bone</div></div>
+  <div class="f"><label>Stalk name</label><div class="ki-text">Infundibulum (hypophyseal stalk)</div></div>
+  <div class="f"><label>Cavernous sinus CNs</label><div class="ki-text">CN III, IV, V<sub>1</sub>, V<sub>2</sub>, VI &mdash; pituitary mass invasion &rarr; ophthalmoplegia</div></div>
+  <div class="f"><label>Above pituitary &amp; visual finding</label><div class="ki-text">Optic chiasm &mdash; compression &rarr; BITEMPORAL HEMIANOPSIA (loss of peripheral vision bilaterally)</div></div>
+  <div class="f"><label>Inferior neighbor</label><div class="ki-text">Sphenoid sinus &mdash; transsphenoidal surgical approach goes through here</div></div>
+</div>
+
+<div class="sec">Clinical tie-ins (LO 1)</div>
+<div class="fg">
+  <div class="f"><label>Sheehan syndrome</label><div class="ki-text">Postpartum pituitary ischemic necrosis. Lactotroph hyperplasia during pregnancy outgrows blood supply &rarr; infarcts with postpartum hypotension. First sign: inability to lactate (PRL loss). Then amenorrhea, hypothyroidism, adrenal insufficiency</div></div>
+  <div class="f"><label>Craniopharyngioma</label><div class="ki-text">Rathke&apos;s pouch epithelial tumor; suprasellar, cystic + calcified, &quot;motor-oil&quot; fluid. Bimodal: kids 5&ndash;14 and adults 50&ndash;70. Bitemporal hemianopsia + hypopituitarism + DI</div></div>
+  <div class="f"><label>Pituitary apoplexy</label><div class="ki-text">Acute hemorrhage/infarct of a pituitary adenoma. Sudden severe headache + visual loss + ophthalmoplegia + acute adrenal crisis. Give stress-dose steroids &mdash; medical emergency</div></div>
+  <div class="f"><label>Empty sella</label><div class="ki-text">Herniation of subarachnoid space into sella turcica flattens pituitary. Often asymptomatic, normal function. Primary (congenital) vs secondary (post-op/radiation)</div></div>
+</div>
+</div>
+
+<!-- TAB 1 -->
+<div class="panel" id="p1">
+<div class="lo-tag">LO 2</div>
+<div class="on-exam">ON EXAM &mdash; Arcuate (GHRH, GnRH, dopamine); PVN (CRH, TRH, ADH, oxytocin); SON (ADH, oxytocin); Preoptic (GnRH); SCN (circadian); Lateral (hunger); VMN (satiety); Anterior=Cooling; Posterior=heating; 4 releasing (CRH, TRH, GnRH, GHRH) + 2 inhibiting (somatostatin, dopamine)</div>
+
+<div class="sec">Hypothalamic nuclei (LO 2)</div>
+<table>
+  <tr><th>Nucleus</th><th>Hormone(s) / function</th><th>Clinical / mnemonic</th></tr>
+  <tr><td class="rl">Arcuate</td><td><div class="ki-text">GHRH, GnRH, DOPAMINE (PIF)</div></td><td><div class="ki-text">Median eminence neurons &rarr; portal system. Damage &rarr; hyperprolactinemia</div></td></tr>
+  <tr><td class="rl">PVN (paraventricular)</td><td><div class="ki-text">CRH, TRH, ADH + oxytocin (some)</div></td><td><div class="ki-text">Parvocellular &rarr; anterior pit; magnocellular &rarr; posterior pit. Central stress-axis hub</div></td></tr>
+  <tr><td class="rl">SON (supraoptic)</td><td><div class="ki-text">ADH (majority) + oxytocin</div></td><td><div class="ki-text">Magnocellular axons &rarr; posterior pit. Lesion &rarr; central DI</div></td></tr>
+  <tr><td class="rl">Preoptic</td><td><div class="ki-text">GnRH (major source) + thermoregulation</div></td><td><div class="ki-text">Damage impairs puberty/fertility</div></td></tr>
+  <tr><td class="rl">SCN (suprachiasmatic)</td><td><div class="ki-text">Circadian pacemaker (no direct hormone)</div></td><td><div class="ki-text">Direct retinal input; drives cortisol/melatonin rhythm</div></td></tr>
+  <tr><td class="rl">Lateral</td><td><div class="ki-text">HUNGER center (orexin/hypocretin)</div></td><td><div class="ki-text">&quot;Lateral Lanky&quot; &mdash; destroyed &rarr; anorexia. Narcolepsy = orexin deficiency</div></td></tr>
+  <tr><td class="rl">VMN (ventromedial)</td><td><div class="ki-text">SATIETY center</div></td><td><div class="ki-text">&quot;Ventromedial Very Massive&quot; &mdash; destroyed &rarr; hyperphagia, obesity, savagery</div></td></tr>
+  <tr><td class="rl">Dorsomedial</td><td><div class="ki-text">Rage/aggression when stimulated</div></td><td><div class="ki-text">Also hunger integration</div></td></tr>
+  <tr><td class="rl">Anterior (temp.)</td><td><div class="ki-text">Heat DISSIPATION (sweat, vasodilation)</div></td><td><div class="ki-text">&quot;A/C is Anterior/Cooling&quot;. Damage &rarr; hyperthermia</div></td></tr>
+  <tr><td class="rl">Posterior (temp.)</td><td><div class="ki-text">Heat CONSERVATION (shiver, vasoconstriction)</div></td><td><div class="ki-text">Damage &rarr; poikilothermia (can&apos;t maintain temp)</div></td></tr>
+</table>
+
+<div class="sec">Releasing vs inhibiting hormones (LO 2)</div>
+<table>
+  <tr><th>Hypothalamic hormone</th><th>Effect</th><th>Nucleus</th><th>Pituitary target</th></tr>
+  <tr><td class="rl">CRH</td><td><div class="ki-text">RELEASES ACTH</div></td><td><div class="ki-text">PVN</div></td><td><div class="ki-text">Corticotroph &rarr; Gs-cAMP</div></td></tr>
+  <tr><td class="rl">TRH</td><td><div class="ki-text">RELEASES TSH + PRL</div></td><td><div class="ki-text">PVN</div></td><td><div class="ki-text">Thyrotrophs + lactotrophs &rarr; Gq-IP<sub>3</sub></div></td></tr>
+  <tr><td class="rl">GnRH</td><td><div class="ki-text">RELEASES LH + FSH (pulsatile)</div></td><td><div class="ki-text">Arcuate + preoptic</div></td><td><div class="ki-text">Gonadotrophs &rarr; Gq-IP<sub>3</sub></div></td></tr>
+  <tr><td class="rl">GHRH</td><td><div class="ki-text">RELEASES GH</div></td><td><div class="ki-text">Arcuate</div></td><td><div class="ki-text">Somatotroph &rarr; Gs-cAMP</div></td></tr>
+  <tr><td class="rl">Somatostatin (SRIF/GHIH)</td><td><div class="ki-text">INHIBITS GH (+ TSH, insulin, glucagon, gastrin)</div></td><td><div class="ki-text">Arcuate/periventricular</div></td><td><div class="ki-text">Somatotroph + others &rarr; Gi-&darr;cAMP</div></td></tr>
+  <tr><td class="rl">Dopamine (PIF)</td><td><div class="ki-text">INHIBITS prolactin (tonic)</div></td><td><div class="ki-text">Arcuate (tuberoinfundibular tract)</div></td><td><div class="ki-text">Lactotroph &rarr; D<sub>2</sub>, Gi-&darr;cAMP</div></td></tr>
+</table>
+<div class="warn">MNEMONIC: Releasing = &quot;CRH TRH GnRH GHRH&quot; (all -RH). Inhibiting = Somatostatin + Dopamine. Dopamine tonically inhibits prolactin &mdash; anything that cuts the stalk releases the brake &rarr; prolactin &uarr;.</div>
+
+<div class="sec">Stalk effect (LO 2)</div>
+<div class="fg">
+  <div class="f"><label>Stalk-section effect</label><div class="ki-text">PROLACTIN rises; ACTH, TSH, LH/FSH, GH all fall. ADH also falls (central DI)</div></div>
+  <div class="f"><label>Why does PRL rise while others fall?</label><div class="ki-text">Prolactin is uniquely under TONIC dopaminergic inhibition &mdash; stalk cut blocks dopamine delivery &rarr; lactotrophs escape inhibition &rarr; PRL &uarr;. All other hormones need positive releasing signals via the portal system</div></div>
+</div>
+</div>
+
+<!-- TAB 2 -->
+<div class="panel" id="p2">
+<div class="lo-tag">LO 3</div>
+<div class="on-exam">ON EXAM &mdash; somatotrophs (50%, GH, acidophil), lactotrophs (15-20%, PRL, acidophil), corticotrophs (15%, ACTH, basophil), gonadotrophs (10%, FSH/LH, basophil), thyrotrophs (5%, TSH, basophil); &quot;B-FLAT&quot; for basophils; POMC &rarr; ACTH + &beta;-endorphin + MSH; posterior = pituicytes + Herring bodies; neurophysin carrier</div>
+
+<div class="sec">Anterior pit cell types (LO 3)</div>
+<table>
+  <tr><th>Cell</th><th>%</th><th>Hormone</th><th>Stain</th><th>Classic tumor</th></tr>
+  <tr><td class="rl">Somatotrophs</td><td><div class="ki-text">~50%</div></td><td><div class="ki-text">GH</div></td><td><div class="ki-text">ACIDOPHIL</div></td><td><div class="ki-text">Acromegaly (adults) / gigantism (kids)</div></td></tr>
+  <tr><td class="rl">Lactotrophs</td><td><div class="ki-text">~15&ndash;20%</div></td><td><div class="ki-text">Prolactin</div></td><td><div class="ki-text">ACIDOPHIL</div></td><td><div class="ki-text">Prolactinoma (MOST COMMON pituitary adenoma); treat with cabergoline</div></td></tr>
+  <tr><td class="rl">Corticotrophs</td><td><div class="ki-text">~15%</div></td><td><div class="ki-text">ACTH (from POMC) + &beta;-endorphin + MSH</div></td><td><div class="ki-text">BASOPHIL</div></td><td><div class="ki-text">Cushing disease; Nelson syndrome</div></td></tr>
+  <tr><td class="rl">Gonadotrophs</td><td><div class="ki-text">~10%</div></td><td><div class="ki-text">FSH + LH</div></td><td><div class="ki-text">BASOPHIL</div></td><td><div class="ki-text">Usually non-functional (&quot;silent&quot;) adenomas</div></td></tr>
+  <tr><td class="rl">Thyrotrophs</td><td><div class="ki-text">~5%</div></td><td><div class="ki-text">TSH</div></td><td><div class="ki-text">BASOPHIL</div></td><td><div class="ki-text">Rare TSH-secreting adenoma &rarr; central hyperthyroidism</div></td></tr>
+</table>
+
+<div class="sec">POMC &mdash; corticotroph precursor (LO 3)</div>
+<div class="fg">
+  <div class="f"><label>POMC stands for</label><div class="ki-text">Pro-opiomelanocortin &mdash; single precursor protein cleaved in corticotrophs</div></div>
+  <div class="f"><label>Three peptides from POMC</label><div class="ki-text">ACTH + &beta;-endorphin + MSH (&alpha;-MSH, &beta;-MSH); also &beta;-lipotropin</div></div>
+  <div class="f"><label>Addison hyperpigmentation</label><div class="ki-text">Low cortisol removes negative feedback &rarr; POMC transcription soars &rarr; ACTH AND MSH rise together. MSH binds melanocyte receptors &rarr; hyperpigmentation (palmar creases, gums, areolae)</div></div>
+  <div class="f"><label>Ectopic vs exogenous</label><div class="ki-text">Ectopic ACTH (small-cell lung) comes from POMC &rarr; coincident MSH &rarr; hyperpigmentation. Exogenous prednisone SUPPRESSES POMC &rarr; no MSH &rarr; no hyperpigmentation (striae, moon face instead)</div></div>
+</div>
+
+<div class="sec">Posterior pituitary histology (LO 3)</div>
+<div class="fg">
+  <div class="f"><label>Two components</label><div class="ki-text">Pituicytes (modified glia) + unmyelinated axon terminals from hypothalamic SON/PVN neurons</div></div>
+  <div class="f"><label>Herring bodies</label><div class="ki-text">Eosinophilic swellings along axon terminals &mdash; represent ADH/oxytocin-containing secretory granules accumulated at axon bulbs</div></div>
+  <div class="f"><label>Neurohemal organ</label><div class="ki-text">Because hypothalamic NEURONS deliver hormone directly into BLOOD at terminals (no synapse) &rarr; neural-vascular junction</div></div>
+  <div class="f"><label>Carrier protein</label><div class="ki-text">Neurophysin &mdash; co-packaged and co-secreted with ADH (neurophysin II) or oxytocin (neurophysin I)</div></div>
+</div>
+
+<div class="sec">Adenohypophysis subdivisions (LO 3)</div>
+<div class="fg">
+  <div class="f"><label>Three parts</label><div class="ki-text">Pars distalis (~90%, main hormone-producing), pars intermedia (vestigial in humans), pars tuberalis (sleeve around stalk)</div></div>
+  <div class="f"><label>Pars intermedia cells</label><div class="ki-text">Melanotrophs &rarr; MSH. Rudimentary in humans (well-developed in fish/amphibians)</div></div>
+  <div class="f"><label>Pars tuberalis</label><div class="ki-text">Wraps around INFUNDIBULAR STALK; TSH-immunoreactive; role in photoperiod/circadian</div></div>
+</div>
+</div>
+
+<!-- TAB 3 -->
+<div class="panel" id="p3">
+<div class="lo-tag">LO 4</div>
+<div class="on-exam">ON EXAM &mdash; 6 axes (HPA, HPT, HPG, somatotropic, lactotropic, posterior); TRH/GnRH/ADH-V1/oxytocin = Gq; CRH/GHRH/ACTH/TSH/LH/FSH/MSH/ADH-V2 = Gs; somatostatin/dopamine = Gi; GH/PRL = JAK-STAT; prolactin uniquely under tonic inhibition</div>
+
+<div class="sec">Pituitary axis table (LO 4)</div>
+<table>
+  <tr><th>Axis</th><th>Hypothalamic regulator(s)</th><th>Pituitary hormone</th><th>Target</th><th>End-organ effect</th></tr>
+  <tr><td class="rl">HPA (stress)</td><td><div class="ki-text">CRH (PVN)</div></td><td><div class="ki-text">ACTH (corticotroph)</div></td><td><div class="ki-text">Adrenal zona fasciculata</div></td><td><div class="ki-text">Cortisol</div></td></tr>
+  <tr><td class="rl">HPT (thyroid)</td><td><div class="ki-text">TRH (PVN)</div></td><td><div class="ki-text">TSH (thyrotroph)</div></td><td><div class="ki-text">Thyroid follicular cells</div></td><td><div class="ki-text">T<sub>4</sub> + T<sub>3</sub></div></td></tr>
+  <tr><td class="rl">HPG &mdash; males</td><td><div class="ki-text">GnRH pulsatile (arcuate/preoptic)</div></td><td><div class="ki-text">LH + FSH</div></td><td><div class="ki-text">Leydig (LH) + Sertoli (FSH)</div></td><td><div class="ki-text">Testosterone + spermatogenesis + inhibin B</div></td></tr>
+  <tr><td class="rl">HPG &mdash; females</td><td><div class="ki-text">GnRH pulsatile</div></td><td><div class="ki-text">LH + FSH</div></td><td><div class="ki-text">Theca (LH) + granulosa (FSH) + corpus luteum</div></td><td><div class="ki-text">Estradiol, progesterone, inhibin</div></td></tr>
+  <tr><td class="rl">Somatotropic</td><td><div class="ki-text">GHRH (+) / somatostatin (&minus;)</div></td><td><div class="ki-text">GH (somatotroph)</div></td><td><div class="ki-text">Liver + periphery</div></td><td><div class="ki-text">IGF-1 (liver) &rarr; growth; direct GH &rarr; lipolysis, &darr; glucose uptake</div></td></tr>
+  <tr><td class="rl">Lactotropic</td><td><div class="ki-text">Dopamine (&minus;) + TRH (+) + estrogen</div></td><td><div class="ki-text">Prolactin (lactotroph)</div></td><td><div class="ki-text">Mammary gland</div></td><td><div class="ki-text">Lactogenesis + suppresses GnRH</div></td></tr>
+</table>
+
+<div class="sec">Posterior pituitary hormones (LO 4)</div>
+<table>
+  <tr><th>Hormone</th><th>Nucleus</th><th>Stimulus</th><th>Receptor + effect</th></tr>
+  <tr><td class="rl">ADH</td><td><div class="ki-text">SON (majority) + PVN</div></td><td><div class="ki-text">&uarr; plasma osmolality (&gt;280 mOsm, osmoreceptors) OR volume loss &gt;10%</div></td><td><div class="ki-text">V<sub>2</sub> (Gs-cAMP) on collecting duct &rarr; aquaporin-2 insertion; V<sub>1</sub> (Gq) on vascular smooth muscle &rarr; vasoconstriction</div></td></tr>
+  <tr><td class="rl">Oxytocin</td><td><div class="ki-text">PVN (majority) + SON</div></td><td><div class="ki-text">Cervical stretch (Ferguson reflex) + nipple suckling + psychological cues</div></td><td><div class="ki-text">Gq-IP<sub>3</sub> on uterine smooth muscle (contraction) + myoepithelial cells of breast (milk ejection)</div></td></tr>
+</table>
+
+<div class="sec">Receptor class map (LO 4)</div>
+<div class="fg3">
+  <div class="f"><label>TRH, GnRH</label><div class="ki-text">Gq (IP<sub>3</sub>/DAG/Ca<sup>2+</sup>)</div></div>
+  <div class="f"><label>CRH</label><div class="ki-text">Gs (cAMP)</div></div>
+  <div class="f"><label>GHRH</label><div class="ki-text">Gs (cAMP)</div></div>
+  <div class="f"><label>Somatostatin, dopamine</label><div class="ki-text">Gi (&darr;cAMP) &mdash; inhibitory</div></div>
+  <div class="f"><label>ACTH, TSH, LH, FSH, MSH</label><div class="ki-text">Gs (cAMP) &mdash; all pituitary peptides on target tissues</div></div>
+  <div class="f"><label>GH and prolactin</label><div class="ki-text">JAK-STAT (cytokine-family) &rarr; JAK2 &rarr; STAT5 &rarr; transcription</div></div>
+</div>
+
+<div class="sec">Prolactin specifics (LO 4)</div>
+<div class="fg">
+  <div class="f"><label>Baseline regulation</label><div class="ki-text">TONIC INHIBITION by dopamine (arcuate &rarr; tuberoinfundibular tract). Unique among pituitary hormones</div></div>
+  <div class="f"><label>TRH on prolactin</label><div class="ki-text">TRH also STIMULATES lactotrophs. Clinical: primary hypothyroidism &rarr; low T<sub>4</sub> &rarr; TRH &uarr; &rarr; TSH &uarr; AND prolactin &uarr; (galactorrhea + amenorrhea)</div></div>
+  <div class="f"><label>Estrogen during pregnancy</label><div class="ki-text">Estrogen stimulates lactotroph HYPERPLASIA and prolactin synthesis &mdash; why postpartum pituitary is vulnerable to infarction (Sheehan)</div></div>
+  <div class="f"><label>No lactation in pregnancy</label><div class="ki-text">Estrogen + progesterone BLOCK prolactin&apos;s action on breast. After placenta delivery, E/P plummet &rarr; prolactin-driven lactogenesis begins</div></div>
+  <div class="f"><label>Prolactin on GnRH</label><div class="ki-text">Prolactin INHIBITS pulsatile GnRH &rarr; &darr; LH/FSH &rarr; &darr; estradiol/testosterone &rarr; amenorrhea, infertility, &darr; libido</div></div>
+</div>
+</div>
+
+<!-- TAB 4 -->
+<div class="panel" id="p4">
+<div class="lo-tag">LO 5, 6</div>
+<div class="on-exam">ON EXAM &mdash; LONG loop (target &rarr; hypothalamus + pituitary); SHORT loop (pituitary &rarr; hypothalamus); ULTRA-SHORT (hormone &rarr; own neurons); POSITIVE = mid-cycle LH surge + oxytocin parturition; primary = end-organ (trophic &uarr;, target &darr;); secondary = pituitary (both &darr;); tertiary = hypothalamus</div>
+
+<div class="sec">Feedback loops (LO 5)</div>
+<table>
+  <tr><th>Loop</th><th>Origin</th><th>Target</th><th>Example</th></tr>
+  <tr><td class="rl">Long (negative)</td><td><div class="ki-text">Target-organ hormone (T<sub>4</sub>, cortisol, testosterone)</div></td><td><div class="ki-text">Hypothalamus + anterior pituitary</div></td><td><div class="ki-text">Cortisol suppresses CRH + ACTH</div></td></tr>
+  <tr><td class="rl">Short (negative)</td><td><div class="ki-text">Pituitary hormone (TSH, ACTH, LH)</div></td><td><div class="ki-text">Hypothalamus</div></td><td><div class="ki-text">ACTH suppresses CRH release</div></td></tr>
+  <tr><td class="rl">Ultra-short</td><td><div class="ki-text">Hypothalamic hormone itself</div></td><td><div class="ki-text">Same hypothalamic neurons</div></td><td><div class="ki-text">GnRH inhibits its own release (autoregulation)</div></td></tr>
+  <tr><td class="rl">Positive</td><td><div class="ki-text">Sustained high estradiol (mid-cycle)</div></td><td><div class="ki-text">Hypothalamus + pituitary</div></td><td><div class="ki-text">LH SURGE &rarr; ovulation. Also oxytocin in parturition (Ferguson reflex)</div></td></tr>
+</table>
+
+<div class="sec">Primary vs secondary vs tertiary (LO 6)</div>
+<table>
+  <tr><th>Disorder</th><th>Defect</th><th>Trophic</th><th>Target hormone</th><th>Classic cause</th></tr>
+  <tr><td class="rl">Primary hypothyroidism</td><td><div class="ki-text">Thyroid gland</div></td><td><div class="ki-text">TSH HIGH</div></td><td><div class="ki-text">T<sub>4</sub> LOW</div></td><td><div class="ki-text">Hashimoto&apos;s, iodine deficiency</div></td></tr>
+  <tr><td class="rl">Secondary hypothyroidism</td><td><div class="ki-text">Pituitary</div></td><td><div class="ki-text">TSH LOW (or inappropriately normal)</div></td><td><div class="ki-text">T<sub>4</sub> LOW</div></td><td><div class="ki-text">Sheehan, pituitary adenoma, surgery</div></td></tr>
+  <tr><td class="rl">Tertiary hypothyroidism</td><td><div class="ki-text">Hypothalamus</div></td><td><div class="ki-text">TRH LOW &rarr; TSH LOW</div></td><td><div class="ki-text">T<sub>4</sub> LOW</div></td><td><div class="ki-text">Craniopharyngioma, hypothalamic injury</div></td></tr>
+  <tr><td class="rl">Primary hypercortisolism</td><td><div class="ki-text">Adrenal</div></td><td><div class="ki-text">ACTH LOW</div></td><td><div class="ki-text">Cortisol HIGH</div></td><td><div class="ki-text">Adrenal adenoma (Cushing syndrome, adrenal-type)</div></td></tr>
+  <tr><td class="rl">Cushing disease</td><td><div class="ki-text">Pituitary adenoma</div></td><td><div class="ki-text">ACTH HIGH</div></td><td><div class="ki-text">Cortisol HIGH</div></td><td><div class="ki-text">ACTH-secreting pituitary adenoma (suppressible with high-dose dex)</div></td></tr>
+  <tr><td class="rl">Primary hypogonadism (&#9794;)</td><td><div class="ki-text">Testes</div></td><td><div class="ki-text">LH/FSH HIGH</div></td><td><div class="ki-text">Testosterone LOW</div></td><td><div class="ki-text">Klinefelter (47,XXY), cryptorchidism, mumps orchitis</div></td></tr>
+  <tr><td class="rl">Secondary hypogonadism (&#9794;)</td><td><div class="ki-text">Pituitary/hypothalamus</div></td><td><div class="ki-text">LH/FSH LOW</div></td><td><div class="ki-text">Testosterone LOW</div></td><td><div class="ki-text">Kallmann, prolactinoma, anabolic steroid abuse</div></td></tr>
+</table>
+
+<div class="sec">Prediction drills (LO 6)</div>
+<div class="fg">
+  <div class="f"><label>Adrenal adenoma (cortisol &uarr;)</label><div class="ki-text">Cortisol &uarr; &rarr; CRH &amp; ACTH &darr; &rarr; CONTRALATERAL adrenal ATROPHIES (loses trophic signal). Adenoma side stays enlarged</div></div>
+  <div class="f"><label>Exogenous prednisone</label><div class="ki-text">Suppresses CRH + ACTH chronically &rarr; endogenous cortisol &darr; &rarr; BILATERAL adrenal atrophy. Abrupt withdrawal &rarr; adrenal crisis &rarr; TAPER</div></div>
+  <div class="f"><label>Stalk section</label><div class="ki-text">ACTH &darr;, TSH &darr;, LH/FSH &darr;, GH &darr;, PROLACTIN &uarr; (dopamine brake lost). Also ADH &darr; &rarr; central DI</div></div>
+  <div class="f"><label>Prolactinoma</label><div class="ki-text">Prolactin &uarr; &rarr; suppresses GnRH &rarr; LH/FSH &darr; &rarr; testosterone/estradiol &darr; &rarr; amenorrhea, infertility, &darr; libido. Plus galactorrhea</div></div>
+  <div class="f"><label>1st-trimester pregnancy</label><div class="ki-text">hCG shares &alpha;-subunit with TSH &rarr; cross-reacts with TSH receptor &rarr; TSH &darr;, free T<sub>4</sub> normal-to-slightly-&uarr;. Transient; resolves after peak hCG (~10 wk)</div></div>
+  <div class="f"><label>Primary hypothyroidism + galactorrhea</label><div class="ki-text">Low T<sub>4</sub> &rarr; TRH &uarr; &rarr; stimulates BOTH TSH and prolactin &rarr; galactorrhea/amenorrhea. Always check TSH before pituitary MRI in hyperprolactinemia</div></div>
+</div>
+
+<div class="sec">Dynamic tests (LO 5, 6)</div>
+<div class="fg">
+  <div class="f"><label>Low-dose dex (1 mg overnight)</label><div class="ki-text">Normal HPA suppresses &rarr; cortisol &lt;1.8 &mu;g/dL next AM. FAILURE to suppress = Cushing syndrome (any cause). Screens IN Cushing</div></div>
+  <div class="f"><label>High-dose dex (8 mg)</label><div class="ki-text">Suppresses pituitary ACTH (Cushing DISEASE) but NOT ectopic ACTH (paraneoplastic) or adrenal adenoma (ACTH already low). Differentiates causes</div></div>
+  <div class="f"><label>ACTH stimulation test</label><div class="ki-text">Cosyntropin (synthetic ACTH). Normal: cortisol rises &gt;18. Primary adrenal insufficiency: no response. Secondary: blunted acutely, improves with repeat dosing</div></div>
+</div>
+</div>
+
+<!-- TAB 5 -->
+<div class="panel" id="p5">
+<div class="lo-tag">LO 1&ndash;6 &middot; USMLE Step 1 Style</div>
+<div class="on-exam">8 questions &mdash; answers pre-revealed. Covers all LOs.</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q1. A 32-year-old woman has severe postpartum hemorrhage with prolonged hypotension. Three weeks later she cannot lactate, has amenorrhea, fatigue, and cold intolerance. Cortisol low, TSH low-normal, free T<sub>4</sub> low. Best explanation?</div>
+  <div class="pq-choices">
+    A. Autoimmune lymphocytic hypophysitis<br>
+    B. Ischemic necrosis of the anterior pituitary (Sheehan syndrome)<br>
+    C. Isolated TSH deficiency<br>
+    D. Primary hypothyroidism<br>
+    E. Rathke&apos;s cleft cyst compressing stalk
+  </div>
+  <div class="pq-ans"><strong>B &mdash; Sheehan syndrome.</strong><br>Pregnancy causes lactotroph hyperplasia; anterior pituitary outgrows its blood supply &rarr; infarcts with postpartum hypotension. Classic sequence: inability to lactate (prolactin) &rarr; amenorrhea (LH/FSH) &rarr; hypothyroidism (low TSH + low T<sub>4</sub> = secondary) &rarr; adrenal insufficiency. Posterior pituitary usually spared.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q2. A 42-year-old man has new bitemporal hemianopsia, headache, galactorrhea, low libido. MRI shows 1.6-cm sellar mass. Prolactin 280 ng/mL. Best initial therapy?</div>
+  <div class="pq-choices">
+    A. Transsphenoidal surgical resection<br>
+    B. Stereotactic radiation<br>
+    C. Cabergoline (dopamine agonist)<br>
+    D. Octreotide<br>
+    E. Levothyroxine
+  </div>
+  <div class="pq-ans"><strong>C &mdash; Cabergoline.</strong><br>Prolactinomas are managed medically first. Prolactin is under tonic <strong>dopaminergic inhibition</strong>; a D<sub>2</sub> agonist restores inhibition, shrinking tumor and reversing symptoms (including visual field defects). Cabergoline preferred over bromocriptine (efficacy + tolerability). Surgery reserved for medication failure, CSF leak, or acute visual compromise.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q3. A 7-year-old boy has short stature, headaches, vomiting, visual field defects. MRI: cystic, calcified suprasellar mass. Aspiration: &ldquo;motor oil&rdquo; fluid. Origin?</div>
+  <div class="pq-choices">
+    A. Infundibular stalk remnants<br>
+    B. Meningothelial cells<br>
+    C. Rathke&apos;s pouch remnants (oral ectoderm)<br>
+    D. Pineal gland<br>
+    E. Germ cells
+  </div>
+  <div class="pq-ans"><strong>C &mdash; Rathke&apos;s pouch remnants (craniopharyngioma).</strong><br>Benign suprasellar tumor from oral ectoderm; bimodal peaks (kids 5&ndash;14, adults 50&ndash;70). Classic: cystic + solid + calcifications + &ldquo;motor-oil&rdquo; cholesterol fluid. Mass effects mimic pituitary adenoma (bitemporal hemianopsia) and can cause hypopituitarism + DI.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q4. Which statement about pituitary staining is TRUE?</div>
+  <div class="pq-choices">
+    A. Somatotrophs are basophils<br>
+    B. Gonadotrophs are acidophils<br>
+    C. Corticotrophs are basophils that cleave POMC into ACTH, &beta;-endorphin, and MSH<br>
+    D. All anterior cells are acidophils<br>
+    E. Prolactinomas arise from thyrotrophs
+  </div>
+  <div class="pq-ans"><strong>C &mdash; Corticotrophs are basophils with POMC cleavage.</strong><br>Acidophils = GH (somatotrophs) + Prolactin (&ldquo;GPA&rdquo;). Basophils = FSH, LH, ACTH, TSH (&ldquo;B-FLAT&rdquo;). Corticotrophs cleave POMC into <strong>ACTH + &beta;-endorphin + MSH</strong> &mdash; explains hyperpigmentation of primary adrenal insufficiency.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q5. After pituitary stalk transection, which hormone pattern is most likely?</div>
+  <div class="pq-choices">
+    A. Prolactin &uarr;; ACTH, TSH, LH/FSH, GH all &darr;<br>
+    B. Prolactin &darr;; all others &darr;<br>
+    C. All anterior hormones &uarr;<br>
+    D. All anterior + posterior &uarr;<br>
+    E. ADH &uarr;, others unchanged
+  </div>
+  <div class="pq-ans"><strong>A &mdash; Prolactin &uarr;, others &darr;.</strong><br>Anterior pituitary depends on the <strong>portal system</strong>. Stalk cut blocks all releasing hormones &rarr; ACTH, TSH, LH, FSH, GH fall. Prolactin is uniquely under <strong>tonic dopaminergic inhibition</strong> &mdash; losing dopamine releases the brake &rarr; PRL rises. Also expect central DI (ADH &darr;).</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q6. 45-year-old woman: weight gain, cold intolerance, galactorrhea. TSH 42, free T<sub>4</sub> low, prolactin mildly elevated. Cause of hyperprolactinemia?</div>
+  <div class="pq-choices">
+    A. Prolactinoma co-secreting TSH<br>
+    B. TRH excess in primary hypothyroidism also stimulates lactotrophs<br>
+    C. Primary adrenal insufficiency<br>
+    D. Dopamine excess<br>
+    E. Ectopic prolactin
+  </div>
+  <div class="pq-ans"><strong>B &mdash; TRH stimulates BOTH TSH and prolactin.</strong><br>In primary hypothyroidism: low T<sub>4</sub> &rarr; TRH &uarr; &rarr; TSH &uarr; AND prolactin &uarr; (TRH acts on lactotrophs too). Treating hypothyroidism with levothyroxine normalizes both. <strong>Always check TSH before pituitary MRI</strong> in hyperprolactinemia workup.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q7. Which receptor pairing is CORRECT?</div>
+  <div class="pq-choices">
+    A. TRH on thyrotroph &rarr; Gs &rarr; cAMP<br>
+    B. CRH on corticotroph &rarr; Gs &rarr; cAMP<br>
+    C. Somatostatin &rarr; Gs &rarr; &uarr;cAMP<br>
+    D. ACTH on adrenal &rarr; Gq &rarr; IP<sub>3</sub><br>
+    E. Dopamine on lactotroph &rarr; Gs &rarr; stimulates PRL
+  </div>
+  <div class="pq-ans"><strong>B &mdash; CRH is Gs-cAMP on corticotroph.</strong><br>Quick map: <strong>Gs</strong>: CRH, GHRH, ACTH, TSH, LH, FSH, MSH, ADH-V2, &beta;-adrenergic. <strong>Gq</strong>: TRH, GnRH, ADH-V1, oxytocin, &alpha;<sub>1</sub>. <strong>Gi</strong>: somatostatin, dopamine (D<sub>2</sub>), &alpha;<sub>2</sub>, M<sub>2</sub>. <strong>JAK-STAT</strong>: GH, prolactin. A wrong (TRH is Gq); C wrong (somatostatin is Gi); D wrong (ACTH is Gs); E wrong (dopamine inhibits).</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q8. The mid-cycle LH surge is triggered by:</div>
+  <div class="pq-choices">
+    A. Chronic low estradiol exerting negative feedback<br>
+    B. Sustained high estradiol for ~48 h switching feedback to POSITIVE on hypothalamus + pituitary<br>
+    C. Progesterone withdrawal<br>
+    D. Inhibin B stimulating LH<br>
+    E. FSH binding LH receptors on theca
+  </div>
+  <div class="pq-ans"><strong>B &mdash; Sustained high estradiol switches feedback to POSITIVE.</strong><br>Normally estradiol is inhibitory, but when serum E<sub>2</sub> exceeds ~200 pg/mL for ~48 h (pre-ovulation), feedback flips to <strong>positive</strong> on both hypothalamus (&uarr; GnRH pulse frequency/amplitude) and pituitary (&uarr; gonadotroph sensitivity) &rarr; <strong>LH surge</strong> &rarr; ovulation. One of the few physiologic positive-feedback loops (others: oxytocin in parturition, clotting cascade).</div>
+</div>
+
+</div>
+
+<script>
+function sw(n){
+  document.querySelectorAll('.tab').forEach((t,i)=>{t.classList.toggle('active',i===n)});
+  document.querySelectorAll('.panel').forEach((p,i)=>{p.classList.toggle('active',i===n)});
+}
+</script>
+</body></html>

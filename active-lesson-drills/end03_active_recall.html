@@ -1,0 +1,559 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:sans-serif}
+body{background:#fff;color:#111;padding:16px;font-size:13px}
+h2{font-size:16px;font-weight:600;margin-bottom:4px}
+.sub{color:#666;font-size:12px;margin-bottom:14px}
+.resource-banner{background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:#1E40AF}
+.resource-banner strong{display:block;margin-bottom:2px;font-size:13px}
+.tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+.tab{padding:7px 14px;border-radius:20px;border:1.5px solid #CBD5E1;font-size:12px;cursor:pointer;background:#fff;color:#475569;font-weight:500}
+.tab.active{background:#1D4ED8;color:#fff;border-color:#1D4ED8}
+.panel{display:none}.panel.active{display:block}
+.sec{font-size:11px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.05em;margin:14px 0 6px}
+table{width:100%;border-collapse:collapse;margin-bottom:10px;font-size:12px}
+th{background:#F1F5F9;text-align:left;padding:7px 8px;font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:#475569;border:1px solid #E2E8F0;font-weight:600}
+td{padding:6px 8px;border:1px solid #E2E8F0;vertical-align:top}
+td input{width:100%;border:none;border-bottom:1.5px solid #e2e8f0;font-size:11px;background:transparent;outline:none;padding:1px 0;color:#1e293b}
+td input:focus{border-bottom-color:#1D4ED8}
+tr:nth-child(even) td{background:#FAFAFA}
+.rl{font-weight:600;font-size:11px;color:#1e293b;background:#F8FAFC!important;white-space:nowrap}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.f{margin-bottom:6px}
+.f label{font-size:10px;color:#94a3b8;display:block;margin-bottom:2px;text-transform:uppercase;letter-spacing:.03em}
+.f input{width:100%;border:none;border-bottom:1.5px solid #CBD5E1;font-size:12px;background:transparent;outline:none;padding:2px 0;color:#1e293b}
+.f input:focus{border-bottom-color:#1D4ED8}
+.f textarea{width:100%;border:1px solid #CBD5E1;border-radius:6px;font-size:12px;background:transparent;outline:none;padding:4px 6px;color:#1e293b;resize:vertical;min-height:52px}
+.btn{background:#1D4ED8;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:13px;cursor:pointer;font-weight:500;margin-top:8px}
+.btn:hover{background:#1e40af}
+.fb{margin-top:14px;display:none;border-radius:10px;overflow:hidden;border:1.5px solid #BFDBFE}
+.fb-header{background:#1D4ED8;color:#fff;font-size:11px;font-weight:700;padding:8px 14px;letter-spacing:.04em;text-transform:uppercase}
+.warn{background:#FFFBEB;border-left:3px solid #F59E0B;padding:7px 10px;border-radius:0 6px 6px 0;font-size:11px;color:#92400E;margin:8px 0}
+.on-exam{background:#FEE2E2;border:1px solid #FDA4AF;border-radius:6px;padding:4px 10px;font-size:11px;color:#991B1B;font-weight:700;display:inline-block;margin-bottom:8px}
+.lo-tag{background:#EDE9FE;border:1px solid #C4B5FD;border-radius:5px;padding:2px 8px;font-size:10px;color:#5B21B6;font-weight:600;margin-bottom:6px;display:inline-block}
+.pq-box{background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;padding:10px 14px;margin-bottom:10px;font-size:12px}
+.pq-q{font-weight:600;margin-bottom:6px;color:#92400E}
+.pq-choices{margin-left:12px;margin-bottom:6px;color:#78350F;line-height:1.8}
+.pq-ans{display:none;background:#EFF6FF;border:1px solid #93C5FD;border-radius:6px;padding:6px 10px;font-size:11px;color:#1E40AF;margin-top:4px}
+.pq-btn{font-size:11px;padding:3px 10px;border-radius:5px;border:1px solid #2563EB;background:#DBEAFE;color:#1E40AF;cursor:pointer}
+.pq-btn:hover{background:#BFDBFE}
+.card{border:1px solid #E2E8F0;border-radius:10px;padding:12px 14px;margin-bottom:10px}
+
+@media(max-width:640px){
+  body{padding:10px;font-size:12px}
+  h2{font-size:14px}
+  .tabs{gap:4px}
+  .tab{padding:6px 10px;font-size:11px}
+  .fg,.fg3{grid-template-columns:1fr!important}
+  table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .pq-choices{margin-left:4px}
+  .btn{width:100%;text-align:center}
+}
+
+.hoyadocs-brand{font-size:14px;font-weight:700;color:#1D4ED8;letter-spacing:-0.02em;margin-bottom:12px}
+
+@media print{
+  @page{size:letter landscape;margin:0.35in 0.4in}
+  html,body{background:#fff!important}
+  body{padding:0;font-size:10px}
+  body > *:not(.panel){display:none!important}
+  .panel{display:block!important;page-break-before:always;break-before:page;page-break-inside:auto}
+  .panel:first-of-type{page-break-before:auto;break-before:auto}
+  .panel::before{content:"HoyaDocs";display:block;font-size:13px;font-weight:700;color:#1D4ED8;margin-bottom:8px;padding-bottom:4px;border-bottom:1.5px solid #1D4ED8;letter-spacing:-0.02em}
+  .btn,.pq-btn{display:none!important}
+  .sec{margin:5px 0 3px;font-size:9.5px}
+  table{margin-bottom:5px;font-size:10px;page-break-inside:avoid}
+  th{font-size:9px;padding:3px 4px}
+  td{padding:2px 4px;font-size:10px}
+  td input{font-size:10px;padding:0}
+  .on-exam{font-size:10px;padding:3px 7px;margin-bottom:5px;display:block;white-space:normal}
+  .warn{font-size:9.5px;padding:4px 7px;margin:3px 0}
+  .pq-box{font-size:9.5px;padding:5px 8px;margin-bottom:4px;page-break-inside:avoid}
+  .pq-ans{display:block!important;font-size:9px;margin-top:3px}
+  .pq-choices{line-height:1.5;margin-bottom:3px}
+  .fb{display:block!important}
+  .fg,.fg3{gap:6px}
+  .f{margin-bottom:3px}
+  .f label{font-size:9px}
+  .f input{font-size:10px;padding:0}
+  .card{padding:6px 8px;margin-bottom:6px}
+  .lo-tag{font-size:9px;padding:1px 6px;margin-bottom:3px}
+  a[href$=".html"]{display:none!important}
+}
+</style></head><body>
+
+<div class="hoyadocs-brand">HoyaDocs</div>
+
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:6px">
+  <h2 style="margin-bottom:0">Hypothalamic-Pituitary Relationships II (GH Axis) — Active Recall</h2>
+  <div style="display:flex;gap:6px;flex-wrap:wrap">
+    <button onclick="window.print()" style="background:#1D4ED8;color:#fff;border:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap">&#128424; Print</button>
+    <a href="end03_key.html" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#14532d;color:#fff;text-decoration:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;white-space:nowrap">&#9989; View Answer Key</a>
+  </div>
+</div>
+<p class="sub">Built from Endocrine Lecture 03 (LOs 1&ndash;5, Kothmann). Close notes. Fill from memory. Reveal only after a genuine attempt.</p>
+
+<div class="resource-banner">
+  <strong>&#128214; Use alongside: Endocrine Lecture 03 &mdash; Hypothalamic-Pituitary Relationships Part 2 (GH Axis) (HoyaDocs)</strong>
+  Focus on: GH axis cascade (arcuate GHRH &rarr; somatotroph GH &rarr; liver IGF-1 &rarr; tissues); JAK2-STAT5 signaling; direct vs indirect GH effects (diabetogenic &amp; lipolytic vs anabolic/growth); pulsatile nocturnal release peaking in slow-wave sleep; lifetime curve (puberty peak &rarr; somatopause); stimulators (ghrelin, sleep, hypoglycemia, exercise, protein, estrogen) vs inhibitors (somatostatin, IGF-1, hyperglycemia, FFA, cortisol, obesity); gigantism vs acromegaly; Laron dwarfism; OGTT suppression test; pegvisomant, octreotide, mecasermin.
+</div>
+
+<div style="margin-bottom:14px">
+  <div style="font-size:12px;font-weight:600;margin-bottom:6px;color:#374151">SEED &mdash; trace the GH cascade from hypothalamus to target tissues (from memory):</div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:6px">
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">1. Hypothalamus: ____ nucleus releases ____</div><input style="width:100%;border:none;border-bottom:1.5px solid #CBD5E1;font-size:12px;background:transparent;outline:none;padding:2px 0;color:#1e293b"></div>
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">2. Pituitary: ____ cells release ____</div><input style="width:100%;border:none;border-bottom:1.5px solid #CBD5E1;font-size:12px;background:transparent;outline:none;padding:2px 0;color:#1e293b"></div>
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">3. Liver: GH &rarr; JAK-STAT &rarr; ____</div><input style="width:100%;border:none;border-bottom:1.5px solid #CBD5E1;font-size:12px;background:transparent;outline:none;padding:2px 0;color:#1e293b"></div>
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">4. Target: growth on ____ (structure)</div><input style="width:100%;border:none;border-bottom:1.5px solid #CBD5E1;font-size:12px;background:transparent;outline:none;padding:2px 0;color:#1e293b"></div>
+  </div>
+  <div style="font-size:11px;color:#6b7280;margin-top:4px">Plus: which hypothalamic hormone <em>inhibits</em> GH release &mdash; and what organ makes ghrelin (which stimulates it)?</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="sw(0)">GH Signaling Pathway</div>
+  <div class="tab" onclick="sw(1)">GH vs IGF-1 Effects</div>
+  <div class="tab" onclick="sw(2)">Regulation &amp; Dynamics</div>
+  <div class="tab" onclick="sw(3)">Stimulators &amp; Inhibitors</div>
+  <div class="tab" onclick="sw(4)">GH Disorders</div>
+  <div class="tab" onclick="sw(5)">Practice Qs</div>
+</div>
+
+<!-- TAB 0: GH SIGNALING PATHWAY -->
+<div class="panel active" id="p0">
+<div class="lo-tag">LO 1</div>
+<div class="on-exam">ON EXAM &mdash; GHRH (arcuate, Gs-cAMP on somatotroph) + ghrelin (stomach, GHSR) stimulate; somatostatin (Gi) inhibits; GH uses JAK2-STAT5 (cytokine-family receptor, single pass &mdash; NOT a GPCR); GH &rarr; liver &rarr; IGF-1 (somatomedin C) &rarr; chondrocytes of epiphyseal growth plate; IGF-1 carried on IGFBP-3 (&gt;90%); IGFBP-3 synthesis ALSO GH-dependent (so both rise together)</div>
+
+<div class="sec">Trace the cascade: hypothalamus &rarr; pituitary &rarr; liver &rarr; target (LO 1)</div>
+<table>
+  <tr><th>Step</th><th>Source cell / organ</th><th>Hormone</th><th>Receptor + signal</th><th>Main effect</th></tr>
+  <tr><td class="rl">1. Hypothalamus (+)</td><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">1. Hypothalamus (&minus;)</td><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">1b. Stomach (+)</td><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">2. Pituitary</td><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">3. Liver</td><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">4. Growth plate</td><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">GH receptor mechanics (LO 1)</div>
+<div class="fg">
+  <div class="f"><label>GH receptor family (GPCR / RTK / JAK-STAT / nuclear)?</label><input></div>
+  <div class="f"><label>Ligand binding causes receptor ____ &rarr; trans-phosphorylation</label><input></div>
+  <div class="f"><label>Key intracellular kinase activated by GH-R</label><input></div>
+  <div class="f"><label>Key transcription factor phosphorylated by that kinase</label><input></div>
+  <div class="f"><label>Which other hormone uses the SAME JAK-STAT mechanism?</label><input></div>
+  <div class="f"><label>SOCS proteins &mdash; role in GH signaling?</label><input></div>
+</div>
+
+<div class="sec">IGF-1 biology (LO 1)</div>
+<div class="fg">
+  <div class="f"><label>Primary site of IGF-1 synthesis (by far)</label><input></div>
+  <div class="f"><label>Receptor IGF-1 binds (and what family?)</label><input></div>
+  <div class="f"><label>Main IGF binding protein in plasma</label><input></div>
+  <div class="f"><label>What makes IGFBP-3 synthesis GH-dependent (clinical implication for labs)?</label><input></div>
+  <div class="f"><label>IGF-1 vs IGF-2 &mdash; where does IGF-2 mainly matter?</label><input></div>
+  <div class="f"><label>Half-life of GH vs IGF-1 &mdash; which is more stable for measurement?</label><input></div>
+</div>
+<div class="warn">KEY: GH has a SHORT, pulsatile half-life (~20 min) and varies through the day. <strong>IGF-1 is stable</strong> (long half-life, carried on IGFBP-3) and reflects integrated GH exposure &mdash; the preferred screening test for acromegaly.</div>
+<button class="btn" onclick="rev('fb0',a0)">Reveal answers</button>
+<div id="fb0" class="fb"></div>
+</div>
+
+<!-- TAB 1: GH vs IGF-1 EFFECTS -->
+<div class="panel" id="p1">
+<div class="lo-tag">LO 2</div>
+<div class="on-exam">ON EXAM &mdash; GH direct (diabetogenic + lipolytic + anti-insulin): &uarr;blood glucose, &uarr;FFA, &darr;muscle/fat glucose uptake, &uarr;hepatic gluconeogenesis. IGF-1 indirect (anabolic/insulin-like): growth, &uarr;AA uptake, &uarr;protein synthesis, chondrogenesis, linear bone growth. &quot;GH keeps glucose high, IGF-1 grows the tissues&quot;</div>
+
+<div class="sec">Direct (GH) vs indirect (IGF-1) effects by tissue (LO 2)</div>
+<table>
+  <tr><th>Tissue</th><th>Direct GH effect</th><th>Indirect (via IGF-1)</th><th>Net metabolic result</th></tr>
+  <tr><td class="rl">Liver</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Adipose</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Skeletal muscle</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Bone &amp; cartilage (growth plate)</td><td><input></td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">Metabolic signature of GH (LO 2)</div>
+<div class="fg">
+  <div class="f"><label>Effect of GH on serum glucose (and mechanism in 1-2 words)</label><input></div>
+  <div class="f"><label>Effect of GH on serum free fatty acids</label><input></div>
+  <div class="f"><label>Why GH is called a &quot;counter-regulatory&quot; / &quot;diabetogenic&quot; hormone</label><input></div>
+  <div class="f"><label>Effect of insulin on GH secretion at the pituitary (hypoglycemia test)</label><input></div>
+  <div class="f"><label>Which 4 hormones together oppose insulin? (GH + ___ + ___ + ___)</label><input></div>
+  <div class="f"><label>Why GH causes insulin RESISTANCE at target tissues</label><input></div>
+</div>
+
+<div class="sec">Growth plate and linear growth (LO 2)</div>
+<div class="fg">
+  <div class="f"><label>Cell type in the epiphyseal plate that IGF-1 stimulates</label><input></div>
+  <div class="f"><label>When do growth plates close (sex-dependent)? What signal closes them?</label><input></div>
+  <div class="f"><label>Pre-puberty vs post-puberty GH excess &mdash; why gigantism vs acromegaly?</label><input></div>
+  <div class="f"><label>Which amino acid transporter is upregulated in muscle/chondrocytes by IGF-1?</label><input></div>
+</div>
+<button class="btn" onclick="rev('fb1',a1)">Reveal answers</button>
+<div id="fb1" class="fb"></div>
+</div>
+
+<!-- TAB 2: REGULATION & DYNAMICS -->
+<div class="panel" id="p2">
+<div class="lo-tag">LO 3</div>
+<div class="on-exam">ON EXAM &mdash; GH is pulsatile, NIGHT-dominant (largest pulses during slow-wave/N3 sleep, ~1 h after onset); lifetime curve: neonatal &uarr; &rarr; childhood moderate &rarr; PUBERTAL PEAK &rarr; adult decline &rarr; &quot;somatopause&quot; in elderly (~50% drop per decade); feedback: IGF-1 &uarr; &rarr; somatostatin &uarr;; GH short-loop &rarr; GHRH &darr;</div>
+
+<div class="sec">24-hour GH rhythm (LO 3)</div>
+<div class="fg">
+  <div class="f"><label>Pattern of GH release: pulsatile, continuous, or circadian?</label><input></div>
+  <div class="f"><label>Time of LARGEST GH pulse</label><input></div>
+  <div class="f"><label>Sleep stage that triggers the biggest pulse</label><input></div>
+  <div class="f"><label>Clinical: why is a SINGLE random GH level poor for diagnosis?</label><input></div>
+  <div class="f"><label>Preferred screening test for chronic GH excess</label><input></div>
+  <div class="f"><label>Confirmatory test for acromegaly (uses physiologic GH inhibitor)</label><input></div>
+</div>
+
+<div class="sec">Lifetime GH curve (LO 3)</div>
+<table>
+  <tr><th>Life stage</th><th>GH / IGF-1 level (relative)</th><th>Dominant driver / context</th></tr>
+  <tr><td class="rl">Neonate</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Childhood (pre-puberty)</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Puberty</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Young adult</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Elderly (&quot;somatopause&quot;)</td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">Feedback architecture (LO 3)</div>
+<div class="fg">
+  <div class="f"><label>Long-loop negative feedback &mdash; what from where suppresses GH?</label><input></div>
+  <div class="f"><label>Short-loop negative feedback &mdash; what from where to where?</label><input></div>
+  <div class="f"><label>Ultra-short loop &mdash; what on what?</label><input></div>
+  <div class="f"><label>How does IGF-1 suppress GH (two arms)?</label><input></div>
+</div>
+<button class="btn" onclick="rev('fb2',a2)">Reveal answers</button>
+<div id="fb2" class="fb"></div>
+</div>
+
+<!-- TAB 3: STIMULATORS & INHIBITORS -->
+<div class="panel" id="p3">
+<div class="lo-tag">LO 4</div>
+<div class="on-exam">ON EXAM &mdash; STIMULATE GH: GHRH, ghrelin, SLEEP (SWS), exercise, stress, HYPOGLYCEMIA (insulin tolerance test gold standard), protein/arginine meals, estrogen (oral), dopamine agonists (paradoxical suppression in acromegaly). INHIBIT: somatostatin, IGF-1, HYPERGLYCEMIA (OGTT suppression test), free fatty acids, cortisol (chronic), obesity, senescence</div>
+
+<div class="sec">Physiologic stimulators of GH (LO 4)</div>
+<table>
+  <tr><th>Stimulator</th><th>Mechanism</th><th>Clinical / test relevance</th></tr>
+  <tr><td class="rl">GHRH</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Ghrelin</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Sleep (SWS / N3)</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Exercise</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Hypoglycemia</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Arginine / protein meal</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Estrogen (oral)</td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">Physiologic inhibitors of GH (LO 4)</div>
+<table>
+  <tr><th>Inhibitor</th><th>Mechanism</th><th>Clinical / test relevance</th></tr>
+  <tr><td class="rl">Somatostatin</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">IGF-1</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Hyperglycemia</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Free fatty acids</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Glucocorticoids (chronic)</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Obesity</td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">Pharmacology of the GH axis (LO 4)</div>
+<table>
+  <tr><th>Drug</th><th>Mechanism</th><th>Use</th></tr>
+  <tr><td class="rl">Somatropin (recombinant GH)</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Mecasermin</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Octreotide / lanreotide</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Pegvisomant</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Cabergoline / bromocriptine</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Sermorelin / tesamorelin</td><td><input></td><td><input></td></tr>
+</table>
+<div class="warn">PARADOX: In NORMAL people, dopamine agonists <em>suppress</em> prolactin but have little effect on GH. In somatotroph adenomas, dopamine agonists can PARADOXICALLY <strong>inhibit</strong> GH secretion (used as adjunct in acromegaly).</div>
+<button class="btn" onclick="rev('fb3',a3)">Reveal answers</button>
+<div id="fb3" class="fb"></div>
+</div>
+
+<!-- TAB 4: GH DISORDERS -->
+<div class="panel" id="p4">
+<div class="lo-tag">LO 5</div>
+<div class="on-exam">ON EXAM &mdash; GIGANTISM: excess GH BEFORE epiphyseal closure &rarr; accelerated linear growth (height). ACROMEGALY: excess AFTER closure &rarr; APPOSITIONAL growth (hands, feet, jaw, brow, macroglossia, visceromegaly). Most common cause: somatotroph adenoma. Labs: IGF-1 &uarr;&uarr;; GH fails to suppress with oral glucose (OGTT). Tx: transsphenoidal surgery &rarr; octreotide &rarr; pegvisomant. DEFICIENCY in kids: short stature with normal proportions. Laron dwarfism = GH receptor defect (high GH, low IGF-1, treat with mecasermin).</div>
+
+<div class="sec">GH EXCESS &mdash; gigantism vs acromegaly (LO 5)</div>
+<table>
+  <tr><th>Feature</th><th>Gigantism</th><th>Acromegaly</th></tr>
+  <tr><td class="rl">Timing (before/after growth plate fusion)</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Classic physical findings</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Most common cause</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Cardiovascular complications</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Metabolic complications</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Other (visual, neurologic, OSA, colon)</td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">Diagnosis of GH excess (LO 5)</div>
+<div class="fg">
+  <div class="f"><label>Best SCREENING test</label><input></div>
+  <div class="f"><label>CONFIRMATORY test (and expected result in disease)</label><input></div>
+  <div class="f"><label>Imaging after biochemical confirmation</label><input></div>
+  <div class="f"><label>Rare cause of ectopic GHRH (lab clue: elevated GHRH)</label><input></div>
+</div>
+
+<div class="sec">Treatment ladder for acromegaly (LO 5)</div>
+<div class="fg">
+  <div class="f"><label>First-line</label><input></div>
+  <div class="f"><label>Medical &mdash; somatostatin analog (name + MOA)</label><input></div>
+  <div class="f"><label>Medical &mdash; GH receptor antagonist (name + MOA)</label><input></div>
+  <div class="f"><label>Adjunct &mdash; dopamine agonist (and which subset responds?)</label><input></div>
+  <div class="f"><label>Salvage &mdash; stereotactic radiation (when used?)</label><input></div>
+</div>
+
+<div class="sec">GH DEFICIENCY (LO 5)</div>
+<table>
+  <tr><th>Feature</th><th>Pediatric GHD</th><th>Adult GHD</th><th>Laron syndrome</th></tr>
+  <tr><td class="rl">Mechanism</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">GH level</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">IGF-1 level</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Clinical features</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Treatment</td><td><input></td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">Diagnosing GH deficiency (LO 5)</div>
+<div class="fg">
+  <div class="f"><label>Gold-standard stimulation test</label><input></div>
+  <div class="f"><label>Alternate safer stim test combo</label><input></div>
+  <div class="f"><label>Single random GH level &mdash; useful or not, and why?</label><input></div>
+  <div class="f"><label>Why is IGF-1 not always low in adult GHD?</label><input></div>
+</div>
+<button class="btn" onclick="rev('fb4',a4)">Reveal answers</button>
+<div id="fb4" class="fb"></div>
+</div>
+
+<!-- TAB 5: PRACTICE QUESTIONS -->
+<div class="panel" id="p5">
+<div class="lo-tag">LO 1&ndash;5 &middot; USMLE Step 1 Style</div>
+<div class="on-exam">8 questions &mdash; cover all LOs. Use these after finishing all tabs.</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q1. A 48-year-old man presents with enlarging hands (needing larger rings and gloves), prognathism, coarse facial features, macroglossia, and new-onset hypertension with glucose intolerance. Fasting IGF-1 is markedly elevated. Which of the following is the BEST CONFIRMATORY test?</div>
+  <div class="pq-choices">
+    A. Random GH level<br>
+    B. GH level after oral glucose tolerance test (OGTT)<br>
+    C. Insulin tolerance test (induced hypoglycemia)<br>
+    D. Arginine-GHRH stimulation test<br>
+    E. Random cortisol level
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>B &mdash; Failure to suppress GH on OGTT.</strong><br>Acromegaly in an adult. Screen with IGF-1 (stable, long half-life reflects integrated GH exposure). <strong>Confirm</strong> with oral glucose tolerance test: in healthy individuals, glucose load suppresses GH to &lt;1 ng/mL. In acromegaly, the autonomous somatotroph adenoma <strong>fails to suppress</strong> (often GH paradoxically rises). Random GH is uninformative because GH is pulsatile; insulin tolerance and arginine-GHRH tests are used to diagnose GH <em>deficiency</em>, not excess.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q2. Which of the following BEST describes the primary intracellular signaling pathway used by the GH receptor?</div>
+  <div class="pq-choices">
+    A. Gs &rarr; adenylyl cyclase &rarr; cAMP &rarr; PKA<br>
+    B. Gq &rarr; phospholipase C &rarr; IP<sub>3</sub> / DAG &rarr; Ca<sup>2+</sup>, PKC<br>
+    C. Receptor tyrosine kinase autophosphorylation &rarr; Ras / MAPK<br>
+    D. Cytokine-family receptor &rarr; JAK2 activation &rarr; STAT5 phosphorylation &rarr; nuclear transcription<br>
+    E. Lipid-soluble ligand &rarr; cytosolic receptor-HSP90 dissociation &rarr; gene transcription
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>D &mdash; JAK2 / STAT5 (cytokine-family receptor).</strong><br>GH receptor is a single-pass, non-kinase cytokine-family receptor. Ligand binding induces receptor dimerization &rarr; trans-phosphorylation by associated <strong>JAK2</strong> &rarr; recruitment and phosphorylation of <strong>STAT5</strong> &rarr; STAT5 dimer translocates to nucleus &rarr; transcription of IGF-1 (hepatocytes) and other target genes. Prolactin uses the same JAK-STAT mechanism. SOCS proteins provide negative feedback.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q3. A 12-year-old boy with a pituitary somatotroph adenoma has accelerated linear growth (95th percentile for height) but has not yet reached his expected final height. Which BEST explains why he has gigantism rather than acromegaly?</div>
+  <div class="pq-choices">
+    A. The tumor secretes IGF-2 rather than IGF-1<br>
+    B. His epiphyseal growth plates have not fused, so IGF-1 drives longitudinal bone growth<br>
+    C. His GH receptors are mutated to be hyperactive<br>
+    D. He has concurrent precocious puberty<br>
+    E. Prolactin co-secretion accelerates growth
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>B &mdash; Open epiphyseal growth plates allow longitudinal growth.</strong><br>Before puberty completes, epiphyseal plates remain open; IGF-1 stimulates chondrocyte proliferation in the growth plate &rarr; <strong>linear growth</strong> (gigantism). After plates fuse (driven by estrogen in both sexes), bone can only grow APPOSITIONALLY, producing enlarged hands, feet, jaw, and soft tissues = <strong>acromegaly</strong>. Same hormone excess, different result based on skeletal maturity.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q4. A healthy 22-year-old medical student undergoes a sleep study. Which of the following BEST describes GH secretion during the study?</div>
+  <div class="pq-choices">
+    A. GH is released continuously at a steady baseline through all sleep stages<br>
+    B. GH declines to its lowest level during sleep<br>
+    C. The largest GH pulse occurs during REM sleep<br>
+    D. The largest GH pulse occurs during slow-wave (N3) sleep, roughly 1 hour after sleep onset<br>
+    E. GH is suppressed during sleep and peaks during afternoon wakefulness
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>D &mdash; Largest pulse in slow-wave (N3) sleep.</strong><br>GH is pulsatile with night-dominant release; the largest pulse follows sleep onset and occurs during deep <strong>slow-wave sleep (stage N3)</strong>. This is why sleep deprivation blunts GH secretion and why a single random GH level is uninformative. For this reason, <strong>IGF-1</strong> (stable, long half-life, integrates 24-hour GH exposure) is preferred for screening, and OGTT for confirmation.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q5. A 6-year-old boy with short stature (well below 3rd percentile) has delayed bone age, chubby appearance, and central adiposity. Serum GH is markedly ELEVATED; IGF-1 is LOW. Exogenous GH injection does NOT raise IGF-1 or stimulate growth. The MOST likely diagnosis is:</div>
+  <div class="pq-choices">
+    A. Isolated GHRH receptor mutation<br>
+    B. Pituitary somatotroph destruction from craniopharyngioma<br>
+    C. GH receptor mutation (Laron syndrome)<br>
+    D. Congenital hypothyroidism<br>
+    E. Constitutional growth delay
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>C &mdash; Laron syndrome (GH receptor mutation).</strong><br>GH-receptor insensitivity: GH is normal or HIGH (no IGF-1 feedback), but IGF-1 is LOW because GH can&apos;t signal through its receptor &rarr; no hepatic IGF-1 production &rarr; short stature with normal proportions, chubby appearance, delayed bone age. Exogenous GH does not help. <strong>Treatment: recombinant IGF-1 (mecasermin)</strong>. Laron patients paradoxically have low rates of cancer and diabetes because GH/IGF-1 signaling is blunted.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q6. A 54-year-old man with acromegaly has persistent IGF-1 elevation three months after transsphenoidal resection of a somatotroph adenoma. Octreotide has not achieved biochemical control. The physician adds pegvisomant. Which BEST describes its mechanism?</div>
+  <div class="pq-choices">
+    A. Somatostatin receptor 2/5 agonist that inhibits GH release<br>
+    B. Dopamine D<sub>2</sub> agonist that paradoxically suppresses GH in some adenomas<br>
+    C. GH receptor ANTAGONIST that blocks dimerization and downstream JAK-STAT signaling<br>
+    D. GHRH receptor antagonist at the pituitary<br>
+    E. Recombinant IGF-1 for substitution therapy
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>C &mdash; GH receptor antagonist.</strong><br>Pegvisomant is a PEGylated, mutated analog of GH that binds the receptor but blocks functional dimerization &rarr; no JAK2-STAT5 signaling &rarr; hepatic IGF-1 production falls. Follow <strong>IGF-1</strong> (not GH, which paradoxically rises because feedback is lost). Use for patients not controlled by surgery or somatostatin analogs. Octreotide (A), cabergoline (B), and mecasermin (E) work through different mechanisms.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q7. A 28-year-old woman presents with fatigue, central adiposity, and decreased exercise tolerance. She had transsphenoidal surgery and pituitary radiation for a macroadenoma 4 years ago. Morning cortisol and T<sub>4</sub> are replaced. GH deficiency is suspected. Which is the MOST appropriate diagnostic test?</div>
+  <div class="pq-choices">
+    A. Random single GH level<br>
+    B. 24-hour urinary GH excretion<br>
+    C. Insulin tolerance test (induced hypoglycemia provokes GH release)<br>
+    D. OGTT GH suppression<br>
+    E. CT pituitary
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>C &mdash; Insulin tolerance test (ITT).</strong><br>ITT is the gold-standard provocative test for GH deficiency: induced hypoglycemia (&lt;40 mg/dL) normally triggers a robust GH surge (&gt;5 ng/mL in adults). Failure to respond = GHD. Alternative (safer in patients with cardiac/seizure risk): GHRH + arginine stimulation. Random GH (A) is useless; OGTT (D) is for suspected GH EXCESS, not deficiency. IGF-1 alone can be normal in up to 40% of adult GHD, so provocative testing is needed for diagnosis.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q8. During a fasting state, GH counter-regulates insulin. Which of the following BEST describes the direct metabolic effects of GH on peripheral tissues?</div>
+  <div class="pq-choices">
+    A. Promotes glucose uptake in muscle and stimulates hepatic glycogenesis<br>
+    B. Inhibits lipolysis and promotes triglyceride storage in adipose tissue<br>
+    C. Stimulates lipolysis in adipose, decreases glucose uptake in muscle, and increases hepatic gluconeogenesis (&rarr; raises serum glucose &amp; FFA)<br>
+    D. Stimulates pancreatic &beta;-cell insulin secretion<br>
+    E. Cross-reacts with the insulin receptor to produce anabolic effects
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>C &mdash; Lipolytic, anti-insulin, gluconeogenic.</strong><br>GH&apos;s <strong>direct</strong> metabolic effects are <em>opposite</em> to insulin: &uarr; lipolysis in adipose (&rarr; &uarr; FFA), &darr; glucose uptake in muscle and fat, &uarr; hepatic gluconeogenesis &rarr; <strong>net hyperglycemia + hyperlipidemia</strong>. This is why chronic GH excess causes glucose intolerance and diabetes in acromegaly. The <em>indirect</em>, <strong>growth-promoting</strong> effects (via IGF-1) are separate &mdash; anabolic, insulin-like, and drive linear growth, muscle protein synthesis, and chondrogenesis. &quot;GH keeps glucose HIGH; IGF-1 grows the tissues.&quot;</div>
+</div>
+
+</div>
+
+<script>
+function sw(n){
+  document.querySelectorAll('.tab').forEach((t,i)=>{t.classList.toggle('active',i===n)});
+  document.querySelectorAll('.panel').forEach((p,i)=>{p.classList.toggle('active',i===n)});
+}
+
+const a0={
+  'Hypothalamus +':'Arcuate nucleus | GHRH | Gs-cAMP on somatotroph | Releases GH (pulsatile)',
+  'Hypothalamus −':'Periventricular/arcuate | Somatostatin (SRIF/GHIH) | Gi-↓cAMP on somatotroph | Suppresses GH release',
+  'Stomach +':'Oxyntic cells of stomach fundus | Ghrelin (the "hunger hormone") | GHSR (growth hormone secretagogue receptor, Gq) on somatotroph + arcuate GHRH neurons | Pulsatile GH release + appetite signal',
+  'Pituitary':'Somatotroph (acidophil, ~50% of anterior pit cells) | Growth Hormone (GH, somatotropin; 191 aa) | — | Acts on GH receptor (JAK2-STAT5) on liver + peripheral tissues',
+  'Liver':'Hepatocytes | IGF-1 (insulin-like growth factor-1, somatomedin C) | IGF-1 receptor (RTK, similar to insulin receptor) on target cells | Anabolic growth signal; also carried by IGFBP-3',
+  'Growth plate':'Chondrocytes in the epiphyseal plate | IGF-1 (endocrine + paracrine) | IGF-1R (RTK) | Chondrogenesis → linear bone growth (pre-fusion) or appositional growth (post-fusion)',
+  'GH receptor family':'CYTOKINE-FAMILY receptor — single-pass transmembrane, no intrinsic kinase. Not a GPCR, not an RTK',
+  'GH-R dimerization':'DIMERIZATION (two receptors, one ligand) → JAK2 molecules associated with each receptor trans-phosphorylate each other',
+  'Kinase activated':'JAK2 (Janus kinase 2)',
+  'Key transcription factor':'STAT5 (Signal Transducer and Activator of Transcription 5) — phosphorylated STAT5 dimerizes, translocates to nucleus, drives transcription of IGF-1 and other target genes',
+  'Other JAK-STAT hormone':'Prolactin (also cytokine family — uses JAK2-STAT5). Others include erythropoietin, leptin, cytokines like IL-2/IFN',
+  'SOCS role':'Suppressors of cytokine signaling (SOCS-1, -3) are induced by STAT5; they bind phosphorylated JAK2 and GH-R → feedback inhibition. Chronic GH exposure upregulates SOCS → desensitization',
+  'IGF-1 primary site':'LIVER (hepatocytes) — >80% of circulating IGF-1. Minor local production in chondrocytes, muscle, kidney (paracrine)',
+  'IGF-1 receptor':'IGF-1R — Receptor Tyrosine Kinase (RTK), structurally and functionally similar to the INSULIN receptor. Cross-talk at high [IGF-1] can bind insulin receptor',
+  'Main IGFBP':'IGFBP-3 — carries >90% of circulating IGF-1 as a ternary complex with ALS (acid-labile subunit)',
+  'IGFBP-3 GH-dependent':'IGFBP-3 synthesis in liver is directly stimulated by GH. Both IGF-1 and IGFBP-3 rise with GH excess and fall with GH deficiency. Measuring both gives a more accurate read on GH axis activity',
+  'IGF-2':'IGF-2 is important in FETAL growth and placental function. Imprinting defects of IGF-2 → Beckwith-Wiedemann syndrome (overgrowth, macroglossia, Wilms tumor risk). Minor role in postnatal life',
+  'GH vs IGF-1 half-life':'GH: ~20 min, highly pulsatile — unreliable single measurement. IGF-1: ~15 hours on IGFBP-3, stable — preferred screening test for chronic GH excess or deficiency'
+};
+
+const a1={
+  'Liver':'Direct: IGF-1 synthesis; ↑gluconeogenesis | Indirect: — (liver is source, not target) | Net: ↑IGF-1 to circulation + ↑hepatic glucose output',
+  'Adipose':'Direct: LIPOLYSIS (↑HSL activity → ↑FFA to blood); ↓glucose uptake | Indirect: minor (IGF-1 less important here) | Net: ↑FFA, ↓fat mass (catabolic on adipose)',
+  'Skeletal muscle':'Direct: ↓glucose uptake (insulin resistance); ↑lipolysis | Indirect (IGF-1): ↑amino acid uptake, ↑protein synthesis, muscle hypertrophy | Net: anabolic for protein, catabolic for glucose/fat',
+  'Bone/cartilage':'Direct: minimal direct effect | Indirect (IGF-1): stimulates CHONDROCYTES in epiphyseal plate → longitudinal growth (pre-fusion) or appositional growth (post-fusion); osteoblast activity ↑ | Net: LINEAR GROWTH in kids; thickened bone/soft tissue in adults',
+  'GH on glucose':'Raises serum glucose (DIABETOGENIC) — via ↓peripheral glucose uptake + ↑hepatic gluconeogenesis + insulin resistance at target tissues',
+  'GH on FFA':'Raises serum FFA (lipolytic) — activates hormone-sensitive lipase in adipose',
+  'Diabetogenic':'Because GH directly opposes insulin at target tissues: reduces GLUT4 translocation, activates gluconeogenic enzymes, and induces insulin resistance via SOCS and lipotoxicity pathways. Chronic excess → glucose intolerance / diabetes in acromegaly',
+  'Hypoglycemia on GH':'HYPOGLYCEMIA strongly STIMULATES GH release (counter-regulatory). This is the basis of the Insulin Tolerance Test (ITT) — gold standard for diagnosing GH DEFICIENCY',
+  '4 counter-regulatory':'GH + CORTISOL + GLUCAGON + EPINEPHRINE — all oppose insulin; raise serum glucose during fasting/stress',
+  'Insulin resistance mechanism':'Chronic GH → ↑FFAs (lipotoxicity) → inhibit muscle insulin signaling. Also ↑SOCS proteins → feedback inhibition of insulin receptor signaling. Direct GH effect on post-receptor signaling (↓GLUT4)',
+  'Growth plate cell':'Chondrocytes — proliferate and undergo hypertrophy → cartilage matrix → endochondral ossification → linear bone growth',
+  'Growth plate closure':'Females: ~14–16; Males: ~16–18. Signal to close: ESTROGEN (in both sexes — aromatized from testosterone in males). That is why estrogen deficiency states (e.g., untreated Klinefelter) cause tall stature with unfused plates',
+  'Pre vs post puberty':'Pre-puberty (open plates) + GH excess → IGF-1 drives chondrocyte proliferation → accelerated LINEAR growth → GIGANTISM. Post-puberty (fused plates) + GH excess → only APPOSITIONAL (width/thickness) growth → enlarged hands, feet, jaw, soft tissues → ACROMEGALY',
+  'AA transporter':'IGF-1 stimulates amino acid uptake via transporters (SLC-family) and ribosomal biogenesis — key for protein synthesis in muscle and chondrocytes'
+};
+
+const a2={
+  'GH pattern':'Pulsatile (mostly night-dominant). ~4–8 pulses per 24 hours; largest during sleep',
+  'Largest pulse timing':'During the first few hours of night sleep, roughly 1 hour after sleep onset',
+  'Sleep stage':'Slow-wave sleep (SWS) = N3 (non-REM, deep sleep). Sleep deprivation markedly blunts GH secretion',
+  'Random GH:poor':'GH is pulsatile with very short half-life (~20 min). Between pulses, levels are near zero even in healthy adults. A single random value gives no information about chronic GH exposure',
+  'Screening test':'Serum IGF-1 — stable, long half-life, integrates 24-hour GH exposure. First-line for screening for acromegaly or adult GHD',
+  'Confirmatory test':'OGTT with GH measurement — 75 g oral glucose; healthy: GH suppresses to <1 ng/mL at 2 h. Acromegaly: GH fails to suppress (or paradoxically rises)',
+  'Neonate':'HIGH GH and IGF-1 at birth (newborn period). GH required for normal neonatal glucose regulation and growth',
+  'Childhood':'Moderate baseline; pulsatile release. Steady IGF-1 reflecting ongoing linear growth',
+  'Puberty':'PEAK GH and IGF-1 of lifetime (driven by sex steroids amplifying GH pulse amplitude). Responsible for pubertal growth spurt. Then plates fuse and final height is reached',
+  'Young adult':'Steady lower-than-puberty baseline; still important for body composition and metabolism. Begins gradual decline from ~age 25–30',
+  'Somatopause':'GH and IGF-1 fall ~50% per decade after peak. Contributes to age-related ↓ muscle mass, ↑ fat mass, ↓ bone density. Not reversed by exogenous GH in the elderly (and risky — cancer, glucose intolerance)',
+  'Long-loop feedback':'IGF-1 from the liver (target-organ hormone) suppresses GH by stimulating hypothalamic somatostatin release and directly inhibiting pituitary somatotroph response to GHRH',
+  'Short-loop feedback':'GH itself (pituitary hormone) → hypothalamus → ↑somatostatin, ↓GHRH',
+  'Ultra-short loop':'GHRH inhibits its own release from arcuate neurons (autoregulatory)',
+  'IGF-1 two arms':'(1) Stimulates somatostatin (GHIH) release from hypothalamus → inhibits GH. (2) Directly inhibits somatotroph response to GHRH at the pituitary'
+};
+
+const a3={
+  'GHRH':'Arcuate nucleus → portal blood → Gs-cAMP on somatotroph | Physiologic releasing hormone; sermorelin is an analog used diagnostically and therapeutically',
+  'Ghrelin':'Stomach oxyntic cells → GHSR (Gq) on somatotroph + arcuate | Strongly stimulates GH; also appetite. Peaks pre-meals. GHRP/GHRH synergize for provocative testing',
+  'Sleep':'Slow-wave sleep triggers largest endogenous GH pulse | Sleep deprivation blunts GH; chronic sleep loss → metabolic dysfunction + impaired growth in kids',
+  'Exercise':'Acute exercise (especially resistance + high intensity) → GH pulse via sympathetic/ghrelin pathways | Part of physiologic anabolism of training',
+  'Hypoglycemia':'Low glucose → strong GH stimulus (counter-regulation) | GOLD STANDARD test for GHD = Insulin Tolerance Test (ITT): induce glucose <40 mg/dL → measure GH response',
+  'Arginine':'Arginine/protein meal → ↓somatostatin release + direct stimulation | Arginine + GHRH is a safer alternative to ITT for GHD diagnosis',
+  'Estrogen':'Oral estrogen amplifies GH pulse amplitude at puberty and in women | Explains female > male GH levels during reproductive years; transdermal estrogen has less effect',
+  'Somatostatin':'Arcuate/periventricular hypothalamus → Gi on somatotroph | Main physiologic brake. Octreotide/lanreotide mimic this for acromegaly treatment',
+  'IGF-1':'Target-organ hormone (liver) → long-loop feedback | Rises with GH excess → tries to shut down axis. In pegvisomant therapy, GH rises because this feedback is broken',
+  'Hyperglycemia':'High glucose suppresses GH via hypothalamic somatostatin | OGTT confirmatory test: healthy suppress GH <1 ng/mL; acromegaly fails to suppress',
+  'FFA':'High circulating free fatty acids suppress GH (partly via somatostatin) | Explains blunted GH in obesity; lipid-heavy meals blunt stim tests',
+  'Glucocorticoids':'Chronic cortisol excess suppresses GH axis at multiple levels | Clinical: kids on chronic steroids have growth failure (Cushing-related short stature); reversible with dose reduction',
+  'Obesity':'Obese patients have markedly blunted GH pulses (complex: ↑insulin, ↑FFA, ↑leptin resistance) | Can cause false-positive GHD diagnoses; use BMI-adjusted cutoffs',
+  'Somatropin':'Recombinant human GH (rhGH); binds GH-R → JAK-STAT → IGF-1 synthesis | Pediatric GHD, Turner, chronic kidney disease, Prader-Willi, adult GHD',
+  'Mecasermin':'Recombinant IGF-1 (usually with IGFBP-3 as mecasermin-rinfabate) | Laron syndrome (GH-R defect) — GH is useless; give IGF-1 directly. Also severe IGF-1 deficiency',
+  'Octreotide / lanreotide':'Somatostatin analogs; bind SSTR2/5 → suppress GH release | First-line medical therapy for acromegaly (after surgery failure). Also used for carcinoid, VIPoma, variceal bleeding',
+  'Pegvisomant':'PEGylated GH-R ANTAGONIST; blocks receptor dimerization → blocks JAK2-STAT5 | Acromegaly not controlled by somatostatin analogs. Follow IGF-1 (GH rises paradoxically as feedback is lost)',
+  'Cabergoline':'D2 agonist; usually inhibits prolactin but in some somatotroph adenomas paradoxically suppresses GH | Adjunct in acromegaly with mild disease or mixed GH-prolactin adenomas',
+  'Sermorelin / tesamorelin':'GHRH analogs → stimulate somatotroph via Gs-cAMP | Sermorelin: GHD diagnostic/therapy. Tesamorelin: HIV-associated lipodystrophy (reduces visceral fat)'
+};
+
+const a4={
+  'Timing':'BEFORE epiphyseal fusion (pre-puberty or peri-puberty) | AFTER fusion (adult)',
+  'Gigantism findings':'Accelerated LINEAR growth → extreme height; lengthened limbs; normal proportions until late. Can eventually develop acromegalic features if excess continues post-fusion',
+  'Acromegaly findings':'Hands/feet enlargement (rings, shoes no longer fit); coarse facial features; prognathism (jaw protrusion); frontal bossing; MACROGLOSSIA; spacing of teeth; deepened voice; organomegaly (heart, thyroid, liver); thickened skin; skin tags; carpal tunnel; joint pain',
+  'Cause — gigantism':'Somatotroph pituitary adenoma (same as adults); rarely McCune-Albright, Carney complex, familial isolated pituitary adenoma (FIPA)',
+  'Cause — acromegaly':'Somatotroph pituitary adenoma (>95%); rarely ectopic GHRH secretion (bronchial/pancreatic carcinoid, pheochromocytoma) or ectopic GH (lymphoma, very rare)',
+  'CV complications':'Hypertension; cardiomegaly (concentric hypertrophy → dilated cardiomyopathy); accelerated atherosclerosis | Main cause of death in acromegaly',
+  'Metabolic':'Insulin resistance → glucose intolerance → overt T2DM in up to 30%; dyslipidemia; hyperphosphatemia (GH → renal P retention)',
+  'Other':'Bitemporal hemianopsia (mass effect); headaches; obstructive sleep apnea (macroglossia + soft tissue); COLON POLYPS/cancer (screen colonoscopy); arthropathy; carpal tunnel syndrome',
+  'Best screening':'Serum IGF-1 (elevated; reflects chronic GH excess)',
+  'Confirmatory':'Oral glucose tolerance test with GH measurement — healthy: GH <1 ng/mL at 2 h; acromegaly: FAILS to suppress (often paradoxically rises)',
+  'Imaging':'MRI of pituitary (after biochemical confirmation) — to localize somatotroph adenoma',
+  'Ectopic GHRH':'Rare (<1%): bronchial / pancreatic / thymic carcinoid tumors or pheochromocytoma. Clue: elevated plasma GHRH (normally suppressed when GH is high)',
+  'First-line treatment':'Transsphenoidal pituitary surgery — cures up to 80% of microadenomas, 50% of macroadenomas',
+  'Somatostatin analog':'Octreotide or lanreotide — bind SSTR2/5 on somatotrophs → ↓GH release. Can also shrink tumor',
+  'GH-R antagonist':'Pegvisomant — PEGylated mutant GH that blocks receptor dimerization → no JAK2-STAT5 → hepatic IGF-1 falls. Monitor IGF-1 (not GH)',
+  'Dopamine agonist':'Cabergoline — paradoxical GH suppression in a minority of somatotroph adenomas, especially those co-secreting prolactin or with high D2 receptor expression',
+  'Radiation':'Stereotactic (gamma knife) or conventional radiotherapy — reserved for disease unresponsive to surgery + medical therapy. Takes 5–10 years for full effect; risks hypopituitarism',
+  'Pediatric GHD':'Pituitary problem — congenital (PROP1, POU1F1, GHRH-R, GH1 mutations) or acquired (craniopharyngioma, trauma) | GH low (inadequate response to stimulation) | IGF-1 low | Short stature with normal proportions, delayed bone age, chubby cherubic appearance, central adiposity | Recombinant GH (somatropin)',
+  'Adult GHD':'Pituitary/hypothalamic injury (adenoma/Sheehan/surgery/radiation) | GH low after provocation | IGF-1 low or normal-low | Central adiposity, ↓lean mass, ↓bone density, ↓exercise tolerance, ↓QoL, cardiovascular risk | Recombinant GH — lower doses than pediatric',
+  'Laron syndrome':'GH RECEPTOR mutation (autosomal recessive) — GH cannot signal | GH HIGH (or normal) — feedback lost | IGF-1 LOW | Severe short stature with normal proportions, frontal bossing, chubby appearance, hypoglycemia in infancy, ↓ cancer + ↓ diabetes risk (GH/IGF-1 signaling blunted) | RECOMBINANT IGF-1 (mecasermin) — exogenous GH is useless',
+  'Gold-standard GHD test':'Insulin tolerance test (ITT) — induce hypoglycemia (<40 mg/dL), measure peak GH. Healthy adult: >5 ng/mL. GHD: <3–5 ng/mL',
+  'Safer alternatives':'GHRH + arginine combined stim test; glucagon stim test. Used in cardiac/seizure risk patients where ITT is contraindicated',
+  'Single random GH':'Useless — GH is pulsatile and near-zero between pulses. Must use provocative stimulation',
+  'IGF-1 in GHD':'Can be within the normal range in up to 30–40% of adults with biochemical GHD (age-related reference intervals overlap). That is why provocative testing is still required for diagnosis'
+};
+
+function rev(id,obj){
+  const el=document.getElementById(id);
+  el.style.display='block';
+  el.innerHTML='<strong>Answer key:</strong><br><br>'+Object.entries(obj).map(([k,v])=>`<b>${k}:</b> ${v}`).join('<br><br>');
+}
+</script>
+</body></html>
