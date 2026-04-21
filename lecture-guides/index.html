@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HoyaDocs | Endocrine Lecture Guides</title>
+  <title>HoyaDocs | Endocrine Study Hub</title>
 
+  <!-- Prevents flash of wrong theme on load -->
   <script>(function(){const t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);})();</script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,13 +30,13 @@
       --rule:       #e2e8f0;
       --card-sh:    0 1px 3px rgba(0,0,0,0.05);
       --bc-blue-bg: #eef4ff; --bc-blue-br: #c7d9f5; --bc-blue-tx: #1f4b99;
-      --bc-grn-bg:  #FFFBEB; --bc-grn-br:  #fde68a; --bc-grn-tx:  #A67C00;
-      --bc-ros-bg:  #FFFBEB; --bc-ros-br:  #fde68a; --bc-ros-tx:  #A67C00;
+      --bc-grn-bg:  #fff1f2; --bc-grn-br:  #fde68a; --bc-grn-tx:  #CA8A04;
+      --bc-ros-bg:  #fff1f2; --bc-ros-br:  #fde68a; --bc-ros-tx:  #CA8A04;
       --bc-pur-bg:  #f5f0ff; --bc-pur-br:  #d8b4fe; --bc-pur-tx:  #6d28d9;
-      --bc-amb-bg:  #fffbeb; --bc-amb-br:  #fde68a; --bc-amb-tx:  #92400e;
-      --hero-em:    #A67C00;
+      --hero-em:    #CA8A04;
     }
 
+    /* ── DARK MODE ── */
     [data-theme="dark"] {
       --bg:         #1e1800;
       --surface:    #3d2f08;
@@ -48,7 +49,6 @@
       --bc-grn-bg:  #1f1700; --bc-grn-br:  #7a5f10; --bc-grn-tx:  #fbbf24;
       --bc-ros-bg:  #250a12; --bc-ros-br:  #5b4608; --bc-ros-tx:  #fbbf24;
       --bc-pur-bg:  #1a1033; --bc-pur-br:  #4c1d95; --bc-pur-tx:  #a78bfa;
-      --bc-amb-bg:  #1f1500; --bc-amb-br:  #78350f; --bc-amb-tx:  #fbbf24;
       --hero-em:    #EAB308;
     }
 
@@ -66,107 +66,102 @@
     button { font-family: inherit; cursor: pointer; }
 
     /* ══════════════════════════════════════
-       BODY / PAGE STRUCTURE
+       LAYOUT SHELL
     ══════════════════════════════════════ */
-    body { display: flex; flex-direction: column; }
+    .shell { display: flex; min-height: 100vh; }
 
     /* ══════════════════════════════════════
-       TOPNAV  (full-width sticky bar)
-    ══════════════════════════════════════ */
-    .topnav {
-      width: 100%; background: var(--sb);
-      position: fixed; top: 0; left: 0; right: 0; z-index: 400;
-      display: flex; align-items: center;
-      padding: 0 20px; height: 52px; gap: 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      transition: background 0.2s; flex-shrink: 0;
-    }
-    .tn-brand {
-      display: flex; flex-direction: column; justify-content: center;
-      margin-right: 28px; flex-shrink: 0; gap: 1px;
-    }
-    .tn-name {
-      font-size: 1.15rem; font-weight: 900; color: #fff;
-      letter-spacing: -0.01em; text-decoration: none;
-      text-shadow: 0 1px 8px rgba(0,0,0,0.25);
-    }
-    .tn-name:hover { color: rgba(255,255,255,0.75); }
-
-    /* Resource nav links (center) */
-    .tn-nav { display: flex; align-items: center; gap: 4px; flex: 1; }
-    .tn-link {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 6px 12px; border-radius: 7px;
-      font-size: 0.80rem; font-weight: 600;
-      color: rgba(255,255,255,0.62);
-      border: 1px solid rgba(255,255,255,0.10);
-      transition: background 0.13s, color 0.13s, border-color 0.13s;
-      white-space: nowrap; text-decoration: none;
-    }
-    .tn-link:hover { background: rgba(255,255,255,0.08); color: #fff; border-color: rgba(255,255,255,0.22); }
-
-    /* Dark toggle (right) */
-    .tn-right { margin-left: auto; flex-shrink: 0; }
-    .dark-toggle {
-      width: 30px; height: 30px; border-radius: 7px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.82rem; color: rgba(255,255,255,0.7);
-      flex-shrink: 0; transition: background 0.14s;
-    }
-    .dark-toggle:hover { background: rgba(255,255,255,0.16); }
-
-    /* ══════════════════════════════════════
-       SHELL  (sidebar + main, below topnav)
-    ══════════════════════════════════════ */
-    .shell { display: flex; flex-direction: row; flex: 1; padding-top: 52px; }
-
-    /* ══════════════════════════════════════
-       LEFT SIDEBAR  (subject tabs)
+       SIDEBAR
     ══════════════════════════════════════ */
     .sidebar {
-      width: 200px; flex-shrink: 0;
+      width: 232px; flex-shrink: 0;
       background: var(--sb);
-      position: sticky; top: 52px; height: calc(100vh - 52px);
+      position: sticky; top: 0; height: 100vh;
       display: flex; flex-direction: column;
-      padding: 24px 12px 24px;
+      padding: 28px 18px 24px;
       overflow-y: auto;
       transition: background 0.2s;
     }
-    .sb-section-label {
-      font-size: 0.60rem; font-weight: 700;
-      letter-spacing: 0.10em; text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-      margin-bottom: 8px; padding: 0 10px;
+
+    .sb-brand {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 6px;
     }
-    .sb-nav { display: flex; flex-direction: column; gap: 2px; }
+
+    .sb-crest { display: none; }
+
+    .sb-name {
+      font-size: 1.35rem; font-weight: 900; color: #fff;
+      letter-spacing: -0.01em; flex: 1;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.25);
+    }
+
+    .sb-block {
+      font-size: 0.72rem; font-weight: 500;
+      color: rgba(255,255,255,0.42);
+      margin-bottom: 26px; padding-left: 2px;
+    }
+
+    .sb-section-label {
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.10em; text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 6px; padding: 0 8px;
+    }
+
+    .sb-nav { display: flex; flex-direction: column; gap: 2px; margin-bottom: 20px; }
+
     .sb-link {
       display: flex; align-items: center; gap: 9px;
-      padding: 9px 10px; border-radius: 8px;
-      font-size: 0.83rem; font-weight: 500;
-      color: rgba(255,255,255,0.58);
+      padding: 8px 10px; border-radius: 8px;
+      font-size: 0.82rem; font-weight: 500;
+      color: rgba(255,255,255,0.60);
       transition: background 0.13s, color 0.13s;
-      text-decoration: none; white-space: nowrap;
     }
     .sb-link:hover { background: var(--sb-hover); color: rgba(255,255,255,0.92); }
-    .sb-link.active { background: rgba(255,255,255,0.10); color: #fff; }
+
     .sb-link-icon {
       width: 22px; height: 22px; border-radius: 6px;
+      background: rgba(255,255,255,0.08);
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.80rem; flex-shrink: 0;
+      font-size: 0.82rem; flex-shrink: 0;
     }
-    .sb-icon-blue   { background: rgba(99,140,220,0.32); }
-    .sb-icon-green  { background: rgba(74,180,120,0.32); }
-    .sb-icon-rose   { background: rgba(220,90,110,0.32); }
-    .sb-icon-amber  { background: rgba(245,180,60,0.32); }
-    .sb-icon-purple { background: rgba(139,92,246,0.32); }
+    .sb-icon-blue  { background: rgba(99,140,220,0.32); }
+    .sb-icon-green { background: rgba(74,180,120,0.32); }
+    .sb-icon-rose  { background: rgba(220,90,110,0.32); }
+    .sb-icon-teal  { background: rgba(20,184,166,0.32); }
+    .sb-icon-amber { background: rgba(245,158,11,0.32); }
+    .sb-icon-qref  { background: rgba(139,92,246,0.32); }
+
+    .sb-rule { height: 1px; background: var(--sb-line); margin: 4px 0 18px; }
+    .sb-spacer { flex: 1; }
+
+    .sb-ext-label {
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.10em; text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 8px; padding: 0 8px;
+    }
+
+    .sb-ext-link {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 9px 10px; border-radius: 8px;
+      font-size: 0.82rem; font-weight: 600;
+      color: rgba(255,255,255,0.65);
+      border: 1px solid rgba(255,255,255,0.10);
+      margin-bottom: 6px;
+      transition: background 0.13s, color 0.13s, border-color 0.13s;
+    }
+    .sb-ext-link:hover { background: rgba(255,255,255,0.08); color: #fff; border-color: rgba(255,255,255,0.20); }
+    .sb-ext-link:last-child { margin-bottom: 0; }
+    .sb-ext-arrow { opacity: 0.5; font-size: 0.75rem; }
 
     /* ══════════════════════════════════════
        MAIN CONTENT
     ══════════════════════════════════════ */
     .main { flex: 1; min-width: 0; background: var(--bg); transition: background 0.2s; }
-    .main-inner { max-width: 820px; padding: 48px 44px 80px; }
+
+    .main-inner { max-width: 860px; padding: 52px 48px 80px; }
 
     /* ── HERO ── */
     .hero { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--rule); }
@@ -182,6 +177,7 @@
       font-weight: 900; letter-spacing: -0.045em;
       color: var(--ink); line-height: 0.98; margin-bottom: 20px;
     }
+
     .hero-title em { font-style: normal; color: var(--hero-em); }
 
     .hero-sub {
@@ -189,123 +185,54 @@
       line-height: 1.7; margin-bottom: 22px;
     }
 
-    /* ── RESOURCE CARDS ── */
-    .res-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 14px; margin-bottom: 36px;
-    }
-    .bcard {
-      border-radius: 16px; padding: 22px;
-      display: flex; flex-direction: column;
-      border: 1px solid transparent;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      position: relative; overflow: hidden;
-      text-decoration: none; color: inherit;
-    }
-    .bcard:hover { transform: translateY(-3px); }
-    .bcard-watermark {
-      position: absolute; bottom: -14px; right: -8px;
-      font-size: 5.5rem; opacity: 0.07;
-      pointer-events: none; user-select: none; line-height: 1;
-    }
-    .bcard-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-    .bcard-icon {
-      width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
-      background: rgba(255,255,255,0.75);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.10);
-      display: flex; align-items: center; justify-content: center; font-size: 1.35rem;
-    }
-    .bcard-header-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
-    .bcard-label {
-      font-size: 0.60rem; font-weight: 700;
-      letter-spacing: 0.10em; text-transform: uppercase; opacity: 0.65;
-    }
-    .bcard h3 {
-      font-size: 0.98rem; font-weight: 800;
-      letter-spacing: -0.02em; color: var(--ink); margin: 0; line-height: 1.2;
-    }
-    .bcard p {
-      font-size: 0.82rem; color: var(--ink-2);
-      line-height: 1.6; flex: 1; margin-bottom: 16px;
-    }
-    .bcard-cta {
+    /* ── FEEDBACK BUTTON (fixed top-right) ── */
+    .feedback-fab {
+      position: fixed; top: 16px; right: 20px; z-index: 500;
       display: inline-flex; align-items: center; gap: 6px;
-      font-size: 0.80rem; font-weight: 700;
-      transition: gap 0.14s; align-self: flex-start;
+      padding: 7px 14px; border-radius: 20px;
+      background: var(--hero-em); color: #fff;
+      font-size: 0.78rem; font-weight: 700;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+      transition: opacity 0.15s, transform 0.15s;
+      text-decoration: none;
     }
-    .bcard:hover .bcard-cta { gap: 10px; }
+    .feedback-fab:hover { opacity: 0.88; transform: translateY(-1px); }
 
-    .bc-green  { background: var(--bc-grn-bg); border-color: var(--bc-grn-br); }
-    .bc-green:hover  { box-shadow: 0 12px 40px rgba(22,101,52,0.14), 0 3px 10px rgba(22,101,52,0.07); }
-    .bc-green  .bcard-cta, .bc-green  .bcard-label { color: var(--bc-grn-tx); }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; }
 
-    .bc-purple { background: var(--bc-pur-bg); border-color: var(--bc-pur-br); }
-    .bc-purple:hover { box-shadow: 0 12px 40px rgba(109,40,217,0.14), 0 3px 10px rgba(109,40,217,0.07); }
-    .bc-purple .bcard-cta, .bc-purple .bcard-label { color: var(--bc-pur-tx); }
-
-    .bc-blue   { background: var(--bc-blue-bg); border-color: var(--bc-blue-br); }
-    .bc-blue:hover   { box-shadow: 0 12px 40px rgba(31,75,153,0.16), 0 3px 10px rgba(31,75,153,0.08); }
-    .bc-blue   .bcard-cta, .bc-blue   .bcard-label { color: var(--bc-blue-tx); }
-
-    @media (max-width: 640px) { .res-grid { grid-template-columns: 1fr; } }
-
-    /* ── WORKFLOW STEPS ── */
-    .workflow {
-      display: flex; align-items: flex-start; gap: 0;
-      margin: 20px 0 6px; flex-wrap: wrap;
+    /* ── HERO JUMP BUTTONS ── */
+    .hero-jump {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+      margin-top: 6px;
     }
-    .wf-step {
-      display: flex; align-items: flex-start; gap: 10px;
-      flex: 1; min-width: 140px;
-    }
-    .wf-num {
-      font-size: 2rem; font-weight: 900; letter-spacing: -0.06em;
-      color: var(--rule); line-height: 1; flex-shrink: 0;
-    }
-    .wf-body { padding-top: 2px; }
-    .wf-title { font-size: 0.82rem; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
-    .wf-desc  { font-size: 0.72rem; color: var(--ink-3); line-height: 1.5; }
-    .wf-divider {
-      width: 1px; background: var(--rule);
-      margin: 4px 16px 0; align-self: stretch; flex-shrink: 0;
-    }
-    .hero-note {
-      font-size: 0.75rem; color: var(--ink-3);
-      line-height: 1.6; margin-top: 18px;
-      border-top: 1px solid var(--rule); padding-top: 14px;
-    }
-    .hero-note a {
-      color: #A67C00; text-decoration: underline;
-      text-underline-offset: 2px; transition: color 0.15s; font-weight: 600;
-    }
-    .hero-note a:hover { color: #854d0e; }
-    [data-theme="dark"] .hero-note a { color: #EAB308; }
-    [data-theme="dark"] .hero-note a:hover { color: #fde68a; }
-    @media (max-width: 640px) {
-      .wf-divider { display: none; }
-      .wf-step { min-width: 45%; }
-      .workflow { gap: 14px; }
-    }
-
-    /* ── SEARCH BAR ── */
-    .search-bar-wrap {
-      position: relative; margin-bottom: 36px;
-    }
-    .search-bar-icon {
-      position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
-      font-size: 14px; color: var(--ink-3); pointer-events: none;
-    }
-    .search-bar {
-      width: 100%; padding: 10px 14px 10px 38px;
-      border: 1px solid var(--rule); border-radius: 10px;
-      background: var(--surface); color: var(--ink);
-      font-size: 0.9rem; font-family: inherit;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      outline: none;
+    @media (max-width: 1024px) { .hero-jump { grid-template-columns: repeat(2, 1fr); } }
+    .hero-jump-btn {
+      display: flex; align-items: center; justify-content: center; gap: 7px;
+      padding: 10px 14px; border-radius: 10px;
+      background: var(--surface); border: 1px solid var(--rule);
+      font-size: 0.82rem; font-weight: 700; color: var(--ink-2);
       box-shadow: var(--card-sh);
+      transition: border-color 0.15s, color 0.15s, transform 0.15s, background 0.15s;
+      text-align: center; line-height: 1.2;
     }
-    .search-bar:focus { border-color: #A67C00; box-shadow: 0 0 0 3px rgba(22,163,74,0.12); }
-    .search-bar::placeholder { color: var(--ink-3); }
+    .hero-jump-btn:hover {
+      border-color: var(--hero-em); color: var(--hero-em);
+      transform: translateY(-1px);
+    }
+    .hero-jump-icon { font-size: 1rem; line-height: 1; }
+    @media (max-width: 680px) {
+      .hero-jump { grid-template-columns: 1fr; }
+      .hero-jump-btn { padding: 8px 12px; font-size: 0.78rem; }
+    }
+
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 12px; border-radius: 999px;
+      background: var(--surface); border: 1px solid var(--rule);
+      font-size: 0.78rem; font-weight: 600; color: var(--ink-2);
+      box-shadow: var(--card-sh);
+      transition: background 0.2s, border-color 0.2s;
+    }
 
     /* ── SECTION DIVIDER ── */
     .section-divider { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
@@ -315,13 +242,130 @@
       letter-spacing: -0.02em; color: var(--ink); white-space: nowrap;
     }
 
-    .section-divider-line { flex: 1; height: 1px; background: #A67C00; }
-    [data-theme="dark"] .section-divider-line { background: #5b4608; }
+    .section-divider-line { flex: 1; height: 1px; background: #CA8A04; }
 
-    .section-block { margin-bottom: 44px; scroll-margin-top: 68px; }
-    .section-block.hidden { display: none; }
+    .section-block { margin-bottom: 36px; }
 
-    /* ── UTIL LIST (guide rows) ── */
+    /* ══════════════════════════════════════
+       BENTO STUDY TOOL CARDS
+    ══════════════════════════════════════ */
+    .bento {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .bento-3 { grid-template-columns: repeat(3, 1fr); }
+
+    .bcard {
+      border-radius: 14px; padding: 16px;
+      display: flex; flex-direction: column;
+      border: 1px solid transparent;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative; overflow: hidden;
+    }
+    .bcard:hover { transform: translateY(-2px); }
+
+    .bcard-watermark {
+      position: absolute; bottom: -10px; right: -6px;
+      font-size: 4.8rem; opacity: 0.06;
+      pointer-events: none; user-select: none; line-height: 1;
+    }
+
+    .bcard-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+
+    .bcard-icon {
+      width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(255,255,255,0.75);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+    }
+    .bcard-feature .bcard-icon { width: 42px; height: 42px; font-size: 1.3rem; }
+
+    .bcard-header-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+
+    .bcard-label {
+      font-size: 0.58rem; font-weight: 700;
+      letter-spacing: 0.10em; text-transform: uppercase; opacity: 0.65;
+    }
+
+    .bcard h3 {
+      font-size: 0.92rem; font-weight: 800;
+      letter-spacing: -0.02em; color: var(--ink); margin: 0; line-height: 1.2;
+    }
+    .bcard-feature h3 { font-size: 1rem; }
+
+    .bcard p {
+      font-size: 0.76rem; color: var(--ink-2);
+      line-height: 1.5; flex: 1; margin-bottom: 12px;
+    }
+
+    .bcard-cta {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 0.72rem; font-weight: 700;
+      transition: gap 0.14s; align-self: flex-start;
+    }
+    .bcard:hover .bcard-cta { gap: 10px; }
+
+    .bc-blue  { background: var(--bc-blue-bg); border-color: var(--bc-blue-br); }
+    .bc-blue:hover  { box-shadow: 0 12px 40px rgba(31,75,153,0.16), 0 3px 10px rgba(31,75,153,0.08); }
+    .bc-blue  .bcard-cta, .bc-blue  .bcard-label { color: var(--bc-blue-tx); }
+
+    .bc-green { background: var(--bc-grn-bg); border-color: var(--bc-grn-br); }
+    .bc-green:hover { box-shadow: 0 12px 40px rgba(22,101,52,0.14), 0 3px 10px rgba(22,101,52,0.07); }
+    .bc-green .bcard-cta, .bc-green .bcard-label { color: var(--bc-grn-tx); }
+
+    /* Exam Study Tools cards — pink background + original darker pink outline */
+    .bc-rose  { background: #fff1f2; border-color: #fda4af; }
+    .bc-rose:hover  {
+      border-color: #fb7185;
+      background: #ffe4e6;
+      box-shadow: 0 12px 40px rgba(159,18,57,0.14), 0 3px 10px rgba(159,18,57,0.07);
+    }
+    /* Updated font styling for EXAM · 01/02/03 labels and Open Section / Coming Soon CTAs */
+    .bc-rose .bcard-label {
+      color: #5b4608;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      opacity: 1;
+      font-family: 'Inter', -apple-system, sans-serif;
+    }
+    .bc-rose .bcard-cta {
+      color: #5b4608;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      font-family: 'Inter', -apple-system, sans-serif;
+    }
+    .bc-rose h3 { color: #3d2f08; }
+    .bc-rose p  { color: #5b4608; opacity: 0.82; }
+
+    .bc-purple { background: var(--bc-pur-bg); border-color: var(--bc-pur-br); }
+    .bc-purple:hover { box-shadow: 0 12px 40px rgba(109,40,217,0.14), 0 3px 10px rgba(109,40,217,0.07); }
+    .bc-purple .bcard-cta, .bc-purple .bcard-label { color: var(--bc-pur-tx); }
+
+    .bc-dkpurple { background: #4c1d95; border-color: #6d28d9; color: #f1f5f9; }
+    .bc-dkpurple:hover { box-shadow: 0 12px 40px rgba(76,29,149,0.35), 0 3px 10px rgba(76,29,149,0.2); }
+    .bc-dkpurple h3 { color: #f1f5f9; }
+    .bc-dkpurple p  { color: #e9d5ff; }
+    .bc-dkpurple .bcard-label { color: #c4b5fd; }
+    .bc-dkpurple .bcard-cta   { color: #4ade80; }
+    .bc-dkpurple .bcard-icon  { background: rgba(255,255,255,0.18); }
+    .bc-dkpurple .bcard-watermark { color: #fff; }
+
+    .bc-dark { background: #5b4608; border-color: #854d0e; color: #f1f5f9; }
+    .bc-dark:hover { box-shadow: 0 12px 40px rgba(91,70,8,0.35), 0 3px 10px rgba(91,70,8,0.2); }
+    .bc-dark h3 { color: #f1f5f9; }
+    .bc-dark p  { color: #fef3c7; }
+    .bc-dark .bcard-label { color: #fde68a; }
+    .bc-dark .bcard-cta   { color: #fef08a; }
+    .bc-dark .bcard-icon  { background: rgba(255,255,255,0.18); }
+    .bc-dark .bcard-watermark { color: #fff; }
+
+    /* ══════════════════════════════════════
+       UTILITY ROWS
+    ══════════════════════════════════════ */
     .util-list {
       background: var(--surface); border: 1px solid var(--rule);
       border-radius: 16px; overflow: hidden; box-shadow: var(--card-sh);
@@ -329,104 +373,40 @@
     }
 
     .util-row {
-      display: flex; align-items: flex-start; gap: 14px;
-      padding: 15px 20px; transition: background 0.14s;
-      text-decoration: none; color: inherit;
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 20px; transition: background 0.14s;
     }
-
     .util-row:not(:last-child) { border-bottom: 1px solid var(--rule); }
     .util-row:hover { background: color-mix(in srgb, var(--bg) 60%, var(--surface)); }
-    .util-row.hidden { display: none; }
 
-    .util-icon {
-      width: 40px; height: 40px; border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.15rem; flex-shrink: 0; margin-top: 2px;
-    }
-    .ui-blue   { background: #dbeafe; }
-    .ui-green  { background: #FEF3C7; }
-    .ui-purple { background: #ede9fe; }
-    .ui-rose   { background: #FEF3C7; }
+    .util-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    .ui-teal   { background: #ccfbf1; }
     .ui-amber  { background: #fef3c7; }
+    .ui-purple { background: #ede9fe; }
 
-    [data-theme="dark"] .ui-blue   { background: rgba(99,140,220,0.20); }
-    [data-theme="dark"] .ui-green  { background: rgba(74,180,120,0.20); }
-    [data-theme="dark"] .ui-purple { background: rgba(139,92,246,0.20); }
-    [data-theme="dark"] .ui-rose   { background: rgba(220,90,110,0.20); }
-    [data-theme="dark"] .ui-amber  { background: rgba(245,158,11,0.20); }
-
-    .util-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
-    .util-text .util-badge { align-self: flex-start; margin-bottom: 2px; }
+    .util-text { flex: 1; }
     .util-text strong { display: block; font-size: 0.93rem; font-weight: 700; color: var(--ink); }
-    .util-text span   { font-size: 0.80rem; color: var(--ink-3); }
+    .util-text span   { font-size: 0.8rem; color: var(--ink-3); }
 
-    .util-badge {
-      font-size: 0.66rem; font-weight: 700; letter-spacing: 0.04em;
-      padding: 2px 8px; border-radius: 999px;
-      flex-shrink: 0; white-space: nowrap;
-    }
-    .ub-blue   { background: var(--bc-blue-bg); color: var(--bc-blue-tx); border: 1px solid var(--bc-blue-br); }
-    .ub-green  { background: var(--bc-grn-bg);  color: var(--bc-grn-tx);  border: 1px solid var(--bc-grn-br); }
-    .ub-purple { background: var(--bc-pur-bg);  color: var(--bc-pur-tx);  border: 1px solid var(--bc-pur-br); }
-    .ub-rose   { background: var(--bc-ros-bg);  color: var(--bc-ros-tx);  border: 1px solid var(--bc-ros-br); }
-    .ub-amber  { background: var(--bc-amb-bg);  color: var(--bc-amb-tx);  border: 1px solid var(--bc-amb-br); }
-
-    .util-arrow {
-      font-size: 0.85rem; font-weight: 700; color: var(--ink-3);
-      transition: transform 0.14s;
-    }
+    .util-arrow { font-size: 0.85rem; font-weight: 700; color: var(--ink-3); transition: transform 0.14s; }
     .util-row:hover .util-arrow { transform: translateX(4px); color: var(--ink); }
 
-    /* ── ROW ACTION BUTTONS ── */
-    .row-actions {
-      display: flex; align-items: center; gap: 8px; flex-shrink: 0;
-      align-self: center;
-    }
+    /* ══════════════════════════════════════
+       WORKFLOW
+    ══════════════════════════════════════ */
+    .workflow-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; }
 
-    .row-btn {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 10px 11px; border-radius: 8px;
-      font-size: 0.82rem; font-weight: 600;
-      text-decoration: none; white-space: nowrap;
-      border: 1px solid transparent; transition: all 0.14s;
-      line-height: 1;
-    }
-    .rb-guide {
-      background: var(--surface); border-color: var(--rule); color: var(--ink-2);
-    }
-    .rb-guide:hover { border-color: var(--ink-3); color: var(--ink); }
+    .wf-item { padding: 0 22px; border-right: 1px solid var(--rule); }
+    .wf-item:first-child { padding-left: 0; }
+    .wf-item:last-child  { border-right: none; padding-right: 0; }
 
-    .rb-mcq {
-      background: #f5f0ff; border-color: #d8b4fe; color: #6d28d9;
-    }
-    .rb-mcq:hover { background: #ede9fe; border-color: #a78bfa; }
+    .wf-num { font-size: 2.4rem; font-weight: 900; letter-spacing: -0.06em; color: var(--rule); line-height: 1; margin-bottom: 10px; transition: color 0.2s; }
+    .wf-title { font-size: 0.85rem; font-weight: 700; color: var(--ink); margin-bottom: 5px; letter-spacing: -0.01em; }
+    .wf-desc  { font-size: 0.76rem; color: var(--ink-3); line-height: 1.55; }
 
-    .rb-drill {
-      background: #FFFBEB; border-color: #fde68a; color: #A67C00;
-    }
-    .rb-drill:hover { background: #FEF3C7; border-color: #EAB308; }
-
-    .rb-disabled {
-      background: var(--bg); border-color: var(--rule); color: var(--ink-3);
-      opacity: 0.42; cursor: not-allowed;
-    }
-
-    [data-theme="dark"] .rb-guide { background: var(--surface); border-color: var(--rule); color: var(--ink-3); }
-    [data-theme="dark"] .rb-guide:hover { color: var(--ink); }
-    [data-theme="dark"] .rb-mcq { background: rgba(139,92,246,0.12); border-color: rgba(139,92,246,0.35); color: #a78bfa; }
-    [data-theme="dark"] .rb-mcq:hover { background: rgba(139,92,246,0.22); }
-    [data-theme="dark"] .rb-drill { background: rgba(74,180,120,0.12); border-color: rgba(74,180,120,0.35); color: #fbbf24; }
-    [data-theme="dark"] .rb-drill:hover { background: rgba(74,180,120,0.22); }
-
-
-    /* hide button labels on narrow screens, keep emoji */
-    @media (max-width: 700px) {
-      .rb-label { display: none; }
-      .row-btn  { padding: 5px 7px; }
-      .util-badge { display: none; }
-    }
-
-    /* ── FOOTER ── */
+    /* ══════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════ */
     .footer {
       border-top: 1px solid var(--rule); padding-top: 22px;
       display: flex; align-items: center; justify-content: space-between;
@@ -434,585 +414,638 @@
     }
     .footer strong { color: var(--ink-2); font-weight: 600; }
 
-    /* ── EMPTY STATE ── */
-    .empty-state {
-      display: none; text-align: center;
-      padding: 48px 24px; color: var(--ink-3);
-      font-size: 0.88rem; background: var(--surface);
-      border: 1px solid var(--rule); border-radius: 16px;
+    /* ══════════════════════════════════════
+       MOBILE BOTTOM NAV
+    ══════════════════════════════════════ */
+    .mobile-nav {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 500;
+      background: var(--surface);
+      border-top: 1px solid var(--rule);
+      padding: 6px 8px max(8px, env(safe-area-inset-bottom));
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.10);
+      transition: background 0.2s, border-color 0.2s;
     }
-    .empty-state .empty-icon { font-size: 2rem; margin-bottom: 8px; }
-    .empty-state.show { display: block; }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      .sidebar { display: none; }
-      .tn-link  { display: none; }
-      .main-inner { padding: 32px 20px 80px; }
+    .mobile-nav-group { padding: 4px 2px; }
+    .mobile-nav-group + .mobile-nav-group {
+      border-top: 1px solid var(--rule);
+      margin-top: 2px; padding-top: 6px;
     }
-    @media (max-width: 640px) {
+    .mobile-nav-label {
+      font-size: 0.58rem; font-weight: 800;
+      letter-spacing: 0.10em; text-transform: uppercase;
+      color: var(--ink-3); padding: 0 6px 4px;
+    }
+
+    .mobile-nav-items { display: flex; justify-content: space-around; gap: 4px; }
+
+    .mobile-nav-item {
+      flex: 1; min-width: 0;
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      padding: 4px 6px; color: var(--ink-3);
+      font-size: 0.58rem; font-weight: 600; letter-spacing: 0.02em;
+      text-align: center; line-height: 1.15;
+      transition: color 0.13s;
+    }
+    .mobile-nav-item:hover { color: #CA8A04; }
+
+    .mobile-nav-icon { font-size: 1.2rem; line-height: 1; }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════ */
+    @media (max-width: 960px) {
+      .shell { flex-direction: column; }
+
+      .sidebar {
+        width: 100%; height: auto; position: sticky; top: 0; z-index: 400;
+        flex-direction: row; align-items: center;
+        padding: 12px 18px; gap: 12px; flex-wrap: nowrap;
+      }
+      .sb-brand   { margin-bottom: 0; flex: 1; }
+      .sb-block   { display: none; }
+      .sb-rule    { display: none; }
+      .sb-section-label { display: none; }
+      .sb-spacer  { display: none; }
+      .sb-ext-label { display: none; }
+      .sb-nav     { display: none; }
+      /* Hide quick-access links from top bar on mobile — accessed via bottom nav */
+      .sb-ext-link { display: none; }
+
+      .main-inner { padding: 24px 18px 160px; }
+
+      /* Move feedback FAB above mobile nav */
+      .feedback-fab { top: auto; bottom: 140px; right: 16px; font-size: 0.74rem; padding: 6px 12px; }
+
+      .mobile-nav { display: flex; }
+    }
+
+    @media (max-width: 900px) {
+      .bento-3 { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      .bento, .bento-3 { grid-template-columns: 1fr; }
+      .bcard-feature { grid-row: span 1; }
+
+      /* Give Today's Lectures a bounded height when stacked */
+      .today-lec-scroll { max-height: 260px; }
+
+      /* Slightly more compact cards */
+      .bcard { padding: 14px; border-radius: 12px; }
+      .bcard h3 { font-size: 0.9rem; }
+      .bcard-icon { width: 32px; height: 32px; font-size: 1rem; }
+
+      .workflow-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .wf-item { padding: 0; border-right: none; border-bottom: 1px solid var(--rule); padding-bottom: 20px; }
+      .wf-item:last-child { border-bottom: none; padding-bottom: 0; }
+
       .hero-title { font-size: 2.4rem; }
       .section-divider-text { font-size: 1.1rem; }
       .footer { flex-direction: column; align-items: flex-start; gap: 6px; }
-      .util-row { padding: 14px 14px; }
-      .main-inner { padding: 24px 14px 60px; }
-      .wf-divider { display: none; }
-      .wf-step { min-width: 45%; }
-      .workflow { gap: 14px; }
+
+      /* Larger touch targets for util rows */
+      .util-row { padding: 18px 16px; }
     }
+    /* ══════════════════════════════════════
+       TODAY'S LECTURES CARD
+    ══════════════════════════════════════ */
+    .today-lec-scroll { flex: 1; overflow-y: auto; }
+    .lec-row { display: flex; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--rule); line-height: 1.35; }
+    .lec-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .lec-time { font-weight: 700; color: var(--ink-3); flex-shrink: 0; width: 42px; font-size: 0.72rem; padding-top: 2px; }
+    .lec-info { min-width: 0; }
+    .lec-name { font-size: 0.80rem; font-weight: 600; color: var(--ink); }
+    .lec-name a { color: inherit; text-decoration: none; }
+    .lec-name a:hover { text-decoration: underline; }
+    .lec-sub { font-size: 0.70rem; color: var(--ink-3); margin-top: 2px; }
+    .lec-tag { display: inline-block; padding: 1px 5px; border-radius: 4px; font-size: 0.66rem; font-weight: 700; margin-right: 4px; }
+    .lec-none { font-size: 0.82rem; color: var(--ink-3); font-style: italic; padding: 4px 0; }
+
+    /* ══════════════════════════════════════
+       MINI CHECKLIST LINK CARD
+    ══════════════════════════════════════ */
+    .mini-link-card {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 14px;
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      text-decoration: none;
+      transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s, background 0.15s;
+      box-shadow: var(--card-sh);
+    }
+    .mini-link-card:hover {
+      border-color: var(--ink-3);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .mlc-icon {
+      flex-shrink: 0;
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.05rem;
+      background: var(--bc-grn-bg);
+      border: 1px solid var(--bc-grn-br);
+      border-radius: 8px;
+    }
+    .mlc-body { flex: 1; min-width: 0; }
+    .mlc-title {
+      font-size: 0.84rem; font-weight: 700; color: var(--ink);
+      line-height: 1.25;
+    }
+    .mlc-desc {
+      font-size: 0.7rem; color: var(--ink-3);
+      margin-top: 2px; line-height: 1.3;
+    }
+    .mlc-arrow {
+      flex-shrink: 0; font-size: 1rem; font-weight: 700;
+      color: var(--bc-grn-tx);
+    }
+
+    /* Themed mini variant — warm cream-gold (champagne, not banana) with dark brown outline */
+    .mini-link-card.mlc-themed {
+      background: #FAF3D8;
+      border-color: #5b4608;
+      border-width: 1.5px;
+    }
+    .mini-link-card.mlc-themed:hover { border-color: #854d0e; background: #F3E8C3; }
+    .mini-link-card.mlc-themed .mlc-icon {
+      background: rgba(255,255,255,0.75);
+      border-color: rgba(255,255,255,0.55);
+    }
+    .mini-link-card.mlc-themed .mlc-title { color: #5b4608; }
+    .mini-link-card.mlc-themed .mlc-arrow { color: #5b4608; }
+
+    /* "Coming Soon" placeholder — dimmed, non-interactive */
+    .mini-link-card.mlc-coming-soon {
+      opacity: 0.55;
+      cursor: default;
+      pointer-events: none;
+    }
+
   </style>
 </head>
 <body>
+<div class="shell">
 
-  <!-- ══ TOPNAV ════════════════════════════════════════════════════════════ -->
-  <header class="topnav">
-    <div class="tn-brand">
-      <a class="tn-name" href="https://strettyit10.github.io/Block4-Endocrine/">HoyaDocs ↗</a>
-      <div style="font-size:0.68rem; font-weight:500; color:rgba(255,255,255,0.42); margin-top:1px;">Block 4 — Endocrine</div>
-    </div>
-    <nav class="tn-nav">
-      <a class="tn-link" href="#block-4-repro-checklist-placeholder" target="_blank" rel="noopener">📋 Block 4 Endocrine Lecture Checklist Sheet</a>
-      <a class="tn-link" href="../active-recall-hub.html">🧠 Active Recall Hub</a>
-    </nav>
-    <div class="tn-right">
-      <button class="dark-toggle" id="darkToggle" onclick="toggleDark()" title="Toggle dark mode">🌙</button>
-    </div>
-  </header>
-
-  <!-- ══ SHELL ══════════════════════════════════════════════════════════════ -->
-  <div class="shell">
-
-  <!-- ══ LEFT SIDEBAR ══════════════════════════════════════════════════════ -->
+  <!-- ══ SIDEBAR ══ -->
   <aside class="sidebar">
-    <div class="sb-section-label">Browse</div>
+    <div class="sb-brand">
+      <a href="https://hoyadocs.com/" class="sb-name">HoyaDocs</a>
+    </div>
+    <div class="sb-block">Block 4 - Endocrine</div>
+
+    <div class="sb-rule"></div>
+
+    <div class="sb-section-label">Quick Links</div>
     <nav class="sb-nav">
-      <a class="sb-link active" href="#physio">
-        <span class="sb-link-icon sb-icon-blue">⚗️</span>Physiology
+      <a class="sb-link" href="./lecture-guides/index.html">
+        <span class="sb-link-icon sb-icon-teal">📖</span>
+        Lecture Guides
       </a>
-      <a class="sb-link" href="#biochem">
-        <span class="sb-link-icon sb-icon-blue">🧪</span>Biochemistry
-      </a>
-      <a class="sb-link" href="#histo">
-        <span class="sb-link-icon sb-icon-green">🔬</span>Histology
-      </a>
-      <a class="sb-link" href="#path">
-        <span class="sb-link-icon sb-icon-rose">🧫</span>Pathology
-      </a>
-      <a class="sb-link" href="#drt">
-        <span class="sb-link-icon sb-icon-amber">💊</span>DRT & Pharm
+      <a class="sb-link" href="https://strettyit10.github.io/Block4-Endocrine/active-recall-hub.html" target="_blank" rel="noopener">
+        <span class="sb-link-icon sb-icon-green">🎯</span>
+        Active Drills
       </a>
     </nav>
+
+    <div class="sb-rule"></div>
+
+    <div class="sb-section-label">Tools</div>
+    <nav class="sb-nav">
+      <a class="sb-link" href="./planning/daily_checklist.html">
+        <span class="sb-link-icon sb-icon-green">✅</span>
+        Daily Checklist
+      </a>
+      <a class="sb-link" href="./anki_package_parser_v10.html">
+        <span class="sb-link-icon sb-icon-amber">🃏</span>
+        Anki Mapping
+      </a>
+      <a class="sb-link" href="./resource-mapping/HoyaDocs-UWorld-QID-Mapping.xlsx">
+        <span class="sb-link-icon sb-icon-teal">📊</span>
+        UWorld QID Mapping
+      </a>
+      <a class="sb-link" href="./resource-mapping/Endocrine_Resource_Mapping.xlsx">
+        <span class="sb-link-icon sb-icon-green">📑</span>
+        Resource Mapping
+      </a>
+    </nav>
+
+    <div class="sb-spacer"></div>
+
+    <div class="sb-ext-label">Quick Access</div>
+    <a class="sb-ext-link" href="https://www.uworld.com/" target="_blank" rel="noopener">
+      <span>UWorld</span><span class="sb-ext-arrow">↗</span>
+    </a>
+    <a class="sb-ext-link" href="https://drive.google.com/" target="_blank" rel="noopener">
+      <span>Class Drive</span><span class="sb-ext-arrow">↗</span>
+    </a>
+    <a class="sb-ext-link" href="https://docs.google.com/spreadsheets/d/14WyUf7nLK21R5drauE0qpBrFZ-gNnyo6d4O1ymhvj4Y/edit?usp=sharing" target="_blank" rel="noopener">
+      <span>HoyaDocs Work In Progress</span><span class="sb-ext-arrow">↗</span>
+    </a>
   </aside>
 
-  <!-- ══ MAIN ══════════════════════════════════════════════════════════════ -->
+  <!-- ══ MAIN ══ -->
   <main class="main">
     <div class="main-inner">
 
       <!-- HERO -->
       <section class="hero" id="hero">
-        <p class="hero-eyebrow">HoyaDocs · Endocrine Block</p>
-        <h1 class="hero-title">Endocrine <em>Lecture Guides.</em></h1>
-        <p class="hero-sub">These materials are designed to <strong style="color:var(--hero-em);">supplement</strong> your learning — whether that's in-house lectures, BnB, Pathoma, Physeo, Sketchy, the BK Anki deck, ANKing, or anything else you use. Whatever your primary sources, this is your one-stop shop to <strong style="color:var(--hero-em);">test and consolidate</strong> that learning.</p>
-
-        <!-- WORKFLOW -->
-        <div class="workflow">
-          <div class="wf-step">
-            <div class="wf-num" style="color:#A67C00;">1</div>
-            <div class="wf-body">
-              <div class="wf-title">Lecture Guide + MCQ</div>
-              <div class="wf-desc">Read the guide, work through the embedded practice questions</div>
-            </div>
-          </div>
-          <div class="wf-divider"></div>
-          <a class="wf-step" href="../active-recall-hub.html" style="text-decoration:none; color:inherit;">
-            <div class="wf-num" style="color:var(--rule);">2</div>
-            <div class="wf-body">
-              <div class="wf-title">Recall Drills + Testing Hub Drills</div>
-              <div class="wf-desc">Fill-in-the-blank active recall, flashcards, and timed question sets for deeper retrieval practice</div>
-            </div>
-          </a>
-          <div class="wf-divider"></div>
-          <a class="wf-step" href="../QuestionBank.html" style="text-decoration:none; color:inherit;">
-            <div class="wf-num">3</div>
-            <div class="wf-body">
-              <div class="wf-title">UWorld / HoyaDocs QBank</div>
-              <div class="wf-desc">Formative feedback with high-yield clinical vignettes</div>
-            </div>
-          </a>
+        <p class="hero-eyebrow">HoyaDocs · Endocrine</p>
+        <h1 class="hero-title">Endocrine <em>Study Hub.</em></h1>
+        <p class="hero-sub">In-house exam prep and USMLE Step 1 review — all your tools in one place.</p>
+        <div class="hero-jump">
+          <a class="hero-jump-btn" href="#lecture-tools"><span class="hero-jump-icon">📘</span>Lecture Study Tools</a>
+          <a class="hero-jump-btn" href="#mapping-tools"><span class="hero-jump-icon">🗂</span>3rd Party Mapping</a>
+          <a class="hero-jump-btn" href="#exam-tools"><span class="hero-jump-icon">🩺</span>Exam Study Tools</a>
+          <a class="hero-jump-btn" href="https://hoyadocs.com/"><span class="hero-jump-icon">🏠</span>Return to HoyaDocs Main Page</a>
         </div>
-
-        <p class="hero-note">
-          For 3rd party resource mapping (BnB, Bootcamp, Pathoma, Physeo, Sketchy) by lecture, see the <a href="../resource-mapping/endocrine_mapping.html">Endocrine Mapping resource</a>.
-          For UWorld QIDs and Anki deck tags by lecture, see the <a href="../resource-mapping/endocrine_resource_hub.html">Endocrine Resource Hub</a>.
-        </p>
       </section>
 
-      <!-- SEARCH -->
-      <div class="search-bar-wrap">
-        <span class="search-bar-icon">🔍</span>
-        <input
-          type="text"
-          class="search-bar"
-          id="searchInput"
-          placeholder="Search guides by title, topic, or lecture number…"
-          oninput="handleSearch()"
-          autocomplete="off"
-        />
-      </div>
-
-            <!-- ── PHYSIOLOGY -->
-      <div class="section-block" id="physio" data-cat="physio">
+      <!-- LECTURE STUDY TOOLS -->
+      <div class="section-block" id="lecture-tools">
         <div class="section-divider">
-          <span class="section-divider-text">⚗️ Physiology</span>
+          <span class="section-divider-text">Lecture Study Tools</span>
           <div class="section-divider-line"></div>
         </div>
-        <div class="util-list">
+        <div class="bento bento-3">
 
-          <div class="util-row" data-cat="physio" data-search="end02 hypothalamic pituitary tropic hormones feedback anterior">
-            <div class="util-icon ui-blue">🧠</div>
-            <div class="util-text">
-              <span class="util-badge ub-blue">Lecture 02</span>
-              <strong>HP Hormone Relationships I</strong>
-              <span>Hypothalamic control of anterior pituitary, tropic hormones, feedback architecture</span>
+          <!-- Column 1: Calendar (spans full column height) -->
+          <div style="display:flex; flex-direction:column; gap:12px;">
+
+            <div class="bcard bc-blue" style="flex:1;">
+              <span class="bcard-watermark">📅</span>
+              <div class="bcard-header">
+                <div class="bcard-icon">📅</div>
+                <div class="bcard-header-text">
+                  <span class="bcard-label" id="today-date-lbl">Today</span>
+                  <h3>Today's Endocrine Lectures</h3>
+                </div>
+              </div>
+              <div id="today-lec-list" class="today-lec-scroll">
+                <div class="lec-none">Loading…</div>
+              </div>
             </div>
-            <div class="row-actions">
-              <a href="./end02-hypothalamic-pituitary-hormone-relationships-i.html" class="row-btn rb-guide">📖 <span class="rb-label">Guide</span></a>
-              <a href="./end02-hypothalamic-pituitary-hormone-relationships-i.html#practice" class="row-btn rb-mcq">📝 <span class="rb-label">MCQs</span></a>
-              <a href="../active-lesson-drills/end02_active_recall.html" class="row-btn rb-drill">✏️ <span class="rb-label">Recall Drill</span></a>
-            </div>
+
           </div>
-          <div class="util-row" data-cat="physio" data-search="end03 anterior pituitary GH prolactin TSH ACTH FSH LH">
-            <div class="util-icon ui-blue">🧠</div>
-            <div class="util-text">
-              <span class="util-badge ub-blue">Lecture 03</span>
-              <strong>HP Hormone Relationships II</strong>
-              <span>Anterior pituitary detail: GH, prolactin, TSH, ACTH, FSH/LH axes and integration</span>
-            </div>
-            <div class="row-actions">
-              <a href="./end03-hypothalamic-pituitary-hormone-relationships-ii.html" class="row-btn rb-guide">📖 <span class="rb-label">Guide</span></a>
-              <a href="./end03-hypothalamic-pituitary-hormone-relationships-ii.html#practice" class="row-btn rb-mcq">📝 <span class="rb-label">MCQs</span></a>
-              <a href="../active-lesson-drills/end03_active_recall.html" class="row-btn rb-drill">✏️ <span class="rb-label">Recall Drill</span></a>
-            </div>
+
+          <!-- Column 2: Lecture Study Guides + Active Drills -->
+          <div style="display:flex; flex-direction:column; gap:12px;">
+
+            <a class="bcard bc-dark" href="./lecture-guides/index.html" style="flex:1;">
+              <span class="bcard-watermark">📖</span>
+              <div class="bcard-header">
+                <div class="bcard-icon">📖</div>
+                <div class="bcard-header-text">
+                  <span class="bcard-label">Lecture · 01</span>
+                  <h3>Lecture Study Guides</h3>
+                </div>
+              </div>
+              <p>Per-lecture organized guides with key concepts, diagrams, and exam-focused notes.</p>
+              <span class="bcard-cta">Open section →</span>
+            </a>
+
+            <a class="bcard bc-dark" href="./active-recall-hub.html" style="flex:1;">
+              <span class="bcard-watermark">🎯</span>
+              <div class="bcard-header">
+                <div class="bcard-icon">🎯</div>
+                <div class="bcard-header-text">
+                  <span class="bcard-label">Lecture · 02</span>
+                  <h3>Active Drills</h3>
+                </div>
+              </div>
+              <p>Gamified practice for vignettes, trap questions, mechanisms, and drug facts.</p>
+              <span class="bcard-cta">Open section →</span>
+            </a>
+
           </div>
-          <div class="util-row" data-cat="physio" data-search="end07 posterior pituitary ADH oxytocin SIADH diabetes insipidus hyponatremia vasopressin">
-            <div class="util-icon ui-blue">💧</div>
-            <div class="util-text">
-              <span class="util-badge ub-blue">Lecture 07</span>
-              <strong>Posterior Pituitary Hormones *</strong>
-              <span>ADH and oxytocin physiology, SIADH, central/nephrogenic DI, hyponatremia  ·  * also Biochemistry</span>
-            </div>
-            <div class="row-actions">
-              <a href="./end07-posterior-pituitary-hormones.html" class="row-btn rb-guide">📖 <span class="rb-label">Guide</span></a>
-              <a href="./end07-posterior-pituitary-hormones.html#practice" class="row-btn rb-mcq">📝 <span class="rb-label">MCQs</span></a>
-              <a href="../active-lesson-drills/end07_active_recall.html" class="row-btn rb-drill">✏️ <span class="rb-label">Recall Drill</span></a>
-            </div>
-          </div>
-          <div class="util-row" data-cat="physio" data-search="end12 pancreas islet alpha beta delta insulin glucagon glucose homeostasis fed fasting">
-            <div class="util-icon ui-blue">🧊</div>
-            <div class="util-text">
-              <span class="util-badge ub-blue">Lecture 12</span>
-              <strong>Pancreatic Hormone Synthesis, Action & Regulation *</strong>
-              <span>Islet cell biology (α, β, δ), insulin and glucagon, glucose homeostasis  ·  * also Biochemistry</span>
-            </div>
-            <div class="row-actions">
-              <a href="./end12-pancreatic-hormone-synthesis-action-regulation.html" class="row-btn rb-guide">📖 <span class="rb-label">Guide</span></a>
-              <a href="./end12-pancreatic-hormone-synthesis-action-regulation.html#practice" class="row-btn rb-mcq">📝 <span class="rb-label">MCQs</span></a>
-              <a href="../active-lesson-drills/end12_active_recall.html" class="row-btn rb-drill">✏️ <span class="rb-label">Recall Drill</span></a>
-            </div>
-          </div>
-          <div class="util-row" data-cat="physio" data-search="end14 TBL growth hormone thyroid CCS team based case">
-            <div class="util-icon ui-blue">📈</div>
-            <div class="util-text">
-              <span class="util-badge ub-blue">Lecture 14</span>
-              <strong>TBL — Growth & Thyroid Hormones CCS</strong>
-              <span>Team-based case review integrating growth hormone and thyroid hormone physiology</span>
-            </div>
-            <div class="row-actions">
-              <a href="./end14-tbl-growth-and-thyroid-hormones-ccs.html" class="row-btn rb-guide">📖 <span class="rb-label">Guide</span></a>
-              <a href="./end14-tbl-growth-and-thyroid-hormones-ccs.html#practice" class="row-btn rb-mcq">📝 <span class="rb-label">MCQs</span></a>
-              <a href="../active-lesson-drills/end14_active_recall.html" class="row-btn rb-drill">✏️ <span class="rb-label">Recall Drill</span></a>
-            </div>
-          </div>
-          <div class="util-row" data-cat="physio" data-search="end19 HPA axis CRH ACTH cortisol circadian feedback">
-            <div class="util-icon ui-blue">🔄</div>
-            <div class="util-text">
-              <span class="util-badge ub-blue">Lecture 19</span>
-              <strong>Hypothalamic-Pituitary-Adrenal Axis</strong>
-              <span>CRH → ACTH → cortisol cascade, circadian rhythms, feedback regulation</span>
-            </div>
-            <div class="row-actions">
-              <a href="./end19-hypothalamic-pituitary-adrenal-axis.html" class="row-btn rb-guide">📖 <span class="rb-label">Guide</span></a>
-              <a href="./end19-hypothalamic-pituitary-adrenal-axis.html#practice" class="row-btn rb-mcq">📝 <span class="rb-label">MCQs</span></a>
-              <a href="../active-lesson-drills/end19_active_recall.html" class="row-btn rb-drill">✏️ <span class="rb-label">Recall Drill</span></a>
-            </div>
-          </div>
-          <div class="util-row" data-cat="physio" data-search="end23 stress hormones cortisol chronic acute pathophysiology ILS integrated">
-            <div class="util-icon ui-blue">⚡</div>
-            <div class="util-text">
-              <span class="util-badge ub-blue">Lecture 23</span>
-              <strong>ILS: Stress, Stress Hormones & Pathophysiology</strong>
-              <span>Acute & chronic stress physiology, cortisol effects, stress-related pathophysiology</span>
-            </div>
-            <div class="row-actions">
-              <a href="./end23-ils-stress-stress-hormones-pathophysiology.html" class="row-btn rb-guide">📖 <span class="rb-label">Guide</span></a>
-              <a href="./end23-ils-stress-stress-hormones-pathophysiology.html#practice" class="row-btn rb-mcq">📝 <span class="rb-label">MCQs</span></a>
-              <a href="../active-lesson-drills/end23_active_recall.html" class="row-btn rb-drill">✏️ <span class="rb-label">Recall Drill</span></a>
-            </div>
-          </div>
-          <div class="util-row" data-cat="physio" data-search="end26 longitudinal wrap-up capstone integration">
-            <div class="util-icon ui-blue">🎯</div>
-            <div class="util-text">
-              <span class="util-badge ub-blue">Lecture 26</span>
-              <strong>Longitudinal Case Wrap-Up *</strong>
-              <span>Capstone case integrating endocrine physiology, pathology, diagnostics, pharmacotherapy  ·  * also DRT/Pharm</span>
-            </div>
-            <div class="row-actions">
-              <a href="./end26-longitudinal-case-wrap-up.html" class="row-btn rb-guide">📖 <span class="rb-label">Guide</span></a>
-              <a href="./end26-longitudinal-case-wrap-up.html#practice" class="row-btn rb-mcq">📝 <span class="rb-label">MCQs</span></a>
-              <a href="../active-lesson-drills/end26_active_recall.html" class="row-btn rb-drill">✏️ <span class="rb-label">Recall Drill</span></a>
-            </div>
+
+          <!-- Column 3: 4 themed quick-access minis -->
+          <div style="display:flex; flex-direction:column; gap:12px;">
+
+            <a class="mini-link-card mlc-themed" href="https://docs.google.com/spreadsheets/d/1SMDEGCMRUBjNL7vrkp1YLqKC_9CsNciMul-BcPU5yO4/edit?usp=sharing" target="_blank" rel="noopener">
+              <span class="mlc-icon">📋</span>
+              <div class="mlc-body">
+                <div class="mlc-title">Block 4 Endocrine Check List</div>
+                <div class="mlc-desc">Google sheet of Endocrine lectures</div>
+              </div>
+              <span class="mlc-arrow">→</span>
+            </a>
+
+            <a class="mini-link-card mlc-themed" href="./planning/daily_checklist.html">
+              <span class="mlc-icon">✅</span>
+              <div class="mlc-body">
+                <div class="mlc-title">Daily Checklist</div>
+                <div class="mlc-desc">Daily study tasks & LOs</div>
+              </div>
+              <span class="mlc-arrow">→</span>
+            </a>
+
+            <a class="mini-link-card mlc-themed" href="./planning/lecture_planner.html">
+              <span class="mlc-icon">📅</span>
+              <div class="mlc-body">
+                <div class="mlc-title">Lecture Planning</div>
+                <div class="mlc-desc">Plan your lecture study week</div>
+              </div>
+              <span class="mlc-arrow">→</span>
+            </a>
+
+            <a class="mini-link-card mlc-themed mlc-coming-soon" aria-disabled="true">
+              <span class="mlc-icon">✨</span>
+              <div class="mlc-body">
+                <div class="mlc-title">Coming Soon</div>
+                <div class="mlc-desc">New study tool in development</div>
+              </div>
+              <span class="mlc-arrow">→</span>
+            </a>
+
           </div>
 
         </div>
       </div>
 
-      <!-- ── BIOCHEMISTRY -->
-      <div class="section-block" id="biochem" data-cat="biochem">
+      <!-- 3RD PARTY × LECTURE MAPPING -->
+      <div class="section-block" id="mapping-tools">
         <div class="section-divider">
-          <span class="section-divider-text">🧪 Biochemistry</span>
+          <span class="section-divider-text">3rd Party × Lecture Mapping</span>
           <div class="section-divider-line"></div>
         </div>
-        <div class="util-list">
+        <div class="bento bento-3">
 
-          <div class="util-row" data-cat="biochem" data-search="end01 intro hormones classes peptide steroid amine signaling receptors feedback">
-            <div class="util-icon ui-blue">🧬</div>
-            <div class="util-text">
-              <span class="util-badge ub-blue">Lecture 01</span>
-              <strong>Module Introduction / Intro to Hormones</strong>
-              <span>Hormone classes (peptide, steroid, amine), mechanisms of action, receptor signaling, feedback</span>
+          <a class="bcard bc-purple" href="./resource-mapping/endocrine_mapping.html">
+            <span class="bcard-watermark">🗂</span>
+            <div class="bcard-header">
+              <div class="bcard-icon">🗂</div>
+              <div class="bcard-header-text">
+                <span class="bcard-label">Mapping · 01</span>
+                <h3>Lecture × 3rd Party Mapping</h3>
+              </div>
             </div>
-            <div class="row-actions">
-              <a href="./end01-module-introduction-intro-to-hormones.html" class="row-btn rb-guide">📖 <span class="rb-label">Guide</span></a>
-              <a href="./end01-module-introduction-intro-to-hormones.html#practice" class="row-btn rb-mcq">📝 <span class="rb-label">MCQs</span></a>
-              <a href="../active-lesson-drills/end01_active_recall.html" class="row-btn rb-drill">✏️ <span class="rb-label">Recall Drill</span></a>
+            <p>3rd party resources mapped to each lecture — BnB, Bootcamp, Pathoma, Physeo, and Sketchy.</p>
+            <span class="bcard-cta">Open section →</span>
+          </a>
+
+          <a class="bcard bc-purple" href="./resource-mapping/endocrine_resource_hub.html">
+            <span class="bcard-watermark">🔗</span>
+            <div class="bcard-header">
+              <div class="bcard-icon">🔗</div>
+              <div class="bcard-header-text">
+                <span class="bcard-label">Mapping · 02</span>
+                <h3>Lecture Specific Resources</h3>
+              </div>
             </div>
-          </div>
-          <div class="util-row" data-cat="biochem" data-search="end04 adrenal steroidogenesis cortisol aldosterone androgens zonation">
-            <div class="util-icon ui-blue">⚡</div>
-            <div class="util-text">
-              <span class="util-badge ub-blue">Lecture 04</span>
-              <strong>IL — Adrenal Hormone Synthesis & Action</strong>
-              <span>Adrenal steroidogenesis, zonation, mineralocorticoids, glucocorticoids, androgens</span>
+            <p>Per-lecture study guides, practice questions, UWorld QIDs, and Anki cards.</p>
+            <span class="bcard-cta">Open section →</span>
+          </a>
+
+          <a class="bcard bc-purple" href="./resource-explorer.html">
+            <span class="bcard-watermark">🔍</span>
+            <div class="bcard-header">
+              <div class="bcard-icon">🔍</div>
+              <div class="bcard-header-text">
+                <span class="bcard-label">Mapping · 03</span>
+                <h3>Resource Explorer</h3>
+              </div>
             </div>
-            <div class="row-actions">
-              <a href="./end04-il-adrenal-hormone-synthesis-and-action.html" class="row-btn rb-guide">📖 <span class="rb-label">Guide</span></a>
-              <a href="./end04-il-adrenal-hormone-synthesis-and-action.html#practice" class="row-btn rb-mcq">📝 <span class="rb-label">MCQs</span></a>
-              <a href="../active-lesson-drills/end04_active_recall.html" class="row-btn rb-drill">✏️ <span class="rb-label">Recall Drill</span></a>
+            <p>Pick your resources and explore mapped tags, card counts, and watch times — with Excel export.</p>
+            <span class="bcard-cta">Open explorer →</span>
+          </a>
+
+          <a class="bcard bc-dkpurple" href="./resource-mapping/HoyaDocs-UWorld-QID-Mapping.xlsx">
+            <span class="bcard-watermark">📊</span>
+            <div class="bcard-header">
+              <div class="bcard-icon">📊</div>
+              <div class="bcard-header-text">
+                <span class="bcard-label">Mapping · 04</span>
+                <h3>UWorld QID Mapping</h3>
+              </div>
             </div>
-          </div>
-          <div class="util-row" data-cat="biochem" data-search="end05 sex steroid testosterone DHT estradiol aromatase 5-alpha-reductase">
-            <div class="util-icon ui-blue">🧪</div>
-            <div class="util-text">
-              <span class="util-badge ub-blue">Lecture 05</span>
-              <strong>IL — Sex Steroid Synthesis & Action</strong>
-              <span>Testosterone, DHT, estradiol, aromatase, 5-α-reductase, receptor action</span>
+            <p>Spreadsheet of UWorld QIDs mapped to each Endocrine lecture for targeted review.</p>
+            <span class="bcard-cta">Download xlsx →</span>
+          </a>
+
+          <a class="bcard bc-dkpurple" href="./resource-mapping/Endocrine_Resource_Mapping.xlsx">
+            <span class="bcard-watermark">📊</span>
+            <div class="bcard-header">
+              <div class="bcard-icon">📊</div>
+              <div class="bcard-header-text">
+                <span class="bcard-label">Mapping · 05</span>
+                <h3>Resource Mapping</h3>
+              </div>
             </div>
-            <div class="row-actions">
-              <a href="./end05-il-sex-steroid-synthesis-and-action.html" class="row-btn rb-guide">📖 <span class="rb-label">Guide</span></a>
-              <a href="./end05-il-sex-steroid-synthesis-and-action.html#practice" class="row-btn rb-mcq">📝 <span class="rb-label">MCQs</span></a>
-              <a href="../active-lesson-drills/end05_active_recall.html" class="row-btn rb-drill">✏️ <span class="rb-label">Recall Drill</span></a>
+            <p>Master spreadsheet of all 3rd party resources mapped to Endocrine lectures.</p>
+            <span class="bcard-cta">Download xlsx →</span>
+          </a>
+
+          <a class="bcard bc-purple" href="./anki_package_parser_v10.html">
+            <span class="bcard-watermark">🃏</span>
+            <div class="bcard-header">
+              <div class="bcard-icon">🃏</div>
+              <div class="bcard-header-text">
+                <span class="bcard-label">Mapping · 06</span>
+                <h3>Anki Mapping</h3>
+              </div>
             </div>
-          </div>
-          <div class="util-row" data-cat="biochem" data-search="end06 adrenal sex steroid CAH biosynthesis integration">
-            <div class="util-icon ui-blue">⚡</div>
-            <div class="util-text">
-              <span class="util-badge ub-blue">Lecture 06</span>
-              <strong>Adrenal & Sex Steroid Hormone Synthesis & Action</strong>
-              <span>Integrated adrenal and sex steroid biosynthesis applied to CAH and hormone disorders</span>
-            </div>
-            <div class="row-actions">
-              <a href="./end06-adrenal-sex-steroid-hormone-synthesis-action.html" class="row-btn rb-guide">📖 <span class="rb-label">Guide</span></a>
-              <a href="./end06-adrenal-sex-steroid-hormone-synthesis-action.html#practice" class="row-btn rb-mcq">📝 <span class="rb-label">MCQs</span></a>
-              <a href="../active-lesson-drills/end06_active_recall.html" class="row-btn rb-drill">✏️ <span class="rb-label">Recall Drill</span></a>
-            </div>
-          </div>
-          <div class="util-row" data-cat="biochem" data-search="end10 thyroid synthesis T3 T4 iodine thyroglobulin deiodinase TSH">
-            <div class="util-icon ui-blue">🦋</div>
-            <div class="util-text">
-              <span class="util-badge ub-blue">Lecture 10</span>
-              <strong>Thyroid Hormone Synthesis & Action</strong>
-              <span>Iodine uptake, thyroglobulin, T4/T3 synthesis, deiodinases, nuclear receptor action</span>
-            </div>
-            <div class="row-actions">
-              <a href="./end10-thyroid-hormone-synthesis-and-action.html" class="row-btn rb-guide">📖 <span class="rb-label">Guide</span></a>
-              <a href="./end10-thyroid-hormone-synthesis-and-action.html#practice" class="row-btn rb-mcq">📝 <span class="rb-label">MCQs</span></a>
-              <a href="../active-lesson-drills/end10_active_recall.html" class="row-btn rb-drill">✏️ <span class="rb-label">Recall Drill</span></a>
-            </div>
-          </div>
-          <div class="util-row" data-cat="biochem" data-search="end15 gender identity ethics panel DSD 5-alpha-reductase CAH androgen insensitivity">
-            <div class="util-icon ui-blue">🌈</div>
-            <div class="util-text">
-              <span class="util-badge ub-blue">Lecture 15</span>
-              <strong>Gender Identity & Ethics Panel</strong>
-              <span>Panel: intersex conditions, gender identity, DSDs (5-α-reductase, CAH, AIS), hormone therapy</span>
-            </div>
-            <div class="row-actions">
-              <a href="./end15-gender-identity-ethics-panel.html" class="row-btn rb-guide">📖 <span class="rb-label">Guide</span></a>
-              <a href="./end15-gender-identity-ethics-panel.html#practice" class="row-btn rb-mcq">📝 <span class="rb-label">MCQs</span></a>
-              <a href="../active-lesson-drills/end15_active_recall.html" class="row-btn rb-drill">✏️ <span class="rb-label">Recall Drill</span></a>
-            </div>
-          </div>
+            <p>Upload an Anki deck (.apkg) and extract out the relevant tags — map cards to your lectures.</p>
+            <span class="bcard-cta">Open tool →</span>
+          </a>
 
         </div>
       </div>
 
-      <!-- ── HISTOLOGY -->
-      <div class="section-block" id="histo" data-cat="histo">
+      <!-- EXAM STUDY TOOLS -->
+      <div class="section-block" id="exam-tools">
         <div class="section-divider">
-          <span class="section-divider-text">🔬 Histology</span>
+          <span class="section-divider-text">Exam Study Tools</span>
           <div class="section-divider-line"></div>
         </div>
-        <div class="util-list">
+        <div class="bento bento-3">
 
-          <div class="util-row" data-cat="histo" data-search="end09 histology thyroid parathyroid adrenal follicle chief oxyphil zonation">
-            <div class="util-icon ui-green">🔬</div>
-            <div class="util-text">
-              <span class="util-badge ub-green">Lecture 09</span>
-              <strong>Thyroid / Parathyroid / Adrenal (Histology)</strong>
-              <span>Follicular histology, chief/oxyphil cells, adrenal cortex zonation + medulla</span>
+          <a class="bcard bc-rose" href="https://strettyit10.github.io/Block4-Endocrine/QuestionBank.html">
+            <span class="bcard-watermark">🩺</span>
+            <div class="bcard-header">
+              <div class="bcard-icon">🩺</div>
+              <div class="bcard-header-text">
+                <span class="bcard-label">Exam · 01</span>
+                <h3>Board-Style Practice</h3>
+              </div>
             </div>
-            <div class="row-actions">
-              <a href="./end09-thyroid-parathyroid-adrenal-histology.html" class="row-btn rb-guide">📖 <span class="rb-label">Guide</span></a>
-              <a href="./end09-thyroid-parathyroid-adrenal-histology.html#practice" class="row-btn rb-mcq">📝 <span class="rb-label">MCQs</span></a>
-              <a href="../active-lesson-drills/end09_active_recall.html" class="row-btn rb-drill">✏️ <span class="rb-label">Recall Drill</span></a>
+            <p>Exam-oriented question sets and external QBank links organized in one place.</p>
+            <span class="bcard-cta">Open section →</span>
+          </a>
+
+          <a class="bcard bc-rose" href="./study-guides/">
+            <span class="bcard-watermark">📘</span>
+            <div class="bcard-header">
+              <div class="bcard-icon">📘</div>
+              <div class="bcard-header-text">
+                <span class="bcard-label">Exam · 02</span>
+                <h3>Coming Soon! Subject Based HY Study Guides</h3>
+              </div>
             </div>
-          </div>
+            <p>Summary notes, curated review pages, and structured study documents for in-house and Step 1 prep.</p>
+            <span class="bcard-cta">Coming soon →</span>
+          </a>
+
+          <a class="bcard bc-rose" href="#">
+            <span class="bcard-watermark">🧬</span>
+            <div class="bcard-header">
+              <div class="bcard-icon">🧬</div>
+              <div class="bcard-header-text">
+                <span class="bcard-label">Exam · 03</span>
+                <h3>Coming Soon! Databases</h3>
+              </div>
+            </div>
+            <p>High-yield tables, fact banks, and reference repositories for quick lookup.</p>
+            <span class="bcard-cta">Coming soon →</span>
+          </a>
 
         </div>
       </div>
 
-      <!-- ── PATHOLOGY -->
-      <div class="section-block" id="path" data-cat="path">
+      <!-- WORKFLOW -->
+      <div class="section-block" id="workflow">
         <div class="section-divider">
-          <span class="section-divider-text">🧫 Pathology</span>
+          <span class="section-divider-text">Recommended Workflow</span>
           <div class="section-divider-line"></div>
         </div>
-        <div class="util-list">
-
-          <div class="util-row" data-cat="path" data-search="end08 pituitary pathology adenoma acromegaly gigantism prolactinoma hypopituitarism sheehan">
-            <div class="util-icon ui-purple">🧠</div>
-            <div class="util-text">
-              <span class="util-badge ub-purple">Lecture 08</span>
-              <strong>Pituitary Pathology</strong>
-              <span>Pituitary adenomas, acromegaly/gigantism, hyperprolactinemia, hypopituitarism</span>
-            </div>
-            <div class="row-actions">
-              <a href="./end08-pituitary-pathology.html" class="row-btn rb-guide">📖 <span class="rb-label">Guide</span></a>
-              <a href="./end08-pituitary-pathology.html#practice" class="row-btn rb-mcq">📝 <span class="rb-label">MCQs</span></a>
-              <a href="../active-lesson-drills/end08_active_recall.html" class="row-btn rb-drill">✏️ <span class="rb-label">Recall Drill</span></a>
-            </div>
+        <div class="workflow-grid">
+          <div class="wf-item">
+            <div class="wf-num">01</div>
+            <div class="wf-title">Study Guides</div>
+            <div class="wf-desc">Build a structured overview and identify the highest-yield concepts first.</div>
           </div>
-          <div class="util-row" data-cat="path" data-search="end11 thyroid pathology graves hashimoto parathyroid hyperparathyroidism hypoparathyroidism cancer vit D">
-            <div class="util-icon ui-purple">🦋</div>
-            <div class="util-text">
-              <span class="util-badge ub-purple">Lecture 11</span>
-              <strong>Thyroid & Parathyroid Pathology</strong>
-              <span>Thyroiditis (Graves, Hashimoto, De Quervain), thyroid neoplasms, parathyroid disorders</span>
-            </div>
-            <div class="row-actions">
-              <a href="./end11-thyroid-and-parathyroid-pathology.html" class="row-btn rb-guide">📖 <span class="rb-label">Guide</span></a>
-              <a href="./end11-thyroid-and-parathyroid-pathology.html#practice" class="row-btn rb-mcq">📝 <span class="rb-label">MCQs</span></a>
-              <a href="../active-lesson-drills/end11_active_recall.html" class="row-btn rb-drill">✏️ <span class="rb-label">Recall Drill</span></a>
-            </div>
+          <div class="wf-item">
+            <div class="wf-num">02</div>
+            <div class="wf-title">Active Recall Drills</div>
+            <div class="wf-desc">Practice vignettes, trap patterns, mechanisms, and key facts through active repetition.</div>
           </div>
-          <div class="util-row" data-cat="path" data-search="end16 diabetes mellitus T1DM T2DM pathophysiology DKA HHS complications nephropathy neuropathy">
-            <div class="util-icon ui-purple">🩸</div>
-            <div class="util-text">
-              <span class="util-badge ub-purple">Lecture 16</span>
-              <strong>Pathophysiology of Diabetes Mellitus</strong>
-              <span>T1DM vs T2DM pathogenesis, DKA, HHS, micro-/macrovascular complications</span>
-            </div>
-            <div class="row-actions">
-              <a href="./end16-pathophysiology-of-diabetes-mellitus.html" class="row-btn rb-guide">📖 <span class="rb-label">Guide</span></a>
-              <a href="./end16-pathophysiology-of-diabetes-mellitus.html#practice" class="row-btn rb-mcq">📝 <span class="rb-label">MCQs</span></a>
-              <a href="../active-lesson-drills/end16_active_recall.html" class="row-btn rb-drill">✏️ <span class="rb-label">Recall Drill</span></a>
-            </div>
+          <div class="wf-item">
+            <div class="wf-num">03</div>
+            <div class="wf-title">Reinforce via Databases</div>
+            <div class="wf-desc">Return to reference tables for clarification and side-by-side comparison.</div>
           </div>
-          <div class="util-row" data-cat="path" data-search="end20 adrenal pathology addison cushing conn pheochromocytoma CAH congenital adrenal hyperplasia">
-            <div class="util-icon ui-purple">⚡</div>
-            <div class="util-text">
-              <span class="util-badge ub-purple">Lecture 20</span>
-              <strong>Adrenal Pathology</strong>
-              <span>Adrenal insufficiency, Cushing, Conn, pheochromocytoma, CAH, adrenal neoplasms</span>
-            </div>
-            <div class="row-actions">
-              <a href="./end20-adrenal-pathology.html" class="row-btn rb-guide">📖 <span class="rb-label">Guide</span></a>
-              <a href="./end20-adrenal-pathology.html#practice" class="row-btn rb-mcq">📝 <span class="rb-label">MCQs</span></a>
-              <a href="../active-lesson-drills/end20_active_recall.html" class="row-btn rb-drill">✏️ <span class="rb-label">Recall Drill</span></a>
-            </div>
+          <div class="wf-item">
+            <div class="wf-num">04</div>
+            <div class="wf-title">Board-Style Practice</div>
+            <div class="wf-desc">Shift into question-based reasoning and exam-style thinking with practice sets.</div>
           </div>
-          <div class="util-row" data-cat="path" data-search="end24 endocrine lab histopathology specimens gross microscopic">
-            <div class="util-icon ui-purple">🔬</div>
-            <div class="util-text">
-              <span class="util-badge ub-purple">Lecture 24</span>
-              <strong>Endocrine Lab</strong>
-              <span>Histopathology lab: thyroid, parathyroid, adrenal, pituitary specimens with clinical correlates</span>
-            </div>
-            <div class="row-actions">
-              <a href="./end24-endocrine-lab.html" class="row-btn rb-guide">📖 <span class="rb-label">Guide</span></a>
-              <a href="./end24-endocrine-lab.html#practice" class="row-btn rb-mcq">📝 <span class="rb-label">MCQs</span></a>
-              <a href="../active-lesson-drills/end24_active_recall.html" class="row-btn rb-drill">✏️ <span class="rb-label">Recall Drill</span></a>
-            </div>
+          <div class="wf-item">
+            <div class="wf-num">05</div>
+            <div class="wf-title">Track Progress</div>
+            <div class="wf-desc">Log what's complete, what feels weak, and where to focus next.</div>
           </div>
-
         </div>
       </div>
 
-      <!-- ── DRT & PHARM -->
-      <div class="section-block" id="drt" data-cat="drt">
-        <div class="section-divider">
-          <span class="section-divider-text">💊 DRT & Pharm</span>
-          <div class="section-divider-line"></div>
-        </div>
-        <div class="util-list">
+      <!-- FOOTER -->
+      <footer class="footer">
+        <span>Built as a shared entry point for HoyaDocs Endocrine resources.</span>
+        <span><strong>Last updated: April 1, 2026</strong></span>
+      </footer>
 
-          <div class="util-row" data-cat="drt" data-search="end13 DRT pituitary thyroid pharmacology bromocriptine octreotide levothyroxine PTU methimazole RAI">
-            <div class="util-icon ui-rose">💊</div>
-            <div class="util-text">
-              <span class="util-badge ub-rose">Lecture 13</span>
-              <strong>Pituitary & Thyroid Disorders</strong>
-              <span>Pituitary adenoma mgmt (bromocriptine, octreotide); thyroid pharm (levothyroxine, PTU/methimazole, RAI)</span>
-            </div>
-            <div class="row-actions">
-              <a href="./end13-drt-pituitary-and-thyroid-disorders.html" class="row-btn rb-guide">📖 <span class="rb-label">Guide</span></a>
-              <a href="./end13-drt-pituitary-and-thyroid-disorders.html#practice" class="row-btn rb-mcq">📝 <span class="rb-label">MCQs</span></a>
-              <a href="../active-lesson-drills/end13_active_recall.html" class="row-btn rb-drill">✏️ <span class="rb-label">Recall Drill</span></a>
-            </div>
-          </div>
-          <div class="util-row" data-cat="drt" data-search="end17 T1DM type 1 diabetes insulin basal bolus DKA CGM diagnosis">
-            <div class="util-icon ui-rose">💉</div>
-            <div class="util-text">
-              <span class="util-badge ub-rose">Lecture 17</span>
-              <strong>Diabetes Type 1 Diagnosis & Treatment</strong>
-              <span>T1DM diagnostic criteria, insulin regimens (basal-bolus, CGM), DKA management</span>
-            </div>
-            <div class="row-actions">
-              <a href="./end17-diabetes-type-1-diagnosis-and-treatment.html" class="row-btn rb-guide">📖 <span class="rb-label">Guide</span></a>
-              <a href="./end17-diabetes-type-1-diagnosis-and-treatment.html#practice" class="row-btn rb-mcq">📝 <span class="rb-label">MCQs</span></a>
-              <a href="../active-lesson-drills/end17_active_recall.html" class="row-btn rb-drill">✏️ <span class="rb-label">Recall Drill</span></a>
-            </div>
-          </div>
-          <div class="util-row" data-cat="drt" data-search="end18 T2DM type 2 diabetes metformin SGLT2 GLP-1 sulfonylureas insulin HHS">
-            <div class="util-icon ui-rose">💊</div>
-            <div class="util-text">
-              <span class="util-badge ub-rose">Lecture 18</span>
-              <strong>Diabetes Type 2 Diagnosis & Treatment</strong>
-              <span>T2DM diagnosis, metformin, SGLT2i, GLP-1 RA, sulfonylureas, insulin; HHS management</span>
-            </div>
-            <div class="row-actions">
-              <a href="./end18-diabetes-type-2-diagnosis-and-treatment.html" class="row-btn rb-guide">📖 <span class="rb-label">Guide</span></a>
-              <a href="./end18-diabetes-type-2-diagnosis-and-treatment.html#practice" class="row-btn rb-mcq">📝 <span class="rb-label">MCQs</span></a>
-              <a href="../active-lesson-drills/end18_active_recall.html" class="row-btn rb-drill">✏️ <span class="rb-label">Recall Drill</span></a>
-            </div>
-          </div>
-          <div class="util-row" data-cat="drt" data-search="end21 DRT adrenal glucocorticoid replacement metyrapone ketoconazole phenoxybenzamine pheo">
-            <div class="util-icon ui-rose">⚡</div>
-            <div class="util-text">
-              <span class="util-badge ub-rose">Lecture 21</span>
-              <strong>Adrenal Disorders</strong>
-              <span>Adrenal insufficiency replacement, Cushing mgmt (metyrapone, ketoconazole), α-blockade for pheo</span>
-            </div>
-            <div class="row-actions">
-              <a href="./end21-drt-adrenal-disorders.html" class="row-btn rb-guide">📖 <span class="rb-label">Guide</span></a>
-              <a href="./end21-drt-adrenal-disorders.html#practice" class="row-btn rb-mcq">📝 <span class="rb-label">MCQs</span></a>
-              <a href="../active-lesson-drills/end21_active_recall.html" class="row-btn rb-drill">✏️ <span class="rb-label">Recall Drill</span></a>
-            </div>
-          </div>
-          <div class="util-row" data-cat="drt" data-search="end22 pituitary thyroid case discussion DRT">
-            <div class="util-icon ui-rose">👥</div>
-            <div class="util-text">
-              <span class="util-badge ub-rose">Lecture 22</span>
-              <strong>Pituitary & Thyroid Case Discussion</strong>
-              <span>Case-based integration of pituitary and thyroid pharmacology, diagnostics, management</span>
-            </div>
-            <div class="row-actions">
-              <a href="./end22-pituitary-thyroid-case-discussion.html" class="row-btn rb-guide">📖 <span class="rb-label">Guide</span></a>
-              <a href="./end22-pituitary-thyroid-case-discussion.html#practice" class="row-btn rb-mcq">📝 <span class="rb-label">MCQs</span></a>
-              <a href="../active-lesson-drills/end22_active_recall.html" class="row-btn rb-drill">✏️ <span class="rb-label">Recall Drill</span></a>
-            </div>
-          </div>
-          <div class="util-row" data-cat="drt" data-search="end25 diabetes clinical cases T1DM T2DM management monitoring complications">
-            <div class="util-icon ui-rose">🏥</div>
-            <div class="util-text">
-              <span class="util-badge ub-rose">Lecture 25</span>
-              <strong>Diabetes Clinical Cases</strong>
-              <span>Applied case-based review of T1DM + T2DM diagnosis, management, monitoring, complications</span>
-            </div>
-            <div class="row-actions">
-              <a href="./end25-diabetes-clinical-cases.html" class="row-btn rb-guide">📖 <span class="rb-label">Guide</span></a>
-              <a href="./end25-diabetes-clinical-cases.html#practice" class="row-btn rb-mcq">📝 <span class="rb-label">MCQs</span></a>
-              <a href="../active-lesson-drills/end25_active_recall.html" class="row-btn rb-drill">✏️ <span class="rb-label">Recall Drill</span></a>
-            </div>
-          </div>
+    </div>
+  </main>
 
-        </div>
-      </div>
-</main>
+</div>
 
+<!-- ══ MOBILE BOTTOM NAV ══ -->
+<nav class="mobile-nav">
 
-  </div><!-- .shell -->
+  <div class="mobile-nav-group">
+    <div class="mobile-nav-label">Quick Links</div>
+    <div class="mobile-nav-items">
+      <a class="mobile-nav-item" href="./lecture-guides/index.html">
+        <span class="mobile-nav-icon">📖</span>Lecture Guides
+      </a>
+      <a class="mobile-nav-item" href="https://strettyit10.github.io/Block4-Endocrine/active-recall-hub.html" target="_blank" rel="noopener">
+        <span class="mobile-nav-icon">🎯</span>Active Drills
+      </a>
+    </div>
+  </div>
+
+  <div class="mobile-nav-group">
+    <div class="mobile-nav-label">Tools</div>
+    <div class="mobile-nav-items">
+      <a class="mobile-nav-item" href="./planning/daily_checklist.html">
+        <span class="mobile-nav-icon">✅</span>Daily Checklist
+      </a>
+      <a class="mobile-nav-item" href="./anki_package_parser_v10.html">
+        <span class="mobile-nav-icon">🃏</span>Anki Mapping
+      </a>
+      <a class="mobile-nav-item" href="./resource-mapping/HoyaDocs-UWorld-QID-Mapping.xlsx">
+        <span class="mobile-nav-icon">📊</span>UWorld QID Mapping
+      </a>
+      <a class="mobile-nav-item" href="./resource-mapping/Endocrine_Resource_Mapping.xlsx">
+        <span class="mobile-nav-icon">📑</span>Resource Mapping
+      </a>
+    </div>
+  </div>
+
+</nav>
 
 <script>
-  /* ── DARK MODE ── */
-  function toggleDark() {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    const next = isDark ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-    document.getElementById('darkToggle').textContent = next === 'dark' ? '☀️' : '🌙';
+  // ── Today's Endocrine Lectures ──
+  const ENDOCRINE_LECTURES = [{"d":"2026-04-20","title":"Module Introduction/Introduction to Hormones","lecturer":"Danielsen","start":"09:00","end":"10:00","course":"Bioch","location":"","link":""},{"d":"2026-04-20","title":"Hypothalamic Pituitary Hormone Relationships I","lecturer":"Watson","start":"10:00","end":"11:00","course":"Phys","location":"","link":""},{"d":"2026-04-22","title":"Hypothalamic Pituitary Hormone Relationships II","lecturer":"Watson","start":"11:00","end":"12:00","course":"Phys","location":"","link":""},{"d":"2026-04-23","title":"IL - Adrenal Hormone Synthesis and Action","lecturer":"Danielsen","start":"09:00","end":"09:30","course":"Biochem","location":"","link":""},{"d":"2026-04-23","title":"IL - Sex Steroid Synthesis and Action","lecturer":"Danielsen","start":"09:30","end":"10:00","course":"Biochem","location":"","link":""},{"d":"2026-04-24","title":"Mandatory - Adrenal and Sex Steroid Hormone Synthesis & Action","lecturer":"Danielsen","start":"10:00","end":"11:00","course":"Biochem","location":"","link":""},{"d":"2026-04-28","title":"Posterior Pituitary Hormones","lecturer":"Sherman","start":"10:00","end":"11:00","course":"Phys, Bioch","location":"","link":""},{"d":"2026-04-29","title":"Pituitary Pathology","lecturer":"Santi","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-12","title":"Thyroid/Parathyroid/Adrenal","lecturer":"Notario","start":"10:00","end":"11:00","course":"Hist","location":"","link":""},{"d":"2026-05-12","title":"Thyroid Hormone Synthesis and Action","lecturer":"Danielsen","start":"11:00","end":"12:00","course":"Bioch","location":"","link":""},{"d":"2026-05-13","title":"Thyroid and Parathyroid Pathology","lecturer":"Wieneke","start":"10:00","end":"11:00","course":"Path","location":"","link":""},{"d":"2026-05-14","title":"Pancreatic Hormone Synthesis, Action and Regulation","lecturer":"Danielsen","start":"09:00","end":"10:00","course":"Phys, Bioch","location":"","link":""},{"d":"2026-05-14","title":"Diagnosis and Treatment of Pituitary and Thyroid Disorders","lecturer":"Jonklaas","start":"10:00","end":"11:00","course":"DRT, Pharm","location":"","link":""},{"d":"2026-05-15","title":"Mandatory TBL - Growth and Thyroid Hormones CCS","lecturer":"Watson","start":"10:00","end":"11:00","course":"Phys","location":"","link":""},{"d":"2026-05-18","title":"Mandatory - Endocrinology, Gender Identity & Ethics Panel Discussion","lecturer":"Panel","start":"13:00","end":"15:00","course":"Bioch","location":"","link":""},{"d":"2026-05-19","title":"Pathophysiology of Diabetes Mellitus","lecturer":"Furlong","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-19","title":"Diabetes Type 1 Diagnosis and Treatment","lecturer":"Janicic","start":"10:00","end":"11:00","course":"DRT, Pharm","location":"","link":""},{"d":"2026-05-19","title":"Diabetes Type 2 Diagnosis and Treatment","lecturer":"Janicic","start":"11:00","end":"12:00","course":"DRT, Pharm","location":"","link":""},{"d":"2026-05-20","title":"Hypothalamic-Pituitary-Adrenal Axis","lecturer":"Watson","start":"10:00","end":"11:00","course":"Phys","location":"","link":""},{"d":"2026-05-20","title":"Adrenal Pathology","lecturer":"Wieneke","start":"11:00","end":"12:00","course":"Path","location":"","link":""},{"d":"2026-05-20","title":"Diagnosis and Treatment of Adrenal Disorders","lecturer":"Sharma","start":"13:00","end":"14:30","course":"DRT, Pharm","location":"","link":""},{"d":"2026-05-22","title":"Mandatory - Case Discussion: Pituitary & Thyroid Disorders","lecturer":"Jonklaas","start":"10:00","end":"11:00","course":"DRT, Pharm","location":"","link":""},{"d":"2026-05-27","title":"Integrated Learning Session: Stress, Stress Hormones & Pathophysiology Integration","lecturer":"Watson","start":"13:00","end":"14:30","course":"Phys","location":"","link":""},{"d":"2026-05-28","title":"Endocrine Lab","lecturer":"Furlong","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-28","title":"Diabetes Clinical Cases","lecturer":"Janicic","start":"10:00","end":"11:00","course":"DRT, Pharm","location":"","link":""},{"d":"2026-05-28","title":"Mandatory - Longitudinal Case Wrap-Up","lecturer":"Multi","start":"11:00","end":"12:00","course":"Phys, DRT, Pharm","location":"","link":""}];
+
+  const COURSE_TAG = {
+    'Phys':       ['#dbeafe','#1e40af'], 'Anat':       ['#dcfce7','#854d0e'],
+    'Path':       ['#ffe4e6','#CA8A04'], 'Pharm':      ['#d1fae5','#065f46'],
+    'Embr':       ['#ede9fe','#5b21b6'], 'Embr-HS':    ['#ede9fe','#5b21b6'],
+    'Hist':       ['#f3e8ff','#6b21a8'], 'Micro':      ['#fef3c7','#92400e'],
+    'DRT':        ['#dbeafe','#1e3a8a'], 'Ethics':     ['#fce7f3','#9d174d'],
+    'CP':         ['#e0f2fe','#0369a1'], 'HS':         ['#ffe4e6','#CA8A04'],
+    'EBM':        ['#fef3c7','#92400e'], 'Bioch':      ['#d1fae5','#065f46'],
+    'Phys-Bioch': ['#dbeafe','#1e40af'],
+    'N/A':        ['#f1f5f9','#64748b'],
+  };
+
+  function renderTodayLectures() {
+    const now = new Date();
+    const yyyy = now.getFullYear();
+    const mm   = String(now.getMonth() + 1).padStart(2, '0');
+    const dd   = String(now.getDate()).padStart(2, '0');
+    const todayStr = `${yyyy}-${mm}-${dd}`;
+
+    const lbl = document.getElementById('today-date-lbl');
+    if (lbl) lbl.textContent = now.toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' });
+
+    const list = document.getElementById('today-lec-list');
+    if (!list) return;
+
+    const rows = ENDOCRINE_LECTURES.filter(l => l.d === todayStr);
+    if (!rows.length) {
+      list.innerHTML = '<div class="lec-none">No lectures scheduled today.</div>';
+      return;
+    }
+
+    list.innerHTML = rows.map(l => {
+      const [bg, tx] = COURSE_TAG[l.course] || COURSE_TAG['N/A'];
+      const name = l.link
+        ? `<a href="${l.link}" target="_blank" rel="noopener">${l.title}</a>`
+        : l.title;
+      const who = (l.lecturer && l.lecturer !== 'N/A') ? `Dr. ${l.lecturer}` : '';
+      const loc = l.location && l.location !== 'N/A' ? `· ${l.location}` : '';
+      return `<div class="lec-row">
+        <div class="lec-time">${l.start}</div>
+        <div class="lec-info">
+          <div class="lec-name">${name}</div>
+          <div class="lec-sub"><span class="lec-tag" style="background:${bg};color:${tx}">${l.course}</span>${who} ${loc}</div>
+        </div>
+      </div>`;
+    }).join('');
   }
-  // Set correct icon on load
-  (function(){
-    if(localStorage.getItem('theme') === 'dark')
-      document.getElementById('darkToggle').textContent = '☀️';
-  })();
 
-  /* ── SEARCH ── */
-  function handleSearch() {
-    const query = document.getElementById('searchInput').value.toLowerCase().trim();
-    let totalVisible = 0;
+  document.addEventListener('DOMContentLoaded', renderTodayLectures);
 
-    document.querySelectorAll('.util-row').forEach(row => {
-      const text = (row.dataset.search + ' ' + row.querySelector('.util-text').textContent).toLowerCase();
-      const show = query === '' || text.includes(query);
-      row.classList.toggle('hidden', !show);
-      if (show) totalVisible++;
-    });
-
-    // Hide entire section blocks when all rows are hidden
-    document.querySelectorAll('.section-block').forEach(block => {
-      const visibleRows = block.querySelectorAll('.util-row:not(.hidden)').length;
-      block.classList.toggle('hidden', visibleRows === 0);
-    });
-
-    document.getElementById('emptyState').classList.toggle('show', totalVisible === 0);
-  }
-
-
-  /* ── ACTIVE SIDEBAR LINK on scroll ── */
-  const sections = ['embryo','histo','anatomy','physio','path','pharm','micro','drt','clinical'];
-  function updateActiveLink() {
-    let current = 'embryo';
-    sections.forEach(id => {
-      const el = document.getElementById(id);
-      if (el && el.getBoundingClientRect().top <= 100) current = id;
-    });
-    document.querySelectorAll('.sidebar .sb-link').forEach(link => {
-      link.classList.toggle('active', link.getAttribute('href') === '#' + current);
-    });
-  }
-  window.addEventListener('scroll', updateActiveLink);
 </script>
+
+<!-- Feedback button fixed top-right -->
+<a class="feedback-fab" href="https://forms.gle/382rWjcPXC1beo8G8" target="_blank" rel="noopener">
+  💬 Feedback
+</a>
 
 </body>
 </html>
