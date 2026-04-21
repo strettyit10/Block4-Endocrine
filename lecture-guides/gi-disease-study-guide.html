@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>GI Disease Study Guide — USMLE Step 1 Prep</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.55;padding:16px}
+.app{max-width:1200px;margin:0 auto}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,#14532d 0%,#166534 50%,#22c55e 100%);color:white;padding:22px 26px;border-radius:14px;margin-bottom:14px;box-shadow:0 4px 14px rgba(0,0,0,0.08)}
+.header h1{font-size:26px;font-weight:800;letter-spacing:-0.02em}
+.header .sub{font-size:13.5px;opacity:0.9;margin-top:4px}
+.header .meta{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:12px;font-weight:600}
+.header .meta span{background:rgba(255,255,255,0.18);padding:4px 10px;border-radius:20px;backdrop-filter:blur(6px)}
+
+/* CONTROL BAR */
+.controls{background:white;padding:14px;border-radius:12px;margin-bottom:14px;box-shadow:0 1px 3px rgba(0,0,0,0.05);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.search-box{flex:1;min-width:240px;position:relative}
+.search-box input{width:100%;padding:9px 14px 9px 36px;border:2px solid #e2e8f0;border-radius:8px;font-size:13.5px;font-family:inherit;transition:border-color 0.15s}
+.search-box input:focus{outline:none;border-color:#166534}
+.search-box::before{content:"🔍";position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;opacity:0.6}
+.ctrl-btn{padding:9px 14px;background:white;border:2px solid #e2e8f0;border-radius:8px;font-size:12.5px;font-weight:700;color:#475569;cursor:pointer;transition:all 0.15s;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.ctrl-btn:hover{border-color:#166534;color:#166534}
+.ctrl-btn.primary{background:#166534;color:white;border-color:#166534}
+.ctrl-btn.primary:hover{background:#14532d;color:white}
+.ctrl-btn.excel{background:#107c41;color:white;border-color:#107c41}
+.ctrl-btn.excel:hover{background:#0b5a2e;color:white}
+.ctrl-btn.print{background:#dc2626;color:white;border-color:#dc2626}
+.ctrl-btn.print:hover{background:#991b1b;color:white}
+
+/* CATEGORY CHIPS */
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.chip{padding:5px 11px;border-radius:18px;font-size:11.5px;font-weight:700;cursor:pointer;border:1.5px solid transparent;background:white;color:#475569;transition:all 0.15s;user-select:none}
+.chip:hover{transform:translateY(-1px)}
+.chip .count{background:rgba(0,0,0,0.12);padding:1px 6px;border-radius:8px;margin-left:4px;font-size:10px}
+.chip.active{background:#166534;color:white;border-color:#166534}
+.chip.active .count{background:rgba(255,255,255,0.25)}
+
+/* PROGRESS */
+.progress{background:white;padding:10px 14px;border-radius:10px;margin-bottom:14px;display:flex;align-items:center;gap:14px;font-size:12.5px;font-weight:600;color:#475569;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.progress-bar{flex:1;height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#16a34a,#22c55e);transition:width 0.4s}
+
+/* DISEASE CARDS */
+.disease-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:12px}
+.disease{background:white;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,0.06);overflow:hidden;border-left:5px solid #166534;transition:box-shadow 0.15s;position:relative}
+.disease:hover{box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+.disease.learned{opacity:0.65}
+.disease.learned::after{content:"✓ LEARNED";position:absolute;top:10px;right:10px;background:#16a34a;color:white;font-size:9px;font-weight:800;padding:3px 7px;border-radius:10px;letter-spacing:0.5px}
+
+.d-header{padding:12px 14px 8px;cursor:pointer;user-select:none}
+.d-header:hover{background:#f8fafc}
+.d-cat{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;color:#166534;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.d-name{font-size:16px;font-weight:800;color:#14532d;line-height:1.25;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.d-name .chevron{font-size:11px;transition:transform 0.2s;color:#64748b}
+.disease.expanded .d-name .chevron{transform:rotate(180deg)}
+.d-oneliner{font-size:12.5px;color:#475569;font-style:italic;line-height:1.5;padding-left:2px}
+
+.d-body{max-height:0;overflow:hidden;transition:max-height 0.35s ease;padding:0 14px}
+.disease.expanded .d-body{max-height:3000px;padding:0 14px 14px;border-top:1px solid #e2e8f0;margin-top:8px}
+
+.section{margin-top:12px}
+.section h4{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.6px;color:#166534;margin-bottom:5px;padding-bottom:3px;border-bottom:1.5px solid #d1fae5;display:flex;align-items:center;gap:5px}
+.section p,.section ul{font-size:12.5px;color:#1e293b;line-height:1.6}
+.section ul{padding-left:18px;margin-top:2px}
+.section ul li{margin-bottom:3px}
+.section strong{color:#14532d}
+.buzzword{background:#fef3c7;color:#78350f;padding:1px 5px;border-radius:4px;font-weight:700;font-size:11.5px;border:1px solid #fcd34d;white-space:nowrap;display:inline-block;margin:1px}
+.hy-box{background:#fef3c7;border-left:3px solid #eab308;padding:8px 11px;border-radius:5px;margin-top:8px;font-size:12px;line-height:1.55}
+.hy-box strong{color:#78350f;display:block;margin-bottom:3px;font-size:11px;text-transform:uppercase;letter-spacing:0.5px}
+.mnemonic{background:#ffedd5;border-left:3px solid #ea580c;padding:8px 11px;border-radius:5px;margin-top:8px;font-size:12px;line-height:1.55;color:#7c2d12}
+.mnemonic strong{color:#9a3412;display:block;margin-bottom:3px;font-size:11px;text-transform:uppercase;letter-spacing:0.5px}
+.trap{background:#fef2f2;border-left:3px solid #dc2626;padding:8px 11px;border-radius:5px;margin-top:8px;font-size:12px;line-height:1.55;color:#7f1d1d}
+.trap strong{color:#991b1b;display:block;margin-bottom:3px;font-size:11px;text-transform:uppercase;letter-spacing:0.5px}
+.learned-btn{margin-top:10px;padding:6px 11px;background:#f1f5f9;border:1.5px solid #cbd5e1;border-radius:6px;font-size:11.5px;font-weight:700;color:#475569;cursor:pointer;transition:all 0.15s;display:inline-flex;align-items:center;gap:5px}
+.learned-btn:hover{background:#dcfce7;border-color:#166534;color:#166534}
+.disease.learned .learned-btn{background:#dcfce7;border-color:#166534;color:#166534}
+
+/* CATEGORY COLORS */
+.cat-cong{border-left-color:#0ea5e9}.d-cong .d-cat{color:#0369a1}.d-cong .d-name{color:#075985}
+.cat-obs{border-left-color:#7c3aed}.d-obs .d-cat{color:#6d28d9}.d-obs .d-name{color:#5b21b6}
+.cat-vasc{border-left-color:#dc2626}.d-vasc .d-cat{color:#dc2626}.d-vasc .d-name{color:#991b1b}
+.cat-malab{border-left-color:#f59e0b}.d-malab .d-cat{color:#d97706}.d-malab .d-name{color:#92400e}
+.cat-ibd{border-left-color:#db2777}.d-ibd .d-cat{color:#be185d}.d-ibd .d-name{color:#9f1239}
+.cat-div{border-left-color:#0891b2}.d-div .d-cat{color:#0e7490}.d-div .d-name{color:#155e75}
+.cat-polyp{border-left-color:#65a30d}.d-polyp .d-cat{color:#4d7c0f}.d-polyp .d-name{color:#365314}
+.cat-genetic{border-left-color:#c026d3}.d-genetic .d-cat{color:#a21caf}.d-genetic .d-name{color:#86198f}
+.cat-crc{border-left-color:#b91c1c}.d-crc .d-cat{color:#991b1b}.d-crc .d-name{color:#7f1d1d}
+.cat-anal{border-left-color:#e11d48}.d-anal .d-cat{color:#be123c}.d-anal .d-name{color:#9f1239}
+.cat-assoc{border-left-color:#475569}.d-assoc .d-cat{color:#334155}.d-assoc .d-name{color:#1e293b}
+.cat-esoph{border-left-color:#0284c7}.d-esoph .d-cat{color:#0369a1}.d-esoph .d-name{color:#075985}
+.cat-gastritis{border-left-color:#ea580c}.d-gastritis .d-cat{color:#c2410c}.d-gastritis .d-name{color:#9a3412}
+.cat-ulcer{border-left-color:#be185d}.d-ulcer .d-cat{color:#9d174d}.d-ulcer .d-name{color:#831843}
+.cat-gastric{border-left-color:#6d28d9}.d-gastric .d-cat{color:#5b21b6}.d-gastric .d-name{color:#4c1d95}
+
+/* PRINT */
+@media print{
+  body{background:white;padding:0;font-size:10.5pt}
+  .controls,.chips,.progress,.learned-btn,.header .meta{display:none!important}
+  .header{background:#14532d!important;color:white!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:14px;border-radius:0}
+  .header h1{font-size:20px}
+  .disease-grid{display:block}
+  .disease{box-shadow:none!important;border:1px solid #e2e8f0!important;border-left:4px solid #166534!important;page-break-inside:avoid;margin-bottom:10px;break-inside:avoid}
+  .disease.expanded .d-body,.d-body{max-height:none!important;padding:0 14px 12px!important;border-top:1px solid #e2e8f0;margin-top:6px}
+  .d-name .chevron{display:none}
+  .hy-box,.mnemonic,.trap{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .disease.learned{opacity:1}
+  .disease.learned::after{display:none}
+}
+
+@media (max-width:700px){
+  .disease-grid{grid-template-columns:1fr}
+  .header h1{font-size:22px}
+  .search-box{min-width:100%}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+<header class="header">
+  <h1>🩺 GI Disease Study Guide</h1>
+  <p class="sub">USMLE Step 1 Prep · High-Yield Pathology · ADHD-Friendly Format</p>
+  <div class="meta">
+    <span>📋 <span id="totalCount">0</span> diseases</span>
+    <span>🗂️ <span id="catCount">0</span> categories</span>
+    <span>🔬 Step 1 focused</span>
+    <span>💾 Export to Excel</span>
+    <span>🖨️ Print as PDF</span>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="search-box"><input type="text" id="search" placeholder="Search disease, buzzword, mechanism..."></div>
+  <button class="ctrl-btn" id="expandAll">📂 Expand All</button>
+  <button class="ctrl-btn" id="collapseAll">📁 Collapse All</button>
+  <button class="ctrl-btn print" id="printBtn">🖨️ Print PDF</button>
+  <button class="ctrl-btn excel" id="excelBtn">📊 Export Excel</button>
+  <button class="ctrl-btn" id="resetBtn">🔄 Reset Progress</button>
+</div>
+
+<div class="chips" id="chips"></div>
+
+<div class="progress">
+  <span>Progress:</span>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <span><strong id="learnedCount">0</strong> / <span id="shownCount">0</span> learned</span>
+</div>
+
+<div class="disease-grid" id="diseaseGrid"></div>
+
+</div>
+
+<script>
+const DISEASES = [
+// ═══════════════ CONGENITAL / DEVELOPMENTAL ═══════════════
+{id:"meckel",cat:"Congenital/Developmental",ck:"cong",emoji:"👶",name:"Meckel Diverticulum",
+oneLiner:"True diverticulum from persistent vitelline (omphalomesenteric) duct. Most common congenital GI anomaly. Classic 'Rule of 2s'.",
+path:"Failure of vitelline duct to obliterate in week 7 of gestation. Contains <strong>all three layers</strong> of bowel wall (true diverticulum). Often has <strong>ectopic gastric mucosa</strong> (acid secretion → ulceration of adjacent ileum) and sometimes pancreatic tissue.",
+clin:"<ul><li><strong>Painless lower GI bleed in child &lt;2 yr</strong> — classic melena or brick-red stool from ectopic gastric mucosa</li><li>Asymptomatic in most (found incidentally)</li><li>Can mimic appendicitis (diverticulitis)</li><li>Lead point for intussusception or volvulus</li></ul>",
+dx:"<strong>Tc-99m pertechnetate scan</strong> ('Meckel scan') — tracer taken up by ectopic gastric mucosa. Can also cause false-negative if no gastric tissue.",
+tx:"Surgical resection if symptomatic.",
+hy:["Rule of 2s: <strong>2%</strong> pop, <strong>2 ft</strong> proximal to ileocecal valve, <strong>2 inches</strong> long, <strong>2 types</strong> of ectopic tissue (gastric, pancreatic), present by age <strong>2</strong>, M:F = <strong>2:1</strong>","Painless bleeding in child = Meckel until proven otherwise","Ectopic gastric mucosa is the troublemaker"],
+mn:"<strong>'Rule of 2s'</strong> — the most tested mnemonic in all of GI.",
+trap:"Don't confuse with other causes of painless pediatric bleeding: juvenile polyp (rectum), vascular malformation."},
+
+{id:"hirschsprung",cat:"Congenital/Developmental",ck:"cong",emoji:"👶",name:"Hirschsprung Disease",
+oneLiner:"Congenital aganglionic megacolon from failed neural crest migration. Most common cause of colonic obstruction in newborns.",
+path:"Failure of <strong>neural crest cell migration</strong> into distal colon wall → <strong>absence of Meissner (submucosal) + Auerbach (myenteric) plexuses</strong> in aganglionic segment → tonic contraction of the affected bowel → functional obstruction. Almost always begins at the <strong>rectum</strong> and extends proximally. Associated with <strong>RET mutation</strong> and <strong>Down syndrome</strong> (2–15%).",
+clin:"<ul><li><strong>Failure to pass meconium &gt;48 h</strong> in newborn (hallmark)</li><li>Bilious emesis, abdominal distension, refusal to feed</li><li>Chronic constipation, failure to thrive in older kids</li><li>DRE: empty rectum + explosive <strong>'squirt sign'</strong> of stool when finger is withdrawn</li><li>Complication: <strong>Hirschsprung-associated enterocolitis</strong> (C. difficile-like) — can be fatal</li></ul>",
+dx:"<strong>Rectal suction biopsy is GOLD STANDARD</strong> — shows absence of ganglion cells. Contrast enema shows narrow aganglionic segment + proximal dilation ('transition zone').",
+tx:"Surgical resection of aganglionic segment (pull-through procedure).",
+hy:["Failure to pass meconium + Down syndrome = think Hirschsprung","Transition zone on contrast enema","Biopsy shows <strong>NO ganglion cells</strong>","RET proto-oncogene"],
+trap:"Contrast with <strong>Meconium ileus</strong> (cystic fibrosis) — thick meconium blocks terminal ileum; NOT aganglionic."},
+
+// ═══════════════ OBSTRUCTIVE / MECHANICAL ═══════════════
+{id:"bowel-obstruction",cat:"Obstructive/Mechanical",ck:"obs",emoji:"🚧",name:"Intestinal Obstruction",
+oneLiner:"Blockage of bowel lumen. SBO (small bowel) >> LBO (large bowel). Mechanical vs functional (ileus).",
+path:"SBO causes (in order): <strong>Adhesions (#1) &gt; Hernias &gt; Tumors &gt; Crohn's</strong>. LBO causes: <strong>Cancer (#1) &gt; Diverticulitis &gt; Volvulus</strong>. Mechanical: physical blockage. Functional (paralytic ileus): no peristalsis (post-op, meds, hypokalemia, sepsis).",
+clin:"<ul><li>Colicky abdominal pain (in waves)</li><li>Bilious vomiting (proximal SBO), feculent vomiting (distal SBO/LBO)</li><li>Abdominal distension (more in LBO)</li><li>Obstipation (no gas/stool)</li><li>High-pitched bowel sounds → absent (late)</li></ul>",
+dx:"<strong>Upright AXR</strong>: <strong>'stepladder' air-fluid levels</strong>, dilated bowel loops. CT confirms level + cause. LBO: colon distension ± 'coffee bean' (volvulus) or 'apple core' (cancer).",
+tx:"NPO + IV fluids + NG decompression ('drip & suck'). Surgery for strangulation, ischemia, closed-loop obstruction, or failed medical mgmt.",
+hy:["Adhesions are the <strong>#1 SBO cause</strong> in post-op patients","Hernia is the <strong>#1 SBO cause</strong> in patients who've never had surgery","Closed-loop obstruction (both ends blocked) → ischemia → emergency","Strangulated hernia → bowel necrosis"],
+mn:"<strong>SBO = 'SMASH'</strong>: <strong>S</strong>urgery (adhesions), <strong>M</strong>asses, <strong>A</strong>bscess, <strong>S</strong>trictures, <strong>H</strong>ernia."},
+
+{id:"hernia",cat:"Obstructive/Mechanical",ck:"obs",emoji:"🚧",name:"Hernia",
+oneLiner:"Protrusion of organ/tissue through a wall defect. Key: inguinal (indirect > direct), femoral, umbilical, hiatal.",
+path:"<ul><li><strong>Indirect inguinal</strong>: Through deep inguinal ring → canal → scrotum. <strong>Lateral</strong> to inf. epigastric a. Patent processus vaginalis (congenital). M &gt;&gt; F.</li><li><strong>Direct inguinal</strong>: Through <strong>Hesselbach's triangle</strong>. <strong>Medial</strong> to inf. epigastric a. Acquired weakness. Older men.</li><li><strong>Femoral</strong>: Below inguinal lig, medial to femoral v. Women &gt;&gt; men. High strangulation risk.</li><li><strong>Hiatal</strong>: Sliding (95%, GE jxn herniates) vs Paraesophageal (5%, stomach beside esophagus).</li></ul>",
+clin:"Bulge worsened by Valsalva/standing. Incarcerated = irreducible. Strangulated = ischemic (severe pain, systemic signs — emergency).",
+dx:"Clinical. US or CT if uncertain.",
+tx:"Surgical repair (mesh). Emergency if strangulated.",
+hy:["<strong>MDs don't LIE</strong>: <strong>M</strong>edial = <strong>D</strong>irect, <strong>L</strong>ateral = <strong>I</strong>ndirect","Indirect hernia in female = look for testicular feminization/AIS","Femoral hernia: highest risk of strangulation","Sliding hiatal hernia → GERD; paraesophageal → can strangulate"],
+mn:"<strong>'MDs don't LIE'</strong>"},
+
+{id:"adhesions",cat:"Obstructive/Mechanical",ck:"obs",emoji:"🚧",name:"Adhesions",
+oneLiner:"#1 cause of SBO in developed countries. Fibrous bands from prior surgery or peritonitis.",
+path:"Post-surgical or post-inflammatory fibrous bands tether bowel loops. Can kink bowel → obstruction or twist → volvulus.",
+clin:"Crampy abdominal pain + vomiting + distension, usually post-surgical patient. May recur.",
+dx:"CT: transition point without obvious mass; 'bird-beak' tapering.",
+tx:"Initially conservative ('drip and suck'). Surgical lysis (adhesiolysis) if fails.",
+hy:["<strong>#1 cause of SBO in developed world</strong>","Post-surgical patient + SBO = adhesions","Laparoscopy &lt; open surgery for adhesion formation"]},
+
+{id:"volvulus",cat:"Obstructive/Mechanical",ck:"obs",emoji:"🚧",name:"Volvulus",
+oneLiner:"Twisting of bowel around mesentery → obstruction ± ischemia. Sigmoid (elderly) or cecal (younger).",
+path:"<ul><li><strong>Sigmoid volvulus</strong>: Most common in elderly/nursing home, chronic constipation, high-fiber diets (Africa, Russia). Long sigmoid mesentery twists.</li><li><strong>Cecal volvulus</strong>: Younger patients, congenital failure of cecal fixation.</li><li><strong>Midgut volvulus</strong>: Infants with malrotation — surgical emergency.</li></ul>",
+clin:"Acute abdominal pain, distension, obstipation, vomiting.",
+dx:"<ul><li>Sigmoid: <strong>'Coffee bean'</strong> or <strong>'bent inner tube'</strong> sign (LUQ) on AXR; <strong>'bird beak'</strong> on contrast enema</li><li>Cecal: 'Coffee bean' sign in LUQ (displaced cecum)</li><li>Midgut: 'Whirlpool sign' on CT</li></ul>",
+tx:"Sigmoid: endoscopic detorsion + elective resection. Cecal: surgical.",
+hy:["<strong>Sigmoid volvulus</strong> = elderly, nursing home, LUQ coffee bean","<strong>Cecal volvulus</strong> = younger, congenital fixation failure","<strong>Midgut volvulus in infant</strong> = malrotation → EMERGENCY surgery (Ladd's procedure)"]},
+
+{id:"intussusception",cat:"Obstructive/Mechanical",ck:"obs",emoji:"🚧",name:"Intussusception",
+oneLiner:"Telescoping of one bowel segment into another. <strong>Most common cause of bowel obstruction in infants (6 mo–2 yr)</strong>.",
+path:"Proximal bowel (intussusceptum) invaginates into distal (intussuscipiens), typically at <strong>ileocecal junction</strong> in kids. Can compromise blood supply → ischemia. <strong>Lead points</strong> (in older kids/adults): Meckel diverticulum, polyps, lymphoma (HIV patients), HSP purpura bruise, recent rotavirus vaccine.",
+clin:"<ul><li>Episodic severe colicky abdominal pain (child draws knees to chest)</li><li><strong>'Currant jelly' stools</strong> (blood + mucus — late sign)</li><li>Palpable <strong>'sausage-shaped'</strong> RUQ mass</li><li>Lethargy between episodes ('dance sign')</li></ul>",
+dx:"<strong>Ultrasound — 'target' or 'bullseye' sign</strong>. Contrast (air or barium) enema is both diagnostic AND therapeutic.",
+tx:"<strong>Air or contrast enema</strong> — reduces 80–90%. Surgery if fails or perforated.",
+hy:["<strong>Currant jelly stools</strong> + <strong>sausage mass</strong> = intussusception","<strong>Target sign</strong> on US","In adults → always look for a lead point (tumor!)","HSP + abdominal pain = classic intussusception trigger","Recent rotavirus vaccine (historical)"],
+mn:"<strong>'CRAMP'</strong>: <strong>C</strong>urrant jelly, <strong>R</strong>educe with enema, <strong>A</strong>ged &lt;2, <strong>M</strong>ass (sausage), <strong>P</strong>ain (colicky)."},
+
+// ═══════════════ VASCULAR ═══════════════
+{id:"ischemic-colitis",cat:"Vascular",ck:"vasc",emoji:"🩸",name:"Ischemic Colitis",
+oneLiner:"Hypoperfusion of colon, classically at watershed areas (splenic flexure, rectosigmoid). Elderly + hypotensive.",
+path:"Watershed areas between SMA + IMA territories have dual, marginal blood supply. Hypotension, AFib, atherosclerosis, post-AAA repair, cocaine, or severe dehydration → ischemia of mucosa/submucosa. Unlike <strong>acute mesenteric ischemia</strong> (SMA embolism → small bowel necrosis, high mortality), ischemic colitis is typically less severe.",
+clin:"<ul><li>Acute onset <strong>crampy LLQ or periumbilical pain</strong></li><li><strong>Bloody diarrhea / hematochezia</strong> within 24 h</li><li>Often self-limited</li></ul>",
+dx:"CT: <strong>'thumbprinting'</strong> (submucosal edema/hemorrhage). Colonoscopy: pale, friable mucosa with hemorrhagic patches at splenic flexure.",
+tx:"Supportive (bowel rest, IV fluids, antibiotics if needed). Surgery if necrosis/perforation.",
+hy:["<strong>Griffith's point</strong> = splenic flexure (SMA ↔ IMA watershed)","<strong>Sudeck's point</strong> = rectosigmoid junction (IMA ↔ internal iliac)","<strong>Thumbprinting</strong> on CT","Contrast with ACUTE MESENTERIC ISCHEMIA (SMA, whole small bowel, 'pain out of proportion')"],
+trap:"Ischemic colitis ≠ acute mesenteric ischemia. Colitis = colon, less severe, often resolves. Mesenteric ischemia = small bowel, SMA, deadly."},
+
+// ═══════════════ MALABSORPTION ═══════════════
+{id:"malabsorption",cat:"Malabsorption",ck:"malab",emoji:"🧪",name:"Malabsorption Syndromes (General)",
+oneLiner:"Failure to absorb nutrients → steatorrhea, weight loss, fatigue, deficiencies of fat-soluble vitamins (ADEK).",
+path:"Causes span 4 categories: <strong>(1) Mucosal</strong> (celiac, tropical sprue, Whipple, lactose intolerance), <strong>(2) Luminal</strong> (pancreatic insufficiency, bile salt def, SIBO), <strong>(3) Structural</strong> (short gut, Crohn), <strong>(4) Infectious</strong> (Giardia, tapeworm).",
+clin:"<ul><li>Steatorrhea: bulky, greasy, foul-smelling, floating stools</li><li>Weight loss despite normal intake</li><li>ADEK deficiency: night blindness (A), osteomalacia (D), neuro + hemolytic (E), coagulopathy (K)</li><li>B12/folate → megaloblastic anemia</li><li>Iron def → microcytic anemia</li><li>Calcium/Mg def → tetany</li></ul>",
+dx:"<strong>72-hr fecal fat collection</strong> (gold standard). <strong>D-xylose test</strong>: abnormal in mucosal disease, normal in pancreatic insufficiency. <strong>Sudan stain</strong> of stool for fat droplets.",
+hy:["D-xylose normal → pancreatic (give enzymes)","D-xylose abnormal → mucosal (celiac, Whipple)","Short gut (&lt;200 cm) → TPN-dependent"],
+mn:"<strong>'I Get Smashed Weekly'</strong>: <strong>I</strong>nfection (Giardia, TB), <strong>G</strong>luten (celiac), <strong>S</strong>hort bowel, <strong>M</strong>ucosa (Whipple), <strong>A</strong>lpha-chain dz, <strong>S</strong>prue, <strong>H</strong>ypolactasia, <strong>E</strong>nzymes (pancreatic insufficiency), <strong>D</strong>iabetes, <strong>W</strong>hipple."},
+
+{id:"celiac",cat:"Malabsorption",ck:"malab",emoji:"🧪",name:"Celiac Disease (Celiac Sprue)",
+oneLiner:"Autoimmune T-cell reaction to <strong>gluten</strong> (gliadin peptide) → villous blunting of duodenum. HLA-DQ2/DQ8.",
+path:"Gliadin deamidated by <strong>tissue transglutaminase (tTG)</strong> → T-cell reaction → cytokines → <strong>villous atrophy</strong>, crypt hyperplasia, intraepithelial lymphocyte infiltration (&gt;25/100 enterocytes). Primarily affects <strong>proximal small bowel (duodenum, jejunum)</strong>, sparing distal ileum (so B12 usually spared early; iron + folate worst).",
+clin:"<ul><li>Chronic diarrhea, steatorrhea, bloating</li><li>Weight loss, failure to thrive (kids)</li><li><strong>Iron-deficiency anemia</strong> (classic adult presentation, even asymptomatic)</li><li>Osteoporosis (vit D def + Ca malabsorption)</li><li><strong>Dermatitis herpetiformis</strong> (pruritic vesicles on extensor surfaces, IgA deposits in dermal papillae — pathognomonic skin finding)</li></ul>",
+dx:"<strong>IgA anti-tTG</strong> (first-line, most sensitive). Anti-endomysial (most specific). Anti-deamidated gliadin. <strong>Duodenal biopsy</strong> (gold standard): villous atrophy + intraepithelial lymphocytes.",
+tx:"<strong>Lifelong gluten-free diet</strong> (no wheat, rye, barley — 'WRB' — rice + oats usually OK).",
+hy:["<strong>HLA-DQ2</strong> (95%) and <strong>HLA-DQ8</strong>","Anti-tTG IgA first (check <strong>total IgA</strong> to exclude IgA deficiency, which is common in celiac!)","<strong>Duodenal</strong> biopsy (NOT ileum)","Increased risk of <strong>Enteropathy-associated T-cell lymphoma (EATL)</strong>","Dermatitis herpetiformis = treat with dapsone + gluten-free"],
+trap:"Anti-tTG IgA can be falsely negative in IgA-deficient patients (10× more common in celiac). Always check total IgA level.",
+mn:"<strong>Celiac skin</strong> = <strong>D</strong>ermatitis <strong>H</strong>erpetiformis; <strong>DH = double H</strong> — very itchy vesicles on the extensor surfaces."},
+
+// ═══════════════ INFLAMMATORY (IBD) ═══════════════
+{id:"crohn",cat:"Inflammatory (IBD)",ck:"ibd",emoji:"🔥",name:"Crohn Disease",
+oneLiner:"Transmural inflammation, anywhere mouth-to-anus (often terminal ileum), skip lesions, non-caseating granulomas, fistulas.",
+path:"Th1-mediated (IL-12, IFN-γ, TNF-α). <strong>Transmural</strong> inflammation. <strong>Skip lesions</strong> (patchy). <strong>Cobblestone</strong> mucosa. <strong>Creeping fat</strong>. <strong>Non-caseating granulomas</strong>. <strong>Strictures, fistulas, abscesses</strong>. Classic location: <strong>terminal ileum + proximal colon</strong> (rectum often SPARED). NOD2 gene. Smoking is <strong>RISK factor</strong>.",
+clin:"<ul><li>Crampy <strong>RLQ pain</strong> + chronic diarrhea (± blood)</li><li>Weight loss, fatigue, low-grade fever</li><li>Perianal disease (fistulas, abscesses, fissures) — highly suggestive</li><li>Oral aphthous ulcers</li><li><strong>Extraintestinal</strong>: migratory polyarthritis, episcleritis/uveitis, erythema nodosum, pyoderma gangrenosum, <strong>kidney stones (calcium oxalate)</strong>, <strong>gallstones</strong> (from bile salt loss in terminal ileum)</li></ul>",
+dx:"Colonoscopy + biopsy: skip lesions, cobblestone, non-caseating granulomas. <strong>'String sign'</strong> (terminal ileum narrowing) on barium. <strong>ASCA+</strong> (anti-Saccharomyces cerevisiae), pANCA−. ↑ CRP, fecal calprotectin.",
+tx:"Mild: 5-ASA (limited), budesonide. Moderate-severe: steroids, immunomodulators (azathioprine, MTX), biologics (<strong>anti-TNF</strong> = infliximab, adalimumab; anti-integrin = vedolizumab; anti-IL12/23 = ustekinumab). Surgery is NOT curative (recurs at anastomosis).",
+hy:["<strong>Transmural</strong> (vs UC mucosal)","<strong>Skip lesions</strong> + <strong>cobblestone</strong>","<strong>Non-caseating granulomas</strong>","Terminal ileum → <strong>B12 def + gallstones + kidney stones</strong>","<strong>ASCA+, pANCA−</strong>","Smoking makes it WORSE","Surgery NOT curative"],
+mn:"<strong>'CHRISTMAS'</strong>: <strong>C</strong>obblestones, <strong>H</strong>igh temp, <strong>R</strong>educed lumen, <strong>I</strong>ntestinal fistulae, <strong>S</strong>kip lesions, <strong>T</strong>ransmural, <strong>M</strong>alabsorption, <strong>A</strong>bdominal pain, <strong>S</strong>ubmucosal fibrosis.",
+trap:"Crohn <strong>spares</strong> the rectum; UC <strong>always</strong> involves rectum."},
+
+{id:"uc",cat:"Inflammatory (IBD)",ck:"ibd",emoji:"🔥",name:"Ulcerative Colitis",
+oneLiner:"Continuous, superficial (mucosa + submucosa) inflammation starting at <strong>rectum</strong>, ascending. Colon only.",
+path:"Th2-mediated. <strong>Continuous</strong> lesions (no skip areas). <strong>Mucosa + submucosa only</strong> (NOT transmural). <strong>Pseudopolyps</strong> (regenerating mucosa). <strong>Crypt abscesses</strong> (neutrophils in crypts). <strong>Lead pipe colon</strong> (loss of haustra on AXR). Rectum ALWAYS involved; can extend proximally. Smoking is PROTECTIVE.",
+clin:"<ul><li><strong>Bloody diarrhea</strong> + tenesmus + urgency (hallmark)</li><li>LLQ pain (less severe than Crohn)</li><li>Extraintestinal: <strong>primary sclerosing cholangitis (PSC)</strong> — highly specific for UC; arthritis, uveitis, EN, PG</li><li><strong>Toxic megacolon</strong>: life-threatening colon dilation &gt;6 cm + systemic toxicity (emergency)</li><li>Perianal disease is RARE (vs Crohn)</li></ul>",
+dx:"Colonoscopy: continuous, rectum-up inflammation; pseudopolyps; lead pipe colon. Biopsy: crypt abscesses, no granulomas. <strong>p-ANCA+</strong>, ASCA−.",
+tx:"5-ASA (mesalamine) is backbone. Steroids for flares. Immunomodulators/biologics for refractory. <strong>Colectomy is CURATIVE</strong>.",
+hy:["<strong>Always starts at rectum</strong> (vs Crohn spares rectum)","<strong>Continuous</strong> + <strong>mucosa only</strong>","<strong>Crypt abscesses</strong>, <strong>pseudopolyps</strong>","<strong>Lead pipe colon</strong>","<strong>PSC association</strong> (anti-smooth muscle or p-ANCA)","Smoking is <strong>PROTECTIVE</strong>","↑↑ colon cancer risk after 10 yrs (annual surveillance)","Surgery is CURATIVE","<strong>p-ANCA+</strong>"],
+mn:"<strong>'ULCCCERS'</strong>: <strong>U</strong>lcers, <strong>L</strong>arge intestine only, <strong>C</strong>ontinuous, <strong>C</strong>olorectal cancer, <strong>C</strong>rypt abscesses, <strong>E</strong>xtends proximally from rectum, <strong>R</strong>ed diarrhea, <strong>S</strong>clerosing cholangitis."},
+
+{id:"ibd-general",cat:"Inflammatory (IBD)",ck:"ibd",emoji:"🔥",name:"IBD — Comparison & General",
+oneLiner:"Crohn vs UC side-by-side. Shared features: extraintestinal manifestations (EIMs) + treatment ladder.",
+path:"Both are chronic immune-mediated. Both have a bimodal age distribution (15–35 and 55–65). Both have EIMs. Both increase colon cancer risk (UC &gt; Crohn).",
+clin:"<strong>Shared EIMs (MSK/Eye/Skin/Liver)</strong>: Migratory arthritis, ankylosing spondylitis, uveitis/episcleritis, erythema nodosum, pyoderma gangrenosum, aphthous ulcers, PSC (UC &gt;&gt; Crohn). <strong>Tx ladder (both)</strong>: 5-ASA (UC &gt; Crohn) → steroids → immunomods → biologics → surgery.",
+hy:["<strong>Crohn</strong>: Transmural, skip, granulomas, terminal ileum, ASCA, fistulas, surgery NOT curative, smoking WORSE","<strong>UC</strong>: Mucosal, continuous, crypt abscesses, rectum, p-ANCA, no fistulas, surgery CURATIVE, smoking PROTECTIVE","Both → ↑ colon cancer risk (surveillance colonoscopy after 8–10 yrs dz)","PSC strongly linked to UC (anti-smooth muscle antibodies)"],
+mn:"<strong>Crohn = 'CHRISTMAS'</strong>; <strong>UC = 'ULCCCERS'</strong>. <strong>'Crohn's = cobblestones; UC = crypt abscesses.'</strong>"},
+
+// ═══════════════ DIVERTICULAR ═══════════════
+{id:"diverticulosis",cat:"Diverticular",ck:"div",emoji:"🕳️",name:"Diverticulosis",
+oneLiner:"Outpouchings of colonic mucosa + submucosa (pseudodiverticula) through muscularis at sites of vasa recta entry. Usually <strong>sigmoid</strong>.",
+path:"Low-fiber, high-pressure colonic lumen → mucosa + submucosa herniate where vasa recta penetrate muscularis (weak points). Common in &gt;60 yr. <strong>False (pseudo) diverticula</strong> — only mucosa + submucosa, NO muscle layer.",
+clin:"Usually <strong>asymptomatic</strong>. May cause <strong>painless hematochezia</strong> (most common cause of painless lower GI bleed in elderly). LLQ fullness.",
+dx:"Colonoscopy or CT.",
+tx:"High-fiber diet. Surgery rarely.",
+hy:["Most common cause of <strong>painless lower GI bleed in elderly</strong>","Sigmoid colon, false diverticula","Low-fiber diet → high intraluminal pressure"]},
+
+{id:"diverticulitis",cat:"Diverticular",ck:"div",emoji:"🕳️",name:"Diverticulitis",
+oneLiner:"Inflammation/infection of a diverticulum → 'left-sided appendicitis'. Fever + LLQ pain.",
+path:"Fecalith obstructs diverticulum neck → stasis + bacterial overgrowth → inflammation ± microperforation. Polymicrobial (E. coli, Bacteroides).",
+clin:"<ul><li><strong>LLQ pain</strong> ('left-sided appendicitis')</li><li>Fever, leukocytosis</li><li>Change in bowel habits (constipation or diarrhea)</li><li>Complications: <strong>perforation</strong>, <strong>abscess</strong>, <strong>fistula</strong> (colovesical → pneumaturia, fecaluria; colovaginal), <strong>stricture</strong>, obstruction</li></ul>",
+dx:"<strong>CT with contrast</strong> (gold standard — shows pericolic fat stranding, bowel wall thickening ± abscess). <strong>AVOID colonoscopy acutely</strong> (perforation risk) — do after 6 wks.",
+tx:"Uncomplicated: bowel rest, IV/PO antibiotics (cipro + metronidazole, or amox/clav). Complicated (abscess &gt;4 cm): drainage. Perforation/fistula: surgery.",
+hy:["<strong>LLQ pain + fever</strong> = diverticulitis","<strong>Pneumaturia</strong> = colovesical fistula","Avoid colonoscopy in acute setting","AAA can mimic — rule out in elderly"]},
+
+// ═══════════════ POLYPS ═══════════════
+{id:"inflammatory-polyp",cat:"Polyps",ck:"polyp",emoji:"🔸",name:"Inflammatory Polyp",
+oneLiner:"Non-neoplastic reactive polyp from injury/inflammation (esp. IBD). Also called 'pseudopolyps'.",
+path:"Regenerating mucosa between ulcerated areas of colon (classic in UC). NO dysplasia — NOT premalignant.",
+hy:["Classic in <strong>ulcerative colitis</strong> (pseudopolyps)","NOT premalignant","Non-neoplastic"]},
+
+{id:"hyperplastic-polyp",cat:"Polyps",ck:"polyp",emoji:"🔸",name:"Hyperplastic Polyp",
+oneLiner:"Most common non-neoplastic polyp. Distal colon/rectum. 'Serrated' architecture.",
+path:"Serrated/sawtooth glands. <strong>Small (&lt;5 mm)</strong>, <strong>distal</strong> (rectosigmoid), <strong>benign</strong>. Different from <strong>sessile serrated lesion</strong> which IS premalignant.",
+hy:["<strong>Most common non-neoplastic polyp</strong>","Distal colon, small, benign","Contrast with <strong>sessile serrated lesion</strong>: right-sided, BRAF+, <strong>premalignant</strong> via MSI pathway"]},
+
+{id:"juvenile-polyp",cat:"Polyps",ck:"polyp",emoji:"🔸",name:"Juvenile Polyp",
+oneLiner:"Hamartomatous polyp in young children. Rectum. Solitary = benign. Multiple = juvenile polyposis syndrome.",
+path:"Cystically dilated glands in a stromal background. Solitary (sporadic, &lt;5 yr, benign, often prolapses/bleeds from rectum). <strong>Multiple polyps = juvenile polyposis syndrome</strong> (AD; SMAD4 or BMPR1A) → ↑ CRC risk.",
+hy:["<strong>Painless rectal bleeding in child</strong> (solitary)","Multiple = <strong>juvenile polyposis syndrome</strong> → CRC risk","SMAD4 / BMPR1A genes"]},
+
+{id:"peutz-polyp",cat:"Polyps",ck:"polyp",emoji:"🔸",name:"Peutz-Jeghers Polyp",
+oneLiner:"Hamartomatous polyp with arborizing smooth muscle core. Small bowel > colon. Part of Peutz-Jeghers syndrome.",
+path:"Hamartoma with <strong>arborizing ('tree-like') smooth muscle core</strong> extending into lamina propria. Distinctive architecture.",
+hy:["<strong>Tree-like smooth muscle core</strong> is the buzzword","Seen in Peutz-Jeghers syndrome (STK11)","Can cause intussusception (lead point)"]},
+
+{id:"tubular-adenoma",cat:"Polyps",ck:"polyp",emoji:"🔸",name:"Tubular Adenoma",
+oneLiner:"Dysplastic tubular glands. Pedunculated. <strong>Most common adenomatous polyp</strong>. Lowest malignancy risk of adenomas.",
+path:"Glands in rounded tubular pattern. <strong>Dysplastic</strong> — PRECANCEROUS. Usually pedunculated (stalk). Risk of CRC: size-dependent (&lt;1 cm: ~1%; &gt;2 cm: &gt;40%).",
+hy:["Most common adenoma","<strong>Pedunculated</strong>","Low-grade dysplasia most common","Size matters: &lt;1 cm = low risk; &gt;1 cm = high risk"]},
+
+{id:"tubulovillous-adenoma",cat:"Polyps",ck:"polyp",emoji:"🔸",name:"Tubulovillous Adenoma",
+oneLiner:"Mix of tubular + villous architecture (26–75% villous). Intermediate malignancy risk.",
+path:"Both tubular glands and villous (finger-like) projections. Dysplastic. Intermediate malignant potential between tubular + villous.",
+hy:["Mixed architecture","Intermediate malignancy risk (between tubular + villous)"]},
+
+{id:"villous-adenoma",cat:"Polyps",ck:"polyp",emoji:"🔸",name:"Villous Adenoma",
+oneLiner:"<strong>Sessile</strong>, finger-like projections. <strong>Highest cancer risk</strong> of adenomas. Can secrete mucus → hypokalemia.",
+path:"&gt;75% villous (finger-like) architecture. Usually <strong>sessile</strong> (flat). Typically rectal. Highest rate of malignant transformation.",
+clin:"Large villous adenomas of rectum can secrete mucus rich in K+ → <strong>secretory diarrhea + hypokalemia</strong> ('McKittrick-Wheelock syndrome').",
+hy:["<strong>Highest cancer risk</strong> among adenomas","<strong>Sessile</strong>, finger-like","Rectal","Can cause hypokalemia from mucus secretion","<strong>'V</strong>illous = <strong>V</strong>illainous'"]},
+
+{id:"sessile-serrated",cat:"Polyps",ck:"polyp",emoji:"🔸",name:"Sessile Serrated Lesion (SSL)",
+oneLiner:"Right-sided serrated polyp with malignant potential via <strong>MSI (microsatellite instability)</strong> pathway. BRAF mutation.",
+path:"Serrated architecture extending DEEP into crypts + crypt dilation at base ('L-shaped' or 'boot-shaped' crypts). <strong>Right colon</strong>. <strong>BRAF V600E mutation</strong>. Progresses via <strong>CpG Island Methylator Phenotype (CIMP)</strong> → MLH1 silencing → MSI → adenocarcinoma.",
+hy:["<strong>Right-sided</strong>","<strong>BRAF+ / MSI pathway</strong>","Serrated + premalignant (vs hyperplastic which is benign)","CpG island hypermethylation","Fast progression to cancer"]},
+
+// ═══════════════ GENETIC SYNDROMES ═══════════════
+{id:"fap",cat:"Genetic Syndromes",ck:"genetic",emoji:"🧬",name:"FAP (Familial Adenomatous Polyposis)",
+oneLiner:"Autosomal dominant. <strong>APC gene</strong> (5q21). &gt;100 adenomatous polyps by adolescence. <strong>100% CRC by age 40</strong> if no colectomy.",
+path:"Germline <strong>APC</strong> mutation (tumor suppressor, Wnt pathway). Second hit → loss of APC → adenoma → CRC. Hundreds to thousands of adenomas appear in colon by teens.",
+clin:"<ul><li><strong>Classic FAP</strong>: 100s-1000s of colonic adenomas, colorectal cancer by 40s</li><li><strong>Gardner syndrome</strong> variant: FAP + <strong>osteomas</strong> (skull/mandible) + <strong>supernumerary teeth</strong> + <strong>congenital hypertrophy of retinal pigment epithelium (CHRPE)</strong> + <strong>desmoid tumors</strong> + epidermoid cysts</li><li><strong>Turcot syndrome</strong> variant: FAP + <strong>CNS tumors</strong> (medulloblastoma, GBM). Mnemonic: 'Turcot → Turban (brain)'</li></ul>",
+dx:"Genetic testing for APC. Colonoscopy at 10–12 yr.",
+tx:"<strong>Prophylactic total colectomy</strong> (usually in teens/20s). Surveillance for duodenal/ampullary adenomas + thyroid cancer.",
+hy:["<strong>AD, APC gene, 5q21</strong>","100% CRC if untreated → prophylactic colectomy","<strong>Gardner</strong> = FAP + osteomas + desmoids + CHRPE","<strong>Turcot</strong> = FAP (or Lynch) + CNS tumors","Duodenal/ampullary cancer (survivors after colectomy)"]},
+
+{id:"lynch",cat:"Genetic Syndromes",ck:"genetic",emoji:"🧬",name:"Lynch Syndrome (HNPCC)",
+oneLiner:"AD. <strong>Mismatch repair (MMR) genes</strong> — MLH1, MSH2, MSH6, PMS2. <strong>MSI-high</strong>. Early, right-sided CRC + endometrial/ovarian.",
+path:"Germline mutation in DNA MMR genes → microsatellite instability (MSI). Proximal (right-sided) colon cancers, often mucinous/medullary. Earlier onset than FAP (avg 45). ~80% lifetime CRC risk.",
+clin:"<ul><li>Early-onset CRC (usually before 50)</li><li>Right-sided colon cancer (not polyp-rich like FAP)</li><li><strong>Endometrial cancer (2nd most common cancer in Lynch — females)</strong></li><li>Ovarian, gastric, urothelial, small bowel, pancreatic, brain cancers</li><li><strong>Muir-Torre variant</strong>: Lynch + <strong>sebaceous skin tumors</strong> + keratoacanthomas</li></ul>",
+dx:"<strong>Amsterdam II criteria (3-2-1 rule)</strong>: ≥3 relatives with Lynch cancer, across 2 generations, 1 diagnosed before 50. IHC for MMR proteins + MSI testing on tumor.",
+tx:"Surveillance colonoscopy Q1-2 yr starting age 20-25. Risk-reducing hysterectomy + BSO after childbearing.",
+hy:["<strong>MSH2, MLH1, MSH6, PMS2</strong>","<strong>Right-sided</strong> colon cancer","<strong>Endometrial cancer</strong> — 2nd most common in Lynch","<strong>Amsterdam criteria: 3-2-1</strong>","NO polyposis phenotype (unlike FAP)"]},
+
+{id:"peutz-syndrome",cat:"Genetic Syndromes",ck:"genetic",emoji:"🧬",name:"Peutz-Jeghers Syndrome",
+oneLiner:"AD. <strong>STK11/LKB1</strong> gene. Hamartomatous polyps + mucocutaneous hyperpigmentation. ↑ risk multiple cancers.",
+path:"Germline STK11 (serine/threonine kinase) mutation. Hamartomatous polyps throughout GI tract (small bowel &gt; colon). Mucocutaneous macules: <strong>lips, buccal mucosa, palms, soles, genitals</strong>.",
+clin:"<ul><li>Mucocutaneous <strong>freckle-like pigmented macules</strong></li><li>Intussusception (polyp as lead point in small bowel)</li><li>GI bleeding</li><li><strong>↑ risk</strong>: breast, colon, pancreatic, stomach, small bowel, ovarian (sex-cord tumor), testicular (Sertoli)</li></ul>",
+hy:["<strong>Lip/buccal freckles</strong> = Peutz-Jeghers","STK11/LKB1 gene","Hamartomatous, not adenomatous","↑ breast + multi-organ cancer risk","Intussusception risk"]},
+
+{id:"juvenile-polyposis",cat:"Genetic Syndromes",ck:"genetic",emoji:"🧬",name:"Juvenile Polyposis Syndrome",
+oneLiner:"AD. <strong>SMAD4 or BMPR1A</strong>. Multiple juvenile (hamartomatous) polyps → ↑ CRC risk.",
+path:"&gt;5 juvenile polyps in colon OR polyps throughout GI + family history. Most polyps are hamartomatous but background mucosa can develop dysplasia → CRC.",
+hy:["SMAD4 / BMPR1A (TGF-β pathway)","Kids with GI bleeding + polyps","CRC risk (unlike sporadic juvenile polyp)","SMAD4 also linked to HHT (hereditary hemorrhagic telangiectasia)"]},
+
+{id:"mutyh",cat:"Genetic Syndromes",ck:"genetic",emoji:"🧬",name:"MUTYH-Associated Polyposis",
+oneLiner:"<strong>AUTOSOMAL RECESSIVE</strong> (unlike FAP!). MUTYH gene (base excision repair). 10–100 adenomas; 'FAP-lite'.",
+path:"Germline biallelic MUTYH mutations → failed repair of oxidative DNA damage (G→T transversions in APC). Phenotype resembles attenuated FAP.",
+hy:["<strong>ONLY AR polyposis syndrome</strong> (FAP, Lynch, PJS, JPS all AD)","10–100 adenomas","'FAP-lite'","Base excision repair defect"]},
+
+// ═══════════════ COLORECTAL NEOPLASIA ═══════════════
+{id:"adenomas",cat:"Colorectal Neoplasia",ck:"crc",emoji:"🧬",name:"Adenomas (Colorectal — General)",
+oneLiner:"Dysplastic epithelial polyps. Precursor lesions for most colorectal adenocarcinomas. Types: tubular, tubulovillous, villous.",
+path:"Neoplastic dysplastic polyps. Progress through <strong>adenoma-carcinoma sequence</strong>: APC loss → β-catenin/Wnt → KRAS activation → TP53/SMAD4 loss → adenocarcinoma. <strong>5–10 yrs</strong> for polyp → cancer.",
+hy:["Adenoma-carcinoma sequence: <strong>APC → KRAS → TP53</strong>","Size + villous architecture + dysplasia grade = cancer risk","Screening colonoscopy Q10 yr; Q3-5 yr if polyps found"]},
+
+{id:"dysplasia-crc",cat:"Colorectal Neoplasia",ck:"crc",emoji:"🧬",name:"Dysplasia (Colorectal)",
+oneLiner:"Architectural + cytologic atypia WITHOUT invasion beyond basement membrane. Premalignant.",
+path:"Low-grade vs high-grade. HGD = carcinoma in situ. When cells breach muscularis mucosae → invasive cancer.",
+hy:["LGD vs HGD","HGD = carcinoma in situ","Invasion through muscularis mucosae = invasive cancer"]},
+
+{id:"crc-adeno",cat:"Colorectal Neoplasia",ck:"crc",emoji:"🧬",name:"Colorectal Adenocarcinoma",
+oneLiner:"<strong>3rd most common cancer + 2nd cancer death in US</strong>. Arises from adenomas. Location determines presentation.",
+path:"<strong>Chromosomal instability (CIN) pathway (80%)</strong>: APC → KRAS → TP53 (sporadic + FAP). <strong>MSI pathway (15%)</strong>: MMR defects (sporadic hypermethylation or Lynch). <strong>CIMP/BRAF pathway</strong>: serrated polyps.",
+clin:"<ul><li><strong>Right-sided (cecum/ascending)</strong>: <strong>iron-deficiency anemia</strong>, occult bleed, weight loss, RLQ mass. Larger at presentation (liquid stool). New IDA in elderly male/postmenopausal F = colon cancer until proven otherwise.</li><li><strong>Left-sided (descending/sigmoid)</strong>: Change in bowel habits, <strong>'pencil-thin'</strong> stools, hematochezia, constipation, obstruction, crampy pain. <strong>'Apple-core lesion'</strong> on barium.</li><li><strong>Rectal</strong>: hematochezia, tenesmus.</li></ul>",
+dx:"<strong>Colonoscopy + biopsy</strong>. CEA for surveillance (NOT screening). CT for staging.",
+tx:"Surgery ± chemo (FOLFOX). Anti-EGFR (cetuximab) only if KRAS wild-type. Anti-VEGF (bevacizumab).",
+hy:["<strong>Right side</strong> = anemia (grows big, silent)","<strong>Left side</strong> = obstruction, apple core","<strong>Streptococcus bovis (gallolyticus) bacteremia</strong> → colonoscopy!","CEA for surveillance only","Screen with colonoscopy starting age <strong>45</strong>"],
+mn:"<strong>'RIGHT = RED'</strong> (anemia, RBCs); <strong>'LEFT = LUMEN'</strong> (obstruction).",
+trap:"New iron-deficiency anemia in older adult = <strong>colonoscopy, not iron supplement alone</strong>."},
+
+{id:"mucinous-carcinoma",cat:"Colorectal Neoplasia",ck:"crc",emoji:"🧬",name:"Mucinous Adenocarcinoma",
+oneLiner:"&gt;50% of tumor volume is extracellular mucin. Worse prognosis than conventional adenocarcinoma.",
+hy:["&gt;50% extracellular mucin","Associated with MSI/Lynch (better prognosis if MSI-high) OR sporadic (worse)","Right-sided colon"]},
+
+{id:"signet-ring-crc",cat:"Colorectal Neoplasia",ck:"crc",emoji:"🧬",name:"Signet-Ring Carcinoma (Colon)",
+oneLiner:"&gt;50% signet-ring cells (mucin pushes nucleus to periphery). Diffuse, aggressive, poor prognosis.",
+path:"Intracellular mucin displaces nucleus → signet-ring appearance. Often diffusely infiltrative (like linitis plastica in stomach).",
+hy:["Poor prognosis","Signet-ring = mucin pushes nucleus","Aggressive"]},
+
+{id:"medullary-crc",cat:"Colorectal Neoplasia",ck:"crc",emoji:"🧬",name:"Medullary Carcinoma",
+oneLiner:"Poorly differentiated but <strong>MSI-high</strong> → better prognosis than its poor histology would suggest.",
+path:"Sheets of poorly differentiated cells with lymphocytic infiltrate. MSI-high (Lynch or sporadic MLH1 methylation).",
+hy:["Paradox: poor differentiation but <strong>BETTER</strong> prognosis","MSI-high","Lymphocytic infiltrate"]},
+
+{id:"micropapillary",cat:"Colorectal Neoplasia",ck:"crc",emoji:"🧬",name:"Micropapillary Carcinoma",
+oneLiner:"Rare, aggressive variant. Small tufts of cells without fibrovascular core.",
+hy:["Rare, aggressive","High LN mets","Poor prognosis"]},
+
+{id:"serrated-adeno",cat:"Colorectal Neoplasia",ck:"crc",emoji:"🧬",name:"Serrated Adenocarcinoma",
+oneLiner:"Arises from sessile serrated lesion. Right colon. BRAF mutation, CIMP, MSI.",
+hy:["From SSL pathway","<strong>BRAF V600E</strong>","Right-sided","CIMP + MSI"]},
+
+{id:"adenosquamous",cat:"Colorectal Neoplasia",ck:"crc",emoji:"🧬",name:"Adenosquamous Carcinoma",
+oneLiner:"Mixed glandular + squamous differentiation. Rare. Worse prognosis than pure adenocarcinoma.",
+hy:["Mixed histology","Aggressive"]},
+
+{id:"scc-crc",cat:"Colorectal Neoplasia",ck:"crc",emoji:"🧬",name:"Squamous Cell Carcinoma (Colon)",
+oneLiner:"Extremely rare in colon (common only at anus). Schistosomiasis, HPV, chronic inflammation.",
+hy:["Rare in true colon","More common at anus","HPV/chronic inflammation associations"]},
+
+{id:"spindle-cell",cat:"Colorectal Neoplasia",ck:"crc",emoji:"🧬",name:"Spindle Cell Carcinoma",
+oneLiner:"Rare sarcomatoid variant. Epithelial + mesenchymal features.",
+hy:["Spindle-shaped cells","Rare","Aggressive"]},
+
+{id:"undiff-crc",cat:"Colorectal Neoplasia",ck:"crc",emoji:"🧬",name:"Undifferentiated Carcinoma",
+oneLiner:"No glandular/squamous differentiation. Very poor prognosis.",
+hy:["No differentiation","Poor prognosis"]},
+
+// ═══════════════ ANAL / PERIANAL ═══════════════
+{id:"anal-scc",cat:"Anal/Perianal",ck:"anal",emoji:"🎯",name:"Anal Squamous Cell Carcinoma",
+oneLiner:"HPV-driven (HPV 16, 18). Below the dentate line. Risk: HIV, anal receptive intercourse, immunosuppression.",
+path:"HPV E6 (inhibits p53) + E7 (inhibits Rb) → transformation of squamous epithelium below dentate line. Above dentate line → ADENOCARCINOMA (columnar mucosa).",
+clin:"Anal bleeding, pain, mass, pruritus. Inguinal lymphadenopathy.",
+dx:"Biopsy. DRE/anoscopy.",
+tx:"Chemoradiation (Nigro protocol) — rarely surgery (sphincter sparing).",
+hy:["<strong>HPV 16/18</strong>","Below dentate line = SCC; above = adenocarcinoma","Risk: HIV, MSM, anal receptive intercourse","Inguinal LN drainage (below dentate)","Chemoradiation curative"]},
+
+{id:"hemorrhoids",cat:"Anal/Perianal",ck:"anal",emoji:"🎯",name:"Hemorrhoids",
+oneLiner:"Dilated submucosal vessels. Internal (above dentate, painless) vs External (below dentate, painful).",
+path:"Chronic straining, constipation, pregnancy, portal hypertension (portocaval anastomosis at superior rectal vein). <strong>Above dentate = visceral innervation = painless bleeding</strong>. <strong>Below dentate = somatic innervation = painful</strong>.",
+clin:"<ul><li><strong>Internal</strong>: painless bright red bleeding on toilet paper</li><li><strong>External</strong>: painful, thrombosed (if clot) = tender blue lump</li></ul>",
+dx:"DRE, anoscopy.",
+tx:"Fiber, sitz baths. Rubber band ligation (internal), surgery (external).",
+hy:["Internal = above dentate = painless","External = below dentate = painful","Portal HTN → hemorrhoids (porto-systemic anastomosis)","Superior rectal v drains to IMV → portal; middle/inferior to internal iliac → systemic"]},
+
+// ═══════════════ ASSOCIATED CONDITIONS ═══════════════
+{id:"srus",cat:"Associated Conditions",ck:"assoc",emoji:"📌",name:"Solitary Rectal Ulcer Syndrome",
+oneLiner:"Chronic straining + rectal prolapse → ulcer of anterior rectal wall. Fibromuscular obliteration of lamina propria (pathognomonic).",
+path:"Chronic straining against puborectalis + rectal prolapse → trauma + ischemia of anterior rectal wall. Histology: <strong>fibromuscular obliteration of lamina propria</strong> (smooth muscle + collagen replacing lamina propria).",
+clin:"Rectal bleeding, mucus discharge, tenesmus, incomplete evacuation.",
+hy:["Fibromuscular obliteration of lamina propria","Associated with rectal prolapse","Can mimic cancer on endoscopy"]},
+
+{id:"colitis-neoplasia",cat:"Associated Conditions",ck:"assoc",emoji:"📌",name:"Colitis-Associated Neoplasia",
+oneLiner:"Dysplasia/CRC arising from long-standing IBD (UC > Crohn). Flat dysplasia (not polypoid).",
+path:"Chronic inflammation → ROS → DNA damage → dysplasia → CRC. Risk factors: duration &gt;8–10 yrs, pancolitis, PSC, family hx of CRC.",
+clin:"Often flat/unseen — needs surveillance biopsies.",
+dx:"Surveillance colonoscopy starting 8-10 yr after UC diagnosis, Q1-2 yr thereafter.",
+tx:"Colectomy for high-grade dysplasia or invasive cancer.",
+hy:["UC &gt; Crohn for CRC risk","FLAT dysplasia (not polypoid)","Random biopsies needed","PSC synergizes risk"]},
+
+// ═══════════════ ESOPHAGITIS ═══════════════
+{id:"hsv-esoph",cat:"Esophagitis",ck:"esoph",emoji:"🫁",name:"HSV Esophagitis",
+oneLiner:"Immunocompromised. <strong>Punched-out / volcano-like ulcers</strong>. Cowdry A inclusions, multinucleated giant cells.",
+path:"HSV-1 reactivation in immunocompromised (HIV, transplant, chemo).",
+clin:"Odynophagia, dysphagia, fever.",
+dx:"Endoscopy with biopsy from <strong>ulcer edge</strong> (viral cytopathic effect). PCR. IHC. Histology: multinucleated giant cells, <strong>Cowdry type A inclusions</strong> (eosinophilic intranuclear).",
+tx:"Acyclovir.",
+hy:["<strong>Punched-out/small discrete ulcers</strong>","<strong>Biopsy edge of ulcer</strong>","<strong>Cowdry A inclusions + multinucleated giant cells</strong>","Acyclovir"]},
+
+{id:"cmv-esoph",cat:"Esophagitis",ck:"esoph",emoji:"🫁",name:"CMV Esophagitis",
+oneLiner:"Immunocompromised (esp AIDS, CD4 &lt; 50). <strong>Linear/longitudinal ulcers</strong>. 'Owl-eye' inclusions.",
+path:"CMV in endothelial cells/fibroblasts of ulcer BASE.",
+clin:"Odynophagia, dysphagia, fever.",
+dx:"Endoscopy biopsy from <strong>ulcer BASE</strong> (HSV = edge, CMV = center). Histology: large cells with intranuclear <strong>'owl-eye'</strong> + cytoplasmic inclusions.",
+tx:"Ganciclovir (valganciclovir PO).",
+hy:["<strong>Linear ulcers</strong>","<strong>Biopsy base of ulcer</strong>","<strong>'Owl-eye' inclusions</strong>","Ganciclovir","CD4 &lt; 50 in AIDS"],
+mn:"<strong>HSV = Edge = small/volcano; CMV = Center = linear/owl eye</strong>."},
+
+{id:"candida-esoph",cat:"Esophagitis",ck:"esoph",emoji:"🫁",name:"Candida Esophagitis",
+oneLiner:"<strong>Most common esophagitis in HIV/immunocompromised</strong>. White plaques. Pseudohyphae on biopsy.",
+path:"Candida albicans (yeast/pseudohyphae).",
+clin:"<strong>Odynophagia</strong> (pain with swallowing) ± thrush in mouth.",
+dx:"Endoscopy: white adherent plaques. Biopsy: pseudohyphae + yeast. KOH/GMS/PAS stain.",
+tx:"Fluconazole PO. Empirical therapy if thrush + dysphagia in HIV.",
+hy:["<strong>MOST COMMON</strong> esophagitis in HIV","<strong>White plaques</strong>, pseudohyphae","CD4 &lt; 200","Fluconazole"]},
+
+// ═══════════════ REFLUX & ESOPHAGEAL ═══════════════
+{id:"gerd",cat:"Reflux",ck:"esoph",emoji:"🫁",name:"GERD (Reflux Esophagitis)",
+oneLiner:"Transient LES relaxation → acid reflux → esophagitis. Heartburn + regurgitation. Risk: obesity, hiatal hernia.",
+path:"Transient LES relaxations + ↓ LES tone (alcohol, smoking, fatty food, caffeine, chocolate, nitrates, CCBs) + delayed gastric emptying + hiatal hernia. Acid injures distal esophageal squamous epithelium.",
+clin:"<ul><li>Heartburn (retrosternal), especially postprandial + supine</li><li>Regurgitation, sour/bitter taste</li><li>Chronic cough, hoarseness, asthma (nocturnal)</li><li>Odynophagia (rare, severe)</li><li>Complications: <strong>Barrett esophagus → adenocarcinoma</strong>, strictures, peptic ulcer, erosive esophagitis</li></ul>",
+dx:"Clinical + PPI trial. Endoscopy if alarm signs (dysphagia, weight loss, GI bleed, odynophagia — 'DROWSY alarm'). 24-hr pH monitoring is gold standard.",
+tx:"Lifestyle (weight loss, elevate HOB, avoid late meals/triggers). PPIs (omeprazole), H2 blockers (famotidine). Fundoplication for refractory.",
+hy:["<strong>Triggers</strong>: alcohol, smoking, caffeine, chocolate, nitrates, CCBs, fatty food","Hiatal hernia","Alarm symptoms → endoscopy","Complication: Barrett → adenocarcinoma","PPIs better than H2","Basal zone hyperplasia + eosinophils (distinguish from EoE: lots more eos, proximal)"]},
+
+{id:"barrett",cat:"Metaplasia",ck:"esoph",emoji:"🫁",name:"Barrett Esophagus",
+oneLiner:"Metaplasia of distal esophageal squamous → <strong>non-ciliated columnar with goblet cells</strong> (intestinal metaplasia). From chronic GERD.",
+path:"Chronic acid exposure → squamous epithelium replaced by intestinal columnar epithelium with goblet cells. <strong>30-fold ↑ risk esophageal adenocarcinoma</strong>. Endoscopy: salmon-colored mucosa extending into distal esophagus.",
+clin:"Often asymptomatic (GERD ± alarms).",
+dx:"Endoscopy + biopsy showing intestinal metaplasia with <strong>goblet cells</strong>.",
+tx:"PPIs. Surveillance endoscopy. Ablation (radiofrequency) if high-grade dysplasia.",
+hy:["<strong>Non-ciliated columnar epithelium with goblet cells</strong>","Metaplasia (reversible adaptation) → dysplasia → adenocarcinoma","Salmon-colored mucosa on endoscopy","Surveillance schedule depends on dysplasia grade"]},
+
+{id:"barrett-dysplasia",cat:"Dysplasia",ck:"esoph",emoji:"🫁",name:"Barrett Dysplasia",
+oneLiner:"Dysplasia arising in Barrett epithelium. Low-grade (LGD) vs high-grade (HGD — carcinoma in situ). Precursor to adenocarcinoma.",
+hy:["LGD → closer surveillance","HGD = carcinoma in situ → ablation (RFA) or EMR","Progression: metaplasia → LGD → HGD → adenocarcinoma"]},
+
+{id:"squamous-papilloma",cat:"Benign tumors",ck:"esoph",emoji:"🫁",name:"Squamous Papilloma (Esophagus)",
+oneLiner:"Benign exophytic papillary lesion. HPV-associated.",
+hy:["HPV","Benign","Rare"]},
+
+{id:"leiomyoma-esoph",cat:"Benign tumors",ck:"esoph",emoji:"🫁",name:"Leiomyoma (Esophagus)",
+oneLiner:"<strong>Most common benign esophageal tumor</strong>. Smooth muscle origin. Submucosal.",
+path:"Smooth muscle tumor, submucosal. No malignant potential.",
+clin:"Usually asymptomatic; if large → dysphagia.",
+dx:"Endoscopic ultrasound shows hypoechoic submucosal mass. Biopsy usually avoided (intact mucosa).",
+tx:"Enucleation if symptomatic.",
+hy:["Most common <strong>benign</strong> esophageal tumor","Smooth muscle origin","Unlike stomach: leiomyoma is rare in stomach (GIST is much more common there)"]},
+
+{id:"esoph-scc",cat:"Malignant",ck:"esoph",emoji:"🫁",name:"Esophageal Squamous Cell Carcinoma",
+oneLiner:"<strong>Upper 2/3</strong> of esophagus. Worldwide most common. Risk: <strong>smoking + alcohol</strong>, hot liquids, achalasia, HPV.",
+path:"Squamous epithelium → dysplasia → invasive SCC. <strong>p53 mutations</strong> common.",
+clin:"Progressive dysphagia (solids first → then liquids), weight loss, odynophagia, hoarseness (recurrent laryngeal n involvement), cough (tracheoesophageal fistula).",
+dx:"Endoscopy + biopsy. CT/EUS for staging.",
+tx:"Chemoradiation ± esophagectomy.",
+hy:["<strong>Upper 2/3</strong>","Smoking + alcohol (synergistic)","<strong>Hot beverages</strong>, <strong>achalasia</strong>, <strong>Plummer-Vinson</strong> (iron def + esoph webs + glossitis + dysphagia), <strong>HPV</strong>, nitrosamines","More common worldwide (but adenocarcinoma more common in US)"]},
+
+{id:"esoph-adeno",cat:"Malignant",ck:"esoph",emoji:"🫁",name:"Esophageal Adenocarcinoma",
+oneLiner:"<strong>Lower 1/3</strong>. Arises from <strong>Barrett esophagus</strong>. Risk: GERD, obesity, smoking. <strong>Most common in US.</strong>",
+path:"Barrett (metaplasia) → dysplasia → adenocarcinoma. Lower esophagus / GE junction.",
+clin:"Progressive dysphagia, weight loss, GERD history.",
+dx:"Endoscopy + biopsy.",
+tx:"Chemoradiation + esophagectomy.",
+hy:["<strong>Lower 1/3</strong>","<strong>Barrett → adenocarcinoma</strong>","<strong>Most common in US</strong> (SCC most common worldwide)","GERD + obesity + smoking"]},
+
+// ═══════════════ GASTRITIS ═══════════════
+{id:"acute-gastritis",cat:"Gastritis",ck:"gastritis",emoji:"🔥",name:"Acute Gastritis",
+oneLiner:"Erosive, often hemorrhagic gastritis from NSAIDs, alcohol, stress, uremia, bile reflux.",
+path:"<strong>Disruption of mucosal barrier</strong> (↓ PGE2 from NSAIDs → ↓ mucus/bicarb) + acid injury. Can cause superficial erosions or deeper ulcers.",
+clin:"Epigastric pain, nausea, vomiting, hematemesis.",
+dx:"Endoscopy shows erosions, petechiae.",
+tx:"Remove cause, PPIs.",
+hy:["<strong>NSAIDs</strong> (↓ PGE2 → ↓ mucus)","Alcohol","Stress (<strong>Curling ulcer</strong> = burns; <strong>Cushing ulcer</strong> = CNS/head injury)","Uremia"],
+mn:"<strong>'AC SUN'</strong>: Acute gastritis from <strong>A</strong>lcohol, <strong>C</strong>hemo, <strong>S</strong>tress, <strong>U</strong>remia, <strong>N</strong>SAIDs."},
+
+{id:"chronic-gastritis",cat:"Gastritis",ck:"gastritis",emoji:"🔥",name:"Chronic Gastritis",
+oneLiner:"<strong>Type A (autoimmune, fundus/body)</strong> vs <strong>Type B (H. pylori, antrum)</strong>. Both → atrophy → metaplasia → dysplasia → cancer.",
+path:"Progression: chronic gastritis → atrophy (loss of glands) → intestinal metaplasia → dysplasia → adenocarcinoma (intestinal type).",
+hy:["<strong>Type A = Autoimmune</strong> (fundus/body, pernicious anemia, B12 def, ↑ gastrin)","<strong>Type B = Bug (H. pylori)</strong> (antrum; most common)","Both → ↑ gastric cancer risk (intestinal type)"]},
+
+{id:"hpylori-gastritis",cat:"Gastritis",ck:"gastritis",emoji:"🔥",name:"H. pylori Gastritis",
+oneLiner:"Most common cause of chronic gastritis worldwide. <strong>Antrum</strong> predominant. Urease+. Causes PUD, gastric cancer, MALT lymphoma.",
+path:"Curved gram-negative rod. <strong>Urease</strong> (converts urea → ammonia → alkaline environment) + flagella → colonizes mucous layer of antrum. Virulence factors: <strong>CagA</strong> (cytotoxin-associated) + <strong>VacA</strong> (vacuolating). Chronic inflammation → gland atrophy → metaplasia → ↑ cancer risk.",
+clin:"Often asymptomatic. Can cause epigastric pain, dyspepsia. Associated diseases: PUD (most), gastric adenocarcinoma (intestinal type), MALT lymphoma.",
+dx:"<strong>Urea breath test</strong> (non-invasive; hold PPI 2 wks prior). <strong>Stool antigen</strong>. Serology (less useful after tx). Endoscopy biopsy (rapid urease test, histology, culture).",
+tx:"<strong>Triple therapy</strong>: PPI + amoxicillin + clarithromycin (14 days). <strong>Quad therapy</strong>: PPI + bismuth + metronidazole + tetracycline (if macrolide resistance).",
+hy:["<strong>Antrum</strong> predominant","<strong>Urease+ → urea breath test</strong>","Causes <strong>PUD, gastric adenocarcinoma (intestinal), MALT lymphoma</strong>","MALT regresses with H. pylori eradication","CagA, VacA virulence factors","Triple therapy: <strong>PPI + Amox + Clari</strong>"]},
+
+{id:"autoimmune-gastritis",cat:"Gastritis",ck:"gastritis",emoji:"🔥",name:"Autoimmune Gastritis (Type A)",
+oneLiner:"<strong>Anti-parietal cell + anti-intrinsic factor antibodies</strong>. Fundus/body. Pernicious anemia, achlorhydria, ↑ gastrin, carcinoid + adenocarcinoma risk.",
+path:"T-cell + autoantibody destruction of parietal cells (fundus/body). <strong>Loss of HCl → achlorhydria → ↑ gastrin → G-cell and ECL-cell hyperplasia → carcinoid tumor risk</strong>. Loss of IF → <strong>B12 deficiency (pernicious anemia)</strong>. Loss of parietal cells → intestinal metaplasia → adenocarcinoma risk.",
+clin:"<strong>Pernicious anemia</strong> (megaloblastic anemia, glossitis, neurological symptoms — subacute combined degeneration). Associated with other autoimmune dz (Hashimoto, vitiligo, Addison, T1DM).",
+dx:"Anti-parietal cell + anti-IF antibodies. ↑ serum gastrin (due to loss of negative feedback). Low B12. Schilling test (historical).",
+hy:["<strong>Fundus/body</strong> (H. pylori = antrum)","<strong>Anti-parietal cell + anti-IF antibodies</strong>","<strong>Pernicious anemia</strong> (B12 def → megaloblastic + neuro)","<strong>↑ gastrin</strong>","<strong>Carcinoid tumors</strong> (ECL hyperplasia) + gastric adenocarcinoma"]},
+
+{id:"atrophic-gastritis",cat:"Gastritis",ck:"gastritis",emoji:"🔥",name:"Atrophic Gastritis",
+oneLiner:"Loss of gastric glands — terminal stage of both autoimmune (fundus) or H. pylori (antrum) chronic gastritis. Precancerous.",
+hy:["From autoimmune OR H. pylori","Loss of parietal cells → achlorhydria → ↑ gastrin","Intestinal metaplasia step","Precursor to adenocarcinoma (intestinal type)"]},
+
+{id:"intestinal-metaplasia-stomach",cat:"Gastritis",ck:"gastritis",emoji:"🔥",name:"Intestinal Metaplasia (Stomach)",
+oneLiner:"Gastric mucosa replaced by intestinal-type epithelium (with goblet cells, Paneth cells). Precancerous.",
+hy:["Precursor to <strong>intestinal-type gastric adenocarcinoma</strong>","From chronic H. pylori OR autoimmune gastritis","Sign: goblet cells in gastric mucosa"]},
+
+// ═══════════════ ULCER ═══════════════
+{id:"pud",cat:"Ulcer",ck:"ulcer",emoji:"🕳️",name:"Peptic Ulcer Disease (PUD)",
+oneLiner:"Mucosal break &gt;5 mm, through muscularis mucosae. Duodenum (70%) &gt; Gastric (30%). H. pylori + NSAIDs are top causes.",
+path:"Imbalance between aggressive factors (acid, pepsin, H. pylori, NSAIDs) and defensive factors (mucus, bicarb, PGE2, blood flow).",
+clin:"Burning epigastric pain, nausea. Duodenal: 'hunger pain', relieved by food, wakes at night. Gastric: worse with food, weight loss. Complications: bleeding, perforation (anterior duodenal → air under diaphragm), penetration (posterior → GDA bleed), gastric outlet obstruction.",
+dx:"Endoscopy + biopsy (rule out malignancy in gastric ulcer). Test for H. pylori.",
+tx:"PPIs + treat cause (H. pylori eradication; stop NSAIDs).",
+hy:["Duodenal: pain <strong>RELIEVED</strong> with food ('duodenal = dinner helps')","Gastric: pain <strong>WORSE</strong> with food ('gastric = grows worse')","H. pylori = most common cause","Biopsy gastric ulcers to rule out malignancy","Posterior duodenal ulcer → GDA bleed","Anterior duodenal ulcer → perforation (peritonitis, free air)"]},
+
+{id:"duodenal-ulcer",cat:"Ulcer",ck:"ulcer",emoji:"🕳️",name:"Duodenal Ulcer",
+oneLiner:"Anterior surface of 1st duodenum. H. pylori (~90%). Pain RELIEVED by food. Brunner gland hypertrophy. Almost never malignant.",
+path:"H. pylori → ↑ gastrin → ↑ acid. <strong>Hypertrophy of Brunner glands</strong> (compensatory bicarb secretion). <strong>Anterior ulcer → perforation</strong> (air under diaphragm). <strong>Posterior ulcer → bleed</strong> (erodes into gastroduodenal artery).",
+clin:"Burning epigastric pain, relieved by food/antacids, 2-3 hrs postprandial, wakes at night.",
+hy:["<strong>H. pylori ~90%</strong>","Pain <strong>BETTER</strong> with food","Brunner gland hypertrophy","<strong>Anterior</strong> = perforation; <strong>Posterior</strong> = GDA bleed","Almost never malignant (biopsy not needed routinely)","First part of duodenum"]},
+
+{id:"gastric-ulcer",cat:"Ulcer",ck:"ulcer",emoji:"🕳️",name:"Gastric Ulcer",
+oneLiner:"<strong>Lesser curvature</strong>. Pain WORSENED by food. Can be malignant — always biopsy.",
+path:"H. pylori (~70%), NSAIDs. Lesser curvature. <strong>Must biopsy to rule out adenocarcinoma</strong>.",
+clin:"Burning pain, WORSE with eating, weight loss, early satiety.",
+hy:["<strong>Lesser curvature</strong>","Pain <strong>WORSE</strong> with food (gastric grows worse)","<strong>Biopsy — can be malignant</strong>","H. pylori + NSAIDs"]},
+
+{id:"zes",cat:"Ulcer",ck:"ulcer",emoji:"🕳️",name:"Zollinger-Ellison Syndrome",
+oneLiner:"Gastrinoma (usually duodenum or pancreas) → hypergastrinemia → multiple, refractory, distal ulcers + diarrhea.",
+path:"Neuroendocrine tumor (usually duodenum or pancreas) secretes gastrin → ↑↑ parietal cell HCl → ulcers + inactivation of pancreatic enzymes → <strong>steatorrhea + diarrhea</strong>. ~25% are part of <strong>MEN1</strong> (Parathyroid + Pituitary + Pancreas — 'Three P's').",
+clin:"Multiple peptic ulcers in unusual sites (distal duodenum, jejunum), refractory to PPI, diarrhea, steatorrhea, severe GERD.",
+dx:"<strong>Elevated fasting gastrin</strong> (&gt;1000 pg/mL off PPIs) + low gastric pH. <strong>Secretin stimulation test</strong>: gastrin paradoxically RISES (normal suppression is lost). Localize with somatostatin scintigraphy (octreotide scan), CT, EUS.",
+tx:"High-dose PPI. Surgical resection if localized. Octreotide.",
+hy:["<strong>Gastrinoma triangle</strong> (cystic duct, 2nd/3rd duodenum jxn, neck of pancreas)","<strong>Secretin test</strong>: paradoxical rise in gastrin","<strong>MEN1</strong>: Parathyroid + Pituitary + Pancreas (Three P's)","Multiple, distal, refractory ulcers + diarrhea","Hypergastrinemia + low pH"],
+trap:"Don't confuse with pernicious anemia (also high gastrin, but LOW acid, positive anti-parietal)."},
+
+{id:"stress-ulcers",cat:"Ulcer",ck:"ulcer",emoji:"🕳️",name:"Stress Ulcers",
+oneLiner:"ICU patients. <strong>Curling</strong> (burns — 'Curling burns') vs <strong>Cushing</strong> (CNS injury — 'Cushing's in brain').",
+path:"<strong>Curling ulcer</strong>: severe burns → hypovolemia → gastric mucosal ischemia. <strong>Cushing ulcer</strong>: CNS injury → ↑ intracranial pressure → ↑ vagal stimulation → ↑ acid + gastric mucosal ischemia.",
+clin:"Often painless bleeding in critically ill patient.",
+tx:"<strong>Prophylactic PPI</strong> in ICU/burn/CNS-injury patients.",
+hy:["<strong>Curling = Burns (burn = curl)</strong>","<strong>Cushing = CNS/ICP (pushing brain)</strong>","Prophylactic PPI in ICU"]},
+
+// ═══════════════ PRECANCER (STOMACH) ═══════════════
+{id:"gastric-adenoma",cat:"Precancer",ck:"gastric",emoji:"⚠️",name:"Gastric Adenoma",
+oneLiner:"Dysplastic gastric polyp. Precursor to intestinal-type adenocarcinoma.",
+hy:["Dysplastic polyp","Precursor to intestinal-type adenocarcinoma","Arises from intestinal metaplasia background"]},
+
+{id:"pernicious-anemia",cat:"Precancer",ck:"gastric",emoji:"⚠️",name:"Pernicious Anemia",
+oneLiner:"B12 deficiency from autoimmune gastritis → ↓ intrinsic factor → megaloblastic anemia + subacute combined degeneration.",
+path:"Anti-parietal cell + anti-IF antibodies → atrophy of fundus/body → ↓ IF → B12 malabsorption (terminal ileum). B12 cofactor for DNA synthesis + myelin.",
+clin:"<ul><li>Macrocytic anemia (MCV &gt;100), hypersegmented PMNs</li><li>Glossitis (smooth, beefy red tongue)</li><li><strong>Subacute combined degeneration</strong>: dorsal columns (vibration/proprioception), lateral corticospinal (UMN), spinocerebellar → ataxia</li><li>Neurologic symptoms irreversible if prolonged — give B12 before folate!</li></ul>",
+dx:"Low B12, high methylmalonic acid + homocysteine. Anti-IF + anti-parietal antibodies. Schilling test (historical).",
+tx:"IM B12 (cyanocobalamin).",
+hy:["<strong>↓ B12, ↑ MMA, ↑ homocysteine</strong>","Anti-IF / anti-parietal antibodies","Subacute combined degeneration","<strong>Treat with B12 before folate</strong> (folate fixes anemia but NOT neurologic damage; can worsen neuro)","↑ gastric adenocarcinoma + carcinoid risk"]},
+
+{id:"menetrier",cat:"Precancer",ck:"gastric",emoji:"⚠️",name:"Menetrier Disease",
+oneLiner:"Hyperplasia of foveolar cells → <strong>giant rugal folds (brain-like)</strong>, protein-losing gastropathy. Precancerous.",
+path:"Excess TGF-α signaling → <strong>foveolar (mucous cell) hyperplasia</strong> + atrophy of parietal + chief cells → ↓ acid + ↑ mucus + <strong>protein-losing gastropathy (hypoalbuminemia)</strong>.",
+clin:"Epigastric pain, weight loss, edema (from protein loss), diarrhea, nausea, hypochlorhydria.",
+dx:"Endoscopy: <strong>giant, cerebriform rugal folds</strong>. Biopsy: foveolar hyperplasia, parietal atrophy.",
+tx:"Cetuximab (anti-EGFR). Gastrectomy in severe cases.",
+hy:["<strong>Giant 'brain-like' rugal folds</strong>","<strong>Protein-losing gastropathy</strong> (hypoalbuminemia)","Hypochlorhydria","<strong>Precancerous</strong> (adenocarcinoma risk)","Mnemonic: <strong>MEN</strong>etrier = <strong>MEN</strong> with big (brain-like) folds"]},
+
+{id:"gastric-dysplasia",cat:"Precancer",ck:"gastric",emoji:"⚠️",name:"Gastric Dysplasia",
+oneLiner:"Architectural + cytologic atypia without invasion. High-grade = carcinoma in situ → soon adenocarcinoma.",
+hy:["LGD vs HGD","HGD = CIS","Needs endoscopic resection (ESD/EMR) or surgery"]},
+
+// ═══════════════ CANCER (STOMACH) ═══════════════
+{id:"gastric-adenocarcinoma",cat:"Cancer",ck:"gastric",emoji:"🎗️",name:"Gastric Adenocarcinoma",
+oneLiner:"Most common gastric malignancy. Japan + Korea > Western. Two histologic types: intestinal (bulky) vs diffuse (linitis plastica).",
+clin:"Early: vague dyspepsia. Late: weight loss, early satiety, iron-def anemia, hematemesis/melena. <strong>Classic metastatic signs</strong>: <strong>Virchow node</strong> (L supraclavicular), <strong>Krukenberg tumor</strong> (bilateral ovary mets, signet-ring), <strong>Sister Mary Joseph nodule</strong> (periumbilical), <strong>Blumer shelf</strong> (rectal mets palpable on DRE), <strong>acanthosis nigricans</strong> (paraneoplastic).",
+dx:"Endoscopy + biopsy.",
+tx:"Surgery ± chemo (FLOT). HER2+ → trastuzumab.",
+hy:["<strong>Virchow-Krukenberg-Sister Mary Joseph-Blumer</strong> = 'VKSMJ-B' classic mets","<strong>Acanthosis nigricans</strong> = paraneoplastic skin","H. pylori, dietary nitrates/smoked food, autoimmune gastritis, blood type A"]},
+
+{id:"intestinal-type",cat:"Cancer",ck:"gastric",emoji:"🎗️",name:"Gastric Intestinal Type",
+oneLiner:"Older (&gt;55 yr), M&gt;F. <strong>Lesser curve</strong>, ulcerative. From H. pylori / chronic gastritis / intestinal metaplasia.",
+path:"Sequential: <strong>gastritis → atrophy → intestinal metaplasia → dysplasia → adenocarcinoma</strong>. Glandular histology.",
+hy:["Older patients, M&gt;F","<strong>Lesser curvature, antrum</strong>","From H. pylori / chronic gastritis","<strong>Ulcerative tumor</strong>","Glandular histology"]},
+
+{id:"diffuse-type",cat:"Cancer",ck:"gastric",emoji:"🎗️",name:"Gastric Diffuse Type",
+oneLiner:"Younger patients, no clear precursor. <strong>E-cadherin loss (CDH1)</strong>. <strong>Signet-ring cells</strong>. <strong>Linitis plastica</strong> ('leather bottle stomach').",
+path:"Loss of E-cadherin (CDH1 gene — hereditary diffuse gastric cancer syndrome) → loss of cell-cell adhesion → diffuse infiltration. Signet-ring cells: mucin displaces nucleus. No precursor lesion (no adenoma).",
+clin:"Younger. Linitis plastica = diffuse thickening of stomach wall → non-distensible 'leather bottle'.",
+hy:["<strong>E-cadherin loss (CDH1)</strong>","<strong>Signet-ring cells</strong>","<strong>Linitis plastica</strong>","Younger patients","Worse prognosis than intestinal type","No precursor — arises de novo"],
+mn:"<strong>DIFFUSE</strong> = <strong>D</strong>e novo (no precursor), <strong>I</strong>nfiltrative, <strong>F</strong>emale prone, <strong>F</strong>ast (aggressive), <strong>U</strong>niform (linitis plastica), <strong>S</strong>ignet-ring, <strong>E</strong>-cadherin loss."},
+
+{id:"gastric-signet",cat:"Cancer",ck:"gastric",emoji:"🎗️",name:"Gastric Signet-Ring Carcinoma",
+oneLiner:"Diffuse-type histology feature. Signet-ring = nucleus pushed to periphery by mucin vacuole. Poor prognosis.",
+hy:["Signet-ring cell = nucleus pushed aside by mucin","Characteristic of diffuse type gastric cancer","Krukenberg tumor = signet cells in ovary (metastasis)"]},
+
+{id:"gastric-mucinous",cat:"Cancer",ck:"gastric",emoji:"🎗️",name:"Gastric Mucinous Adenocarcinoma",
+oneLiner:"&gt;50% extracellular mucin. Aggressive subtype.",
+hy:["&gt;50% mucin","Poor prognosis"]},
+
+// ═══════════════ STROMAL / NEUROENDOCRINE / LYMPHOID ═══════════════
+{id:"gist",cat:"Stromal",ck:"gastric",emoji:"🔹",name:"GIST (Gastrointestinal Stromal Tumor)",
+oneLiner:"Most common GI mesenchymal tumor. Arises from <strong>interstitial cells of Cajal</strong> (GI pacemaker). <strong>c-KIT (CD117) +</strong>, DOG-1 +.",
+path:"Gain-of-function mutation in <strong>c-KIT (CD117)</strong> tyrosine kinase (most) or PDGFRA. Stomach (most common, 60%), small bowel, elsewhere. Variable malignant potential (size + mitotic rate).",
+clin:"GI bleed (#1), abdominal mass, anemia. Can be asymptomatic.",
+dx:"Endoscopy: submucosal mass. EUS-guided biopsy. IHC: <strong>CD117 (c-KIT)+, DOG-1+</strong>. CD34+.",
+tx:"Surgical resection. <strong>Imatinib (Gleevec)</strong> for unresectable/metastatic (tyrosine kinase inhibitor targets c-KIT).",
+hy:["<strong>Interstitial cells of Cajal</strong>","<strong>c-KIT (CD117) positive</strong>, <strong>DOG-1</strong>","<strong>Imatinib</strong> = first-line for advanced","Most common GI mesenchymal tumor","Stomach &gt; small bowel","<strong>NF1 association</strong>","Carney triad: GIST + pulmonary chondroma + extra-adrenal paraganglioma"]},
+
+{id:"carcinoid",cat:"Neuroendocrine",ck:"gastric",emoji:"🔹",name:"Carcinoid Tumor",
+oneLiner:"Neuroendocrine tumor from enterochromaffin cells. <strong>Appendix (most common, benign)</strong>; <strong>ileum (most common malignant)</strong>. Serotonin secretor.",
+path:"Enterochromaffin (EC) cells secrete <strong>serotonin (5-HT)</strong>, histamine, kallikrein. Gut hormones → vasoactive symptoms only after <strong>LIVER METASTASIS</strong> (otherwise liver clears serotonin first-pass).",
+clin:"<ul><li><strong>Carcinoid syndrome (only with liver mets)</strong>: episodic <strong>flushing</strong>, <strong>diarrhea</strong>, <strong>bronchospasm (wheezing)</strong>, <strong>right-sided heart valve fibrosis</strong> (tricuspid regurg, pulmonary stenosis — because lung MAOs destroy serotonin, sparing left heart)</li><li><strong>Pellagra (niacin deficiency)</strong> — tryptophan diverted to serotonin: <strong>3 Ds — Diarrhea, Dermatitis, Dementia</strong></li><li>Ileal carcinoid can cause intussusception</li></ul>",
+dx:"<strong>24-hr urine 5-HIAA</strong> (serotonin metabolite). Chromogranin A. Octreotide scan / Ga-68 DOTATATE PET.",
+tx:"Surgical resection. <strong>Octreotide</strong> (somatostatin analog) for symptoms.",
+hy:["<strong>Appendix = most common site</strong> (usually benign; incidental)","<strong>Ileum = most common malignant</strong>","<strong>Right-sided valve fibrosis</strong> (tricuspid, pulmonary)","<strong>Pellagra (3 Ds)</strong> from tryptophan depletion","Urine <strong>5-HIAA</strong>","Octreotide treatment","Needs <strong>liver mets</strong> for carcinoid syndrome"],
+mn:"<strong>Carcinoid = 'R' heart valves (TRICUSPID REGURG + PULMONIC STENOSIS — TIPS)</strong>."},
+
+{id:"malt-lymphoma",cat:"Lymphoid",ck:"gastric",emoji:"🔹",name:"MALT Lymphoma",
+oneLiner:"<strong>H. pylori-driven</strong> marginal zone B-cell lymphoma of stomach. Often <strong>regresses with H. pylori eradication</strong>. t(11;18).",
+path:"Chronic H. pylori antigen stimulation → B-cell lymphoid tissue proliferation. <strong>t(11;18)(q21;q21) — API2-MALT1 fusion</strong>. Low-grade.",
+clin:"Dyspepsia, similar to gastritis. Often asymptomatic until advanced.",
+dx:"Endoscopy + biopsy. IHC: CD20+.",
+tx:"<strong>H. pylori eradication FIRST</strong> (many regress). Rituximab/radiation if no response or t(11;18) present (unlikely to regress).",
+hy:["<strong>H. pylori → MALT</strong>","Low-grade B-cell","<strong>t(11;18)</strong> = won't regress with H. pylori tx","First-line: H. pylori eradication","Can transform to DLBCL"]},
+
+{id:"dlbcl",cat:"Lymphoid",ck:"gastric",emoji:"🔹",name:"Diffuse Large B-Cell Lymphoma (GI)",
+oneLiner:"<strong>Most common primary GI lymphoma</strong>. Aggressive but curable. Stomach most common.",
+path:"High-grade B-cell lymphoma. Can arise de novo or from transformation of MALT. <strong>BCL2, BCL6, MYC</strong> translocations.",
+clin:"B-symptoms (fever, night sweats, weight loss), mass, GI bleed, perforation.",
+dx:"Biopsy. IHC: CD20+.",
+tx:"<strong>R-CHOP</strong> (rituximab + cyclophosphamide + doxorubicin + vincristine + prednisone).",
+hy:["<strong>Most common GI lymphoma</strong>","Aggressive but curable","<strong>R-CHOP</strong>","Can come from MALT","CD20+"]}
+];
+
+// ═══════════════ RENDERING + INTERACTIVITY ═══════════════
+let state={search:"",category:"all",learned:new Set(),expanded:new Set()};
+
+function keyOf(d){return d.ck}
+function categoryGroups(){
+  const map={};
+  DISEASES.forEach(d=>{
+    if(!map[d.cat])map[d.cat]={key:d.ck,count:0};
+    map[d.cat].count++;
+  });
+  return map;
+}
+
+function getFiltered(){
+  const q=state.search.toLowerCase().trim();
+  return DISEASES.filter(d=>{
+    if(state.category!=="all"&&d.ck!==state.category)return false;
+    if(!q)return true;
+    const hay=(d.name+" "+d.cat+" "+d.oneLiner+" "+(d.path||"")+" "+(d.clin||"")+" "+(d.dx||"")+" "+(d.tx||"")+" "+(d.hy||[]).join(" ")+" "+(d.mn||"")+" "+(d.trap||"")).toLowerCase();
+    return hay.includes(q);
+  });
+}
+
+function updateProgress(){
+  const filtered=getFiltered();
+  const learned=filtered.filter(d=>state.learned.has(d.id)).length;
+  const pct=filtered.length?Math.round(learned/filtered.length*100):0;
+  document.getElementById("progressFill").style.width=pct+"%";
+  document.getElementById("learnedCount").textContent=learned;
+  document.getElementById("shownCount").textContent=filtered.length;
+}
+
+function renderChips(){
+  const chips=document.getElementById("chips");
+  const groups=categoryGroups();
+  chips.innerHTML=`<div class="chip ${state.category==="all"?"active":""}" data-key="all">📋 All <span class="count">${DISEASES.length}</span></div>`;
+  Object.entries(groups).forEach(([cat,info])=>{
+    chips.innerHTML+=`<div class="chip ${state.category===info.key?"active":""}" data-key="${info.key}" style="${state.category===info.key?"":`background:var(--chip-bg,#fff)`}">${cat} <span class="count">${info.count}</span></div>`;
+  });
+  chips.querySelectorAll(".chip").forEach(c=>{
+    c.onclick=()=>{state.category=c.dataset.key;renderChips();renderDiseases();updateProgress();};
+  });
+}
+
+function renderDiseases(){
+  const grid=document.getElementById("diseaseGrid");
+  const filtered=getFiltered();
+  if(!filtered.length){
+    grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:40px;color:#64748b;font-size:14px;background:white;border-radius:12px;">No diseases match your search.</div>`;
+    return;
+  }
+  grid.innerHTML=filtered.map(d=>{
+    const learned=state.learned.has(d.id);
+    const expanded=state.expanded.has(d.id);
+    const safe=(s)=>s||"";
+    return `<div class="disease cat-${d.ck} d-${d.ck} ${learned?"learned":""} ${expanded?"expanded":""}" data-id="${d.id}">
+      <div class="d-header">
+        <div class="d-cat">${d.emoji} ${d.cat}</div>
+        <div class="d-name">${d.name} <span class="chevron">▼</span></div>
+        <div class="d-oneliner">${d.oneLiner}</div>
+      </div>
+      <div class="d-body">
+        ${d.path?`<div class="section"><h4>🔬 Pathophysiology</h4><p>${d.path}</p></div>`:""}
+        ${d.clin?`<div class="section"><h4>🩺 Clinical Features</h4>${d.clin.includes("<ul>")?d.clin:"<p>"+d.clin+"</p>"}</div>`:""}
+        ${d.dx?`<div class="section"><h4>🔍 Diagnosis</h4><p>${d.dx}</p></div>`:""}
+        ${d.tx?`<div class="section"><h4>💊 Treatment</h4><p>${d.tx}</p></div>`:""}
+        ${d.hy?.length?`<div class="hy-box"><strong>⚡ USMLE High-Yield</strong><ul>${d.hy.map(x=>`<li>${x}</li>`).join("")}</ul></div>`:""}
+        ${d.mn?`<div class="mnemonic"><strong>🧠 Mnemonic</strong>${d.mn}</div>`:""}
+        ${d.trap?`<div class="trap"><strong>⚠️ Exam Trap</strong>${d.trap}</div>`:""}
+        <button class="learned-btn" onclick="toggleLearned('${d.id}',event)">${learned?"✓ Learned":"○ Mark as learned"}</button>
+      </div>
+    </div>`;
+  }).join("");
+  // attach click handlers
+  grid.querySelectorAll(".d-header").forEach(h=>{
+    h.onclick=()=>{
+      const id=h.parentElement.dataset.id;
+      if(state.expanded.has(id))state.expanded.delete(id);
+      else state.expanded.add(id);
+      renderDiseases();
+    };
+  });
+}
+
+function toggleLearned(id,e){
+  e.stopPropagation();
+  if(state.learned.has(id))state.learned.delete(id);
+  else state.learned.add(id);
+  renderDiseases();
+  updateProgress();
+}
+
+// EXCEL EXPORT (HTML → .xls)
+function exportExcel(){
+  let html=`<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"><style>
+    th{background:#166534;color:white;padding:8px;font-weight:bold;text-align:left;border:1px solid #14532d}
+    td{padding:6px 8px;border:1px solid #e2e8f0;vertical-align:top}
+    tr:nth-child(even) td{background:#f8fafc}
+    .cat{background:#dcfce7;font-weight:bold}
+  </style></head><body>
+  <table>
+    <tr><th>#</th><th>Category</th><th>Disease</th><th>One-Liner</th><th>Pathophysiology</th><th>Clinical Features</th><th>Diagnosis</th><th>Treatment</th><th>USMLE High-Yield</th><th>Mnemonic</th><th>Exam Trap</th><th>Learned</th></tr>`;
+  DISEASES.forEach((d,i)=>{
+    const strip=(s)=>(s||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
+    html+=`<tr>
+      <td>${i+1}</td>
+      <td class="cat">${d.cat}</td>
+      <td><strong>${d.name}</strong></td>
+      <td>${strip(d.oneLiner)}</td>
+      <td>${strip(d.path)}</td>
+      <td>${strip(d.clin)}</td>
+      <td>${strip(d.dx)}</td>
+      <td>${strip(d.tx)}</td>
+      <td>${(d.hy||[]).map(strip).join(" • ")}</td>
+      <td>${strip(d.mn)}</td>
+      <td>${strip(d.trap)}</td>
+      <td>${state.learned.has(d.id)?"✓":""}</td>
+    </tr>`;
+  });
+  html+=`</table></body></html>`;
+  const blob=new Blob(['\ufeff',html],{type:"application/vnd.ms-excel"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download="GI_Disease_Study_Guide.xls";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// PRINT
+function printPDF(){
+  // Expand all for print
+  DISEASES.forEach(d=>state.expanded.add(d.id));
+  renderDiseases();
+  setTimeout(()=>{window.print();},200);
+}
+
+// WIRING
+document.getElementById("search").addEventListener("input",(e)=>{
+  state.search=e.target.value;
+  renderDiseases();
+  updateProgress();
+});
+document.getElementById("expandAll").onclick=()=>{
+  DISEASES.forEach(d=>state.expanded.add(d.id));
+  renderDiseases();
+};
+document.getElementById("collapseAll").onclick=()=>{
+  state.expanded.clear();
+  renderDiseases();
+};
+document.getElementById("printBtn").onclick=printPDF;
+document.getElementById("excelBtn").onclick=exportExcel;
+document.getElementById("resetBtn").onclick=()=>{
+  if(confirm("Reset all progress (learned markers)?")){
+    state.learned.clear();
+    renderDiseases();
+    updateProgress();
+  }
+};
+
+// Init
+document.getElementById("totalCount").textContent=DISEASES.length;
+document.getElementById("catCount").textContent=Object.keys(categoryGroups()).length;
+renderChips();
+renderDiseases();
+updateProgress();
+</script>
+</body>
+</html>

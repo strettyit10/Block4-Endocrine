@@ -78,6 +78,11 @@
   .cover h1{font-size:36px;color:var(--navy);margin:8px 0 4px;line-height:1.15}
   .cover .how{background:#F9FAFB;border-left:5px solid var(--navy);border-radius:0 8px 8px 0;padding:14px 18px;margin-top:16px}
   .cover .how h3{margin:0 0 8px;color:var(--navy);font-size:16px}
+  .cover .how.alt{border-left-color:var(--purple)}
+  .cover .how.alt h3{color:var(--purple)}
+  .how-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+  .how-grid .how{margin-top:0}
+  @media (max-width:700px){.how-grid{grid-template-columns:1fr}}
 
   .roadmap{display:grid;grid-template-columns:1fr;gap:8px;margin-top:12px}
   .roadmap a{
@@ -268,8 +273,8 @@
     <a href="#obj6" data-obj="6">6. Predicting changes</a>
     <a href="#cheatsheet">Cheat Sheet</a>
     <a href="#quiz">Self-Quiz</a>
-    <a href="#audit">Source Audit</a>
     <a href="#references">References</a>
+    <a href="#audit">Source Audit</a>
     <div class="controls" style="margin-top:14px;flex-direction:column;align-items:stretch">
       <button class="btn-reset" onclick="toggleAllDeepDives(true)">Collapse all sub-sections</button>
       <button class="btn-reset" onclick="toggleAllDeepDives(false)">Expand all sub-sections</button>
@@ -282,17 +287,29 @@
     <div class="cover" id="cover">
       <h1>Endocrine Module 02: Hypothalamic-Pituitary Relationships (Part 1)</h1>
 
-      <div class="how">
-        <h3>How to use this guide (60 seconds)</h3>
-        <p>Each objective follows the same pattern:</p>
-        <ul>
-          <li><b>Gist</b> (one paragraph) — the big idea</li>
-          <li><b>Tables &amp; diagrams</b> for anatomy, cells, hormones, and feedback loops</li>
-          <li><b>Yellow ★ High-Yield</b>, <b>green 🧠 Memory Trick</b>, <b>orange 🏥 Clinical Pearl</b></li>
-          <li><b>Blue ✏️ Active Recall</b> — click each question to reveal the answer</li>
-          <li><b>Mark Done</b> on each objective; the bar at the top tracks you</li>
-        </ul>
-        <p style="margin-top:8px"><b style="color:var(--red)">Rule:</b> don't just read. Before you click to reveal, say the answer out loud. If you can't, reread the section.</p>
+      <div class="how-grid">
+        <div class="how">
+          <h3>How to use this guide (60 seconds)</h3>
+          <p>Each objective follows the same pattern:</p>
+          <ul>
+            <li><b>Gist</b> (one paragraph) — the big idea</li>
+            <li><b>Tables &amp; diagrams</b> for anatomy, cells, hormones, and feedback loops</li>
+            <li><b>Yellow ★ High-Yield</b>, <b>green 🧠 Memory Trick</b>, <b>orange 🏥 Clinical Pearl</b></li>
+            <li><b>Blue ✏️ Active Recall</b> — click each question to reveal the answer</li>
+            <li><b>Mark Done</b> on each objective; the bar at the top tracks you</li>
+          </ul>
+          <p style="margin-top:8px"><b style="color:var(--red)">Rule:</b> don't just read. Before you click to reveal, say the answer out loud. If you can't, reread the section.</p>
+        </div>
+
+        <div class="how alt">
+          <h3>How to use this guide with other resources</h3>
+          <ul>
+            <li>Early in study: <b>read this guide → watch the corresponding B&amp;B videos → review First Aid</b> section. Three modalities = better retention.</li>
+            <li>For pharmacology (leuprolide, bromocriptine, desmopressin, dexamethasone test): cross-reference <b>Lippincott Pharm</b>.</li>
+            <li>For pathology (pituitary adenomas, Cushing, Addison, Sheehan): watch <b>Pathoma ch 15</b>.</li>
+            <li>Finish with <b>UWorld Qbank</b> questions tagged "hypothalamus," "pituitary," "HPA axis," "HPT axis."</li>
+          </ul>
+        </div>
       </div>
 
       <h3 style="margin-top:22px;color:var(--navy);font-size:16px">Jump to any objective:</h3>
@@ -517,11 +534,11 @@
 
       <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
         <ul>
-          <li><b>Pituitary mass → bitemporal hemianopsia</b> (optic chiasm compression; crossing fibers from nasal retinas).</li>
-          <li><b>Sheehan syndrome:</b> postpartum hypopituitarism from pituitary infarction. First and most common sign is <b>failure to lactate</b> (PRL). <span class="ai-inline">AI generated</span></li>
-          <li><b>Pituitary stalk transection:</b> all anterior pituitary hormones ↓ EXCEPT <b>prolactin ↑</b> (dopamine no longer inhibits lactotropes).</li>
-          <li><b>Pituitary apoplexy:</b> acute hemorrhage into a pituitary adenoma → sudden headache, ophthalmoplegia, vision loss. <span class="ai-inline">AI generated</span></li>
-          <li><b>Empty sella syndrome:</b> CSF herniation into sella flattens the pituitary (often asymptomatic, imaging finding). <span class="ai-inline">AI generated</span></li>
+          <li><b>Pituitary mass → bitemporal hemianopsia</b> (optic chiasm compression; crossing fibers from nasal retinas). <span class="cite">FA 2.01 Pituitary gland; B&amp;B 5.01</span></li>
+          <li><b>Sheehan syndrome:</b> postpartum hypopituitarism from pituitary infarction. First and most common sign is <b>failure to lactate</b> (PRL). <span class="cite">AI Generated · see end08</span></li>
+          <li><b>Pituitary stalk transection:</b> all anterior pituitary hormones ↓ EXCEPT <b>prolactin ↑</b> (dopamine no longer inhibits lactotropes). <span class="cite">end02 lecture concept; FA 3.04 Prolactin</span></li>
+          <li><b>Pituitary apoplexy:</b> acute hemorrhage into a pituitary adenoma → sudden headache, ophthalmoplegia, vision loss. <span class="cite">AI Generated · see end08</span></li>
+          <li><b>Empty sella syndrome:</b> CSF herniation into sella flattens the pituitary (often asymptomatic, imaging finding). <span class="cite">AI Generated · see end08</span></li>
         </ul>
       </div>
 
@@ -534,10 +551,10 @@
 
       <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
         <ul>
-          <li>Classic Sheehan presentation: postpartum woman, failure to lactate, amenorrhea, fatigue, hypotension, cold intolerance.</li>
-          <li>Pituitary adenoma workup: prolactin, IGF-1, TSH/fT4, AM cortisol + ACTH, FSH/LH + sex steroids, MRI with contrast.</li>
-          <li>Craniopharyngioma: suprasellar calcified mass in children (Rathke's pouch remnant) — can cause bitemporal hemianopsia AND endocrine dysfunction.</li>
-          <li>Bitemporal hemianopsia: spares central vision; the classic "tunnel vision" of pituitary disease.</li>
+          <li>Classic Sheehan presentation: postpartum woman, failure to lactate, amenorrhea, fatigue, hypotension, cold intolerance. <span class="cite">AI Generated · see end08</span></li>
+          <li>Pituitary adenoma workup: prolactin, IGF-1, TSH/fT4, AM cortisol + ACTH, FSH/LH + sex steroids, MRI with contrast. <span class="cite">FA 2.01 Pituitary gland; B&amp;B 5.01</span></li>
+          <li>Craniopharyngioma: suprasellar calcified mass in children (Rathke's pouch remnant) — can cause bitemporal hemianopsia AND endocrine dysfunction. <span class="cite">Bootcamp 3.01 Pituitary Embryology</span></li>
+          <li>Bitemporal hemianopsia: spares central vision; the classic "tunnel vision" of pituitary disease. <span class="cite">FA 2.01; B&amp;B 5.01</span></li>
         </ul>
       </div>
 
@@ -797,12 +814,12 @@
 
       <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
         <ul>
-          <li><b>Dopamine = PIH</b> and the only non-peptide hypothalamic hormone. Everything else is a peptide.</li>
-          <li><b>TRH stimulates BOTH TSH and PRL</b> — primary hypothyroidism can cause galactorrhea.</li>
-          <li><b>GnRH must be pulsatile.</b> Continuous GnRH agonist (leuprolide) chemically castrates.</li>
-          <li><b>Stalk section → PRL rises</b> (everything else falls) — loss of tonic dopamine.</li>
-          <li><b>Kallmann syndrome</b> — failed migration of GnRH neurons from olfactory placode → anosmia + hypogonadotropic hypogonadism. <span class="ai-inline">AI generated</span></li>
-          <li><b>SON = ADH-dominant; PVN = oxytocin-dominant</b> — but both produce both.</li>
+          <li><b>Dopamine = PIH</b> and the only non-peptide hypothalamic hormone. Everything else is a peptide. <span class="cite">end02 lecture</span></li>
+          <li><b>TRH stimulates BOTH TSH and PRL</b> — primary hypothyroidism can cause galactorrhea. <span class="cite">FA 3.04 Prolactin; HPT clinical in end10/11</span></li>
+          <li><b>GnRH must be pulsatile.</b> Continuous GnRH agonist (leuprolide) chemically castrates. <span class="cite">end02 concept; leuprolide AI Generated · see end13</span></li>
+          <li><b>Stalk section → PRL rises</b> (everything else falls) — loss of tonic dopamine. <span class="cite">FA 3.04 Prolactin</span></li>
+          <li><b>Kallmann syndrome</b> — failed migration of GnRH neurons from olfactory placode → anosmia + hypogonadotropic hypogonadism. <span class="cite">AI Generated · see end05/repro</span></li>
+          <li><b>SON = ADH-dominant; PVN = oxytocin-dominant</b> — but both produce both. <span class="cite">end02 lecture</span></li>
         </ul>
       </div>
 
@@ -816,11 +833,11 @@
 
       <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
         <ul>
-          <li><b>Antipsychotics / metoclopramide</b> → D2 blockade → hyperprolactinemia → galactorrhea, amenorrhea.</li>
-          <li><b>Prolactinoma:</b> treat with dopamine AGONISTS (bromocriptine, cabergoline). Surgery only if refractory.</li>
-          <li><b>Leuprolide</b>: continuous → suppress LH/FSH → prostate cancer, endometriosis. Pulsatile → stimulate LH/FSH → infertility treatment.</li>
-          <li><b>Kallmann syndrome:</b> primary amenorrhea + anosmia; low GnRH, low LH/FSH, low estradiol.</li>
-          <li><b>Primary hypothyroidism → ↑TRH → ↑TSH + ↑PRL</b> → can present with galactorrhea + constipation + cold intolerance.</li>
+          <li><b>Antipsychotics / metoclopramide</b> → D2 blockade → hyperprolactinemia → galactorrhea, amenorrhea. <span class="cite">FA 3.04 Prolactin</span></li>
+          <li><b>Prolactinoma:</b> treat with dopamine AGONISTS (bromocriptine, cabergoline). Surgery only if refractory. <span class="cite">FA 3.04 Prolactin</span></li>
+          <li><b>Leuprolide</b>: continuous → suppress LH/FSH → prostate cancer, endometriosis. Pulsatile → stimulate LH/FSH → infertility treatment. <span class="cite">AI Generated · drug detail end13</span></li>
+          <li><b>Kallmann syndrome:</b> primary amenorrhea + anosmia; low GnRH, low LH/FSH, low estradiol. <span class="cite">AI Generated · see end05/repro</span></li>
+          <li><b>Primary hypothyroidism → ↑TRH → ↑TSH + ↑PRL</b> → can present with galactorrhea + constipation + cold intolerance. <span class="cite">FA 3.04 Prolactin; HPT clinical in end10/11</span></li>
         </ul>
       </div>
 
@@ -1072,12 +1089,12 @@
 
       <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
         <ul>
-          <li><b>Basophils = B-FLAT</b>: FSH, LH, ACTH, TSH (all "tropic" hormones).</li>
-          <li><b>Acidophils = GPA</b> (GH + PRL are Acidophilic).</li>
-          <li><b>Prolactinoma is the most common pituitary tumor.</b></li>
-          <li><b>Craniopharyngioma:</b> from Rathke's pouch, children, calcified suprasellar mass, "motor oil" cyst fluid.</li>
-          <li><b>Primary adrenal insufficiency → hyperpigmentation</b> from ↑ POMC → ↑ MSH alongside ↑ ACTH.</li>
-          <li><b>Gigantism (pre-closure) vs. acromegaly (post-closure)</b> from GH-secreting somatotrope adenomas.</li>
+          <li><b>Basophils = B-FLAT</b>: FSH, LH, ACTH, TSH (all "tropic" hormones). <span class="cite">end02 lecture</span></li>
+          <li><b>Acidophils = GPA</b> (GH + PRL are Acidophilic). <span class="cite">end02 lecture</span></li>
+          <li><b>Prolactinoma is the most common pituitary tumor.</b> <span class="cite">FA 3.04 Prolactin</span></li>
+          <li><b>Craniopharyngioma:</b> from Rathke's pouch, children, calcified suprasellar mass, "motor oil" cyst fluid. <span class="cite">Bootcamp 3.01 Pituitary Embryology</span></li>
+          <li><b>Primary adrenal insufficiency → hyperpigmentation</b> from ↑ POMC → ↑ MSH alongside ↑ ACTH. <span class="cite">AI Generated · POMC in end02; Addison clinical end20/21</span></li>
+          <li><b>Gigantism (pre-closure) vs. acromegaly (post-closure)</b> from GH-secreting somatotrope adenomas. <span class="cite">Bootcamp 3.04; FA 3.02 GH</span></li>
         </ul>
       </div>
 
@@ -1091,10 +1108,10 @@
 
       <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
         <ul>
-          <li>Suspect prolactinoma with: galactorrhea, amenorrhea, infertility, bitemporal hemianopsia. Check prolactin → MRI.</li>
-          <li>Acromegaly: enlarged jaw (prognathism), hands (ring/glove size up), feet (shoe size up), coarse facial features, skin tags, carpal tunnel syndrome, DM, cardiomegaly.</li>
-          <li>Cushing disease workup: elevated midnight salivary cortisol, elevated 24-hr urinary free cortisol, failure of low-dose dexamethasone suppression; high-dose dex does suppress (pituitary origin).</li>
-          <li>Craniopharyngioma in a child with growth failure + bitemporal hemianopsia + calcified suprasellar mass on imaging — classic.</li>
+          <li>Suspect prolactinoma with: galactorrhea, amenorrhea, infertility, bitemporal hemianopsia. Check prolactin → MRI. <span class="cite">FA 3.04 Prolactin; Bootcamp 3.02</span></li>
+          <li>Acromegaly: enlarged jaw (prognathism), hands (ring/glove size up), feet (shoe size up), coarse facial features, skin tags, carpal tunnel syndrome, DM, cardiomegaly. <span class="cite">Bootcamp 3.04; FA 3.02 GH</span></li>
+          <li>Cushing disease workup: elevated midnight salivary cortisol, elevated 24-hr urinary free cortisol, failure of low-dose dexamethasone suppression; high-dose dex does suppress (pituitary origin). <span class="cite">AI Generated · see end19/20/21</span></li>
+          <li>Craniopharyngioma in a child with growth failure + bitemporal hemianopsia + calcified suprasellar mass on imaging — classic. <span class="cite">Bootcamp 3.01 Pituitary Embryology</span></li>
         </ul>
       </div>
 
@@ -1415,12 +1432,12 @@
 
       <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
         <ul>
-          <li><b>FLAT PiG</b>: anterior pituitary hormones — FSH, LH, ACTH, TSH, Prolactin, GH.</li>
-          <li><b>Basophils</b> make FLAT (tropic). <b>Acidophils</b> make PiG (direct).</li>
-          <li><b>GH acts via JAK-STAT</b>; induces IGF-1 from liver. Acromegaly tested by IGF-1 + glucose suppression.</li>
-          <li><b>Prolactin under tonic dopamine inhibition.</b> Treat prolactinoma with dopamine AGONISTS.</li>
-          <li><b>ADH V2 = renal aquaporin-2. V1 = vasoconstriction.</b> Central DI: DDAVP reverses. Nephrogenic DI: it does not.</li>
-          <li><b>Mid-cycle estradiol switch to positive feedback → LH surge → ovulation.</b></li>
+          <li><b>FLAT PiG</b>: anterior pituitary hormones — FSH, LH, ACTH, TSH, Prolactin, GH. <span class="cite">end02 lecture</span></li>
+          <li><b>Basophils</b> make FLAT (tropic). <b>Acidophils</b> make PiG (direct). <span class="cite">end02 lecture</span></li>
+          <li><b>GH acts via JAK-STAT</b>; induces IGF-1 from liver. Acromegaly tested by IGF-1 + glucose suppression. <span class="cite">FA 3.02 GH; Bootcamp 3.02/3.04</span></li>
+          <li><b>Prolactin under tonic dopamine inhibition.</b> Treat prolactinoma with dopamine AGONISTS. <span class="cite">FA 3.04 Prolactin</span></li>
+          <li><b>ADH V2 = renal aquaporin-2. V1 = vasoconstriction.</b> Central DI: DDAVP reverses. Nephrogenic DI: it does not. <span class="cite">V1/V2 from FA 3.01; DI clinical AI Generated · see end07</span></li>
+          <li><b>Mid-cycle estradiol switch to positive feedback → LH surge → ovulation.</b> <span class="cite">end02 lecture</span></li>
         </ul>
       </div>
 
@@ -1434,11 +1451,11 @@
 
       <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
         <ul>
-          <li>Acromegaly triad: increased shoe/ring/hat size + facial coarsening + joint pain. Labs: ↑ IGF-1, failure of GH suppression on OGTT.</li>
-          <li>Prolactinoma: galactorrhea, amenorrhea, infertility, decreased libido, bitemporal hemianopsia if large. Treat with cabergoline.</li>
-          <li>Central DI: polyuria + polydipsia + dilute urine → DDAVP corrects. Nephrogenic DI: DDAVP does not correct. <span class="ai-inline">AI generated · see end07</span></li>
-          <li>SIADH: hyponatremia with inappropriately concentrated urine; fluid restriction, tolvaptan (V2 antagonist), demeclocycline. <span class="ai-inline">AI generated · see end07</span></li>
-          <li>Sheehan's first sign: failure to lactate (low PRL from ischemic lactotropes).</li>
+          <li>Acromegaly triad: increased shoe/ring/hat size + facial coarsening + joint pain. Labs: ↑ IGF-1, failure of GH suppression on OGTT. <span class="cite">Bootcamp 3.04; FA 3.02 GH</span></li>
+          <li>Prolactinoma: galactorrhea, amenorrhea, infertility, decreased libido, bitemporal hemianopsia if large. Treat with cabergoline. <span class="cite">FA 3.04 Prolactin</span></li>
+          <li>Central DI: polyuria + polydipsia + dilute urine → DDAVP corrects. Nephrogenic DI: DDAVP does not correct. <span class="cite">AI Generated · see end07</span></li>
+          <li>SIADH: hyponatremia with inappropriately concentrated urine; fluid restriction, tolvaptan (V2 antagonist), demeclocycline. <span class="cite">AI Generated · see end07</span></li>
+          <li>Sheehan's first sign: failure to lactate (low PRL from ischemic lactotropes). <span class="cite">AI Generated · see end08</span></li>
         </ul>
       </div>
 
@@ -1661,11 +1678,11 @@
 
       <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
         <ul>
-          <li><b>Pulsatility matters.</b> Continuous GnRH desensitizes gonadotropes — this is why leuprolide causes chemical castration.</li>
-          <li><b>Most feedback is negative.</b> Main positive-feedback examples: estradiol → LH surge; oxytocin in labor and lactation.</li>
-          <li><b>Dexamethasone suppression distinguishes Cushing causes</b> — suppresses pituitary Cushing (high dose), fails to suppress adrenal tumor or ectopic ACTH.</li>
-          <li><b>Exogenous steroid use suppresses the HPA axis</b> → adrenal atrophy → risk of Addisonian crisis on abrupt discontinuation.</li>
-          <li><b>Surreptitious thyroid hormone use</b> → suppressed TSH, elevated T4 → no goiter (distinguishing from Graves).</li>
+          <li><b>Pulsatility matters.</b> Continuous GnRH desensitizes gonadotropes — this is why leuprolide causes chemical castration. <span class="cite">end02 concept; leuprolide AI Generated · see end13</span></li>
+          <li><b>Most feedback is negative.</b> Main positive-feedback examples: estradiol → LH surge; oxytocin in labor and lactation. <span class="cite">end02 lecture</span></li>
+          <li><b>Dexamethasone suppression distinguishes Cushing causes</b> — suppresses pituitary Cushing (high dose), fails to suppress adrenal tumor or ectopic ACTH. <span class="cite">AI Generated · see end19/21</span></li>
+          <li><b>Exogenous steroid use suppresses the HPA axis</b> → adrenal atrophy → risk of Addisonian crisis on abrupt discontinuation. <span class="cite">AI Generated · see end21</span></li>
+          <li><b>Surreptitious thyroid hormone use</b> → suppressed TSH, elevated T4 → no goiter (distinguishing from Graves). <span class="cite">AI Generated · see end10/13</span></li>
         </ul>
       </div>
 
@@ -1678,11 +1695,11 @@
 
       <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
         <ul>
-          <li>A patient on chronic steroids cannot be abruptly stopped — taper to allow HPA axis recovery.</li>
-          <li>Leuprolide + flutamide combination is used in metastatic prostate cancer (blocks both pituitary drive and peripheral androgen receptor).</li>
-          <li>The failure of the low-dose dexamethasone test to suppress cortisol is the gatekeeper test for Cushing syndrome.</li>
-          <li>Oxytocin (Pitocin) is given to induce/augment labor — therapeutic use of positive feedback.</li>
-          <li>Kallmann patients can be treated with pulsatile GnRH (infertility) or testosterone replacement (virilization).</li>
+          <li>A patient on chronic steroids cannot be abruptly stopped — taper to allow HPA axis recovery. <span class="cite">AI Generated · see end21</span></li>
+          <li>Leuprolide + flutamide combination is used in metastatic prostate cancer (blocks both pituitary drive and peripheral androgen receptor). <span class="cite">AI Generated · oncology/repro pharm</span></li>
+          <li>The failure of the low-dose dexamethasone test to suppress cortisol is the gatekeeper test for Cushing syndrome. <span class="cite">AI Generated · see end19/21</span></li>
+          <li>Oxytocin (Pitocin) is given to induce/augment labor — therapeutic use of positive feedback. <span class="cite">AI Generated · obstetrics</span></li>
+          <li>Kallmann patients can be treated with pulsatile GnRH (infertility) or testosterone replacement (virilization). <span class="cite">AI Generated · see end05/repro</span></li>
         </ul>
       </div>
 
@@ -1973,12 +1990,12 @@
 
       <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
         <ul>
-          <li><b>Primary = gland failure; secondary = pituitary; tertiary = hypothalamus.</b> Know all 6 permutations for every axis.</li>
-          <li><b>Hyperpigmentation = primary adrenal insufficiency</b> (↑ POMC → ↑ MSH alongside ↑ ACTH).</li>
-          <li><b>Dex suppression:</b> low-dose suppresses normals; high-dose suppresses pituitary Cushing disease; high-dose fails to suppress ectopic ACTH or adrenal tumor.</li>
-          <li><b>Inappropriately normal/high TSH + high T4</b> → TSHoma.</li>
-          <li><b>Chronic exogenous steroids taper</b> — sudden stop = tertiary adrenal insufficiency, risk of crisis.</li>
-          <li><b>Klinefelter (primary hypogonadism)</b>: ↑ LH/FSH + ↓ testosterone + ↑ estradiol (from aromatase) → tall stature, gynecomastia, small firm testes.</li>
+          <li><b>Primary = gland failure; secondary = pituitary; tertiary = hypothalamus.</b> Know all 6 permutations for every axis. <span class="cite">end02 lecture (LO 6)</span></li>
+          <li><b>Hyperpigmentation = primary adrenal insufficiency</b> (↑ POMC → ↑ MSH alongside ↑ ACTH). <span class="cite">AI Generated · POMC in end02; Addison clinical end20/21</span></li>
+          <li><b>Dex suppression:</b> low-dose suppresses normals; high-dose suppresses pituitary Cushing disease; high-dose fails to suppress ectopic ACTH or adrenal tumor. <span class="cite">AI Generated · see end19/21</span></li>
+          <li><b>Inappropriately normal/high TSH + high T4</b> → TSHoma. <span class="cite">AI Generated · see end08</span></li>
+          <li><b>Chronic exogenous steroids taper</b> — sudden stop = tertiary adrenal insufficiency, risk of crisis. <span class="cite">AI Generated · see end21</span></li>
+          <li><b>Klinefelter (primary hypogonadism)</b>: ↑ LH/FSH + ↓ testosterone + ↑ estradiol (from aromatase) → tall stature, gynecomastia, small firm testes. <span class="cite">AI Generated · see end05/repro</span></li>
         </ul>
       </div>
 
@@ -1991,11 +2008,11 @@
 
       <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
         <ul>
-          <li>Workup for hyperthyroidism: check TSH first. Low TSH → measure free T4 → Graves, toxic adenoma, etc. Normal/high TSH with high T4 → TSHoma.</li>
-          <li>Workup for hypothyroidism: TSH first. High → primary (Hashimoto). Low/normal with low T4 → central hypothyroidism → MRI pituitary.</li>
-          <li>Cushing workup: confirm hypercortisolism (24-hr urine free cortisol, midnight salivary, low-dose dex), then ACTH → if high do high-dose dex test ± IPSS (inferior petrosal sinus sampling) to localize.</li>
-          <li>Primary vs. secondary adrenal insufficiency: ACTH level + cosyntropin test + electrolytes (primary has hyponatremia/hyperkalemia, secondary usually has intact aldosterone).</li>
-          <li>Patient on long-term prednisone undergoes surgery → give stress-dose steroids to prevent Addisonian crisis.</li>
+          <li>Workup for hyperthyroidism: check TSH first. Low TSH → measure free T4 → Graves, toxic adenoma, etc. Normal/high TSH with high T4 → TSHoma. <span class="cite">AI Generated · see end10/11; TSHoma end08</span></li>
+          <li>Workup for hypothyroidism: TSH first. High → primary (Hashimoto). Low/normal with low T4 → central hypothyroidism → MRI pituitary. <span class="cite">AI Generated · see end10/11</span></li>
+          <li>Cushing workup: confirm hypercortisolism (24-hr urine free cortisol, midnight salivary, low-dose dex), then ACTH → if high do high-dose dex test ± IPSS (inferior petrosal sinus sampling) to localize. <span class="cite">AI Generated · see end19/21</span></li>
+          <li>Primary vs. secondary adrenal insufficiency: ACTH level + cosyntropin test + electrolytes (primary has hyponatremia/hyperkalemia, secondary usually has intact aldosterone). <span class="cite">AI Generated · see end20/21</span></li>
+          <li>Patient on long-term prednisone undergoes surgery → give stress-dose steroids to prevent Addisonian crisis. <span class="cite">AI Generated · see end21</span></li>
         </ul>
       </div>
 
@@ -2055,164 +2072,6 @@
       <div style="margin-top:14px;text-align:center"><button class="btn-reset" onclick="revealAllQuiz()">Reveal all answers</button></div>
     </section>
 
-    <!-- ============ SOURCE AUDIT ============ -->
-    <section class="obj" id="audit">
-      <h2><span class="num" style="background:var(--orange)">⚠</span>Clinical Correlation &amp; Drug Source Audit</h2>
-      <p style="font-style:italic;color:var(--muted)">This guide adds clinical correlations and drugs to reinforce Step 1 pattern recognition. Every item is categorized by source so you know what's directly tested for this lecture versus what's useful cross-reference material.</p>
-
-      <div class="legend">
-        <b>Source legend</b>
-        <ul>
-          <li><span class="src-pill src-lecture">In lecture</span> The topic appears explicitly in the end02 Kothmann lecture PDF.</li>
-          <li><span class="src-pill src-mapped">end02-mapped</span> The topic is covered in a 3rd-party resource primarily mapped to end02 per the HoyaDocs resource mapping (Bootcamp, Boards &amp; Beyond, Physeo, First Aid).</li>
-          <li><span class="src-pill src-ai">AI generated reference</span> The topic is primarily mapped to a DIFFERENT lecture's 3rd-party content. Included here to help you build pattern recognition early; defer to the primary lecture for comprehensive coverage.</li>
-        </ul>
-      </div>
-
-      <h3>Objective 1 — Anatomy</h3>
-      <div class="tbl-wrap"><table>
-        <thead><tr><th>Item</th><th>Source category</th><th>Where it's referenced</th></tr></thead>
-        <tbody>
-          <tr><td>Sella turcica / sphenoid / infundibulum anatomy</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture</td></tr>
-          <tr><td>Hypophyseal portal system</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture</td></tr>
-          <tr><td>Posterior pituitary axonal delivery of ADH/oxytocin</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture</td></tr>
-          <tr><td>Herring bodies &amp; pituicytes</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture</td></tr>
-          <tr><td>Circumventricular organs (median eminence, OVLT, pineal)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture</td></tr>
-          <tr><td>Optic chiasm position above pituitary</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 2.01 Pituitary gland, B&amp;B 5.01 Pituitary Anatomy (end02 primary)</td></tr>
-          <tr><td>Bitemporal hemianopsia (pituitary mass)</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 2.01 Pituitary gland, B&amp;B 5.01 (end02 primary)</td></tr>
-          <tr><td>Pituitary adenomas (general mass effect)</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 2.01, B&amp;B 5.01</td></tr>
-          <tr><td><b>Sheehan syndrome</b> (postpartum pituitary necrosis)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>FA 4.03 Hypopituitarism primarily mapped to <b>end08</b> (Pituitary Pathology)</td></tr>
-          <tr><td><b>Pituitary apoplexy</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily mapped to <b>end08</b></td></tr>
-          <tr><td><b>Empty sella syndrome</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily mapped to <b>end08</b></td></tr>
-          <tr><td>Craniopharyngioma (Rathke's pouch remnant, suprasellar calcified, motor-oil fluid)</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>Bootcamp 3.01 Pituitary Embryology (primary to end02); also referenced in end08</td></tr>
-        </tbody>
-      </table></div>
-
-      <h3>Objective 2 — Hypothalamic nuclei &amp; hormones</h3>
-      <div class="tbl-wrap"><table>
-        <thead><tr><th>Item</th><th>Source category</th><th>Where it's referenced</th></tr></thead>
-        <tbody>
-          <tr><td>Hypothalamic nuclei map (SON, PVN, arcuate, etc.)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture</td></tr>
-          <tr><td>Releasing &amp; inhibiting hormones (GnRH, TRH, CRH, GHRH, SST, PIH, GnIH)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture</td></tr>
-          <tr><td>Dopamine (PIH) as the only non-peptide</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture</td></tr>
-          <tr><td>Hormone peptide sizes (TRH 3 AA, GnRH 10 AA, etc.)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture (most sizes shown)</td></tr>
-          <tr><td>Pulsatility concept (prevents desensitization)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture (explicit)</td></tr>
-          <tr><td>Neurophysin I &amp; II</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>Bootcamp 3.02 Anterior Pituitary, B&amp;B 5.01</td></tr>
-          <tr><td>ADH V1 / V2 receptor mechanisms</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>Bootcamp 3.03 Posterior Pituitary (primary to end07, also referenced in B&amp;B 5.01 basics)</td></tr>
-          <tr><td>Hyperprolactinemia from D2 antagonists (antipsychotics, metoclopramide)</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.04 Prolactin (primary to end02)</td></tr>
-          <tr><td>Bromocriptine / Cabergoline (dopamine agonists for prolactinoma)</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.04 Prolactin section (primary to end02); drug detail primarily in end13</td></tr>
-          <tr><td><b>Kallmann syndrome</b> (GnRH neuron migration failure)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily mapped to repro (end05) and end13; included here for pattern recognition</td></tr>
-          <tr><td>Leuprolide (continuous = suppress, pulsatile = stimulate)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily mapped to <b>end13</b> (Pituitary &amp; Thyroid Pharmacology)</td></tr>
-          <tr><td>Reserpine (VMAT inhibitor)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily a catecholamine-pharm topic (end01 / general pharmacology)</td></tr>
-        </tbody>
-      </table></div>
-
-      <h3>Objective 3 — Pituitary anatomy &amp; histology</h3>
-      <div class="tbl-wrap"><table>
-        <thead><tr><th>Item</th><th>Source category</th><th>Where it's referenced</th></tr></thead>
-        <tbody>
-          <tr><td>Pars distalis / intermedia / tuberalis</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture</td></tr>
-          <tr><td>Basophils / acidophils / chromophobes</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture</td></tr>
-          <tr><td>Pars intermedia makes MSH</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture</td></tr>
-          <tr><td>Acidophil / basophil identification (B-FLAT, GPA)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture (content in lecture; mnemonics are AI)</td></tr>
-          <tr><td>Rathke's pouch embryology</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>Bootcamp 3.01 Pituitary Embryology (primary to end02)</td></tr>
-          <tr><td>POMC cleavage products (ACTH, MSH, β-endorphin, β-lipotropin)</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.01 Hypothalamic-pituitary hormones (primary to end02)</td></tr>
-          <tr><td>Most pituitary adenomas appear chromophobic on H&amp;E</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 2.01 Pituitary gland, B&amp;B 5.01 (end02 primary)</td></tr>
-          <tr><td><b>Prolactinoma</b> (most common functional pituitary adenoma)</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.04 Prolactin (primary to end02), Bootcamp 3.02 Anterior Pituitary Function</td></tr>
-          <tr><td>Galactorrhea, amenorrhea from hyperprolactinemia</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.04 Prolactin</td></tr>
-          <tr><td><b>Acromegaly / Gigantism</b> (GH excess)</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>Bootcamp 3.04 Gigantism and Acromegaly (primary to end02), FA 3.02 GH (primary to end02)</td></tr>
-          <tr><td><b>GH deficiency</b> (short stature)</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>Bootcamp 3.05 Growth Hormone Deficiency (primary to end02)</td></tr>
-          <tr><td>IGF-1 as acromegaly screening test</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.02 Growth hormone</td></tr>
-          <tr><td>Oral glucose suppression test for acromegaly</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.02 GH; drug detail in end13</td></tr>
-          <tr><td>Insulin tolerance test (GH deficiency)</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.02 GH; also Bootcamp 3.05</td></tr>
-          <tr><td><b>Addison disease (primary adrenal insufficiency) &amp; hyperpigmentation via POMC/MSH</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily mapped to <b>end20</b> (Adrenal Pathology) and <b>end21</b> (Adrenal Pharm). POMC itself is end02-covered; the clinical association is from other lectures.</td></tr>
-          <tr><td><b>Cushing disease</b> (pituitary corticotrope adenoma)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily mapped to <b>end19</b> (HPA Axis), <b>end20</b>, <b>end21</b></td></tr>
-        </tbody>
-      </table></div>
-
-      <h3>Objective 4 — Pituitary hormones &amp; regulation</h3>
-      <div class="tbl-wrap"><table>
-        <thead><tr><th>Item</th><th>Source category</th><th>Where it's referenced</th></tr></thead>
-        <tbody>
-          <tr><td>FLAT PiG framework (six anterior hormones)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture (all 6 hormones explicitly covered)</td></tr>
-          <tr><td>Hormone → stimulator / inhibitor pairings</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture</td></tr>
-          <tr><td>Prolactin tonic dopamine inhibition</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture</td></tr>
-          <tr><td>ADH / oxytocin basic functions</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture</td></tr>
-          <tr><td>HPA / HPT / HPG / GH axis diagrams</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture (concept slide; specific axis diagrams enriched from 3rd-party)</td></tr>
-          <tr><td>GH via JAK-STAT → liver IGF-1</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.02 Growth hormone (primary to end02), Bootcamp 3.02 Anterior Pituitary</td></tr>
-          <tr><td>Inhibin B selectively inhibits FSH</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.01 Hypothalamic-pituitary hormones; also repro</td></tr>
-          <tr><td>Ghrelin stimulates GH</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.02 Growth hormone</td></tr>
-          <tr><td>Diurnal cortisol / pulsatile GH during deep sleep</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.01/3.02; cortisol diurnal primary to end19</td></tr>
-          <tr><td><b>Central Diabetes Insipidus</b> (low ADH)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily mapped to <b>end07</b> (Posterior Pituitary Hormones)</td></tr>
-          <tr><td><b>Nephrogenic DI</b> (V2/AQP-2 mutation, lithium, hypercalcemia)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily mapped to <b>end07</b> (and end13 for lithium)</td></tr>
-          <tr><td><b>SIADH</b> (hyponatremia; SCLC, CNS, drugs)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily mapped to <b>end07</b> (Posterior Pituitary), <b>end13</b></td></tr>
-          <tr><td><b>DDAVP / Desmopressin</b> (V2 agonist)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily mapped to <b>end13</b> (Pituitary &amp; Thyroid Pharm)</td></tr>
-          <tr><td><b>Tolvaptan</b> (V2 antagonist), <b>Demeclocycline</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily mapped to <b>end07</b>, <b>end13</b></td></tr>
-          <tr><td>Estrogen-driven LH surge (ovulation)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture (explicit example of positive feedback)</td></tr>
-          <tr><td>Oxytocin positive feedback in labor (Ferguson reflex)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture (explicit example)</td></tr>
-          <tr><td>Oxytocin milk let-down reflex</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.01 Hypothalamic-pituitary hormones</td></tr>
-        </tbody>
-      </table></div>
-
-      <h3>Objective 5 — Feedback loops</h3>
-      <div class="tbl-wrap"><table>
-        <thead><tr><th>Item</th><th>Source category</th><th>Where it's referenced</th></tr></thead>
-        <tbody>
-          <tr><td>Ultrashort / short / long loop definitions</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture</td></tr>
-          <tr><td>Pulsatility prevents desensitization</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture</td></tr>
-          <tr><td>Estradiol → LH surge (positive feedback switch)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture</td></tr>
-          <tr><td>Ferguson reflex (oxytocin in labor)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture</td></tr>
-          <tr><td>Leuprolide continuous vs. pulsatile use</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily mapped to <b>end13</b> (Pharm)</td></tr>
-          <tr><td>Flutamide + leuprolide in prostate cancer</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily mapped to oncology/repro pharm</td></tr>
-          <tr><td>Chronic steroid taper / Addisonian crisis</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily mapped to <b>end21</b> (Adrenal Pharm)</td></tr>
-          <tr><td><b>Dexamethasone suppression test</b> (low / high dose)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily mapped to <b>end19</b>, <b>end21</b> (Adrenal / HPA)</td></tr>
-          <tr><td><b>Cosyntropin (ACTH) stimulation test</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily mapped to <b>end21</b></td></tr>
-          <tr><td><b>Metyrapone</b> (11β-hydroxylase inhibitor)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily mapped to <b>end21</b>; also end04 (steroid synthesis)</td></tr>
-          <tr><td>Exogenous glucocorticoid suppression of HPA</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily mapped to <b>end21</b></td></tr>
-          <tr><td>Surreptitious levothyroxine labs pattern</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily mapped to <b>end13</b> / end10 (thyroid)</td></tr>
-          <tr><td>Oxytocin (Pitocin) for labor induction</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Obstetrics / repro — not in the endocrine module mapping</td></tr>
-          <tr><td>Midnight salivary cortisol for Cushing screening</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily mapped to <b>end21</b></td></tr>
-        </tbody>
-      </table></div>
-
-      <h3>Objective 6 — Predict hormone changes (all iterations)</h3>
-      <div class="tbl-wrap"><table>
-        <thead><tr><th>Item</th><th>Source category</th><th>Where it's referenced</th></tr></thead>
-        <tbody>
-          <tr><td>Primary / secondary / tertiary framework</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture (predict-all-iterations objective)</td></tr>
-          <tr><td>All HPT / HPA / HPG / GH axis tables (direction of each hormone)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>Kothmann end02 lecture (LO 6 is the framework)</td></tr>
-          <tr><td><b>Hashimoto thyroiditis</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily mapped to <b>end10</b>, <b>end11</b> (Thyroid)</td></tr>
-          <tr><td><b>Graves disease</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily mapped to <b>end10</b>, <b>end11</b></td></tr>
-          <tr><td><b>TSHoma (TSH-secreting pituitary adenoma)</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily mapped to <b>end08</b> (Pituitary Pathology)</td></tr>
-          <tr><td><b>Ectopic ACTH (small-cell lung CA)</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily mapped to <b>end19</b>, <b>end21</b></td></tr>
-          <tr><td>Klinefelter (XXY), Turner (XO)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily repro/genetics module, not endocrine module</td></tr>
-          <tr><td>Anabolic steroid abuse → testicular atrophy</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily mapped to repro / end05</td></tr>
-          <tr><td>Oral contraceptives and HPG suppression</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Repro pharmacology</td></tr>
-          <tr><td><b>Laron syndrome</b> (GH receptor defect)</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.02 Growth hormone (primary to end02)</td></tr>
-          <tr><td>Ectopic GHRH (pancreatic NET)</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.02 Growth hormone (primary to end02)</td></tr>
-          <tr><td>IPSS (inferior petrosal sinus sampling)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily end19/end21 (HPA axis testing)</td></tr>
-          <tr><td>Stress-dose steroids for surgery</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Primarily end21 (Adrenal Pharm)</td></tr>
-        </tbody>
-      </table></div>
-
-      <h3>Summary counts</h3>
-      <div class="tbl-wrap"><table>
-        <thead><tr><th>Category</th><th>Count</th><th>Interpretation</th></tr></thead>
-        <tbody>
-          <tr><td><span class="src-pill src-lecture">In lecture</span></td><td>~18 items</td><td>Core material; what Dr. Kothmann directly teaches.</td></tr>
-          <tr><td><span class="src-pill src-mapped">end02-mapped</span></td><td>~18 items</td><td>Covered in 3rd-party resources primarily mapped to end02 — fair game for this lecture's depth of coverage.</td></tr>
-          <tr><td><span class="src-pill src-ai">AI generated reference</span></td><td>~24 items</td><td>Clinical material I added for pattern recognition that is PRIMARILY mapped to a different lecture. Use as a preview only; depth comes from the primary lecture.</td></tr>
-        </tbody>
-      </table></div>
-
-      <h3>How to read this</h3>
-      <ul>
-        <li>The <span class="src-pill src-lecture">In lecture</span> items are the ones you must know cold from this lecture alone.</li>
-        <li>The <span class="src-pill src-mapped">end02-mapped</span> items are what 3rd-party resources (Bootcamp, B&amp;B, Physeo, First Aid) expect you to pair with this lecture.</li>
-        <li>The <span class="src-pill src-ai">AI generated reference</span> items give you the clinical context early — but don't treat them as complete coverage. When you reach end07 (posterior pituitary disorders), end08 (pituitary pathology), end13 (pituitary/thyroid pharm), end19–21 (HPA axis and adrenal), come back and see how those lectures deepen the same material.</li>
-      </ul>
-    </section>
-
     <!-- ============ REFERENCES ============ -->
     <section class="obj" id="references">
       <h2><span class="num" style="background:var(--accent, #7030A0)">📖</span>References &amp; 3rd-Party Sources</h2>
@@ -2230,16 +2089,146 @@
         <li><b>UWorld USMLE Step 1 Qbank</b>. Referenced for clinical workup sequences (Cushing, hypothyroidism, prolactinoma).</li>
       </ol>
 
-      <h3>How to use this guide with other resources</h3>
-      <ul>
-        <li>Early in study: <b>read this guide → watch the corresponding B&amp;B videos → review First Aid</b> section. Three modalities = better retention.</li>
-        <li>For pharmacology (leuprolide, bromocriptine, desmopressin, dexamethasone test): cross-reference <b>Lippincott Pharm</b>.</li>
-        <li>For pathology (pituitary adenomas, Cushing, Addison, Sheehan): watch <b>Pathoma ch 15</b>.</li>
-        <li>Finish with <b>UWorld Qbank</b> questions tagged "hypothalamus," "pituitary," "HPA axis," "HPT axis."</li>
-      </ul>
     </section>
 
-    <div class="footer-note">
+<!-- ============ SOURCE AUDIT ============ -->
+    <section class="obj" id="audit">
+      <h2><span class="num" style="background:var(--orange)">⚠</span>Clinical Correlation &amp; Drug Source Audit</h2>
+      <div class="legend">
+        <b>Source legend</b>
+        <ul>
+          <li><span class="src-pill src-lecture">In lecture</span> The topic appears explicitly in the end02 lecture.</li>
+          <li><span class="src-pill src-mapped">end02-mapped</span> The topic is covered in a 3rd-party resource primarily mapped to end02 (Bootcamp, Boards &amp; Beyond, Physeo, First Aid).</li>
+          <li><span class="src-pill src-ai">AI generated reference</span> An item where the core concept sits in end02, but the clinical / drug association is primarily taught in another lecture. Kept here because it falls into one of three buckets:
+            <ul style="margin-top:4px">
+              <li>The core concept is in end02 and the clinical association lives elsewhere (e.g., POMC is end02, Addison is end20).</li>
+              <li>Included for pattern recognition that ties directly to an end02 concept.</li>
+              <li>Connection to a previously completed lecture (e.g., reserpine ties back to end01 catecholamines).</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <h3>Objective 1 — Anatomy</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Item</th><th>Source category</th><th>Where it's referenced</th></tr></thead>
+        <tbody>
+          <tr><td>Sella turcica / sphenoid / infundibulum anatomy</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture</td></tr>
+          <tr><td>Hypophyseal portal system</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture</td></tr>
+          <tr><td>Posterior pituitary axonal delivery of ADH/oxytocin</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture</td></tr>
+          <tr><td>Herring bodies &amp; pituicytes</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture</td></tr>
+          <tr><td>Circumventricular organs (median eminence, OVLT, pineal)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture</td></tr>
+          <tr><td>Optic chiasm position above pituitary</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 2.01 Pituitary gland, B&amp;B 5.01 Pituitary Anatomy (end02 primary)</td></tr>
+          <tr><td>Bitemporal hemianopsia (pituitary mass)</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 2.01 Pituitary gland, B&amp;B 5.01 (end02 primary)</td></tr>
+          <tr><td>Pituitary adenomas (general mass effect)</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 2.01, B&amp;B 5.01</td></tr>
+          <tr><td><b>Sheehan syndrome</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Pituitary anatomy / portal system is end02-core; clinical presentation lives in end08 (Pituitary Pathology). <i>Core concept here, clinical association elsewhere.</i></td></tr>
+          <tr><td><b>Pituitary apoplexy</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Pituitary mass-effect anatomy is end02-core; clinical entity in end08. <i>Included for pattern recognition on pituitary mass effect.</i></td></tr>
+          <tr><td><b>Empty sella syndrome</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Sella anatomy is end02-core; clinical entity in end08. <i>Included for pattern recognition.</i></td></tr>
+          <tr><td>Craniopharyngioma (Rathke's pouch remnant, suprasellar calcified, motor-oil fluid)</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>Bootcamp 3.01 Pituitary Embryology (primary to end02); also referenced in end08</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Objective 2 — Hypothalamic nuclei &amp; hormones</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Item</th><th>Source category</th><th>Where it's referenced</th></tr></thead>
+        <tbody>
+          <tr><td>Hypothalamic nuclei map (SON, PVN, arcuate, etc.)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture</td></tr>
+          <tr><td>Releasing &amp; inhibiting hormones (GnRH, TRH, CRH, GHRH, SST, PIH, GnIH)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture</td></tr>
+          <tr><td>Dopamine (PIH) as the only non-peptide</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture</td></tr>
+          <tr><td>Hormone peptide sizes (TRH 3 AA, GnRH 10 AA, etc.)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture (most sizes shown)</td></tr>
+          <tr><td>Pulsatility concept (prevents desensitization)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture (explicit)</td></tr>
+          <tr><td>Neurophysin I &amp; II</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>Bootcamp 3.02 Anterior Pituitary, B&amp;B 5.01</td></tr>
+          <tr><td>ADH V1 / V2 receptor mechanisms</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>Bootcamp 3.03 Posterior Pituitary (primary to end07, also referenced in B&amp;B 5.01 basics)</td></tr>
+          <tr><td>Hyperprolactinemia from D2 antagonists (antipsychotics, metoclopramide)</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.04 Prolactin (primary to end02)</td></tr>
+          <tr><td>Bromocriptine / Cabergoline (dopamine agonists for prolactinoma)</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.04 Prolactin section (primary to end02); drug detail primarily in end13</td></tr>
+          <tr><td><b>Kallmann syndrome</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>GnRH neurons are end02-core; Kallmann clinical lives in repro (end05) and end13. <i>Included for pattern recognition on GnRH neuron migration.</i></td></tr>
+          <tr><td><b>Leuprolide</b> (continuous vs pulsatile)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>GnRH pulsatility is end02-core; drug detail primarily in end13. <i>Included for pattern recognition — the clinical flip of the pulsatility rule.</i></td></tr>
+          <tr><td><b>Reserpine</b> (VMAT inhibitor)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Vesicular catecholamine packaging. <i>Ties back to end01 catecholamine synthesis (previously completed).</i></td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Objective 3 — Pituitary anatomy &amp; histology</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Item</th><th>Source category</th><th>Where it's referenced</th></tr></thead>
+        <tbody>
+          <tr><td>Pars distalis / intermedia / tuberalis</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture</td></tr>
+          <tr><td>Basophils / acidophils / chromophobes</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture</td></tr>
+          <tr><td>Pars intermedia makes MSH</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture</td></tr>
+          <tr><td>Acidophil / basophil identification (B-FLAT, GPA)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture (content in lecture; mnemonics are AI)</td></tr>
+          <tr><td>Rathke's pouch embryology</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>Bootcamp 3.01 Pituitary Embryology (primary to end02)</td></tr>
+          <tr><td>POMC cleavage products (ACTH, MSH, β-endorphin, β-lipotropin)</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.01 Hypothalamic-pituitary hormones (primary to end02)</td></tr>
+          <tr><td>Most pituitary adenomas appear chromophobic on H&amp;E</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 2.01 Pituitary gland, B&amp;B 5.01 (end02 primary)</td></tr>
+          <tr><td><b>Prolactinoma</b> (most common functional pituitary adenoma)</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.04 Prolactin (primary to end02), Bootcamp 3.02 Anterior Pituitary Function</td></tr>
+          <tr><td>Galactorrhea, amenorrhea from hyperprolactinemia</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.04 Prolactin</td></tr>
+          <tr><td><b>Acromegaly / Gigantism</b> (GH excess)</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>Bootcamp 3.04 Gigantism and Acromegaly (primary to end02), FA 3.02 GH (primary to end02)</td></tr>
+          <tr><td><b>GH deficiency</b> (short stature)</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>Bootcamp 3.05 Growth Hormone Deficiency (primary to end02)</td></tr>
+          <tr><td>IGF-1 as acromegaly screening test</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.02 Growth hormone</td></tr>
+          <tr><td>Oral glucose suppression test for acromegaly</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.02 GH; drug detail in end13</td></tr>
+          <tr><td>Insulin tolerance test (GH deficiency)</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.02 GH; also Bootcamp 3.05</td></tr>
+          <tr><td><b>Addison disease &amp; hyperpigmentation via POMC/MSH</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>POMC &amp; MSH are end02-core; Addison clinical is primarily in end20 (Adrenal Pathology) and end21 (Adrenal Pharm). <i>Core concept here, clinical association in other lectures.</i></td></tr>
+          <tr><td><b>Cushing disease</b> (pituitary corticotrope adenoma)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Pituitary corticotropes are end02-core; Cushing clinical primarily in end19/20/21. <i>Included for pattern recognition on pituitary adenoma subtypes.</i></td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Objective 4 — Pituitary hormones &amp; regulation</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Item</th><th>Source category</th><th>Where it's referenced</th></tr></thead>
+        <tbody>
+          <tr><td>FLAT PiG framework (six anterior hormones)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture (all 6 hormones explicitly covered)</td></tr>
+          <tr><td>Hormone → stimulator / inhibitor pairings</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture</td></tr>
+          <tr><td>Prolactin tonic dopamine inhibition</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture</td></tr>
+          <tr><td>ADH / oxytocin basic functions</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture</td></tr>
+          <tr><td>HPA / HPT / HPG / GH axis diagrams</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture (concept slide; specific axis diagrams enriched from 3rd-party)</td></tr>
+          <tr><td>GH via JAK-STAT → liver IGF-1</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.02 Growth hormone (primary to end02), Bootcamp 3.02 Anterior Pituitary</td></tr>
+          <tr><td>Inhibin B selectively inhibits FSH</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.01 Hypothalamic-pituitary hormones; also repro</td></tr>
+          <tr><td>Ghrelin stimulates GH</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.02 Growth hormone</td></tr>
+          <tr><td>Diurnal cortisol / pulsatile GH during deep sleep</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.01/3.02 (GH/pulsatility aspects)</td></tr>
+          <tr><td><b>Central DI / Nephrogenic DI</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>ADH physiology is end02-core; DI clinical primarily in end07 (Posterior Pituitary Hormones). <i>Included for pattern recognition on ADH signaling failure.</i></td></tr>
+          <tr><td><b>SIADH</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>ADH physiology is end02-core; SIADH clinical primarily in end07. <i>Included for pattern recognition on ADH excess.</i></td></tr>
+          <tr><td><b>DDAVP / Desmopressin, Tolvaptan, Demeclocycline</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Target the V2 receptor taught here; drug detail primarily in end07 / end13. <i>Clinical association in other lectures.</i></td></tr>
+          <tr><td>Estrogen-driven LH surge (ovulation)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture (explicit example of positive feedback)</td></tr>
+          <tr><td>Oxytocin positive feedback in labor (Ferguson reflex)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture (explicit example)</td></tr>
+          <tr><td>Oxytocin milk let-down reflex</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.01 Hypothalamic-pituitary hormones</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Objective 5 — Feedback loops</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Item</th><th>Source category</th><th>Where it's referenced</th></tr></thead>
+        <tbody>
+          <tr><td>Ultrashort / short / long loop definitions</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture</td></tr>
+          <tr><td>Pulsatility prevents desensitization</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture</td></tr>
+          <tr><td>Estradiol → LH surge (positive feedback switch)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture</td></tr>
+          <tr><td>Ferguson reflex (oxytocin in labor)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture</td></tr>
+          <tr><td>Oxytocin (Pitocin) labor induction</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Oxytocin physiology is end02-core; therapeutic labor induction is obstetrics. <i>Clinical application of an in-lecture concept.</i></td></tr>
+          <tr><td><b>Leuprolide</b> continuous vs pulsatile use</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>GnRH pulsatility is end02-core; drug detail primarily in end13. <i>Clinical application of the pulsatility rule.</i></td></tr>
+          <tr><td><b>Dexamethasone suppression test</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>HPA feedback is end02-core; test interpretation primarily in end19 / end21. <i>Clinical application of long-loop feedback.</i></td></tr>
+          <tr><td>Chronic steroid taper / Addisonian crisis</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>HPA long-loop feedback is end02-core; clinical management primarily in end21. <i>Included for pattern recognition on exogenous suppression.</i></td></tr>
+          <tr><td>Exogenous glucocorticoid HPA suppression</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>HPA feedback is end02-core; clinical implications in end21. <i>Clinical application of long-loop feedback.</i></td></tr>
+          <tr><td>Surreptitious levothyroxine labs pattern</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>HPT feedback is end02-core; clinical pattern in end10 / end13. <i>Included for pattern recognition on exogenous thyroid hormone.</i></td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Objective 6 — Predict hormone changes (all iterations)</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Item</th><th>Source category</th><th>Where it's referenced</th></tr></thead>
+        <tbody>
+          <tr><td>Primary / secondary / tertiary framework</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture (predict-all-iterations objective)</td></tr>
+          <tr><td>All HPT / HPA / HPG / GH axis tables (direction of each hormone)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture (LO 6 is the framework)</td></tr>
+          <tr><td><b>Laron syndrome</b> (GH receptor defect)</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.02 Growth hormone (primary to end02)</td></tr>
+          <tr><td>Ectopic GHRH (pancreatic NET)</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.02 Growth hormone (primary to end02)</td></tr>
+          <tr><td><b>Hashimoto thyroiditis / Graves disease</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>HPT axis is end02-core; specific thyroid diseases primarily in end10 / end11. <i>Included for pattern recognition on HPT iterations.</i></td></tr>
+          <tr><td><b>TSHoma</b> (TSH-secreting pituitary adenoma)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Thyrotropes &amp; HPT feedback are end02-core; TSHoma clinical in end08. <i>Included for pattern recognition on secondary hyperthyroidism.</i></td></tr>
+          <tr><td><b>Ectopic ACTH</b> (small-cell lung CA)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>HPA axis is end02-core; ectopic ACTH clinical in end19 / end21. <i>Included for pattern recognition on HPA iterations.</i></td></tr>
+          <tr><td>Klinefelter (XXY), Turner (XO)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>HPG axis is end02-core; karyotypes primarily in repro / genetics. <i>Included for pattern recognition on primary hypogonadism.</i></td></tr>
+          <tr><td>Anabolic steroid abuse → testicular atrophy</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>HPG feedback is end02-core; clinical scenario primarily in repro / end05. <i>Clinical application of long-loop feedback.</i></td></tr>
+          <tr><td>Oral contraceptives and HPG suppression</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>HPG feedback is end02-core; OCP detail primarily in repro pharm. <i>Clinical application of long-loop feedback.</i></td></tr>
+        </tbody>
+      </table></div>
+
+    </section>
+
+        <div class="footer-note">
       — End of guide —<br>
       Now close it and try to reproduce FLAT PiG, the three feedback loops, and the primary/secondary/tertiary framework from memory.
     </div>
