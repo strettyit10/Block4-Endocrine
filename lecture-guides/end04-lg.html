@@ -1,0 +1,1908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HoyaDocs · Endo 04 · Adrenal Hormone Synthesis &amp; Action</title>
+<style>
+  :root{
+    --navy:#1F3864; --blue:#2E75B6; --red:#C00000; --purple:#7030A0;
+    --green:#548235; --orange:#C55A11;
+    --hy:#FFF8DC; --hyBorder:#BF8F00;
+    --mn:#E8F5E9; --mnBorder:#548235;
+    --cl:#FDECDC; --clBorder:#C55A11;
+    --rc:#E7F1FB; --rcBorder:#2E75B6;
+    --tp:#FDE7E7; --tpBorder:#C00000;
+    --bg:#FAFAFA; --card:#FFFFFF; --text:#1A1A1A; --muted:#6B7280;
+    --border:#E5E7EB;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:84px}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;margin:0;background:var(--bg);color:var(--text);line-height:1.55}
+  header.topbar{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,var(--navy),#2E4A7A);color:#fff;padding:10px 20px;border-bottom:3px solid var(--blue);box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+  .topbar-inner{max-width:1100px;margin:0 auto;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  .topbar h1{margin:0;font-size:16px;font-weight:700;letter-spacing:.3px}
+  .topbar .brand{font-family:Georgia,"Times New Roman",serif;font-size:20px;font-weight:700;color:#FFD54F;letter-spacing:.5px;padding:2px 0;border-right:1px solid rgba(255,255,255,0.25);padding-right:16px}
+  .topbar .tag{background:rgba(255,255,255,0.18);padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600}
+  .progress-wrap{flex:1;min-width:200px}
+  .progress-track{height:8px;background:rgba(255,255,255,0.25);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:#FFD54F;width:0%;transition:width .4s ease}
+  .progress-label{font-size:12px;margin-top:3px;opacity:.9}
+  .wrap{max-width:1100px;margin:0 auto;padding:24px 20px 80px;display:grid;grid-template-columns:220px 1fr;gap:28px;transition:grid-template-columns .25s ease}
+  .wrap.sidebar-collapsed{grid-template-columns:44px 1fr;gap:16px}
+  @media (max-width:900px){.wrap,.wrap.sidebar-collapsed{grid-template-columns:1fr}}
+  nav.sidebar{position:sticky;top:80px;align-self:start;max-height:calc(100vh - 100px);overflow-y:auto;padding-right:8px}
+  @media (max-width:900px){nav.sidebar{position:static;max-height:none}}
+  .sidebar-toggle{display:flex;align-items:center;justify-content:center;width:100%;padding:8px 10px;margin-bottom:10px;background:#EEF2F7;border:1px solid var(--border);border-radius:6px;cursor:pointer;font-weight:700;color:var(--navy);font-size:13px;transition:background .15s ease}
+  .sidebar-toggle:hover{background:#DDEAF7}
+  .sidebar-toggle .label{margin-left:6px;transition:opacity .2s ease}
+  nav.sidebar.collapsed{overflow-x:hidden;padding-right:0}
+  nav.sidebar.collapsed a,nav.sidebar.collapsed .controls{display:none}
+  nav.sidebar.collapsed .sidebar-toggle{padding:8px 0;min-width:32px}
+  nav.sidebar.collapsed .sidebar-toggle .label{display:none}
+  nav.sidebar a{display:block;padding:8px 12px;margin:2px 0;border-radius:6px;color:var(--navy);text-decoration:none;font-weight:600;font-size:14px;border-left:3px solid transparent;transition:all .15s ease}
+  nav.sidebar a:hover{background:#EEF2F7;border-left-color:var(--blue)}
+  nav.sidebar a.active{background:#DDEAF7;border-left-color:var(--red);color:var(--red)}
+  nav.sidebar .done::after{content:" ✓";color:var(--green);font-weight:800}
+
+  .cover{background:linear-gradient(135deg,#FFFFFF 0%,#F0F4F8 100%);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:24px;box-shadow:0 2px 6px rgba(0,0,0,0.04)}
+  .cover h1{font-size:36px;color:var(--navy);margin:8px 0 4px;line-height:1.15}
+  .cover .how{background:#F9FAFB;border-left:5px solid var(--navy);border-radius:0 8px 8px 0;padding:14px 18px;margin-top:16px}
+  .cover .how h3{margin:0 0 8px;color:var(--navy);font-size:16px}
+  .cover .how.alt{border-left-color:var(--purple)}
+  .cover .how.alt h3{color:var(--purple)}
+  .how-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+  .how-grid .how{margin-top:0}
+  @media (max-width:700px){.how-grid{grid-template-columns:1fr}}
+
+  .roadmap{display:grid;grid-template-columns:1fr;gap:8px;margin-top:12px}
+  .roadmap a{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#fff;border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--navy);font-weight:500;font-size:13.5px;line-height:1.4;transition:all .15s ease}
+  .roadmap a:hover{border-color:var(--blue);transform:translateY(-1px);box-shadow:0 2px 6px rgba(0,0,0,0.06);background:#F8FBFF}
+  .roadmap .num{flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;background:var(--navy);color:#fff;border-radius:999px;width:24px;height:24px;font-size:12px;font-weight:700;margin-top:1px}
+
+  section.obj{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:24px;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+  section.obj h2{color:var(--navy);font-size:26px;margin:0 0 8px;line-height:1.2;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  section.obj h2 .num{background:var(--navy);color:#fff;border-radius:999px;width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+  section.obj h3{color:var(--blue);font-size:19px;margin:22px 0 8px;padding-bottom:4px;border-bottom:2px solid #DDEAF7}
+  section.obj h4{color:var(--red);font-size:16px;margin:18px 0 6px}
+  section.obj p{margin:8px 0}
+  section.obj ul{margin:6px 0 12px 0;padding-left:22px}
+  section.obj li{margin:4px 0}
+
+  .gist{background:#F7F9FC;border-left:5px solid var(--blue);border-radius:0 8px 8px 0;padding:14px 18px;margin:10px 0 18px;font-size:15px}
+  .gist-label{color:var(--blue);font-weight:700;font-size:16px;letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:8px}
+  .gist-deeper{margin-top:10px;padding-top:10px;border-top:1px dashed #CDD5E0;font-size:13.5px}
+  .gist-deeper .preview-label{display:block;color:var(--purple);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+  .gist-deeper ul{margin:4px 0 0 0;padding-left:22px}
+  .gist-deeper li{margin:3px 0;color:#333;line-height:1.45}
+  .gist-deeper li b{color:var(--navy)}
+
+  .callout{border-radius:8px;padding:14px 16px;margin:14px 0;border-left:6px solid;position:relative}
+  .callout .ctitle{font-weight:700;font-size:16px;letter-spacing:0.5px;margin-bottom:10px;display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;padding:4px 6px;border-radius:6px;transition:background .15s ease}
+  .callout .ctitle::after{content:"▼";font-size:13px;margin-left:auto;transition:transform .2s ease;display:inline-block}
+  .callout.collapsed .ctitle::after{content:"▶"}
+  .callout.collapsed > *:not(.ctitle){display:none}
+  .callout.hy .ctitle:hover{background:#FDE8B0} .callout.hy .ctitle::after{color:var(--hyBorder)}
+  .callout.mn .ctitle:hover{background:#D7F0DB} .callout.mn .ctitle::after{color:var(--mnBorder)}
+  .callout.cl .ctitle:hover{background:#FDD6BB} .callout.cl .ctitle::after{color:var(--clBorder)}
+  .callout.rc .ctitle:hover{background:#CFE0F5} .callout.rc .ctitle::after{color:var(--rcBorder)}
+  .callout p,.callout ul li,.callout ol li{font-size:14px;line-height:1.5}
+  .callout ul{margin:6px 0 0 0;padding-left:20px}
+  .flashcard .q,.flashcard .a span{font-size:14px}
+  .hy{background:var(--hy);border-color:var(--hyBorder)} .hy .ctitle{color:var(--hyBorder)}
+  .mn{background:var(--mn);border-color:var(--mnBorder)} .mn .ctitle{color:var(--mnBorder)}
+  .cl{background:var(--cl);border-color:var(--clBorder)} .cl .ctitle{color:var(--clBorder)}
+  .rc{background:var(--rc);border-color:var(--rcBorder)} .rc .ctitle{color:var(--rcBorder)}
+
+  .tbl-wrap{overflow-x:auto;margin:14px 0}
+  table{border-collapse:collapse;width:100%;font-size:14px;background:#fff}
+  thead th{background:var(--navy);color:#fff;text-align:left;padding:10px 12px;font-weight:600;vertical-align:top}
+  tbody td{padding:9px 12px;border:1px solid var(--border);vertical-align:top}
+  tbody tr:nth-child(even){background:#FAFBFC}
+  tbody tr:hover{background:#F0F6FC}
+  td b{color:var(--navy)}
+
+  .flashcard{background:#fff;border:1px solid var(--rcBorder);border-radius:8px;margin:8px 0;overflow:hidden;cursor:pointer;transition:all .15s ease}
+  .flashcard:hover{box-shadow:0 2px 6px rgba(46,117,182,0.2)}
+  .flashcard .q{padding:12px 16px;font-weight:600;display:flex;align-items:flex-start;gap:10px}
+  .flashcard .q::before{content:"Q";background:var(--blue);color:#fff;border-radius:4px;padding:2px 8px;font-size:12px;font-weight:700;flex-shrink:0;margin-top:2px}
+  .flashcard .a{max-height:0;overflow:hidden;transition:max-height .25s ease, padding .2s ease;background:#F0F7FF;padding:0 16px;border-top:1px solid transparent}
+  .flashcard.open .a{max-height:400px;padding:12px 16px;border-top:1px solid #CFE0F5}
+  .flashcard .a::before{content:"A";background:var(--red);color:#fff;border-radius:4px;padding:2px 8px;font-size:12px;font-weight:700;margin-right:8px}
+  .flashcard .a span{color:var(--red);font-weight:500}
+
+  .quiz-item{background:#fff;border:1px solid var(--border);border-left:4px solid var(--purple);border-radius:8px;padding:14px 16px;margin:10px 0}
+  .quiz-item .qn{color:var(--purple);font-weight:700;margin-right:8px}
+  .quiz-item button.show{background:var(--purple);color:#fff;border:none;padding:6px 14px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;margin-top:8px}
+  .quiz-item button.show:hover{background:#5E1D88}
+  .quiz-item .ans{display:none;margin-top:10px;padding:10px 14px;background:#F4EEFA;border-radius:6px;border-left:3px solid var(--purple);color:var(--purple);font-weight:500}
+  .quiz-item.revealed .ans{display:block}
+  .quiz-item.revealed button.show{background:var(--muted)}
+
+  .obj-header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+  .mark-done{background:#fff;border:2px solid var(--green);color:var(--green);padding:6px 14px;border-radius:999px;font-weight:600;font-size:13px;cursor:pointer;transition:all .15s ease;white-space:nowrap}
+  .mark-done:hover{background:#E8F5E9}
+  .mark-done.done{background:var(--green);color:#fff}
+  .mark-done.done::before{content:"✓ "}
+
+  .pathway{display:flex;gap:0;align-items:center;flex-wrap:wrap;margin:14px 0;padding:14px;background:#F7F9FC;border-radius:8px;font-weight:600;font-size:14px}
+  .pathway .step{background:#fff;border:2px solid var(--navy);color:var(--navy);padding:6px 10px;border-radius:6px;white-space:nowrap}
+  .pathway .arrow{color:var(--red);font-weight:800;margin:0 8px}
+  .pathway .enz{color:var(--red);font-size:11px;font-weight:700;display:block;text-align:center;letter-spacing:.4px}
+  .footer-note{text-align:center;padding:24px;color:var(--muted);font-style:italic}
+  .controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+  .btn-reset{background:#fff;border:1px solid var(--border);color:var(--muted);padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer}
+  .btn-reset:hover{border-color:var(--red);color:var(--red)}
+
+  .deep-dive{background:#FCFCFE;border-radius:8px;border:1px solid #E5E7EB;padding:14px 18px 10px 20px;margin:16px 0;box-shadow:0 1px 2px rgba(0,0,0,0.03)}
+  .deep-dive .dd-title{color:var(--purple);font-weight:700;font-size:16px;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .deep-dive h4{color:var(--navy);margin:14px 0 6px;font-size:14px;cursor:pointer;user-select:none;display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:6px;transition:background .15s ease}
+  .deep-dive h4:hover{background:#F3EEFA}
+  .deep-dive h4::after{content:"▼";font-size:12px;color:var(--purple);margin-left:auto;transition:transform .2s ease;display:inline-block}
+  .deep-dive h4.collapsed::after{content:"▶"}
+  .deep-dive h4.collapsed{background:#FAFAFC}
+  .deep-dive [data-h4-hidden="true"]{display:none}
+  .deep-dive .group-label{font-weight:700;color:var(--navy);font-size:13.5px;margin:10px 0 4px;padding:2px 0 2px 0;border-bottom:1px dashed #CDD5E0;display:inline-block}
+  .deep-dive > ul > li,.deep-dive > ul > li > br + *,.deep-dive ul:not(.sublist) > li{font-size:13px;font-weight:600;color:#1A1A1A;line-height:1.5}
+  .deep-dive .sublist li{font-size:12.5px;font-weight:400;color:#333}
+  .cite{display:inline-block;font-size:11px;color:var(--muted);background:#EEF2F7;padding:1px 7px;border-radius:3px;margin-left:4px;font-style:italic;white-space:nowrap;border:1px solid #E0E5EC;vertical-align:baseline}
+
+  #references{background:var(--card)}
+  #references p,#references ul li,#references .ref-list li{font-size:14px;line-height:1.55}
+  #references .ref-list{margin:10px 0;padding-left:22px}
+  #references .ref-list li{margin:6px 0}
+  #references .ref-list b{color:var(--navy)}
+  #references ul{margin:6px 0 12px 0;padding-left:22px}
+
+  #audit{background:var(--card)}
+  #audit p,#audit li{font-size:14px}
+  .src-pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px;margin-right:4px}
+  .src-lecture{background:#E8F5E9;color:#2E7D32;border:1px solid #81C784}
+  .src-mapped{background:#E3F2FD;color:#0D47A1;border:1px solid #64B5F6}
+  .src-ai{background:#FFEBEE;color:#B71C1C;border:1px solid #EF9A9A}
+  #audit .legend{background:#F7F9FC;border-left:4px solid var(--navy);padding:12px 16px;border-radius:0 6px 6px 0;margin:10px 0 16px}
+  #audit .legend ul{margin:6px 0 0 0}
+
+  @media print{
+    header.topbar,nav.sidebar,.mark-done,.controls{display:none}
+    .wrap{grid-template-columns:1fr;padding:10px}
+    section.obj{page-break-after:always;box-shadow:none;border:none}
+    .flashcard .a{max-height:none!important;padding:12px 16px!important;border-top:1px solid #CFE0F5!important}
+    .quiz-item .ans{display:block!important}
+    .deep-dive [data-h4-hidden="true"]{display:block!important}
+    .callout.collapsed > *{display:block!important}
+    .deep-dive h4::after,.callout .ctitle::after{display:none!important}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <span class="brand">HoyaDocs</span>
+    <span class="tag">ENDO · 04</span>
+    <h1>Adrenal Hormone Synthesis &amp; Action</h1>
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-label" id="progressLabel">0 / 6 objectives complete</div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="sidebar" id="sidebar">
+    <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()" title="Minimize / expand menu">
+      <span class="icon">◀</span><span class="label">Minimize menu</span>
+    </button>
+    <a href="#cover">Overview</a>
+    <a href="#obj1" data-obj="1">1. Steroid nomenclature</a>
+    <a href="#obj2" data-obj="2">2. Shared synthesis steps</a>
+    <a href="#obj3" data-obj="3">3. Adrenal cortex layers</a>
+    <a href="#obj4" data-obj="4">4. Aldo / Cortisol / DHEA pathways</a>
+    <a href="#obj5" data-obj="5">5. Circulation &amp; inactivation</a>
+    <a href="#obj6" data-obj="6">6. Mechanisms of action</a>
+    <a href="#cheatsheet">Cheat Sheet</a>
+    <a href="#quiz">Self-Quiz</a>
+    <a href="#references">References</a>
+    <a href="#audit">Source Audit</a>
+    <div class="controls" style="margin-top:14px;flex-direction:column;align-items:stretch">
+      <button class="btn-reset" onclick="toggleAllDeepDives(true)">Collapse all sub-sections</button>
+      <button class="btn-reset" onclick="toggleAllDeepDives(false)">Expand all sub-sections</button>
+      <button class="btn-reset" onclick="resetProgress()">Reset progress</button>
+    </div>
+  </nav>
+
+  <main>
+
+    <div class="cover" id="cover">
+      <h1>Endocrine Module 04: Adrenal Hormone Synthesis &amp; Action</h1>
+
+      <div class="how-grid">
+        <div class="how">
+          <h3>How to use this guide (60 seconds)</h3>
+          <p>All 6 objectives revolve around <b>adrenal cortex steroid synthesis</b>. Each follows the same pattern:</p>
+          <ul>
+            <li><b>Gist</b> (one paragraph) — the big idea</li>
+            <li><b>Tables &amp; pathway diagrams</b> for enzymes, zones, and hormone fates</li>
+            <li><b>Yellow ★ High-Yield</b>, <b>green 🧠 Memory Trick</b>, <b>orange 🏥 Clinical Pearl</b></li>
+            <li><b>Blue ✏️ Active Recall</b> — click each question to reveal the answer</li>
+            <li><b>Mark Done</b> on each objective; the bar at the top tracks you</li>
+          </ul>
+          <p style="margin-top:8px"><b style="color:var(--red)">Rule:</b> say the answer out loud BEFORE you peek. That's active recall.</p>
+        </div>
+
+        <div class="how alt">
+          <h3>How to use this guide with other resources</h3>
+          <ul>
+            <li>Pair this guide with <b>B&amp;B 2.01 Adrenal Glands</b> and <b>Physeo 6.07 Adrenal Glands</b>.</li>
+            <li>Cross-reference <b>FA 3.11 Adrenal steroids &amp; CAH</b> and <b>3.12 Cortisol</b> for Step 1 HY facts.</li>
+            <li>For CAH enzyme-deficiency pattern recognition: review <b>Bootcamp 6.11/6.12/6.13</b> and <b>Physeo 6.08 CAH</b>.</li>
+            <li>Finish with <b>UWorld Qbank</b> questions tagged "adrenal," "aldosterone," "cortisol," "CAH."</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 style="margin-top:22px;color:var(--navy);font-size:16px">Jump to any objective:</h3>
+      <div class="roadmap">
+        <a href="#obj1"><span class="num">1</span><span>Recognize the structure of steroid hormones and understand the nomenclature used to describe them</span></a>
+        <a href="#obj2"><span class="num">2</span><span>Describe the synthesis steps shared by all steroid hormones</span></a>
+        <a href="#obj3"><span class="num">3</span><span>Differentiate between layers of the adrenal cortex, the enzymes that they express, and the hormones that they secrete</span></a>
+        <a href="#obj4"><span class="num">4</span><span>Describe the biosynthesis pathways for aldosterone, cortisol, and DHEA</span></a>
+        <a href="#obj5"><span class="num">5</span><span>Know the mechanisms that facilitate circulation and inactivation of aldosterone, cortisol, and DHEA, and explain their effects on half-life</span></a>
+        <a href="#obj6"><span class="num">6</span><span>Understand the primary mechanisms of action of aldosterone and cortisol on their target cells</span></a>
+      </div>
+    </div>
+
+    <!-- ============ OBJECTIVE 1 ============ -->
+    <section class="obj" id="obj1" data-obj="1">
+      <div class="obj-header">
+        <h2><span class="num">1</span>Steroid structure and nomenclature</h2>
+        <button class="mark-done" data-obj="1">Mark Done</button>
+      </div>
+
+      <div class="gist"><span class="gist-label">The Gist</span>
+        All steroid hormones share the same <b>4-ring planar backbone</b> derived from <b>cholesterol</b> (cyclopentanoperhydrophenanthrene). They differ by: <b>carbon count</b>, the <b>functional groups</b> attached, and <b>double-bond position</b>. <b>C21 = progestins &amp; corticoids; C19 = androgens; C18 = estrogens.</b> Knowing the ring labels (A, B, C, D), carbon numbering, and double-bond notation (Δ4, Δ5) makes enzyme actions and structural differences readable at a glance.
+        <div class="gist-deeper">
+          <span class="preview-label">📚 Going Deeper will expand on:</span>
+          <ul>
+            <li><b>(1) The 4-ring steroid backbone</b> — A, B, C, D rings; shared with cholesterol.</li>
+            <li><b>(2) Carbon count classes</b> — C21 / C19 / C18 as a fingerprint of pathway branching.</li>
+            <li><b>(3) Double-bond (Δ) nomenclature</b> — why 3β-HSD matters for converting Δ5 → Δ4.</li>
+            <li><b>(4) Reading enzyme names</b> — hydroxylases (add -OH), HSD (oxidize/reduce OH), lyases (cleave bonds), aromatase (convert A-ring).</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Carbon count = steroid class</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Carbons</th><th>Class</th><th>Examples</th><th>Built by losing / gaining</th></tr></thead>
+        <tbody>
+          <tr><td>C27</td><td>Cholesterol &amp; Vit D</td><td>Cholesterol, calcitriol</td><td>Starting precursor</td></tr>
+          <tr><td><b>C21</b></td><td>Progestins &amp; corticoids</td><td>Pregnenolone, progesterone, cortisol, aldosterone, DOC</td><td>Side-chain cleavage of cholesterol (desmolase, losing 6 C)</td></tr>
+          <tr><td><b>C19</b></td><td>Androgens</td><td>DHEA, androstenedione, testosterone</td><td>17,20-lyase removes a 2-C side chain from C21</td></tr>
+          <tr><td><b>C18</b></td><td>Estrogens</td><td>Estrone, estradiol, estriol</td><td>Aromatase removes the C19 methyl + aromatizes A-ring</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="deep-dive">
+        <div class="dd-title">📚 Going Deeper — reading steroid structures like a pro</div>
+
+        <h4>1 · The 4-ring backbone</h4>
+        <div class="group-label">Shared architecture</div>
+        <ul>
+          <li>Structure:
+            <ul class="sublist">
+              <li>All steroids have 4 fused rings (A, B, C, D) — "cyclopentanoperhydrophenanthrene."<span class="cite">end04 lecture</span></li>
+              <li>Derived from cholesterol, which has 27 carbons.</li>
+            </ul>
+          </li>
+          <li>Why it matters:
+            <ul class="sublist">
+              <li>The shared backbone means steroid hormones are all lipophilic.</li>
+              <li>Hence they bind carrier proteins (CBG, albumin), cross plasma membranes, and act on intracellular receptors.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>2 · Carbon count tells the class</h4>
+        <ul>
+          <li>C21 — progestins and corticoids:
+            <ul class="sublist">
+              <li>Cholesterol (C27) loses 6 carbons in the side-chain cleavage step → pregnenolone (C21).<span class="cite">end04 lecture</span></li>
+              <li>All mineralocorticoids and glucocorticoids retain the C21 scaffold.</li>
+            </ul>
+          </li>
+          <li>C19 — androgens:
+            <ul class="sublist">
+              <li>17,20-lyase removes a 2-carbon side chain → androstenedione / DHEA (C19).</li>
+            </ul>
+          </li>
+          <li>C18 — estrogens:
+            <ul class="sublist">
+              <li>Aromatase removes the C19 methyl group and aromatizes the A-ring → estrone / estradiol (C18).<span class="cite">FA 3.11 Adrenal steroids and CAH; Bootcamp 6.10</span></li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>3 · Double-bond (Δ) nomenclature</h4>
+        <ul>
+          <li>Δ5 pathway:
+            <ul class="sublist">
+              <li>Double bond between C5 and C6 (in the B ring).</li>
+              <li>Pregnenolone, 17-OH-pregnenolone, DHEA are Δ5 compounds.<span class="cite">end04 lecture; FA 3.11</span></li>
+            </ul>
+          </li>
+          <li>Δ4 pathway:
+            <ul class="sublist">
+              <li>Double bond between C4 and C5 (in the A ring).</li>
+              <li>Progesterone, 17-OH-progesterone, androstenedione are Δ4 compounds.</li>
+            </ul>
+          </li>
+          <li>3β-HSD converts Δ5 → Δ4:
+            <ul class="sublist">
+              <li>3β-hydroxysteroid dehydrogenase moves the double bond from position 5 → 4 and oxidizes the C3 hydroxyl to a ketone.</li>
+              <li>This is the "gate" that converts precursors to the Δ4 pathway.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>4 · Reading enzyme names</h4>
+        <ul>
+          <li>Hydroxylases (-hydroxylase):
+            <ul class="sublist">
+              <li>Add an -OH group at a specific carbon (e.g., 21-hydroxylase adds -OH at C21).<span class="cite">FA 3.11 Adrenal steroids</span></li>
+            </ul>
+          </li>
+          <li>HSDs (hydroxysteroid dehydrogenases):
+            <ul class="sublist">
+              <li>Oxidize/reduce an -OH group at a specific carbon.</li>
+              <li>3β-HSD (Δ5 → Δ4) and 17β-HSD (androstenedione → testosterone).</li>
+            </ul>
+          </li>
+          <li>Lyases:
+            <ul class="sublist">
+              <li>Cleave C-C bonds (e.g., 17,20-lyase cleaves between C17 and C20 to make C19 steroids).</li>
+            </ul>
+          </li>
+          <li>Aromatase:
+            <ul class="sublist">
+              <li>Converts C19 androgens to C18 estrogens by aromatizing the A-ring (removes the C19 methyl).<span class="cite">FA 3.11; Bootcamp 6.10</span></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+        <ul>
+          <li>All steroid hormones share the <b>4-ring cyclopentanoperhydrophenanthrene backbone</b> from cholesterol. <span class="cite">end04 lecture</span></li>
+          <li><b>C21 = progestins / corticoids. C19 = androgens. C18 = estrogens.</b> <span class="cite">FA 3.11 Adrenal steroids and CAH</span></li>
+          <li><b>3β-HSD</b> converts Δ5 pathway (pregnenolone side) → Δ4 pathway (progesterone side). <span class="cite">end04 lecture</span></li>
+          <li><b>Aromatase</b> = C19 → C18 (androgen → estrogen). <span class="cite">FA 3.11</span></li>
+          <li><b>17,20-lyase</b> drops 2 carbons → makes androgens (C19). <span class="cite">end04 lecture</span></li>
+        </ul>
+      </div>
+
+      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <p><b>"Count the carbons to name the class"</b>: 21 = corticoid, 19 = androgen, 18 = estrogen.</p>
+        <p><b>"Δ5 is Pregnen-side; Δ4 is Progestin-side"</b> — 3β-HSD flips the switch.</p>
+        <p><b>"Aromatase Aromatizes A-ring"</b> — removes C19 methyl to make estrogen.</p>
+        <p><b>"-ase names describe what they do"</b>: hydroxylase adds OH; lyase cuts; HSD flips OH; aromatase aromatizes.</p>
+      </div>
+
+      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <ul>
+          <li><b>Aromatase inhibitors (anastrozole, letrozole, exemestane)</b> are used in postmenopausal ER+ breast cancer. Aromatase is the bridge from C19 → C18 — inhibiting it starves ER+ tumors of estrogen. <span class="cite">AI Generated · repro / oncology pharm</span></li>
+          <li><b>3β-HSD deficiency</b> (rare CAH) causes accumulation of Δ5 precursors (pregnenolone, DHEA) and deficient Δ4 hormones (aldosterone, cortisol, testosterone). <span class="cite">AI Generated · see end06 / end20</span></li>
+          <li><b>17,20-lyase deficiency</b> blocks androgen formation → incomplete virilization in 46,XY. <span class="cite">AI Generated · see end05 / end06</span></li>
+        </ul>
+      </div>
+
+      <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL — click each question to reveal</div>
+        <div class="flashcard"><div class="q">How many carbons do cholesterol, progesterone, testosterone, and estradiol have?</div><div class="a"><span>Cholesterol 27; progesterone 21; testosterone 19; estradiol 18.</span></div></div>
+        <div class="flashcard"><div class="q">Which enzyme converts androgens (C19) to estrogens (C18)?</div><div class="a"><span>Aromatase — removes the C19 methyl and aromatizes the A-ring.</span></div></div>
+        <div class="flashcard"><div class="q">What enzyme bridges the Δ5 and Δ4 steroid pathways?</div><div class="a"><span>3β-HSD (3β-hydroxysteroid dehydrogenase).</span></div></div>
+        <div class="flashcard"><div class="q">What does 17,20-lyase do?</div><div class="a"><span>Cleaves the bond between C17 and C20, removing a 2-carbon side chain to create C19 androgens from C21 precursors.</span></div></div>
+        <div class="flashcard"><div class="q">Why do all steroid hormones share similar pharmacokinetic properties (carrier binding, membrane crossing, nuclear receptors)?</div><div class="a"><span>They all share the 4-ring cholesterol-derived lipophilic backbone.</span></div></div>
+      </div>
+    </section>
+
+    <!-- ============ OBJECTIVE 2 ============ -->
+    <section class="obj" id="obj2" data-obj="2">
+      <div class="obj-header">
+        <h2><span class="num">2</span>Synthesis steps shared by all steroid hormones</h2>
+        <button class="mark-done" data-obj="2">Mark Done</button>
+      </div>
+
+      <div class="gist"><span class="gist-label">The Gist</span>
+        Every steroid hormone — whether made in the adrenal cortex, gonads, or placenta — begins with the <b>same four shared steps</b>. (1) Cholesterol is liberated from cytoplasmic lipid droplets by <b>hormone-sensitive lipase (HSL)</b>. (2) <b>StAR protein</b> transfers cholesterol from the outer to inner mitochondrial membrane — the <b>rate-limiting step</b>. (3) Mitochondrial <b>cholesterol desmolase (CYP11A1 / P450scc)</b> cleaves cholesterol's side chain → <b>pregnenolone</b> (C21), the universal steroid precursor. (4) The entire process is coordinated by <b>cAMP</b> generated by hormone-responsive GPCRs (ACTH in the cortex, AngII in zona glomerulosa).
+        <div class="gist-deeper">
+          <span class="preview-label">📚 Going Deeper will expand on:</span>
+          <ul>
+            <li><b>(1) Cholesterol sources</b> — LDL uptake, lipid droplets, de novo synthesis.</li>
+            <li><b>(2) HSL (hormone-sensitive lipase)</b> — mobilizes cholesterol esters.</li>
+            <li><b>(3) StAR and the rate-limiting step</b> — mitochondrial cholesterol import.</li>
+            <li><b>(4) Desmolase / P450scc</b> — the four-names-one-enzyme step.</li>
+            <li><b>(5) cAMP coordination</b> — ACTH in cortex, AngII in ZG.</li>
+            <li><b>(6) Chronic stimulation effects</b> — upregulates LDLR and P450scc.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>The universal steroidogenesis starting cascade</h3>
+      <div class="pathway">
+        <div class="step">Cholesterol in lipid droplets</div>
+        <span class="arrow">→</span>
+        <div class="step">Free cholesterol<span class="enz">HSL</span></div>
+        <span class="arrow">→</span>
+        <div class="step">Inner mito membrane<span class="enz">StAR · RATE-LIMITING</span></div>
+        <span class="arrow">→</span>
+        <div class="step" style="border-color:var(--red);color:var(--red)">Pregnenolone (C21)<span class="enz">Desmolase / P450scc</span></div>
+      </div>
+
+      <h3>Shared steroidogenesis steps</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Step</th><th>Event</th><th>Enzyme / protein</th><th>Key point</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Liberate cholesterol from lipid droplets</td><td><b>HSL</b> (hormone-sensitive lipase)</td><td>Cholesterol esters → free cholesterol</td></tr>
+          <tr><td>2</td><td>Transfer to inner mitochondrial membrane</td><td><b>StAR</b> (steroidogenic acute regulatory protein)</td><td>★ <b>Rate-limiting step</b></td></tr>
+          <tr><td>3</td><td>Side-chain cleavage (C27 → C21)</td><td><b>Desmolase</b> (CYP11A1, P450scc)</td><td>First committed step; produces pregnenolone</td></tr>
+          <tr><td>4</td><td>Coordinate entire process</td><td>cAMP (from GPCR-activated adenylyl cyclase)</td><td>Upregulates HSL activity, StAR expression, LDLR, P450scc</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="deep-dive">
+        <div class="dd-title">📚 Going Deeper — every shared step in detail</div>
+
+        <h4>1 · Cholesterol sources</h4>
+        <div class="group-label">Three origins (in order of use)</div>
+        <ul>
+          <li>Primary — LDL-receptor-mediated uptake:
+            <ul class="sublist">
+              <li>Hepatocytes and steroidogenic cells express high levels of LDL-R.</li>
+              <li>ACTH upregulates LDL-R expression with some delay.<span class="cite">end04 lecture</span></li>
+            </ul>
+          </li>
+          <li>Secondary — stored cholesterol esters:
+            <ul class="sublist">
+              <li>Held in cytoplasmic lipid droplets.</li>
+              <li>Acute mobilization is via HSL.</li>
+            </ul>
+          </li>
+          <li>Tertiary — de novo synthesis:
+            <ul class="sublist">
+              <li>From acetyl-CoA via HMG-CoA reductase (rate-limiting step for cholesterol synthesis).</li>
+              <li>Less important source for adrenal steroidogenesis.<span class="cite">Bootcamp 6.01 Adrenal Gland Physiology</span></li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>2 · HSL (hormone-sensitive lipase)</h4>
+        <ul>
+          <li>Function:
+            <ul class="sublist">
+              <li>Hydrolyzes cholesterol ester bonds, releasing free cholesterol.<span class="cite">end04 lecture</span></li>
+            </ul>
+          </li>
+          <li>Activation:
+            <ul class="sublist">
+              <li>PKA-mediated phosphorylation (downstream of cAMP from ACTH or AngII).</li>
+            </ul>
+          </li>
+          <li>Clinical relevance:
+            <ul class="sublist">
+              <li>Acute steroidogenic response requires HSL + StAR together.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>3 · StAR (steroidogenic acute regulatory protein)</h4>
+        <div class="group-label">The real bottleneck</div>
+        <ul>
+          <li>Function:
+            <ul class="sublist">
+              <li>Shuttles cholesterol from the outer to the inner mitochondrial membrane.<span class="cite">end04 lecture</span></li>
+              <li>Without StAR, desmolase sits idle with no substrate — so this transport is the true rate-limiting step.</li>
+            </ul>
+          </li>
+          <li>Regulation:
+            <ul class="sublist">
+              <li>Transcription upregulated rapidly by cAMP-PKA (in minutes).</li>
+              <li>ACTH (adrenal cortex), LH (gonads), AngII + K⁺ (zona glomerulosa) all drive StAR expression.<span class="cite">FA 3.11 Adrenal steroids and CAH</span></li>
+            </ul>
+          </li>
+          <li>Classic disease:
+            <ul class="sublist">
+              <li>StAR mutation → <b>congenital lipoid adrenal hyperplasia</b>.</li>
+              <li>Lipid-engorged adrenals, profound deficiency of ALL steroid hormones.<span class="cite">AI Generated · see end20 / end06</span></li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>4 · Desmolase / P450scc / CYP11A1</h4>
+        <div class="group-label">The four-names-one-enzyme step</div>
+        <ul>
+          <li>Names (all the same enzyme):
+            <ul class="sublist">
+              <li>Cholesterol desmolase.</li>
+              <li>20,22-desmolase.</li>
+              <li>CYP11A1.</li>
+              <li>P450scc (scc = side-chain cleavage).<span class="cite">end04 lecture</span></li>
+            </ul>
+          </li>
+          <li>Reaction:
+            <ul class="sublist">
+              <li>Two sequential hydroxylations (C20, C22) followed by C–C bond cleavage.</li>
+              <li>Removes 6 carbons (C27 → C21).</li>
+            </ul>
+          </li>
+          <li>Location:
+            <ul class="sublist">
+              <li>Inner mitochondrial membrane.</li>
+            </ul>
+          </li>
+          <li>Cofactors:
+            <ul class="sublist">
+              <li>NADPH, O₂, Fe (P450 heme).</li>
+            </ul>
+          </li>
+          <li>Pharmacologic inhibitors:
+            <ul class="sublist">
+              <li>Ketoconazole (antifungal; inhibits desmolase + several CYPs).</li>
+              <li>Aminoglutethimide (historical).<span class="cite">AI Generated · see end21</span></li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>5 · cAMP coordinates everything</h4>
+        <ul>
+          <li>Hormonal drivers:
+            <ul class="sublist">
+              <li>ACTH at the adrenal cortex (binds MC2R Gs-coupled GPCR).<span class="cite">end04 lecture</span></li>
+              <li>AngII + K⁺ at zona glomerulosa (binds AT1R Gq; raises intracellular Ca²⁺).</li>
+              <li>LH at gonads.</li>
+            </ul>
+          </li>
+          <li>Downstream actions:
+            <ul class="sublist">
+              <li>↑ HSL phosphorylation → more free cholesterol.</li>
+              <li>↑ StAR transcription → more mitochondrial cholesterol import.</li>
+              <li>↑ LDLR and P450scc expression (with some delay).<span class="cite">end04 lecture</span></li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>6 · Acute vs. chronic stimulation</h4>
+        <ul>
+          <li>Acute response (minutes):
+            <ul class="sublist">
+              <li>HSL activation + StAR transcription → rapid cortisol release.</li>
+            </ul>
+          </li>
+          <li>Chronic response (hours–days):
+            <ul class="sublist">
+              <li>Upregulates LDLR for more cholesterol uptake.</li>
+              <li>Upregulates P450scc and downstream enzymes.</li>
+              <li>Causes adrenal cortex hyperplasia (e.g., in Cushing disease).<span class="cite">AI Generated · see end19/20</span></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+        <ul>
+          <li><b>Rate-limiting step of steroidogenesis = StAR-mediated cholesterol import.</b> <span class="cite">end04 lecture; FA 3.11</span></li>
+          <li><b>First committed enzymatic step = desmolase (P450scc / CYP11A1)</b> → pregnenolone. <span class="cite">end04 lecture</span></li>
+          <li><b>ACTH → MC2R → Gs/cAMP/PKA</b> drives steroidogenesis. <span class="cite">FA 3.12 Cortisol; Bootcamp 6.01</span></li>
+          <li><b>Angiotensin II → AT1R → Gq</b> drives aldosterone synthesis in zona glomerulosa. <span class="cite">AI Generated · see end19/20</span></li>
+          <li><b>Ketoconazole</b> inhibits desmolase + several downstream CYPs → used in Cushing's. <span class="cite">AI Generated · see end21</span></li>
+          <li><b>StAR mutation</b> → congenital lipoid adrenal hyperplasia (lipid-engorged adrenals, deficiency of ALL steroids). <span class="cite">AI Generated · see end20</span></li>
+        </ul>
+      </div>
+
+      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <p><b>"Cholesterol is Pregnant with every steroid"</b> — cholesterol → pregnenolone is the first step.</p>
+        <p><b>"SCC = Scissors on the Side Chain"</b> — P450scc literally cleaves it.</p>
+        <p><b>"StAR is the bouncer"</b> — cholesterol can't enter the mitochondrial VIP room without it.</p>
+        <p><b>"cAMP is the conductor"</b> — coordinates HSL + StAR + LDLR + P450scc.</p>
+      </div>
+
+      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <ul>
+          <li><b>Congenital lipoid adrenal hyperplasia (StAR mutation):</b> lipid-engorged adrenals, deficiency of ALL steroids → salt-wasting, hypotension, 46,XY phenotypic females (no androgens). <span class="cite">AI Generated · see end06/end20</span></li>
+          <li><b>Ketoconazole</b> broad CYP inhibition → used in Cushing's; can cause gynecomastia from ↓ testosterone. <span class="cite">AI Generated · see end21</span></li>
+          <li><b>Aminoglutethimide</b> is an old desmolase inhibitor; largely replaced. <span class="cite">AI Generated · see end21</span></li>
+          <li>Chronic ACTH excess (Cushing disease, ectopic ACTH) → adrenal cortex hyperplasia + upregulated LDLR. <span class="cite">AI Generated · see end19/20</span></li>
+        </ul>
+      </div>
+
+      <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL</div>
+        <div class="flashcard"><div class="q">Name the rate-limiting step of steroidogenesis.</div><div class="a"><span>StAR-mediated cholesterol transfer from outer to inner mitochondrial membrane.</span></div></div>
+        <div class="flashcard"><div class="q">What enzyme converts cholesterol to pregnenolone, and where?</div><div class="a"><span>Cholesterol desmolase (CYP11A1 / P450scc), in the inner mitochondrial membrane.</span></div></div>
+        <div class="flashcard"><div class="q">Which second messenger coordinates adrenal steroidogenesis?</div><div class="a"><span>cAMP — activated by ACTH at MC2R (Gs) or AngII/K⁺ at AT1R (though AngII uses Gq/IP3/Ca²⁺ in practice).</span></div></div>
+        <div class="flashcard"><div class="q">A newborn has lipid-filled adrenals, salt-wasting, and is a 46,XY phenotypic female. Diagnosis?</div><div class="a"><span>Congenital lipoid adrenal hyperplasia — StAR protein mutation → cholesterol cannot enter mitochondria → deficiency of all steroids.</span></div></div>
+        <div class="flashcard"><div class="q">Which drug inhibits desmolase (and several downstream CYPs) and can cause gynecomastia in men?</div><div class="a"><span>Ketoconazole.</span></div></div>
+      </div>
+    </section>
+
+    <!-- ============ OBJECTIVE 3 ============ -->
+    <section class="obj" id="obj3" data-obj="3">
+      <div class="obj-header">
+        <h2><span class="num">3</span>Layers of the adrenal cortex, their enzymes, and their hormones</h2>
+        <button class="mark-done" data-obj="3">Mark Done</button>
+      </div>
+
+      <div class="gist"><span class="gist-label">The Gist</span>
+        The adrenal cortex has three zones (outer → inner): <b>zona Glomerulosa</b> (mineralocorticoids — aldosterone), <b>zona Fasciculata</b> (glucocorticoids — cortisol), <b>zona Reticularis</b> (androgens — DHEA). Each zone expresses a different enzyme pattern, which dictates the hormone produced. The <b>medulla</b> (center) is a separate neuroendocrine organ that makes <b>catecholamines</b> (mostly epinephrine).
+        <div class="gist-deeper">
+          <span class="preview-label">📚 Going Deeper will expand on:</span>
+          <ul>
+            <li><b>(1) Adrenal zonation</b> — the three cortical zones and medulla.</li>
+            <li><b>(2) Which enzymes each zone expresses</b> — and which are absent.</li>
+            <li><b>(3) Signature enzymes</b> — aldosterone synthase (ZG only), CYP11B1 (ZF), enhanced 17,20-lyase (ZR).</li>
+            <li><b>(4) Clinical anchors</b> — zone-specific adenomas and hyperplasias.</li>
+            <li><b>(5) Why zonation matters for CAH patterns</b>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Adrenal cortex zonation</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Zone (outer → inner)</th><th>Primary hormone</th><th>Signature enzymes</th><th>What's MISSING</th></tr></thead>
+        <tbody>
+          <tr><td><b>Zona Glomerulosa (ZG)</b></td><td>Aldosterone (mineralocorticoid)</td><td>Aldosterone synthase (CYP11B2) — found ONLY here</td><td>NO 17α-hydroxylase → cannot make cortisol or sex steroids</td></tr>
+          <tr><td><b>Zona Fasciculata (ZF)</b></td><td>Cortisol (glucocorticoid)</td><td>17α-hydroxylase, CYP11B1 (11β-hydroxylase)</td><td>LOW 17,20-lyase — limited androgen output</td></tr>
+          <tr><td><b>Zona Reticularis (ZR)</b></td><td>DHEA (weak androgen)</td><td>Enhanced 17,20-lyase; sulfotransferase (DHEA → DHEA-S)</td><td>NO 21-hydroxylase; LOW 3β-HSD → cannot make mineralocorticoids or glucocorticoids</td></tr>
+          <tr><td><b>Medulla</b></td><td>Catecholamines (Epi ~80%, NE ~20%)</td><td>Tyrosine hydroxylase, DBH, PNMT (cortisol-induced)</td><td>Functionally a modified sympathetic ganglion</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="deep-dive">
+        <div class="dd-title">📚 Going Deeper — zonation in detail</div>
+
+        <h4>1 · Histologic and functional zonation</h4>
+        <div class="group-label">Outside → inside of the cortex</div>
+        <ul>
+          <li>Zona Glomerulosa (15% of cortex):
+            <ul class="sublist">
+              <li>Outermost, just deep to the capsule.</li>
+              <li>Cells in small nests ("glomerular" cluster appearance).<span class="cite">end04 lecture; Physeo 6.07 Adrenal Glands</span></li>
+              <li>Primary stimulus: angiotensin II and K⁺.</li>
+            </ul>
+          </li>
+          <li>Zona Fasciculata (~75% of cortex, largest):
+            <ul class="sublist">
+              <li>Middle zone, cells in long vertical cords ("fascicles").</li>
+              <li>Cells are lipid-rich ("spongiocytes") with a foamy cytoplasm.</li>
+              <li>Primary stimulus: ACTH.<span class="cite">B&amp;B 2.01 Adrenal Glands</span></li>
+            </ul>
+          </li>
+          <li>Zona Reticularis (~10% of cortex):
+            <ul class="sublist">
+              <li>Innermost cortical layer, next to the medulla.</li>
+              <li>Cells in a branching reticular network; pigmented (lipofuscin).</li>
+              <li>Primary stimulus: ACTH (same as ZF but different enzyme suite).</li>
+            </ul>
+          </li>
+          <li>Adrenal medulla:
+            <ul class="sublist">
+              <li>Center of the gland — a modified sympathetic ganglion.</li>
+              <li>Chromaffin cells (postganglionic sympathetic neurons) secrete catecholamines.<span class="cite">end04 lecture (brief)</span></li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>2 · Enzyme fingerprints — which enzymes each zone has</h4>
+        <div class="group-label">Zona Glomerulosa</div>
+        <ul>
+          <li>Has:
+            <ul class="sublist">
+              <li>All early steroidogenic enzymes (desmolase, 3β-HSD, 21-hydroxylase).</li>
+              <li><b>Aldosterone synthase (CYP11B2)</b> — unique to ZG; catalyzes the final 3 steps to aldosterone.<span class="cite">end04 lecture; FA 3.11</span></li>
+            </ul>
+          </li>
+          <li>Lacks:
+            <ul class="sublist">
+              <li>17α-hydroxylase → can't make cortisol or sex steroids.</li>
+            </ul>
+          </li>
+          <li>Makes:
+            <ul class="sublist">
+              <li>Aldosterone (primary).</li>
+              <li>Traces of other mineralocorticoids (DOC, corticosterone).</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Zona Fasciculata</div>
+        <ul>
+          <li>Has:
+            <ul class="sublist">
+              <li>17α-hydroxylase (activates glucocorticoid pathway).</li>
+              <li>CYP11B1 (11β-hydroxylase, the ZF version of 11β-hydroxylase).<span class="cite">end04 lecture</span></li>
+            </ul>
+          </li>
+          <li>Has but at low levels:
+            <ul class="sublist">
+              <li>17,20-lyase — limited androgen output.</li>
+            </ul>
+          </li>
+          <li>Lacks (vs ZG):
+            <ul class="sublist">
+              <li>Aldosterone synthase → cannot make aldosterone.</li>
+            </ul>
+          </li>
+          <li>Makes:
+            <ul class="sublist">
+              <li>Cortisol (primary).</li>
+              <li>Corticosterone (minor).</li>
+              <li>Small amounts of adrenal androgens.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Zona Reticularis</div>
+        <ul>
+          <li>Has:
+            <ul class="sublist">
+              <li>Enhanced 17,20-lyase activity.</li>
+              <li>Sulfotransferase (converts DHEA → DHEA-S).<span class="cite">end04 lecture</span></li>
+            </ul>
+          </li>
+          <li>Lacks / low:
+            <ul class="sublist">
+              <li>NO 21-hydroxylase (can't make corticoids).</li>
+              <li>LOW 3β-HSD activity (stays in Δ5 pathway).</li>
+            </ul>
+          </li>
+          <li>Makes:
+            <ul class="sublist">
+              <li>DHEA (primary) and DHEA-S.</li>
+              <li>Androstenedione (minor).</li>
+              <li>Small amounts of testosterone.<span class="cite">FA 3.11 Adrenal steroids</span></li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>3 · Development and lifetime changes in each zone</h4>
+        <ul>
+          <li>Zona Reticularis (adrenarche):
+            <ul class="sublist">
+              <li>Develops and begins secreting DHEA between ages 6–8 (adrenarche).<span class="cite">end04 lecture</span></li>
+              <li>DHEA output peaks in mid-20s.</li>
+              <li>Declines steadily thereafter.</li>
+            </ul>
+          </li>
+          <li>Aging changes:
+            <ul class="sublist">
+              <li>ZR thins with age → falling DHEA with preserved cortisol/aldosterone.</li>
+              <li>Contributes to age-related decline in adrenal androgen output.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>4 · Clinical anchors by zone</h4>
+        <ul>
+          <li>ZG pathology:
+            <ul class="sublist">
+              <li>Primary hyperaldosteronism (Conn syndrome) → aldosterone-secreting adenoma.<span class="cite">AI Generated · see end20</span></li>
+            </ul>
+          </li>
+          <li>ZF pathology:
+            <ul class="sublist">
+              <li>Cortisol-secreting adenoma → ACTH-independent Cushing syndrome.<span class="cite">AI Generated · see end20</span></li>
+              <li>Chronic ACTH hypersecretion (pituitary Cushing) → ZF hyperplasia.</li>
+            </ul>
+          </li>
+          <li>ZR pathology:
+            <ul class="sublist">
+              <li>Androgen-secreting adrenal tumors → virilization.<span class="cite">AI Generated · see end20</span></li>
+              <li>Premature adrenarche → early body odor, axillary/pubic hair.</li>
+            </ul>
+          </li>
+          <li>Medulla pathology:
+            <ul class="sublist">
+              <li>Pheochromocytoma (chromaffin cell tumor) — catecholamine excess, "5 P's."<span class="cite">AI Generated · see end20/21</span></li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>5 · Why zonation matters for CAH</h4>
+        <ul>
+          <li>CAH enzyme deficiencies have different consequences in each zone:
+            <ul class="sublist">
+              <li>21-hydroxylase deficiency: ZG (aldo) and ZF (cortisol) both impaired; ZR (no 21-hydroxylase anyway) unaffected for its own DHEA output, and substrate shunts into androgens.<span class="cite">Bootcamp 6.11 21-hydroxylase Deficiency</span></li>
+              <li>11β-hydroxylase deficiency: Cortisol blocked (ZF); DOC builds up (weak mineralocorticoid) + androgens rise.<span class="cite">Bootcamp 6.13</span></li>
+              <li>17α-hydroxylase deficiency: ZF cortisol and ZR sex steroids blocked; ZG still makes aldosterone / DOC → HTN + sexual infantilism.<span class="cite">Bootcamp 6.12</span></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+        <ul>
+          <li><b>GFR → salt, sugar, sex (+ deeper = sweeter).</b> Zona Glomerulosa → salt (aldosterone). Fasciculata → sugar (cortisol). Reticularis → sex (DHEA). <span class="cite">end04 lecture; FA 3.11</span></li>
+          <li><b>Aldosterone synthase (CYP11B2)</b> is found ONLY in zona glomerulosa. <span class="cite">end04 lecture</span></li>
+          <li><b>ZG lacks 17α-hydroxylase</b> → can't make cortisol or sex steroids. <span class="cite">end04 lecture; FA 3.11</span></li>
+          <li><b>ZR lacks 21-hydroxylase</b> and has low 3β-HSD → makes mostly DHEA/DHEA-S. <span class="cite">end04 lecture</span></li>
+          <li><b>Adrenarche (DHEA onset) starts at 6–8 years of age</b>, peaks in mid-20s. <span class="cite">end04 lecture</span></li>
+          <li><b>Medulla = modified sympathetic ganglion</b> making catecholamines (~80% Epi, 20% NE). <span class="cite">end04 lecture</span></li>
+        </ul>
+      </div>
+
+      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <p><b>"GFR → Salt, Sugar, Sex"</b> = Glomerulosa / Fasciculata / Reticularis → Aldosterone / Cortisol / DHEA.</p>
+        <p><b>"The deeper you go, the sweeter it gets"</b> — salt → sugar → sex as you move from outer to inner cortex.</p>
+        <p><b>"ZG has the BOUNCER CYP11B2"</b> — only zone with aldosterone synthase.</p>
+        <p><b>"Medulla = Modified Sympathetic — Makes Epi."</b></p>
+        <p><b>"Adrenarche starts when kids start school"</b> (~6–8 years).</p>
+      </div>
+
+      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <ul>
+          <li><b>Primary hyperaldosteronism (Conn):</b> ZG adenoma → HTN, hypokalemia, metabolic alkalosis, low renin. <span class="cite">AI Generated · see end20/21</span></li>
+          <li><b>Adrenal adenoma causing Cushing syndrome (ACTH-independent):</b> ZF lesion → high cortisol, suppressed ACTH. <span class="cite">AI Generated · see end20/21</span></li>
+          <li><b>Adrenal androgen-secreting tumor:</b> ZR pathology → virilization (hirsutism, acne, deepening voice in females). <span class="cite">AI Generated · see end20</span></li>
+          <li><b>Pheochromocytoma:</b> medulla tumor — episodic HTN, palpitations, diaphoresis, pallor, panic ("5 P's"). <span class="cite">AI Generated · see end20/21</span></li>
+          <li><b>Premature adrenarche</b> (pubarche &lt;8 girls / &lt;9 boys): early DHEA surge → axillary hair, acne. Often benign. <span class="cite">AI Generated · pediatrics</span></li>
+        </ul>
+      </div>
+
+      <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL — click each question to reveal</div>
+        <div class="flashcard"><div class="q">Three cortical zones outer → inner, and their primary hormones?</div><div class="a"><span>GFR: Glomerulosa → aldosterone, Fasciculata → cortisol, Reticularis → DHEA.</span></div></div>
+        <div class="flashcard"><div class="q">Which zone has aldosterone synthase? Which zone lacks 17α-hydroxylase?</div><div class="a"><span>Zona Glomerulosa has aldosterone synthase (CYP11B2). ZG ALSO lacks 17α-hydroxylase — it can't make cortisol or sex steroids.</span></div></div>
+        <div class="flashcard"><div class="q">Which zone is the largest, and what stimulates it?</div><div class="a"><span>Zona Fasciculata (~75% of cortex); stimulated by ACTH.</span></div></div>
+        <div class="flashcard"><div class="q">What enzyme converts DHEA to DHEA-S, and where?</div><div class="a"><span>Sulfotransferase in zona reticularis.</span></div></div>
+        <div class="flashcard"><div class="q">When does adrenarche (DHEA onset) occur?</div><div class="a"><span>Age 6–8 years; DHEA peaks in mid-20s.</span></div></div>
+        <div class="flashcard"><div class="q">What makes the adrenal medulla functionally unique?</div><div class="a"><span>It's a modified sympathetic ganglion (chromaffin cells = postganglionic sympathetic neurons) → releases catecholamines directly into blood.</span></div></div>
+      </div>
+    </section>
+
+    <!-- ============ OBJECTIVE 4 ============ -->
+    <section class="obj" id="obj4" data-obj="4">
+      <div class="obj-header">
+        <h2><span class="num">4</span>Biosynthesis pathways — aldosterone, cortisol, DHEA</h2>
+        <button class="mark-done" data-obj="4">Mark Done</button>
+      </div>
+
+      <div class="gist"><span class="gist-label">The Gist</span>
+        All three pathways start from cholesterol → pregnenolone. Then they diverge based on each zone's enzyme fingerprint. <b>Aldosterone</b> (ZG): pregnenolone → progesterone → DOC → corticosterone → aldosterone (aldosterone synthase, CYP11B2). <b>Cortisol</b> (ZF): pregnenolone → 17-OH-pregnenolone → 17-OH-progesterone → 11-deoxycortisol → cortisol (11β-hydroxylase, CYP11B1). <b>DHEA</b> (ZR): pregnenolone → 17-OH-pregnenolone → DHEA (17,20-lyase) → DHEA-S (sulfotransferase). Memorize the "grid" of enzymes and you can reason through every CAH.
+        <div class="gist-deeper">
+          <span class="preview-label">📚 Going Deeper will expand on:</span>
+          <ul>
+            <li><b>(1) Aldosterone pathway</b> — full ZG sequence with key checkpoints.</li>
+            <li><b>(2) Cortisol pathway</b> — full ZF sequence.</li>
+            <li><b>(3) DHEA pathway</b> — full ZR sequence and sulfotransferase step.</li>
+            <li><b>(4) The three enzyme "forks"</b> — 17α-hydroxylase, 17,20-lyase, 3β-HSD.</li>
+            <li><b>(5) CAH patterns</b> — 21-hydroxylase, 11β-hydroxylase, 17α-hydroxylase deficiencies.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Aldosterone pathway (Zona Glomerulosa)</h3>
+      <div class="pathway">
+        <div class="step">Cholesterol</div><span class="arrow">→</span>
+        <div class="step">Pregnenolone<span class="enz">Desmolase</span></div><span class="arrow">→</span>
+        <div class="step">Progesterone<span class="enz">3β-HSD</span></div><span class="arrow">→</span>
+        <div class="step">DOC<span class="enz">21-hydroxylase</span></div><span class="arrow">→</span>
+        <div class="step">Corticosterone<span class="enz">11β-hydroxylase</span></div><span class="arrow">→</span>
+        <div class="step" style="border-color:var(--red);color:var(--red)">Aldosterone<span class="enz">Aldo synthase (CYP11B2)</span></div>
+      </div>
+
+      <h3>Cortisol pathway (Zona Fasciculata)</h3>
+      <div class="pathway">
+        <div class="step">Pregnenolone</div><span class="arrow">→</span>
+        <div class="step">17-OH-Pregnenolone<span class="enz">17α-hydroxylase</span></div><span class="arrow">→</span>
+        <div class="step">17-OH-Progesterone<span class="enz">3β-HSD</span></div><span class="arrow">→</span>
+        <div class="step">11-Deoxycortisol<span class="enz">21-hydroxylase</span></div><span class="arrow">→</span>
+        <div class="step" style="border-color:var(--red);color:var(--red)">Cortisol<span class="enz">11β-hydroxylase (CYP11B1)</span></div>
+      </div>
+
+      <h3>DHEA pathway (Zona Reticularis)</h3>
+      <div class="pathway">
+        <div class="step">Pregnenolone</div><span class="arrow">→</span>
+        <div class="step">17-OH-Pregnenolone<span class="enz">17α-hydroxylase</span></div><span class="arrow">→</span>
+        <div class="step">DHEA<span class="enz">17,20-lyase</span></div><span class="arrow">→</span>
+        <div class="step" style="border-color:var(--red);color:var(--red)">DHEA-S<span class="enz">sulfotransferase</span></div>
+      </div>
+
+      <h3>The master enzyme grid — who does what</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Enzyme</th><th>Reaction</th><th>Where expressed</th><th>Deficiency consequence</th></tr></thead>
+        <tbody>
+          <tr><td>Cholesterol desmolase (CYP11A1, P450scc)</td><td>Cholesterol → Pregnenolone</td><td>All zones</td><td>Lipoid CAH (via StAR mutation) — all steroids absent</td></tr>
+          <tr><td>3β-HSD</td><td>Δ5 → Δ4 (preg → progesterone; DHEA → androstenedione)</td><td>ZG, ZF; low in ZR</td><td>Rare CAH: salt wasting + ambiguous genitalia</td></tr>
+          <tr><td>17α-hydroxylase</td><td>Adds 17-OH; gateway to cortisol + androgens</td><td>ZF &amp; ZR; absent in ZG</td><td>17α-hyd def: ↓ cortisol + sex steroids; ↑ mineralocorticoids → HTN + sexual infantilism</td></tr>
+          <tr><td>17,20-lyase</td><td>Cleaves C17-C20; makes DHEA from 17-OH-preg</td><td>High in ZR; low in ZF</td><td>Sex steroid deficiency</td></tr>
+          <tr><td>21-hydroxylase</td><td>Essential for aldo + cortisol synthesis</td><td>ZG &amp; ZF</td><td>21-hyd def (95% of CAH): ↓ cortisol + aldo, ↑ androgens → virilization + salt wasting</td></tr>
+          <tr><td>11β-hydroxylase (CYP11B1)</td><td>Deoxycortisol → cortisol; DOC → corticosterone</td><td>ZF</td><td>11β-hyd def: ↓ cortisol, ↑ DOC (weak mineralocorticoid) + ↑ androgens → virilization + HTN</td></tr>
+          <tr><td>Aldosterone synthase (CYP11B2)</td><td>Final 3 steps to aldosterone</td><td>ZG ONLY</td><td>Aldosterone synthase def → isolated low aldo (rare)</td></tr>
+          <tr><td>Sulfotransferase (SULT2A1)</td><td>DHEA → DHEA-S</td><td>ZR</td><td>Alters DHEA half-life but not generally clinical</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>CAH enzyme deficiencies — Pattern recognition</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Deficiency</th><th>Cortisol</th><th>Aldosterone</th><th>Androgens</th><th>Clinical signature</th></tr></thead>
+        <tbody>
+          <tr><td><b>21-hydroxylase</b> (~95% of CAH)</td><td>↓</td><td>↓</td><td>↑</td><td>Salt wasting, virilization, hypotension, hyperkalemia, ↑ 17-OH-progesterone</td></tr>
+          <tr><td><b>11β-hydroxylase</b></td><td>↓</td><td>↓ (but ↑ DOC, a weak mineralocorticoid)</td><td>↑</td><td>HTN, virilization, hypokalemia (DOC effect)</td></tr>
+          <tr><td><b>17α-hydroxylase</b></td><td>↓</td><td>↑ (mineralocorticoid pathway unblocked)</td><td>↓</td><td>HTN, hypokalemia, sexual infantilism (XY phenotype female, XX amenorrhea)</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="deep-dive">
+        <div class="dd-title">📚 Going Deeper — pathways and their enzyme forks</div>
+
+        <h4>1 · The three critical "forks" in steroidogenesis</h4>
+        <div class="group-label">17α-hydroxylase (the "sex/sugar fork")</div>
+        <ul>
+          <li>If 17α-hydroxylase is present:
+            <ul class="sublist">
+              <li>Pregnenolone → 17-OH-pregnenolone → continues to cortisol or sex steroids.<span class="cite">end04 lecture; FA 3.11</span></li>
+            </ul>
+          </li>
+          <li>If absent (ZG):
+            <ul class="sublist">
+              <li>Pregnenolone → progesterone → mineralocorticoid pathway only.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">17,20-lyase (the "sex steroid fork")</div>
+        <ul>
+          <li>When active:
+            <ul class="sublist">
+              <li>17-OH-pregnenolone → DHEA (or 17-OH-progesterone → androstenedione).</li>
+            </ul>
+          </li>
+          <li>Tissue distribution:
+            <ul class="sublist">
+              <li>High in ZR → mostly DHEA.</li>
+              <li>Low in ZF → little androgen output in normal cortisol synthesis.<span class="cite">end04 lecture</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">3β-HSD (the "Δ5 vs Δ4 fork")</div>
+        <ul>
+          <li>If active:
+            <ul class="sublist">
+              <li>Converts Δ5 compounds (pregnenolone, 17-OH-preg, DHEA) to Δ4 compounds (progesterone, 17-OH-prog, androstenedione).</li>
+            </ul>
+          </li>
+          <li>Tissue variation:
+            <ul class="sublist">
+              <li>Active in ZG and ZF.</li>
+              <li>Low in ZR → leaves DHEA in the Δ5 form.<span class="cite">end04 lecture</span></li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>2 · CAH deficiencies — how to reason through them</h4>
+        <div class="group-label">General logic</div>
+        <ul>
+          <li>The rule:
+            <ul class="sublist">
+              <li>Block the enzyme → substrate accumulates upstream → shunts into alternative pathways.<span class="cite">FA 3.11 Adrenal steroids and CAH; Pathoma 15.10</span></li>
+              <li>Cortisol deficiency removes negative feedback → ↑ ACTH → adrenal hyperplasia.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">21-hydroxylase deficiency (~95% of CAH)</div>
+        <ul>
+          <li>Blocked steps:
+            <ul class="sublist">
+              <li>Progesterone → DOC (blocks aldosterone).</li>
+              <li>17-OH-progesterone → 11-deoxycortisol (blocks cortisol).<span class="cite">Bootcamp 6.11 21-hydroxylase Deficiency</span></li>
+            </ul>
+          </li>
+          <li>Consequences:
+            <ul class="sublist">
+              <li>↓ cortisol, ↓ aldosterone.</li>
+              <li>Accumulated 17-OH-progesterone shunts into androgen pathway → ↑ androgens.</li>
+              <li>Clinical: salt wasting (hypovolemia, hyponatremia, hyperkalemia), virilization of XX fetuses, ambiguous genitalia.</li>
+              <li>Lab: ↑ 17-OH-progesterone (screening marker, state newborn screen).</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">11β-hydroxylase deficiency</div>
+        <ul>
+          <li>Blocked steps:
+            <ul class="sublist">
+              <li>11-deoxycortisol → cortisol (blocks cortisol).</li>
+              <li>DOC → corticosterone (blocks aldosterone… BUT).<span class="cite">Bootcamp 6.13 11β-hydroxylase Deficiency</span></li>
+            </ul>
+          </li>
+          <li>Key twist — DOC accumulates:
+            <ul class="sublist">
+              <li>11-deoxycorticosterone (DOC) is itself a weak mineralocorticoid.</li>
+              <li>Its accumulation causes hypertension and hypokalemia despite "low" aldosterone.</li>
+            </ul>
+          </li>
+          <li>Consequences:
+            <ul class="sublist">
+              <li>↓ cortisol → ↑ ACTH → adrenal hyperplasia.</li>
+              <li>↑ androgens (substrate shunts).</li>
+              <li>Clinical: virilization + HTN + hypokalemia.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">17α-hydroxylase deficiency</div>
+        <ul>
+          <li>Blocked steps:
+            <ul class="sublist">
+              <li>Pregnenolone → 17-OH-pregnenolone (blocks cortisol AND sex steroids).<span class="cite">Bootcamp 6.12 17α-hydroxylase Deficiency</span></li>
+            </ul>
+          </li>
+          <li>Consequences:
+            <ul class="sublist">
+              <li>↓ cortisol, ↓ sex steroids.</li>
+              <li>Pathway shunts into mineralocorticoids → ↑ aldosterone, ↑ DOC → HTN, hypokalemia.</li>
+              <li>Clinical: 46,XY phenotypic female (no androgens) or 46,XX primary amenorrhea; HTN; hypokalemia.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>3 · CAH memory mnemonic</h4>
+        <ul>
+          <li>HYPER / HYPO rule:
+            <ul class="sublist">
+              <li>HYPER-tension = 11 or 17.</li>
+              <li>HYPO-tension = 21.<span class="cite">FA 3.11 Adrenal steroids and CAH</span></li>
+            </ul>
+          </li>
+          <li>Virilization rule:
+            <ul class="sublist">
+              <li>21 and 11 virilize (shunt into androgens).</li>
+              <li>17 does NOT virilize (blocks sex steroids — underdeveloped genitalia).</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+        <ul>
+          <li><b>21-hydroxylase deficiency</b>: ↓ cortisol + ↓ aldo + ↑ androgens → <b>virilization + salt wasting + hypotension</b>. Elevated 17-OH-progesterone is the screening marker. <span class="cite">Bootcamp 6.11; FA 3.11</span></li>
+          <li><b>11β-hydroxylase deficiency</b>: ↓ cortisol + DOC accumulates (weak mineralocorticoid) + ↑ androgens → <b>virilization + HTN + hypokalemia</b>. <span class="cite">Bootcamp 6.13; FA 3.11</span></li>
+          <li><b>17α-hydroxylase deficiency</b>: ↓ cortisol + ↓ sex steroids + ↑ mineralocorticoids → <b>HTN + hypokalemia + sexual infantilism</b>. <span class="cite">Bootcamp 6.12; FA 3.11</span></li>
+          <li><b>HYPER = 11 or 17 (both hypertensive). HYPO = 21 (salt wasting).</b> <span class="cite">FA 3.11</span></li>
+          <li><b>21 and 11 virilize. 17 does NOT virilize.</b> <span class="cite">FA 3.11</span></li>
+          <li><b>Aldosterone synthase (CYP11B2) is unique to ZG</b>; cortisol's CYP11B1 is in ZF. <span class="cite">end04 lecture</span></li>
+        </ul>
+      </div>
+
+      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <p><b>"HYPER = 11 or 17. HYPO = 21."</b></p>
+        <p><b>"21 and 11 Virilize. 17 doesn't."</b></p>
+        <p><b>Aldosterone pathway enzymes:</b> "DES-3-21-11-B2" (Desmolase, 3β-HSD, 21-hyd, 11β-hyd, aldo synthase).</p>
+        <p><b>Cortisol pathway:</b> "17-3-21-11" (17α, 3β-HSD, 21-hyd, 11β-hyd).</p>
+        <p><b>DHEA pathway:</b> "17-then-lyase" (17α-hyd → 17,20-lyase).</p>
+      </div>
+
+      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <ul>
+          <li><b>Newborn screening</b> for CAH uses <b>17-OH-progesterone</b> (elevated in 21-hydroxylase deficiency). <span class="cite">AI Generated · see end06/end20</span></li>
+          <li><b>Salt-wasting CAH</b> presents with hypotension, hyperkalemia, hyponatremia, and virilized external genitalia (XX) in the newborn period. <span class="cite">AI Generated · see end06/end20</span></li>
+          <li><b>Simple virilizing CAH</b> (incomplete 21-hyd deficiency) presents later with virilization without salt-wasting. <span class="cite">AI Generated · see end06/end20</span></li>
+          <li><b>Nonclassic CAH</b> (mildest form) presents in adolescence/adulthood with hirsutism, acne, irregular menses — often mistaken for PCOS. <span class="cite">AI Generated · see end06/end20</span></li>
+          <li><b>Apparent mineralocorticoid excess</b>: 11β-HSD2 deficiency (or licorice/glycyrrhizic acid inhibition) → cortisol activates MR → hypertension with low renin + low aldosterone. <span class="cite">AI Generated · see end20/21</span></li>
+        </ul>
+      </div>
+
+      <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL</div>
+        <div class="flashcard"><div class="q">Name the final enzyme in aldosterone synthesis.</div><div class="a"><span>Aldosterone synthase (CYP11B2) — unique to zona glomerulosa.</span></div></div>
+        <div class="flashcard"><div class="q">Name the final enzyme in cortisol synthesis.</div><div class="a"><span>11β-hydroxylase (CYP11B1) — in zona fasciculata.</span></div></div>
+        <div class="flashcard"><div class="q">The three enzyme deficiencies causing CAH and their hallmark features?</div><div class="a"><span>21-hydroxylase (most common, 95%): low cortisol + aldo + high androgens → virilization + salt wasting + hypotension. 11β-hydroxylase: virilization + HTN + hypokalemia (DOC accumulates). 17α-hydroxylase: no cortisol or sex steroids + HTN + sexual infantilism.</span></div></div>
+        <div class="flashcard"><div class="q">CAH screening marker in newborns?</div><div class="a"><span>17-OH-progesterone — elevated in 21-hydroxylase deficiency.</span></div></div>
+        <div class="flashcard"><div class="q">Why does 11β-hydroxylase deficiency cause HYPERtension despite blocked aldosterone?</div><div class="a"><span>11-deoxycorticosterone (DOC) accumulates upstream and has weak mineralocorticoid activity.</span></div></div>
+        <div class="flashcard"><div class="q">Why does 17α-hydroxylase deficiency cause sexual infantilism AND hypertension?</div><div class="a"><span>Sex steroids blocked (no virilization, no development). Substrate shunts into mineralocorticoid pathway → ↑ aldosterone + DOC → HTN.</span></div></div>
+      </div>
+    </section>
+
+    <!-- ============ OBJECTIVE 5 ============ -->
+    <section class="obj" id="obj5" data-obj="5">
+      <div class="obj-header">
+        <h2><span class="num">5</span>Circulation and inactivation — carrier proteins and half-life</h2>
+        <button class="mark-done" data-obj="5">Mark Done</button>
+      </div>
+
+      <div class="gist"><span class="gist-label">The Gist</span>
+        All adrenal steroids travel via carrier proteins but with different ratios. <b>Aldosterone</b>: only ~35% free; binds <b>CBG/albumin with low affinity</b>; T½ ~20 min. <b>Cortisol</b>: ~90% bound to <b>CBG (transcortin)</b>, ~6% albumin, ~4% free; T½ ~70 min. <b>DHEA</b>: albumin (low affinity), T½ 15–30 min. <b>DHEA-S</b>: albumin (high affinity), T½ 7–10 hours — serves as the body's DHEA reservoir. All three inactivated by hepatic <b>glucuronide/sulfate conjugation</b> and renal excretion. Only the <b>free fraction</b> is active and can cross cell membranes.
+        <div class="gist-deeper">
+          <span class="preview-label">📚 Going Deeper will expand on:</span>
+          <ul>
+            <li><b>(1) Carrier protein summary</b> — CBG, albumin, SHBG roles.</li>
+            <li><b>(2) Why DHEA-S has a 7–10 hour half-life</b> vs. DHEA's 15–30 min.</li>
+            <li><b>(3) Free vs. bound</b> — only free is active.</li>
+            <li><b>(4) Hepatic inactivation</b> — glucuronide vs. sulfate conjugation.</li>
+            <li><b>(5) Clinical implications</b> — pregnancy raises CBG; cirrhosis and nephrotic syndrome lower it; liver disease prolongs steroid half-lives.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Summary of circulation &amp; inactivation</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Hormone</th><th>Carrier</th><th>% free</th><th>Half-life</th><th>Inactivation</th></tr></thead>
+        <tbody>
+          <tr><td><b>Aldosterone</b></td><td>Low-affinity CBG / albumin</td><td>~35%</td><td>~20 min</td><td>Hepatic glucuronide conjugation → kidney</td></tr>
+          <tr><td><b>Cortisol</b></td><td><b>CBG (transcortin, ~90%)</b>, albumin (~6%)</td><td>~4%</td><td>~70 min</td><td>Hepatic glucuronide or sulfate conjugation → kidney</td></tr>
+          <tr><td><b>DHEA</b></td><td>Albumin (low affinity)</td><td>Substantial</td><td>15–30 min</td><td>Kidney</td></tr>
+          <tr><td><b>DHEA-S</b></td><td>Albumin (high affinity)</td><td>Low</td><td>7–10 hours</td><td>Kidney</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="deep-dive">
+        <div class="dd-title">📚 Going Deeper — carriers, half-life, and clearance</div>
+
+        <h4>1 · Carrier proteins — who carries what</h4>
+        <div class="group-label">CBG (cortisol-binding globulin / transcortin)</div>
+        <ul>
+          <li>Primary cargo:
+            <ul class="sublist">
+              <li>Cortisol — very high affinity, carries ~90% of cortisol.<span class="cite">end04 lecture</span></li>
+              <li>Aldosterone — low affinity, carries some.</li>
+            </ul>
+          </li>
+          <li>Regulation (clinically relevant):
+            <ul class="sublist">
+              <li>↑ by estrogen (pregnancy, OCP, tamoxifen) → ↑ total cortisol but normal free cortisol.<span class="cite">AI Generated · see end19/end21</span></li>
+              <li>↓ by cirrhosis, nephrotic syndrome, severe sepsis.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Albumin</div>
+        <ul>
+          <li>Role:
+            <ul class="sublist">
+              <li>Low-affinity, high-capacity backup carrier for many steroids including aldosterone, DHEA, and DHEA-S.</li>
+              <li>For DHEA-S, albumin binds at HIGH affinity — this is unusual and drives DHEA-S's long half-life.<span class="cite">end04 lecture</span></li>
+            </ul>
+          </li>
+          <li>Clinical:
+            <ul class="sublist">
+              <li>↓ albumin (liver failure, nephrotic syndrome, malnutrition) → altered free fractions and pharmacokinetics.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>2 · Why DHEA-S lasts so much longer than DHEA</h4>
+        <div class="group-label">The sulfation trick</div>
+        <ul>
+          <li>DHEA:
+            <ul class="sublist">
+              <li>Binds albumin loosely; T½ 15–30 min.</li>
+              <li>Freely filtered by kidneys.</li>
+            </ul>
+          </li>
+          <li>DHEA-S:
+            <ul class="sublist">
+              <li>Sulfation by sulfotransferase (SULT2A1) in the zona reticularis.</li>
+              <li>The sulfate group drastically increases albumin binding affinity.</li>
+              <li>Bound DHEA-S cannot be filtered → T½ 7–10 hours.<span class="cite">end04 lecture</span></li>
+            </ul>
+          </li>
+          <li>Why this matters:
+            <ul class="sublist">
+              <li>DHEA-S serves as the circulating reservoir of adrenal androgen precursor.</li>
+              <li>DHEA-S can be reactivated peripherally (by sulfatase) when tissues need DHEA.</li>
+              <li>DHEA-S is the standard lab test for adrenal androgen activity.<span class="cite">FA 3.11 Adrenal steroids</span></li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>3 · Free hormone hypothesis — quick refresher</h4>
+        <ul>
+          <li>Core principle:
+            <ul class="sublist">
+              <li>Only the FREE (unbound) fraction is biologically active.</li>
+              <li>Bound hormone is an inert reservoir in equilibrium (Kd) with free.<span class="cite">end01 lecture (previously completed); FA 3.14 Signaling</span></li>
+            </ul>
+          </li>
+          <li>Clinical implication:
+            <ul class="sublist">
+              <li>Pregnancy raises CBG → raises TOTAL cortisol but free cortisol stays normal.</li>
+              <li>Don't be fooled by total cortisol in these states.<span class="cite">AI Generated · see end19</span></li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>4 · Hepatic inactivation</h4>
+        <div class="group-label">Cortisol &amp; aldosterone</div>
+        <ul>
+          <li>Liver conjugation:
+            <ul class="sublist">
+              <li>Glucuronide or sulfate conjugation at various hydroxyl groups.</li>
+              <li>Conjugated steroids are water-soluble → excreted in urine.<span class="cite">end04 lecture</span></li>
+            </ul>
+          </li>
+          <li>11β-HSD:
+            <ul class="sublist">
+              <li>11β-HSD2 (in aldosterone-target tissues like kidney) converts cortisol → cortisone (inactive at MR).</li>
+              <li>This is how cortisol is kept OFF mineralocorticoid receptors despite 1000× higher concentrations.<span class="cite">AI Generated · see end06/end20</span></li>
+              <li>11β-HSD1 in liver and adipose does the reverse (cortisone → cortisol) — amplifies cortisol exposure.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">DHEA / DHEA-S</div>
+        <ul>
+          <li>Excretion:
+            <ul class="sublist">
+              <li>DHEA filtered by kidney.</li>
+              <li>DHEA-S largely recirculates due to albumin binding, eventually deconjugated in tissues.<span class="cite">end04 lecture</span></li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>5 · Clinical half-life implications</h4>
+        <ul>
+          <li>Cortisol (~70 min):
+            <ul class="sublist">
+              <li>Short enough to show diurnal variation (peak ~6 AM, nadir ~midnight).</li>
+              <li>Used in midnight salivary cortisol test for Cushing screening.<span class="cite">AI Generated · see end19/21</span></li>
+            </ul>
+          </li>
+          <li>Aldosterone (~20 min):
+            <ul class="sublist">
+              <li>Too short for casual testing; aldosterone/renin ratio uses morning blood draw.<span class="cite">AI Generated · see end20/21</span></li>
+            </ul>
+          </li>
+          <li>DHEA-S (7–10 h):
+            <ul class="sublist">
+              <li>Stable single-draw lab — used to evaluate adrenal androgen excess (e.g., hirsutism workup).<span class="cite">AI Generated · repro / endocrine</span></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+        <ul>
+          <li><b>Cortisol: 90% CBG / 6% albumin / 4% free</b>; T½ ~70 min. <span class="cite">end04 lecture</span></li>
+          <li><b>Aldosterone: ~35% free</b>, rest low-affinity CBG/albumin; T½ ~20 min. <span class="cite">end04 lecture</span></li>
+          <li><b>DHEA-S</b> has the longest half-life (7–10 h) — the adrenal androgen <b>reservoir</b>. <span class="cite">end04 lecture</span></li>
+          <li><b>Only FREE hormone is active.</b> Estrogen (pregnancy / OCP) raises CBG → raises TOTAL but not free cortisol. <span class="cite">AI Generated · see end19/21</span></li>
+          <li><b>11β-HSD2</b> in kidney converts cortisol → cortisone to protect MR from cortisol. Its deficiency (or inhibition by licorice) → apparent mineralocorticoid excess. <span class="cite">AI Generated · see end20/21</span></li>
+        </ul>
+      </div>
+
+      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <p><b>"Cortisol clings to CBG"</b> — 90% bound.</p>
+        <p><b>"DHEA-S = DHEA's reservoir — Sulfate Sticks to albumin."</b></p>
+        <p><b>"Aldo is almost always free — quick in, quick out."</b></p>
+        <p><b>"Free = Active. Bound = Backup."</b></p>
+      </div>
+
+      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <ul>
+          <li><b>Pregnancy / OCPs</b> → ↑ CBG → ↑ total cortisol but normal free cortisol. Don't mistake this for Cushing's. <span class="cite">AI Generated · see end19/21</span></li>
+          <li><b>DHEA-S</b> is the preferred test for adrenal androgen excess (hirsutism, acne, virilization workup) — stable levels. <span class="cite">AI Generated · repro</span></li>
+          <li><b>Cirrhosis / nephrotic syndrome</b> → ↓ CBG + albumin → altered steroid pharmacokinetics. <span class="cite">AI Generated · GI / renal</span></li>
+          <li><b>Licorice (glycyrrhizic acid)</b> inhibits 11β-HSD2 → apparent mineralocorticoid excess (HTN with low renin / low aldo). <span class="cite">AI Generated · see end20/21</span></li>
+          <li><b>Hydrocortisone dosing</b> takes advantage of cortisol's ~70 min half-life — divided daily doses (mimic diurnal variation). <span class="cite">AI Generated · see end21</span></li>
+        </ul>
+      </div>
+
+      <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL</div>
+        <div class="flashcard"><div class="q">Primary carrier for cortisol?</div><div class="a"><span>Corticosteroid-binding globulin (CBG / transcortin) — ~90%. Another 6% bound to albumin, ~4% free.</span></div></div>
+        <div class="flashcard"><div class="q">Approximate free fraction of aldosterone?</div><div class="a"><span>~35% — aldosterone binds CBG and albumin with LOW affinity.</span></div></div>
+        <div class="flashcard"><div class="q">Why does DHEA-S have a half-life of 7–10 hours while DHEA is 15–30 min?</div><div class="a"><span>Sulfation dramatically increases albumin binding affinity, preventing renal filtration and creating a long-lived reservoir.</span></div></div>
+        <div class="flashcard"><div class="q">A pregnant patient has a high total cortisol but normal ACTH. What explains this?</div><div class="a"><span>Estrogen-induced rise in CBG (transcortin) increases total cortisol; free cortisol is normal, so the patient is not Cushing's.</span></div></div>
+        <div class="flashcard"><div class="q">What enzyme keeps cortisol OFF mineralocorticoid receptors in the kidney?</div><div class="a"><span>11β-HSD2 — converts cortisol to inactive cortisone at MR-expressing tissues.</span></div></div>
+        <div class="flashcard"><div class="q">What is apparent mineralocorticoid excess, and what can cause it?</div><div class="a"><span>A syndrome where cortisol activates MR because 11β-HSD2 is deficient or inhibited. Causes: genetic 11β-HSD2 deficiency, licorice (glycyrrhizic acid). Presents with HTN, hypokalemia, metabolic alkalosis, LOW renin AND aldosterone.</span></div></div>
+      </div>
+    </section>
+
+    <!-- ============ OBJECTIVE 6 ============ -->
+    <section class="obj" id="obj6" data-obj="6">
+      <div class="obj-header">
+        <h2><span class="num">6</span>Mechanisms of action — aldosterone and cortisol</h2>
+        <button class="mark-done" data-obj="6">Mark Done</button>
+      </div>
+
+      <div class="gist"><span class="gist-label">The Gist</span>
+        Both aldosterone and cortisol are lipophilic steroids that cross the plasma membrane and bind <b>cytoplasmic nuclear receptors</b> (MR and GR, respectively). Receptors are chaperoned by <b>HSP90</b>; hormone binding releases the chaperones, letting the receptor dimerize and translocate to the <b>nucleus</b>. Dimeric receptors bind <b>hormone response elements</b> (MRE or GRE) on chromatin and modulate transcription. <b>Aldosterone</b>: acts on collecting duct principal cells → ↑ ENaC, ↑ Na/K-ATPase, ↑ ROMK → Na⁺ reabsorption, K⁺ and H⁺ secretion. <b>Cortisol</b>: broad effects — gluconeogenesis, lipolysis, protein catabolism, immunosuppression, vascular permissiveness. Cortisol has the same affinity for MR as aldosterone, so kidney protects MR via <b>11β-HSD2</b>.
+        <div class="gist-deeper">
+          <span class="preview-label">📚 Going Deeper will expand on:</span>
+          <ul>
+            <li><b>(1) MR and GR as Type I nuclear receptors</b> — cytoplasmic HSP90 chaperoning, dimerization, DNA binding.</li>
+            <li><b>(2) Aldosterone effects on the collecting duct</b> — ENaC, Na/K-ATPase, ROMK.</li>
+            <li><b>(3) Cortisol's broad effects</b> — metabolic, immune, vascular, cardiovascular.</li>
+            <li><b>(4) Cortisol-MR cross-reactivity</b> — why 11β-HSD2 matters.</li>
+            <li><b>(5) Timescale of action</b> — transcriptional (hours) vs. "rapid" non-genomic effects.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Aldosterone and cortisol action — side by side</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Feature</th><th>Aldosterone</th><th>Cortisol</th></tr></thead>
+        <tbody>
+          <tr><td>Receptor</td><td>Mineralocorticoid receptor (MR)</td><td>Glucocorticoid receptor (GR)</td></tr>
+          <tr><td>Receptor location (resting)</td><td>Cytoplasm (bound to HSP90)</td><td>Cytoplasm (bound to HSP90)</td></tr>
+          <tr><td>Mechanism</td><td>Direct (transcriptional) — dimerizes, translocates to nucleus, binds MRE</td><td>Direct (transcriptional) — dimerizes, translocates to nucleus, binds GRE</td></tr>
+          <tr><td>Primary target cells</td><td>Kidney collecting duct principal cells (also colon, sweat, salivary glands)</td><td>Most tissues — liver, muscle, adipose, immune cells, vascular endothelium</td></tr>
+          <tr><td>Key effects</td><td>↑ ENaC, ↑ Na/K-ATPase, ↑ ROMK → Na reabsorption; K⁺ and H⁺ secretion</td><td>↑ gluconeogenesis; ↑ lipolysis; ↑ protein catabolism; ↓ immune response; ↑ vascular tone permissiveness</td></tr>
+          <tr><td>Onset</td><td>Hours (genomic)</td><td>Hours (genomic); some rapid non-genomic effects</td></tr>
+          <tr><td>Target cell protection</td><td>11β-HSD2 protects MR from cortisol</td><td>—</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="deep-dive">
+        <div class="dd-title">📚 Going Deeper — mechanisms and effects</div>
+
+        <h4>1 · Nuclear receptor mechanism — Type I (steroid) receptors</h4>
+        <div class="group-label">Resting state</div>
+        <ul>
+          <li>Receptor location:
+            <ul class="sublist">
+              <li>MR and GR sit in the cytoplasm, bound to HSP90 and HSP70 chaperones.<span class="cite">end04 lecture; FA 3.15 Signaling pathways of steroid hormones</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Activation</div>
+        <ul>
+          <li>Steps:
+            <ul class="sublist">
+              <li>Steroid crosses the plasma membrane (lipophilic).</li>
+              <li>Binds receptor → HSPs dissociate.</li>
+              <li>Receptor dimerizes and translocates to nucleus.</li>
+              <li>Dimeric receptor binds palindromic hormone response elements (HRE) on DNA.</li>
+              <li>Transcription is upregulated or repressed (depending on coactivators/corepressors present).</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Timescale</div>
+        <ul>
+          <li>Genomic effects:
+            <ul class="sublist">
+              <li>Require transcription + translation → take hours.<span class="cite">end04 lecture; FA 3.15</span></li>
+            </ul>
+          </li>
+          <li>Non-genomic effects:
+            <ul class="sublist">
+              <li>Some steroids have rapid effects (seconds to minutes) via membrane-associated receptors — less well-characterized but increasingly recognized.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>2 · Aldosterone effects on the collecting duct</h4>
+        <div class="group-label">Principal cell targets</div>
+        <ul>
+          <li>Apical membrane:
+            <ul class="sublist">
+              <li>↑ ENaC (epithelial Na channel) — reabsorbs Na⁺ from the tubule.<span class="cite">Physeo 6.07 Adrenal Glands; FA 3.11</span></li>
+              <li>↑ ROMK (K⁺ channel) — secretes K⁺ into the tubule.</li>
+            </ul>
+          </li>
+          <li>Basolateral membrane:
+            <ul class="sublist">
+              <li>↑ Na/K-ATPase — drives the Na⁺ gradient; moves Na⁺ into blood.</li>
+            </ul>
+          </li>
+          <li>Intercalated cells (a-type):
+            <ul class="sublist">
+              <li>↑ H⁺-ATPase → secretes H⁺ into tubule.</li>
+              <li>Explains why hyperaldosteronism causes metabolic alkalosis.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Systemic result</div>
+        <ul>
+          <li>Net electrolyte effect:
+            <ul class="sublist">
+              <li>Na⁺ + water reabsorbed (volume expansion).</li>
+              <li>K⁺ and H⁺ excreted (hypokalemia + metabolic alkalosis with excess aldosterone).<span class="cite">AI Generated · see end19/20/21</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Other aldosterone targets</div>
+        <ul>
+          <li>Colon, sweat, salivary glands:
+            <ul class="sublist">
+              <li>All conserve Na⁺ and excrete K⁺ under aldosterone's control.</li>
+              <li>Dehydrated patients have low-sodium sweat and saliva as a result.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>3 · Cortisol's broad effects</h4>
+        <div class="group-label">Metabolism</div>
+        <ul>
+          <li>Liver:
+            <ul class="sublist">
+              <li>↑ gluconeogenesis, ↑ glycogenesis (when insulin also present).<span class="cite">FA 3.12 Cortisol</span></li>
+            </ul>
+          </li>
+          <li>Adipose:
+            <ul class="sublist">
+              <li>↑ lipolysis (releases FFA, glycerol for gluconeogenesis).</li>
+              <li>Redistribution of fat (central obesity in chronic excess).</li>
+            </ul>
+          </li>
+          <li>Muscle:
+            <ul class="sublist">
+              <li>↑ protein catabolism → releases AAs for gluconeogenesis.</li>
+              <li>Muscle wasting in chronic excess.</li>
+            </ul>
+          </li>
+          <li>Net:
+            <ul class="sublist">
+              <li>Hyperglycemic effect — a diabetogenic stress hormone.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Immune and inflammatory</div>
+        <ul>
+          <li>Effects:
+            <ul class="sublist">
+              <li>Suppresses NF-κB and cytokine transcription.</li>
+              <li>Reduces lymphocyte trafficking, eosinophil function.<span class="cite">FA 3.12 Cortisol; Pathoma 15.10</span></li>
+              <li>Demargination of neutrophils (neutrophilia on CBC).</li>
+            </ul>
+          </li>
+          <li>Clinical uses:
+            <ul class="sublist">
+              <li>Glucocorticoids are cornerstone immunosuppressants for autoimmune disease, transplant, asthma, and many others.<span class="cite">AI Generated · see end21</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Cardiovascular (permissive effect)</div>
+        <ul>
+          <li>Cortisol permits catecholamine vasoconstriction:
+            <ul class="sublist">
+              <li>Upregulates α1 adrenergic receptors on vascular smooth muscle.</li>
+              <li>Addisonian crisis = hypotension refractory to pressors until hydrocortisone is given.<span class="cite">AI Generated · see end20/21</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Bone and connective tissue</div>
+        <ul>
+          <li>Chronic excess:
+            <ul class="sublist">
+              <li>↓ osteoblast activity, ↑ osteoclast activity → osteoporosis.</li>
+              <li>Thin skin, purple striae, poor wound healing.<span class="cite">AI Generated · see end20/21</span></li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>4 · Cortisol–MR cross-reactivity and 11β-HSD2</h4>
+        <div class="group-label">The physiological problem</div>
+        <ul>
+          <li>Why this matters:
+            <ul class="sublist">
+              <li>Cortisol binds MR with the same affinity as aldosterone.</li>
+              <li>Cortisol circulates at ~1000× higher concentration than aldosterone.<span class="cite">FA 3.11; B&amp;B 2.01</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">The solution — 11β-HSD2</div>
+        <ul>
+          <li>Expression:
+            <ul class="sublist">
+              <li>11β-HSD2 is expressed in aldosterone-target tissues (kidney collecting duct).</li>
+            </ul>
+          </li>
+          <li>Action:
+            <ul class="sublist">
+              <li>Converts cortisol → cortisone (inactive at MR).</li>
+              <li>Protects MR from cortisol activation.<span class="cite">Physeo 6.07</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">When 11β-HSD2 fails</div>
+        <ul>
+          <li>Apparent mineralocorticoid excess syndrome:
+            <ul class="sublist">
+              <li>Genetic 11β-HSD2 deficiency.</li>
+              <li>Glycyrrhizic acid (licorice) inhibits 11β-HSD2.<span class="cite">AI Generated · see end20/21</span></li>
+            </ul>
+          </li>
+          <li>Clinical picture:
+            <ul class="sublist">
+              <li>HTN with hypokalemia and metabolic alkalosis.</li>
+              <li>LOW renin AND low aldosterone (it's cortisol acting on MR).</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>5 · Clinical consequences of MR and GR action</h4>
+        <ul>
+          <li>MR antagonists:
+            <ul class="sublist">
+              <li>Spironolactone (nonselective; also binds AR, PR → gynecomastia).</li>
+              <li>Eplerenone (selective MR antagonist; fewer endocrine side effects).<span class="cite">AI Generated · see end21</span></li>
+            </ul>
+          </li>
+          <li>GR modulators:
+            <ul class="sublist">
+              <li>Dexamethasone, prednisone, hydrocortisone — varying potencies and mineralocorticoid activity.</li>
+              <li>Fludrocortisone — strong mineralocorticoid activity, used in Addison's.</li>
+              <li>Mifepristone — GR antagonist, used in select Cushing cases.<span class="cite">AI Generated · see end21</span></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+        <ul>
+          <li><b>Both MR and GR are Type I nuclear receptors</b> — cytoplasmic with HSP90, dimerize and translocate to nucleus after ligand binding. <span class="cite">end04 lecture; FA 3.15</span></li>
+          <li><b>Aldosterone on principal cells:</b> ↑ ENaC + ↑ Na/K-ATPase + ↑ ROMK → Na reabsorption, K⁺ &amp; H⁺ secretion. <span class="cite">Physeo 6.07; end04 lecture</span></li>
+          <li><b>Cortisol is broadly catabolic + anti-inflammatory + diabetogenic + permissive for catecholamines.</b> <span class="cite">FA 3.12 Cortisol</span></li>
+          <li><b>Cortisol and aldosterone bind MR with equal affinity</b> — 11β-HSD2 in kidney protects MR from cortisol. <span class="cite">FA 3.11; Physeo 6.07</span></li>
+          <li><b>Apparent mineralocorticoid excess</b>: 11β-HSD2 inhibition (licorice) or deficiency → cortisol acts at MR → HTN with low renin AND low aldosterone. <span class="cite">AI Generated · see end20/21</span></li>
+          <li><b>Hyperaldosteronism</b> → HTN + hypokalemia + metabolic alkalosis. <span class="cite">AI Generated · see end20/21</span></li>
+          <li><b>Spironolactone</b> = nonselective MR antagonist (off-target: gynecomastia). <b>Eplerenone</b> = selective. <span class="cite">AI Generated · see end21</span></li>
+        </ul>
+      </div>
+
+      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <p><b>"Both MR and GR Sneak into the Cytoplasm; HSP90 Holds them"</b> — classic steroid receptor mechanism.</p>
+        <p><b>"Aldosterone = ENaC ON, ROMK ON, Pump ON"</b> — all three principal cell channels upregulated.</p>
+        <p><b>"Cortisol is a triple-C drug: Catabolic, anti-inflammatory Cytokine suppressor, Cardiovascular permit."</b></p>
+        <p><b>"Licorice Locks out 11β-HSD2"</b> — apparent mineralocorticoid excess.</p>
+        <p><b>"Spironolactone is dirty; Eplerenone is clean."</b></p>
+      </div>
+
+      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <ul>
+          <li><b>Addisonian crisis</b>: give IV hydrocortisone FIRST. Catecholamine pressors won't work without cortisol's permissive effect. <span class="cite">AI Generated · see end20/21</span></li>
+          <li><b>Chronic glucocorticoid therapy</b> adverse effects: Cushingoid appearance, osteoporosis, thin skin, muscle wasting, cataracts, DM, infection risk. <span class="cite">AI Generated · see end21</span></li>
+          <li><b>Spironolactone</b> commonly causes gynecomastia (binds AR and PR in addition to MR). <span class="cite">AI Generated · see end21</span></li>
+          <li><b>Licorice / glycyrrhizic acid</b> in large amounts (candy, tea) → apparent mineralocorticoid excess. <span class="cite">AI Generated · see end20/21</span></li>
+          <li><b>Fludrocortisone</b> is a potent mineralocorticoid used in primary adrenal insufficiency (Addison's) and orthostatic hypotension. <span class="cite">Physeo 7.14 Fludrocortisone</span></li>
+        </ul>
+      </div>
+
+      <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL — click each question to reveal</div>
+        <div class="flashcard"><div class="q">Where do MR and GR sit in the resting cell?</div><div class="a"><span>In the cytoplasm, bound to HSP90 (and HSP70) chaperone proteins.</span></div></div>
+        <div class="flashcard"><div class="q">Three principal cell proteins upregulated by aldosterone?</div><div class="a"><span>ENaC (apical Na channel), Na/K-ATPase (basolateral pump), ROMK (apical K channel). Also ↑ H⁺-ATPase in intercalated cells.</span></div></div>
+        <div class="flashcard"><div class="q">Why doesn't cortisol normally activate MR in the kidney, despite equal binding affinity?</div><div class="a"><span>11β-HSD2 converts cortisol to inactive cortisone in MR-expressing tissues.</span></div></div>
+        <div class="flashcard"><div class="q">A patient has hypertension, hypokalemia, low renin, AND low aldosterone. Differential?</div><div class="a"><span>Apparent mineralocorticoid excess — 11β-HSD2 deficiency or inhibition (e.g., licorice). Cortisol is acting on MR.</span></div></div>
+        <div class="flashcard"><div class="q">Why is cortisol required for catecholamine vasoconstriction?</div><div class="a"><span>Cortisol is permissive — it upregulates α1 receptor expression on vascular smooth muscle.</span></div></div>
+        <div class="flashcard"><div class="q">Why does spironolactone cause gynecomastia, but eplerenone does not?</div><div class="a"><span>Spironolactone is nonselective — also binds androgen and progesterone receptors. Eplerenone is selective for MR.</span></div></div>
+      </div>
+    </section>
+
+    <!-- ============ CHEAT SHEET ============ -->
+    <section class="obj" id="cheatsheet">
+      <h2><span class="num" style="background:var(--red)">★</span>Master Cheat Sheet</h2>
+      <p style="font-style:italic;color:var(--muted)">One-page summary before exam day.</p>
+
+      <h3>Objective-by-objective bottom line</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>#</th><th>One-line answer to lock in</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>All steroids: 4-ring cholesterol backbone. <b>C21 = progestins/corticoids, C19 = androgens, C18 = estrogens.</b> 3β-HSD flips Δ5→Δ4; aromatase = C19→C18; 17,20-lyase drops 2 carbons.</td></tr>
+          <tr><td>2</td><td>Shared cascade: Cholesterol → (HSL + StAR) → inner mito → <b>Desmolase (P450scc)</b> → Pregnenolone. StAR = rate-limiting. cAMP coordinates (ACTH, AngII).</td></tr>
+          <tr><td>3</td><td>GFR = Salt, Sugar, Sex. <b>ZG = aldo</b> (aldo synthase CYP11B2, no 17α-hyd). <b>ZF = cortisol</b> (17α-hyd + CYP11B1). <b>ZR = DHEA</b> (enhanced 17,20-lyase, no 21-hyd). Medulla = catecholamines.</td></tr>
+          <tr><td>4</td><td>Aldosterone: preg → prog → DOC → corticosterone → aldo. Cortisol: preg → 17OH-preg → 17OH-prog → 11-deoxycortisol → cortisol. DHEA: preg → 17OH-preg → DHEA → DHEA-S. CAH patterns: <b>21 = salt wasting + virilize + HYPO</b>; <b>11 = HTN + virilize + HYPER</b>; <b>17 = HTN + no virilize + infantilism</b>.</td></tr>
+          <tr><td>5</td><td>Cortisol = 90% CBG, T½ 70 min. Aldo = 35% free, T½ 20 min. DHEA-S T½ 7–10 h (albumin reservoir). Only free hormone is active. Liver glucuronide/sulfate → kidney.</td></tr>
+          <tr><td>6</td><td>MR and GR are cytoplasmic → HSP90 → nuclear translocation → HRE binding. Aldo: ENaC + Na/K-ATPase + ROMK on principal cells. Cortisol: broad (metabolic, immune, vascular permissive). <b>11β-HSD2</b> protects MR from cortisol; licorice inhibits it.</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Top 10 USMLE traps for end04</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>#</th><th>Trap</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Rate-limiting step of steroidogenesis = <b>StAR-mediated cholesterol import</b> (NOT desmolase itself).</td></tr>
+          <tr><td>2</td><td>ZG lacks 17α-hydroxylase → can't make cortisol or sex steroids.</td></tr>
+          <tr><td>3</td><td>Aldosterone synthase (CYP11B2) is ONLY in the zona glomerulosa.</td></tr>
+          <tr><td>4</td><td>21-hydroxylase deficiency = hypotension + salt wasting + virilization; ↑ 17-OH-progesterone is the screen.</td></tr>
+          <tr><td>5</td><td>11β-hydroxylase deficiency = HTN (DOC accumulates) + virilization.</td></tr>
+          <tr><td>6</td><td>17α-hydroxylase deficiency = HTN + no virilization + sexual infantilism.</td></tr>
+          <tr><td>7</td><td>HYPER = 11 or 17. HYPO = 21.</td></tr>
+          <tr><td>8</td><td>DHEA-S (not DHEA) is the lab test for adrenal androgens — long half-life.</td></tr>
+          <tr><td>9</td><td>11β-HSD2 deficiency or licorice → apparent mineralocorticoid excess (HTN, low renin + low aldo).</td></tr>
+          <tr><td>10</td><td>Pregnancy/OCP raises CBG → raises TOTAL cortisol but free cortisol is normal (not Cushing's).</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <!-- ============ QUIZ ============ -->
+    <section class="obj" id="quiz">
+      <h2><span class="num" style="background:var(--purple)">?</span>Final Self-Quiz (USMLE-Style Rapid Fire)</h2>
+      <p style="font-style:italic;color:var(--muted)">Cover the answers. Work through all 15. Click "Show answer" only after you've committed.</p>
+      <div id="quizList"></div>
+      <div style="margin-top:14px;text-align:center"><button class="btn-reset" onclick="revealAllQuiz()">Reveal all answers</button></div>
+    </section>
+
+    <!-- ============ REFERENCES ============ -->
+    <section class="obj" id="references">
+      <h2><span class="num" style="background:var(--accent, #7030A0)">📖</span>References &amp; 3rd-Party Sources</h2>
+      <p style="font-style:italic;color:var(--muted)">The lecture content above is based on its associated In House Lecture and Learning Objectives. Additional details, mnemonics, clinical pearls, and expanded explanations draw on the standard Step 1 prep resources below.</p>
+
+      <h3>Primary Step 1 resources cited inline</h3>
+      <ol class="ref-list">
+        <li><b>First Aid for the USMLE Step 1 (2024)</b> — especially 3.11 Adrenal steroids and CAH, 3.12 Cortisol, 3.15 Signaling pathways of steroid hormones, 2.02 Adrenal cortex and medulla.</li>
+        <li><b>Costanzo Physiology (6th ed.)</b> — chapter 9 (adrenal).</li>
+        <li><b>Guyton &amp; Hall Physiology (14th ed.)</b> — chapter 78 (adrenocortical hormones).</li>
+        <li><b>Pathoma: Fundamentals of Pathology (Sattar, 2024)</b> — 15.10 Adrenal Cortex (cross-reference for adenoma and CAH pathology).</li>
+        <li><b>Boards &amp; Beyond — Endocrine module</b>, especially 2.01 Adrenal Glands and 2.06 Congenital Adrenal Hyperplasia.</li>
+        <li><b>Physeo Physiology</b> — 6.07 Adrenal Glands, 6.08 Congenital Adrenal Hyperplasias; <b>Physeo Pharm 7.14 Fludrocortisone</b>.</li>
+        <li><b>Bootcamp Endocrine</b> — 6.01 Adrenal Gland Physiology, 6.10 Adrenal Cortex Pathways Overview, 6.11–6.13 CAH series.</li>
+        <li><b>Lippincott Illustrated Reviews: Pharmacology (7th ed.)</b> — ketoconazole, metyrapone, aromatase inhibitors, spironolactone, eplerenone, fludrocortisone.</li>
+        <li><b>UWorld USMLE Step 1 Qbank</b> — adrenal enzyme deficiency vignettes and diagnostic workup.</li>
+      </ol>
+    </section>
+
+    <!-- ============ SOURCE AUDIT ============ -->
+    <section class="obj" id="audit">
+      <h2><span class="num" style="background:var(--orange)">⚠</span>Clinical Correlation &amp; Drug Source Audit</h2>
+
+      <div class="legend">
+        <b>Source legend</b>
+        <ul>
+          <li><span class="src-pill src-lecture">In lecture</span> The topic appears explicitly in the end04 lecture.</li>
+          <li><span class="src-pill src-mapped">end04-mapped</span> The topic is covered in a 3rd-party resource primarily mapped to end04 (Bootcamp, Boards &amp; Beyond, Physeo, First Aid).</li>
+          <li><span class="src-pill src-ai">AI generated reference</span> An item where the core concept sits in end04, but the clinical / drug association is primarily taught in another lecture. Kept here because it falls into one of three buckets:
+            <ul style="margin-top:4px">
+              <li>The core concept is in end04 and the clinical association lives elsewhere.</li>
+              <li>Included for pattern recognition tied to an end04 concept.</li>
+              <li>Forward reference to an upcoming lecture so you build the pattern now.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <h3>Objective 1 — Steroid structure &amp; nomenclature</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Item</th><th>Source</th><th>Where referenced</th></tr></thead>
+        <tbody>
+          <tr><td>4-ring cholesterol backbone, carbon count classes (C21/C19/C18)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end04 lecture</td></tr>
+          <tr><td>Δ5 / Δ4 pathway concept, 3β-HSD as fork</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end04 lecture</td></tr>
+          <tr><td>17,20-lyase drops 2 carbons to make androgens</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end04 lecture</td></tr>
+          <tr><td>Aromatase converts C19 → C18</td><td><span class="src-pill src-mapped">end04-mapped</span></td><td>FA 3.11 Adrenal steroids and CAH; Bootcamp 6.10</td></tr>
+          <tr><td>Aromatase inhibitors (anastrozole, letrozole, exemestane)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Aromatase mechanism is end04-core; drugs primarily repro / oncology pharm. <i>Clinical application of C19→C18 pathway.</i></td></tr>
+          <tr><td>3β-HSD and 17,20-lyase deficiency (rare CAH)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Enzyme biology is end04-core; clinical presentations primarily in end06/end20. <i>Core concept here, clinical association elsewhere.</i></td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Objective 2 — Shared steroidogenesis steps</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Item</th><th>Source</th><th>Where referenced</th></tr></thead>
+        <tbody>
+          <tr><td>HSL, StAR, desmolase sequence</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end04 lecture</td></tr>
+          <tr><td>StAR as rate-limiting step</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end04 lecture</td></tr>
+          <tr><td>cAMP coordination (ACTH, AngII)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end04 lecture</td></tr>
+          <tr><td>ACTH at MC2R (Gs) in adrenal cortex</td><td><span class="src-pill src-mapped">end04-mapped</span></td><td>FA 3.12 Cortisol; Bootcamp 6.01</td></tr>
+          <tr><td>AngII at AT1R (Gq) in ZG</td><td><span class="src-pill src-mapped">end04-mapped</span></td><td>Physeo 6.07 Adrenal Glands; B&amp;B 2.01</td></tr>
+          <tr><td><b>Congenital lipoid adrenal hyperplasia</b> (StAR mutation)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>StAR biology is end04-core; clinical entity primarily in end06/end20. <i>Core concept here, clinical association elsewhere.</i></td></tr>
+          <tr><td><b>Ketoconazole</b> (desmolase inhibitor)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Desmolase is end04-core; drug detail primarily in end21. <i>Clinical application.</i></td></tr>
+          <tr><td>ACTH-driven adrenal hyperplasia (chronic excess)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>cAMP-driven upregulation is end04-core; Cushing pathology primarily in end19/20/21. <i>Included for pattern recognition.</i></td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Objective 3 — Adrenal cortex zonation</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Item</th><th>Source</th><th>Where referenced</th></tr></thead>
+        <tbody>
+          <tr><td>GFR zonation + hormones + signature enzymes</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end04 lecture</td></tr>
+          <tr><td>Adrenal medulla as modified sympathetic ganglion</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end04 lecture</td></tr>
+          <tr><td>Adrenarche (DHEA onset age 6–8; peaks mid-20s)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end04 lecture</td></tr>
+          <tr><td>Histologic features of each zone</td><td><span class="src-pill src-mapped">end04-mapped</span></td><td>Physeo 6.07 Adrenal Glands; B&amp;B 2.01</td></tr>
+          <tr><td><b>Primary hyperaldosteronism (Conn syndrome)</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>ZG biology is end04-core; Conn clinical in end20/end21. <i>Included for pattern recognition.</i></td></tr>
+          <tr><td><b>ACTH-independent Cushing (adrenal adenoma)</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>ZF biology is end04-core; Cushing subtypes in end19/20/21. <i>Included for pattern recognition.</i></td></tr>
+          <tr><td><b>Androgen-secreting adrenal tumor / premature adrenarche</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>ZR biology is end04-core; clinical entities in end20 / pediatrics. <i>Included for pattern recognition.</i></td></tr>
+          <tr><td><b>Pheochromocytoma</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Medulla biology is end04-adjacent; clinical in end20/21. <i>Included for pattern recognition on adrenal tumor types.</i></td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Objective 4 — Biosynthesis pathways &amp; CAH</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Item</th><th>Source</th><th>Where referenced</th></tr></thead>
+        <tbody>
+          <tr><td>Aldosterone / cortisol / DHEA biosynthetic pathways</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end04 lecture</td></tr>
+          <tr><td>Enzyme grid (17α-hyd, 21-hyd, 11β-hyd, aldo synthase, etc.)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end04 lecture</td></tr>
+          <tr><td>DHEA → DHEA-S via sulfotransferase</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end04 lecture</td></tr>
+          <tr><td><b>21-hydroxylase deficiency</b> (95% of CAH)</td><td><span class="src-pill src-mapped">end04-mapped</span></td><td>Bootcamp 6.11 21-hydroxylase Deficiency; FA 3.11; Physeo 6.08 CAH; B&amp;B 2.06 CAH</td></tr>
+          <tr><td><b>11β-hydroxylase deficiency</b></td><td><span class="src-pill src-mapped">end04-mapped</span></td><td>Bootcamp 6.13; FA 3.11; Physeo 6.08 CAH</td></tr>
+          <tr><td><b>17α-hydroxylase deficiency</b></td><td><span class="src-pill src-mapped">end04-mapped</span></td><td>Bootcamp 6.12; FA 3.11; Physeo 6.08 CAH</td></tr>
+          <tr><td>Newborn 17-OH-progesterone screening</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Enzyme biology end04-core; screening primarily pediatrics / end06. <i>Clinical application.</i></td></tr>
+          <tr><td>Nonclassic 21-hydroxylase deficiency (adolescent presentation)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Enzyme deficiency biology end04-core; clinical phenotype end06/20 / repro. <i>Forward reference.</i></td></tr>
+          <tr><td>Apparent mineralocorticoid excess (11β-HSD2)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>11β-HSD2 biology end04-core; clinical syndrome in end20/21. <i>Core concept here, clinical association elsewhere.</i></td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Objective 5 — Circulation &amp; inactivation</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Item</th><th>Source</th><th>Where referenced</th></tr></thead>
+        <tbody>
+          <tr><td>Carrier proteins, free fraction, half-life for aldo / cortisol / DHEA / DHEA-S</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end04 lecture</td></tr>
+          <tr><td>DHEA-S as long-T½ reservoir</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end04 lecture</td></tr>
+          <tr><td>Hepatic glucuronide / sulfate conjugation</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end04 lecture</td></tr>
+          <tr><td>Free hormone hypothesis (only free is active)</td><td><span class="src-pill src-mapped">end04-mapped</span></td><td>FA 3.15; connects back to end01 carrier proteins</td></tr>
+          <tr><td>Pregnancy / OCP → ↑CBG → ↑ total cortisol</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>CBG biology end04-core; clinical scenario lives in end19/21 / obstetrics. <i>Clinical application.</i></td></tr>
+          <tr><td>DHEA-S as lab test for adrenal androgens</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>DHEA-S biology end04-core; diagnostic workup in repro / endocrine. <i>Clinical application.</i></td></tr>
+          <tr><td>11β-HSD2 protecting MR from cortisol</td><td><span class="src-pill src-mapped">end04-mapped</span></td><td>Physeo 6.07; FA 3.11</td></tr>
+          <tr><td>Licorice-induced apparent mineralocorticoid excess</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>11β-HSD2 biology end04-core; clinical in end20/21. <i>Clinical application.</i></td></tr>
+          <tr><td>Midnight salivary cortisol for Cushing screening</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Cortisol half-life / diurnal variation is end04-core; diagnostic test primarily in end19/21. <i>Clinical application.</i></td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Objective 6 — Mechanisms of action</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Item</th><th>Source</th><th>Where referenced</th></tr></thead>
+        <tbody>
+          <tr><td>MR and GR cytoplasmic with HSP90; dimerize; nuclear HRE</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end04 lecture</td></tr>
+          <tr><td>Aldosterone ENaC / Na-K-ATPase / ROMK effects</td><td><span class="src-pill src-mapped">end04-mapped</span></td><td>Physeo 6.07; FA 3.11; Bootcamp 6.01</td></tr>
+          <tr><td>Cortisol's broad metabolic, immune, vascular effects</td><td><span class="src-pill src-mapped">end04-mapped</span></td><td>FA 3.12 Cortisol; Pathoma 15.10 Adrenal Cortex</td></tr>
+          <tr><td>11β-HSD2 protection of MR from cortisol</td><td><span class="src-pill src-mapped">end04-mapped</span></td><td>FA 3.11; Physeo 6.07; B&amp;B 2.01</td></tr>
+          <tr><td>Cortisol's permissive effect on catecholamines (α1 upregulation)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Permissive concept end01-core; Addisonian crisis clinical in end20/21. <i>Forward reference.</i></td></tr>
+          <tr><td>Chronic glucocorticoid adverse effects (Cushingoid, osteoporosis, thin skin, etc.)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Cortisol biology end04-core; iatrogenic Cushing clinical in end21. <i>Clinical application.</i></td></tr>
+          <tr><td>Spironolactone (non-selective MR antagonist; gynecomastia)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>MR biology end04-core; drug detail primarily in end21. <i>Clinical application.</i></td></tr>
+          <tr><td>Eplerenone (selective MR antagonist)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>MR biology end04-core; drug detail primarily in end21. <i>Clinical application.</i></td></tr>
+          <tr><td>Fludrocortisone (potent mineralocorticoid)</td><td><span class="src-pill src-mapped">end04-mapped</span></td><td>Physeo Pharm 7.14 Fludrocortisone (primary to end04)</td></tr>
+          <tr><td>Mifepristone (GR antagonist)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>GR biology end04-core; drug detail primarily in end21 / repro. <i>Clinical application.</i></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <div class="footer-note">
+      — End of guide —<br>
+      Now close it and try to reproduce the GFR zonation + enzyme grid + the three CAH patterns from memory.
+    </div>
+
+  </main>
+</div>
+
+<script>
+const quizData = [
+  { q: "A newborn has ambiguous genitalia (46,XX), hypotension, hyponatremia, hyperkalemia, and elevated 17-OH-progesterone. Diagnosis?", a: "21-hydroxylase deficiency — the most common form of congenital adrenal hyperplasia (~95% of cases). Low cortisol + low aldosterone + high androgens." },
+  { q: "A young patient has hypertension, hypokalemia, and hirsutism. Labs show low cortisol, elevated 11-deoxycorticosterone, and elevated androgens. Diagnosis?", a: "11β-hydroxylase deficiency. DOC (weak mineralocorticoid) accumulates causing HTN; shunted substrate makes androgens." },
+  { q: "A 46,XY adolescent has phenotypic female external genitalia, no axillary or pubic hair, primary amenorrhea, hypertension, and hypokalemia. Diagnosis?", a: "17α-hydroxylase deficiency. No cortisol, no sex steroids (infantilism), but mineralocorticoid pathway is unblocked → HTN + hypokalemia." },
+  { q: "Rate-limiting step of steroidogenesis?", a: "StAR-mediated cholesterol transfer from outer to inner mitochondrial membrane. Desmolase is the first committed enzymatic step but StAR limits substrate delivery." },
+  { q: "Why is the zona glomerulosa the only site of aldosterone production?", a: "It exclusively expresses aldosterone synthase (CYP11B2) — the enzyme that catalyzes the final 3 steps to aldosterone. It also lacks 17α-hydroxylase." },
+  { q: "Why is DHEA-S (not DHEA) the standard lab marker for adrenal androgens?", a: "DHEA-S is sulfated → binds albumin with HIGH affinity → half-life 7–10 hours (stable). DHEA has a 15–30 min half-life and variable levels." },
+  { q: "A patient has HTN, hypokalemia, LOW renin, AND LOW aldosterone. Explain and name a common culprit.", a: "Apparent mineralocorticoid excess: cortisol activates MR because 11β-HSD2 is deficient or inhibited. Common culprit: licorice (glycyrrhizic acid) inhibits 11β-HSD2." },
+  { q: "GFR mnemonic — what does it stand for, and what hormone does each zone make?", a: "Glomerulosa / Fasciculata / Reticularis → Aldosterone (salt) / Cortisol (sugar) / DHEA (sex). \"The deeper you go, the sweeter it gets.\"" },
+  { q: "Where do MR and GR sit before ligand binds, and what chaperones them?", a: "Cytoplasm, bound to HSP90 (and HSP70). Hormone binding releases HSPs → receptor dimerizes and translocates to the nucleus." },
+  { q: "Three principal cell channels/pumps upregulated by aldosterone?", a: "ENaC (apical Na channel), Na/K-ATPase (basolateral pump), ROMK (apical K channel). Plus H⁺-ATPase in α-intercalated cells." },
+  { q: "Why does a pregnant woman have elevated total cortisol but normal free cortisol?", a: "Estrogen raises CBG (transcortin) → more cortisol is protein-bound → total rises, but feedback maintains normal free cortisol (patient is not Cushing's)." },
+  { q: "Why does hydrocortisone correct Addisonian hypotension when norepinephrine cannot?", a: "Cortisol is permissive for catecholamine vasoconstriction (upregulates α1 receptors on vascular smooth muscle). Without cortisol, catecholamines can't vasoconstrict effectively." },
+  { q: "Mechanism of 'HYPER = 11 or 17, HYPO = 21' in CAH?", a: "11β-hydroxylase deficiency → DOC accumulates (weak mineralocorticoid) → HTN. 17α-hydroxylase deficiency → mineralocorticoid pathway unblocked → ↑ aldosterone + DOC → HTN. 21-hydroxylase deficiency → no aldosterone AND no cortisol → salt wasting, hypotension." },
+  { q: "Why does spironolactone cause gynecomastia but eplerenone doesn't?", a: "Spironolactone is nonselective — also binds androgen and progesterone receptors. Eplerenone is selective for MR only." },
+  { q: "A lipid-engorged adrenal gland with absent cortisol, aldosterone, and androgens. Gene defect?", a: "StAR (steroidogenic acute regulatory protein) mutation → congenital lipoid adrenal hyperplasia. Cholesterol cannot enter mitochondria." },
+];
+
+const quizList = document.getElementById('quizList');
+quizData.forEach((item, i) => {
+  const el = document.createElement('div');
+  el.className = 'quiz-item';
+  el.innerHTML = `
+    <div><span class="qn">${i+1}.</span>${item.q}</div>
+    <button class="show" onclick="this.parentElement.classList.toggle('revealed'); this.textContent = this.parentElement.classList.contains('revealed') ? 'Hide answer' : 'Show answer';">Show answer</button>
+    <div class="ans"><b>Answer:</b> ${item.a}</div>
+  `;
+  quizList.appendChild(el);
+});
+function revealAllQuiz(){
+  document.querySelectorAll('.quiz-item').forEach(el => {
+    el.classList.add('revealed');
+    const btn = el.querySelector('button.show');
+    if (btn) btn.textContent = 'Hide answer';
+  });
+}
+
+// Sidebar toggle
+function toggleSidebar(){
+  const wrap = document.querySelector('.wrap');
+  const sidebar = document.querySelector('nav.sidebar');
+  const toggle = document.getElementById('sidebarToggle');
+  const collapsed = wrap.classList.toggle('sidebar-collapsed');
+  sidebar.classList.toggle('collapsed', collapsed);
+  if (toggle) toggle.querySelector('.icon').textContent = collapsed ? '▶' : '◀';
+  try { sessionStorage.setItem('sidebarCollapsed_v1', collapsed ? '1' : '0'); } catch(e) {}
+}
+try {
+  if (sessionStorage.getItem('sidebarCollapsed_v1') === '1') {
+    document.querySelector('.wrap').classList.add('sidebar-collapsed');
+    document.querySelector('nav.sidebar').classList.add('collapsed');
+    const toggle = document.getElementById('sidebarToggle');
+    if (toggle) toggle.querySelector('.icon').textContent = '▶';
+  }
+} catch(e) {}
+
+// Flashcards
+document.querySelectorAll('.flashcard').forEach(card => {
+  card.addEventListener('click', () => card.classList.toggle('open'));
+});
+
+// Going Deeper h4 toggles (default collapsed)
+function applyH4Collapse(h4){
+  const collapsed = h4.classList.contains('collapsed');
+  let sib = h4.nextElementSibling;
+  while (sib && sib.tagName !== 'H4') {
+    if (collapsed) sib.setAttribute('data-h4-hidden', 'true');
+    else sib.removeAttribute('data-h4-hidden');
+    sib = sib.nextElementSibling;
+  }
+}
+document.querySelectorAll('.deep-dive h4').forEach(h4 => {
+  h4.addEventListener('click', () => {
+    h4.classList.toggle('collapsed');
+    applyH4Collapse(h4);
+  });
+  h4.classList.add('collapsed');
+  applyH4Collapse(h4);
+});
+function toggleAllDeepDives(collapse) {
+  document.querySelectorAll('.deep-dive h4').forEach(h4 => {
+    if (collapse) h4.classList.add('collapsed');
+    else h4.classList.remove('collapsed');
+    applyH4Collapse(h4);
+  });
+}
+
+// Callouts (all default collapsed)
+document.querySelectorAll('.callout.hy .ctitle, .callout.mn .ctitle, .callout.cl .ctitle, .callout.rc .ctitle').forEach(title => {
+  const box = title.parentElement;
+  box.classList.add('collapsed');
+  title.addEventListener('click', () => {
+    box.classList.toggle('collapsed');
+  });
+});
+
+// Mark Done + progress
+const STORAGE_KEY = 'endo04_progress_v1';
+function getDone(){
+  try { return JSON.parse(sessionStorage.getItem(STORAGE_KEY) || '{}'); }
+  catch(e) { return {}; }
+}
+function setDone(map){
+  try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(map)); } catch(e) {}
+}
+function refreshProgress(){
+  const done = getDone();
+  const count = Object.values(done).filter(Boolean).length;
+  const pct = Math.round((count / 6) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = `${count} / 6 objectives complete`;
+  document.querySelectorAll('.mark-done').forEach(btn => {
+    const obj = btn.getAttribute('data-obj');
+    if (done[obj]) { btn.classList.add('done'); btn.textContent = 'Done'; }
+    else { btn.classList.remove('done'); btn.textContent = 'Mark Done'; }
+  });
+  document.querySelectorAll('nav.sidebar a[data-obj]').forEach(a => {
+    const obj = a.getAttribute('data-obj');
+    if (done[obj]) a.classList.add('done'); else a.classList.remove('done');
+  });
+}
+document.querySelectorAll('.mark-done').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const obj = btn.getAttribute('data-obj');
+    const done = getDone();
+    done[obj] = !done[obj];
+    setDone(done);
+    refreshProgress();
+  });
+});
+function resetProgress(){
+  if (!confirm('Reset all progress?')) return;
+  setDone({});
+  document.querySelectorAll('.deep-dive h4').forEach(h4 => {
+    h4.classList.add('collapsed');
+    applyH4Collapse(h4);
+  });
+  document.querySelectorAll('.callout.hy, .callout.mn, .callout.cl, .callout.rc').forEach(b => b.classList.add('collapsed'));
+  document.querySelectorAll('.flashcard.open').forEach(f => f.classList.remove('open'));
+  document.querySelectorAll('.quiz-item.revealed').forEach(q => {
+    q.classList.remove('revealed');
+    const btn = q.querySelector('button.show');
+    if (btn) btn.textContent = 'Show answer';
+  });
+  refreshProgress();
+}
+refreshProgress();
+
+// Scrollspy
+const sections = document.querySelectorAll('section.obj, div.cover');
+const navLinks = document.querySelectorAll('nav.sidebar a');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+
+</body>
+</html>

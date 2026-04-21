@@ -1,0 +1,3253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HoyaDocs · Endo 01 · Intro to Hormones</title>
+<style>
+  :root{
+    --navy:#1F3864; --blue:#2E75B6; --red:#C00000; --purple:#7030A0;
+    --green:#548235; --orange:#C55A11;
+    --hy:#FFF8DC; --hyBorder:#BF8F00;
+    --mn:#E8F5E9; --mnBorder:#548235;
+    --cl:#FDECDC; --clBorder:#C55A11;
+    --rc:#E7F1FB; --rcBorder:#2E75B6;
+    --tp:#FDE7E7; --tpBorder:#C00000;
+    --bg:#FAFAFA; --card:#FFFFFF; --text:#1A1A1A; --muted:#6B7280;
+    --border:#E5E7EB;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:84px}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    margin:0;background:var(--bg);color:var(--text);line-height:1.55;
+  }
+
+  /* ---------- Top bar / progress ---------- */
+  header.topbar{
+    position:sticky;top:0;z-index:50;
+    background:linear-gradient(90deg,var(--navy),#2E4A7A);
+    color:#fff;padding:10px 20px;border-bottom:3px solid var(--blue);
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  }
+  .topbar-inner{max-width:1100px;margin:0 auto;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  .topbar h1{margin:0;font-size:16px;font-weight:700;letter-spacing:.3px}
+  .topbar .brand{
+    font-family:Georgia, "Times New Roman", serif;
+    font-size:20px;font-weight:700;color:#FFD54F;letter-spacing:.5px;
+    padding:2px 0;border-right:1px solid rgba(255,255,255,0.25);padding-right:16px;
+  }
+  .topbar .tag{background:rgba(255,255,255,0.18);padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600}
+  .progress-wrap{flex:1;min-width:200px}
+  .progress-track{height:8px;background:rgba(255,255,255,0.25);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:#FFD54F;width:0%;transition:width .4s ease}
+  .progress-label{font-size:12px;margin-top:3px;opacity:.9}
+
+  /* ---------- Layout ---------- */
+  .wrap{max-width:1100px;margin:0 auto;padding:24px 20px 80px;display:grid;grid-template-columns:220px 1fr;gap:28px;transition:grid-template-columns .25s ease}
+  .wrap.sidebar-collapsed{grid-template-columns:44px 1fr;gap:16px}
+  @media (max-width:900px){.wrap,.wrap.sidebar-collapsed{grid-template-columns:1fr}}
+
+  nav.sidebar{position:sticky;top:80px;align-self:start;max-height:calc(100vh - 100px);overflow-y:auto;padding-right:8px}
+  @media (max-width:900px){nav.sidebar{position:static;max-height:none}}
+  /* Sidebar toggle button */
+  .sidebar-toggle{
+    display:flex;align-items:center;justify-content:center;
+    width:100%;padding:8px 10px;margin-bottom:10px;
+    background:#EEF2F7;border:1px solid var(--border);border-radius:6px;
+    cursor:pointer;font-weight:700;color:var(--navy);font-size:13px;
+    transition:background .15s ease;
+  }
+  .sidebar-toggle:hover{background:#DDEAF7}
+  .sidebar-toggle .label{margin-left:6px;transition:opacity .2s ease}
+  /* Collapsed sidebar hides its links + controls, keeps toggle visible */
+  nav.sidebar.collapsed{overflow-x:hidden;padding-right:0}
+  nav.sidebar.collapsed a,
+  nav.sidebar.collapsed .controls{display:none}
+  nav.sidebar.collapsed .sidebar-toggle{padding:8px 0;min-width:32px}
+  nav.sidebar.collapsed .sidebar-toggle .label{display:none}
+  nav.sidebar a{
+    display:block;padding:8px 12px;margin:2px 0;border-radius:6px;color:var(--navy);
+    text-decoration:none;font-weight:600;font-size:14px;border-left:3px solid transparent;
+    transition:all .15s ease;
+  }
+  nav.sidebar a:hover{background:#EEF2F7;border-left-color:var(--blue)}
+  nav.sidebar a.active{background:#DDEAF7;border-left-color:var(--red);color:var(--red)}
+  nav.sidebar .done::after{content:" ✓";color:var(--green);font-weight:800}
+
+  /* ---------- Cover ---------- */
+  .cover{
+    background:linear-gradient(135deg,#FFFFFF 0%,#F0F4F8 100%);
+    border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:24px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.04);
+  }
+  .cover .kicker{color:var(--purple);font-weight:700;font-size:13px;letter-spacing:1.5px;text-transform:uppercase}
+  .cover h1{font-size:36px;color:var(--navy);margin:8px 0 4px;line-height:1.15}
+  .cover .sub{color:var(--blue);font-weight:600;margin-bottom:16px}
+  .cover .how{background:#F9FAFB;border-left:5px solid var(--navy);border-radius:0 8px 8px 0;padding:14px 18px;margin-top:16px}
+  .cover .how h3{margin:0 0 8px;color:var(--navy);font-size:16px}
+
+  .roadmap{display:grid;grid-template-columns:1fr;gap:8px;margin-top:12px}
+  .roadmap a{
+    display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#fff;border:1px solid var(--border);
+    border-radius:8px;text-decoration:none;color:var(--navy);font-weight:500;font-size:13.5px;line-height:1.4;
+    transition:all .15s ease;
+  }
+  .roadmap a:hover{border-color:var(--blue);transform:translateY(-1px);box-shadow:0 2px 6px rgba(0,0,0,0.06);background:#F8FBFF}
+  .roadmap .num{flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;background:var(--navy);color:#fff;border-radius:999px;width:24px;height:24px;font-size:12px;font-weight:700;margin-top:1px}
+
+  /* ---------- How-to 2-column grid + alt panel ---------- */
+  .cover .how.alt{border-left-color:var(--purple)}
+  .cover .how.alt h3{color:var(--purple)}
+  .how-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+  .how-grid .how{margin-top:0}
+  @media (max-width:700px){.how-grid{grid-template-columns:1fr}}
+
+  /* ---------- Source audit + inline AI markers ---------- */
+  #audit{background:var(--card)}
+  #audit p,#audit li{font-size:14px}
+  .src-pill{
+    display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;
+    font-weight:700;text-transform:uppercase;letter-spacing:0.3px;margin-right:4px;
+  }
+  .src-lecture{background:#E8F5E9;color:#2E7D32;border:1px solid #81C784}
+  .src-mapped{background:#E3F2FD;color:#0D47A1;border:1px solid #64B5F6}
+  .src-ai{background:#FFEBEE;color:#B71C1C;border:1px solid #EF9A9A}
+  #audit .legend{background:#F7F9FC;border-left:4px solid var(--navy);padding:12px 16px;border-radius:0 6px 6px 0;margin:10px 0 16px}
+  #audit .legend ul{margin:6px 0 0 0}
+  .ai-inline{
+    display:inline-block;font-size:10px;padding:1px 6px;border-radius:3px;
+    background:#FFEBEE;color:#B71C1C;border:1px solid #EF9A9A;font-weight:700;
+    margin-left:4px;text-transform:uppercase;letter-spacing:0.3px;white-space:nowrap;
+    vertical-align:baseline;
+  }
+
+  /* ---------- Sections ---------- */
+  section.obj{
+    background:var(--card);border:1px solid var(--border);border-radius:12px;
+    padding:28px;margin-bottom:24px;box-shadow:0 1px 3px rgba(0,0,0,0.04);
+  }
+  section.obj h2{
+    color:var(--navy);font-size:26px;margin:0 0 8px;line-height:1.2;
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap
+  }
+  section.obj h2 .num{
+    background:var(--navy);color:#fff;border-radius:999px;width:36px;height:36px;
+    display:inline-flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;
+  }
+  section.obj h3{color:var(--blue);font-size:19px;margin:22px 0 8px;padding-bottom:4px;border-bottom:2px solid #DDEAF7}
+  section.obj h4{color:var(--red);font-size:16px;margin:18px 0 6px}
+  section.obj p{margin:8px 0}
+  section.obj ul{margin:6px 0 12px 0;padding-left:22px}
+  section.obj li{margin:4px 0}
+
+  .gist{
+    background:#F7F9FC;border-left:5px solid var(--blue);border-radius:0 8px 8px 0;
+    padding:14px 18px;margin:10px 0 18px;font-size:15px;
+  }
+  .gist-label{color:var(--blue);font-weight:700;font-size:16px;letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:8px}
+
+  /* ---------- Callouts ---------- */
+  .callout{
+    border-radius:8px;padding:14px 16px;margin:14px 0;border-left:6px solid;position:relative;
+  }
+  .callout .ctitle{
+    font-weight:700;font-size:16px;letter-spacing:0.5px;margin-bottom:10px;
+    display:flex;align-items:center;gap:8px;
+    cursor:pointer;user-select:none;
+    padding:4px 6px;border-radius:6px;transition:background .15s ease;
+  }
+  .callout .ctitle::after{
+    content:"▼";font-size:13px;margin-left:auto;transition:transform .2s ease;display:inline-block;
+  }
+  .callout.collapsed .ctitle::after{content:"▶"}
+  .callout.collapsed > *:not(.ctitle){display:none}
+  /* Per-callout hover shade matches the banner color */
+  .callout.hy .ctitle:hover{background:#FDE8B0}
+  .callout.hy .ctitle::after{color:var(--hyBorder)}
+  .callout.mn .ctitle:hover{background:#D7F0DB}
+  .callout.mn .ctitle::after{color:var(--mnBorder)}
+  .callout.cl .ctitle:hover{background:#FDD6BB}
+  .callout.cl .ctitle::after{color:var(--clBorder)}
+  .callout.rc .ctitle:hover{background:#CFE0F5}
+  .callout.rc .ctitle::after{color:var(--rcBorder)}
+  /* Callout body text standardized to match reference list sizing (14px) */
+  .callout p,.callout ul li,.callout ol li{font-size:14px;line-height:1.5}
+  .callout ul{margin:6px 0 0 0;padding-left:20px}
+  .flashcard .q,.flashcard .a span{font-size:14px}
+  .callout ul{margin:6px 0 0 0;padding-left:20px}
+  .callout p{margin:6px 0}
+  .callout b{color:inherit}
+  .hy{background:var(--hy);border-color:var(--hyBorder)}      .hy .ctitle{color:var(--hyBorder)}
+  .mn{background:var(--mn);border-color:var(--mnBorder)}      .mn .ctitle{color:var(--mnBorder)}
+  .cl{background:var(--cl);border-color:var(--clBorder)}      .cl .ctitle{color:var(--clBorder)}
+  .rc{background:var(--rc);border-color:var(--rcBorder)}      .rc .ctitle{color:var(--rcBorder)}
+  .tp{background:var(--tp);border-color:var(--tpBorder)}      .tp .ctitle{color:var(--tpBorder)}
+
+  /* ---------- Tables ---------- */
+  .tbl-wrap{overflow-x:auto;margin:14px 0}
+  table{border-collapse:collapse;width:100%;font-size:14px;background:#fff}
+  thead th{background:var(--navy);color:#fff;text-align:left;padding:10px 12px;font-weight:600;vertical-align:top}
+  tbody td{padding:9px 12px;border:1px solid var(--border);vertical-align:top}
+  tbody tr:nth-child(even){background:#FAFBFC}
+  tbody tr:hover{background:#F0F6FC}
+  td b{color:var(--navy)}
+
+  /* ---------- Flashcards (active recall) ---------- */
+  .flashcard{
+    background:#fff;border:1px solid var(--rcBorder);border-radius:8px;
+    margin:8px 0;overflow:hidden;cursor:pointer;transition:all .15s ease;
+  }
+  .flashcard:hover{box-shadow:0 2px 6px rgba(46,117,182,0.2)}
+  .flashcard .q{padding:12px 16px;font-weight:600;display:flex;align-items:flex-start;gap:10px}
+  .flashcard .q::before{content:"Q";background:var(--blue);color:#fff;border-radius:4px;padding:2px 8px;font-size:12px;font-weight:700;flex-shrink:0;margin-top:2px}
+  .flashcard .a{
+    max-height:0;overflow:hidden;transition:max-height .25s ease, padding .2s ease;
+    background:#F0F7FF;padding:0 16px;border-top:1px solid transparent;
+  }
+  .flashcard.open .a{max-height:400px;padding:12px 16px;border-top:1px solid #CFE0F5}
+  .flashcard .a::before{content:"A";background:var(--red);color:#fff;border-radius:4px;padding:2px 8px;font-size:12px;font-weight:700;margin-right:8px}
+  .flashcard .a span{color:var(--red);font-weight:500}
+  .flip-hint{font-size:12px;color:var(--muted);margin:6px 0 0 42px;font-style:italic}
+
+  /* ---------- Quiz ---------- */
+  .quiz-item{
+    background:#fff;border:1px solid var(--border);border-left:4px solid var(--purple);
+    border-radius:8px;padding:14px 16px;margin:10px 0;
+  }
+  .quiz-item .qn{color:var(--purple);font-weight:700;margin-right:8px}
+  .quiz-item button.show{
+    background:var(--purple);color:#fff;border:none;padding:6px 14px;border-radius:6px;
+    font-size:13px;font-weight:600;cursor:pointer;margin-top:8px;
+  }
+  .quiz-item button.show:hover{background:#5E1D88}
+  .quiz-item .ans{display:none;margin-top:10px;padding:10px 14px;background:#F4EEFA;border-radius:6px;border-left:3px solid var(--purple);color:var(--purple);font-weight:500}
+  .quiz-item.revealed .ans{display:block}
+  .quiz-item.revealed button.show{background:var(--muted)}
+
+  /* ---------- Completion toggle ---------- */
+  .obj-header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+  .mark-done{
+    background:#fff;border:2px solid var(--green);color:var(--green);
+    padding:6px 14px;border-radius:999px;font-weight:600;font-size:13px;cursor:pointer;
+    transition:all .15s ease;white-space:nowrap
+  }
+  .mark-done:hover{background:#E8F5E9}
+  .mark-done.done{background:var(--green);color:#fff}
+  .mark-done.done::before{content:"✓ "}
+
+  /* ---------- Utilities ---------- */
+  .badge{display:inline-block;background:#EEF2F7;color:var(--navy);padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;margin-right:6px}
+  .pathway{
+    display:flex;gap:0;align-items:center;flex-wrap:wrap;margin:14px 0;padding:14px;
+    background:#F7F9FC;border-radius:8px;font-weight:600;font-size:14px;
+  }
+  .pathway .step{background:#fff;border:2px solid var(--navy);color:var(--navy);padding:6px 10px;border-radius:6px;white-space:nowrap}
+  .pathway .arrow{color:var(--red);font-weight:800;margin:0 8px}
+  .pathway .enz{color:var(--red);font-size:11px;font-weight:700;display:block;text-align:center;letter-spacing:.4px}
+  .footer-note{text-align:center;padding:24px;color:var(--muted);font-style:italic}
+
+  /* ---------- Deep Dive sub-sections ---------- */
+  .deep-dive{
+    background:#FCFCFE;border-radius:8px;border:1px solid #E5E7EB;
+    padding:14px 18px 10px 20px;margin:16px 0;box-shadow:0 1px 2px rgba(0,0,0,0.03);
+  }
+  .deep-dive .dd-title{
+    color:var(--purple);font-weight:700;font-size:16px;text-transform:uppercase;
+    letter-spacing:0.8px;margin-bottom:10px;display:flex;align-items:center;gap:8px;
+  }
+  /* h4 inside deep-dive is collapsible — click to toggle */
+  .deep-dive h4{
+    color:var(--navy);margin:14px 0 6px;font-size:14px;
+    cursor:pointer;user-select:none;
+    display:flex;align-items:center;gap:8px;
+    padding:6px 8px;border-radius:6px;
+    transition:background .15s ease;
+  }
+  .deep-dive h4:hover{background:#F3EEFA}
+  .deep-dive h4::after{
+    content:"▼";font-size:12px;color:var(--purple);margin-left:auto;
+    transition:transform .2s ease;display:inline-block;
+  }
+  .deep-dive h4.collapsed::after{content:"▶"}
+  .deep-dive h4.collapsed{background:#FAFAFC}
+  /* Content hidden when its parent h4 is collapsed — handled by JS setting data-hidden */
+  .deep-dive [data-h4-hidden="true"]{display:none}
+  .deep-dive .group-label{
+    font-weight:700;color:var(--navy);font-size:13.5px;
+    margin:10px 0 4px;padding:2px 0 2px 0;
+    border-bottom:1px dashed #CDD5E0;display:inline-block;
+  }
+  /* Parent bullet sized between the sub-heading and the sub-bullet */
+  .deep-dive > ul > li,
+  .deep-dive > ul > li > br + *,
+  .deep-dive ul:not(.sublist) > li{
+    font-size:13px;font-weight:600;color:#1A1A1A;line-height:1.5;
+  }
+  /* Sub-bullets slightly smaller and lighter */
+  .deep-dive .sublist li{font-size:12.5px;font-weight:400;color:#333}
+
+  .deep-dive .dd-hint{
+    font-size:11px;color:var(--muted);font-weight:500;letter-spacing:0;
+    text-transform:none;margin-left:10px;font-style:italic;
+  }
+
+  /* Gist → Going Deeper preview */
+  .gist-deeper{
+    margin-top:10px;padding-top:10px;border-top:1px dashed #CDD5E0;
+    font-size:13.5px;
+  }
+  .gist-deeper .preview-label{
+    display:block;color:var(--purple);font-weight:700;font-size:12px;
+    text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;
+  }
+  .gist-deeper ul{margin:4px 0 0 0;padding-left:22px}
+  .gist-deeper li{margin:3px 0;color:#333;line-height:1.45}
+  .gist-deeper li b{color:var(--navy)}
+  .deep-dive ul{margin:4px 0 10px 0}
+  .deep-dive li{margin:4px 0;line-height:1.5}
+  .deep-dive .sublist{margin:2px 0 6px 0;padding-left:16px}
+  .deep-dive .sublist li{list-style:circle;font-size:13.5px;color:#333}
+  .cite{
+    display:inline-block;font-size:11px;color:var(--muted);background:#EEF2F7;
+    padding:1px 7px;border-radius:3px;margin-left:4px;font-style:italic;white-space:nowrap;
+    border:1px solid #E0E5EC;vertical-align:baseline;
+  }
+  .deep-dive table{margin:8px 0 10px}
+  .deep-dive thead th{background:var(--purple);font-size:13px;padding:8px 10px}
+  .deep-dive tbody td{font-size:13px;padding:7px 10px}
+
+  /* References section */
+  #references{background:var(--card)}
+  #references p,#references ul li,#references .ref-list li{font-size:14px;line-height:1.55}
+  #references .ref-list{margin:10px 0;padding-left:22px}
+  #references .ref-list li{margin:6px 0}
+  #references .ref-list b{color:var(--navy)}
+  #references ul{margin:6px 0 12px 0;padding-left:22px}
+  .controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+  .btn-reset{background:#fff;border:1px solid var(--border);color:var(--muted);padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer}
+  .btn-reset:hover{border-color:var(--red);color:var(--red)}
+  .print-only{display:none}
+  @media print {
+    header.topbar,nav.sidebar,.mark-done,.controls{display:none}
+    .wrap{grid-template-columns:1fr;padding:10px}
+    section.obj{page-break-after:always;box-shadow:none;border:none}
+    .flashcard .a{max-height:none!important;padding:12px 16px!important;border-top:1px solid #CFE0F5!important}
+    .quiz-item .ans{display:block!important}
+    .deep-dive [data-h4-hidden="true"]{display:block!important}
+    .callout.rc.collapsed .flashcard{display:block!important}
+    .deep-dive h4::after,.callout.rc .ctitle::after{display:none!important}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <span class="brand">HoyaDocs</span>
+    <span class="tag">ENDO · 01</span>
+    <h1>Intro to Hormones</h1>
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-label" id="progressLabel">0 / 7 objectives complete</div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ============ SIDEBAR ============ -->
+  <nav class="sidebar" id="sidebar">
+    <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()" title="Minimize / expand menu">
+      <span class="icon">◀</span><span class="label">Minimize menu</span>
+    </button>
+    <a href="#cover">Overview</a>
+    <a href="#obj1" data-obj="1">1. Signaling modes</a>
+    <a href="#obj2" data-obj="2">2. Hormone classes</a>
+    <a href="#obj3" data-obj="3">3. Catecholamines</a>
+    <a href="#obj4" data-obj="4">4. Steroid synthesis</a>
+    <a href="#obj5" data-obj="5">5. Carrier proteins</a>
+    <a href="#obj6" data-obj="6">6. Receptors</a>
+    <a href="#obj7" data-obj="7">7. Sensitivity</a>
+    <a href="#cheatsheet">Cheat Sheet</a>
+    <a href="#quiz">Self-Quiz</a>
+    <a href="#references">References</a>
+    <a href="#audit">Source Audit</a>
+    <div class="controls" style="margin-top:14px;flex-direction:column;align-items:stretch">
+      <button class="btn-reset" onclick="toggleAllDeepDives(true)">Collapse all sub-sections</button>
+      <button class="btn-reset" onclick="toggleAllDeepDives(false)">Expand all sub-sections</button>
+      <button class="btn-reset" onclick="resetProgress()">Reset progress</button>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ============ COVER ============ -->
+    <div class="cover" id="cover">
+      <h1>Endocrine Module 01: Introduction to Hormones</h1>
+
+      <div class="how-grid">
+        <div class="how">
+          <h3>How to use this guide (60 seconds)</h3>
+          <p>Each objective follows the same pattern so your brain can cruise on autopilot:</p>
+          <ul>
+            <li><b>Gist</b> (one paragraph) — the big idea</li>
+            <li><b>Tables</b> for side-by-side comparison</li>
+            <li><b>Yellow ★ High-Yield</b>, <b>green 🧠 Memory Trick</b>, <b>orange 🏥 Clinical Pearl</b></li>
+            <li><b>Blue ✏️ Active Recall</b> — <u>click each question to reveal the answer</u></li>
+            <li><b>Mark Done</b> on each objective; the bar at the top tracks you</li>
+          </ul>
+          <p style="margin-top:8px"><b style="color:var(--red)">Rule:</b> don't just read. Before you click to reveal, say the answer out loud. If you can't, reread the section. That's active recall — 2–3× more effective than passive reading.</p>
+        </div>
+
+        <div class="how alt">
+          <h3>How to use this guide with other resources</h3>
+          <ul>
+            <li>If you're early in your study: <b>read this guide → watch the corresponding B&amp;B video → review First Aid</b> for the topic. Same content, 3 different modalities = better retention.</li>
+            <li>For drug-heavy questions (pharmacology): cross-reference the <b>Lippincott Pharm</b> chapter for each drug mentioned here.</li>
+            <li>For pathology (CAH, pheochromocytoma, Cushing's): watch the relevant <b>Pathoma</b> chapter 15 sections; they're short and high-yield.</li>
+            <li>Then hit <b>UWorld Qbank</b> questions on the Endocrine section — particularly the ones tagged "hormone synthesis," "receptor," and "adrenal pathway" — to consolidate.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 style="margin-top:22px;color:var(--navy);font-size:16px">Jump to any objective:</h3>
+      <div class="roadmap">
+        <a href="#obj1"><span class="num">1</span><span>Distinguish between endocrine signaling and other forms of intercellular communication</span></a>
+        <a href="#obj2"><span class="num">2</span><span>Classify hormones based on their structure, solubility, &amp; storability</span></a>
+        <a href="#obj3"><span class="num">3</span><span>Describe catecholamine biosynthesis</span></a>
+        <a href="#obj4"><span class="num">4</span><span>Describe the initial step of steroid biosynthesis</span></a>
+        <a href="#obj5"><span class="num">5</span><span>Explain the effects of carrier proteins on hormone activity and half-life</span></a>
+        <a href="#obj6"><span class="num">6</span><span>Classify hormone receptors based on their subcellular location and mechanism of action</span></a>
+        <a href="#obj7"><span class="num">7</span><span>Explain the factors that influence cellular sensitivity to hormones and cellular response to hormones</span></a>
+      </div>
+    </div>
+
+    <!-- ============ OBJECTIVE 1 ============ -->
+    <section class="obj" id="obj1" data-obj="1">
+      <div class="obj-header">
+        <h2><span class="num">1</span>Endocrine signaling vs. other intercellular communication</h2>
+        <button class="mark-done" data-obj="1">Mark Done</button>
+      </div>
+
+      <div class="gist"><span class="gist-label">The Gist</span>
+        Cells talk in several modes. Endocrine = hormone rides the bloodstream to distant cells. Hormones physically reach almost every cell in the body, but only cells with the matching <b>receptor</b> respond. That receptor expression is what creates hormonal specificity.
+        <div class="gist-deeper">
+          <span class="preview-label">📚 Going Deeper will expand on:</span>
+          <ul>
+            <li><b>(1) What defines "endocrine"</b> — unpacks the "ductless, into the bloodstream" rule and contrasts endocrine with exocrine.</li>
+            <li><b>(2) Autocrine vs. paracrine</b> — explains how the same molecule can be a hormone, paracrine, or autocrine depending on delivery.</li>
+            <li><b>(3) Neuroendocrine</b> — shows how the hypothalamus turns neurons into hormone-secreting cells (posterior pituitary, hypophyseal portal).</li>
+            <li><b>(4) Specificity</b> — details why receptor expression is necessary but not sufficient (isoform, machinery, concentration, timing).</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>The 6 modes of intercellular communication</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Mode</th><th>How it travels</th><th>Distance</th><th>Classic example</th></tr></thead>
+        <tbody>
+          <tr><td><b>Endocrine</b></td><td>Hormone → bloodstream → distant target</td><td>Long (anywhere)</td><td>Insulin from β-cell → muscle/liver</td></tr>
+          <tr><td><b>Paracrine</b></td><td>Diffusion through interstitial fluid</td><td>Local (neighbors)</td><td>Somatostatin → adjacent islet α/β-cells; histamine in stomach</td></tr>
+          <tr><td><b>Autocrine</b></td><td>Cell signals itself</td><td>Same cell</td><td>IL-2 from activated T cells</td></tr>
+          <tr><td><b>Neural</b></td><td>Neurotransmitter across synapse</td><td>Very short (nm)</td><td>ACh at NMJ</td></tr>
+          <tr><td><b>Neuroendocrine</b></td><td>Neuron releases hormone into blood</td><td>Long (via blood)</td><td>Hypothalamic ADH/oxytocin → posterior pituitary → systemic</td></tr>
+          <tr><td><b>Juxtacrine</b></td><td>Direct membrane–membrane contact</td><td>Touching</td><td>Notch–Delta; antigen presentation</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="deep-dive">
+        <div class="dd-title">📚 Going Deeper — the details behind the gist</div>
+
+        <h4>1 · What defines "endocrine" (the one-line rule)</h4>
+        <div class="group-label">Core Definition</div>
+        <ul>
+          <li>Hormone =
+            <ul class="sublist">
+              <li>A molecule secreted by a <b>ductless gland</b> into the <b>bloodstream</b> to act on a distant target cell.<span class="cite">FA 2024 Endo</span></li>
+            </ul>
+          </li>
+          <li>Endocrine vs. exocrine:
+            <ul class="sublist">
+              <li>Rules out exocrine glands (pancreatic acini → duodenum via duct, sweat glands, salivary glands).</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Unique Organ — The Pancreas</div>
+        <ul>
+          <li>Dual role:
+            <ul class="sublist">
+              <li>Endocrine: islets of Langerhans → blood.</li>
+              <li>Exocrine: acini → duct of Wirsung → duodenum.</li>
+              <li>Same organ, two modes.<span class="cite">Costanzo Physiology 6e, ch 9</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Clinical Implication</div>
+        <ul>
+          <li>Why endocrinopathies are systemic:
+            <ul class="sublist">
+              <li>"Ductless" delivery means the hormone goes everywhere → multi-organ symptoms.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>2 · Autocrine vs. paracrine — the tricky pair</h4>
+        <div class="group-label">Autocrine — cell signals itself</div>
+        <ul>
+          <li>Core feature:
+            <ul class="sublist">
+              <li>Receptor and ligand on the SAME cell.</li>
+            </ul>
+          </li>
+          <li>Tumor biology examples:
+            <ul class="sublist">
+              <li>Glioblastomas often have PDGF autocrine loops.</li>
+              <li>Some breast cancers have IGF-1 autocrine loops.</li>
+            </ul>
+          </li>
+          <li>Immunology examples:
+            <ul class="sublist">
+              <li>Activated T cells produce IL-2 AND express IL-2R → autocrine proliferation.<span class="cite">FA 2024 Immuno</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Paracrine — neighbor-to-neighbor diffusion</div>
+        <ul>
+          <li>Mechanism:
+            <ul class="sublist">
+              <li>Signal diffuses to NEIGHBORING cells through interstitial fluid.</li>
+            </ul>
+          </li>
+          <li>Classic examples:
+            <ul class="sublist">
+              <li>Somatostatin from pancreatic δ-cells inhibits adjacent α and β cells (paracrine) — same molecule from the hypothalamus is endocrine on the anterior pituitary.</li>
+              <li>Histamine from ECL cells → neighboring parietal cells → HCl secretion. Blocked by H2-blockers (famotidine).<span class="cite">Guyton &amp; Hall 14e ch 78</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Key Insight</div>
+        <ul>
+          <li>Mode is defined by delivery, not the molecule:
+            <ul class="sublist">
+              <li>A single molecule can be autocrine, paracrine, OR endocrine depending on which cell makes it and which cell listens.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>3 · Neuroendocrine — the hypothalamus is the master regulator</h4>
+        <div class="group-label">Definition</div>
+        <ul>
+          <li>Neuroendocrine neuron:
+            <ul class="sublist">
+              <li>A neuron whose axon terminal releases hormone into the bloodstream instead of across a synapse.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Two Hypothalamic Neuron Classes</div>
+        <ul>
+          <li>Magnocellular neurons:
+            <ul class="sublist">
+              <li>Located in supraoptic and paraventricular nuclei.</li>
+              <li>Produce ADH &amp; oxytocin.</li>
+              <li>Stored/released from the posterior pituitary → systemic circulation.</li>
+            </ul>
+          </li>
+          <li>Parvocellular neurons:
+            <ul class="sublist">
+              <li>Produce TRH, CRH, GnRH, GHRH, dopamine (PIH), somatostatin.</li>
+              <li>Released into the <b>hypophyseal portal system</b> → anterior pituitary (local, concentrated delivery).<span class="cite">Costanzo 6e ch 9; B&amp;B Endo</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Anatomical Details</div>
+        <ul>
+          <li>Hypophyseal portal network:
+            <ul class="sublist">
+              <li>A capillary → vein → capillary system that delivers hypothalamic hormones to the anterior pituitary.</li>
+              <li>Achieves ~1000× the concentration hormones would reach via systemic circulation.</li>
+              <li>Why lesions of the pituitary stalk cause anterior pituitary dysfunction.<span class="cite">Guyton 14e ch 75</span></li>
+            </ul>
+          </li>
+          <li>Adrenal medulla:
+            <ul class="sublist">
+              <li>A modified sympathetic ganglion.</li>
+              <li>Chromaffin cells are post-ganglionic sympathetic neurons that release Epi/NE into the blood.</li>
+              <li>Functions as a neuroendocrine organ.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>4 · Specificity — receptor expression + local factors</h4>
+        <div class="group-label">Core Rule</div>
+        <ul>
+          <li>Receptor expression alone:
+            <ul class="sublist">
+              <li>Necessary but not sufficient for hormonal response.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Additional Factors That Shape Specificity</div>
+        <ul>
+          <li>Receptor isoform affinity:
+            <ul class="sublist">
+              <li>α1 vs β1 both bind NE, but produce opposite vascular effects.</li>
+            </ul>
+          </li>
+          <li>Intracellular signaling machinery:
+            <ul class="sublist">
+              <li>A cell with GPCR but no adenylyl cyclase won't respond to Gs-coupled signaling.</li>
+            </ul>
+          </li>
+          <li>Local concentration:
+            <ul class="sublist">
+              <li>Paracrine signals achieve higher [hormone] than endocrine.</li>
+              <li>Explains why paracrine somatostatin is potent locally despite low systemic levels.</li>
+            </ul>
+          </li>
+          <li>Timing:
+            <ul class="sublist">
+              <li>Some receptors are expressed only during certain cell-cycle or developmental windows.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+        <ul>
+          <li><b>Endocrine vs. exocrine:</b> endocrine = ductless, into blood. Exocrine = into a duct (sweat, saliva, pancreatic enzymes). <span class="cite">Bootcamp 1.02 Endocrine Glands</span></li>
+          <li>A "hormone" is defined by <b>endocrine delivery</b>. The same molecule can act as neurotransmitter, paracrine, or hormone depending on context (dopamine, somatostatin, gastrin). <span class="cite">end01 lecture</span></li>
+          <li><b>Specificity = receptor expression</b>, not hormone distribution. <span class="cite">end01 lecture</span></li>
+        </ul>
+      </div>
+
+      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <p><b>PANE-J:</b> Paracrine, Autocrine, Neural, Endocrine, Juxtacrine.</p>
+        <p><b>Distance mantra:</b> "Autocrine whispers to itself, paracrine gossips to neighbors, endocrine shouts across the body."</p>
+        <p><b>Neuroendocrine</b> = "the neuron that hijacks the bloodstream" (posterior pituitary, hypothalamic releasing hormones).</p>
+      </div>
+
+      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <ul>
+          <li><b>Pheochromocytoma</b> dumps catecholamines systemically → endocrine effect (episodic HTN, palpitations). <span class="cite">AI Generated · see end20</span></li>
+          <li><b>IGF-1 from liver</b> = endocrine. IGF-1 locally = paracrine/autocrine. Same molecule, different modes. <span class="cite">FA 3.14 Signaling pathways; Bootcamp 1.01</span></li>
+          <li><b>Gastrinoma (Zollinger-Ellison):</b> gastrin normally paracrine, but a tumor makes it endocrine → systemic acid hypersecretion, refractory ulcers. <span class="cite">AI Generated · GI module</span></li>
+        </ul>
+      </div>
+
+      <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL — click each question to reveal</div>
+        <div class="flashcard"><div class="q">A hormone reaches every cell in the body. Why does only one cell type respond?</div><div class="a"><span>Only target cells express the specific receptor; receptors create hormonal specificity.</span></div></div>
+        <div class="flashcard"><div class="q">Somatostatin from D-cells inhibits nearby α/β cells — what mode?</div><div class="a"><span>Paracrine.</span></div></div>
+        <div class="flashcard"><div class="q">Hypothalamic neuron releases TRH into hypophyseal portal blood — what mode?</div><div class="a"><span>Neuroendocrine (neuron secreting into blood).</span></div></div>
+        <div class="flashcard"><div class="q">Pancreatic digestive enzymes — endocrine or exocrine?</div><div class="a"><span>Exocrine (via ducts). The pancreas is both endocrine AND exocrine.</span></div></div>
+        <div class="flashcard"><div class="q">T cell makes IL-2 that binds its own IL-2 receptor.</div><div class="a"><span>Autocrine.</span></div></div>
+      </div>
+    </section>
+
+    <!-- ============ OBJECTIVE 2 ============ -->
+    <section class="obj" id="obj2" data-obj="2">
+      <div class="obj-header">
+        <h2><span class="num">2</span>Classify hormones by structure, solubility & storability</h2>
+        <button class="mark-done" data-obj="2">Mark Done</button>
+      </div>
+
+      <div class="gist"><span class="gist-label">The Gist</span>
+        Three structural classes: amino acid derivatives (amines), peptides/proteins, and steroids. Eicosanoids are a minor 4th category (usually paracrine). The <b>single most useful split</b> is water-loving vs. fat-loving, because solubility determines storage, carriers, receptor location, onset, and duration.
+        <div class="gist-deeper">
+          <span class="preview-label">📚 Going Deeper will expand on:</span>
+          <ul>
+            <li><b>(1) Amino acid derivatives</b> — breaks down the Tyr, Trp, and His sub-families (catecholamines, thyroid hormones, serotonin, melatonin, histamine).</li>
+            <li><b>(2) Peptides &amp; proteins</b> — walks through the pre-pro-hormone synthesis pipeline with insulin / C-peptide as the teaching example.</li>
+            <li><b>(3) Steroids</b> — explains why the cholesterol backbone forces on-demand synthesis and long half-lives.</li>
+            <li><b>(4) Eicosanoids</b> — shows the COX and LOX branches and why they act paracrine not endocrine.</li>
+            <li><b>(5) The thyroid rebel</b> — explains why T3/T4 are amine-class but behave like steroids (lipophilic, nuclear, long half-life).</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>The 3 structural classes (+ eicosanoids)</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Class</th><th>Built from</th><th>Examples</th><th>Solubility</th></tr></thead>
+        <tbody>
+          <tr><td><b>Amino acid derivatives</b></td><td>Single AA (Tyr or Trp)</td><td>Catecholamines (Epi, NE, DA), T3/T4, melatonin, serotonin</td><td>Hydrophilic — <b>EXCEPT T3/T4</b> (lipophilic rebel!)</td></tr>
+          <tr><td><b>Peptides & Proteins</b></td><td>AA chains</td><td>Insulin, glucagon, GH, PRL, TSH, ACTH, LH, FSH, ADH, oxytocin, PTH, calcitonin, ANP, BNP, EPO, leptin</td><td>Hydrophilic</td></tr>
+          <tr><td><b>Steroids</b></td><td>Cholesterol</td><td>Cortisol, aldosterone, DHEA, testosterone, estradiol, progesterone, calcitriol</td><td>Hydrophobic</td></tr>
+          <tr><td><b>Eicosanoids</b></td><td>Arachidonic acid</td><td>Prostaglandins, leukotrienes, thromboxanes, prostacyclins</td><td>Lipophilic; mostly paracrine</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>The master table: solubility decides everything</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Feature</th><th>HYDROPHILIC (peptides + catecholamines)</th><th>HYDROPHOBIC (steroids + thyroid)</th></tr></thead>
+        <tbody>
+          <tr><td>Blood transport</td><td>Dissolved freely; little/no carrier</td><td>Mostly bound to carrier proteins</td></tr>
+          <tr><td>Half-life</td><td>Seconds → minutes</td><td>Tens of minutes → days</td></tr>
+          <tr><td>Storable in cell?</td><td><b>YES</b> — in secretory vesicles</td><td><b>NO</b> — made on demand</td></tr>
+          <tr><td>Cross plasma membrane?</td><td>No (too polar)</td><td>Yes (lipid-soluble)</td></tr>
+          <tr><td>Receptor location</td><td>Membrane (extracellular-facing)</td><td>Intracellular (cytoplasm or nucleus)</td></tr>
+          <tr><td>Mechanism</td><td>Indirect — 2nd messengers, amplification</td><td>Direct — transcription factor</td></tr>
+          <tr><td>Onset / Duration</td><td>Fast / short</td><td>Slow / long</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="deep-dive">
+        <div class="dd-title">📚 Going Deeper — each class in detail</div>
+
+        <h4>1 · Amino acid derivatives (amines)</h4>
+        <div class="group-label">From Tyrosine</div>
+        <ul>
+          <li>Catecholamines:
+            <ul class="sublist">
+              <li>Epinephrine, norepinephrine, dopamine.</li>
+              <li>Hydrophilic; short half-life (~1–2 min); stored in vesicles.</li>
+            </ul>
+          </li>
+          <li>Thyroid hormones T3/T4:
+            <ul class="sublist">
+              <li>Made by coupling two iodinated tyrosines.</li>
+              <li>Iodination + ring structure = lipophilic.</li>
+              <li>Long half-life (T4 ~7 days).<span class="cite">Costanzo 6e ch 9</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">From Tryptophan</div>
+        <ul>
+          <li>Serotonin (5-HT):
+            <ul class="sublist">
+              <li>Mostly neurotransmitter.</li>
+              <li>Acts as paracrine/endocrine from enterochromaffin cells in GI tract (carcinoid syndrome).<span class="cite">Pathoma 2024 ch 15</span></li>
+            </ul>
+          </li>
+          <li>Melatonin:
+            <ul class="sublist">
+              <li>From pineal gland; peaks at night.</li>
+              <li>Acts via MT1/MT2 GPCRs for circadian rhythm.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">From Histidine</div>
+        <ul>
+          <li>Histamine:
+            <ul class="sublist">
+              <li>Mostly paracrine (gastric ECL cells, mast cells).</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>2 · Peptides &amp; proteins — the synthesis pipeline</h4>
+        <div class="group-label">Synthesis Steps</div>
+        <ul>
+          <li>Step 1 — Translation:
+            <ul class="sublist">
+              <li>Transcribed → translated on ribosomes of the <b>rough ER</b> as a larger precursor (<b>pre-pro-hormone</b>).</li>
+            </ul>
+          </li>
+          <li>Step 2 — Signal cleavage:
+            <ul class="sublist">
+              <li>Pre-sequence (signal peptide) targets the protein to the ER lumen → cleaved → <b>pro-hormone</b>.</li>
+            </ul>
+          </li>
+          <li>Step 3 — Packaging &amp; processing:
+            <ul class="sublist">
+              <li>Pro-hormone travels Golgi → packaged in <b>secretory vesicles</b> → proteolytically processed inside the vesicle to the final active form.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Classic example — Insulin</div>
+        <ul>
+          <li>Processing pathway:
+            <ul class="sublist">
+              <li>Pre-pro-insulin (110 AA) → pro-insulin (86 AA with A and B chains connected by C-peptide) → insulin (A + B chains, disulfide-linked) + <b>C-peptide</b> (equimolar).<span class="cite">FA 2024 Endo</span></li>
+            </ul>
+          </li>
+          <li>Why C-peptide matters clinically:
+            <ul class="sublist">
+              <li>C-peptide is inert but clinically valuable.</li>
+              <li>It rises with endogenous insulin and is ABSENT with exogenous insulin.</li>
+              <li>Distinguishes insulinoma / endogenous hyperinsulinism from factitious (injected) insulin use.<span class="cite">B&amp;B Endo — Insulinoma</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Peptide Hormone Characteristics</div>
+        <ul>
+          <li>Size range:
+            <ul class="sublist">
+              <li>3 AAs (TRH) to 200+ AAs (glycoprotein hormones like FSH).</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Types of Peptide Hormones — Glycoprotein Subfamily</div>
+        <ul>
+          <li>Members:
+            <ul class="sublist">
+              <li>TSH, LH, FSH, hCG.</li>
+            </ul>
+          </li>
+          <li>Subunit structure:
+            <ul class="sublist">
+              <li>Share a common α-subunit (encoded by a single gene — CGA).</li>
+              <li>Unique β-subunit confers receptor specificity.</li>
+            </ul>
+          </li>
+          <li>Why hCG is ideal for pregnancy testing:
+            <ul class="sublist">
+              <li>Glycosylation patterns extend half-life and modulate affinity.</li>
+              <li>hCG has extra sialic acid → longer half-life than LH → detectable at low concentrations in urine.<span class="cite">Guyton 14e ch 76</span></li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>3 · Steroids — the cholesterol family</h4>
+        <div class="group-label">Core Principle</div>
+        <ul>
+          <li>Universal precursor:
+            <ul class="sublist">
+              <li>All 5 steroid hormone classes (progestins, gluco/mineralocorticoids, androgens, estrogens) + vitamin D are built from cholesterol (27 carbons).</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Cholesterol Sources (in order of preference)</div>
+        <ul>
+          <li>Primary — LDL-receptor-mediated uptake:
+            <ul class="sublist">
+              <li>Highest contribution in the adrenal gland.</li>
+            </ul>
+          </li>
+          <li>Secondary — de novo synthesis:
+            <ul class="sublist">
+              <li>From acetyl-CoA via HMG-CoA reductase.</li>
+            </ul>
+          </li>
+          <li>Tertiary — stored cholesterol esters:
+            <ul class="sublist">
+              <li>Held in lipid droplets, mobilized acutely during stimulation.<span class="cite">Costanzo 6e ch 9</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Steroid Characteristics</div>
+        <ul>
+          <li>Why steroids cannot be stored:
+            <ul class="sublist">
+              <li>The lipid backbone diffuses through ANY membrane, including vesicle membranes.</li>
+              <li>Cells make steroids on demand and release them immediately.<span class="cite">Guyton 14e ch 74</span></li>
+            </ul>
+          </li>
+          <li>Why steroids have long half-lives:
+            <ul class="sublist">
+              <li>Carrier protein binding (CBG, SHBG, albumin) protects from hepatic metabolism.</li>
+              <li>Bound hormone cannot be filtered by the kidney, extending circulating time.</li>
+            </ul>
+          </li>
+          <li>Elimination:
+            <ul class="sublist">
+              <li>Hepatic conjugation (glucuronide or sulfate) → excreted in bile or urine.</li>
+              <li>Liver disease can markedly prolong steroid half-life.<span class="cite">Lippincott Pharm 7e</span></li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>4 · Eicosanoids (lipid derivatives) — brief</h4>
+        <div class="group-label">Source &amp; Release</div>
+        <ul>
+          <li>Precursor:
+            <ul class="sublist">
+              <li>Arachidonic acid (20-C polyunsaturated fatty acid).</li>
+              <li>Released from membrane phospholipids by phospholipase A2 (PLA2).</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Two Main Enzymatic Pathways</div>
+        <ul>
+          <li>COX-1 / COX-2 pathway:
+            <ul class="sublist">
+              <li>Produces prostaglandins (PGE2, PGI2) and thromboxane (TxA2).</li>
+              <li>Blocked by NSAIDs.</li>
+            </ul>
+          </li>
+          <li>5-lipoxygenase (LOX) pathway:
+            <ul class="sublist">
+              <li>Produces leukotrienes (LTB4, LTC4).</li>
+              <li>Enzyme blocked by zileuton.</li>
+              <li>Receptor blocked by montelukast (used in asthma).<span class="cite">FA 2024 Pharm — NSAIDs</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Kinetic Profile</div>
+        <ul>
+          <li>Half-life:
+            <ul class="sublist">
+              <li>Seconds.</li>
+              <li>Act as paracrine/autocrine — NOT classic endocrine.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>5 · The thyroid rebel — why T3/T4 are lipophilic</h4>
+        <div class="group-label">Structural Basis</div>
+        <ul>
+          <li>How T3 and T4 are built:
+            <ul class="sublist">
+              <li>T4 = two DIT (di-iodotyrosine) residues coupled.</li>
+              <li>T3 = MIT + DIT.</li>
+              <li>Coupling + iodination creates a bulky, non-polar aromatic structure.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Net Properties — Behaves Like a Steroid</div>
+        <ul>
+          <li>Functional profile:
+            <ul class="sublist">
+              <li>Fat-soluble; crosses membranes freely.</li>
+              <li>Carrier-bound in plasma (TBG).</li>
+              <li>Nuclear receptor (transcription factor).</li>
+              <li>Long half-life (T4 ~7 days).</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">T4 vs. T3 — Prohormone and Active Form</div>
+        <ul>
+          <li>Circulating form:
+            <ul class="sublist">
+              <li>T4 is the primary circulating form (~80% of thyroid output).</li>
+            </ul>
+          </li>
+          <li>Active form:
+            <ul class="sublist">
+              <li>T3 is ~5× more potent at the TRβ receptor.</li>
+            </ul>
+          </li>
+          <li>Peripheral conversion:
+            <ul class="sublist">
+              <li>5'-deiodinase converts T4 → T3 in target tissues (liver, kidney, muscle).</li>
+              <li>Why a patient on levothyroxine still ends up with active T3 systemically.<span class="cite">Guyton 14e ch 77; Pathoma ch 15</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Clinical Trap — Euthyroid Sick Syndrome</div>
+        <ul>
+          <li>Reverse T3 (rT3):
+            <ul class="sublist">
+              <li>In severe illness / starvation, T4 is preferentially converted to reverse T3 — an inactive metabolite.</li>
+              <li>Patient appears hypothyroid biochemically but is NOT truly hypothyroid — no treatment needed. Classic USMLE trap.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+        <p><b>THE REBEL: Thyroid hormone (T3/T4).</b> Amino-acid-derived but behaves like a steroid — lipophilic, TBG-bound, nuclear receptor, long half-life (T4 ≈ 7 days). Don't be caught on this one. <span class="cite">end01 lecture</span></p>
+        <ul>
+          <li><b>Glycoprotein hormones</b> (TSH, FSH, LH, hCG) share a common <b>α-subunit</b>; the <b>β-subunit</b> gives receptor specificity. <span class="cite">end01 lecture</span></li>
+          <li><b>Peptide hormones are cleaved from pre-pro forms</b> (pre-pro-insulin → pro-insulin → insulin + C-peptide). C-peptide distinguishes endogenous from exogenous insulin. <span class="cite">FA 3.14 Signaling pathways</span></li>
+        </ul>
+      </div>
+
+      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <p><b>"Steroids and Thyroid are Siblings" (S.T.S.)</b> — both lipophilic, carrier-bound, nuclear receptors, slow + long-lasting.</p>
+        <p><b>"CAT PEP"</b> = hydrophilic: CATecholamines + PEPtides. Stored, short-lived, membrane receptors.</p>
+        <p><b>"TFL-hC"</b> = glycoprotein α-subunit sharers: TSH, FSH, LH, hCG.</p>
+      </div>
+
+      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <ul>
+          <li><b>C-peptide measurement</b> distinguishes insulinoma / endogenous insulin (↑ C-peptide) from surreptitious insulin injection (↓ C-peptide). <span class="cite">AI Generated · see end17/18</span></li>
+          <li><b>Pregnancy → ↑TBG → ↑ total T4, normal free T4.</b> Patient is euthyroid — classic trap. <span class="cite">AI Generated · see end10/11</span></li>
+          <li><b>hCG cross-reacts with TSH receptor</b> (shared α) → gestational hyperthyroidism in hyperemesis gravidarum. <span class="cite">AI Generated · see end11</span></li>
+        </ul>
+      </div>
+
+      <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL</div>
+        <div class="flashcard"><div class="q">Which hormone class is NOT stored in the cell of origin?</div><div class="a"><span>Steroids (synthesized on demand from cholesterol).</span></div></div>
+        <div class="flashcard"><div class="q">An amino-acid-derived hormone that acts like a steroid?</div><div class="a"><span>Thyroid hormone (T3/T4) — lipophilic, carrier-bound, nuclear receptor.</span></div></div>
+        <div class="flashcard"><div class="q">Where are receptors for hydrophilic hormones located?</div><div class="a"><span>On the plasma membrane (extracellular-facing).</span></div></div>
+        <div class="flashcard"><div class="q">Which subunit of TSH/FSH/LH/hCG gives receptor specificity?</div><div class="a"><span>The β-subunit (α is shared).</span></div></div>
+        <div class="flashcard"><div class="q">Why does insulin have a short half-life but cortisol a long one?</div><div class="a"><span>Insulin (peptide) is hydrophilic and unbound → rapidly degraded. Cortisol (steroid) is hydrophobic and carrier-bound (CBG/albumin) → protected.</span></div></div>
+        <div class="flashcard"><div class="q">Classify prostaglandin E2.</div><div class="a"><span>Eicosanoid — lipid derivative from arachidonic acid, mostly paracrine.</span></div></div>
+      </div>
+    </section>
+
+    <!-- ============ OBJECTIVE 3 ============ -->
+    <section class="obj" id="obj3" data-obj="3">
+      <div class="obj-header">
+        <h2><span class="num">3</span>Catecholamine biosynthesis</h2>
+        <button class="mark-done" data-obj="3">Mark Done</button>
+      </div>
+
+      <div class="gist"><span class="gist-label">The Gist</span>
+        Catecholamines start from tyrosine and are built in 4 enzymatic steps. Know: (1) the order, (2) the rate-limiting step, and (3) why only the adrenal medulla makes epinephrine.
+        <div class="gist-deeper">
+          <span class="preview-label">📚 Going Deeper will expand on:</span>
+          <ul>
+            <li><b>(1) The order of the pathway</b> — walks through each step (Phe→Tyr→DOPA→DA→NE→Epi) with enzymes, cofactors, and pharmacologic targets.</li>
+            <li><b>(2) The rate-limiting step (tyrosine hydroxylase)</b> — covers short-term feedback, long-term transcriptional regulation, and clinical inhibition (metyrosine).</li>
+            <li><b>(3) Why only the adrenal medulla makes Epi</b> — explains the adrenal portal blood supply and how cortisol induces PNMT, with pheo vs. paraganglioma distinction.</li>
+            <li><b>(4) Degradation &amp; lab markers</b> — details MAO/COMT, metanephrines, VMA, and why plasma free metanephrines is the best pheochromocytoma test.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>The pathway — memorize cold</h3>
+      <div class="pathway">
+        <div class="step">Phe<span class="enz">PAH</span></div>
+        <span class="arrow">→</span>
+        <div class="step">Tyr<span class="enz">Tyr Hydroxylase ★ RL</span></div>
+        <span class="arrow">→</span>
+        <div class="step">L-DOPA<span class="enz">DOPA decarb · B6</span></div>
+        <span class="arrow">→</span>
+        <div class="step">Dopamine<span class="enz">DBH · Vit C, Cu</span></div>
+        <span class="arrow">→</span>
+        <div class="step">NE<span class="enz">PNMT · cortisol</span></div>
+        <span class="arrow">→</span>
+        <div class="step">Epi</div>
+      </div>
+
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Step</th><th>Enzyme</th><th>Cofactor</th><th>Key fact</th></tr></thead>
+        <tbody>
+          <tr><td>Phe → Tyr</td><td>Phenylalanine hydroxylase</td><td>BH4, O₂</td><td>Deficiency = PKU (musty odor, intellectual disability)</td></tr>
+          <tr><td>Tyr → L-DOPA</td><td><b>Tyrosine hydroxylase</b></td><td>BH4, O₂</td><td>★ <b>RATE-LIMITING</b></td></tr>
+          <tr><td>L-DOPA → Dopamine</td><td>DOPA decarboxylase (AADC)</td><td>Vit B6 (PLP)</td><td>Carbidopa blocks this peripherally</td></tr>
+          <tr><td>Dopamine → NE</td><td>Dopamine β-hydroxylase</td><td>Vit C, Cu, O₂</td><td>Occurs inside vesicles</td></tr>
+          <tr><td>NE → Epi</td><td><b>PNMT</b></td><td>SAM</td><td>★ <b>Requires cortisol</b> → only adrenal medulla</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="deep-dive">
+        <div class="dd-title">📚 Going Deeper — the three must-knows in detail</div>
+
+        <h4>1 · The order of the pathway (why each step matters)</h4>
+        <div class="group-label">Step 0 — Phe → Tyr (phenylalanine hydroxylase, liver)</div>
+        <ul>
+          <li>Context:
+            <ul class="sublist">
+              <li>Not strictly part of catecholamine synthesis, but clinically important.</li>
+            </ul>
+          </li>
+          <li>Clinical relevance:
+            <ul class="sublist">
+              <li>Deficiency = <b>PKU</b> (phenylketonuria) → intellectual disability, musty body odor, seizures.</li>
+              <li>Screened at birth in all US states.<span class="cite">FA 2024 Biochem</span></li>
+              <li>Tyrosine becomes an "essential" AA in PKU patients — must be supplied in diet.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Step 1 — Tyr → L-DOPA (tyrosine hydroxylase) · ★ RATE-LIMITING</div>
+        <ul>
+          <li>Location &amp; cofactors:
+            <ul class="sublist">
+              <li>Cytoplasmic.</li>
+              <li>Requires BH4 (tetrahydrobiopterin) and O₂.</li>
+              <li>Same cofactor as phenylalanine hydroxylase — BH4 deficiency breaks multiple pathways.<span class="cite">Costanzo 6e ch 9</span></li>
+            </ul>
+          </li>
+          <li>Regulation:
+            <ul class="sublist">
+              <li>Feedback-inhibited by end products (DA, NE, Epi) binding an allosteric site.</li>
+              <li>Phosphorylation by PKA or CaMKII during sympathetic activation INCREASES activity (relieves feedback).</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Step 2 — L-DOPA → Dopamine (DOPA decarboxylase / AADC)</div>
+        <ul>
+          <li>Location &amp; cofactors:
+            <ul class="sublist">
+              <li>Cytoplasmic.</li>
+              <li>Requires <b>vitamin B6 (PLP)</b>.</li>
+            </ul>
+          </li>
+          <li>Activity level:
+            <ul class="sublist">
+              <li>High baseline activity — rarely rate-limiting.</li>
+              <li>This is why L-DOPA is effective in Parkinson's: the enzyme is already waiting to convert it.</li>
+            </ul>
+          </li>
+          <li>Pharmacologic target:
+            <ul class="sublist">
+              <li>Blocked <b>peripherally</b> by <b>carbidopa</b> in Parkinson's treatment.<span class="cite">FA 2024 Pharm — Parkinson's</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Step 3 — Dopamine → NE (dopamine β-hydroxylase / DBH)</div>
+        <ul>
+          <li>Unique location:
+            <ul class="sublist">
+              <li>Occurs INSIDE the chromaffin granule / synaptic vesicle.</li>
+              <li>Dopamine is first pumped into the vesicle by VMAT (vesicular monoamine transporter), then hydroxylated.</li>
+            </ul>
+          </li>
+          <li>Cofactors:
+            <ul class="sublist">
+              <li>Vitamin C (ascorbate).</li>
+              <li>Copper.</li>
+            </ul>
+          </li>
+          <li>Pharmacologic target:
+            <ul class="sublist">
+              <li>Reserpine inhibits VMAT → blocks vesicular uptake → depletes catecholamines (old antihypertensive).<span class="cite">Lippincott Pharm 7e</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Step 4 — NE → Epi (PNMT — phenylethanolamine N-methyltransferase)</div>
+        <ul>
+          <li>Location &amp; cofactor:
+            <ul class="sublist">
+              <li>Cytoplasmic.</li>
+              <li>Requires <b>SAM (S-adenosyl methionine)</b> as methyl donor.</li>
+            </ul>
+          </li>
+          <li>Special requirement:
+            <ul class="sublist">
+              <li>Only active where cortisol levels are high — see section 3 below.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>2 · The rate-limiting step: tyrosine hydroxylase in depth</h4>
+        <div class="group-label">Why it's rate-limiting</div>
+        <ul>
+          <li>Enzyme kinetics:
+            <ul class="sublist">
+              <li>Slowest Vmax in the pathway and highly regulated.</li>
+              <li>Any change in catecholamine output requires a change in this enzyme's activity.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Short-term regulation (seconds–minutes)</div>
+        <ul>
+          <li>Feedback control:
+            <ul class="sublist">
+              <li>Allosteric end-product feedback by NE, Epi, and DA.</li>
+              <li>Phosphorylation by PKA (cAMP-dependent) and CaMKII during stress → relieves end-product inhibition → more NE/Epi produced.<span class="cite">B&amp;B Endo — Catecholamines</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Long-term regulation (hours–days)</div>
+        <ul>
+          <li>Transcriptional upregulation:
+            <ul class="sublist">
+              <li>Induced by chronic stress, glucocorticoids, and nerve growth factor (NGF).</li>
+              <li>This is why chronic stress or steroid excess can lead to elevated sympathetic tone.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Clinical Inhibition</div>
+        <ul>
+          <li>Metyrosine (α-methyl-p-tyrosine):
+            <ul class="sublist">
+              <li>Competitive tyrosine hydroxylase inhibitor.</li>
+              <li>Used preoperatively in pheochromocytoma when α-blockade alone isn't enough.<span class="cite">Lippincott Pharm 7e; UWorld Endo Qbank</span></li>
+              <li>Reduces catecholamine stores by 50–80% → helps prevent intraoperative hypertensive crisis.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Why NOT DOPA decarboxylase?</div>
+        <ul>
+          <li>Reasoning:
+            <ul class="sublist">
+              <li>DOPA decarboxylase has HIGH baseline activity and rapidly consumes any DOPA produced.</li>
+              <li>This is why L-DOPA therapy works — you give the substrate and the enzyme is ready and waiting.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>3 · Why only the adrenal medulla makes epinephrine</h4>
+        <div class="group-label">Adrenal Anatomy</div>
+        <ul>
+          <li>Gross structure:
+            <ul class="sublist">
+              <li>Adrenal gland = cortex (outer) + medulla (inner).</li>
+            </ul>
+          </li>
+          <li>Cortical zones (outer → inner):
+            <ul class="sublist">
+              <li>Zona Glomerulosa → aldosterone.</li>
+              <li>Zona Fasciculata → cortisol.</li>
+              <li>Zona Reticularis → adrenal androgens (DHEA).</li>
+            </ul>
+          </li>
+          <li>Medulla:
+            <ul class="sublist">
+              <li>Modified post-ganglionic sympathetic neurons = <b>chromaffin cells</b>.</li>
+              <li>Innervated directly by pre-ganglionic sympathetic fibers (splanchnic nerves).<span class="cite">Pathoma 2024 ch 15; Guyton 14e ch 78</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">The Blood Supply Trick — The Key Anatomical Insight</div>
+        <ul>
+          <li>Path of blood flow:
+            <ul class="sublist">
+              <li>Blood enters the adrenal cortex first via superficial capsular arteries.</li>
+              <li>Cortical capillaries load up with cortisol from the zona fasciculata.</li>
+              <li>Those cortisol-rich capillaries drain CENTRIPETALLY through the medulla before leaving via the central adrenal vein.</li>
+            </ul>
+          </li>
+          <li>Consequence:
+            <ul class="sublist">
+              <li>The adrenal medulla bathes in cortisol at 10–100× systemic plasma concentration.</li>
+              <li>A concentration seen NOWHERE else in the body.<span class="cite">Guyton 14e ch 78; Costanzo 6e ch 9</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Why Cortisol Matters Molecularly</div>
+        <ul>
+          <li>Mechanism:
+            <ul class="sublist">
+              <li>Cortisol binds glucocorticoid receptors in chromaffin cells → induces PNMT gene transcription.</li>
+              <li>Without high local cortisol, PNMT is not expressed → NE cannot be methylated to Epi.</li>
+            </ul>
+          </li>
+          <li>Why nerves elsewhere can't make Epi:
+            <ul class="sublist">
+              <li>Sympathetic nerve terminals elsewhere (heart, vessels, bronchi) never see this cortisol concentration.</li>
+              <li>No PNMT → they release NE only.<span class="cite">FA 2024 Endo</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Clinical Consequences</div>
+        <ul>
+          <li>Addison's disease (primary adrenal insufficiency):
+            <ul class="sublist">
+              <li>↓ cortisol → ↓ PNMT expression → impaired epinephrine synthesis.</li>
+              <li>Contributes to fatigue, hypoglycemia, and poor stress response.</li>
+            </ul>
+          </li>
+          <li>Pheochromocytoma (chromaffin cell tumor):
+            <ul class="sublist">
+              <li>Releases a mix of Epi + NE.</li>
+            </ul>
+          </li>
+          <li>Paraganglioma (extra-adrenal sympathetic tumor):
+            <ul class="sublist">
+              <li>Releases mostly NE — no local cortisol to induce PNMT.</li>
+              <li><b>HY distinction</b> between pheo and paraganglioma.<span class="cite">Pathoma 2024 ch 15</span></li>
+            </ul>
+          </li>
+          <li>Chronic exogenous glucocorticoid use:
+            <ul class="sublist">
+              <li>May experience adrenal medullary atrophy AND HPA-axis suppression.</li>
+              <li>But the adrenal cortisol–medulla anatomy means patients often still make some Epi.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Output Ratios</div>
+        <ul>
+          <li>Adrenal medulla:
+            <ul class="sublist">
+              <li>~80% Epi / ~20% NE.</li>
+            </ul>
+          </li>
+          <li>Sympathetic nerve terminals:
+            <ul class="sublist">
+              <li>~0% Epi / 100% NE.<span class="cite">FA 2024 Endo</span></li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>4 · Catecholamine degradation and lab markers</h4>
+        <div class="group-label">Degradation Enzymes</div>
+        <ul>
+          <li>MAO (monoamine oxidase):
+            <ul class="sublist">
+              <li>Mitochondrial, intracellular.</li>
+              <li>MAO-A preferentially acts on NE and serotonin.</li>
+              <li>MAO-B preferentially acts on dopamine.</li>
+            </ul>
+          </li>
+          <li>COMT (catechol-O-methyltransferase):
+            <ul class="sublist">
+              <li>Cytoplasmic, extracellular.</li>
+              <li>Uses SAM as methyl donor.<span class="cite">Lippincott Pharm 7e</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Major Metabolites</div>
+        <ul>
+          <li>Norepinephrine pathway:
+            <ul class="sublist">
+              <li>NE → normetanephrine (COMT) → VMA (MAO).</li>
+            </ul>
+          </li>
+          <li>Epinephrine pathway:
+            <ul class="sublist">
+              <li>Epi → metanephrine (COMT) → VMA (MAO).</li>
+            </ul>
+          </li>
+          <li>Dopamine pathway:
+            <ul class="sublist">
+              <li>Dopamine → HVA (homovanillic acid).</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Diagnostic Tests for Pheochromocytoma</div>
+        <ul>
+          <li>Best initial test:
+            <ul class="sublist">
+              <li>Plasma free metanephrines — most sensitive (~99%).</li>
+            </ul>
+          </li>
+          <li>Confirmatory:
+            <ul class="sublist">
+              <li>24-hour urine metanephrines and VMA — specific.<span class="cite">UWorld Endo</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Drug Interaction Pearl</div>
+        <ul>
+          <li>MAOI + tyramine foods:
+            <ul class="sublist">
+              <li>Hypertensive crisis.</li>
+              <li>MAO normally degrades dietary tyramine; without MAO, tyramine reaches nerve terminals and displaces stored NE.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+        <p><b>Rate-limiting enzyme = Tyrosine Hydroxylase.</b> Regulated by end-product feedback and phosphorylation during sympathetic activation. <span class="cite">end01 lecture</span></p>
+        <p><b>Why only the medulla makes Epi:</b> PNMT needs HIGH cortisol. Cortisol drains from the adrenal cortex <i>through</i> the medulla via portal venous drainage. Post-ganglionic sympathetic neurons release <b>NE only</b>. <span class="cite">end01 lecture</span></p>
+        <ul>
+          <li>Adrenal medulla output ≈ <b>80% Epi / 20% NE</b>. <span class="cite">end01 lecture</span></li>
+          <li>Sympathetic nerve terminals ≈ <b>100% NE</b>. <span class="cite">end01 lecture</span></li>
+          <li>Degradation by MAO + COMT → <b>VMA</b> (urine) and <b>metanephrines</b> (plasma/urine — more sensitive for pheochromocytoma). <span class="cite">Bootcamp 10.04 Phe/Tyr/Catecholamines; pheo clinical end20</span></li>
+        </ul>
+      </div>
+
+      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <p><b>"Tyrants Don't Dare Nag Emperors"</b> = Tyrosine → DOPA → Dopamine → NE → Epi.</p>
+        <p><b>"The Boss Hydroxylates First"</b> — Tyrosine Hydroxylase is the rate-limiting boss.</p>
+        <p><b>PNMT</b> = "Please iNject More Cortisol To make Epi" — only the medulla gets cortisol.</p>
+        <p>Cofactor trick: <b>B6 before B6 of breakfast</b> → DOPA decarboxylase. <b>"C sees Cu"</b> → DBH needs Vit C and copper.</p>
+      </div>
+
+      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <ul>
+          <li><b>Parkinson's:</b> give L-DOPA (crosses BBB; dopamine doesn't). Pair with carbidopa (blocks peripheral DOPA decarboxylase) → more L-DOPA reaches the brain, fewer peripheral side effects. <span class="cite">AI Generated · neuro pharm</span></li>
+          <li><b>Pheochromocytoma — 5 P's:</b> Pressure (HTN), Pain (headache), Palpitations, Perspiration, Pallor. Dx: plasma free metanephrines. Tx: <b>α-blocker FIRST</b> (phenoxybenzamine), then β-blocker. <span class="cite">AI Generated · see end20/21</span></li>
+          <li><b>MAO inhibitor + tyramine foods</b> → hypertensive crisis. <span class="cite">AI Generated · psychiatry pharm</span></li>
+          <li><b>Addison's disease:</b> low cortisol → ↓ PNMT → ↓ Epi synthesis. <span class="cite">AI Generated · PNMT in end01; Addison clinical end20/21</span></li>
+        </ul>
+      </div>
+
+      <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL</div>
+        <div class="flashcard"><div class="q">Rate-limiting enzyme of catecholamine synthesis?</div><div class="a"><span>Tyrosine hydroxylase (Tyr → L-DOPA).</span></div></div>
+        <div class="flashcard"><div class="q">Why does the adrenal medulla make Epi but sympathetic nerves don't?</div><div class="a"><span>Only the medulla has enough cortisol (via portal drainage from cortex) to induce PNMT.</span></div></div>
+        <div class="flashcard"><div class="q">Cofactor for DOPA decarboxylase?</div><div class="a"><span>Vitamin B6 (PLP).</span></div></div>
+        <div class="flashcard"><div class="q">Cofactor for dopamine β-hydroxylase?</div><div class="a"><span>Vitamin C (ascorbate) plus copper.</span></div></div>
+        <div class="flashcard"><div class="q">Why give L-DOPA (not dopamine) in Parkinson's?</div><div class="a"><span>Dopamine cannot cross the BBB; L-DOPA can.</span></div></div>
+        <div class="flashcard"><div class="q">Best plasma test for pheochromocytoma?</div><div class="a"><span>Plasma free metanephrines.</span></div></div>
+        <div class="flashcard"><div class="q">Addison's patient has undetectable plasma Epi despite intact medulla. Why?</div><div class="a"><span>No cortisol → PNMT not induced → NE cannot be methylated to Epi.</span></div></div>
+      </div>
+    </section>
+
+    <!-- ============ OBJECTIVE 4 ============ -->
+    <section class="obj" id="obj4" data-obj="4">
+      <div class="obj-header">
+        <h2><span class="num">4</span>Initial step of steroid biosynthesis</h2>
+        <button class="mark-done" data-obj="4">Mark Done</button>
+      </div>
+
+      <div class="gist"><span class="gist-label">The Gist</span>
+        Every steroid hormone in the body starts with <b>cholesterol</b>, and every pathway's first committed step is the same: <b>cholesterol → pregnenolone</b> by <b>desmolase</b> inside the mitochondrion. This is the rate-limiting step and the target of several high-yield drugs.
+        <div class="gist-deeper">
+          <span class="preview-label">📚 Going Deeper will expand on:</span>
+          <ul>
+            <li><b>(1) The chemistry</b> — details the side-chain cleavage reaction (C27 → C21), the four names for the same enzyme, and cofactors / location.</li>
+            <li><b>(2) The real bottleneck (StAR)</b> — reveals that cholesterol import by StAR is the true rate-limiter, and links to congenital lipoid adrenal hyperplasia.</li>
+            <li><b>(3) Downstream branching</b> — shows how tissue-specific enzymes turn pregnenolone into aldosterone, cortisol, DHEA, testosterone, or estradiol.</li>
+            <li><b>(4) CAH enzyme deficiencies</b> — 21- / 11β- / 17α-hydroxylase patterns you must know for Step 1.</li>
+            <li><b>(5) Drug targets</b> — ketoconazole, metyrapone, finasteride, aromatase inhibitors, abiraterone.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pathway">
+        <div class="step">Cholesterol</div>
+        <span class="arrow">→</span>
+        <div class="step" style="border-color:var(--red);color:var(--red)">Pregnenolone<span class="enz">Desmolase / CYP11A1 / P450scc</span></div>
+        <span class="arrow">→</span>
+        <div class="step">all steroid hormones</div>
+      </div>
+
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Feature</th><th>Detail</th></tr></thead>
+        <tbody>
+          <tr><td><b>Substrate</b></td><td>Cholesterol (LDL uptake, de novo synthesis, or stored esters)</td></tr>
+          <tr><td><b>Enzyme</b></td><td>Cholesterol desmolase — aka 20,22-desmolase, <b>CYP11A1</b>, <b>P450scc</b> (side-chain cleavage)</td></tr>
+          <tr><td><b>Location</b></td><td>Inner mitochondrial membrane</td></tr>
+          <tr><td><b>Rate-limiting transport</b></td><td><b>StAR protein</b> — moves cholesterol from outer to inner mitochondrial membrane. StAR expression is the true bottleneck.</td></tr>
+          <tr><td><b>Stimulated by</b></td><td>Adrenal: ACTH (via Gs/cAMP/PKA). Gonads: LH. Zona glomerulosa: Angiotensin II, K⁺.</td></tr>
+          <tr><td><b>Product</b></td><td><b>Pregnenolone</b> — universal precursor to ALL steroid hormones.</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>The steroid "carbon count" family tree</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Carbons</th><th>Class</th><th>Members</th><th>How to remember</th></tr></thead>
+        <tbody>
+          <tr><td><b>C21</b></td><td>Progestins & Corticoids</td><td>Progesterone, cortisol, aldosterone</td><td>Pregnenolone itself is C21</td></tr>
+          <tr><td><b>C19</b></td><td>Androgens</td><td>DHEA, androstenedione, testosterone, DHT</td><td>Lose 2-carbon side chain</td></tr>
+          <tr><td><b>C18</b></td><td>Estrogens</td><td>Estrone, estradiol, estriol</td><td>Aromatase removes C19 methyl</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="deep-dive">
+        <div class="dd-title">📚 Going Deeper — the reaction, the bottleneck, the consequences</div>
+
+        <h4>1 · The chemistry: cholesterol → pregnenolone</h4>
+        <div class="group-label">The Reaction</div>
+        <ul>
+          <li>Carbon count change:
+            <ul class="sublist">
+              <li>Removes 6 carbons from cholesterol's side chain (C27 → C21).</li>
+              <li>Hence the name "side-chain cleavage" (P450scc = CYP11A1 = desmolase — four names, same enzyme).<span class="cite">Costanzo 6e ch 9</span></li>
+            </ul>
+          </li>
+          <li>Mechanism:
+            <ul class="sublist">
+              <li>Two sequential hydroxylations at C20 and C22.</li>
+              <li>Followed by C-C bond cleavage.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Cofactors &amp; Location</div>
+        <ul>
+          <li>Required cofactors:
+            <ul class="sublist">
+              <li>NADPH.</li>
+              <li>O₂.</li>
+              <li>Fe (as P450 heme cofactor).</li>
+            </ul>
+          </li>
+          <li>Location:
+            <ul class="sublist">
+              <li>Inner mitochondrial membrane — so cholesterol must be imported first (see StAR, below).</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>2 · The real bottleneck: StAR and mitochondrial cholesterol import</h4>
+        <ul>
+          <li>What StAR does:
+            <ul class="sublist">
+              <li>Shuttles cholesterol from the OUTER to the INNER mitochondrial membrane.</li>
+              <li>This transport is the <i>actual</i> rate-limiting step of steroidogenesis.</li>
+            </ul>
+          </li>
+          <li>Why desmolase isn't the bottleneck:
+            <ul class="sublist">
+              <li>Desmolase is constitutively active — it simply waits for substrate.</li>
+              <li>Block StAR and the downstream enzyme is idle.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Regulation of StAR (upregulated in minutes)</div>
+        <ul>
+          <li>Adrenal cortex:
+            <ul class="sublist">
+              <li>ACTH via cAMP-PKA.</li>
+            </ul>
+          </li>
+          <li>Gonads:
+            <ul class="sublist">
+              <li>LH via cAMP-PKA.</li>
+            </ul>
+          </li>
+          <li>Zona glomerulosa:
+            <ul class="sublist">
+              <li>Angiotensin II + K⁺ via IP3 / Ca²⁺.<span class="cite">Boards &amp; Beyond — Adrenal</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Cholesterol Source Hierarchy</div>
+        <ul>
+          <li>Preferred (most to least):
+            <ul class="sublist">
+              <li>LDL-receptor uptake.</li>
+              <li>Stored cholesterol esters in lipid droplets.</li>
+              <li>De novo synthesis via HMG-CoA reductase.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Classic Disease — Congenital Lipoid Adrenal Hyperplasia</div>
+        <ul>
+          <li>Cause:
+            <ul class="sublist">
+              <li>Mutations in StAR.</li>
+            </ul>
+          </li>
+          <li>Pathology:
+            <ul class="sublist">
+              <li>Adrenals become lipid-engorged (cholesterol cannot enter mitochondria).</li>
+            </ul>
+          </li>
+          <li>Clinical:
+            <ul class="sublist">
+              <li>Profound deficiency of ALL steroid hormones → salt-wasting, hypotension.</li>
+              <li>46,XY fetuses are phenotypic females (no androgens to drive male development).<span class="cite">Pathoma ch 15</span></li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>3 · Downstream branching — one precursor, five hormone families</h4>
+        <div class="group-label">Core Principle</div>
+        <ul>
+          <li>Tissue-specific enzymes determine the product:
+            <ul class="sublist">
+              <li>All steroid hormones derive from pregnenolone.</li>
+              <li>Different organs and zones express different downstream enzymes, producing different end-products.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Adrenal Cortex Outputs (by zone)</div>
+        <ul>
+          <li>Zona glomerulosa:
+            <ul class="sublist">
+              <li>Has aldosterone synthase; lacks 17α-hydroxylase.</li>
+              <li>Makes <b>aldosterone</b> only.</li>
+            </ul>
+          </li>
+          <li>Zona fasciculata:
+            <ul class="sublist">
+              <li>Has 17α-hydroxylase + 11β-hydroxylase.</li>
+              <li>Makes <b>cortisol</b>.</li>
+            </ul>
+          </li>
+          <li>Zona reticularis:
+            <ul class="sublist">
+              <li>Has 17,20-lyase.</li>
+              <li>Makes <b>DHEA</b> (adrenal androgen).</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Gonadal Outputs</div>
+        <ul>
+          <li>Testes (Leydig cells):
+            <ul class="sublist">
+              <li>Full androgen pathway → <b>testosterone</b>.</li>
+            </ul>
+          </li>
+          <li>Ovary (granulosa + theca):
+            <ul class="sublist">
+              <li>Theca makes androstenedione (LH-driven).</li>
+              <li>Granulosa aromatizes it to <b>estradiol</b> (FSH-driven).</li>
+              <li>Two-cell two-gonadotropin model.<span class="cite">FA 2024 Repro; Costanzo 6e ch 10</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Two Parallel Synthetic Paths</div>
+        <ul>
+          <li>Pathways:
+            <ul class="sublist">
+              <li>Δ5 pathway — the pregnenolone side.</li>
+              <li>Δ4 pathway — the progesterone side.</li>
+            </ul>
+          </li>
+          <li>Tissue preference:
+            <ul class="sublist">
+              <li>Adrenal prefers Δ5.</li>
+              <li>Gonads prefer Δ4.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>4 · Enzyme deficiencies you MUST know — CAH</h4>
+        <div class="group-label">Core Principle</div>
+        <ul>
+          <li>Block an enzyme:
+            <ul class="sublist">
+              <li>Substrate backs up upstream.</li>
+              <li>Accumulated intermediates shunt into alternative pathways.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>Deficiency</th><th>Blocks</th><th>Accumulates</th><th>Clinical picture</th></tr></thead>
+          <tbody>
+            <tr><td><b>21-hydroxylase</b> (~95% of CAH)</td><td>Cortisol + Aldo</td><td>Progesterone → androgens</td><td>Virilization (ambiguous genitalia in females) + salt-wasting + hypotension + hyperkalemia</td></tr>
+            <tr><td><b>11β-hydroxylase</b></td><td>Cortisol + Aldo</td><td>11-deoxycorticosterone (weak mineralocorticoid) + androgens</td><td>Virilization + <b>HYPERtension</b> + hypokalemia</td></tr>
+            <tr><td><b>17α-hydroxylase</b></td><td>Cortisol + sex steroids</td><td>Mineralocorticoid pathway</td><td>Sexual infantilism + <b>HYPERtension</b> + hypokalemia</td></tr>
+          </tbody>
+        </table></div>
+        <div class="group-label">Memory Trick for CAH Patterns</div>
+        <ul>
+          <li>HYPER vs. HYPO rule:
+            <ul class="sublist">
+              <li><b>HYPER-tension = 11 or 17.</b></li>
+              <li><b>HYPO-tension = 21.</b></li>
+            </ul>
+          </li>
+          <li>Virilization rule:
+            <ul class="sublist">
+              <li>21 and 11 → virilize (shunt INTO sex steroids → females virilize).</li>
+              <li>17 → does NOT virilize (blocks sex steroids → genitalia underdeveloped).<span class="cite">Pathoma ch 15; FA 2024</span></li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>5 · Drug targets on the pathway</h4>
+        <ul>
+          <li><b>Ketoconazole:</b>
+            <ul class="sublist">
+              <li>Inhibits desmolase + 17α-hydroxylase + several other CYPs.</li>
+              <li>Net effect: ↓ cortisol, ↓ androgens.</li>
+              <li>Used in Cushing's syndrome and advanced prostate cancer.</li>
+              <li>Notable side effect: gynecomastia (from ↓ testosterone).<span class="cite">Lippincott Pharm 7e</span></li>
+            </ul>
+          </li>
+          <li><b>Metyrapone:</b>
+            <ul class="sublist">
+              <li>11β-hydroxylase inhibitor.</li>
+              <li>Used diagnostically (tests ACTH reserve) and therapeutically (Cushing's).</li>
+            </ul>
+          </li>
+          <li><b>Aminoglutethimide:</b>
+            <ul class="sublist">
+              <li>Desmolase inhibitor.</li>
+              <li>Older agent, mostly replaced by ketoconazole.</li>
+            </ul>
+          </li>
+          <li><b>Mitotane:</b>
+            <ul class="sublist">
+              <li>Adrenolytic — destroys the adrenal cortex.</li>
+              <li>Used in adrenocortical carcinoma.</li>
+            </ul>
+          </li>
+          <li><b>Finasteride:</b>
+            <ul class="sublist">
+              <li>5α-reductase inhibitor (blocks T → DHT conversion).</li>
+              <li>Used in BPH and male-pattern baldness.</li>
+            </ul>
+          </li>
+          <li><b>Anastrozole / letrozole / exemestane:</b>
+            <ul class="sublist">
+              <li>Aromatase inhibitors (block androgen → estrogen conversion).</li>
+              <li>Used in ER+ breast cancer (postmenopausal).</li>
+              <li>Letrozole is also used for ovulation induction in fertility treatment.</li>
+            </ul>
+          </li>
+          <li><b>Abiraterone:</b>
+            <ul class="sublist">
+              <li>17α-hydroxylase / 17,20-lyase inhibitor.</li>
+              <li>Used in metastatic prostate cancer.<span class="cite">Lippincott Pharm 7e — chemotherapy chapter</span></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+        <p><b>Rate-limiting step of steroidogenesis = Cholesterol → Pregnenolone (desmolase).</b> StAR-mediated import is the actual bottleneck. <span class="cite">end01 lecture</span></p>
+        <ul>
+          <li><b>ACTH upregulates</b> StAR and desmolase → increases cortisol in minutes (acute) and hours (chronic). <span class="cite">FA 3.15 Signaling pathways of steroid hormones</span></li>
+          <li><b>Desmolase inhibitors:</b> ketoconazole, aminoglutethimide (used in Cushing's). <span class="cite">AI Generated · see end21</span></li>
+          <li><b>Metyrapone</b> blocks 11β-hydroxylase (Cushing testing/treatment). <span class="cite">AI Generated · see end21</span></li>
+        </ul>
+      </div>
+
+      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <p><b>"Cholesterol is Pregnant with every steroid"</b> — Cholesterol → Pregnenolone → all others. Desmolase is the "midwife."</p>
+        <p><b>"SCC = Scissors on the Side Chain"</b> — P450scc literally cleaves the side chain.</p>
+        <p><b>"StAR is the bouncer"</b> — cholesterol can't enter the mitochondrial VIP room without StAR.</p>
+        <p>Carbon counts <b>descend</b>: C21 → C19 → C18 (progesterone → androgens → estrogens).</p>
+      </div>
+
+      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <ul>
+          <li><b>21-hydroxylase deficiency</b> (most common CAH): ↓ cortisol & aldo, ↑ androgens → virilization, salt-wasting, hypotension. <span class="cite">AI Generated · see end04/end20</span></li>
+          <li><b>17α-hydroxylase deficiency:</b> ↓ cortisol & sex steroids, ↑ mineralocorticoids → HTN, hypokalemia, sexual infantilism. <span class="cite">AI Generated · see end04/end20</span></li>
+          <li><b>11β-hydroxylase deficiency:</b> ↓ cortisol, ↑ 11-DOC (weak mineralocorticoid) + ↑ androgens → HTN + virilization. <span class="cite">AI Generated · see end04/end20</span></li>
+          <li><b>Ketoconazole</b> (broad CYP inhibitor) → can cause gynecomastia in men from ↓ testosterone. <span class="cite">AI Generated · see end21</span></li>
+        </ul>
+      </div>
+
+      <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL</div>
+        <div class="flashcard"><div class="q">First committed step of all steroid biosynthesis — enzyme + reaction?</div><div class="a"><span>Cholesterol → Pregnenolone, catalyzed by desmolase (CYP11A1 / P450scc).</span></div></div>
+        <div class="flashcard"><div class="q">What protein actually rate-limits the mitochondrial import of cholesterol?</div><div class="a"><span>StAR (Steroidogenic Acute Regulatory protein).</span></div></div>
+        <div class="flashcard"><div class="q">Hormone that stimulates this step in the adrenal? In the gonads?</div><div class="a"><span>ACTH (adrenal); LH (gonads).</span></div></div>
+        <div class="flashcard"><div class="q">Carbon counts of progesterone, testosterone, estradiol?</div><div class="a"><span>C21, C19, C18.</span></div></div>
+        <div class="flashcard"><div class="q">Ketoconazole's endocrine mechanism?</div><div class="a"><span>Inhibits multiple CYP450 steroidogenic enzymes (including desmolase and 17α-hydroxylase) → ↓ cortisol and sex steroids.</span></div></div>
+        <div class="flashcard"><div class="q">Why are androgens elevated in 21-hydroxylase deficiency?</div><div class="a"><span>Blocked cortisol/aldo synthesis shunts progesterone/pregnenolone intermediates into the androgen pathway.</span></div></div>
+      </div>
+    </section>
+
+    <!-- ============ OBJECTIVE 5 ============ -->
+    <section class="obj" id="obj5" data-obj="5">
+      <div class="obj-header">
+        <h2><span class="num">5</span>Carrier proteins — activity & half-life</h2>
+        <button class="mark-done" data-obj="5">Mark Done</button>
+      </div>
+
+      <div class="gist"><span class="gist-label">The Gist</span>
+        Hydrophobic hormones (steroids, thyroid) don't dissolve in plasma, so they ride bound to carrier proteins. This (1) <b>increases solubility</b>, (2) <b>extends half-life</b> by protecting from degradation/filtration, (3) creates a <b>reserve/buffer</b>, and (4) <b>inactivates</b> the bound fraction — only free hormone binds receptors.
+        <div class="gist-deeper">
+          <span class="preview-label">📚 Going Deeper will expand on:</span>
+          <ul>
+            <li><b>(1) Binding kinetics</b> — explains Kd, typical free fractions (T4 ~0.03%, cortisol ~5%), and why feedback keeps free hormone stable.</li>
+            <li><b>(2) What regulates each carrier</b> — drivers of TBG, CBG, SHBG, and albumin up/down, including the PCOS SHBG story.</li>
+            <li><b>(3) Half-life values</b> — memorizable ballparks from catecholamines (seconds) up to T4 (~7 days).</li>
+            <li><b>(4) Why "total hormone" can deceive</b> — worked examples for pregnancy, nephrotic syndrome, cirrhosis, and euthyroid sick syndrome.</li>
+            <li><b>(5) Exceptions to "only free = active"</b> — megalin-mediated endocytosis and tissue-specific conversion caveats.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Who carries what</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Carrier</th><th>Main cargo</th><th>Clinical point</th></tr></thead>
+        <tbody>
+          <tr><td><b>TBG</b> (Thyroxine-Binding Globulin)</td><td>T4 (strong), T3 (weaker)</td><td>↑TBG in pregnancy, OCP, hepatitis → ↑ total T4, normal free T4 (<b>euthyroid</b>)</td></tr>
+          <tr><td>Transthyretin (TTR)</td><td>T4, retinol</td><td>Secondary thyroid carrier</td></tr>
+          <tr><td><b>CBG</b> (Transcortin)</td><td>Cortisol, aldo (weakly)</td><td>↑CBG in pregnancy/OCP → ↑ total cortisol, normal free cortisol</td></tr>
+          <tr><td><b>SHBG</b> (Sex Hormone-Binding Globulin)</td><td>Testosterone > estradiol</td><td>↑SHBG → ↓ free T (cirrhosis, hyperthyroidism, estrogen). ↓SHBG in obesity, hypothyroidism, PCOS → ↑ free T</td></tr>
+          <tr><td>Albumin</td><td>Many (non-specific)</td><td>Low-affinity, high-capacity backup</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>The "Free vs. Bound" rule</h3>
+      <ul>
+        <li>Activity:
+          <ul class="sublist">
+            <li><b>Only FREE hormone is biologically active.</b> It crosses membranes and binds receptors.</li>
+          </ul>
+        </li>
+        <li>Reservoir role:
+          <ul class="sublist">
+            <li>Bound hormone = inert reservoir, in equilibrium (Kd) with free hormone.</li>
+          </ul>
+        </li>
+        <li>Feedback target:
+          <ul class="sublist">
+            <li>Feedback regulates <b>free</b> hormone — so total changes but free often stays normal.</li>
+          </ul>
+        </li>
+        <li>Half-life effect:
+          <ul class="sublist">
+            <li>Only free hormone is filtered by the kidney or degraded — binding extends half-life.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="deep-dive">
+        <div class="dd-title">📚 Going Deeper — the kinetics and the clinical chaos</div>
+
+        <h4>1 · Binding kinetics — the Kd concept</h4>
+        <div class="group-label">The Equilibrium</div>
+        <ul>
+          <li>Dissociation constant:
+            <ul class="sublist">
+              <li>The binding of hormone to carrier is reversible and governed by Kd.</li>
+              <li>Formula: <span style="font-family:monospace;background:#F0F0F2;padding:2px 6px;border-radius:3px">Kd = [Hormone]<sub>free</sub> × [Carrier]<sub>free</sub> / [Complex]</span></li>
+            </ul>
+          </li>
+          <li>Interpretation:
+            <ul class="sublist">
+              <li>LOW Kd = tight binding.</li>
+              <li>HIGH Kd = loose binding.</li>
+              <li>TBG has low Kd for T4 — very tight.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Free Fractions at Steady State</div>
+        <ul>
+          <li>Thyroid hormones:
+            <ul class="sublist">
+              <li>T4: ~0.03% free.</li>
+              <li>T3: ~0.3% free.</li>
+            </ul>
+          </li>
+          <li>Steroids:
+            <ul class="sublist">
+              <li>Cortisol: ~5% free.</li>
+              <li>Testosterone: ~2% truly free; ~40% is loosely albumin-bound and bioavailable.<span class="cite">Costanzo 6e ch 9</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Why Feedback Keeps Free Stable</div>
+        <ul>
+          <li>Homeostatic adjustment:
+            <ul class="sublist">
+              <li>When carrier level changes, total hormone shifts but free hormone returns to baseline via negative feedback.</li>
+              <li>This is why a pregnant euthyroid patient has ↑ total T4 but normal free T4 and normal TSH.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>2 · What regulates each carrier's production</h4>
+        <div class="group-label">TBG (made in liver)</div>
+        <ul>
+          <li>Increased by:
+            <ul class="sublist">
+              <li>Estrogen (pregnancy, OCP, HRT, tamoxifen).</li>
+              <li>Acute hepatitis.</li>
+              <li>Heroin, methadone.</li>
+            </ul>
+          </li>
+          <li>Decreased by:
+            <ul class="sublist">
+              <li>Androgens.</li>
+              <li>Glucocorticoids.</li>
+              <li>Nephrotic syndrome (urinary loss).</li>
+              <li>Cirrhosis.</li>
+              <li>Severe illness (euthyroid sick syndrome).<span class="cite">FA 2024 Endo; Costanzo 6e</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">CBG / Transcortin (made in liver)</div>
+        <ul>
+          <li>Increased by:
+            <ul class="sublist">
+              <li>Estrogen.</li>
+              <li>Pregnancy.</li>
+            </ul>
+          </li>
+          <li>Decreased by:
+            <ul class="sublist">
+              <li>Cirrhosis.</li>
+              <li>Nephrotic syndrome.</li>
+              <li>Severe sepsis.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">SHBG (made in liver — clinically HUGE)</div>
+        <ul>
+          <li>Increased by:
+            <ul class="sublist">
+              <li>Estrogen.</li>
+              <li>Hyperthyroidism.</li>
+              <li>Cirrhosis.</li>
+              <li>Anorexia.</li>
+              <li>Anticonvulsants.</li>
+            </ul>
+          </li>
+          <li>Decreased by:
+            <ul class="sublist">
+              <li>Androgens.</li>
+              <li>Obesity.</li>
+              <li>Hypothyroidism.</li>
+              <li>Insulin excess (PCOS, T2DM).</li>
+            </ul>
+          </li>
+          <li>PCOS link:
+            <ul class="sublist">
+              <li>Hyperinsulinemia ↓ SHBG → ↑ free testosterone.</li>
+              <li>Clinical picture: hirsutism, acne, oligomenorrhea.</li>
+              <li>Metformin / weight loss can reverse this.<span class="cite">FA 2024 Repro; B&amp;B — PCOS</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Albumin (non-specific, high-capacity)</div>
+        <ul>
+          <li>Decreased in:
+            <ul class="sublist">
+              <li>Liver failure.</li>
+              <li>Nephrotic syndrome.</li>
+              <li>Malnutrition.</li>
+              <li>Burns.</li>
+            </ul>
+          </li>
+          <li>Clinical effect:
+            <ul class="sublist">
+              <li>Low albumin shifts free fraction of MANY drugs and hormones.</li>
+              <li>Alters pharmacokinetics (e.g., phenytoin, warfarin dosing).<span class="cite">Lippincott Pharm 7e</span></li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>3 · Half-life values worth knowing</h4>
+        <div class="group-label">What Sets Half-Life</div>
+        <ul>
+          <li>Definition:
+            <ul class="sublist">
+              <li>Time for plasma concentration to drop by 50% after secretion stops.</li>
+            </ul>
+          </li>
+          <li>Determinants:
+            <ul class="sublist">
+              <li>Carrier binding (protects).</li>
+              <li>Hepatic metabolism.</li>
+              <li>Renal filtration.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Approximate Half-Lives (memorize ballparks)</div>
+        <ul>
+          <li>Catecholamines (seconds):
+            <ul class="sublist">
+              <li>Epi, NE: 1–2 minutes.</li>
+            </ul>
+          </li>
+          <li>Peptide hormones (minutes):
+            <ul class="sublist">
+              <li>PTH: ~4 minutes (very short — why bone/kidney effects are continuous).</li>
+              <li>Insulin: 5–8 minutes.</li>
+              <li>ACTH: ~10 minutes.</li>
+              <li>GH: ~20 minutes.</li>
+            </ul>
+          </li>
+          <li>Steroids (hours):
+            <ul class="sublist">
+              <li>Aldosterone: ~20 minutes.</li>
+              <li>Cortisol: 60–90 minutes.</li>
+              <li>Testosterone: 1–2 hours.</li>
+            </ul>
+          </li>
+          <li>Thyroid hormones (days — titanic):
+            <ul class="sublist">
+              <li>T3: 18–24 hours.</li>
+              <li>T4: ~7 days — why once-daily levothyroxine works.<span class="cite">Guyton 14e ch 77</span></li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>4 · Why "total hormone" can deceive you — worked examples</h4>
+        <ul>
+          <li><b>Pregnancy:</b>
+            <ul class="sublist">
+              <li>↑ estrogen → ↑ TBG → ↑ total T4 but normal free T4.</li>
+              <li>Patient is euthyroid — <b>don't treat based on total T4.</b></li>
+            </ul>
+          </li>
+          <li><b>Nephrotic syndrome:</b>
+            <ul class="sublist">
+              <li>Protein loss in urine includes TBG → ↓ total T4.</li>
+              <li>Free T4 remains normal → still euthyroid.</li>
+            </ul>
+          </li>
+          <li><b>Cirrhosis:</b>
+            <ul class="sublist">
+              <li>↓ albumin from failed hepatic synthesis.</li>
+              <li>↑ SHBG from ↑ estrogen (liver can't clear it).</li>
+              <li>Total hormone levels and free fractions both altered → careful lab interpretation needed.<span class="cite">B&amp;B Endo — Thyroid labs</span></li>
+            </ul>
+          </li>
+          <li><b>Severe illness ("euthyroid sick syndrome"):</b>
+            <ul class="sublist">
+              <li>↓ TBG, ↓ CBG, ↓ free T3 (peripheral conversion shunts T4 to inactive reverse T3).</li>
+              <li>Patient is NOT truly hypothyroid — no thyroid hormone treatment needed.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>5 · Nuance: exceptions to "only free = active"</h4>
+        <div class="group-label">Megalin-Mediated Endocytosis</div>
+        <ul>
+          <li>Mechanism:
+            <ul class="sublist">
+              <li>A few tissues internalize bound hormone-carrier complexes WHOLE.</li>
+              <li>Classic: kidney proximal tubule taking up vitamin D-binding protein complexes.</li>
+              <li>Some steroid-SHBG uptake also uses this pathway.<span class="cite">Guyton 14e</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Tissue-Specific Conversion</div>
+        <ul>
+          <li>Local adjustments:
+            <ul class="sublist">
+              <li>Certain tissues have tissue-specific deiodinase or carrier dissociation.</li>
+              <li>Can change the LOCAL free-hormone concentration from plasma.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Step 1 Bottom Line</div>
+        <ul>
+          <li>Default rule:
+            <ul class="sublist">
+              <li>The "only free is active" rule is &gt;95% correct.</li>
+              <li>It is the right default answer for USMLE questions.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+        <ul>
+          <li><b>Pregnancy/OCP/estrogen → ↑TBG → ↑ total T4, normal free T4.</b> Patient is euthyroid — do NOT treat based on total T4. <span class="cite">AI Generated · see end10/11</span></li>
+          <li><b>Nephrotic/liver failure → ↓TBG → ↓ total T4</b>, but normal free T4. Still euthyroid. <span class="cite">AI Generated · see end10</span></li>
+          <li><b>Half-life ranking:</b> catecholamines (~1–2 min) &lt; peptides (5–60 min) &lt; steroids (hours) &lt; thyroid (T3 ~1 day, <b>T4 ~7 days</b>). <span class="cite">FA 3.14 Signaling pathways; Bootcamp 1.01</span></li>
+          <li><b>Hyperthyroidism</b> ↑ SHBG → ↓ free testosterone in men (gynecomastia, low libido). <span class="cite">AI Generated · SHBG in end01; clinical end10/11</span></li>
+        </ul>
+      </div>
+
+      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <p><b>"Free = Active. Bound = Backup."</b> Bound pool = savings account; free = spending money.</p>
+        <p><b>TBG, CBG, SHBG</b> — the "BG" family of Binding Globulins: Thyroid, Cortisol, Sex steroids.</p>
+        <p><b>Estrogen raises ALL carrier proteins</b> (TBG, CBG, SHBG) — think "estrogen dresses up all the hormones in carrier coats."</p>
+        <p>Half-life: <b>"Catecholamines are TINY (sec), Thyroid is TITANIC (days)."</b></p>
+      </div>
+
+      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <ul>
+          <li><b>Levothyroxine once daily</b> works because T4 half-life is ~7 days — plasma levels are stable. <span class="cite">AI Generated · see end13</span></li>
+          <li><b>Pregnancy thyroid labs:</b> always order <b>FREE T4</b> (and TSH). Total T4 is falsely high. <span class="cite">AI Generated · see end10/11</span></li>
+          <li><b>Cirrhosis:</b> ↓ albumin + ↑ SHBG (↑ estrogen from failed liver clearance) → low free T, high estradiol → gynecomastia, spider angiomas. <span class="cite">AI Generated · GI / repro</span></li>
+          <li><b>Why pheochromocytoma is EPISODIC:</b> catecholamine half-life is minutes, so bursts give paroxysmal symptoms. <span class="cite">AI Generated · see end20</span></li>
+        </ul>
+      </div>
+
+      <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL</div>
+        <div class="flashcard"><div class="q">Only the ___ fraction of a hormone is biologically active.</div><div class="a"><span>Free (unbound) fraction.</span></div></div>
+        <div class="flashcard"><div class="q">Primary carrier for thyroid hormones? Cortisol? Sex steroids?</div><div class="a"><span>TBG; CBG (transcortin); SHBG.</span></div></div>
+        <div class="flashcard"><div class="q">Pregnant patient: ↑ total T4, normal free T4, normal TSH — thyroid status?</div><div class="a"><span>Euthyroid — estrogen raised TBG, so total T4 rises but free stays normal.</span></div></div>
+        <div class="flashcard"><div class="q">Why do hydrophobic hormones have longer half-lives than hydrophilic ones?</div><div class="a"><span>Carrier binding protects them from plasma enzymes and prevents renal filtration.</span></div></div>
+        <div class="flashcard"><div class="q">Effect of hyperthyroidism on free testosterone in men?</div><div class="a"><span>Decreased — hyperthyroidism raises SHBG, increasing the bound fraction.</span></div></div>
+        <div class="flashcard"><div class="q">Approximate half-life of T4?</div><div class="a"><span>~7 days.</span></div></div>
+      </div>
+    </section>
+
+    <!-- ============ OBJECTIVE 6 ============ -->
+    <section class="obj" id="obj6" data-obj="6">
+      <div class="obj-header">
+        <h2><span class="num">6</span>Classifying hormone receptors (location + mechanism)</h2>
+        <button class="mark-done" data-obj="6">Mark Done</button>
+      </div>
+
+      <div class="gist"><span class="gist-label">The Gist</span>
+        Two big buckets, based on whether the hormone can cross the membrane. Hydrophilic → <b>membrane receptors</b> with second messengers (fast, amplified). Hydrophobic → <b>intracellular receptors</b>, usually transcription factors (slow, long-lasting).
+        <div class="gist-deeper">
+          <span class="preview-label">📚 Going Deeper will expand on:</span>
+          <ul>
+            <li><b>(1) GPCRs</b> — details the 7-TM architecture, Gα-GTP activation cycle, and the Gs / Gq / Gi cascades with cholera and pertussis toxin mechanisms.</li>
+            <li><b>(2) RTKs</b> — explains dimerization, trans-autophosphorylation, MAPK and PI3K-AKT pathways, insulin receptor, and cancer drug targets.</li>
+            <li><b>(3) JAK-STAT</b> — shows the cytokine-receptor mechanism and the hormones that use it (GH, PRL, EPO, TPO, cytokines).</li>
+            <li><b>(4) Guanylyl cyclase</b> — covers membrane vs. soluble GC, cGMP/PKG, and the ANP / nitroglycerin / sildenafil clinical pathway.</li>
+            <li><b>(5) Nuclear receptors</b> — Type I (steroid, cytoplasm + HSP90) vs. Type II (thyroid / vit D / retinoid, nucleus + corepressor).</li>
+            <li><b>(6) Decision tree</b> — a quick algorithm to pick the receptor family from the hormone alone.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>The big-picture split</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Bucket</th><th>Which hormones</th><th>What the receptor does</th></tr></thead>
+        <tbody>
+          <tr><td><b>Membrane-bound</b></td><td>Peptides + catecholamines</td><td>Activates 2nd messengers → post-translational effects. Fast, amplified.</td></tr>
+          <tr><td><b>Intracellular</b></td><td>Steroids, thyroid, vit D, retinoids</td><td>Binds DNA response elements → modulates transcription. Slow, long-lasting.</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Membrane receptor subtypes</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Type</th><th>Mechanism</th><th>Representative hormones</th></tr></thead>
+        <tbody>
+          <tr><td>GPCR — <b>Gs</b></td><td>↑ AC → ↑ cAMP → PKA</td><td>β1, β2, D1, H2, V2, glucagon, FSH, LH, TSH, ACTH, PTH, CRH, calcitonin, GHRH</td></tr>
+          <tr><td>GPCR — <b>Gi</b></td><td>↓ AC → ↓ cAMP</td><td>α2, M2, D2, somatostatin</td></tr>
+          <tr><td>GPCR — <b>Gq</b></td><td>PLC → IP3 + DAG → ↑ Ca²⁺, PKC</td><td>α1, M1, M3, H1, V1, Ang II, GnRH, TRH, oxytocin</td></tr>
+          <tr><td><b>RTK</b></td><td>Dimerize → autophosphorylate → MAPK, PI3K-AKT</td><td>Insulin, IGF-1, EGF, FGF, PDGF, VEGF</td></tr>
+          <tr><td><b>JAK-STAT</b></td><td>JAK phosphorylates STAT → nucleus</td><td>GH, Prolactin, EPO, TPO, cytokines</td></tr>
+          <tr><td><b>Guanylyl cyclase</b></td><td>GTP → cGMP → PKG</td><td>ANP, BNP, NO</td></tr>
+          <tr><td>Ligand-gated ion channel</td><td>Opens channel</td><td>nACh, GABA-A, 5-HT3 (mostly NTs)</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Intracellular receptor subtypes</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Subtype</th><th>Ligands</th><th>Resting location</th></tr></thead>
+        <tbody>
+          <tr><td>Steroid / sex-steroid</td><td>Cortisol, aldo, testosterone, estradiol, progesterone</td><td><b>Cytoplasm</b> (bound to HSP90); hormone binding releases → nucleus</td></tr>
+          <tr><td>Thyroid / Vit D / Retinoid</td><td>T3/T4, calcitriol, retinoic acid</td><td><b>Already in nucleus</b>, often DNA-bound with corepressor</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="deep-dive">
+        <div class="dd-title">📚 Going Deeper — receptor signaling machinery</div>
+
+        <h4>1 · GPCR biology in depth</h4>
+        <div class="group-label">Receptor Architecture</div>
+        <ul>
+          <li>Structure:
+            <ul class="sublist">
+              <li>7 transmembrane α-helices, single polypeptide chain.</li>
+              <li>Extracellular N-terminus, intracellular C-terminus.</li>
+              <li>Ligand binding pocket sits among the TM helices.</li>
+            </ul>
+          </li>
+          <li>Resting state:
+            <ul class="sublist">
+              <li>Gα (bound to GDP) + Gβγ form a trimer.</li>
+              <li>Trimer attached to the inner membrane, loosely associated with the receptor.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Activation Cycle</div>
+        <ul>
+          <li>Steps:
+            <ul class="sublist">
+              <li>Hormone binds → conformational change in receptor → receptor acts as a GEF (guanine exchange factor).</li>
+              <li>Gα exchanges GDP for GTP → dissociates from Gβγ.</li>
+              <li>Gα-GTP (and sometimes Gβγ) activates or inhibits downstream effectors.</li>
+              <li>Gα's intrinsic GTPase activity hydrolyzes GTP → GDP, terminating the signal and reassembling the trimer.<span class="cite">Costanzo 6e ch 1</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Gs Cascade</div>
+        <ul>
+          <li>Pathway:
+            <ul class="sublist">
+              <li>Gs-α activates adenylyl cyclase → ATP → cAMP → activates PKA.</li>
+              <li>PKA phosphorylates substrates (enzymes, channels, CREB).</li>
+            </ul>
+          </li>
+          <li>Termination &amp; modulation:
+            <ul class="sublist">
+              <li>Terminated by phosphodiesterases (PDEs) that hydrolyze cAMP → AMP.</li>
+              <li>Caffeine inhibits PDEs non-selectively → ↑ cAMP duration → stimulation.</li>
+            </ul>
+          </li>
+          <li>Toxin disruption:
+            <ul class="sublist">
+              <li>Cholera toxin ADP-ribosylates Gs-α → permanently "on" → ↑↑ cAMP → Cl⁻/water secretion → rice-water diarrhea.<span class="cite">FA 2024 Micro — Vibrio cholerae</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Gq Cascade</div>
+        <ul>
+          <li>Pathway:
+            <ul class="sublist">
+              <li>Gq-α activates phospholipase C-β (PLC) → cleaves PIP2 → IP3 + DAG.</li>
+              <li>IP3 → opens ER calcium channel (IP3R) → ↑ cytoplasmic Ca²⁺.</li>
+              <li>DAG + Ca²⁺ → activate PKC → phosphorylate targets.</li>
+            </ul>
+          </li>
+          <li>Classic clinical example:
+            <ul class="sublist">
+              <li>α1 agonist on vascular smooth muscle → Gq → Ca²⁺ → contraction → vasoconstriction.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Gi Cascade</div>
+        <ul>
+          <li>Pathway:
+            <ul class="sublist">
+              <li>Gi-α inhibits adenylyl cyclase → ↓ cAMP.</li>
+              <li>Gβγ directly opens cardiac GIRK K⁺ channels — why M2 agonists slow the heart.</li>
+            </ul>
+          </li>
+          <li>Toxin disruption:
+            <ul class="sublist">
+              <li>Pertussis toxin ADP-ribosylates Gi → permanently "off" → cAMP un-inhibited → ↑ cAMP → lymphocytosis, whooping cough.<span class="cite">FA 2024 Micro — Bordetella</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Desensitization</div>
+        <ul>
+          <li>Mechanism:
+            <ul class="sublist">
+              <li>GRKs (G-protein-coupled receptor kinases) phosphorylate the activated receptor.</li>
+              <li>β-arrestin binds → uncouples receptor from G-protein.</li>
+              <li>Receptor internalized via clathrin-coated pits.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>2 · Receptor tyrosine kinases (RTKs)</h4>
+        <div class="group-label">Receptor Architecture</div>
+        <ul>
+          <li>Structure:
+            <ul class="sublist">
+              <li>Single transmembrane (TM) domain.</li>
+              <li>Intracellular tyrosine kinase domain.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Activation</div>
+        <ul>
+          <li>Mechanism:
+            <ul class="sublist">
+              <li>Ligand binding induces receptor dimerization.</li>
+              <li>Each receptor phosphorylates the OTHER on tyrosine residues (trans-autophosphorylation).</li>
+              <li>Phosphotyrosines become docking sites for SH2 or PTB domains on adaptor proteins.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Two Main Downstream Pathways</div>
+        <ul>
+          <li>RAS-RAF-MEK-ERK (MAPK):
+            <ul class="sublist">
+              <li>Drives growth, proliferation, differentiation.</li>
+            </ul>
+          </li>
+          <li>PI3K-AKT-mTOR:
+            <ul class="sublist">
+              <li>Drives survival and metabolism.</li>
+              <li>GLUT4 translocation in response to insulin.<span class="cite">Costanzo 6e ch 1; FA 2024 Biochem</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Insulin Receptor — Special Case</div>
+        <ul>
+          <li>Structure:
+            <ul class="sublist">
+              <li>α₂β₂ tetramer — two α chains outside, two β chains with kinase domains inside.</li>
+              <li>Pre-dimerized (doesn't need a second molecule to find a partner).</li>
+            </ul>
+          </li>
+          <li>Activation:
+            <ul class="sublist">
+              <li>Insulin binding causes conformational change that activates the intracellular kinases.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Other RTKs</div>
+        <ul>
+          <li>EGFR family:
+            <ul class="sublist">
+              <li>HER1, HER2, HER3, HER4.</li>
+            </ul>
+          </li>
+          <li>Other growth-factor RTKs:
+            <ul class="sublist">
+              <li>PDGFR, FGFR, VEGFR.</li>
+              <li>All are major cancer drug targets.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Major RTK-Targeted Drugs</div>
+        <ul>
+          <li>Trastuzumab:
+            <ul class="sublist">
+              <li>Targets HER2 in breast cancer.</li>
+            </ul>
+          </li>
+          <li>Imatinib:
+            <ul class="sublist">
+              <li>Targets BCR-ABL fusion in CML.</li>
+            </ul>
+          </li>
+          <li>Cetuximab:
+            <ul class="sublist">
+              <li>Targets EGFR in colorectal cancer.</li>
+            </ul>
+          </li>
+          <li>Bevacizumab:
+            <ul class="sublist">
+              <li>Targets VEGF in many solid tumors.<span class="cite">Lippincott Pharm 7e — oncology</span></li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>3 · JAK-STAT (cytokine receptors)</h4>
+        <div class="group-label">Receptor Architecture</div>
+        <ul>
+          <li>Structure:
+            <ul class="sublist">
+              <li>Receptor itself has no intrinsic kinase activity.</li>
+              <li>Recruits <b>JAK (Janus kinase)</b> enzymes bound to the intracellular tail.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Activation</div>
+        <ul>
+          <li>Step-by-step:
+            <ul class="sublist">
+              <li>Ligand → receptor dimerization → JAKs trans-phosphorylate each other.</li>
+              <li>JAKs phosphorylate the receptor tails creating docking sites for STATs (Signal Transducers and Activators of Transcription).</li>
+              <li>STATs get phosphorylated → dimerize → translocate to the nucleus.</li>
+              <li>STAT dimers bind DNA (GAS elements) → activate transcription.<span class="cite">FA 2024 Immuno</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Who Uses JAK-STAT</div>
+        <ul>
+          <li>Classic endocrine / hematopoietic group (GPE/TPO):
+            <ul class="sublist">
+              <li>GH, Prolactin, EPO, TPO.</li>
+            </ul>
+          </li>
+          <li>Immune cytokines:
+            <ul class="sublist">
+              <li>All interleukins.</li>
+              <li>Interferons.</li>
+              <li>G-CSF.</li>
+            </ul>
+          </li>
+          <li>Metabolic:
+            <ul class="sublist">
+              <li>Leptin.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Major JAK-STAT Drugs</div>
+        <ul>
+          <li>Tofacitinib:
+            <ul class="sublist">
+              <li>Used in rheumatoid arthritis.</li>
+            </ul>
+          </li>
+          <li>Ruxolitinib:
+            <ul class="sublist">
+              <li>Used in myelofibrosis and alopecia areata.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>4 · Guanylyl cyclase receptors</h4>
+        <div class="group-label">Two Flavors</div>
+        <ul>
+          <li>Membrane-bound GC:
+            <ul class="sublist">
+              <li>Hormone (ANP, BNP, guanylin) binds extracellular domain.</li>
+              <li>Intracellular catalytic domain converts GTP → cGMP.</li>
+            </ul>
+          </li>
+          <li>Soluble GC:
+            <ul class="sublist">
+              <li>NO (nitric oxide) freely diffuses across membranes.</li>
+              <li>Binds the heme of soluble guanylyl cyclase inside the cell → cGMP.<span class="cite">Costanzo 6e ch 1</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Downstream Effects</div>
+        <ul>
+          <li>cGMP → PKG:
+            <ul class="sublist">
+              <li>Phosphorylates smooth-muscle proteins.</li>
+              <li>Leads to vasodilation and natriuresis.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Clinical Applications</div>
+        <ul>
+          <li>BNP:
+            <ul class="sublist">
+              <li>Elevated in heart failure — diagnostic blood test.</li>
+            </ul>
+          </li>
+          <li>Nitroglycerin:
+            <ul class="sublist">
+              <li>Releases NO → vasodilation in angina.</li>
+            </ul>
+          </li>
+          <li>Sildenafil:
+            <ul class="sublist">
+              <li>Blocks PDE5 → preserves cGMP.</li>
+              <li>Acts in corpus cavernosum (erectile function) and pulmonary vasculature (pulmonary HTN).<span class="cite">Lippincott Pharm 7e</span></li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>5 · Nuclear receptor superfamily — intracellular signaling</h4>
+        <div class="group-label">Common Architecture</div>
+        <ul>
+          <li>Three domains:
+            <ul class="sublist">
+              <li>DNA-binding domain (DBD) — contains zinc fingers.</li>
+              <li>Ligand-binding domain (LBD).</li>
+              <li>Transactivation domains (AF-1 and AF-2).</li>
+            </ul>
+          </li>
+          <li>Where they bind DNA:
+            <ul class="sublist">
+              <li>Specific <b>hormone response elements (HREs)</b> in the promoters of target genes.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Two Functional Classes</div>
+        <ul>
+          <li>Type I — "steroid" receptors:
+            <ul class="sublist">
+              <li>Members: GR (cortisol), MR (aldo), AR, PR, ER.</li>
+              <li>Resting location: cytoplasm, bound to HSP90 and HSP70.</li>
+              <li>On hormone binding: HSPs dissociate → receptor dimerizes → nuclear translocation → binds palindromic half-site HREs.</li>
+            </ul>
+          </li>
+          <li>Type II — "thyroid / vit D / retinoid" receptors:
+            <ul class="sublist">
+              <li>Members: TR, VDR, RAR, PPAR.</li>
+              <li>Resting location: nucleus, pre-bound to DNA as heterodimers with RXR, holding a corepressor.</li>
+              <li>On hormone binding: swaps corepressor for a coactivator → transcription.<span class="cite">Guyton 14e ch 74</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Timing of Effects</div>
+        <ul>
+          <li>Classical "genomic" effects:
+            <ul class="sublist">
+              <li>Minutes for transcription initiation.</li>
+              <li>Hours for full protein-level effects.</li>
+            </ul>
+          </li>
+          <li>Non-genomic effects:
+            <ul class="sublist">
+              <li>Some steroid effects are rapid (seconds–minutes) via membrane-associated receptors.</li>
+              <li>Less well-characterized, but HY for vascular effects of aldosterone and estrogen.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>6 · Quick decision tree — pick the receptor family</h4>
+        <ul>
+          <li>Is the hormone lipid-soluble (steroid, thyroid, vit D, retinoid)?
+            <ul class="sublist">
+              <li>→ Intracellular receptor.</li>
+              <li>Cytoplasm for steroids; nucleus for thyroid / vit D / retinoid.</li>
+            </ul>
+          </li>
+          <li>Is it insulin, a growth factor, or a cancer-driver ligand?
+            <ul class="sublist">
+              <li>→ Receptor tyrosine kinase (RTK).</li>
+            </ul>
+          </li>
+          <li>Is it GH, prolactin, EPO, TPO, or a cytokine?
+            <ul class="sublist">
+              <li>→ JAK-STAT.</li>
+            </ul>
+          </li>
+          <li>Is it ANP, BNP, or NO?
+            <ul class="sublist">
+              <li>→ Guanylyl cyclase / cGMP pathway.</li>
+            </ul>
+          </li>
+          <li>Otherwise (most peptide hormones, most neurotransmitters):
+            <ul class="sublist">
+              <li>→ GPCR — then figure out Gs / Gi / Gq.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+        <ul>
+          <li><b>GPCR G-protein assignments are repeat questions.</b> You must know α1 = Gq, β1 = Gs, etc. <span class="cite">FA 3.14 Signaling pathways; B&amp;B 5.06</span></li>
+          <li><b>Acidophiles use JAK-STAT:</b> GH and Prolactin (from pituitary acidophils). Also EPO, TPO. <span class="cite">FA 3.14 Signaling pathways</span></li>
+          <li><b>Insulin receptor is an RTK</b> (α₂β₂ tetramer). Many cancer drug targets too (HER2, EGFR). <span class="cite">FA 3.14 Signaling pathways; oncology xref</span></li>
+          <li><b>ANP/BNP</b> → membrane guanylyl cyclase → cGMP → natriuresis, vasodilation. BNP ↑ in heart failure. <span class="cite">AI Generated · cardiology</span></li>
+          <li><b>Thyroid &amp; Vit D receptors live in the NUCLEUS.</b> Steroid receptors live in the CYTOPLASM with HSP90. <span class="cite">FA 3.15 Signaling pathways of steroid hormones</span></li>
+        </ul>
+      </div>
+
+      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <p><b>"HAVe 1 M&M of GQs":</b> Gq = H1, α1, V1, M1, M3 + GnRH, TRH, Ang II, oxytocin.</p>
+        <p><b>"MAD 2":</b> Gi = M2, α2, D2.</p>
+        <p><b>"Big Box Always Bends":</b> Gs = β1, β2, D1, H2, V2 (+ glucagon, ACTH, PTH, CRH, GHRH).</p>
+        <p><b>"GPE = JAK":</b> GH, Prolactin, EPO all use JAK-STAT.</p>
+        <p><b>"Steroids Sneak into the Cytoplasm; Thyroid goes straight to the Nucleus."</b></p>
+      </div>
+
+      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <ul>
+          <li><b>Cholera toxin</b> ADP-ribosylates Gs → locked ON → ↑↑ cAMP → rice-water diarrhea. <span class="cite">AI Generated · microbiology</span></li>
+          <li><b>Pertussis toxin</b> ADP-ribosylates Gi → locked OFF → ↑ cAMP (disinhibited) → lymphocytosis, whooping cough. <span class="cite">AI Generated · microbiology</span></li>
+          <li><b>Pseudohypoparathyroidism 1A (Albright):</b> defective Gs → PTH doesn't signal → hypocalcemia, short 4th/5th digits. <span class="cite">AI Generated · see end12/parathyroid</span></li>
+          <li><b>Androgen insensitivity:</b> mutant cytoplasmic AR → 46,XY phenotypic female with testes, no axillary/pubic hair. <span class="cite">AI Generated · repro/genetics</span></li>
+          <li><b>Thyroid hormone resistance:</b> mutant TRβ nuclear receptor. <span class="cite">AI Generated · see end10</span></li>
+        </ul>
+      </div>
+
+      <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL</div>
+        <div class="flashcard"><div class="q">α1 agonist binds — what G-protein, what 2nd messengers?</div><div class="a"><span>Gq → PLC → IP3 (↑ Ca²⁺) + DAG (→ PKC).</span></div></div>
+        <div class="flashcard"><div class="q">Cholera toxin — which G-protein, which state?</div><div class="a"><span>Gs, locked ON → ↑ cAMP.</span></div></div>
+        <div class="flashcard"><div class="q">Second messenger for ANP?</div><div class="a"><span>cGMP (membrane guanylyl cyclase).</span></div></div>
+        <div class="flashcard"><div class="q">Receptor family for insulin?</div><div class="a"><span>Receptor tyrosine kinase (RTK).</span></div></div>
+        <div class="flashcard"><div class="q">Receptor family for GH and prolactin?</div><div class="a"><span>JAK-STAT.</span></div></div>
+        <div class="flashcard"><div class="q">Where does the cortisol receptor sit before cortisol arrives?</div><div class="a"><span>In the cytoplasm, bound to HSP90.</span></div></div>
+        <div class="flashcard"><div class="q">Why are steroid hormone effects slower than catecholamine effects?</div><div class="a"><span>Steroids work via gene transcription (hours), catecholamines via 2nd messengers (seconds).</span></div></div>
+      </div>
+    </section>
+
+    <!-- ============ OBJECTIVE 7 ============ -->
+    <section class="obj" id="obj7" data-obj="7">
+      <div class="obj-header">
+        <h2><span class="num">7</span>Factors influencing cellular sensitivity & response</h2>
+        <button class="mark-done" data-obj="7">Mark Done</button>
+      </div>
+
+      <div class="gist"><span class="gist-label">The Gist</span>
+        A target cell's response depends on (1) <b>how much</b> receptor it has, (2) <b>how tightly</b> each receptor binds the hormone, and (3) <b>how well the downstream machinery</b> converts binding into a physiologic effect. Together these shape the dose–response curve (EC50 measures sensitivity).
+        <div class="gist-deeper">
+          <span class="preview-label">📚 Going Deeper will expand on:</span>
+          <ul>
+            <li><b>(1) Dose-response curve math</b> — Hill equation, EC50, Emax, Hill coefficient, and spare-receptor theory.</li>
+            <li><b>(2) Receptor regulation mechanisms</b> — short-term desensitization (GRK / β-arrestin), internalization, and transcriptional up/down-regulation.</li>
+            <li><b>(3) Down-regulation vs. resistance</b> — clarifies the difference and explains why T2DM insulin resistance is primarily post-receptor.</li>
+            <li><b>(4) Permissive, synergistic, antagonistic</b> — precise definitions with classic clinical examples (cortisol + catecholamines, stress hyperglycemia, insulin vs. glucagon).</li>
+            <li><b>(5) Hormone resistance syndromes</b> — AIS, Laron, Albright, NDI, thyroid hormone resistance, leptin receptor deficiency.</li>
+            <li><b>(6) Tachyphylaxis</b> — β2-agonist, opioid, and nitrate tolerance as variations of the same theme.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>The big 3 factors</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Factor</th><th>What changes</th><th>Key examples</th></tr></thead>
+        <tbody>
+          <tr><td><b>Receptor number</b></td><td>Up-regulation vs. down-regulation</td><td>Down-reg: chronic insulin ↑ → T2DM resistance. Up-reg: denervation supersensitivity; β-blocker withdrawal tachycardia.</td></tr>
+          <tr><td><b>Receptor affinity</b></td><td>Kd / EC50 of each receptor</td><td>Post-translational modifications change affinity. Isoforms differ (α1 vs β1 for Epi).</td></tr>
+          <tr><td><b>Signal transduction</b></td><td>Downstream machinery efficiency</td><td>T2DM: post-receptor IRS-1 / PI3K defect. Gs defect in Albright.</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Reading a dose–response curve</h3>
+      <ul>
+        <li>X: log[hormone]. Y: % max response.</li>
+        <li><b>EC50</b> = [hormone] producing half-max response → sensitivity measure.</li>
+        <li><b>LEFT shift (↓EC50) = more sensitive.</b> <b>RIGHT shift (↑EC50) = less sensitive.</b></li>
+        <li>Lower plateau (↓Emax) = ↓ efficacy (fewer functional receptors or broken downstream).</li>
+      </ul>
+
+      <div class="deep-dive">
+        <div class="dd-title">📚 Going Deeper — curves, regulation, and resistance syndromes</div>
+
+        <h4>1 · Dose-response curves — the math you need</h4>
+        <div class="group-label">The Hill Equation</div>
+        <ul>
+          <li>Mathematical form:
+            <ul class="sublist">
+              <li><span style="font-family:monospace;background:#F0F0F2;padding:2px 6px;border-radius:3px">Response = (Emax × [H]<sup>n</sup>) / (EC50<sup>n</sup> + [H]<sup>n</sup>)</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Key Parameters</div>
+        <ul>
+          <li>EC50:
+            <ul class="sublist">
+              <li>The [hormone] producing 50% of maximal response.</li>
+              <li>Lower EC50 = more sensitive (curve shifted left).</li>
+            </ul>
+          </li>
+          <li>Emax:
+            <ul class="sublist">
+              <li>The maximum achievable response (efficacy).</li>
+              <li>Drops when receptor machinery is globally impaired (few receptors OR broken downstream).</li>
+            </ul>
+          </li>
+          <li>Hill coefficient (n):
+            <ul class="sublist">
+              <li>Steepness of the curve.</li>
+              <li>n&gt;1 = positive cooperativity (classic example: hemoglobin–O₂).</li>
+              <li>Hormone-receptor binding is usually n≈1 (single-site binding).<span class="cite">Rang &amp; Dale Pharmacology 9e; Costanzo 6e ch 1</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Spare Receptors Concept</div>
+        <ul>
+          <li>Core idea:
+            <ul class="sublist">
+              <li>Many tissues have more receptors than needed for Emax.</li>
+              <li>This creates high sensitivity even at low receptor occupancy.</li>
+            </ul>
+          </li>
+          <li>Practical consequence:
+            <ul class="sublist">
+              <li>A tissue with 90% spare receptors can lose 80% of its receptors and still reach Emax — just with a right-shifted curve (↑EC50).</li>
+              <li>Explains why receptor down-regulation causes decreased sensitivity (EC50 shift) BEFORE decreased efficacy (Emax drop).<span class="cite">Lippincott Pharm 7e</span></li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>2 · Receptor regulation — multiple mechanisms, different timescales</h4>
+        <div class="group-label">Short-term Desensitization (seconds to minutes)</div>
+        <ul>
+          <li>Mechanism:
+            <ul class="sublist">
+              <li>GRKs phosphorylate activated receptors on C-terminal serine/threonine residues.</li>
+              <li>β-arrestin binds phosphorylated receptor → uncouples it from G-proteins.</li>
+            </ul>
+          </li>
+          <li>Classic example:
+            <ul class="sublist">
+              <li>β2-receptor tachyphylaxis to albuterol in severe asthma overuse.<span class="cite">FA 2024 Pharm — β-agonists</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Internalization (minutes to hours)</div>
+        <ul>
+          <li>Mechanism:
+            <ul class="sublist">
+              <li>β-arrestin recruits clathrin adaptor proteins → receptor taken into endosomes.</li>
+              <li>Fate: recycled to plasma membrane (re-sensitized) OR trafficked to lysosome (degraded = down-regulated).</li>
+            </ul>
+          </li>
+          <li>Classic example:
+            <ul class="sublist">
+              <li>Insulin receptor is classically internalized together with bound insulin → both degraded in lysosome.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Transcriptional Changes (hours to days)</div>
+        <ul>
+          <li>Direction of change:
+            <ul class="sublist">
+              <li>Chronic hormone excess → ↓ receptor gene transcription → fewer new receptors made.</li>
+              <li>Chronic hormone deficit → ↑ receptor gene transcription → more receptors made.</li>
+            </ul>
+          </li>
+          <li>Classic example:
+            <ul class="sublist">
+              <li>β-blocker withdrawal tachycardia: chronic β-blockade up-regulates β1 → sudden discontinuation → catecholamines meet a supersensitive receptor population.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>3 · Down-regulation vs. resistance — clarify</h4>
+        <div class="group-label">Definitions</div>
+        <ul>
+          <li>Down-regulation:
+            <ul class="sublist">
+              <li>Fewer receptors on the cell surface.</li>
+            </ul>
+          </li>
+          <li>Resistance:
+            <ul class="sublist">
+              <li>Decreased biologic response overall.</li>
+              <li>Can be from fewer receptors, impaired signal transduction, impaired downstream effector machinery, or all three.<span class="cite">B&amp;B Endo — Diabetes</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Type 2 DM — Insulin Resistance is Primarily POST-Receptor</div>
+        <ul>
+          <li>Initiating trigger:
+            <ul class="sublist">
+              <li>Obesity / inflammation → ↑ TNF-α and free fatty acids.</li>
+            </ul>
+          </li>
+          <li>Molecular block:
+            <ul class="sublist">
+              <li>Serine phosphorylation of IRS-1 (insulin receptor substrate-1).</li>
+              <li>Serine-phosphorylated IRS-1 cannot be tyrosine-phosphorylated properly → impaired PI3K/AKT signaling.</li>
+            </ul>
+          </li>
+          <li>Downstream consequence:
+            <ul class="sublist">
+              <li>↓ GLUT4 translocation in muscle.</li>
+              <li>↓ Suppression of hepatic gluconeogenesis.</li>
+            </ul>
+          </li>
+          <li>Late compounding:
+            <ul class="sublist">
+              <li>Chronic hyperinsulinemia eventually ALSO down-regulates receptors, compounding the problem.<span class="cite">FA 2024 Endo; Pathoma ch 15</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Drug Targets</div>
+        <ul>
+          <li>Metformin:
+            <ul class="sublist">
+              <li>Activates AMPK, partially bypasses insulin resistance.</li>
+              <li>Reduces hepatic gluconeogenesis.</li>
+            </ul>
+          </li>
+          <li>Thiazolidinediones (pioglitazone):
+            <ul class="sublist">
+              <li>PPAR-γ agonists.</li>
+              <li>Improve insulin sensitivity at adipose tissue.</li>
+            </ul>
+          </li>
+          <li>GLP-1 agonists (semaglutide):
+            <ul class="sublist">
+              <li>Enhance glucose-dependent insulin secretion.</li>
+              <li>Promote weight loss.<span class="cite">Lippincott Pharm 7e</span></li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>4 · Permissive, synergistic, antagonistic — used precisely</h4>
+        <div class="group-label">Permissive</div>
+        <ul>
+          <li>Definition:
+            <ul class="sublist">
+              <li>Hormone A is required for hormone B's effect, but A alone at physiologic levels has little direct effect.</li>
+            </ul>
+          </li>
+          <li>Cortisol permits catecholamine vasoconstriction:
+            <ul class="sublist">
+              <li>Addisonian crisis patients don't respond to norepinephrine until hydrocortisone is given.</li>
+              <li>Cortisol up-regulates α1 receptor expression and preserves vascular responsiveness.<span class="cite">Guyton 14e ch 78</span></li>
+            </ul>
+          </li>
+          <li>Thyroid hormone permits GH and catecholamines:
+            <ul class="sublist">
+              <li>Permits GH effects on growth.</li>
+              <li>Permits catecholamine cardiac effects (↑ β-adrenergic receptor density in myocardium).</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Synergistic</div>
+        <ul>
+          <li>Definition:
+            <ul class="sublist">
+              <li>Two hormones together produce MORE than the sum of individual effects.</li>
+            </ul>
+          </li>
+          <li>Examples:
+            <ul class="sublist">
+              <li>Glucagon + Epi + cortisol → hyperglycemia during stress (counter-regulatory response, more than additive).</li>
+              <li>FSH + estrogen in follicular development.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Antagonistic</div>
+        <ul>
+          <li>Definition:
+            <ul class="sublist">
+              <li>Opposing actions.</li>
+            </ul>
+          </li>
+          <li>Examples:
+            <ul class="sublist">
+              <li>Insulin vs. glucagon on hepatic glucose output.</li>
+              <li>PTH vs. calcitonin on bone (PTH resorbs; calcitonin inhibits osteoclasts — clinically minor in humans).</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>5 · Hormone resistance syndromes — the "receptor is broken" diseases</h4>
+        <div class="group-label">Sex Hormone / Growth Resistance</div>
+        <ul>
+          <li>Complete androgen insensitivity (AIS):
+            <ul class="sublist">
+              <li>Cause: loss-of-function mutation in androgen receptor (AR).</li>
+              <li>Presentation: 46,XY phenotypic female with testes, no axillary/pubic hair, blind-ending vagina, primary amenorrhea.<span class="cite">FA 2024 Repro; Pathoma ch 15</span></li>
+            </ul>
+          </li>
+          <li>Laron syndrome:
+            <ul class="sublist">
+              <li>Cause: GH receptor mutation.</li>
+              <li>Labs: ↑ GH (no negative feedback), ↓ IGF-1.</li>
+              <li>Clinical: short stature; paradoxically protective against cancer and diabetes.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">GPCR / Gsα Defects</div>
+        <ul>
+          <li>Pseudohypoparathyroidism type 1A (Albright hereditary osteodystrophy):
+            <ul class="sublist">
+              <li>Cause: Gsα mutation → PTH doesn't signal despite high PTH levels.</li>
+              <li>Features: hypocalcemia + short 4th/5th metacarpals + round facies + mental disability.</li>
+            </ul>
+          </li>
+          <li>Nephrogenic diabetes insipidus:
+            <ul class="sublist">
+              <li>Cause: V2 receptor mutation (X-linked) OR aquaporin-2 mutation.</li>
+              <li>Clinical: kidney cannot respond to ADH → polyuria, dilute urine.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Nuclear Receptor Defects</div>
+        <ul>
+          <li>Thyroid hormone resistance:
+            <ul class="sublist">
+              <li>Cause: TRβ mutation.</li>
+              <li>Labs: ↑ T3/T4 with inappropriately normal or ↑ TSH.</li>
+              <li>Clinical: often presents with goiter and ADHD-like features.</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Metabolic Receptor Defects</div>
+        <ul>
+          <li>Leptin receptor deficiency:
+            <ul class="sublist">
+              <li>Cause: loss-of-function mutation in leptin receptor.</li>
+              <li>Clinical: severe early-onset obesity despite high leptin levels (no satiety signaling).</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>6 · Tachyphylaxis (rapid tolerance) — how and why</h4>
+        <div class="group-label">Classic Drug-Level Examples</div>
+        <ul>
+          <li>β2-agonist overuse (albuterol) in asthma:
+            <ul class="sublist">
+              <li>Receptor desensitization by GRK / β-arrestin.</li>
+              <li>Receptor internalization.</li>
+              <li>Net effect: diminished bronchodilation despite more puffs.</li>
+            </ul>
+          </li>
+          <li>Opioid tolerance:
+            <ul class="sublist">
+              <li>μ-opioid receptor down-regulation plus post-receptor adaptations.</li>
+              <li>Requires higher doses over time for equivalent analgesia.</li>
+            </ul>
+          </li>
+          <li>Nitrate tolerance:
+            <ul class="sublist">
+              <li>Depletion of intracellular sulfhydryl groups needed to convert nitroglycerin to NO.</li>
+              <li>Requires a nitrate-free interval each day to restore efficacy.<span class="cite">Lippincott Pharm 7e — cardiovascular</span></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="group-label">Unifying Theme</div>
+        <ul>
+          <li>Big picture:
+            <ul class="sublist">
+              <li>These mechanisms are variations of the same theme: receptors (and the systems behind them) adapt to keep a cell's response within a useful physiologic range.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+        <p><b>Insulin resistance = RIGHT shift (↑EC50).</b> Higher insulin needed for same effect. Advanced T2DM also drops Emax (β-cell failure + receptor down-reg + post-receptor defects). <span class="cite">AI Generated · see end16/17/18</span></p>
+        <ul>
+          <li>Chronic hormone <b>excess → down-regulation</b> (β-agonist tolerance, insulin resistance). <span class="cite">end01 lecture; clinical examples AI Generated</span></li>
+          <li>Chronic hormone <b>deficit → up-regulation</b> (denervation hypersensitivity). <span class="cite">end01 lecture</span></li>
+        </ul>
+      </div>
+
+      <h3>Beyond the target cell: 3 more modifiers</h3>
+      <h4>Permissive effects</h4>
+      <ul>
+        <li>Definition:
+          <ul class="sublist">
+            <li>One hormone at baseline is <b>required</b> for another to work.</li>
+            <li>The permissive hormone doesn't cause the effect on its own — it just licenses it.</li>
+          </ul>
+        </li>
+        <li>Classic examples:
+          <ul class="sublist">
+            <li>Cortisol is permissive for catecholamine vasoconstriction → Addisonian crisis = refractory hypotension until you give hydrocortisone.</li>
+            <li>Thyroid hormone is permissive for GH and catecholamines → cardiac output.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h4>Synergy vs. antagonism</h4>
+      <ul>
+        <li>Synergy:
+          <ul class="sublist">
+            <li>Glucagon + epinephrine + cortisol → additive (often more-than-additive) hyperglycemia during stress.</li>
+          </ul>
+        </li>
+        <li>Antagonism:
+          <ul class="sublist">
+            <li>Insulin vs. glucagon on liver glucose output.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h4>Free-fraction and clearance</h4>
+      <ul>
+        <li>Core idea:
+          <ul class="sublist">
+            <li>Even perfect receptors can only see FREE hormone.</li>
+            <li>Carrier proteins and clearance (liver / kidney) set the "input" the cell experiences.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <p><b>3 A's of Sensitivity:</b> Affinity, Amount (of receptor), Activation (downstream).</p>
+        <p><b>Up/Down logic:</b> "More hormone → fewer receptors. Less hormone → more receptors." Cells push back on whatever's flooding them.</p>
+        <p><b>Permissive = "Cortisol is the Permit."</b> No permit, no effect.</p>
+        <p><b>Curve shift:</b> <span style="color:var(--green)">Left = Love</span> (more sensitive). <span style="color:var(--red)">Right = Resistant</span>.</p>
+      </div>
+
+      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <ul>
+          <li><b>Addisonian crisis:</b> hypotension won't respond to pressors until hydrocortisone is given. Cortisol permits vasoconstriction. <span class="cite">AI Generated · see end20/21</span></li>
+          <li><b>T2DM:</b> primarily <b>post-receptor</b> defect (IRS-1 serine phosphorylation, ↓ PI3K/AKT, GLUT4 trafficking). <span class="cite">AI Generated · see end16/17/18</span></li>
+          <li><b>β-blocker withdrawal tachycardia:</b> chronic blockade up-regulates β1 → sudden stop → reflex tachycardia/HTN. <span class="cite">AI Generated · cardiology pharm</span></li>
+          <li><b>Albuterol tachyphylaxis:</b> β2 receptor desensitization + internalization. <span class="cite">AI Generated · pulmonology pharm</span></li>
+          <li><b>T1DM honeymoon phase:</b> after starting insulin, receptor up-reg + residual β-cell → transient low insulin needs. <span class="cite">AI Generated · see end17</span></li>
+        </ul>
+      </div>
+
+      <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL</div>
+        <div class="flashcard"><div class="q">Direction of dose–response curve shift in insulin resistance?</div><div class="a"><span>Right (↑EC50 — more insulin needed).</span></div></div>
+        <div class="flashcard"><div class="q">Mechanism of denervation hypersensitivity?</div><div class="a"><span>Up-regulation of receptors in response to chronically low ligand.</span></div></div>
+        <div class="flashcard"><div class="q">Role of cortisol as a permissive hormone?</div><div class="a"><span>Licenses catecholamine vasoconstriction; absence → refractory hypotension (Addisonian crisis).</span></div></div>
+        <div class="flashcard"><div class="q">What does Emax represent?</div><div class="a"><span>Maximal achievable response (efficacy); falls when receptors/signaling are globally impaired.</span></div></div>
+        <div class="flashcard"><div class="q">Main site of early T2DM insulin resistance?</div><div class="a"><span>Post-receptor (IRS-1 / PI3K signaling). Chronic hyperinsulinemia eventually also down-regulates receptors.</span></div></div>
+        <div class="flashcard"><div class="q">Two mechanisms for β-agonist tolerance?</div><div class="a"><span>Receptor desensitization (GRK + β-arrestin) and receptor internalization/down-regulation.</span></div></div>
+      </div>
+    </section>
+
+    <!-- ============ CHEAT SHEET ============ -->
+    <section class="obj" id="cheatsheet">
+      <h2><span class="num" style="background:var(--red)">★</span>Master Cheat Sheet</h2>
+      <p style="font-style:italic;color:var(--muted)">The one-page summary to review before the exam.</p>
+
+      <h3>Objective-by-objective bottom line</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>#</th><th>One-line answer you must have locked</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Endocrine = blood-borne, distant. <b>Specificity = receptor expression</b>, not distribution.</td></tr>
+          <tr><td>2</td><td>3 classes: amines (mostly hydrophilic; <b>thyroid = lipophilic rebel</b>), peptides (hydrophilic, stored), steroids (lipophilic, on demand from cholesterol).</td></tr>
+          <tr><td>3</td><td>Tyr → DOPA → DA → NE → Epi. <b>Rate-limiting: tyrosine hydroxylase.</b> PNMT needs cortisol → only adrenal medulla makes Epi.</td></tr>
+          <tr><td>4</td><td>Steroids start: <b>Cholesterol → Pregnenolone by desmolase</b> (CYP11A1, P450scc). StAR imports cholesterol. ACTH/LH stimulate.</td></tr>
+          <tr><td>5</td><td>Carriers ↑ solubility, ↑ half-life, ↓ activity (only FREE works), buffer plasma. <b>↑TBG in pregnancy → ↑ total T4 but normal free T4</b> (euthyroid).</td></tr>
+          <tr><td>6</td><td>Hydrophilic → MEMBRANE receptors (GPCR Gs/Gi/Gq, RTK, JAK-STAT, guanylyl cyclase). Hydrophobic → INTRACELLULAR (cytoplasm for sex steroids + cortisol; nucleus for thyroid/Vit D/retinoids).</td></tr>
+          <tr><td>7</td><td>Sensitivity = <b>Affinity + Amount + Activation</b>. Chronic ↑hormone → receptor down-reg. Permissive: cortisol licenses catecholamines.</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Top 10 USMLE traps</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>#</th><th>Trap</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>↑ total T4 in pregnancy ≠ hyperthyroidism. Order FREE T4.</td></tr>
+          <tr><td>2</td><td>Thyroid hormone is an <b>amine</b> but acts like a <b>steroid</b>.</td></tr>
+          <tr><td>3</td><td>Rate-limiting step of catecholamines = <b>tyrosine hydroxylase</b> (not DOPA decarb).</td></tr>
+          <tr><td>4</td><td>Only adrenal medulla makes Epi (PNMT needs cortisol).</td></tr>
+          <tr><td>5</td><td>Steroids are NOT stored — made on demand by ACTH/LH.</td></tr>
+          <tr><td>6</td><td>Rate-limiting step of steroidogenesis = cholesterol → pregnenolone. <b>StAR = transport bottleneck</b>.</td></tr>
+          <tr><td>7</td><td>Gq = α1, M1, M3, H1, V1, GnRH, TRH, Ang II, oxytocin ("HAVe 1 M&M of GQs").</td></tr>
+          <tr><td>8</td><td>Cortisol receptor is <b>cytoplasmic</b> (HSP90). Thyroid & Vit D receptors are <b>nuclear</b>.</td></tr>
+          <tr><td>9</td><td>Chronic hormone excess → receptor <b>down-regulation</b>; chronic deprivation → up-regulation.</td></tr>
+          <tr><td>10</td><td>Glycoprotein hormones (TSH, FSH, LH, hCG) share α-subunit → hCG can trigger gestational hyperthyroidism.</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <!-- ============ QUIZ ============ -->
+    <section class="obj" id="quiz">
+      <h2><span class="num" style="background:var(--purple)">?</span>Final Self-Quiz (USMLE-Style Rapid Fire)</h2>
+      <p style="font-style:italic;color:var(--muted)">Cover the answers. Work through all 15. Click "Show answer" only after you've committed.</p>
+      <div id="quizList"></div>
+      <div style="margin-top:14px;text-align:center"><button class="btn-reset" onclick="revealAllQuiz()">Reveal all answers</button></div>
+    </section>
+
+    <!-- ============ REFERENCES ============ -->
+    <section class="obj" id="references">
+      <h2><span class="num" style="background:var(--accent)">📖</span>References &amp; 3rd-Party Sources</h2>
+      <p style="font-style:italic;color:var(--muted)">The lecture content above is based on its associated In House Lecture and Learning Objectives. Additional details, mnemonics, clinical pearls, and expanded explanations in the "Going Deeper" sections draw on the standard Step 1 prep resources below.</p>
+
+      <h3>Primary Step 1 resources cited inline</h3>
+      <ol class="ref-list">
+        <li><b>First Aid for the USMLE Step 1 (2024 edition)</b> — McGraw-Hill. The consensus Step 1 review book; cited for HY facts, disease associations, and drug mechanisms.</li>
+        <li><b>Costanzo, Physiology (6th ed., 2018)</b> — Elsevier. Physiology textbook widely used for foundational endocrine concepts and kinetic reasoning. Chapters 1 (cellular) and 9 (endocrine).</li>
+        <li><b>Guyton &amp; Hall, Textbook of Medical Physiology (14th ed., 2020)</b> — Elsevier. Classic physiology reference; used for anatomy of the hypophyseal portal system, adrenal portal drainage, and receptor mechanisms. Chapters 74–78.</li>
+        <li><b>Pathoma: Fundamentals of Pathology (Sattar, 2024)</b> — Pathoma LLC. Concise pathology review; cited for CAH, pheochromocytoma, and hormone resistance syndromes. Chapter 15 (Endocrine).</li>
+        <li><b>Boards &amp; Beyond (B&amp;B) — Endocrine module</b> (Dr. Jason Ryan). Video-based Step 1 review series; cited for concept explanations of HPA axis, PCOS, and diabetes pathophysiology.</li>
+        <li><b>Lippincott Illustrated Reviews: Pharmacology (7th ed., 2019)</b> — Wolters Kluwer. Used for drug mechanisms (ketoconazole, metyrapone, metyrosine, aromatase inhibitors, JAK inhibitors, PDE5 inhibitors).</li>
+        <li><b>Rang &amp; Dale's Pharmacology (9th ed.)</b> — Elsevier. Cited for dose-response curve mathematics and receptor theory.</li>
+        <li><b>UWorld USMLE Step 1 Qbank</b>. Referenced for clinical workup sequences (pheochromocytoma labs, Cushing diagnostic testing).</li>
+      </ol>
+
+    </section>
+
+    <!-- ============ SOURCE AUDIT ============ -->
+    <section class="obj" id="audit">
+      <h2><span class="num" style="background:var(--orange)">⚠</span>Clinical Correlation &amp; Drug Source Audit</h2>
+
+      <div class="legend">
+        <b>Source legend</b>
+        <ul>
+          <li><span class="src-pill src-lecture">In lecture</span> The topic appears explicitly in the end01 lecture.</li>
+          <li><span class="src-pill src-mapped">end01-mapped</span> The topic is covered in a 3rd-party resource primarily mapped to end01 (Bootcamp, Boards &amp; Beyond, Physeo, First Aid).</li>
+          <li><span class="src-pill src-ai">AI generated reference</span> An item where the core concept sits in end01 but the clinical / drug association is primarily taught in another lecture. Kept here because it falls into one of three buckets:
+            <ul style="margin-top:4px">
+              <li>The core concept is in end01 and the clinical association lives elsewhere (e.g., POMC is a signaling concept here, Addison clinical is end20).</li>
+              <li>Included for pattern recognition tied directly to an end01 concept.</li>
+              <li>Forward reference to an upcoming lecture so you start building the pattern now.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <h3>Objective 1 — Endocrine signaling vs. other modes</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Item</th><th>Source</th><th>Where it's referenced</th></tr></thead>
+        <tbody>
+          <tr><td>Endocrine / paracrine / autocrine / neural / neuroendocrine / juxtacrine modes</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
+          <tr><td>Specificity = receptor expression</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
+          <tr><td>Endocrine vs. exocrine distinction</td><td><span class="src-pill src-mapped">end01-mapped</span></td><td>Bootcamp 1.02 Endocrine Glands (primary to end01)</td></tr>
+          <tr><td>Hypophyseal portal system (neuroendocrine concept)</td><td><span class="src-pill src-mapped">end01-mapped</span></td><td>Physeo 6.01 Introduction to Endocrinology (primary to end01)</td></tr>
+          <tr><td><b>Pheochromocytoma</b> (endocrine delivery of catecholamines)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Endocrine delivery concept is end01-core; pheo clinical is primarily in end20 (Adrenal Pathology). <i>Included for pattern recognition on endocrine mode.</i></td></tr>
+          <tr><td>IGF-1 endocrine vs. paracrine</td><td><span class="src-pill src-mapped">end01-mapped</span></td><td>Bootcamp 1.01 General Principles; FA 3.14 Signaling pathways</td></tr>
+          <tr><td><b>Gastrinoma (Zollinger-Ellison)</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Paracrine vs. endocrine mode is end01-core; gastrinoma clinical is primarily GI. <i>Included for pattern recognition on mode-switching of a single molecule.</i></td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Objective 2 — Hormone classes</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Item</th><th>Source</th><th>Where it's referenced</th></tr></thead>
+        <tbody>
+          <tr><td>3 structural classes (amine, peptide, steroid) + eicosanoids</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
+          <tr><td>Hydrophilic vs. hydrophobic determines storage, carriers, receptor location</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
+          <tr><td>Glycoprotein hormone α/β subunit sharing (TSH, FSH, LH, hCG)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
+          <tr><td>Thyroid hormone "rebel" (amine-derived, lipophilic)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
+          <tr><td>C-peptide &amp; pre-pro-insulin processing</td><td><span class="src-pill src-mapped">end01-mapped</span></td><td>FA 3.14 Signaling pathways; B&amp;B 5.06 Signaling</td></tr>
+          <tr><td><b>Insulinoma vs. factitious insulin</b> (C-peptide test)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>C-peptide physiology is end01-core; insulinoma clinical is primarily in end17/18 (Diabetes). <i>Included for pattern recognition on peptide hormone processing.</i></td></tr>
+          <tr><td>Pregnancy ↑TBG → ↑ total T4</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Carrier protein concept is end01-core; thyroid function testing is primarily in end10/11. <i>Clinical application of carrier protein physiology.</i></td></tr>
+          <tr><td>hCG cross-reactivity with TSH receptor</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Shared α-subunit is end01-core; gestational hyperthyroidism clinical is in end11. <i>Included for pattern recognition on glycoprotein subunit sharing.</i></td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Objective 3 — Catecholamine biosynthesis</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Item</th><th>Source</th><th>Where it's referenced</th></tr></thead>
+        <tbody>
+          <tr><td>Tyr → DOPA → DA → NE → Epi pathway</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
+          <tr><td>Tyrosine hydroxylase is rate-limiting</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
+          <tr><td>PNMT requires cortisol → only adrenal medulla makes Epi</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
+          <tr><td>Catecholamine synthesis enzymes &amp; cofactors (B6, Vit C, Cu)</td><td><span class="src-pill src-mapped">end01-mapped</span></td><td>Bootcamp 10.04 Phenylalanine/Tyrosine/Catecholamines (xref to end01); FA Phe/Tyr pathway</td></tr>
+          <tr><td><b>PKU</b> (phenylalanine hydroxylase deficiency)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Phe → Tyr is end01-adjacent via catecholamine precursor; PKU clinical is primarily biochemistry. <i>Included for pattern recognition on upstream pathway disease.</i></td></tr>
+          <tr><td><b>Parkinson's disease</b> (L-DOPA, carbidopa)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>DOPA decarboxylase / dopamine physiology is end01-core; Parkinson's clinical and pharm live in neuro/pharm. <i>Included for pattern recognition on clinical use of pathway intermediates.</i></td></tr>
+          <tr><td><b>Pheochromocytoma</b> (5 P's, metanephrines, α-blocker first)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Catecholamine synthesis is end01-core; pheo clinical is primarily end20 (Adrenal Pathology). <i>Included for pattern recognition on catecholamine excess.</i></td></tr>
+          <tr><td>MAOI + tyramine hypertensive crisis</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>MAO/COMT degradation pathway concept is end01-adjacent; MAOI drugs are primarily psychiatry pharm. <i>Included for pattern recognition on catecholamine degradation.</i></td></tr>
+          <tr><td>Addison disease causing ↓ PNMT / ↓ Epi</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>PNMT mechanism is end01-core; Addison clinical is primarily end20/21. <i>Core concept here, clinical association elsewhere.</i></td></tr>
+          <tr><td>Reserpine (VMAT inhibitor)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Vesicular packaging is end01-core; reserpine drug detail primarily cardiovascular/pharm. <i>Clinical application of an in-lecture concept.</i></td></tr>
+          <tr><td>Metyrosine (tyrosine hydroxylase inhibitor for pheo pre-op)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Rate-limiting enzyme concept is end01-core; metyrosine drug primarily in end21. <i>Clinical application of the rate-limiting step.</i></td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Objective 4 — Steroid synthesis (initial step)</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Item</th><th>Source</th><th>Where it's referenced</th></tr></thead>
+        <tbody>
+          <tr><td>Cholesterol → Pregnenolone by desmolase (CYP11A1)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
+          <tr><td>StAR is the true rate-limiting transport step</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
+          <tr><td>ACTH / LH / AngII stimulate steroidogenesis</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
+          <tr><td>Carbon counts (C21 progestins/corticoids, C19 androgens, C18 estrogens)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
+          <tr><td>Steroid signaling pathway (hormone response elements)</td><td><span class="src-pill src-mapped">end01-mapped</span></td><td>FA 3.15 Signaling pathways of steroid hormones (primary to end01); B&amp;B 5.06</td></tr>
+          <tr><td><b>Congenital lipoid adrenal hyperplasia</b> (StAR mutation)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>StAR is end01-core; lipoid hyperplasia is primarily end04 (Adrenal Synthesis) / end20. <i>Clinical association in other lectures.</i></td></tr>
+          <tr><td><b>Congenital adrenal hyperplasia (21, 11β, 17α)</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Steroidogenesis backup logic is end01-adjacent; CAH clinical and enzyme specifics are primarily in end04 (Adrenal Synthesis) / end20. <i>Included for pattern recognition on steroid pathway disease.</i></td></tr>
+          <tr><td>Ketoconazole, metyrapone, aminoglutethimide, mitotane</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Steroid pathway is end01-core; these pharmacologic inhibitors are primarily in end21 (Adrenal Pharm). <i>Clinical application of the steroidogenesis pathway.</i></td></tr>
+          <tr><td>Finasteride (5α-reductase inhibitor)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Steroid modification is end01-adjacent; finasteride primarily in repro pharm. <i>Clinical application of steroid metabolism.</i></td></tr>
+          <tr><td>Aromatase inhibitors (anastrozole, letrozole, exemestane)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>C19→C18 aromatization is end01-core; aromatase inhibitors primarily in repro / breast cancer pharm. <i>Clinical application of carbon-count conversion.</i></td></tr>
+          <tr><td>Abiraterone (17α-hydroxylase/17,20-lyase inhibitor)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>17α-hydroxylase pathway is end01-adjacent; abiraterone primarily in prostate cancer pharm. <i>Clinical application of steroidogenesis inhibition.</i></td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Objective 5 — Carrier proteins</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Item</th><th>Source</th><th>Where it's referenced</th></tr></thead>
+        <tbody>
+          <tr><td>Free vs. bound hormone; carrier proteins (TBG, CBG, SHBG, albumin)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
+          <tr><td>Carriers ↑ half-life, ↓ active fraction, buffer free hormone</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
+          <tr><td>Kd (dissociation constant) concept</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
+          <tr><td>Typical free fractions (T4 0.03%, T3 0.3%, cortisol 5%)</td><td><span class="src-pill src-mapped">end01-mapped</span></td><td>FA 3.14 Signaling pathways; Bootcamp 1.01 General Principles</td></tr>
+          <tr><td>Pregnancy / OCP ↑TBG → ↑ total T4, normal free T4</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Carrier protein concept is end01-core; thyroid function testing primarily in end10/11. <i>Clinical application of carrier protein physiology.</i></td></tr>
+          <tr><td>Nephrotic syndrome / cirrhosis effects on carriers</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Carrier protein concept is end01-core; clinical scenarios span renal / GI. <i>Clinical application of carrier physiology.</i></td></tr>
+          <tr><td>PCOS ↓SHBG → ↑ free testosterone</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>SHBG regulation is end01-adjacent; PCOS clinical primarily in repro/end05. <i>Clinical application of SHBG physiology.</i></td></tr>
+          <tr><td>Euthyroid sick syndrome (reverse T3, altered carriers)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Carrier + deiodinase biology is end01-adjacent; clinical syndrome primarily end10. <i>Included for pattern recognition on carrier disturbances.</i></td></tr>
+          <tr><td>Megalin-mediated endocytosis (kidney vit D binding protein)</td><td><span class="src-pill src-mapped">end01-mapped</span></td><td>FA 3.14 Signaling pathways (general carrier physiology)</td></tr>
+          <tr><td>Levothyroxine once-daily dosing (T4 ~7 day half-life)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Half-life concept is end01-core; levothyroxine pharm primarily in end13. <i>Clinical application of the half-life principle.</i></td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Objective 6 — Hormone receptors</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Item</th><th>Source</th><th>Where it's referenced</th></tr></thead>
+        <tbody>
+          <tr><td>Membrane vs. intracellular receptor classification</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
+          <tr><td>GPCR (Gs / Gi / Gq), RTK, JAK-STAT, guanylyl cyclase, nuclear receptors</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
+          <tr><td>Direct vs. indirect signaling, amplification concept</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
+          <tr><td>Signaling pathway details (cAMP, IP3/DAG, MAPK, PI3K-AKT, cGMP)</td><td><span class="src-pill src-mapped">end01-mapped</span></td><td>FA 3.14 Signaling pathways of endocrine hormones (primary to end01); B&amp;B 5.06 Signaling Pathways</td></tr>
+          <tr><td>Nuclear receptor mechanism (HSP90, hormone response elements)</td><td><span class="src-pill src-mapped">end01-mapped</span></td><td>FA 3.15 Signaling pathways of steroid hormones (primary to end01)</td></tr>
+          <tr><td><b>Cholera toxin</b> (Gs lock-on) → rice-water diarrhea</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Gs cascade is end01-core; cholera toxin clinical primarily in microbiology. <i>Included for pattern recognition on GPCR disruption.</i></td></tr>
+          <tr><td><b>Pertussis toxin</b> (Gi lock-off)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Gi cascade is end01-core; pertussis toxin clinical primarily in microbiology. <i>Included for pattern recognition on GPCR disruption.</i></td></tr>
+          <tr><td><b>Pseudohypoparathyroidism 1A (Albright)</b> — defective Gsα</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>GPCR Gs mechanism is end01-core; Albright clinical primarily in end12/parathyroid. <i>Core concept here, clinical association elsewhere.</i></td></tr>
+          <tr><td><b>Androgen insensitivity syndrome</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Nuclear receptor biology is end01-core; AIS clinical primarily in repro/genetics. <i>Core concept here, clinical association elsewhere.</i></td></tr>
+          <tr><td>Thyroid hormone resistance</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Nuclear receptor biology is end01-core; TR resistance clinical primarily in end10. <i>Core concept here, clinical association elsewhere.</i></td></tr>
+          <tr><td>BNP in heart failure; nitroglycerin; sildenafil (PDE5)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>cGMP signaling / guanylyl cyclase is end01-core; clinical use primarily in cardiology. <i>Clinical application of cGMP signaling.</i></td></tr>
+          <tr><td>Cancer drugs targeting RTKs (trastuzumab, imatinib, cetuximab, bevacizumab)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>RTK signaling is end01-core; targeted therapies primarily in oncology pharm. <i>Clinical application of RTK signaling.</i></td></tr>
+          <tr><td>JAK inhibitors (tofacitinib, ruxolitinib)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>JAK-STAT signaling is end01-core; JAK inhibitors primarily in rheumatology / heme pharm. <i>Clinical application of JAK-STAT signaling.</i></td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Objective 7 — Cellular sensitivity &amp; response</h3>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Item</th><th>Source</th><th>Where it's referenced</th></tr></thead>
+        <tbody>
+          <tr><td>3 A's of sensitivity (Amount, Affinity, Activation)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
+          <tr><td>EC50, Emax, dose-response curve shifts</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
+          <tr><td>Up-regulation vs. down-regulation</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
+          <tr><td>Permissive / synergistic / antagonistic effects</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
+          <tr><td>Hill equation, spare receptors</td><td><span class="src-pill src-mapped">end01-mapped</span></td><td>FA 3.14 Signaling pathways of endocrine hormones; Rang &amp; Dale pharm</td></tr>
+          <tr><td>Receptor desensitization (GRK, β-arrestin, internalization)</td><td><span class="src-pill src-mapped">end01-mapped</span></td><td>FA 3.14 Signaling pathways; B&amp;B 5.06</td></tr>
+          <tr><td><b>Insulin resistance / T2DM</b> (post-receptor IRS-1 defect)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Sensitivity / dose-response is end01-core; T2DM clinical primarily in end16/17/18. <i>Clinical application of post-receptor signaling defects.</i></td></tr>
+          <tr><td>Metformin, thiazolidinediones, GLP-1 agonists</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Sensitivity concept is end01-core; diabetes pharm primarily in end17/18. <i>Clinical application.</i></td></tr>
+          <tr><td>β-blocker withdrawal tachycardia</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Receptor up-regulation is end01-core; clinical scenario primarily in cardiovascular pharm. <i>Clinical application of up-regulation.</i></td></tr>
+          <tr><td>Albuterol tachyphylaxis</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Receptor desensitization is end01-core; clinical scenario primarily in pulmonology pharm. <i>Clinical application of desensitization.</i></td></tr>
+          <tr><td>Opioid tolerance, nitrate tolerance</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Tolerance concept is end01-adjacent; clinical specifics in other pharm disciplines. <i>Included for pattern recognition on tachyphylaxis.</i></td></tr>
+          <tr><td><b>Laron syndrome</b> (GH receptor defect)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Receptor defect concept is end01-core; Laron clinical primarily in end02 (HP Relationships I). <i>Forward reference to end02.</i></td></tr>
+          <tr><td><b>Nephrogenic DI</b> (V2 / AQP-2 mutation)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Receptor defect concept is end01-core; DI clinical primarily in end07. <i>Forward reference to end07.</i></td></tr>
+          <tr><td><b>Leptin receptor deficiency</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Receptor defect is end01-core; obesity clinical primarily elsewhere. <i>Included for pattern recognition on hormone resistance syndromes.</i></td></tr>
+          <tr><td>Addisonian crisis &amp; cortisol permissiveness for catecholamines</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Permissive effect is end01-core; Addisonian crisis clinical primarily in end20/21. <i>Clinical application of permissive effect.</i></td></tr>
+          <tr><td>Stress counter-regulatory hormone synergy (cortisol + Epi + glucagon)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Synergy concept is end01-core; stress physiology primarily in end23. <i>Forward reference / clinical application of synergy.</i></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <div class="footer-note">
+      — End of guide —<br>
+      Now close it and try to reproduce the roadmap from memory. That's the win.
+    </div>
+
+  </main>
+</div>
+
+<script>
+// ============ Quiz data ============
+const quizData = [
+  { q: "A neonate has virilization, hypotension, and hyponatremia. CYP enzyme deficient?", a: "21-hydroxylase (most common CAH) → ↓ cortisol & aldosterone, ↑ androgens." },
+  { q: "A patient with hyperemesis gravidarum has ↓ TSH, ↑ free T4. Mechanism?", a: "hCG cross-reacts with TSH receptor (shared α-subunit) → gestational thyrotoxicosis." },
+  { q: "Best test to confirm pheochromocytoma?", a: "Plasma free metanephrines (or 24-hr urine metanephrines)." },
+  { q: "Why give carbidopa with L-DOPA?", a: "Carbidopa inhibits peripheral DOPA decarboxylase → more L-DOPA crosses the BBB, fewer peripheral side effects." },
+  { q: "An Addisonian in shock isn't responding to norepinephrine. Next step?", a: "IV hydrocortisone — cortisol is permissive for catecholamine vasoconstriction." },
+  { q: "Which class of hormone is typically NOT stored in the producing cell?", a: "Steroids — synthesized on demand from cholesterol when stimulated by ACTH/LH/Ang II." },
+  { q: "Cholera toxin's molecular target and effect?", a: "ADP-ribosylates Gs α-subunit → locked \"on\" → ↑ cAMP → profuse secretory diarrhea." },
+  { q: "Which second messenger mediates ANP action?", a: "cGMP (membrane guanylyl cyclase receptor)." },
+  { q: "The receptor type for GH and prolactin?", a: "JAK-STAT." },
+  { q: "Chronic insulin resistance: how does the dose-response curve shift, and what is the earliest defect?", a: "Right shift (↑EC50). Earliest defect is post-receptor (IRS-1 / PI3K) signaling." },
+  { q: "Where does the cortisol receptor live before cortisol arrives, and what chaperone holds it?", a: "Cytoplasm; bound to HSP90." },
+  { q: "What carbon count are estrogens, and which enzyme converts androgens to estrogens?", a: "C18; aromatase." },
+  { q: "Ketoconazole's effect on steroidogenesis?", a: "Inhibits multiple CYP enzymes (desmolase, 17α-hydroxylase) → ↓ cortisol and sex steroid synthesis; can cause gynecomastia." },
+  { q: "Why is T4 dosed once daily?", a: "T4 half-life is ~7 days (highly protein-bound to TBG)." },
+  { q: "A patient has PTH resistance with short 4th/5th metacarpals. Diagnosis and mechanism?", a: "Pseudohypoparathyroidism type 1A (Albright) — defective Gs α → PTH signal fails." },
+];
+
+const quizList = document.getElementById('quizList');
+quizData.forEach((item, i) => {
+  const el = document.createElement('div');
+  el.className = 'quiz-item';
+  el.innerHTML = `
+    <div><span class="qn">${i+1}.</span>${item.q}</div>
+    <button class="show" onclick="this.parentElement.classList.toggle('revealed'); this.textContent = this.parentElement.classList.contains('revealed') ? 'Hide answer' : 'Show answer';">Show answer</button>
+    <div class="ans"><b>Answer:</b> ${item.a}</div>
+  `;
+  quizList.appendChild(el);
+});
+
+function revealAllQuiz(){
+  document.querySelectorAll('.quiz-item').forEach(el => {
+    el.classList.add('revealed');
+    const btn = el.querySelector('button.show');
+    if (btn) btn.textContent = 'Hide answer';
+  });
+}
+
+// ============ Sidebar minimize toggle ============
+function toggleSidebar(){
+  const wrap = document.querySelector('.wrap');
+  const sidebar = document.querySelector('nav.sidebar');
+  const toggle = document.getElementById('sidebarToggle');
+  const collapsed = wrap.classList.toggle('sidebar-collapsed');
+  sidebar.classList.toggle('collapsed', collapsed);
+  if (toggle) toggle.querySelector('.icon').textContent = collapsed ? '▶' : '◀';
+  try { sessionStorage.setItem('sidebarCollapsed_v1', collapsed ? '1' : '0'); } catch(e) {}
+}
+// Restore sidebar state on load
+try {
+  if (sessionStorage.getItem('sidebarCollapsed_v1') === '1') {
+    document.querySelector('.wrap').classList.add('sidebar-collapsed');
+    document.querySelector('nav.sidebar').classList.add('collapsed');
+    const toggle = document.getElementById('sidebarToggle');
+    if (toggle) toggle.querySelector('.icon').textContent = '▶';
+  }
+} catch(e) {}
+
+// ============ Flashcard toggle ============
+document.querySelectorAll('.flashcard').forEach(card => {
+  card.addEventListener('click', () => card.classList.toggle('open'));
+});
+
+// ============ Going Deeper h4 toggle (per sub-section) ============
+// Hide/show siblings of an h4 until the next h4 inside the same deep-dive
+function applyH4Collapse(h4){
+  const collapsed = h4.classList.contains('collapsed');
+  let sib = h4.nextElementSibling;
+  while (sib && sib.tagName !== 'H4') {
+    if (collapsed) sib.setAttribute('data-h4-hidden', 'true');
+    else sib.removeAttribute('data-h4-hidden');
+    sib = sib.nextElementSibling;
+  }
+}
+
+// Wire up h4 click handlers and default-collapse every one
+document.querySelectorAll('.deep-dive h4').forEach(h4 => {
+  h4.addEventListener('click', () => {
+    h4.classList.toggle('collapsed');
+    applyH4Collapse(h4);
+  });
+  // Default-collapsed on every page load
+  h4.classList.add('collapsed');
+  applyH4Collapse(h4);
+});
+
+// Bulk toggle all deep-dive h4 sub-sections
+function toggleAllDeepDives(collapse) {
+  document.querySelectorAll('.deep-dive h4').forEach(h4 => {
+    if (collapse) h4.classList.add('collapsed');
+    else h4.classList.remove('collapsed');
+    applyH4Collapse(h4);
+  });
+}
+
+// ============ Callout toggles (HY / Mnemonic / Clinical / Active Recall) ============
+document.querySelectorAll('.callout.hy .ctitle, .callout.mn .ctitle, .callout.cl .ctitle, .callout.rc .ctitle').forEach(title => {
+  const box = title.parentElement;
+  // Default-collapsed on every page load
+  box.classList.add('collapsed');
+  title.addEventListener('click', () => {
+    box.classList.toggle('collapsed');
+  });
+});
+
+// ============ Mark Done / Progress ============
+const STORAGE_KEY = 'endo01_progress_v1';
+function getDone(){
+  try { return JSON.parse(sessionStorage.getItem(STORAGE_KEY) || '{}'); }
+  catch(e) { return {}; }
+}
+function setDone(map){
+  try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(map)); } catch(e) {}
+}
+
+function refreshProgress(){
+  const done = getDone();
+  const count = Object.values(done).filter(Boolean).length;
+  const pct = Math.round((count / 7) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = `${count} / 7 objectives complete`;
+
+  // Sync buttons
+  document.querySelectorAll('.mark-done').forEach(btn => {
+    const obj = btn.getAttribute('data-obj');
+    if (done[obj]) { btn.classList.add('done'); btn.textContent = 'Done'; }
+    else { btn.classList.remove('done'); btn.textContent = 'Mark Done'; }
+  });
+
+  // Sync sidebar checkmarks
+  document.querySelectorAll('nav.sidebar a[data-obj]').forEach(a => {
+    const obj = a.getAttribute('data-obj');
+    if (done[obj]) a.classList.add('done'); else a.classList.remove('done');
+  });
+}
+
+document.querySelectorAll('.mark-done').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const obj = btn.getAttribute('data-obj');
+    const done = getDone();
+    done[obj] = !done[obj];
+    setDone(done);
+    refreshProgress();
+  });
+});
+
+function resetProgress(){
+  if (!confirm('Reset all progress?')) return;
+  setDone({});
+  // Re-collapse every h4 and every callout (matches default page-load state)
+  document.querySelectorAll('.deep-dive h4').forEach(h4 => {
+    h4.classList.add('collapsed');
+    applyH4Collapse(h4);
+  });
+  document.querySelectorAll('.callout.hy, .callout.mn, .callout.cl, .callout.rc').forEach(b => b.classList.add('collapsed'));
+  document.querySelectorAll('.flashcard.open').forEach(f => f.classList.remove('open'));
+  document.querySelectorAll('.quiz-item.revealed').forEach(q => {
+    q.classList.remove('revealed');
+    const btn = q.querySelector('button.show');
+    if (btn) btn.textContent = 'Show answer';
+  });
+  refreshProgress();
+}
+
+refreshProgress();
+
+// ============ Sidebar active-link scrollspy ============
+const sections = document.querySelectorAll('section.obj, div.cover');
+const navLinks = document.querySelectorAll('nav.sidebar a');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+
+</body>
+</html>
