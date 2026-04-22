@@ -458,6 +458,36 @@
       .main-inner { padding: 24px 14px 60px; }
     }
   </style>
+<!-- hoyadocs:link-availability:css -->
+<style>
+  /* HoyaDocs: missing-file styling for row-btn links.
+     Added by inject_link_availability.py. Safe to re-run. */
+  a.row-btn.is-missing,
+  a.row-btn.is-missing:hover,
+  a.row-btn.is-missing:focus {
+    opacity: 0.42 !important;
+    cursor: not-allowed !important;
+    filter: grayscale(0.9);
+    transform: none !important;
+    box-shadow: none !important;
+    text-decoration: none;
+  }
+  a.row-btn.is-missing .rb-label::after {
+    content: " · soon";
+    font-weight: 400;
+    opacity: 0.8;
+  }
+  a.row-btn.is-missing::before {
+    /* subtle diagonal hatch overlay for visual-distinction clarity */
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: repeating-linear-gradient(45deg, rgba(0,0,0,0.04) 0 4px, transparent 4px 8px);
+    pointer-events: none;
+  }
+</style>
+
 </head>
 <body>
 
@@ -1084,6 +1114,67 @@
       this.classList.add('active');
     });
   });
+</script>
+
+<!-- hoyadocs:link-availability:js -->
+<script>
+  /* HoyaDocs: auto-detect missing lecture files and mark their row-btns as "coming soon".
+     Added by inject_link_availability.py. Safe to re-run. */
+  (function () {
+    if (typeof window === 'undefined') return;
+    if (location.protocol === 'file:') return; // fetch HEAD is unreliable on file://
+    if (!('fetch' in window)) return;
+
+    var fileFilter = /(?:end|rpd|gi)\d{2}(?:-\d{2})?_(lg|mcq|hub[1-3])\.html$/;
+
+    function run() {
+      var links = Array.prototype.slice.call(document.querySelectorAll('a.row-btn[href]'));
+      var targets = [];
+      links.forEach(function (a) {
+        var raw = a.getAttribute('href');
+        if (!raw) return;
+        var url = raw.split('#')[0];
+        if (!fileFilter.test(url)) return;
+        targets.push({ link: a, url: url });
+      });
+      if (targets.length === 0) return;
+
+      // De-duplicate URLs so we only fetch each once.
+      var urlSet = {};
+      targets.forEach(function (t) { urlSet[t.url] = true; });
+      var uniqueUrls = Object.keys(urlSet);
+      var statusMap = {};
+
+      var checks = uniqueUrls.map(function (url) {
+        return fetch(url, { method: 'HEAD', cache: 'no-store' })
+          .then(function (r) { statusMap[url] = r && r.ok; })
+          .catch(function () { statusMap[url] = false; });
+      });
+
+      Promise.all(checks).then(function () {
+        targets.forEach(function (t) {
+          var exists = statusMap[t.url];
+          if (exists) {
+            t.link.classList.add('is-live');
+          } else {
+            t.link.classList.add('is-missing');
+            t.link.setAttribute('aria-disabled', 'true');
+            t.link.setAttribute('tabindex', '-1');
+            t.link.addEventListener('click', function (e) {
+              e.preventDefault();
+              e.stopPropagation();
+            }, true);
+          }
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', run);
+    } else {
+      run();
+    }
+  })();
 </script>
 
 </body>
