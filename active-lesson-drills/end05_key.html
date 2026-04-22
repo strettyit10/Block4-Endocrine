@@ -1,0 +1,508 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:sans-serif}
+body{background:#fff;color:#111;padding:16px;font-size:13px}
+h2{font-size:16px;font-weight:600;margin-bottom:4px}
+.sub{color:#666;font-size:12px;margin-bottom:14px}
+.resource-banner{background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:#1E40AF}
+.resource-banner strong{display:block;margin-bottom:2px;font-size:13px}
+.tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+.tab{padding:7px 14px;border-radius:20px;border:1.5px solid #CBD5E1;font-size:12px;cursor:pointer;background:#fff;color:#475569;font-weight:500}
+.tab.active{background:#1D4ED8;color:#fff;border-color:#1D4ED8}
+.panel{display:none}.panel.active{display:block}
+.sec{font-size:11px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.05em;margin:14px 0 6px}
+table{width:100%;border-collapse:collapse;margin-bottom:10px;font-size:12px}
+th{background:#F1F5F9;text-align:left;padding:7px 8px;font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:#475569;border:1px solid #E2E8F0;font-weight:600}
+td{padding:6px 8px;border:1px solid #E2E8F0;vertical-align:top}
+tr:nth-child(even) td{background:#FAFAFA}
+.rl{font-weight:600;font-size:11px;color:#1e293b;background:#F8FAFC!important;white-space:nowrap}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.f{margin-bottom:6px}
+.f label{font-size:10px;color:#94a3b8;display:block;margin-bottom:2px;text-transform:uppercase;letter-spacing:.03em}
+.warn{background:#FFFBEB;border-left:3px solid #F59E0B;padding:7px 10px;border-radius:0 6px 6px 0;font-size:11px;color:#92400E;margin:8px 0}
+.on-exam{background:#FEE2E2;border:1px solid #FDA4AF;border-radius:6px;padding:4px 10px;font-size:11px;color:#991B1B;font-weight:700;display:inline-block;margin-bottom:8px}
+.lo-tag{background:#EDE9FE;border:1px solid #C4B5FD;border-radius:5px;padding:2px 8px;font-size:10px;color:#5B21B6;font-weight:600;margin-bottom:6px;display:inline-block}
+.pq-box{background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;padding:10px 14px;margin-bottom:10px;font-size:12px}
+.pq-q{font-weight:600;margin-bottom:6px;color:#92400E}
+.pq-choices{margin-left:12px;margin-bottom:6px;color:#78350F;line-height:1.8}
+.pq-ans{background:#EFF6FF;border:1px solid #93C5FD;border-radius:6px;padding:6px 10px;font-size:11px;color:#1E40AF;margin-top:4px}
+.card{border:1px solid #E2E8F0;border-radius:10px;padding:12px 14px;margin-bottom:10px}
+
+@media(max-width:640px){
+  body{padding:10px;font-size:12px}
+  h2{font-size:14px}
+  .tabs{gap:4px}
+  .tab{padding:6px 10px;font-size:11px}
+  .fg,.fg3{grid-template-columns:1fr!important}
+  table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .pq-choices{margin-left:4px}
+}
+</style><style>
+.ki-text{
+  display:block;width:100%;min-height:18px;
+  border-bottom:1.5px solid #22c55e;
+  font-size:11px;background:#f0fdf4;color:#14532d;
+  font-weight:500;padding:3px 2px;line-height:1.6;
+  word-break:break-word;white-space:pre-wrap;
+  border-radius:0;
+}
+.ki-text.wu{font-size:12px;border-bottom-color:#22c55e;}
+.key-banner{background:#14532d;color:#fff;padding:10px 16px;border-radius:8px;margin-bottom:14px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
+
+.hoyadocs-brand{font-size:14px;font-weight:700;color:#1D4ED8;letter-spacing:-0.02em;margin-bottom:12px}
+
+@media print{
+  @page{size:letter landscape;margin:0.35in 0.4in}
+  html,body{background:#fff!important}
+  body{padding:0;font-size:10px}
+  body > *:not(.panel){display:none!important}
+  .panel{display:block!important;page-break-before:always;break-before:page;page-break-inside:auto}
+  .panel:first-of-type{page-break-before:auto;break-before:auto}
+  .panel::before{content:"HoyaDocs \2014 Answer Key";display:block;font-size:13px;font-weight:700;color:#1D4ED8;margin-bottom:8px;padding-bottom:4px;border-bottom:1.5px solid #1D4ED8;letter-spacing:-0.02em}
+  .sec{margin:5px 0 3px;font-size:9.5px}
+  table{margin-bottom:5px;font-size:10px;page-break-inside:avoid}
+  th{font-size:9px;padding:3px 4px}
+  td{padding:2px 4px;font-size:10px}
+  .on-exam{font-size:10px;padding:3px 7px;margin-bottom:5px;display:block;white-space:normal}
+  .warn{font-size:9.5px;padding:4px 7px;margin:3px 0}
+  .pq-box{font-size:9.5px;padding:5px 8px;margin-bottom:4px;page-break-inside:avoid}
+  .pq-ans{font-size:9px;margin-top:3px}
+  .pq-choices{line-height:1.5;margin-bottom:3px}
+  .fg,.fg3{gap:6px}
+  .f{margin-bottom:3px}
+  .f label{font-size:9px}
+  .card{padding:6px 8px;margin-bottom:6px}
+  .lo-tag{font-size:9px;padding:1px 6px;margin-bottom:3px}
+  .ki-text{font-size:9px!important;min-height:12px;padding:1px 2px;line-height:1.3}
+  .ki-text.wu{font-size:10px!important}
+  a[href$=".html"]{display:none!important}
+}
+</style></head><body>
+
+<div class="hoyadocs-brand">HoyaDocs</div>
+
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px">
+  <div class="key-banner" style="margin-bottom:0">&#9989; ANSWER KEY — all fields pre-filled. Use this to check your work.</div>
+  <div style="display:flex;gap:6px;flex-wrap:wrap">
+    <button onclick="window.print()" style="background:#1D4ED8;color:#fff;border:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap">&#128424; Print</button>
+    <a href="end05_active_recall.html" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#1e40af;color:#fff;text-decoration:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;white-space:nowrap">&larr; Active Recall</a>
+  </div>
+</div>
+<h2>Sex Steroid Synthesis &amp; Action — Answer Key</h2>
+<p class="sub">Built from Endocrine Lecture 05 (LOs 1&ndash;6). Use this to check your work after the active recall sheet.</p>
+
+<div class="resource-banner">
+  <strong>&#128214; Use alongside: Endocrine Lecture 05 &mdash; Sex Steroid Synthesis &amp; Action (HoyaDocs)</strong>
+  Focus on: C21 vs C19 vs C18; androgen/estrogen potency ladders; sources (Leydig, theca, reticularis, placenta, peripheral aromatase); biosynthesis (17&beta;-HSD3, 5&alpha;-reductase, aromatase, 17&beta;-HSD1); SHBG-dominated circulation + short half-lives; Type I nuclear receptor mechanism + SERMs, AIs, anti-androgens, mifepristone.
+</div>
+
+<div style="margin-bottom:14px">
+  <div style="font-size:12px;font-weight:600;margin-bottom:6px;color:#374151">SEED &mdash; high-yield anchors:</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:6px">
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">AR ladder</div><div class="ki-text wu">DHT &gt; testosterone &gt;&gt; androstenedione &gt; DHEA / DHEA-S</div></div>
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">ER ladder</div><div class="ki-text wu">17&beta;-estradiol (E<sub>2</sub>) &gt; estrone (E<sub>1</sub>) &gt; estriol (E<sub>3</sub>)</div></div>
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">3 androgen sources</div><div class="ki-text wu">Leydig cells (testis &mdash; testosterone); thecal cells (ovary &mdash; androstenedione); zona reticularis (adrenal &mdash; DHEA/DHEA-S)</div></div>
+  </div>
+  <div style="font-size:11px;color:#6b7280;margin-top:4px">5&alpha;-reductase: T &rarr; DHT (peripheral). Aromatase: C19 androgens &rarr; C18 estrogens.</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="sw(0)">C21 vs C19 vs C18</div>
+  <div class="tab" onclick="sw(1)">Hormones &amp; Receptor Affinity</div>
+  <div class="tab" onclick="sw(2)">Sources</div>
+  <div class="tab" onclick="sw(3)">Biosynthesis Pathways</div>
+  <div class="tab" onclick="sw(4)">Circulation &amp; Half-Life</div>
+  <div class="tab" onclick="sw(5)">Mechanisms &amp; Pharmacology</div>
+  <div class="tab" onclick="sw(6)">Practice Qs</div>
+</div>
+
+<!-- TAB 0 -->
+<div class="panel active" id="p0">
+<div class="lo-tag">LO 1</div>
+<div class="on-exam">ON EXAM &mdash; C21 (pregnanes): progestins + corticoids. C19 (androstanes): 17,20-LYASE drops side chain. C18 (estranes): AROMATASE removes C19 methyl + aromatizes A-ring &rarr; phenolic A-ring. Key bridges: 17,20-lyase (C21 &rarr; C19 sex steroid fork) and aromatase (C19 &rarr; C18)</div>
+
+<div class="sec">Steroid classes by carbon count (LO 1)</div>
+<table>
+  <tr><th>Carbons</th><th>Class</th><th>Examples</th><th>Key feature / conversion</th></tr>
+  <tr><td class="rl">C27</td><td><div class="ki-text">Cholesterol + Vit D precursors</div></td><td><div class="ki-text">Cholesterol, calcitriol</div></td><td><div class="ki-text">Starting precursor; 27 carbons with full 8-C side chain + angular methyls at C-18 and C-19</div></td></tr>
+  <tr><td class="rl">C21</td><td><div class="ki-text">Progestins + corticoids (pregnanes)</div></td><td><div class="ki-text">Pregnenolone, progesterone, cortisol, aldosterone, DOC</div></td><td><div class="ki-text">Retain 2-carbon side chain (C20-C21); made by desmolase cleaving 6 C off cholesterol. Gateway to sex steroids via 17&alpha;-hydroxylase + 17,20-lyase</div></td></tr>
+  <tr><td class="rl">C19</td><td><div class="ki-text">Androgens (androstanes)</div></td><td><div class="ki-text">DHEA, androstenedione, testosterone, DHT</div></td><td><div class="ki-text">17,20-lyase activity of CYP17 DROPS the 2-C side chain (C20 + C21). Leaves functional group at C-17 (OH or =O)</div></td></tr>
+  <tr><td class="rl">C18</td><td><div class="ki-text">Estrogens (estranes)</div></td><td><div class="ki-text">Estrone (E<sub>1</sub>), estradiol (E<sub>2</sub>), estriol (E<sub>3</sub>)</div></td><td><div class="ki-text">AROMATASE (CYP19) removes C-19 methyl AND aromatizes A-ring &rarr; phenolic A-ring. UNIQUE structural signature of estrogens</div></td></tr>
+</table>
+
+<div class="sec">The critical conversion enzymes (LO 1)</div>
+<table>
+  <tr><th>Enzyme</th><th>Reaction</th><th>What it changes</th><th>Where expressed</th><th>Clinical / deficiency</th></tr>
+  <tr><td class="rl">17,20-lyase (CYP17)</td><td><div class="ki-text">C21 &rarr; C19 (sex steroid fork)</div></td><td><div class="ki-text">Cleaves C17-C20 bond, drops 2-C side chain, leaves C-17 ketone (DHEA, androstenedione)</div></td><td><div class="ki-text">HIGH in zona reticularis + gonads (theca, Leydig); LOW in zona fasciculata</div></td><td><div class="ki-text">Deficiency: blocks all androgens + estrogens; corticoids preserved &rarr; sexual infantilism</div></td></tr>
+  <tr><td class="rl">Aromatase (CYP19)</td><td><div class="ki-text">C19 androgen &rarr; C18 estrogen</div></td><td><div class="ki-text">Removes C-19 methyl + introduces 3 double bonds in A-ring &rarr; phenolic aromatic A-ring</div></td><td><div class="ki-text">Granulosa cells, placenta, adipose, skin, bone, brain, minor Leydig</div></td><td><div class="ki-text">Target of anastrozole/letrozole/exemestane for postmenopausal ER<sup>+</sup> breast cancer</div></td></tr>
+  <tr><td class="rl">5&alpha;-reductase</td><td><div class="ki-text">Testosterone &rarr; DHT</div></td><td><div class="ki-text">Reduces &Delta;<sup>4</sup> double bond (saturates A-ring); adds H at C-5&alpha;</div></td><td><div class="ki-text">Peripheral: skin (scalp, face), prostate, external genitalia, hair follicles, seminal vesicles</div></td><td><div class="ki-text">Deficiency: 46,XY ambiguous at birth, virilize at puberty. Finasteride/dutasteride for BPH + baldness</div></td></tr>
+  <tr><td class="rl">17&beta;-HSD (two isoforms)</td><td><div class="ki-text">17&beta;-HSD3: androstenedione &rarr; T. 17&beta;-HSD1: estrone &rarr; estradiol</div></td><td><div class="ki-text">Reduces C-17 ketone to 17&beta;-OH</div></td><td><div class="ki-text">17&beta;-HSD3 in Leydig; 17&beta;-HSD1 in granulosa + peripheral</div></td><td><div class="ki-text">17&beta;-HSD3 deficiency: 46,XY ambiguous at birth, partial virilization at puberty</div></td></tr>
+</table>
+
+<div class="sec">Structural signatures (LO 1)</div>
+<div class="fg">
+  <div class="f"><label>Unique estrogen feature</label><div class="ki-text">AROMATIC (benzene) A-ring with 3-OH phenol. No other steroid has this &mdash; reflects loss of C-19 methyl + aromatization</div></div>
+  <div class="f"><label>Aromatization meaning</label><div class="ki-text">Removing C-19 angular methyl + introducing 3 double bonds in A-ring &rarr; fully aromatic benzene ring. 3-oxo converted to 3-OH phenol. Catalyzed by aromatase (CYP19)</div></div>
+  <div class="f"><label>Gateway pregnane</label><div class="ki-text">Pregnenolone (and &Delta;<sup>4</sup> form progesterone) &mdash; enters mineralocorticoid, glucocorticoid, and sex steroid pathways</div></div>
+  <div class="f"><label>17,20-lyase deficiency</label><div class="ki-text">Blocks androgen + estrogen synthesis (estrogens need C19 androgen substrate). Corticoids preserved (progesterone pathway intact). Sexual infantilism without virilization</div></div>
+  <div class="f"><label>Aromatase deficiency 46,XX</label><div class="ki-text">Fetal androgens not converted to estrogens &rarr; virilization in utero (ambiguous genitalia at birth); postnatally: tall stature (no estrogen to close epiphyses), primary amenorrhea, polycystic ovaries, osteopenia</div></div>
+</div>
+</div>
+
+<!-- TAB 1 -->
+<div class="panel" id="p1">
+<div class="lo-tag">LO 2</div>
+<div class="on-exam">ON EXAM &mdash; AR ladder: DHT &gt; T &gt;&gt; androstenedione &gt; DHEA. ER ladder: E<sub>2</sub> &gt; E<sub>1</sub> &gt; E<sub>3</sub>. E<sub>2</sub> = reproductive, E<sub>1</sub> = postmenopause, E<sub>3</sub> = pregnancy. Receptors: AR 1 gene X-LINKED, ER 2 genes (&alpha;+&beta;), PR 1 gene &mdash; all Type I nuclear + membrane variants</div>
+
+<div class="sec">Androgen potency ladder (LO 2)</div>
+<table>
+  <tr><th>Androgen</th><th>AR affinity</th><th>Role</th><th>Clinical relevance</th></tr>
+  <tr><td class="rl">DHT</td><td><div class="ki-text">HIGHEST &mdash; 2-5&times; testosterone</div></td><td><div class="ki-text">Male external genital differentiation, prostate growth, facial/body hair, scalp balding, voice deepening. Greater AR affinity + slower dissociation</div></td><td><div class="ki-text">Finasteride/dutasteride (5&alpha;-red inhibitors) lower DHT for BPH + male-pattern baldness. 5&alpha;-reductase deficiency &rarr; 46,XY ambiguous at birth &rarr; virilize at puberty</div></td></tr>
+  <tr><td class="rl">Testosterone</td><td><div class="ki-text">HIGH &mdash; primary circulating androgen</div></td><td><div class="ki-text">Main blood androgen; precursor to DHT (5&alpha;-red) and E<sub>2</sub> (aromatase). Wolffian development, spermatogenesis, muscle, libido</div></td><td><div class="ki-text">Used for hypogonadism (IM, transdermal, implant). Anabolic steroid abuse &rarr; testicular atrophy</div></td></tr>
+  <tr><td class="rl">Androstenedione</td><td><div class="ki-text">WEAK</div></td><td><div class="ki-text">Peripheral precursor; main ovarian thecal androgen; converted to T (17&beta;-HSD3) or estrone (aromatase)</div></td><td><div class="ki-text">Elevated in CAH (21-OH, 11&beta;-OH), PCOS, adrenal androgen tumors</div></td></tr>
+  <tr><td class="rl">DHEA / DHEA-S</td><td><div class="ki-text">VERY WEAK</div></td><td><div class="ki-text">Reservoir; peripherally converted to active androgens/estrogens. DHEA-S sulfated by SULT2A1 &mdash; most abundant circulating steroid</div></td><td><div class="ki-text">DHEA-S preferred lab for adrenal androgen excess (stable, long half-life). Age-related decline = adrenopause</div></td></tr>
+</table>
+
+<div class="sec">Estrogen potency + life-stage dominance (LO 2)</div>
+<table>
+  <tr><th>Estrogen</th><th>ER affinity</th><th>Dominant life stage</th><th>Principal source</th></tr>
+  <tr><td class="rl">17&beta;-Estradiol (E<sub>2</sub>)</td><td><div class="ki-text">HIGHEST</div></td><td><div class="ki-text">REPRODUCTIVE years</div></td><td><div class="ki-text">Ovarian granulosa cells (aromatase on thecal androstenedione); peripheral aromatase contributes</div></td></tr>
+  <tr><td class="rl">Estrone (E<sub>1</sub>)</td><td><div class="ki-text">INTERMEDIATE</div></td><td><div class="ki-text">POSTMENOPAUSE</div></td><td><div class="ki-text">Peripheral aromatization of adrenal androstenedione in adipose, bone &mdash; obesity &uarr; postmenopausal estrone + endometrial CA risk</div></td></tr>
+  <tr><td class="rl">Estriol (E<sub>3</sub>)</td><td><div class="ki-text">WEAKEST</div></td><td><div class="ki-text">PREGNANCY</div></td><td><div class="ki-text">Fetal-placental unit &mdash; fetal adrenal DHEA-S &rarr; placental aromatase. Falling E<sub>3</sub> = fetal distress</div></td></tr>
+</table>
+
+<div class="sec">Sex steroid receptors (LO 2)</div>
+<table>
+  <tr><th>Receptor</th><th>Gene / location</th><th>Tissue distribution</th><th>Key clinical fact</th></tr>
+  <tr><td class="rl">AR</td><td><div class="ki-text">1 gene on X chromosome (NR3C4). Cytoplasmic with HSP90 at rest</div></td><td><div class="ki-text">Widespread &mdash; male reproductive tract, skin, prostate, muscle, liver, hair follicles, CNS</div></td><td><div class="ki-text">X-LINKED &rarr; AIS inheritance is X-linked recessive. CAIS: 46,XY phenotypic female with testes, breasts, no pubic hair</div></td></tr>
+  <tr><td class="rl">ER&alpha; (ESR1)</td><td><div class="ki-text">ESR1 on 6q25. Cytoplasmic with HSP90</div></td><td><div class="ki-text">BREAST, UTERUS, LIVER, BONE, hypothalamus</div></td><td><div class="ki-text">Drives classic estrogen effects &mdash; breast proliferation, endometrial growth, bone preservation, hepatic protein synthesis. Main SERM target</div></td></tr>
+  <tr><td class="rl">ER&beta; (ESR2)</td><td><div class="ki-text">ESR2 on 14q23. Cytoplasmic with HSP90</div></td><td><div class="ki-text">PROSTATE, OVARY, CNS, cardiovascular, lung, colon</div></td><td><div class="ki-text">Often opposes / modulates ER&alpha;. Less-targeted by current SERMs</div></td></tr>
+  <tr><td class="rl">PR</td><td><div class="ki-text">1 gene (PGR on 11q22). Two isoforms (A, B). Cytoplasmic with HSP90</div></td><td><div class="ki-text">Uterus (endometrium, myometrium), breast (ductal), ovary, CNS</div></td><td><div class="ki-text">Progesterone also weakly binds MR (anti-mineralocorticoid at pharmacologic doses). Target of mifepristone</div></td></tr>
+  <tr><td class="rl">Membrane receptors</td><td><div class="ki-text">GPER / GPR30 (estrogen); mPR (progesterone) &mdash; separate genes</div></td><td><div class="ki-text">Plasma membrane in many tissues (endothelium, CNS, cardiac)</div></td><td><div class="ki-text">Mediate rapid non-genomic effects (seconds&ndash;minutes): vasodilation, rapid CNS effects, cardioprotection</div></td></tr>
+</table>
+<div class="warn">AR is on the X CHROMOSOME &rarr; Complete Androgen Insensitivity Syndrome (CAIS) shows X-linked recessive inheritance: 46,XY phenotypic female with testes, breasts (aromatization), but NO pubic/axillary hair, blind-ending vagina, primary amenorrhea.</div>
+</div>
+
+<!-- TAB 2 -->
+<div class="panel" id="p2">
+<div class="lo-tag">LO 3</div>
+<div class="on-exam">ON EXAM &mdash; Androgens: Leydig (testis, LH-driven), thecal (ovary, LH-driven), zona reticularis (ACTH-driven). DHT made PERIPHERALLY by 5&alpha;-reductase &mdash; not secreted. Estrogens: granulosa (two-cell model, FSH-driven aromatase), placenta (E<sub>3</sub>), peripheral aromatase (E<sub>1</sub> postmenopause). Two-cell: LH &rarr; theca &rarr; androstenedione &rarr; granulosa (FSH) &rarr; aromatase &rarr; estrone &rarr; (17&beta;-HSD1) &rarr; estradiol</div>
+
+<div class="sec">Source summary (LO 3)</div>
+<table>
+  <tr><th>Hormone</th><th>Gonadal source</th><th>Adrenal source</th><th>Peripheral source</th></tr>
+  <tr><td class="rl">Testosterone</td><td><div class="ki-text">LEYDIG CELLS (testis) &mdash; primary in males; LH-driven (Gs-cAMP)</div></td><td><div class="ki-text">Minor (via DHEA/androstenedione conversion)</div></td><td><div class="ki-text">Peripheral conversion of androstenedione by 17&beta;-HSD in liver, skin, fat &mdash; significant in females</div></td></tr>
+  <tr><td class="rl">DHT</td><td><div class="ki-text">NOT made directly</div></td><td><div class="ki-text">NOT made</div></td><td><div class="ki-text">PERIPHERAL conversion of T by 5&alpha;-reductase in skin, prostate, external genitalia, hair follicles</div></td></tr>
+  <tr><td class="rl">Androstenedione</td><td><div class="ki-text">THECAL cells (ovary) &mdash; primary in females, LH-driven; minor testicular</div></td><td><div class="ki-text">Zona reticularis (along with DHEA/DHEA-S)</div></td><td><div class="ki-text">Minor (from DHEA conversion)</div></td></tr>
+  <tr><td class="rl">DHEA / DHEA-S</td><td><div class="ki-text">Minor gonadal</div></td><td><div class="ki-text">Zona RETICULARIS &mdash; PRIMARY. Sulfated by SULT2A1 &rarr; DHEA-S for circulation</div></td><td><div class="ki-text">Negligible; DHEA-S desulfated in target tissues</div></td></tr>
+  <tr><td class="rl">17&beta;-Estradiol</td><td><div class="ki-text">GRANULOSA cells (ovary, two-cell model) &mdash; primary in reproductive women; FSH-driven aromatase</div></td><td><div class="ki-text">Minor</div></td><td><div class="ki-text">Peripheral aromatase (adipose, skin, bone) on testosterone &mdash; significant in men and postmenopausal women</div></td></tr>
+  <tr><td class="rl">Estrone</td><td><div class="ki-text">Ovary (minor &mdash; ovary makes E<sub>2</sub> preferentially)</div></td><td><div class="ki-text">No direct source</div></td><td><div class="ki-text">PRIMARY source &mdash; peripheral aromatase (adipose) on adrenal androstenedione. DOMINANT postmenopausal estrogen</div></td></tr>
+  <tr><td class="rl">Estriol</td><td><div class="ki-text">No ovarian source</div></td><td><div class="ki-text">No adrenal source</div></td><td><div class="ki-text">FETAL-PLACENTAL unit (pregnancy only). Fetal adrenal DHEA-S &rarr; placental desulfation + 16&alpha;-OH + aromatization</div></td></tr>
+  <tr><td class="rl">Progesterone</td><td><div class="ki-text">CORPUS LUTEUM (luteal phase) &rarr; placenta from ~7-10 weeks of pregnancy</div></td><td><div class="ki-text">Minor intermediate in mineralocorticoid pathway</div></td><td><div class="ki-text">Negligible</div></td></tr>
+</table>
+
+<div class="sec">Two-cell / two-gonadotropin model (LO 3)</div>
+<div class="fg">
+  <div class="f"><label>LH on thecal cells</label><div class="ki-text">LH binds Gs-coupled receptor &rarr; cAMP/PKA &rarr; stimulates thecal steroidogenic enzymes &rarr; produces ANDROSTENEDIONE</div></div>
+  <div class="f"><label>FSH on granulosa cells</label><div class="ki-text">FSH binds Gs-coupled receptor &rarr; cAMP/PKA &rarr; stimulates AROMATASE &rarr; converts thecal androstenedione &rarr; estrone &rarr; (17&beta;-HSD1) &rarr; estradiol</div></div>
+  <div class="f"><label>Theca no estrogen</label><div class="ki-text">Thecal cells LACK aromatase &mdash; can&apos;t convert androgens to estrogens. Androstenedione must diffuse into granulosa for estrogen production</div></div>
+  <div class="f"><label>Theca vs granulosa enzymes</label><div class="ki-text">Theca: 17&alpha;-hydroxylase + 17,20-lyase + 3&beta;-HSD &rarr; androstenedione (from pregnenolone). Granulosa: aromatase + 17&beta;-HSD1 &rarr; estrone &rarr; estradiol</div></div>
+  <div class="f"><label>Mid-cycle ovulation trigger</label><div class="ki-text">Sustained high E<sub>2</sub> (&gt;200 pg/mL for ~48 h) flips feedback from negative to POSITIVE &rarr; LH SURGE &rarr; ovulation. Corpus luteum then makes progesterone (luteal phase)</div></div>
+</div>
+
+<div class="sec">Peripheral conversion enzymes (LO 3)</div>
+<table>
+  <tr><th>Enzyme</th><th>Where expressed</th><th>Reaction</th><th>Clinical hook</th></tr>
+  <tr><td class="rl">5&alpha;-reductase</td><td><div class="ki-text">Skin (scalp, face), prostate, external genitalia, hair follicles, seminal vesicles. NOT in adrenal cortex</div></td><td><div class="ki-text">Testosterone &rarr; DHT (reduces &Delta;<sup>4</sup>). DHT has 2-5&times; AR affinity</div></td><td><div class="ki-text">Finasteride/dutasteride for BPH + baldness. 5&alpha;-reductase deficiency &rarr; 46,XY ambiguous at birth, virilize at puberty</div></td></tr>
+  <tr><td class="rl">Aromatase (CYP19)</td><td><div class="ki-text">Granulosa (ovary), adipose, bone, skin, brain, placenta (huge), minimal Leydig</div></td><td><div class="ki-text">Androstenedione &rarr; estrone; testosterone &rarr; estradiol</div></td><td><div class="ki-text">Anastrozole/letrozole/exemestane for postmenopausal ER<sup>+</sup> breast CA. Obesity &uarr; aromatase &rarr; postmenopausal endometrial CA risk</div></td></tr>
+  <tr><td class="rl">17&beta;-HSD3 (androgenic)</td><td><div class="ki-text">Leydig cells (testis); minor elsewhere</div></td><td><div class="ki-text">Androstenedione &rarr; testosterone (reductive at C-17)</div></td><td><div class="ki-text">Deficiency in 46,XY &rarr; ambiguous at birth, partial virilization at puberty from other 17&beta;-HSD isoforms</div></td></tr>
+  <tr><td class="rl">17&beta;-HSD1 (estrogenic)</td><td><div class="ki-text">Granulosa (ovary), placenta, breast</div></td><td><div class="ki-text">Estrone &rarr; estradiol (reductive at C-17). Higher affinity for estrogen substrates than 17&beta;-HSD3</div></td><td><div class="ki-text">Potential target for ER<sup>+</sup> breast cancer therapy (clinical trials); inhibition lowers local tissue E<sub>2</sub></div></td></tr>
+</table>
+
+<div class="sec">Placenta and lifetime shifts (LO 3)</div>
+<div class="fg">
+  <div class="f"><label>Placenta no 17&alpha;-hydroxylase</label><div class="ki-text">Placenta LACKS 17&alpha;-hydroxylase and 17,20-lyase &rarr; can&apos;t make DHEA from pregnenolone. Uses FETAL adrenal DHEA-S as substrate for estriol synthesis</div></div>
+  <div class="f"><label>Falling estriol meaning</label><div class="ki-text">E<sub>3</sub> requires intact fetal adrenal (DHEA-S source), placenta (desulfation + aromatization), fetal-placental circulation. FALLING E<sub>3</sub> late pregnancy signals fetal distress (demise, IUGR, placental insufficiency)</div></div>
+  <div class="f"><label>Postmenopausal estrogen source</label><div class="ki-text">ESTRONE (E<sub>1</sub>) dominant &mdash; peripheral AROMATASE (adipose, bone) on adrenal ANDROSTENEDIONE. Ovary essentially silent after menopause</div></div>
+  <div class="f"><label>Obesity + postmenopausal estrogen</label><div class="ki-text">Adipose has high aromatase &rarr; more androstenedione &rarr; estrone conversion &rarr; unopposed estrogen &rarr; endometrial hyperplasia + CA risk; also &uarr; postmenopausal breast CA risk</div></div>
+  <div class="f"><label>PCOS hyperandrogenism</label><div class="ki-text">(1) Ovarian thecal overproduction (&uarr; LH:FSH + hyperinsulinemia stim). (2) Hyperinsulinemia SUPPRESSES hepatic SHBG synthesis &rarr; &uarr; FREE testosterone. Both drive hirsutism, acne, oligomenorrhea</div></div>
+</div>
+</div>
+
+<!-- TAB 3 -->
+<div class="panel" id="p3">
+<div class="lo-tag">LO 4</div>
+<div class="on-exam">ON EXAM &mdash; Testosterone (Leydig): cholesterol &rarr; pregnenolone &rarr; 17-OH-preg &rarr; DHEA &rarr; androstenedione &rarr; testosterone (17&beta;-HSD3). Peripheral: T &rarr; DHT (5&alpha;-red); T &rarr; E<sub>2</sub> (aromatase). Ovarian: theca &rarr; androstenedione &rarr; granulosa aromatase &rarr; estrone &rarr; (17&beta;-HSD1) &rarr; E<sub>2</sub>. Deficiencies: 5&alpha;-red (46,XY ambiguous at birth &rarr; virilize at puberty); 17&beta;-HSD3 (similar); aromatase (tall + virilization)</div>
+
+<div class="sec">Testosterone biosynthesis &mdash; Leydig cell (LO 4)</div>
+<table>
+  <tr><th>Step</th><th>Substrate</th><th>Enzyme</th><th>Product</th></tr>
+  <tr><td class="rl">1</td><td>Cholesterol</td><td><div class="ki-text">Desmolase (CYP11A1 / P450scc) on inner mitochondrial membrane</div></td><td>Pregnenolone</td></tr>
+  <tr><td class="rl">2</td><td>Pregnenolone</td><td><div class="ki-text">17&alpha;-hydroxylase (CYP17)</div></td><td>17-OH-Pregnenolone</td></tr>
+  <tr><td class="rl">3</td><td>17-OH-Pregnenolone</td><td><div class="ki-text">17,20-lyase activity of CYP17 &mdash; cleaves C17-C20 bond, drops 2-C side chain, leaves C-17 ketone</div></td><td>DHEA</td></tr>
+  <tr><td class="rl">4</td><td>DHEA</td><td><div class="ki-text">3&beta;-HSD &mdash; converts &Delta;<sup>5</sup> DHEA to &Delta;<sup>4</sup> androstenedione (isomerization + 3-ketone formation)</div></td><td>Androstenedione</td></tr>
+  <tr><td class="rl">5</td><td>Androstenedione</td><td><div class="ki-text">17&beta;-HSD3 (androgenic) &mdash; reduces C-17 ketone to 17&beta;-OH. LEYDIG CELL final step</div></td><td>Testosterone</td></tr>
+</table>
+
+<div class="sec">Peripheral conversions of testosterone (LO 4)</div>
+<table>
+  <tr><th>Substrate</th><th>Enzyme</th><th>Product</th><th>Importance</th></tr>
+  <tr><td class="rl">Testosterone</td><td><div class="ki-text">5&alpha;-reductase (skin, prostate, external genitalia, hair follicles)</div></td><td>DHT</td><td><div class="ki-text">DHT has 2-5&times; AR affinity &mdash; drives male external genital differentiation, prostate growth, facial/body hair, scalp balding, voice deepening. Blocked by finasteride/dutasteride</div></td></tr>
+  <tr><td class="rl">Testosterone</td><td><div class="ki-text">Aromatase (CYP19 &mdash; granulosa, adipose, bone, skin, brain)</div></td><td>17&beta;-Estradiol</td><td><div class="ki-text">Explains: (1) feminization in aromatase-excess states or estrogen Rx in men; (2) breast development in CAIS (testosterone aromatized to E<sub>2</sub> drives ER&alpha; despite broken AR); (3) basis of aromatase inhibitor therapy</div></td></tr>
+</table>
+
+<div class="sec">Ovarian estrogen biosynthesis &mdash; two-cell model (LO 4)</div>
+<table>
+  <tr><th>Cell</th><th>Stimulated by</th><th>Enzyme activity</th><th>Product</th></tr>
+  <tr><td class="rl">Thecal cell</td><td><div class="ki-text">LH (Gs-cAMP)</div></td><td><div class="ki-text">17&alpha;-hydroxylase + 17,20-lyase + 3&beta;-HSD. LACKS aromatase</div></td><td><div class="ki-text">Androstenedione (primary thecal product). Diffuses into granulosa</div></td></tr>
+  <tr><td class="rl">Granulosa (step 1)</td><td><div class="ki-text">FSH (Gs-cAMP)</div></td><td><div class="ki-text">Aromatase (CYP19) &mdash; androstenedione &rarr; estrone; testosterone &rarr; estradiol directly</div></td><td><div class="ki-text">Estrone (E<sub>1</sub>) &mdash; intermediate</div></td></tr>
+  <tr><td class="rl">Granulosa (step 2)</td><td><div class="ki-text">Constitutive / FSH permissive</div></td><td><div class="ki-text">17&beta;-HSD1 (estrogenic) &mdash; reduces estrone to 17&beta;-OH</div></td><td><div class="ki-text">17&beta;-Estradiol (E<sub>2</sub>) &mdash; primary circulating estrogen in reproductive women</div></td></tr>
+</table>
+
+<div class="sec">Critical enzyme deficiencies (LO 4)</div>
+<table>
+  <tr><th>Enzyme</th><th>Reaction</th><th>Location</th><th>Deficiency phenotype</th></tr>
+  <tr><td class="rl">17,20-lyase</td><td><div class="ki-text">Cleaves C17-C20; 17-OH-pregnenolone (or progesterone) &rarr; DHEA (or androstenedione)</div></td><td><div class="ki-text">CYP17 in zona reticularis + gonads</div></td><td><div class="ki-text">Blocks androgens + estrogens; corticoids preserved. Sexual infantilism; 46,XY phenotypic female, 46,XX no sexual maturation</div></td></tr>
+  <tr><td class="rl">17&beta;-HSD3</td><td><div class="ki-text">Androstenedione &rarr; testosterone (reductive)</div></td><td><div class="ki-text">Leydig cells (testis)</div></td><td><div class="ki-text">46,XY ambiguous at birth (reduced fetal testosterone); partial virilization at puberty from other isoforms</div></td></tr>
+  <tr><td class="rl">5&alpha;-reductase</td><td><div class="ki-text">Testosterone &rarr; DHT</div></td><td><div class="ki-text">Skin, prostate, external genitalia, hair follicles</div></td><td><div class="ki-text">46,XY ambiguous at birth (no DHT for external virilization); Wolffian preserved; VIRILIZES AT PUBERTY (&quot;guevedoces&quot;). Normal T, LOW DHT, HIGH T:DHT</div></td></tr>
+  <tr><td class="rl">Aromatase (CYP19)</td><td><div class="ki-text">Androgen &rarr; estrogen</div></td><td><div class="ki-text">Granulosa, adipose, bone, skin, brain, placenta</div></td><td><div class="ki-text">46,XX: fetal virilization + tall stature + primary amenorrhea + polycystic ovaries + osteopenia. 46,XY: tall + osteoporosis</div></td></tr>
+</table>
+<div class="warn">5&alpha;-REDUCTASE DEFICIENCY: 46,XY infant with ambiguous / female-appearing external genitalia AT BIRTH (no DHT), but VIRILIZES AT PUBERTY as rising testosterone drives late masculinization. Classic &quot;guevedoces&quot; phenotype. Normal T, LOW DHT, elevated T:DHT ratio.</div>
+
+<div class="sec">Pharmacologic pathway modulators (LO 4)</div>
+<div class="fg">
+  <div class="f"><label>Finasteride / dutasteride</label><div class="ki-text">5&alpha;-reductase inhibitors &mdash; finasteride (type 2 selective) for BPH + male-pattern baldness; dutasteride (both types) for more complete DHT suppression. TERATOGENIC in male fetus (pregnancy warning)</div></div>
+  <div class="f"><label>Anastrozole / letrozole</label><div class="ki-text">Aromatase inhibitors (nonsteroidal, REVERSIBLE). First-line for POSTMENOPAUSAL ER<sup>+</sup> breast cancer. Side effects: hot flashes, arthralgia, osteoporosis</div></div>
+  <div class="f"><label>Exemestane</label><div class="ki-text">Aromatase inhibitor &mdash; STEROIDAL, IRREVERSIBLE (&quot;suicide inhibitor&quot;). Different resistance pattern than nonsteroidal AIs. Postmenopausal ER<sup>+</sup> breast CA</div></div>
+  <div class="f"><label>AI premenopausal failure</label><div class="ki-text">Premenopausal ovaries respond to low estrogen with &uarr; gonadotropin drive &rarr; more aromatase &rarr; more estrogen &mdash; the ovarian feedback loop overwhelms the AI. Can paradoxically INCREASE estrogen. Premenopausal ER<sup>+</sup> breast CA uses tamoxifen (or ovarian suppression + AI)</div></div>
+</div>
+</div>
+
+<!-- TAB 4 -->
+<div class="panel" id="p4">
+<div class="lo-tag">LO 5</div>
+<div class="on-exam">ON EXAM &mdash; SHBG primary carrier (T &gt; DHT &gt; E<sub>2</sub>). T distribution: 60% SHBG, 38% albumin, 2% free. E<sub>2</sub>: 60% SHBG, 20% albumin, 20% free. Half-lives short: T ~1 h, E<sub>2</sub> &lt;20 min, PROGESTERONE ~5 MIN (shortest), DHEA-S 7-10 h (longest). SHBG &uarr; by estrogen/pregnancy/hyperthyroid/cirrhosis/anorexia. SHBG &darr; by androgens/obesity/insulin/PCOS/hypothyroid. Hepatic glucuronide/sulfate &rarr; kidney. Oral T has extensive first-pass metabolism</div>
+
+<div class="sec">Circulation (LO 5)</div>
+<table>
+  <tr><th>Hormone</th><th>Carriers</th><th>% free</th><th>Half-life</th><th>Pearl</th></tr>
+  <tr><td class="rl">Testosterone</td><td><div class="ki-text">SHBG (~60%, high affinity), albumin (~38%), free (~2%)</div></td><td><div class="ki-text">~2% FREE (active)</div></td><td><div class="ki-text">Up to ~1 hour</div></td><td><div class="ki-text">Free T drives biological activity. SHBG key modifier &mdash; measure free T when SHBG abnormal (pregnancy, obesity, liver dz)</div></td></tr>
+  <tr><td class="rl">DHT</td><td><div class="ki-text">SHBG (high affinity), albumin</div></td><td><div class="ki-text">Low</div></td><td><div class="ki-text">Short (&lt;20 min)</div></td><td><div class="ki-text">Made peripherally and acts locally &mdash; circulating levels don&apos;t reflect tissue-level DHT. T:DHT ratio used for 5&alpha;-red diagnosis</div></td></tr>
+  <tr><td class="rl">Androstenedione</td><td><div class="ki-text">Albumin (primarily, weak)</div></td><td><div class="ki-text">Moderate</div></td><td><div class="ki-text">Up to ~1 hour</div></td><td><div class="ki-text">Elevated in CAH, PCOS, adrenal androgen tumors</div></td></tr>
+  <tr><td class="rl">DHEA-S</td><td><div class="ki-text">Albumin (HIGH affinity)</div></td><td><div class="ki-text">Low</div></td><td><div class="ki-text">7-10 hours (LONGEST steroid)</div></td><td><div class="ki-text">Most abundant circulating steroid. Sulfate prevents renal filtration &rarr; prolonged t&frac12;. Preferred lab for adrenal androgen excess</div></td></tr>
+  <tr><td class="rl">17&beta;-Estradiol</td><td><div class="ki-text">SHBG (~60%), albumin (~20%)</div></td><td><div class="ki-text">~20% free</div></td><td><div class="ki-text">&lt;20 min</div></td><td><div class="ki-text">Dominant reproductive estrogen. Short half-life requires continuous production. Pregnancy &rarr; &uarr; SHBG &rarr; &uarr; total E<sub>2</sub> but free normal</div></td></tr>
+  <tr><td class="rl">Estrone / estriol</td><td><div class="ki-text">Albumin primarily (weaker SHBG binding than E<sub>2</sub>)</div></td><td><div class="ki-text">Higher than E<sub>2</sub></div></td><td><div class="ki-text">&lt;20 min</div></td><td><div class="ki-text">E<sub>1</sub> dominant postmenopause (peripheral aromatase). E<sub>3</sub> dominant pregnancy (fetal-placental). Falling E<sub>3</sub> = fetal distress</div></td></tr>
+  <tr><td class="rl">Progesterone</td><td><div class="ki-text">CBG + albumin (BOTH weak for P)</div></td><td><div class="ki-text">Moderate</div></td><td><div class="ki-text">~5 MINUTES (SHORTEST)</div></td><td><div class="ki-text">Ultra-short t&frac12; from weak carrier binding + efficient hepatic clearance. Acts quickly, inactivated rapidly. Weakly binds MR (anti-mineralocorticoid pharmacologically)</div></td></tr>
+</table>
+
+<div class="sec">SHBG regulation (LO 5)</div>
+<table>
+  <tr><th>Effect</th><th>Direction</th><th>Clinical consequence</th></tr>
+  <tr><td class="rl">Estrogen (pregnancy, OCPs)</td><td><div class="ki-text">RAISES SHBG</div></td><td><div class="ki-text">Total T rises but free T falls; total E<sub>2</sub> rises but free normal</div></td></tr>
+  <tr><td class="rl">Hyperthyroidism</td><td><div class="ki-text">RAISES SHBG</div></td><td><div class="ki-text">In men: free T falls &rarr; gynecomastia, low libido. Useful clinical clue</div></td></tr>
+  <tr><td class="rl">Cirrhosis</td><td><div class="ki-text">RAISES SHBG (paradoxical &mdash; loss of hepatic estrogen clearance)</div></td><td><div class="ki-text">Combined with impaired sex-steroid inactivation &rarr; gynecomastia, spider angiomas, testicular atrophy</div></td></tr>
+  <tr><td class="rl">Anorexia / malnutrition</td><td><div class="ki-text">RAISES SHBG</div></td><td><div class="ki-text">Low insulin / low leptin + altered hepatic substrate signaling</div></td></tr>
+  <tr><td class="rl">Aging in men</td><td><div class="ki-text">Gradual RISE</div></td><td><div class="ki-text">Free T falls more than total T does &mdash; contributes to age-related androgen decline</div></td></tr>
+  <tr><td class="rl">Androgens (exogenous / excess)</td><td><div class="ki-text">LOWERS SHBG</div></td><td><div class="ki-text">Raises free T further (positive feedback)</div></td></tr>
+  <tr><td class="rl">Obesity / hyperinsulinemia (PCOS, T2DM)</td><td><div class="ki-text">LOWERS SHBG</div></td><td><div class="ki-text">Raises free T &mdash; major mechanism in PCOS and T2DM hyperandrogenism</div></td></tr>
+  <tr><td class="rl">Hypothyroidism</td><td><div class="ki-text">LOWERS SHBG</div></td><td><div class="ki-text">Less clinically significant than hyperthyroid effect</div></td></tr>
+</table>
+
+<div class="sec">Inactivation and clearance (LO 5)</div>
+<div class="fg">
+  <div class="f"><label>Principal hepatic step</label><div class="ki-text">Glucuronide and sulfate conjugation at hydroxyl groups &rarr; water-soluble &rarr; kidney excretion. Also oxidation/reduction reactions. Liver is major clearance organ</div></div>
+  <div class="f"><label>Estradiol to weaker estrogens</label><div class="ki-text">17&beta;-HSD2 (OXIDATIVE, opposite of HSD1) converts estradiol &rarr; estrone. 16&alpha;-hydroxylation (liver) converts estrone &rarr; estriol. Both weaker than E<sub>2</sub> but can still bind ER</div></div>
+  <div class="f"><label>Oral T failure</label><div class="ki-text">Extensive FIRST-PASS hepatic metabolism &rarr; very little reaches circulation. Low bioavailability + hepatotoxicity risk with oral 17&alpha;-alkylated variants</div></div>
+  <div class="f"><label>Preferred T routes</label><div class="ki-text">IM (cypionate, enanthate &mdash; long-acting depot), transdermal (patch, gel), implantable pellets, intranasal. Avoid oral 17&alpha;-alkylated forms (hepatotoxic)</div></div>
+  <div class="f"><label>Cirrhosis sex steroids</label><div class="ki-text">(1) Reduced hepatic clearance &rarr; estrogen accumulates. (2) &uarr; SHBG from systemic estrogen. (3) Impaired conjugation. (4) Hypoalbuminemia alters kinetics. Result: gynecomastia, spider angiomas, testicular atrophy, &darr; libido</div></div>
+</div>
+</div>
+
+<!-- TAB 5 -->
+<div class="panel" id="p5">
+<div class="lo-tag">LO 6</div>
+<div class="on-exam">ON EXAM &mdash; AR/ER/PR are Type I nuclear receptors: cytoplasmic + HSP90 at rest &rarr; ligand &rarr; HSP release &rarr; dimer &rarr; nucleus &rarr; HRE. ER&alpha; (ESR1): breast/uterus/bone/liver. ER&beta; (ESR2): prostate/ovary/CNS/vascular. Membrane receptors (GPER, mPR) for rapid non-genomic effects. SERMs (tamoxifen, raloxifene, clomiphene), AIs, anti-androgens, 5&alpha;-red inhibitors, mifepristone</div>
+
+<div class="sec">Canonical Type I nuclear receptor mechanism (LO 6)</div>
+<table>
+  <tr><th>Step</th><th>What happens</th></tr>
+  <tr><td class="rl">1. Resting</td><td><div class="ki-text">AR, ER, PR sit in cytoplasm bound to HSP90 + HSP70 chaperones (Type I NR mechanism, same as MR, GR)</div></td></tr>
+  <tr><td class="rl">2. Ligand entry</td><td><div class="ki-text">Lipophilic hormone crosses plasma membrane by diffusion (no transporter)</div></td></tr>
+  <tr><td class="rl">3. Chaperone release</td><td><div class="ki-text">Ligand binds LBD &rarr; conformational change &rarr; HSP chaperones dissociate</div></td></tr>
+  <tr><td class="rl">4. Dimerization</td><td><div class="ki-text">Receptor dimerizes (AR homodimer; ER &alpha;-&alpha;, &beta;-&beta;, or &alpha;-&beta; heterodimer; PR homodimer) &rarr; translocates to nucleus</div></td></tr>
+  <tr><td class="rl">5. DNA binding</td><td><div class="ki-text">Dimer binds palindromic HRE (ARE/ERE/PRE) on target gene promoters; recruits coactivators (agonist) or corepressors (antagonist) &rarr; modulates transcription</div></td></tr>
+  <tr><td class="rl">6. Genomic timescale</td><td><div class="ki-text">Hours &mdash; requires new protein synthesis. Full effect over hours to days</div></td></tr>
+  <tr><td class="rl">7. Non-genomic</td><td><div class="ki-text">Membrane receptors (GPER for estrogen; mPR for progesterone) trigger rapid (sec-min) MAPK, PI3K/AKT, cAMP signaling. Ex: estrogen vasodilation, CNS mood effects, cardioprotection</div></td></tr>
+</table>
+
+<div class="sec">ER&alpha; vs ER&beta; (LO 6)</div>
+<div class="fg">
+  <div class="f"><label>ER&alpha; (ESR1)</label><div class="ki-text">Dominant in BREAST, UTERUS, LIVER, BONE, hypothalamus. Drives classic estrogenic effects &mdash; breast proliferation, endometrial growth, bone preservation, hepatic clotting factor + binding protein synthesis. Main SERM target</div></div>
+  <div class="f"><label>ER&beta; (ESR2)</label><div class="ki-text">Dominant in PROSTATE, OVARY, CNS, cardiovascular, lung, colon. Often opposes / modulates ER&alpha;. Newer selective ER&beta; agonists under investigation</div></div>
+  <div class="f"><label>SERM selectivity mechanism</label><div class="ki-text">Different tissues have distinct ER&alpha;/ER&beta; ratios + distinct coactivator/corepressor availability + distinct chromatin contexts. SERM-bound receptor adopts a conformation favoring coactivators in some tissues (agonist) and corepressors in others (antagonist)</div></div>
+</div>
+
+<div class="sec">SERMs (LO 6)</div>
+<table>
+  <tr><th>SERM</th><th>Breast</th><th>Endometrium</th><th>Bone</th><th>Use</th></tr>
+  <tr><td class="rl">Tamoxifen</td><td><div class="ki-text">ANTAGONIST</div></td><td><div class="ki-text">AGONIST (&uarr; endometrial CA risk)</div></td><td><div class="ki-text">AGONIST (preserves bone)</div></td><td><div class="ki-text">Adjuvant ER<sup>+</sup> breast CA (PRE- and postmenopausal); prevention in high-risk. SE: endometrial CA, VTE, hot flashes</div></td></tr>
+  <tr><td class="rl">Raloxifene</td><td><div class="ki-text">ANTAGONIST</div></td><td><div class="ki-text">ANTAGONIST (no endometrial risk)</div></td><td><div class="ki-text">AGONIST</div></td><td><div class="ki-text">Postmenopausal osteoporosis prevention/treatment + breast CA prevention in high-risk women</div></td></tr>
+  <tr><td class="rl">Clomiphene</td><td><div class="ki-text">Mixed/weak antagonist</div></td><td><div class="ki-text">Weak antagonist (can thin endometrium)</div></td><td><div class="ki-text">Not clinically significant</div></td><td><div class="ki-text">OVULATION INDUCTION in anovulatory PCOS &mdash; blocks hypothalamic ER &rarr; removes negative feedback &rarr; &uarr; GnRH &rarr; &uarr; LH/FSH &rarr; folliculogenesis</div></td></tr>
+</table>
+
+<div class="sec">Other sex steroid pharmacology (LO 6)</div>
+<div class="fg">
+  <div class="f"><label>Aromatase inhibitors</label><div class="ki-text">Anastrozole, letrozole (nonsteroidal, reversible); exemestane (steroidal, irreversible). Block peripheral androgen &rarr; estrogen conversion. FIRST-LINE POSTMENOPAUSAL ER<sup>+</sup> breast CA. SE: hot flashes, arthralgia, osteoporosis</div></div>
+  <div class="f"><label>Anti-androgens</label><div class="ki-text">Flutamide (hepatotoxic), bicalutamide, enzalutamide (best CNS penetration, for castration-resistant prostate CA). AR antagonists &mdash; block AR at target. Often combined with leuprolide (combined androgen blockade)</div></div>
+  <div class="f"><label>Finasteride / dutasteride</label><div class="ki-text">5&alpha;-reductase inhibitors &mdash; finasteride (type 2) for BPH + baldness; dutasteride (both types) for more complete DHT drop. TERATOGENIC in male fetus &mdash; pregnant women shouldn&apos;t handle broken tablets</div></div>
+  <div class="f"><label>Spironolactone</label><div class="ki-text">Nonselective MR antagonist with OFF-TARGET AR ANTAGONISM + PR AGONISM. For AR block: PCOS hirsutism, transgender hormone therapy (off-label), women&apos;s acne. SE: gynecomastia, menstrual irregularities, hyperkalemia</div></div>
+  <div class="f"><label>Mifepristone</label><div class="ki-text">PR antagonist (RU-486) + GR antagonist. Medical abortion (PR); Cushing syndrome with hyperglycemia (GR, off-label)</div></div>
+  <div class="f"><label>Leuprolide continuous</label><div class="ki-text">GnRH agonist in continuous administration &rarr; gonadotrope desensitization + downregulation &rarr; &darr; LH/FSH &rarr; &darr; sex steroids (&quot;medical castration&quot;). Uses: prostate CA, endometriosis, central precocious puberty, IVF. Initial &quot;flare&quot; requires antiandrogen cover 2-4 weeks in prostate CA</div></div>
+</div>
+
+<div class="sec">Clinical syndromes (LO 6)</div>
+<div class="fg">
+  <div class="f"><label>CAIS genetics + features</label><div class="ki-text">Complete Androgen Insensitivity Syndrome &mdash; AR loss-of-function mutation (X chromosome). X-LINKED RECESSIVE. 46,XY with functional Sertoli + Leydig cells but nonfunctional AR</div></div>
+  <div class="f"><label>CAIS breasts</label><div class="ki-text">Leydig cells make testosterone normally. Peripheral AROMATASE converts T &rarr; 17&beta;-estradiol &rarr; ER&alpha; drives breast development. Uterus + upper vagina absent (MIS from Sertoli cells caused M&uuml;llerian regression)</div></div>
+  <div class="f"><label>CAIS no hair</label><div class="ki-text">Pubic + axillary hair are AR-dependent (driven by DHT). Nonfunctional AR &rarr; fail to develop despite high T/DHT. Scalp hair preserved (estrogen-dependent). Classic CAIS finding</div></div>
+  <div class="f"><label>5&alpha;-reductase birth vs puberty</label><div class="ki-text">BIRTH: 46,XY ambiguous / female-appearing external genitalia (no DHT for external virilization); Wolffian preserved internally. PUBERTY: rising testosterone overcomes DHT block &rarr; virilization (&quot;guevedoces&quot;)</div></div>
+  <div class="f"><label>Tamoxifen side effects</label><div class="ki-text">(1) Increased ENDOMETRIAL CANCER risk (agonist in endometrium) &mdash; always investigate postmenopausal bleeding. (2) VTE (DVT, PE). Also hot flashes, cataracts, hepatic steatosis</div></div>
+</div>
+</div>
+
+<!-- TAB 6 -->
+<div class="panel" id="p6">
+<div class="lo-tag">LO 1&ndash;6 &middot; USMLE Step 1 Style</div>
+<div class="on-exam">10 questions &mdash; answers pre-revealed.</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q1. Rank androgens by AR affinity.</div>
+  <div class="pq-choices">
+    A. Androstenedione &gt; DHT &gt; T &gt; DHEA<br>
+    B. DHT &gt; testosterone &gt;&gt; androstenedione &gt; DHEA<br>
+    C. T &gt; DHT &gt; DHEA &gt; androstenedione<br>
+    D. DHEA &gt; DHEA-S &gt; T &gt; DHT<br>
+    E. All equal
+  </div>
+  <div class="pq-ans"><strong>B &mdash; DHT &gt; T &gt;&gt; androstenedione &gt; DHEA.</strong><br>DHT has 2&ndash;5&times; AR affinity vs testosterone. Androstenedione + DHEA are WEAK androgens that serve mainly as peripheral precursors. Why 5&alpha;-reductase inhibition produces clinical effects in DHT-dependent tissues (scalp, prostate).</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q2. 16-year-old phenotypically female with primary amenorrhea, normal breasts, sparse axillary/pubic hair, blind-ending vagina. 46,XY. Bilateral inguinal masses. Diagnosis?</div>
+  <div class="pq-choices">
+    A. Kallmann<br>
+    B. 5&alpha;-reductase deficiency<br>
+    C. Complete AIS &mdash; X-linked AR mutation<br>
+    D. Turner syndrome<br>
+    E. MRKH
+  </div>
+  <div class="pq-ans"><strong>C &mdash; CAIS.</strong><br>46,XY, functional Sertoli &rarr; MIS &rarr; M&uuml;llerian regression (no uterus, blind vagina). Leydig make testosterone, but AR nonfunctional &rarr; no AR signaling &rarr; Wolffian regresses, external defaults female. Breasts from peripheral AROMATASE (T &rarr; E<sub>2</sub> &rarr; ER&alpha;). Sparse pubic/axillary hair because those are AR-dependent. AR on X chromosome &rarr; X-linked recessive.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q3. 3-week-old 46,XY with ambiguous genitalia. Normal testosterone, LOW DHT, elevated T:DHT ratio. Virilizes at puberty with deepening voice, phallic growth, muscle mass. Enzyme deficient?</div>
+  <div class="pq-choices">
+    A. 17,20-lyase<br>
+    B. 17&beta;-HSD3<br>
+    C. Aromatase<br>
+    D. 5&alpha;-reductase<br>
+    E. 21-hydroxylase
+  </div>
+  <div class="pq-ans"><strong>D &mdash; 5&alpha;-reductase deficiency.</strong><br>Converts T &rarr; DHT in peripheral tissues. Without DHT, external masculinization fails IN UTERO &rarr; ambiguous genitalia at birth. Wolffian preserved (T-dependent, not DHT). At PUBERTY, rising T overcomes DHT deficit &rarr; late virilization (&ldquo;guevedoces&rdquo;). Lab: normal T, LOW DHT, HIGH T:DHT.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q4. Two-cell / two-gonadotropin model &mdash; correct pairing?</div>
+  <div class="pq-choices">
+    A. Theca &mdash; FSH &mdash; aromatase &rarr; E<sub>2</sub><br>
+    B. Granulosa &mdash; LH &mdash; androstenedione<br>
+    C. Theca &mdash; LH &mdash; androstenedione; granulosa &mdash; FSH &mdash; aromatase &rarr; estrone &rarr; (17&beta;-HSD1) &rarr; E<sub>2</sub><br>
+    D. Theca &mdash; FSH &mdash; progesterone; granulosa &mdash; LH &mdash; testosterone<br>
+    E. Both FSH-driven
+  </div>
+  <div class="pq-ans"><strong>C &mdash; LH theca/androstenedione; FSH granulosa/aromatase.</strong><br>Thecal cells lack aromatase &mdash; can&apos;t make estrogens themselves &mdash; but LH (Gs-cAMP) stimulates their androgen output. Androstenedione diffuses into granulosa, where FSH-driven aromatase &rarr; estrone, and 17&beta;-HSD1 &rarr; 17&beta;-estradiol. Foundation of menstrual cycle physiology.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q5. 58-year-old postmenopausal woman with ER<sup>+</sup> breast CA. Dominant estrogen source?</div>
+  <div class="pq-choices">
+    A. Ovarian granulosa (remaining follicles)<br>
+    B. Adrenal cortex directly<br>
+    C. Peripheral aromatization of adrenal ANDROSTENEDIONE to ESTRONE in adipose<br>
+    D. Placental estriol<br>
+    E. Liver synthesis
+  </div>
+  <div class="pq-ans"><strong>C &mdash; Peripheral aromatization of androstenedione to estrone in adipose.</strong><br>After menopause, ovaries depleted and granulosa E<sub>2</sub> stops. Dominant postmenopausal estrogen = <strong>estrone</strong>, produced when adrenal androstenedione is aromatized by peripheral aromatase in adipose (+ bone, skin, brain). Obesity RAISES postmenopausal estrone &rarr; endometrial hyperplasia/CA risk. Why <strong>aromatase inhibitors</strong> are first-line for postmenopausal ER<sup>+</sup> breast CA.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q6. 28-year-old PCOS patient: hirsutism, oligomenorrhea, acne, BMI 33. Free T elevated; total T at upper limit of normal. Mechanism for elevated free T?</div>
+  <div class="pq-choices">
+    A. Adrenal tumor<br>
+    B. HYPERINSULINEMIA and obesity suppress hepatic SHBG &rarr; raise free T<br>
+    C. Hepatic failure with markedly &uarr; SHBG<br>
+    D. 17&alpha;-OH CAH<br>
+    E. Exogenous T
+  </div>
+  <div class="pq-ans"><strong>B &mdash; Hyperinsulinemia + obesity LOWER SHBG.</strong><br>PCOS hyperandrogenism has TWO mechanisms: (1) ovarian thecal overproduction (LH-driven), (2) <strong>hyperinsulinemia + obesity suppress hepatic SHBG</strong> &rarr; more free T for the same total. Metformin and weight loss raise SHBG. Converse: pregnancy/OCPs/hyperthyroid RAISE SHBG.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q7. Postmenopausal woman on tamoxifen for adjuvant ER<sup>+</sup> breast CA &mdash; expected effect?</div>
+  <div class="pq-choices">
+    A. Agonist in breast (blocks tumor)<br>
+    B. Antagonist in breast (blocks tumor) + AGONIST in endometrium (&uarr; endometrial CA risk) + agonist in bone (maintains density)<br>
+    C. Antagonist in all tissues<br>
+    D. Aromatase inhibitor<br>
+    E. PR antagonist
+  </div>
+  <div class="pq-ans"><strong>B &mdash; Tamoxifen: antagonist breast; agonist endometrium + bone.</strong><br>SERM tissue selectivity from differential coactivator/corepressor recruitment + ER&alpha;/ER&beta; ratios. Tamoxifen BLOCKS breast ER (tumor suppression) but STIMULATES endometrium (&uarr; endometrial hyperplasia/CA risk) + bone (maintains density). Also &uarr; VTE. Raloxifene: antagonist in breast AND endometrium but agonist in bone &mdash; osteoporosis + breast CA prevention without endometrial risk.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q8. 35-year-old with anovulatory PCOS wants to conceive. Clomiphene mechanism?</div>
+  <div class="pq-choices">
+    A. Direct ovarian follicle stimulation<br>
+    B. ER agonist at hypothalamus<br>
+    C. ER ANTAGONIST at hypothalamus &rarr; removes negative feedback &rarr; &uarr; GnRH pulsatility &rarr; &uarr; LH/FSH &rarr; ovulation<br>
+    D. PR agonist<br>
+    E. Aromatase inhibitor
+  </div>
+  <div class="pq-ans"><strong>C &mdash; Clomiphene blocks hypothalamic ER.</strong><br>Clomiphene blocks estrogen feedback at hypothalamic ER &rarr; hypothalamus &ldquo;thinks&rdquo; estrogen is low &rarr; &uarr; GnRH pulse frequency/amplitude &rarr; &uarr; LH/FSH from pituitary &rarr; follicle recruitment + ovulation. First-line for ovulatory induction in PCOS. Letrozole (AI) now also used off-label.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q9. Pregnant woman with markedly elevated TOTAL testosterone but normal FREE T and no hyperandrogenism signs. Explanation?</div>
+  <div class="pq-choices">
+    A. Luteoma of pregnancy<br>
+    B. Estrogen-driven &uarr; hepatic SHBG synthesis raises total but not free testosterone<br>
+    C. Placental aromatase failure<br>
+    D. PCOS relapse<br>
+    E. Adrenal androgen tumor
+  </div>
+  <div class="pq-ans"><strong>B &mdash; Pregnancy estrogen &uarr; SHBG.</strong><br>Pregnancy dramatically raises estrogen &rarr; hepatic SHBG synthesis up. Total T rises (more bound) but biologically active FREE T stays normal (HPG axis defends it). Same principle: CBG (total cortisol up, free normal) and TBG (total T<sub>4</sub> up, free normal) &mdash; all driven by estrogen-hepatic binding-globulin effect. Don&apos;t misinterpret elevated total as hyperandrogen state.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q10. 32-year-old man on flutamide for prostate CA. Mechanism?</div>
+  <div class="pq-choices">
+    A. 5&alpha;-reductase inhibitor<br>
+    B. Aromatase inhibitor<br>
+    C. AR antagonist &mdash; blocks androgen at the receptor<br>
+    D. GnRH agonist<br>
+    E. PR antagonist
+  </div>
+  <div class="pq-ans"><strong>C &mdash; Flutamide is an AR antagonist.</strong><br>Flutamide, bicalutamide, enzalutamide are nonsteroidal AR antagonists for prostate CA &mdash; often combined with GnRH agonist leuprolide for COMBINED ANDROGEN BLOCKADE. Bind AR and prevent T/DHT from activating it. SE: gynecomastia (unopposed estradiol signaling), hepatotoxicity (especially flutamide). Compare: <strong>5&alpha;-reductase inhibitors</strong> (finasteride) block DHT synthesis; <strong>AIs</strong> block estrogen synthesis; <strong>leuprolide continuous</strong> desensitizes GnRH receptors.</div>
+</div>
+
+</div>
+
+<script>
+function sw(n){
+  document.querySelectorAll('.tab').forEach((t,i)=>{t.classList.toggle('active',i===n)});
+  document.querySelectorAll('.panel').forEach((p,i)=>{p.classList.toggle('active',i===n)});
+}
+</script>
+</body></html>
