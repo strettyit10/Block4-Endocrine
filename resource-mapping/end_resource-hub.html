@@ -1024,7 +1024,7 @@ const HUB_FILES = {
 
 let activeSubject = 'all';
 let searchQuery = '';
-let selectedLecture = ( => {
+let selectedLecture = (() => {
  const p = new URLSearchParams(window.location.search);
  const c = p.get('class');
  if (c !== null) {
@@ -1032,7 +1032,7 @@ let selectedLecture = ( => {
  if (DATA.some(d => d.class === num)) return num;
  }
  return DATA[0]?.class ?? null;
-});
+})();
 let showQidTable = false;
 let showObjectives = false;
 let showResources = false;
@@ -1051,7 +1051,7 @@ function lectureStats(lecture) {
  return { loCount, qidCount, resources };
 }
 
-function buildMetrics {
+function buildMetrics() {
  return;
 }
 
@@ -1066,7 +1066,7 @@ function buildLectureLinks(lectureNumber) {
  };
 }
 
-function syncLectureListHeight {
+function syncLectureListHeight() {
  const lectureList = document.getElementById('lectureList');
  const learningCard = document.querySelector('.learning-card');
 
@@ -1078,15 +1078,15 @@ function syncLectureListHeight {
  return;
  }
 
- const listTop = lectureList.getBoundingClientRect.top;
- const learningTop = learningCard.getBoundingClientRect.top;
+ const listTop = lectureList.getBoundingClientRect().top;
+ const learningTop = learningCard.getBoundingClientRect().top;
  const targetHeight = Math.max(320, Math.floor(learningTop - listTop - 14));
 
  lectureList.style.height = `${targetHeight}px`;
  lectureList.style.maxHeight = `${targetHeight}px`;
 }
 
-function buildSubjects {
+function buildSubjects() {
  const counts = DATA.reduce((acc, lecture) => {
  acc[lecture.subject] = (acc[lecture.subject] || 0) + 1;
  return acc;
@@ -1104,15 +1104,15 @@ function buildSubjects {
  document.getElementById('subjectRowPrimary').innerHTML = chips[0] || '';
  document.getElementById('subjectRowSecondary').innerHTML = chips.slice(1).join('');
  document.querySelectorAll('.subject-chip').forEach((button) => {
- button.addEventListener('click', => {
+ button.addEventListener('click', () => {
  activeSubject = button.dataset.key;
- buildSubjects;
- refreshList;
+ buildSubjects();
+ refreshList();
  });
  });
 }
 
-function getFilteredLectures {
+function getFilteredLectures() {
  return DATA.filter((lecture) => {
  const subjectOk = activeSubject === 'all' || lecture.subject === activeSubject;
  const resourceSearchText = RESOURCE_META.flatMap((resource) =>
@@ -1130,7 +1130,7 @@ function getFilteredLectures {
  ...(lecture.uworld_qids || []).flatMap((item) => [item.qid, item.topic, item.subject, item.lectures]),
  ...(lecture.los || []).flatMap((group) => [group.header, ...group.items]),
  ...resourceSearchText,
- ].join(' ').toLowerCase;
+ ].join(' ').toLowerCase();
  const searchOk = !searchQuery || haystack.includes(searchQuery);
  return subjectOk && searchOk;
  });
@@ -1160,18 +1160,18 @@ function toggleLectureList(forceState) {
 }
 
 // Auto-collapse on narrow screens (<= 1100px) on load, expand on wide.
-(function initLectureListToggle {
+(function initLectureListToggle() {
  try {
  const mql = window.matchMedia('(max-width: 1100px)');
  const apply = (e) => toggleLectureList(e.matches);
  if (mql.addEventListener) mql.addEventListener('change', apply);
  else if (mql.addListener) mql.addListener(apply);
- document.addEventListener('DOMContentLoaded', => apply(mql));
+ document.addEventListener('DOMContentLoaded', () => apply(mql));
  } catch (e) { /* no-op */ }
-});
+})();
 
-function refreshList {
- const lectures = sortLectures(getFilteredLectures);
+function refreshList() {
+ const lectures = sortLectures(getFilteredLectures());
  const list = document.getElementById('lectureList');
  document.getElementById('listSummary').textContent = `${lectures.length} lecture${lectures.length === 1 ? '' : 's'} showing`;
 
@@ -1215,9 +1215,9 @@ function refreshList {
  }
 
  document.querySelectorAll('.lecture-item').forEach((button) => {
- button.addEventListener('click', => {
+ button.addEventListener('click', () => {
  selectedLecture = Number(button.dataset.class);
- refreshList;
+ refreshList();
  // On narrow screens, collapse the list after picking so the user
  // sees the detail pane without scrolling past 26 lectures.
  if (window.matchMedia && window.matchMedia('(max-width: 1100px)').matches) {
@@ -1434,7 +1434,7 @@ function renderDetail(lecture) {
 
  const qidToggle = document.getElementById('qidToggle');
  if (qidToggle) {
- qidToggle.addEventListener('click', => {
+ qidToggle.addEventListener('click', () => {
  showQidTable = !showQidTable;
  renderDetail(lecture);
  });
@@ -1442,7 +1442,7 @@ function renderDetail(lecture) {
 
  const resourcesToggle = document.getElementById('resourcesToggle');
  if (resourcesToggle) {
- resourcesToggle.addEventListener('click', => {
+ resourcesToggle.addEventListener('click', () => {
  showResources = !showResources;
  renderDetail(lecture);
  });
@@ -1450,7 +1450,7 @@ function renderDetail(lecture) {
 
  const objectivesToggle = document.getElementById('objectivesToggle');
  if (objectivesToggle) {
- objectivesToggle.addEventListener('click', => {
+ objectivesToggle.addEventListener('click', () => {
  showObjectives = !showObjectives;
  renderDetail(lecture);
  });
@@ -1458,14 +1458,14 @@ function renderDetail(lecture) {
 
  const exportBtn = document.getElementById('exportRowBtn');
  if (exportBtn) {
- exportBtn.addEventListener('click', => exportLectureRow(lecture));
+ exportBtn.addEventListener('click', () => exportLectureRow(lecture));
  }
 
- syncLectureListHeight;
+ syncLectureListHeight();
 }
 
 document.getElementById('searchBox').addEventListener('input', (event) => {
- searchQuery = event.target.value.trim.toLowerCase;
+ searchQuery = event.target.value.trim().toLowerCase();
  // If the user has typed anything, auto-expand the lecture list so they can
  // see matching lectures (relevant on narrow screens where it defaults collapsed).
  if (searchQuery) {
@@ -1474,10 +1474,10 @@ document.getElementById('searchBox').addEventListener('input', (event) => {
  toggleLectureList(false);
  }
  }
- refreshList;
+ refreshList();
 });
 // Also auto-expand the moment the user focuses the search box
-document.getElementById('searchBox').addEventListener('focus', => {
+document.getElementById('searchBox').addEventListener('focus', () => {
  const panel = document.getElementById('listPanel');
  if (panel && panel.classList.contains('collapsed')) {
  toggleLectureList(false);
@@ -1620,12 +1620,12 @@ function showToast(message) {
  toast.textContent = message;
  toast.classList.add('is-visible');
  clearTimeout(toast._timeout);
- toast._timeout = setTimeout( => toast.classList.remove('is-visible'), 2400);
+ toast._timeout = setTimeout(() => toast.classList.remove('is-visible'), 2400);
 }
 
-buildMetrics;
-buildSubjects;
-refreshList;
+buildMetrics();
+buildSubjects();
+refreshList();
 </script>
 </body>
 </html>
