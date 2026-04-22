@@ -42,6 +42,12 @@
   .brand{display:flex;align-items:center;gap:14px;margin-bottom:12px}
   .brand .dot{width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 18px rgba(245,158,11,.7)}
   .brand .name{font-weight:800;letter-spacing:.04em;font-size:12px;color:var(--muted);text-transform:uppercase}
+  .brand .version{
+    margin-left:auto;font:600 11px 'JetBrains Mono',monospace;color:#fde68a;
+    background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.35);
+    padding:3px 9px;border-radius:99px;letter-spacing:.04em;
+  }
+  .brand .version .v-label{color:#9aa9c6;margin-right:6px}
   h1{margin:0 0 6px;font-size:34px;font-weight:800;letter-spacing:-.02em}
   h1 .tag{color:var(--accent-2)}
   header.hero p{margin:0;color:var(--muted);max-width:860px;line-height:1.55}
@@ -318,7 +324,11 @@
 <body>
 
 <header class="hero">
-  <div class="brand"><div class="dot"></div><div class="name">HoyaDocs · Block 4 · Endocrine</div></div>
+  <div class="brand">
+    <div class="dot"></div>
+    <div class="name">HoyaDocs · Block 4 · Endocrine</div>
+    <div class="version"><span class="v-label">rev</span>v1.2 · 2026-04-21</div>
+  </div>
   <h1>Endocrine Hub <span class="tag">Map</span></h1>
   <p>A bird's-eye view of every HTML in the endocrine study hub — how the pages link to each other, and which primary sources (lecture slides, learning objectives, Anki decks, workbooks, and practice banks) each tier pulls from.</p>
 </header>
@@ -410,9 +420,28 @@
         </div>
 
         <div class="fm-card fm-src" data-card="subj">
-          <div class="fm-card-head"><span class="ic">📘</span><span data-k="subj_title"></span><span class="fm-toggle" title="Collapse / expand">▾</span><span class="fm-card-sub" data-k="subj_file"></span></div>
-          <div class="fm-field" id="f-sub-1"><span data-k="sub1"></span><span class="fm-pin"></span></div>
-          <div class="fm-field" id="f-sub-2"><span data-k="sub2"></span><span class="fm-pin"></span></div>
+          <div class="fm-card-head"><span class="ic">📘</span>In House Subject Review<span class="fm-toggle" title="Collapse / expand">▾</span><span class="fm-card-sub">Per Subject / — in-house review materials</span></div>
+
+          <div class="fm-subhead"><span class="label">Physiology</span></div>
+          <div class="fm-field" id="f-sub-physio"><span>Endocrine Physiology Review Guide.docx</span><span class="fm-pin"></span></div>
+
+          <div class="fm-subhead"><span class="label">Pathology</span></div>
+          <div class="fm-field" id="f-sub-path"><span>Endocrine Pathology Review Guide.docx</span><span class="fm-pin"></span></div>
+
+          <div class="fm-subhead"><span class="label">Histology</span></div>
+          <div class="fm-field" id="f-sub-histo"><span>Endocrine Histology Review Guide.docx</span><span class="fm-pin"></span></div>
+
+          <div class="fm-subhead"><span class="label">Pharmacology</span></div>
+          <div class="fm-field" id="f-sub-pharm"><span>Pharmacology Review Guide.docx</span><span class="fm-pin"></span></div>
+          <div class="fm-field" id="f-sub-druglist"><span>Endo Drug List.docx</span><span class="fm-pin"></span></div>
+          <div class="fm-field" id="f-sub-pharmatable"><span>Endo Pharma Table.pdf</span><span class="fm-pin"></span></div>
+
+          <div class="fm-subhead"><span class="label">Biochemistry</span></div>
+          <div class="fm-field" id="f-sub-biochem"><span>Biochem Study Guide.docx</span><span class="fm-pin"></span></div>
+
+          <div class="fm-subhead"><span class="label">Clinical &amp; Organizational</span></div>
+          <div class="fm-field" id="f-sub-clin"><span>ENDO Clinical Correlations.pdf</span><span class="fm-pin"></span></div>
+          <div class="fm-field" id="f-sub-checklist"><span>Endocrine_Checklist_Revised.xlsx</span><span class="fm-pin"></span></div>
         </div>
 
         <div class="fm-card fm-src" data-card="thirdparty">
@@ -446,7 +475,7 @@
         <div class="fm-card fm-src" data-card="addank">
           <div class="fm-card-head"><span class="ic">🧩</span>Additional Anki Decks<span class="fm-toggle" title="Collapse / expand">▾</span><span class="fm-card-sub">In-House + 3rd-Party decks beyond the vendor set above</span></div>
 
-          <div class="fm-subhead"><span class="label">In House Decks</span><span class="dim">GUSOM · Block 4</span></div>
+          <div class="fm-subhead"><span class="label">In House Decks</span><span class="dim">School-wide + Block 4</span></div>
           <div class="fm-field" id="f-in-gusom"><span data-k="in_gusom"></span><span class="fm-pin"></span></div>
           <div class="fm-field" id="f-in-block4"><span data-k="in_block4"></span><span class="fm-pin"></span></div>
 
@@ -1110,7 +1139,7 @@
     </div>
     <div class="card"><div class="title"><span class="badge badge-src">SRC</span> Practice Problems/</div>
       <div class="path">./Practice Problems/*.pdf, *.docx + ./3rd Party/BRS</div>
-      <div class="desc">GUSOM old block exams, Endo pathology Qs, combined ENDO module Qs, pharm ENDO practice, histo practice, plus BRS Embryo/Histo/Path/Pharm.</div>
+      <div class="desc">In-house old block exams, Endo pathology Qs, combined ENDO module Qs, pharm ENDO practice, histo practice, plus BRS Embryo/Histo/Path/Pharm.</div>
     </div>
     <div class="card"><div class="title"><span class="badge badge-src">SRC</span> resource-mapping/</div>
       <div class="path">./resource-mapping/*.xlsx + DRAFT-*.md</div>
@@ -1174,8 +1203,8 @@
     Physio:  {file:'Endocrine Physiology Review Guide NK.docx', sub:['Hormone-signaling overview','Receptor mechanisms / 2nd messengers']},
     Path:    {file:'Endocrine Pathology Review Guide NK.docx',  sub:['Gland-specific pathology patterns','Neoplastic vs functional disease']},
     Histo:   {file:'Endocrine Histology Review Guide NK.docx',  sub:['Gland histology overview','Cell-type morphology']},
-    Pharm:   {file:'GUSOM-Pharmacology-ReviewGuideNK.docx',     sub:['Drug-class mechanisms','Indications + adverse effects']},
-    Biochem: {file:'GUSOM-Biochem-StudyGuide.docx',             sub:['Hormone biochemistry','Synthesis + degradation pathways']},
+    Pharm:   {file:'Pharmacology-ReviewGuide.docx',             sub:['Drug-class mechanisms','Indications + adverse effects']},
+    Biochem: {file:'Biochem-StudyGuide.docx',                   sub:['Hormone biochemistry','Synthesis + degradation pathways']},
     TBL:     {file:'ENDO Clinical Correlations.docx.pdf',       sub:['Integrated case framework','Lab workup approach']},
     Ethics:  {file:'ENDO Clinical Correlations.docx.pdf',       sub:['Professionalism framework','Ethics principles']},
     Lab:     {file:'Endocrine Histology Review Guide NK.docx',  sub:['Gross + histo correlates','Slide interpretation']}
@@ -1390,12 +1419,33 @@
     // Slides
     m.push(['f-sl-1','t-lg-cover','slide']);
     for (let i=2;i<=Math.min(6,n+1);i++) m.push([`f-sl-${i}`,`t-lg-obj${i-1}`,'slide']);
-    // Subject review → cheatsheet + obj bodies (multi-line so the flow is visible)
-    m.push(['f-sub-1','t-lg-cheat','subj']);
-    m.push(['f-sub-1','t-lg-obj1','subj']);
-    m.push(['f-sub-2',`t-lg-obj${Math.min(n,3)}`,'subj']);
-    m.push(['f-sub-2',`t-lg-obj${n}`,'subj']);
-    m.push(['f-sub-2','t-lg-audit','subj']);
+    // Subject review → cheatsheet + obj bodies (primary review varies per lecture subject)
+    const SUBJ_PRIMARY = {
+      Physio:'f-sub-physio', Path:'f-sub-path', Histo:'f-sub-histo',
+      Pharm:'f-sub-pharm',   Biochem:'f-sub-biochem',
+      TBL:'f-sub-clin',      Ethics:'f-sub-clin',   Lab:'f-sub-histo'
+    };
+    const primarySub = SUBJ_PRIMARY[L.sj] || 'f-sub-physio';
+    m.push([primarySub,'t-lg-cheat','subj']);
+    m.push([primarySub,'t-lg-obj1','subj']);
+    m.push([primarySub,`t-lg-obj${Math.min(n,3)}`,'subj']);
+    m.push([primarySub,`t-lg-obj${n}`,'subj']);
+    m.push([primarySub,'t-lg-audit','subj']);
+
+    // Pharm lectures also use the Endo drug list + pharma table
+    if (L.sj === 'Pharm') {
+      m.push(['f-sub-druglist','t-lg-ref','subj']);
+      m.push(['f-sub-druglist','t-lg-audit','subj']);
+      m.push(['f-sub-pharmatable','t-lg-ref','subj']);
+    }
+    // TBL / Ethics / Lab also reference clinical correlations
+    if (L.sj === 'TBL' || L.sj === 'Ethics' || L.sj === 'Lab') {
+      m.push(['f-sub-clin','t-lg-cheat','subj']);
+      m.push(['f-sub-clin',`t-lg-obj${Math.min(n,2)}`,'subj']);
+    }
+    // The block checklist is cross-cutting — feeds the references section and matrix row
+    m.push(['f-sub-checklist','t-lg-ref','subj']);
+    m.push(['f-sub-checklist','t-map-row','subj']);
     // Workbooks → references + obj bodies (only if that resource covers the lecture)
     const wbs = ['bnb','bc','fa','path','phy','sk'];
     wbs.forEach((k,idx)=>{
@@ -1413,7 +1463,7 @@
     if (L.ak.bnb && L.ak.bnb !== '—') m.push(['f-ak-bnb','t-map-row','anki']);
     if (L.ak.bc  && L.ak.bc  !== '—') m.push(['f-ak-bc','t-rhub-card','anki']);
 
-    // Additional Anki Decks (in-house GUSOM + Block 4) → lecture guide (audit + obj bodies)
+    // Additional Anki Decks (in-house school-wide + Block 4) → lecture guide (audit + obj bodies)
     m.push(['f-in-gusom','t-lg-audit','anki']);
     m.push(['f-in-gusom','t-lg-obj1','anki']);
     m.push(['f-in-gusom',`t-lg-obj${n}`,'anki']);
@@ -1524,9 +1574,9 @@
     m.push(['f-in-block4','t-h3-all','anki']);
     m.push(['f-in-path','t-h3-all','anki']);
 
-    // Subject review → Hub 1 testing drill (subject-level framing)
-    m.push(['f-sub-1','t-h1-all','subj']);
-    m.push(['f-sub-2','t-h1-all','subj']);
+    // Subject review → Hub 1 testing drill (primary subject review + checklist)
+    m.push([primarySub,'t-h1-all','subj']);
+    m.push(['f-sub-checklist','t-h1-all','subj']);
 
     // Slides → active-recall drill (direct slide-fact recall)
     m.push(['f-sl-1','t-ar-1','slide']);
@@ -1544,20 +1594,28 @@
   function setK(k, v) {
     document.querySelectorAll(`[data-k="${k}"]`).forEach(el => el.textContent = v || '');
   }
-  // Remove professor names from displayed filenames (data stays intact in LECTURES)
-  const PROF_NAMES = ['Kothmann','Watson','Jonklaas','Janicic','Wieneke','Danielsen','Santi','Notario','Sherman','Furlong','Sharma','Altayeb','Panel'];
+  // Strip professor names + institution tokens from displayed filenames
+  // (the underlying data in LECTURES stays intact)
+  const SCRUB_TOKENS = [
+    // professor / contributor names
+    'Kothmann','Watson','Jonklaas','Janicic','Wieneke','Danielsen','Santi',
+    'Notario','Sherman','Furlong','Sharma','Altayeb','Maryam','Panel',
+    // institution / school tokens
+    'GUSOM','Georgetown','NK'
+  ];
   function stripProf(s) {
     if (!s) return s;
-    PROF_NAMES.forEach(p => {
-      // remove "_Name_", "_Name.", " Name ", "-Name-" etc.
-      s = s.replace(new RegExp(`[_\\s-]+${p}([_\\s.-]|$)`, 'g'), '$1');
+    SCRUB_TOKENS.forEach(tok => {
+      s = s.replace(new RegExp(`[_\\s-]+${tok}([_\\s.-]|$)`, 'g'), '$1');
+      s = s.replace(new RegExp(`^${tok}[_\\s-]+`, 'g'), '');
     });
     return s.replace(/__/g,'_').replace(/\s{2,}/g,' ').trim();
   }
   function renderLecture(key) {
     const L = LECTURES[key];
     if (!L) return;
-    const subj = SUBJECT_REVIEWS[L.sj] || SUBJECT_REVIEWS.Physio;
+    // (SUBJECT_REVIEWS map kept for reference but no longer used since the subject review
+    //  card now lists all Per Subject files individually.)
 
     // Sources — headers use friendly titles, sub-lines expose the actual filenames
     setK('inlec_title', `In House ${key} Lecture Materials`);
@@ -1569,10 +1627,22 @@
     setK('slide_file',  stripProf(L.sd));
     L.S.forEach((s,i)=> setK(`sl${i+1}`, s));
     for (let i=L.S.length+1;i<=6;i++) setK(`sl${i}`, '');
-    setK('subj_title',  `In House Subject Review — ${L.sj}`);
-    setK('subj_file',   subj.file);
-    setK('sub1', subj.sub[0]);
-    setK('sub2', subj.sub[1]);
+    // Mark subject review files as applicable / not-covered based on this lecture's subject
+    const subjApplies = {
+      'f-sub-physio':      L.sj === 'Physio',
+      'f-sub-path':        L.sj === 'Path' || L.sj === 'Lab',
+      'f-sub-histo':       L.sj === 'Histo' || L.sj === 'Lab',
+      'f-sub-pharm':       L.sj === 'Pharm',
+      'f-sub-druglist':    L.sj === 'Pharm',
+      'f-sub-pharmatable': L.sj === 'Pharm',
+      'f-sub-biochem':     L.sj === 'Biochem',
+      'f-sub-clin':        L.sj === 'TBL' || L.sj === 'Ethics' || L.sj === 'Lab',
+      'f-sub-checklist':   true   // cross-cutting — always applies
+    };
+    Object.entries(subjApplies).forEach(([id, ok]) => {
+      const el = document.getElementById(id);
+      if (el) el.classList.toggle('not-covered', !ok);
+    });
     const wbLabel = (name, v) => v && v !== '—' ? `${name} — ${v}` : `${name} — (not covered)`;
     setK('wb_bnb',  wbLabel('BnB Endo Book',   L.wb.bnb));
     setK('wb_bc',   wbLabel('Bootcamp Endo',   L.wb.bc));
@@ -1591,7 +1661,7 @@
     setK('rm2', 'LO topic cells + BnB/Bootcamp/FA/Pathoma/Physeo/Sketchy coverage');
     // In-house Anki
     const n2 = key.replace('end','');
-    setK('in_gusom',  `gusom-all.apkg → ::GUSOM::Endo::${L.t.split(' ')[0]}`);
+    setK('in_gusom',  `in-house-all.apkg → ::InHouse::Endo::Module`);
     setK('in_block4', `block4-all.apkg → ::Block4::Endo::L${n2}`);
     setK('in_path',   'duke-pathoma-all.apkg → ::Pathoma::Endo');
     setK('in_mich',   'michigan-blue-atlas-all.apkg → (anatomy overlay)');
