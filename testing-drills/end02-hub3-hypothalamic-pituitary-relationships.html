@@ -121,6 +121,7 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
     <div class="source-badge"><strong>Style:</strong> USMLE Step 1 clinical vignettes</div>
     <div class="source-badge"><strong>Pace:</strong> ~1.5 min / question</div>
     <div class="source-badge"><strong>Coverage:</strong> LOs 1–6 incl. CVOs · OVLT osmoreceptor · Direct SNS pathway · Oxytocin in bonding</div>
+    <div class="source-badge"><strong>Extension:</strong> BRS Biochem/Physio + Waite &amp; Sheakley 3rd Party Bank</div>
   </div>
 </div>
 
@@ -134,8 +135,8 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
 </div>
 
 <div class="stats-bar">
-  <div class="stat-card"><div class="stat-num">15</div><div class="stat-label">Questions</div></div>
-  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Exam Blocks</div></div>
+  <div class="stat-card"><div class="stat-num">15<span style="font-size:.5em;color:#D4A84C"> + 12</span></div><div class="stat-label">Questions</div></div>
+  <div class="stat-card"><div class="stat-num">3<span style="font-size:.5em;color:#D4A84C"> + 1</span></div><div class="stat-label">Exam Blocks</div></div>
   <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">LOs Covered</div></div>
   <div class="stat-card"><div class="stat-num" id="global-score">—</div><div class="stat-label">Your Score</div></div>
 </div>
@@ -144,6 +145,7 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
   <button class="tab-btn active" onclick="switchTab('block1',this)">Block 1</button>
   <button class="tab-btn" onclick="switchTab('block2',this)">Block 2</button>
   <button class="tab-btn" onclick="switchTab('block3',this)">Block 3</button>
+  <button class="tab-btn" onclick="switchTab('ext',this)">3rd Party Bank</button>
   <button class="tab-btn" onclick="switchTab('score',this)">Score Report</button>
 </div>
 
@@ -417,6 +419,220 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
 
 </div>
 
+<!-- ════════════════════════════════════════════════════════════════════════
+     3RD PARTY BANK — BRS Biochem / BRS Physio / Waite &amp; Sheakley Physio Q&amp;A
+     Curated questions mapped to END02 LOs 1–6 (H-P Relationships Part 1)
+     ════════════════════════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-ext">
+  <div class="exam-header">
+    <div class="exam-header-left">
+      <div class="exam-header-title">3rd Party Bank — END02 LO-Mapped Items</div>
+      <div class="exam-header-sub">12 questions · Untimed practice · BRS Biochem + BRS Physio + Waite &amp; Sheakley Physio Q&amp;A</div>
+    </div>
+    <div class="exam-timer">
+      <span class="timer-icon">⏱</span>
+      <div>
+        <div class="timer-display" id="timer-ext">15:00</div>
+        <div class="timer-label">Optional Timer</div>
+      </div>
+    </div>
+    <div class="exam-controls">
+      <button class="exam-ctrl-btn" onclick="toggleTimer('ext')">Start / Pause</button>
+      <button class="exam-ctrl-btn" onclick="resetTimer('ext',900)">Reset</button>
+    </div>
+  </div>
+  <div class="exam-intro">
+    <strong>Source review.</strong> Every item below was pulled from your 3rd Party Biochem + Physio folders and hand-mapped to END02 Hypothalamic-Pituitary Relationships (Part 1) LOs — anatomical connections, hypothalamic nuclei and their hormones, pituitary organization, pituitary hormones and their hypothalamic regulation, feedback loops, and predicting axis-level changes. Grouped by LO to complement — not duplicate — the in-house exam Blocks 1-3 above.
+    <br><br>
+    <strong>Legend:</strong>
+    <span style="display:inline-block;margin:4px 6px 0 0;padding:2px 8px;background:#EDEAE3;border:1px solid #D2CDC4;border-radius:3px;font-size:.82em;color:#8B6914">BRS Biochem</span>
+    <span style="display:inline-block;margin:4px 6px 0 0;padding:2px 8px;background:#EDEAE3;border:1px solid #D2CDC4;border-radius:3px;font-size:.82em;color:#8B6914">BRS Physio</span>
+    <span style="display:inline-block;margin:4px 6px 0 0;padding:2px 8px;background:#EDEAE3;border:1px solid #D2CDC4;border-radius:3px;font-size:.82em;color:#8B6914">Waite &amp; Sheakley</span>
+  </div>
+
+  <!-- ── GROUP A ── -->
+  <div class="sec">Group A · Anatomy &amp; Cell-of-Origin (LOs 1, 3)</div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q1 — LO 3 · Neuroectodermal Origin — Waite &amp; Sheakley Q7</div>
+    <div class="vig-stem">A 75-year-old woman complains of bilateral temporal hemianopsia, and imaging of the head reveals a suprasellar granular cell tumor. The tumor is excised, and immunohistochemical studies using biomarkers are performed in order to determine the tumor cell origin. <strong>A positive reaction for which of the following hormones would indicate that the tumor is of neuroectodermal origin?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Adrenocorticotropic hormone (ACTH)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>β-endorphin</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Luteinizing hormone (LH)</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">D</span>Oxytocin</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Thyroid-stimulating hormone (TSH)</div>
+    </div>
+    <div class="vig-exp"><strong>D — Oxytocin.</strong> The <span class="vig-buzzword">posterior pituitary (neurohypophysis)</span> is an extension of the hypothalamus — it develops from <strong>neuroectoderm</strong> and stores oxytocin and ADH (synthesized in the paraventricular and supraoptic nuclei). The <span class="vig-buzzword">anterior pituitary (adenohypophysis)</span> is derived from <strong>oral ectoderm (Rathke pouch)</strong> and makes ACTH (with β-endorphin from POMC cleavage), LH, FSH, TSH, GH, and PRL. LO 3 at the embryology-meets-histology level: oxytocin positivity = neural lobe, all the others = oral-ectoderm-derived anterior lobe.</div>
+  </div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q2 — LO 1 · Hypophyseal Portal Disruption — Waite &amp; Sheakley Q8</div>
+    <div class="vig-stem">A male soldier experienced severe head trauma that resulted in permanent interruption of his hypothalamohypophyseal portal vessels. <strong>Which of the following would be expected to develop?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Acromegaly</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Excessive aggressiveness (↑ testosterone)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Hyperpigmentation</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">D</span>Hyperprolactinemia</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Hyperthyroidism</div>
+    </div>
+    <div class="vig-exp"><strong>D — Hyperprolactinemia.</strong> The hypothalamic-hypophyseal portal system delivers ALL hypothalamic releasing/inhibiting hormones to the anterior pituitary in high local concentration. Prolactin is uniquely under <strong>tonic inhibition</strong> by hypothalamic <span class="vig-buzzword">dopamine</span> (PIF). Cut the portal system → dopamine can't reach the lactotrophs → <strong>disinhibition</strong> → PRL ↑ (the "stalk effect"). Every OTHER anterior pituitary hormone is tonically STIMULATED, so portal loss DECREASES them: GHRH loss ↓ GH (no acromegaly, A), GnRH loss ↓ LH/FSH (↓ testosterone, not ↑, so B is wrong), CRH loss ↓ ACTH/POMC (no hyperpigmentation, C), TRH loss ↓ TSH (no hyperthyroidism, E). This is the single most test-worthy LO 1 mechanism.</div>
+  </div>
+
+  <!-- ── GROUP B ── -->
+  <div class="sec" style="margin-top:28px">Group B · Pituitary Hormones &amp; Hypothalamic Regulation (LOs 2, 4)</div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q3 — LO 4 · Dopamine as PIF — BRS Biochem Q13</div>
+    <div class="vig-stem">A 32-year-old female presents with 3 months of irregular menstrual periods and a milky discharge from both breasts. Under the microscope, the discharge has many fat globules, but no red blood cells. She is on no medications, has had a bilateral tubal ligation, and her pregnancy test is negative. <strong>Which ONE of the following would inhibit the release of the hormone that is being overproduced in this patient?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>GnRH</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Dopamine</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>TRH</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Somatostatin</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Estradiol</div>
+    </div>
+    <div class="vig-exp"><strong>B — Dopamine.</strong> This is a prolactinoma of the anterior pituitary. Hypothalamic <span class="vig-buzzword">dopamine (PIF)</span> tonically inhibits lactotroph PRL release — classic test detail for LO 4. Clinical payoff: dopamine AGONISTS like <span class="vig-buzzword">bromocriptine</span> and <span class="vig-buzzword">cabergoline</span> shrink prolactinomas. GnRH (A) inhibits LH/FSH, not PRL. TRH (C) actually STIMULATES PRL release (a key reason primary hypothyroidism causes hyperprolactinemia). Somatostatin (D) inhibits GH. Estradiol (E) STIMULATES PRL synthesis.</div>
+  </div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q4 — LO 4 · Post-Traumatic Galactorrhea — Waite &amp; Sheakley Q11</div>
+    <div class="vig-stem">A 30-year-old woman is diagnosed with galactorrhea from both breasts. She is not pregnant and has never been pregnant. The nipple discharge started two weeks ago, after she was in a car accident. She had a concussion and is still having headaches. <strong>The galactorrhea is most likely a result of which substance not reaching the pituitary gland?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">A</span>Dopamine</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Gonadotropin-releasing hormone (GnRH)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Growth hormone–releasing hormone (GHRH)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Oxytocin</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Thyrotropin-releasing hormone (TRH)</div>
+    </div>
+    <div class="vig-exp"><strong>A — Dopamine.</strong> Same physiology as Ext Q2 applied clinically. Traumatic brain injury can interrupt either the long portal veins or the periventricular dopaminergic axons running down the pituitary stalk — in either case lactotrophs are <span class="vig-buzzword">disinhibited</span> → hyperprolactinemia → galactorrhea. All the other choices (GnRH, GHRH, oxytocin, TRH) actually SUPPORT or stimulate prolactin release — missing them would REDUCE prolactin. Think of dopamine as the one "braking" signal in the entire hypothalamic-pituitary system.</div>
+  </div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q5 — LO 4 · GnRH Deficiency — BRS Biochem Q34</div>
+    <div class="vig-stem">An individual has a mutation such that GnRH release is greatly reduced. <strong>This mutation would have its greatest effects on the release of which one of the following?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Growth hormone (GH)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>T3 and T4</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Prolactin (PRL)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Insulin-like growth factor (IGF)</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">E</span>LH and FSH</div>
+    </div>
+    <div class="vig-exp"><strong>E — LH and FSH.</strong> One-to-one mapping of hypothalamic → anterior pituitary hormones (LO 4): <span class="vig-buzzword">GnRH → LH + FSH</span>, <span class="vig-buzzword">GHRH → GH</span> (and GH → IGF-1 from liver), <span class="vig-buzzword">TRH → TSH + PRL</span>, <span class="vig-buzzword">CRH → ACTH</span>, and dopamine → ↓PRL. GnRH deficiency underlies <span class="vig-buzzword">Kallmann syndrome</span> (when associated with anosmia). Downstream: ↓LH/FSH → hypogonadotropic hypogonadism → ↓ sex steroids, infertility.</div>
+  </div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q6 — LO 4 · ADH Analog for Central DI — Waite &amp; Sheakley Q9</div>
+    <div class="vig-stem">A 17-year-old boy previously sustained a severe fracture at the base of his skull while skateboarding. He presents with increased thirst and polyuria. His urine is pale in color with a low specific gravity. He has a blood pressure of 98/50 mm Hg, has tachycardia, and is very weak. <strong>An analogue of which of the following hormones is most likely prescribed for treatment?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Adrenocorticotropic hormone (ACTH)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Aldosterone</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Androstenedione</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Angiotensin II</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">E</span>Antidiuretic hormone (ADH / vasopressin)</div>
+    </div>
+    <div class="vig-exp"><strong>E — ADH (desmopressin).</strong> Classic <span class="vig-buzzword">central diabetes insipidus</span> after stalk / skull-base injury: polyuria + polydipsia + pale, dilute urine + hypotension + tachycardia from volume depletion. ADH is synthesized in hypothalamic <span class="vig-buzzword">supraoptic + paraventricular nuclei</span> (LO 2) and released from posterior pituitary; when axonal transport is severed, ADH-deficient polyuria results. <span class="vig-buzzword">Desmopressin (DDAVP)</span> is a selective V2 agonist that restores water reabsorption without V1 vasoconstrictor effects. Note: nephrogenic DI would NOT respond to DDAVP.</div>
+  </div>
+
+  <!-- ── GROUP C ── -->
+  <div class="sec" style="margin-top:28px">Group C · Feedback Loops (LO 5)</div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q7 — LO 5 · Iodine Deficiency Feedback — BRS Biochem Q35</div>
+    <div class="vig-stem">A teenager in Australia has developed a goiter, due to a dietary deficiency. <strong>Which row best describes the expected changes in this dietary deficiency?</strong>
+    <br><br>
+    <span style="display:block;font-family:'Source Sans 3',monospace;background:#F4F3EF;padding:10px 12px;border-radius:4px;font-size:.84em;line-height:1.7;overflow-x:auto">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Salt balance&nbsp;&nbsp;&nbsp;TSH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TRH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Heat<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;altered?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;secretion&nbsp;&nbsp;&nbsp;&nbsp;secretion&nbsp;&nbsp;&nbsp;&nbsp;production<br>
+    A.&nbsp;&nbsp;&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Increased&nbsp;&nbsp;&nbsp;Increased&nbsp;&nbsp;&nbsp;Increased<br>
+    B.&nbsp;&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Increased&nbsp;&nbsp;&nbsp;Decreased&nbsp;&nbsp;&nbsp;Increased<br>
+    C.&nbsp;&nbsp;&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Increased&nbsp;&nbsp;&nbsp;Increased&nbsp;&nbsp;&nbsp;Decreased<br>
+    D.&nbsp;&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decreased&nbsp;&nbsp;&nbsp;Decreased&nbsp;&nbsp;&nbsp;Decreased<br>
+    E.&nbsp;&nbsp;&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decreased&nbsp;&nbsp;&nbsp;Increased&nbsp;&nbsp;&nbsp;Decreased<br>
+    F.&nbsp;&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decreased&nbsp;&nbsp;&nbsp;Decreased&nbsp;&nbsp;&nbsp;Increased
+    </span></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Row A</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Row B</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Row C</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Row D</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Row E</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">F</span>Row F</div>
+    </div>
+    <div class="vig-exp"><strong>C.</strong> Dietary iodine deficiency → thyroid can't make enough T3/T4 → LOSS of negative feedback on hypothalamus + pituitary → <span class="vig-buzzword">TRH ↑</span> and <span class="vig-buzzword">TSH ↑</span>. Chronic TSH stimulation hyperplastes the gland → <strong>goiter</strong>. Because T3/T4 are low, basal metabolic rate drops → heat production ↓ (not ↑). Iodine does NOT affect salt balance (aldosterone axis). This question tests LO 5 end-to-end: feedback origin (thyroid hormone) → feedback target (hypothalamus AND pituitary) → net effect on both upstream hormones.</div>
+  </div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q8 — LO 5 · TRH Stimulation Test Baseline — Waite &amp; Sheakley Q28</div>
+    <div class="vig-stem">As part of a TRH stimulating test, TRH is injected into a healthy adult at time zero and peripheral blood samples are taken at 0, 20, and 60 minutes to measure TSH. The baseline TSH at time zero is 2 mU/L. <strong>Which of the following best describes the expected 20-min and 60-min TSH levels?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>20 min: 2 mU/L · 60 min: 15 mU/L</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>20 min: 2 mU/L · 60 min: 45 mU/L</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>20 min: 15 mU/L · 60 min: 45 mU/L</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">D</span>20 min: 15 mU/L · 60 min: 10 mU/L</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>20 min: 15 mU/L · 60 min: 2 mU/L</div>
+    </div>
+    <div class="vig-exp"><strong>D — 15 then 10 mU/L.</strong> Two kinetic principles from LO 5: (1) TRH stimulates pituitary TSH release quickly because TSH is <span class="vig-buzzword">preformed</span> and stored → peak within 20 min. (2) Hypothalamic TRH has a <strong>short half-life (minutes)</strong>, while pituitary TSH has a <strong>longer half-life (hours)</strong>. So at 60 min the TRH stimulus is gone but TSH is still partially elevated as negative feedback from rising T3/T4 slowly brings it back down. Choice E (rapid full return to baseline) requires faster feedback than physiology allows.</div>
+  </div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q9 — LO 5 · TRH Stim in Primary Hypothyroidism — Waite &amp; Sheakley Q29</div>
+    <div class="vig-stem">In the TRH stimulation test described above, <strong>in which of the following conditions would TSH be expected to rise promptly 20 minutes after TRH administration?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Primary hyperthyroidism</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Primary hypothyroidism</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Secondary hypothyroidism</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Secondary hyperthyroidism</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Tertiary hyperthyroidism</div>
+    </div>
+    <div class="vig-exp"><strong>B — Primary hypothyroidism.</strong> LO 5 localization of axis lesions: <span class="vig-buzzword">Primary</span> = gland, <span class="vig-buzzword">Secondary</span> = pituitary, <span class="vig-buzzword">Tertiary</span> = hypothalamus. In primary hypothyroidism the thyroid is broken but the pituitary is fine — and is already running with low T3/T4 feedback, so TSH baseline is HIGH and the gland responds even more briskly to exogenous TRH. Primary HYPERthyroidism (A) has TSH fully suppressed by excess T3/T4 → no response. Secondary disorders (C, D) can't respond because the pituitary itself is the lesion. Tertiary HYPERthyroidism (E) means hypothalamic TRH is already excessive — adding more does little — and "tertiary hyper" is barely a real clinical entity anyway.</div>
+  </div>
+
+  <!-- ── GROUP D ── -->
+  <div class="sec" style="margin-top:28px">Group D · Predict the Axis (LO 6)</div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q10 — LO 6 · Panhypopituitarism Prediction — BRS Biochem Q30</div>
+    <div class="vig-stem">Following an automobile accident, a 14-year-old girl developed diabetes insipidus (excessive loss of water in the urine), amenorrhea (lack of menses), and cold intolerance, and her growth rate slowed markedly. <strong>Her symptoms best correspond to which one of the following?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Damage to her kidneys and ovaries caused by the accident</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Damage to her pituitary gland</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Symptoms could be relieved by oral doses of anterior and posterior pituitary hormones</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Long-term estrogen + thyroxine + glucocorticoid tablets and restriction of water intake</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Damage to the pancreas caused by airbag deployment</div>
+    </div>
+    <div class="vig-exp"><strong>B — Pituitary damage (panhypopituitarism).</strong> LO 6: iterate every axis and look for multi-system dysfunction. <span class="vig-buzzword">↓ ADH</span> → central DI. <span class="vig-buzzword">↓ LH/FSH</span> → amenorrhea. <span class="vig-buzzword">↓ TSH</span> → low T3/T4 → cold intolerance, decreased BMR. <span class="vig-buzzword">↓ GH</span> → growth arrest (in a 14-year-old with open growth plates this is profound). Only a pituitary lesion hits all four axes at once. C is wrong because pituitary hormones are PEPTIDES — orally they'd be digested. D is wrong because water intake must be INCREASED, not restricted, and estrogen alone won't restore normal menses without gonadotropin support either. E can't explain DI or cold intolerance.</div>
+  </div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q11 — LO 4/6 · Secondary Hypothyroidism &amp; Stalk Hormone Cross-Talk — Waite &amp; Sheakley Q31</div>
+    <div class="vig-stem">A 45-year-old woman presents with a 6-month history of excessive tiredness, unexpected weight gain, constipation, galactorrhea, and amenorrhea. Laboratory values show elevated TSH and FSH. A pregnancy test is negative. She denies any head injuries, and brain MRI is normal. <strong>Which of the following serum levels of TRH and GnRH are expected?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>TRH normal · GnRH ↑</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>TRH normal · GnRH ↓</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>TRH ↓ · GnRH normal</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>TRH ↓ · GnRH ↑</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">E</span>TRH ↑ · GnRH ↓</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">F</span>TRH ↑ · GnRH normal</div>
+    </div>
+    <div class="vig-exp"><strong>E — TRH ↑ · GnRH ↓.</strong> Textbook LO 4/6 cross-talk. Hypothyroidism + galactorrhea + amenorrhea → primary hypothyroidism. Mechanism: low T3/T4 → TRH ↑ (feedback). <span class="vig-buzzword">TRH is a strong PRL releaser</span>, so PRL also ↑ → galactorrhea. High PRL inhibits hypothalamic <span class="vig-buzzword">GnRH</span> → LH/FSH fall → amenorrhea. Note the question's "elevated FSH" is a distractor / lab timing artifact — the MECHANISTIC logic still says GnRH suppressed. Choice D would require a hypothalamic lesion, which the normal MRI contradicts. Great composite of LO 4 (regulatory cross-talk) + LO 6 (iterate the axis).</div>
+  </div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q12 — LO 2/6 · Drug-Induced TRH Stim → ↓ Libido — Waite &amp; Sheakley Q32</div>
+    <div class="vig-stem">Clinical trials determined that a new drug had the undesirable effect of stimulating TRH receptors. <strong>Which of the following is the most likely side effect experienced by male patients who took the medication?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Constipation</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Decreased libido</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Hair loss</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Premature ejaculation</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Pretibial myxedema</div>
+    </div>
+    <div class="vig-exp"><strong>B — Decreased libido.</strong> LO 2 detail: pituitary <span class="vig-buzzword">lactotrophs express TRH receptors</span> (not just thyrotrophs). Drug-induced TRH stimulation → hyperprolactinemia. LO 6 iteration: elevated PRL inhibits the hypothalamic-pituitary-gonadal axis (↓ GnRH pulses) → ↓ LH/FSH → ↓ testosterone → <strong>decreased libido / erectile dysfunction</strong>. Constipation (A), hair loss (C), and pretibial myxedema (E) are features of <em>hypo</em>thyroidism and Graves respectively — but stimulating TRH actually mimics mild <em>hyper</em>thyroidism downstream. Premature ejaculation (D) is more associated with hypoprolactinemia.</div>
+  </div>
+
+</div>
+
 <!-- ══ SCORE REPORT ══ -->
 <div class="tab-content" id="tab-score">
   <div class="sec">Performance Dashboard</div>
@@ -441,6 +657,11 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
       <div class="score-card-num" id="sc-b3">— <span class="pct"></span></div>
       <div class="score-card-label">Block 3 — Predict the Axis</div>
       <div class="score-bar-wrap"><div class="score-bar" id="bar-b3" style="width:0%"></div></div>
+    </div>
+    <div class="score-card">
+      <div class="score-card-num" id="sc-ext">— <span class="pct"></span></div>
+      <div class="score-card-label">3rd Party Bank</div>
+      <div class="score-bar-wrap"><div class="score-bar" id="bar-ext" style="width:0%"></div></div>
     </div>
   </div>
 
@@ -498,7 +719,7 @@ function updateGlobalScore(){
   if(total>0) el.textContent=right+'/'+total;
 }
 function updateScoreReport(){
-  var blocks={b1:{right:0,total:0,max:5},b2:{right:0,total:0,max:5},b3:{right:0,total:0,max:5}};
+  var blocks={b1:{right:0,total:0,max:5},b2:{right:0,total:0,max:5},b3:{right:0,total:0,max:5},ext:{right:0,total:0,max:12}};
   var totalRight=0,totalAnswered=0;
   for(var k in answers){
     var a=answers[k];
@@ -517,7 +738,7 @@ function updateScoreReport(){
     el.innerHTML=right+'/'+max+' <span class="pct">'+pct+'%</span>';
     bar.style.width=pct+'%';
   }
-  var totalMax=15;
+  var totalMax=27; // 15 exam items + 12 3rd-party items
   var totalPct=totalAnswered>0?Math.round((totalRight/totalMax)*100):0;
   var scTotal=document.getElementById('sc-total');
   var barTotal=document.getElementById('bar-total');
@@ -526,6 +747,7 @@ function updateScoreReport(){
   setCard('sc-b1','bar-b1',blocks.b1.right,blocks.b1.total,blocks.b1.max);
   setCard('sc-b2','bar-b2',blocks.b2.right,blocks.b2.total,blocks.b2.max);
   setCard('sc-b3','bar-b3',blocks.b3.right,blocks.b3.total,blocks.b3.max);
+  setCard('sc-ext','bar-ext',blocks.ext.right,blocks.ext.total,blocks.ext.max);
   var bd=document.getElementById('q-breakdown');
   if(totalAnswered===0){bd.innerHTML='<div class="exam-intro" style="text-align:center">Answer questions in the Exam Blocks to see your breakdown here.</div>';return;}
   var html='';
@@ -573,6 +795,7 @@ window.addEventListener('load',function(){
   initTimer('b1',450);
   initTimer('b2',450);
   initTimer('b3',450);
+  initTimer('ext',900);
 });
 </script>
 </body>
