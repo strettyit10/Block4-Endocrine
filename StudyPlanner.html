@@ -1,0 +1,2459 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>HoyaDocs | GI Study Planner</title>
+<script>(function{const t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);});</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+ -sb:#240d10;-sb-hover:rgba(255,255,255,.07);-sb-line:rgba(255,255,255,.09);
+ -bg:#f9f3f4;-surface:#fff;-ink:#0f172a;-ink-2:#334155;-ink-3:#64748b;-rule:#e2e8f0;
+ -accent:#991b1b;-accent-2:#b91c1c;-accent-light:#fef2f2;-accent-br:#fca5a5;
+ -card-sh:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+ -pill-h:28px;-radius:10px;
+ -c-ih-bg:#FFF9E6;-c-ih-br:#F0C040;-c-ih-tx:#7B4F00;
+ -c-bc-bg:#EEF4FF;-c-bc-br:#B8D0F5;-c-bc-tx:#1F4B99;
+ -c-bb-bg:#FEF2F2;-c-bb-br:#FCA5A5;-c-bb-tx:#991B1B;
+ -c-pt-bg:#FFF1EE;-c-pt-br:#FFBDAD;-c-pt-tx:#C0380A;
+ -c-ph-bg:#FAF0FF;-c-ph-br:#DFB4FE;-c-ph-tx:#6A0DAD;
+ -c-sk-bg:#FFF7EE;-c-sk-br:#F5C88A;-c-sk-tx:#854D0E;
+}
+[data-theme="dark"]{
+ -bg:#1f0a10;-surface:#2b121a;-ink:#f1f5f9;-ink-2:#cbd5e1;-ink-3:#94a3b8;-rule:#4a1e2a;
+ -accent:#f87171;-accent-2:#ef4444;-accent-light:#220a10;-accent-br:#7f1d1d;
+ -card-sh:0 2px 8px rgba(0,0,0,.4);
+ -c-ih-bg:#2a2000;-c-ih-br:#856404;-c-ih-tx:#FCD34D;
+ -c-bc-bg:#0f1e3a;-c-bc-br:#1e3a6b;-c-bc-tx:#6BA3E8;
+ -c-bb-bg:#220a10;-c-bb-br:#7f1d1d;-c-bb-tx:#F87171;
+ -c-pt-bg:#2a0f0a;-c-pt-br:#7f1d1d;-c-pt-tx:#FCA5A5;
+ -c-ph-bg:#1a0a2a;-c-ph-br:#4c1d95;-c-ph-tx:#C4B5FD;
+ -c-sk-bg:#2a1800;-c-sk-br:#78350f;-c-sk-tx:#FCD34D;
+}
+html,body{height:100%}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(-bg);color:var(-ink);line-height:1.6}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+input[type=checkbox]{accent-color:var(-accent);width:15px;height:15px;cursor:pointer}
+
+/* ── SHELL ── */
+.shell{min-height:100vh}
+
+
+
+/* ── MAIN ── */
+.main{flex:1;display:flex;flex-direction:column;min-width:0;overflow:hidden}
+
+/* ── TOP BAR ── */
+.topbar{display:flex;align-items:center;gap:16px;padding:14px 28px;
+ border-bottom:1px solid rgba(255,255,255,.08);background:#240d10;position:sticky;top:0;z-index:50}
+.topbar h1{font-size:1.25rem;font-weight:800;color:#fff;line-height:1.2}
+.topbar-sub{font-size:.68rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:1px}
+.topbar-back{font-size:.82rem;font-weight:700;letter-spacing:.02em;color:rgba(255,255,255,.65);
+ display:flex;align-items:center;gap:5px;white-space:nowrap;transition:color .15s}
+.topbar-back:hover{color:rgba(255,255,255,.95)}
+.topbar-icon-btn{display:flex;align-items:center;gap:6px;padding:5px 10px;border-radius:7px;
+ background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);cursor:pointer;
+ font-size:.75rem;color:rgba(255,255,255,.8);font-family:inherit;white-space:nowrap}
+.topbar-icon-btn:hover{background:rgba(255,255,255,.15);color:#fff}
+.topbar-badge{font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:20px;
+ background:var(-accent-light);color:var(-accent);border:1px solid var(-accent-br)}
+
+/* ── TABS ── */
+.tab-nav{display:flex;align-items:center;gap:2px;padding:12px 28px 0;background:var(-surface);border-bottom:1px solid var(-rule)}
+.tab-btn{padding:9px 18px;font-size:.82rem;font-weight:600;border:none;background:none;
+ color:var(-ink-3);border-bottom:2px solid transparent;transition:color .15s,border-color .15s;margin-bottom:-1px}
+.tab-btn.active{color:var(-accent);border-color:var(-accent)}
+.tab-btn:hover:not(.active){color:var(-ink-2)}
+.tab-panel{display:none;padding:24px 28px 48px;overflow-y:auto}
+.tab-panel.active{display:block}
+
+/* ── CARDS / SURFACES ── */
+.card{background:var(-surface);border:1px solid var(-rule);border-radius:var(-radius);
+ box-shadow:var(-card-sh);overflow:hidden}
+.card-header{padding:14px 18px;border-bottom:1px solid var(-rule);display:flex;align-items:center;gap:10px}
+.card-body{padding:16px 18px}
+
+/* ── STAT GRID ── */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:22px}
+.stat-box{background:var(-surface);border:1px solid var(-rule);border-radius:var(-radius);
+ padding:16px 18px;box-shadow:var(-card-sh)}
+.stat-num{font-size:1.8rem;font-weight:800;color:var(-accent);line-height:1}
+.stat-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(-ink-3);margin-top:4px}
+.stat-sub{font-size:.78rem;color:var(-ink-2);margin-top:3px}
+
+/* ── PROGRESS BAR ── */
+.prog-bar-wrap{background:var(-rule);border-radius:6px;height:8px;overflow:hidden;flex:1}
+.prog-bar{height:100%;border-radius:6px;background:var(-accent);transition:width .4s}
+
+/* ── RESOURCE LEGEND ── */
+.res-legend{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.res-pill{display:flex;align-items:center;gap:5px;padding:4px 11px;border-radius:20px;font-size:.75rem;font-weight:600;border:1px solid}
+.res-pill.IH{background:var(-c-ih-bg);border-color:var(-c-ih-br);color:var(-c-ih-tx)}
+.res-pill.BC{background:var(-c-bc-bg);border-color:var(-c-bc-br);color:var(-c-bc-tx)}
+.res-pill.BB{background:var(-c-bb-bg);border-color:var(-c-bb-br);color:var(-c-bb-tx)}
+.res-pill.PT{background:var(-c-pt-bg);border-color:var(-c-pt-br);color:var(-c-pt-tx)}
+.res-pill.PH{background:var(-c-ph-bg);border-color:var(-c-ph-br);color:var(-c-ph-tx)}
+.res-pill.SK{background:var(-c-sk-bg);border-color:var(-c-sk-br);color:var(-c-sk-tx)}
+
+/* ── LECTURE CARDS ── */
+.lec-grid{display:flex;flex-direction:column;gap:12px}
+.lec-card{background:var(-surface);border:1px solid var(-rule);border-radius:var(-radius);
+ box-shadow:var(-card-sh);overflow:hidden;transition:box-shadow .15s}
+.lec-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.lec-card-header{display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer;
+ border-bottom:1px solid var(-rule);user-select:none}
+.lec-card-header:hover{background:rgba(0,0,0,.02)}
+[data-theme="dark"] .lec-card-header:hover{background:rgba(255,255,255,.02)}
+.lec-num{font-size:.72rem;font-weight:800;color:var(-ink-3);min-width:42px}
+.lec-date-badge{font-size:.68rem;font-weight:600;padding:2px 8px;border-radius:12px;
+ background:var(-accent-light);color:var(-accent);border:1px solid var(-accent-br);white-space:nowrap}
+.subj-badge{font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:12px;white-space:nowrap}
+.subj-Phys{background:#EEF4FF;color:#1F4B99;border:1px solid #C7D9F5}
+.subj-Path{background:#FFF1EE;color:#C0380A;border:1px solid #FFBDAD}
+.subj-Anat{background:#FEF2F2;color:#991B1B;border:1px solid #FCA5A5}
+.subj-Embr{background:#FAF0FF;color:#6A0DAD;border:1px solid #DFB4FE}
+.subj-Hist{background:#FFF7EE;color:#854D0E;border:1px solid #F5C88A}
+.subj-Pharm{background:#F5F0FF;color:#6d28d9;border:1px solid #d8b4fe}
+.subj-Micro{background:#F0F9FF;color:#0C4A6E;border:1px solid #BAE6FD}
+.subj-DRT{background:#FEF2F2;color:#991B1B;border:1px solid #FCA5A5}
+[data-theme="dark"] .subj-Phys{background:#0f1e3a;color:#6BA3E8;border-color:#1e3a6b}
+[data-theme="dark"] .subj-Path{background:#2a0f0a;color:#FCA5A5;border-color:#7f1d1d}
+[data-theme="dark"] .subj-Anat{background:#220a10;color:#F87171;border-color:#7f1d1d}
+[data-theme="dark"] .subj-Embr{background:#1a0a2a;color:#C4B5FD;border-color:#4c1d95}
+[data-theme="dark"] .subj-Hist{background:#2a1800;color:#FCD34D;border-color:#78350f}
+[data-theme="dark"] .subj-Pharm{background:#1a1033;color:#a78bfa;border-color:#4c1d95}
+[data-theme="dark"] .subj-Micro{background:#0a1a2a;color:#7DD3FC;border-color:#1e3a6b}
+[data-theme="dark"] .subj-DRT{background:#220a10;color:#FCA5A5;border-color:#991B1B}
+.lec-title{font-size:.88rem;font-weight:600;flex:1;min-width:0}
+.lec-mini-prog{display:flex;align-items:center;gap:8px;min-width:100px}
+.lec-pct{font-size:.72rem;font-weight:700;color:var(-accent);min-width:28px;text-align:right}
+.lec-chevron{font-size:.7rem;color:var(-ink-3);transition:transform .2s;margin-left:4px}
+.lec-watch-stat{font-size:.68rem;color:var(-ink-3);white-space:nowrap;margin-right:4px}
+.lec-card.open .lec-chevron{transform:rotate(180deg)}
+.lec-body{display:none;padding:0 16px 14px}
+.lec-card.open .lec-body{display:block}
+
+/* ── RESOURCE ROWS ── */
+.res-row{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:7px;
+ margin-top:6px;border:1px solid transparent;transition:background .15s}
+.res-row.IH{background:var(-c-ih-bg);border-color:var(-c-ih-br)}
+.res-row.BC{background:var(-c-bc-bg);border-color:var(-c-bc-br)}
+.res-row.BB{background:var(-c-bb-bg);border-color:var(-c-bb-br)}
+.res-row.PT{background:var(-c-pt-bg);border-color:var(-c-pt-br)}
+.res-row.PH{background:var(-c-ph-bg);border-color:var(-c-ph-br)}
+.res-row.SK{background:var(-c-sk-bg);border-color:var(-c-sk-br)}
+.res-row.na{background:transparent;border-color:var(-rule);opacity:.45}
+.res-row.not-included{opacity:.55;filter:grayscale(.4)}
+.res-include-btn{font-size:.68rem;font-weight:700;padding:2px 9px;border-radius:12px;
+ border:1.5px solid;cursor:pointer;transition:all .15s;white-space:nowrap}
+.res-include-btn.IH{background:var(-c-ih-bg);border-color:var(-c-ih-br);color:var(-c-ih-tx)}
+.res-include-btn.BC{background:var(-c-bc-bg);border-color:var(-c-bc-br);color:var(-c-bc-tx)}
+.res-include-btn.BB{background:var(-c-bb-bg);border-color:var(-c-bb-br);color:var(-c-bb-tx)}
+.res-include-btn.PT{background:var(-c-pt-bg);border-color:var(-c-pt-br);color:var(-c-pt-tx)}
+.res-include-btn.PH{background:var(-c-ph-bg);border-color:var(-c-ph-br);color:var(-c-ph-tx)}
+.res-include-btn.SK{background:var(-c-sk-bg);border-color:var(-c-sk-br);color:var(-c-sk-tx)}
+.res-include-btn.not-inc{background:transparent;border-color:var(-rule);color:var(-ink-3)}
+.res-label{font-size:.78rem;font-weight:600;min-width:120px;color:var(-ink-2)}
+.res-module{font-size:.72rem;color:var(-ink-3);flex:1}
+.res-time{font-size:.7rem;color:var(-ink-3);white-space:nowrap}
+.res-tasks{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.task-check{display:flex;align-items:center;gap:4px;font-size:.7rem;color:var(-ink-2);
+ background:rgba(255,255,255,.6);border:1px solid rgba(0,0,0,.08);padding:2px 7px;
+ border-radius:12px;white-space:nowrap}
+[data-theme="dark"] .task-check{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1)}
+.task-check.done{background:var(-accent-light);border-color:var(-accent-br)}
+.warn-pill{font-size:.68rem;font-weight:700;padding:2px 9px;border-radius:12px;
+ background:#FFF1EE;color:#C0380A;border:1px solid #FFBDAD}
+
+/* ── DAY PLANNER ── */
+.day-group{margin-bottom:20px}
+.day-header{display:flex;align-items:center;gap:12px;padding:10px 14px;
+ background:var(-sb);border-radius:8px;color:#fff;margin-bottom:8px}
+.day-label{font-size:.88rem;font-weight:700}
+.day-week{font-size:.72rem;color:rgba(255,255,255,.6)}
+.day-stat{font-size:.75rem;color:rgba(255,255,255,.75);margin-left:auto}
+.day-tasks{display:flex;flex-direction:column;gap:4px}
+/* day-task-row base style is in the CALENDAR section below */
+.dtask-lec{font-size:.68rem;font-weight:700;color:var(-ink-3)}
+.dtask-type-pill{font-size:.65rem;font-weight:700;padding:1px 7px;border-radius:10px;border:1px solid;white-space:nowrap}
+.dtask-title{color:var(-ink-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dtask-time{font-size:.7rem;color:var(-ink-3);white-space:nowrap;min-width:48px;text-align:right}
+.dtask-cb{display:flex;align-items:center;gap:3px;font-size:.68rem;color:var(-ink-3);white-space:nowrap}
+.day-summary-row{display:flex;align-items:center;gap:10px;padding:7px 12px;
+ border-radius:7px;background:var(-rule);margin-top:4px;font-size:.75rem;color:var(-ink-2)}
+
+/* ── ANKI TAB ── */
+.anki-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.anki-res-card{background:var(-surface);border:1px solid var(-rule);border-radius:var(-radius);overflow:hidden;box-shadow:var(-card-sh)}
+.anki-res-header{padding:11px 16px;font-size:.82rem;font-weight:700;display:flex;align-items:center;gap:8px}
+.anki-res-body{padding:8px 0}
+.anki-row{display:flex;align-items:center;gap:8px;padding:5px 16px;font-size:.76rem}
+.anki-row:hover{background:var(-bg)}
+.anki-lec{color:var(-ink-3);min-width:52px;font-weight:600}
+.anki-count{font-weight:700;color:var(-ink);min-width:42px;text-align:right}
+.anki-sess{color:var(-ink-3);min-width:70px}
+.anki-bar-wrap{flex:1;background:var(-rule);border-radius:4px;height:6px;overflow:hidden}
+.anki-bar{height:100%;border-radius:4px}
+.anki-row.not-sel .anki-count{color:var(-ink-3)}
+.anki-row.not-sel .anki-lec{opacity:.5}
+.anki-done-cb{display:flex;align-items:center;gap:4px;font-size:.68rem;color:var(-ink-3)}
+
+/* ── UTILITY ── */
+.section-title{font-size:1rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.section-title span{font-size:.75rem;font-weight:500;color:var(-ink-3)}
+.empty-state{text-align:center;padding:40px 20px;color:var(-ink-3);font-size:.85rem}
+.btn-sm{padding:5px 13px;border-radius:7px;font-size:.78rem;font-weight:600;border:1px solid;cursor:pointer;transition:all .15s}
+.btn-reset{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.7)}
+.btn-reset:hover{border-color:#f87171;color:#f87171;background:rgba(239,68,68,.15)}
+.max-warn{font-size:.72rem;color:#C0380A;font-weight:600;display:none}
+.limit-tip{font-size:.72rem;color:var(-ink-3);padding:6px 10px;background:var(-bg);border-radius:6px;margin-top:8px}
+
+/* ── WEEK FILTER ── */
+.week-filter{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+.wf-btn{padding:5px 14px;border-radius:20px;font-size:.78rem;font-weight:600;
+ border:1.5px solid var(-rule);background:var(-surface);color:var(-ink-3);cursor:pointer;transition:all .15s}
+.wf-btn.active{background:var(-accent);border-color:var(-accent);color:#fff}
+.wf-btn:hover:not(.active){border-color:var(-accent);color:var(-accent)}
+
+/* ── CALENDAR ENHANCEMENTS ── */
+.cal-week-hdr{margin:6px 0 14px;display:flex;align-items:center;gap:12px}
+.cal-week-hdr::before,.cal-week-hdr::after{content:'';flex:1;height:2px;background:var(-sb);border-radius:2px;opacity:.15}
+.cal-week-hdr span{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;
+ color:#fff;padding:5px 18px;border-radius:20px;background:var(-sb);white-space:nowrap}
+.day-task-row{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:7px;
+ border:1px solid var(-rule);background:var(-surface);font-size:.78rem;flex-wrap:wrap}
+.day-task-row.done-row{opacity:.6}
+.day-task-row.review-row{background:var(-accent-light);border-color:var(-accent-br)}
+.day-task-row.anki-row{background:var(-c-ph-bg);border-color:var(-c-ph-br)}
+.day-task-row.ih-row{background:var(-c-ih-bg);border-color:var(-c-ih-br)}
+.day-task-row.watch-BC{background:var(-c-bc-bg);border-color:var(-c-bc-br)}
+.day-task-row.watch-BB{background:var(-c-bb-bg);border-color:var(-c-bb-br)}
+.day-task-row.watch-PT{background:var(-c-pt-bg);border-color:var(-c-pt-br)}
+.day-task-row.watch-PH{background:var(-c-ph-bg);border-color:var(-c-ph-br)}
+.day-task-row.watch-SK{background:var(-c-sk-bg);border-color:var(-c-sk-br)}
+.day-task-row.lp-row{background:var(-accent-light);border-color:var(-accent-br)}
+.day-task-row.cu-row{background:var(-bg);border-color:var(-rule)}
+.cal-pill{font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:10px;border:1px solid;white-space:nowrap;flex-shrink:0}
+.cal-pill.IH{background:var(-c-ih-bg);border-color:var(-c-ih-br);color:var(-c-ih-tx)}
+.cal-pill.BC{background:var(-c-bc-bg);border-color:var(-c-bc-br);color:var(-c-bc-tx)}
+.cal-pill.BB{background:var(-c-bb-bg);border-color:var(-c-bb-br);color:var(-c-bb-tx)}
+.cal-pill.PT{background:var(-c-pt-bg);border-color:var(-c-pt-br);color:var(-c-pt-tx)}
+.cal-pill.PH{background:var(-c-ph-bg);border-color:var(-c-ph-br);color:var(-c-ph-tx)}
+.cal-pill.SK{background:var(-c-sk-bg);border-color:var(-c-sk-br);color:var(-c-sk-tx)}
+.cal-pill.REV{background:var(-accent-light);border-color:var(-accent-br);color:var(-accent)}
+.cal-pill.MIDDAY{background:var(-c-ih-bg);border-color:var(-c-ih-br);color:var(-c-ih-tx)}
+.cal-pill.AFTERNOON{background:var(-c-bc-bg);border-color:var(-c-bc-br);color:var(-c-bc-tx)}
+.cal-pill.ANK{background:var(-c-ph-bg);border-color:var(-c-ph-br);color:var(-c-ph-tx)}
+.cal-pill.LP{background:var(-accent-light);border-color:var(-accent-br);color:var(-accent)}
+.cal-pill.PHQ{background:#FFF3E0;border-color:#FFB74D;color:#E65100}
+[data-theme="dark"] .cal-pill.PHQ{background:#3d1f00;border-color:#b86800;color:#FFB74D}
+.cal-pill.CU{background:var(-bg);border-color:var(-rule);color:var(-ink-3)}
+.day-task-row.midday-row{background:var(-c-ih-bg);border-color:var(-c-ih-br)}
+.day-task-row.afternoon-row{background:var(-c-bc-bg);border-color:var(-c-bc-br)}
+.day-task-row.phq-row{background:#FFF3E0;border-color:#FFB74D}
+[data-theme="dark"] .day-task-row.phq-row{background:#3d1f00;border-color:#b86800}
+.cal-label{flex:1;color:var(-ink-2);font-size:.78rem;min-width:0}
+.cal-note{font-size:.67rem;color:var(-ink-3);font-style:italic}
+.cal-time{font-size:.7rem;color:var(-ink-3);white-space:nowrap;margin-left:auto}
+.cal-cards{font-size:.68rem;color:var(-c-ph-tx);font-weight:600;white-space:nowrap}
+.cal-cb{display:flex;align-items:center;gap:4px;font-size:.7rem;color:var(-ink-3);white-space:nowrap;flex-shrink:0}
+.weekend-header{background:#3d1a22 !important}
+
+/* ── THIS WEEK TAB ── */
+.week-cal-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:24px}
+@media(max-width:900px){.week-cal-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.week-cal-grid{grid-template-columns:1fr}}
+.wday-col{background:var(-surface);border:1px solid var(-rule);border-radius:var(-radius);
+ box-shadow:var(-card-sh);overflow:hidden}
+.wday-col.today-col{border-color:var(-accent);box-shadow:0 0 0 2px var(-accent-br)}
+.wday-hdr{padding:9px 12px;background:var(-sb);color:#fff;font-size:.78rem;font-weight:700;
+ display:flex;align-items:baseline;gap:6px}
+.wday-hdr.today-hdr{background:var(-accent)}
+.wday-date-sub{font-size:.65rem;opacity:.6;font-weight:400}
+.wday-lecs{padding:6px 8px;display:flex;flex-direction:column;gap:4px;min-height:40px}
+.wday-lec-row{display:flex;gap:6px;padding:5px 6px;border-radius:5px;
+ background:var(-bg);border:1px solid var(-rule);align-items:flex-start}
+.wday-lec-row:hover{background:var(-accent-light)}
+.wday-time{font-size:.65rem;font-weight:700;color:var(-ink-3);min-width:34px;padding-top:2px;flex-shrink:0}
+.wday-lec-info{min-width:0}
+.wday-lec-name{font-size:.72rem;font-weight:600;color:var(-ink);line-height:1.3}
+.wday-lec-name a{color:var(-ink);text-decoration:none}
+.wday-lec-name a:hover{color:var(-accent)}
+.wday-lec-meta{font-size:.64rem;color:var(-ink-3);margin-top:2px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.wday-course-tag{font-size:.6rem;font-weight:700;padding:1px 5px;border-radius:8px;white-space:nowrap}
+.wday-none{font-size:.72rem;color:var(-ink-3);padding:8px 4px;font-style:italic}
+
+/* backlog section */
+.backlog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.backlog-card{background:var(-surface);border:1px solid var(-rule);border-radius:var(-radius);
+ overflow:hidden;box-shadow:var(-card-sh)}
+.backlog-card-hdr{padding:8px 12px;background:#FFF9E6;border-bottom:1px solid #F0C040;
+ font-size:.75rem;font-weight:700;color:#7B4F00;display:flex;justify-content:space-between;align-items:center}
+[data-theme="dark"] .backlog-card-hdr{background:#2a2000;border-color:#856404;color:#FCD34D}
+.backlog-rem{font-size:.7rem;font-weight:800;color:#C0380A;background:#FFF1EE;padding:2px 7px;
+ border-radius:10px;border:1px solid #FFBDAD}
+[data-theme="dark"] .backlog-rem{background:#2a0f0a;border-color:#7f1d1d;color:#FCA5A5}
+.backlog-rows{padding:6px 10px;display:flex;flex-direction:column;gap:4px}
+.backlog-row{display:flex;align-items:center;gap:7px;padding:4px 0;font-size:.73rem;
+ border-bottom:1px solid var(-rule)}
+.backlog-row:last-child{border-bottom:none}
+.backlog-res-pill{font-size:.62rem;font-weight:700;padding:1px 6px;border-radius:8px;border:1px solid;white-space:nowrap}
+.backlog-min{color:#C0380A;font-weight:700;font-size:.7rem;margin-left:auto;white-space:nowrap}
+
+/* ── MOBILE ── */
+@media(max-width:700px){
+ /* Topbar */
+ .topbar{padding:10px 14px;gap:8px;flex-wrap:wrap}
+ .topbar h1{font-size:1rem}
+ .topbar-back{font-size:.72rem}
+ .topbar-sub{font-size:.6rem}
+ .topbar-icon-btn{font-size:.68rem;padding:4px 8px;gap:4px}
+ .topbar-icon-btn.hide-mobile{display:none}
+ .btn-reset{font-size:.68rem;padding:4px 8px}
+
+ /* Tab nav */
+ .tab-nav{padding:8px 12px 0;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch}
+ .tab-btn{padding:8px 12px;font-size:.75rem;white-space:nowrap}
+ .topbar-badge{font-size:.65rem;padding:2px 8px;margin-left:auto;flex-shrink:0}
+
+ /* Tab panels */
+ .tab-panel{padding:14px 12px 40px}
+
+ /* Stat grid */
+ .stat-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+ .stat-num{font-size:1.4rem}
+
+ /* Lecture card headers — stack badges below title */
+ .lec-card-header{flex-wrap:wrap;gap:6px;padding:10px 12px}
+ .lec-title{order:1;width:100%;min-width:0}
+ .lec-num{order:0;font-size:.65rem}
+ .lec-date-badge,.subj-badge{order:0;font-size:.62rem}
+ .lec-mini-prog{order:2;margin-left:auto}
+ .lec-watch-stat{order:2;font-size:.62rem}
+ .lec-chevron{order:0}
+
+ /* Resource rows */
+ .res-row{flex-wrap:wrap;gap:6px}
+ .res-label{min-width:90px;font-size:.72rem}
+ .res-module{font-size:.65rem}
+ .res-tasks{flex-wrap:wrap}
+
+ /* Lecture planner header */
+ .section-title{flex-wrap:wrap;font-size:.9rem}
+ .planner-actions{flex-wrap:wrap;gap:6px}
+
+ /* This Week cal */
+ .week-cal-grid{grid-template-columns:1fr}
+ .backlog-card{padding:10px 12px}
+
+ /* Dashboard res bars */
+ .res-bar-label{font-size:.7rem;min-width:80px}
+}
+
+@media(max-width:480px){
+ .topbar h1{font-size:.9rem}
+ .tab-btn{padding:7px 10px;font-size:.7rem}
+ .stat-grid{grid-template-columns:1fr}
+ /* Hide less critical topbar buttons on very small screens */
+ .topbar-icon-btn.hide-xs{display:none}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<!- ── MAIN ── ->
+<div class="main">
+ <div class="topbar">
+ <div style="display:flex;flex-direction:column;gap:2px;flex:1">
+ <a href="https://strettyit10.github.io/Block4-GI/" class="topbar-back">HoyaDocs ↗</a>
+ <h1 style="flex:unset">Study Planner</h1>
+ <div class="topbar-sub">Block 4 · Repro</div>
+ </div>
+ <a href="https://docs.google.com/spreadsheets/d/1oMKX3NlM3xTTb3RDQ7VQsGdDEwuwEbfoX2mf09r-6K8/edit?usp=sharing" target="_blank" class="topbar-icon-btn hide-mobile">📋 Block 4 Checklist ↗</a>
+ <button class="topbar-icon-btn" onclick="toggleTheme">🌙 Dark Mode</button>
+ <button class="btn-sm btn-reset" onclick="confirmReset">↺ Reset All</button>
+ </div>
+
+ <!- TAB NAV ->
+ <div class="tab-nav">
+ <button class="tab-btn active" onclick="switchTab('thisweek')" data-tab="thisweek">📅 This Week</button>
+ <button class="tab-btn" onclick="switchTab('dashboard')" data-tab="dashboard">📊 Dashboard</button>
+ <button class="tab-btn" onclick="switchTab('planner')" data-tab="planner">✅ Lecture Planner</button>
+ <span style="margin-left:auto;margin-bottom:6px" class="topbar-badge" id="topbar-pct">0% Complete</span>
+ </div>
+
+ <!- ══ TAB 1: DASHBOARD ══ ->
+ <div class="tab-panel" id="tab-dashboard">
+ <div class="stat-grid" id="stat-grid"></div>
+
+ <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:22px">
+ <!- Progress by resource ->
+ <div class="card">
+ <div class="card-header">
+ <span style="font-size:.9rem;font-weight:700">Progress by Resource</span>
+ </div>
+ <div class="card-body" id="res-progress-bars" style="display:flex;flex-direction:column;gap:10px"></div>
+ </div>
+ <!- Progress by week ->
+ <div class="card">
+ <div class="card-header">
+ <span style="font-size:.9rem;font-weight:700">Progress by Week</span>
+ </div>
+ <div class="card-body" id="week-progress-bars" style="display:flex;flex-direction:column;gap:10px"></div>
+ </div>
+ </div>
+
+ <!- Quick legend ->
+ <div class="card">
+ <div class="card-header"><span style="font-size:.9rem;font-weight:700">Resource Guide</span></div>
+ <div class="card-body">
+ <div class="res-legend">
+ <div class="res-pill IH">🏥 In-House · Always included</div>
+ <div class="res-pill BC">🔵 Bootcamp</div>
+ <div class="res-pill BB">🟢 Boards &amp; Beyond</div>
+ <div class="res-pill PT">🔴 Pathoma</div>
+ <div class="res-pill PH">🟣 Physeo</div>
+ <div class="res-pill SK">🟤 Sketchy</div>
+ </div>
+ <p style="font-size:.8rem;color:var(-ink-3)">
+ <strong>Rule:</strong> In-House is optional and does <em>not</em> count against the 2 third-party limit. Select up to <strong>2 third-party resources</strong> per lecture.<br>
+ <strong>Tasks per resource:</strong> Watch/Attend → Anki → Last Pass<br>
+ <strong>Practice Problems:</strong> Track UWorld, Active Learning, Drill Hub, and Qbank progress per lecture.
+ </p>
+ </div>
+ </div>
+ </div>
+
+ <!- ══ TAB 2: LECTURE PLANNER ══ ->
+ <div class="tab-panel" id="tab-planner">
+ <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+ <div class="section-title" style="margin-bottom:0">Lecture Planner <span>Select resources · track tasks per lecture</span></div>
+ <div class="planner-actions" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+ <div class="max-warn" id="max-warn">⚠️ Max 2 third-party resources per lecture</div>
+ <button class="btn-sm" style="background:var(-surface);border-color:var(-rule);color:var(-ink-2);font-weight:600" onclick="exportData">⬇ Export Data</button>
+ <button class="btn-sm" style="background:var(-surface);border-color:var(-rule);color:var(-ink-2);font-weight:600" onclick="document.getElementById('import-input').click">⬆ Import Data</button>
+ <input type="file" id="import-input" accept=".json" style="display:none" onchange="importData(this)">
+ <button class="btn-sm" style="background:var(-accent-light);border-color:var(-accent-br);color:var(-accent);font-weight:600" onclick="exportToHTML">⬇ Export HTML</button>
+ </div>
+ </div>
+ <div class="limit-tip" style="margin-bottom:14px">
+ 💡 <strong>In-House</strong> is optional — toggle it on/off as needed. It does <strong>not</strong> count against the 2 third-party resource limit. Track <strong>Watch / Anki / Last Pass</strong> and use <strong>Practice Problems</strong> dropdowns below each lecture.
+ </div>
+ <div class="week-filter">
+ <button class="wf-btn active" onclick="filterWeek('all',this)">All Weeks</button>
+ <button class="wf-btn" onclick="filterWeek('Wk 1',this)">Week 1</button>
+ <button class="wf-btn" onclick="filterWeek('Wk 2',this)">Week 2</button>
+ <button class="wf-btn" onclick="filterWeek('Wk 3',this)">Week 3</button>
+ </div>
+ <div class="lec-grid" id="lec-grid"></div>
+ </div>
+
+
+ <!- ══ TAB 3: THIS WEEK ══ ->
+ <div class="tab-panel active" id="tab-thisweek">
+ <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+ <div class="section-title" style="margin-bottom:0">📅 This Week <span id="thisweek-range"></span></div>
+ </div>
+ <div class="week-cal-grid" id="thisweek-cal"></div>
+
+ <div class="section-title" style="margin-top:8px">⏳ Previous Week — Watch Backlog <span id="prevweek-label"></span></div>
+ <div id="backlog-empty" style="display:none;font-size:.82rem;color:var(-ink-3);padding:16px 0">
+ ✅ All previous week lectures have been watched!
+ </div>
+ <div class="backlog-grid" id="backlog-grid"></div>
+ </div>
+
+
+</div><!- /main ->
+</div><!- /shell ->
+
+<script>
+// ══════════════════════════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════════════════════════
+const LECTURES = [
+ {
+ "id": 0,
+ "num": "1",
+ "week": "Wk 1",
+ "date": "Mon Apr 6",
+ "subj": "Phys",
+ "title": "IL GI Overview",
+ "ihMin": 60,
+ "res": {
+ "BC": {
+ "label": "Ch. 2 · Oral Cavity",
+ "min": 30
+ },
+ "BB": {
+ "label": "Sec. 1 · Anatomy",
+ "min": 94
+ },
+ "PT": null,
+ "PH": {
+ "label": "Phys. 5.1 & 5.6",
+ "min": 69
+ },
+ "SK": null
+ },
+ "anki": {
+ "BC": 174,
+ "BB": 94,
+ "PH": 69
+ }
+ },
+ {
+ "id": 1,
+ "num": "2",
+ "week": "Wk 1",
+ "date": "Mon Apr 6",
+ "subj": "Phys",
+ "title": "Introduction / Motility",
+ "ihMin": 60,
+ "res": {
+ "BC": {
+ "label": "Ch. 8 & 9 · Sm/Lg Int.",
+ "min": 45
+ },
+ "BB": {
+ "label": "Sec. 2 · Physiology",
+ "min": 102
+ },
+ "PT": null,
+ "PH": {
+ "label": "Phys. 5.1 & 5.6",
+ "min": 69
+ },
+ "SK": null
+ },
+ "anki": {
+ "BC": 342,
+ "BB": 102,
+ "PH": 69
+ }
+ },
+ {
+ "id": 2,
+ "num": "3",
+ "week": "Wk 1",
+ "date": "Mon Apr 6",
+ "subj": "Anat",
+ "title": "Anterior Abdominal Wall / Hernia",
+ "ihMin": 60,
+ "res": {
+ "BC": {
+ "label": "Ch. 10 · Hernias",
+ "min": 20
+ },
+ "BB": {
+ "label": "Sec. 1 · Anatomy",
+ "min": 42
+ },
+ "PT": null,
+ "PH": {
+ "label": "Anat. 4",
+ "min": 129
+ },
+ "SK": {
+ "label": "Anat. 1.1",
+ "min": 0
+ }
+ },
+ "anki": {
+ "BC": 42,
+ "BB": 42,
+ "PH": 129,
+ "SK": 105
+ }
+ },
+ {
+ "id": 3,
+ "num": "4",
+ "week": "Wk 1",
+ "date": "Mon Apr 6",
+ "subj": "Hist",
+ "title": "Esoph / Stomach / Intestines (Histology)",
+ "ihMin": 60,
+ "res": {
+ "BC": {
+ "label": "Ch. 2 · Oral Cavity",
+ "min": 15
+ },
+ "BB": {
+ "label": "Sec. 1 · Anatomy",
+ "min": 94
+ },
+ "PT": null,
+ "PH": null,
+ "SK": null
+ },
+ "anki": {
+ "BC": 174,
+ "BB": 94
+ }
+ },
+ {
+ "id": 4,
+ "num": "5 & 6",
+ "week": "Wk 1",
+ "date": "Mon Apr 6",
+ "subj": "Phys",
+ "title": "IL Bile Workshop & Making a Micelle",
+ "ihMin": 120,
+ "res": {
+ "BC": {
+ "label": "Ch. 5 & 6 · Liver/Biliary",
+ "min": 90
+ },
+ "BB": {
+ "label": "Sec. 2 · Physiology",
+ "min": 102
+ },
+ "PT": null,
+ "PH": {
+ "label": "Phys. 5.3 & 5.4",
+ "min": 99
+ },
+ "SK": null
+ },
+ "anki": {
+ "BC": 536,
+ "BB": 102,
+ "PH": 99
+ }
+ },
+ {
+ "id": 5,
+ "num": "7",
+ "week": "Wk 1",
+ "date": "Mon Apr 6",
+ "subj": "Embr",
+ "title": "IL GI Primer",
+ "ihMin": 60,
+ "res": {
+ "BC": {
+ "label": "Ch. 1 · Embryology",
+ "min": 25
+ },
+ "BB": {
+ "label": "Sec. 1 · Anatomy",
+ "min": 105
+ },
+ "PT": null,
+ "PH": {
+ "label": "Embr. 5",
+ "min": 73
+ },
+ "SK": {
+ "label": "Anat. 1.1",
+ "min": 0
+ }
+ },
+ "anki": {
+ "BC": 131,
+ "BB": 105,
+ "PH": 73,
+ "SK": 105
+ }
+ },
+ {
+ "id": 6,
+ "num": "8",
+ "week": "Wk 1",
+ "date": "Tue Apr 7",
+ "subj": "Anat",
+ "title": "Abdominal Viscera I: GI Tract",
+ "ihMin": 60,
+ "res": {
+ "BC": {
+ "label": "Ch. 10 · Hernias",
+ "min": 20
+ },
+ "BB": {
+ "label": "Sec. 1 · Anatomy",
+ "min": 90
+ },
+ "PT": null,
+ "PH": {
+ "label": "Anat. 4",
+ "min": 129
+ },
+ "SK": {
+ "label": "Anat. 1.1",
+ "min": 0
+ }
+ },
+ "anki": {
+ "BC": 42,
+ "BB": 90,
+ "PH": 129,
+ "SK": 105
+ }
+ },
+ {
+ "id": 7,
+ "num": "9 & 10",
+ "week": "Wk 1",
+ "date": "Tue Apr 7",
+ "subj": "Phys",
+ "title": "Secretions I & II",
+ "ihMin": 120,
+ "res": {
+ "BC": {
+ "label": "Ch. 2,4 & 7 · Oral/Stom/Panc",
+ "min": 95
+ },
+ "BB": {
+ "label": "Sec. 1 & 2 · Anat/Physiol",
+ "min": 231
+ },
+ "PT": null,
+ "PH": {
+ "label": "Phys. 5.2",
+ "min": 45
+ },
+ "SK": null
+ },
+ "anki": {
+ "BC": 653,
+ "BB": 231,
+ "PH": 45
+ }
+ },
+ {
+ "id": 8,
+ "num": "12",
+ "week": "Wk 1",
+ "date": "Wed Apr 8",
+ "subj": "Embr",
+ "title": "GI Embryology",
+ "ihMin": 60,
+ "res": {
+ "BC": {
+ "label": "Ch. 1 · Embryology",
+ "min": 25
+ },
+ "BB": {
+ "label": "Sec. 1 · Anatomy",
+ "min": 105
+ },
+ "PT": null,
+ "PH": {
+ "label": "Embr. 5",
+ "min": 73
+ },
+ "SK": {
+ "label": "Anat. 1.1",
+ "min": 0
+ }
+ },
+ "anki": {
+ "BC": 131,
+ "BB": 105,
+ "PH": 73,
+ "SK": 105
+ }
+ },
+ {
+ "id": 9,
+ "num": "13",
+ "week": "Wk 1",
+ "date": "Wed Apr 8",
+ "subj": "Anat",
+ "title": "Abdominal Viscera II: Liver & Pancreas",
+ "ihMin": 60,
+ "res": {
+ "BC": {
+ "label": "Ch. 5 · Liver",
+ "min": 55
+ },
+ "BB": {
+ "label": "Sec. 1 · Anatomy",
+ "min": 99
+ },
+ "PT": null,
+ "PH": {
+ "label": "Anat. 4",
+ "min": 129
+ },
+ "SK": {
+ "label": "Anat. 1.1",
+ "min": 0
+ }
+ },
+ "anki": {
+ "BC": 292,
+ "BB": 99,
+ "PH": 129,
+ "SK": 105
+ }
+ },
+ {
+ "id": 10,
+ "num": "14",
+ "week": "Wk 1",
+ "date": "Wed Apr 8",
+ "subj": "Phys",
+ "title": "Overview of the Liver",
+ "ihMin": 60,
+ "res": {
+ "BC": {
+ "label": "Ch. 5 · Liver",
+ "min": 55
+ },
+ "BB": {
+ "label": "Sec. 2 · Physiology",
+ "min": 118
+ },
+ "PT": null,
+ "PH": {
+ "label": "Phys. 5.3",
+ "min": 62
+ },
+ "SK": null
+ },
+ "anki": {
+ "BC": 292,
+ "BB": 118,
+ "PH": 62
+ }
+ },
+ {
+ "id": 11,
+ "num": "15",
+ "week": "Wk 1",
+ "date": "Thu Apr 9",
+ "subj": "Path",
+ "title": "Esophagus / Stomach Disease",
+ "ihMin": 60,
+ "res": {
+ "BC": {
+ "label": "Ch. 3 & 4 · Esoph/Stomach",
+ "min": 80
+ },
+ "BB": {
+ "label": "Sec. 3 · Clinical",
+ "min": 80
+ },
+ "PT": {
+ "label": "Ch. 10 · GI Tract",
+ "min": 156
+ },
+ "PH": {
+ "label": "Path. 6.1–6.4",
+ "min": 222
+ },
+ "SK": null
+ },
+ "anki": {
+ "BC": 549,
+ "BB": 80,
+ "PT": 528,
+ "PH": 222
+ }
+ },
+ {
+ "id": 12,
+ "num": "16 & 17",
+ "week": "Wk 1",
+ "date": "Thu Apr 9",
+ "subj": "Phys",
+ "title": "Digestion / Absorption I & II",
+ "ihMin": 120,
+ "res": {
+ "BC": {
+ "label": "Ch. 8 · Small Intestine",
+ "min": 50
+ },
+ "BB": {
+ "label": "Sec. 2 & 3 · Physiol/Clin.",
+ "min": 115
+ },
+ "PT": null,
+ "PH": {
+ "label": "Phys. 5.5",
+ "min": 50
+ },
+ "SK": null
+ },
+ "anki": {
+ "BC": 279,
+ "BB": 115,
+ "PH": 50
+ }
+ },
+ {
+ "id": 13,
+ "num": "19 & 20",
+ "week": "Wk 1",
+ "date": "Fri Apr 10",
+ "subj": "Path",
+ "title": "Intestinal Pathology I & II",
+ "ihMin": 120,
+ "res": {
+ "BC": {
+ "label": "Ch. 8 & 9 · Sm/Lg Int.",
+ "min": 60
+ },
+ "BB": {
+ "label": "Sec. 3 · Clinical",
+ "min": 317
+ },
+ "PT": {
+ "label": "Ch. 10 · GI Tract",
+ "min": 156
+ },
+ "PH": {
+ "label": "Path. 6.5–6.9",
+ "min": 258
+ },
+ "SK": null
+ },
+ "anki": {
+ "BC": 342,
+ "BB": 317,
+ "PT": 528,
+ "PH": 258
+ }
+ },
+ {
+ "id": 14,
+ "num": "21",
+ "week": "Wk 2",
+ "date": "Mon Apr 13",
+ "subj": "Pharm",
+ "title": "Poisoning Conference & Cases",
+ "ihMin": 60,
+ "res": {
+ "BC": {
+ "label": "Ch. 10 · Hernias",
+ "min": 20
+ },
+ "BB": {
+ "label": "Sec. 3 · Clinical",
+ "min": 52
+ },
+ "PT": null,
+ "PH": {
+ "label": "Pharm. 11",
+ "min": 120
+ },
+ "SK": {
+ "label": "5.1 Antiemetics",
+ "min": 19
+ }
+ },
+ "anki": {
+ "BC": 42,
+ "BB": 52,
+ "PH": 120,
+ "SK": 37
+ }
+ },
+ {
+ "id": 15,
+ "num": "22",
+ "week": "Wk 2",
+ "date": "Tue Apr 14",
+ "subj": "Path",
+ "title": "GI Lab",
+ "ihMin": 60,
+ "res": {
+ "BC": {
+ "label": "Ch. 9 · Large Intestine",
+ "min": 15
+ },
+ "BB": null,
+ "PT": {
+ "label": "Ch. 10 & 11 · GI/Hepatobil.",
+ "min": 156
+ },
+ "PH": {
+ "label": "Path. 6.3–6.5 & 6.8",
+ "min": 346
+ },
+ "SK": null
+ },
+ "anki": {
+ "BC": 63,
+ "PT": 812,
+ "PH": 346
+ }
+ },
+ {
+ "id": 16,
+ "num": "23 & 24",
+ "week": "Wk 2",
+ "date": "Tue Apr 14",
+ "subj": "Pharm",
+ "title": "Treatment: PUD / GERD & Other GI Disorders",
+ "ihMin": 120,
+ "res": {
+ "BC": {
+ "label": "Ch. 3 & 4 · Esoph/Stomach",
+ "min": 80
+ },
+ "BB": {
+ "label": "Sec. 3 · Clinical",
+ "min": 80
+ },
+ "PT": null,
+ "PH": {
+ "label": "Pharm. 11",
+ "min": 120
+ },
+ "SK": {
+ "label": "5.1–5.4 & 5.FA",
+ "min": 0
+ }
+ },
+ "anki": {
+ "BC": 549,
+ "BB": 80,
+ "PH": 120,
+ "SK": 120
+ }
+ },
+ {
+ "id": 17,
+ "num": "25",
+ "week": "Wk 2",
+ "date": "Wed Apr 15",
+ "subj": "Micro",
+ "title": "GI Infections",
+ "ihMin": 60,
+ "res": {
+ "BC": {
+ "label": "Ch. 8 & 9 · Sm/Lg Int.",
+ "min": 45
+ },
+ "BB": {
+ "label": "Sec. 3 · Clinical",
+ "min": 144
+ },
+ "PT": null,
+ "PH": {
+ "label": "Path. 6.14",
+ "min": 95
+ },
+ "SK": null
+ },
+ "anki": {
+ "BC": 342,
+ "BB": 144,
+ "PH": 95
+ }
+ },
+ {
+ "id": 18,
+ "num": "26",
+ "week": "Wk 2",
+ "date": "Wed Apr 15",
+ "subj": "Micro",
+ "title": "Parasitology",
+ "ihMin": 60,
+ "res": {
+ "BC": {
+ "label": "Ch. 8 · Small Intestine",
+ "min": 50
+ },
+ "BB": {
+ "label": "Sec. 3 · Clinical",
+ "min": 144
+ },
+ "PT": null,
+ "PH": {
+ "label": "Path. 6.14",
+ "min": 95
+ },
+ "SK": null
+ },
+ "anki": {
+ "BC": 279,
+ "BB": 144,
+ "PH": 95
+ }
+ },
+ {
+ "id": 19,
+ "num": "28",
+ "week": "Wk 2",
+ "date": "Thu Apr 16",
+ "subj": "Path",
+ "title": "Intestinal Path. Case Review",
+ "ihMin": 60,
+ "res": {
+ "BC": {
+ "label": "Ch. 9 · Large Intestine",
+ "min": 15
+ },
+ "BB": {
+ "label": "Sec. 3 · Clinical",
+ "min": 150
+ },
+ "PT": null,
+ "PH": {
+ "label": "Path. 6.7–6.9",
+ "min": 128
+ },
+ "SK": null
+ },
+ "anki": {
+ "BC": 63,
+ "BB": 150,
+ "PH": 128
+ }
+ },
+ {
+ "id": 20,
+ "num": "29",
+ "week": "Wk 2",
+ "date": "Thu Apr 16",
+ "subj": "Anat",
+ "title": "Retroperitoneum",
+ "ihMin": 60,
+ "res": {
+ "BC": {
+ "label": "Ch. 10 · Hernias",
+ "min": 20
+ },
+ "BB": {
+ "label": "Sec. 1 · Anatomy",
+ "min": 42
+ },
+ "PT": null,
+ "PH": {
+ "label": "Anat. 4",
+ "min": 129
+ },
+ "SK": {
+ "label": "Anat. 1.1",
+ "min": 0
+ }
+ },
+ "anki": {
+ "BC": 42,
+ "BB": 42,
+ "PH": 129,
+ "SK": 105
+ }
+ },
+ {
+ "id": 21,
+ "num": "33",
+ "week": "Wk 3",
+ "date": "Mon Apr 20",
+ "subj": "Hist",
+ "title": "Liver & Biliary Tract (Histology)",
+ "ihMin": 60,
+ "res": {
+ "BC": {
+ "label": "Ch. 6 · Biliary System",
+ "min": 44
+ },
+ "BB": {
+ "label": "Sec. 1 · Anatomy",
+ "min": 71
+ },
+ "PT": null,
+ "PH": null,
+ "SK": {
+ "label": "Anat. 1.1",
+ "min": 0
+ }
+ },
+ "anki": {
+ "BC": 244,
+ "BB": 71,
+ "SK": 105
+ }
+ },
+ {
+ "id": 22,
+ "num": "34 & 35",
+ "week": "Wk 3",
+ "date": "Tue Apr 21",
+ "subj": "Path",
+ "title": "Liver Disease I & II",
+ "ihMin": 120,
+ "res": {
+ "BC": {
+ "label": "Ch. 5 · Liver",
+ "min": 55
+ },
+ "BB": {
+ "label": "Sec. 3 · Clinical",
+ "min": 201
+ },
+ "PT": {
+ "label": "Ch. 11 · Hepatobiliary",
+ "min": 65
+ },
+ "PH": {
+ "label": "Path. 6.11–6.13",
+ "min": 160
+ },
+ "SK": null
+ },
+ "anki": {
+ "BC": 292,
+ "BB": 201,
+ "PT": 284,
+ "PH": 160
+ }
+ },
+ {
+ "id": 23,
+ "num": "36",
+ "week": "Wk 3",
+ "date": "Tue Apr 21",
+ "subj": "DRT",
+ "title": "Liver Enzymes",
+ "ihMin": 60,
+ "res": {
+ "BC": {
+ "label": "Ch. 5 · Liver",
+ "min": 55
+ },
+ "BB": {
+ "label": "Sec. 2 · Physiology",
+ "min": 91
+ },
+ "PT": null,
+ "PH": {
+ "label": "Phys. 5.3",
+ "min": 62
+ },
+ "SK": null
+ },
+ "anki": {
+ "BC": 292,
+ "BB": 91,
+ "PH": 62
+ }
+ },
+ {
+ "id": 24,
+ "num": "38",
+ "week": "Wk 3",
+ "date": "Wed Apr 22",
+ "subj": "Path",
+ "title": "Pancreas Disease",
+ "ihMin": 60,
+ "res": {
+ "BC": {
+ "label": "Ch. 7 · Pancreas",
+ "min": 30
+ },
+ "BB": {
+ "label": "Sec. 3 · Clinical",
+ "min": 91
+ },
+ "PT": {
+ "label": "Ch. 11 · Hepatobiliary",
+ "min": 65
+ },
+ "PH": {
+ "label": "Path. 6.10",
+ "min": 60
+ },
+ "SK": null
+ },
+ "anki": {
+ "BC": 130,
+ "BB": 91,
+ "PT": 284,
+ "PH": 60
+ }
+ },
+ {
+ "id": 25,
+ "num": "39",
+ "week": "Wk 3",
+ "date": "Wed Apr 22",
+ "subj": "Path",
+ "title": "Liver / Pancreas Lab",
+ "ihMin": 60,
+ "res": {
+ "BC": {
+ "label": "Ch. 6 · Biliary System",
+ "min": 44
+ },
+ "BB": {
+ "label": "Sec. 3 · Clinical",
+ "min": 92
+ },
+ "PT": {
+ "label": "Ch. 11 · Hepatobiliary",
+ "min": 65
+ },
+ "PH": {
+ "label": "Path. 6.11–6.13",
+ "min": 160
+ },
+ "SK": null
+ },
+ "anki": {
+ "BC": 244,
+ "BB": 92,
+ "PT": 284,
+ "PH": 160
+ }
+ },
+ {
+ "id": 26,
+ "num": "40",
+ "week": "Wk 3",
+ "date": "Fri Apr 24",
+ "subj": "Phys",
+ "title": "PSW: Cholera / Lactose Intolerance",
+ "ihMin": 60,
+ "res": {
+ "BC": {
+ "label": "Ch. 8 · Small Intestine",
+ "min": 50
+ },
+ "BB": {
+ "label": "Sec. 2 · Physiology",
+ "min": 102
+ },
+ "PT": null,
+ "PH": {
+ "label": "Phys. 5.1",
+ "min": 61
+ },
+ "SK": null
+ },
+ "anki": {
+ "BC": 279,
+ "BB": 102,
+ "PH": 61
+ }
+ }
+];
+
+const DAY_GROUPS = [
+ {
+ "day": "Mon Apr 6",
+ "week": "Week 1",
+ "ids": [
+ 0,
+ 1,
+ 2,
+ 3,
+ 4,
+ 5
+ ]
+ },
+ {
+ "day": "Tue Apr 7",
+ "week": "Week 1",
+ "ids": [
+ 6,
+ 7
+ ]
+ },
+ {
+ "day": "Wed Apr 8",
+ "week": "Week 1",
+ "ids": [
+ 8,
+ 9,
+ 10
+ ]
+ },
+ {
+ "day": "Thu Apr 9",
+ "week": "Week 1",
+ "ids": [
+ 11,
+ 12
+ ]
+ },
+ {
+ "day": "Fri Apr 10",
+ "week": "Week 1",
+ "ids": [
+ 13
+ ]
+ },
+ {
+ "day": "Mon Apr 13",
+ "week": "Week 2",
+ "ids": [
+ 14
+ ]
+ },
+ {
+ "day": "Tue Apr 14",
+ "week": "Week 2",
+ "ids": [
+ 15,
+ 16
+ ]
+ },
+ {
+ "day": "Wed Apr 15",
+ "week": "Week 2",
+ "ids": [
+ 17,
+ 18
+ ]
+ },
+ {
+ "day": "Thu Apr 16",
+ "week": "Week 2",
+ "ids": [
+ 19,
+ 20
+ ]
+ },
+ {
+ "day": "Mon Apr 20",
+ "week": "Week 3",
+ "ids": [
+ 21
+ ]
+ },
+ {
+ "day": "Tue Apr 21",
+ "week": "Week 3",
+ "ids": [
+ 22,
+ 23
+ ]
+ },
+ {
+ "day": "Wed Apr 22",
+ "week": "Week 3",
+ "ids": [
+ 24,
+ 25
+ ]
+ },
+ {
+ "day": "Fri Apr 24",
+ "week": "Week 3",
+ "ids": [
+ 26
+ ]
+ }
+];
+
+// Expert-recommended resources per lecture (id → [res1, res2])
+const RECOMMENDED = {
+ "0": [
+ "BC",
+ "PH"
+ ],
+ "1": [
+ "BC",
+ "PH"
+ ],
+ "2": [
+ "BB",
+ "PH"
+ ],
+ "3": [
+ "BC",
+ "BB"
+ ],
+ "4": [
+ "BC",
+ "PH"
+ ],
+ "5": [
+ "BB",
+ "PH"
+ ],
+ "6": [
+ "BB",
+ "PH"
+ ],
+ "7": [
+ "BC",
+ "BB"
+ ],
+ "8": [
+ "BB",
+ "PH"
+ ],
+ "9": [
+ "BB",
+ "PH"
+ ],
+ "10": [
+ "BC",
+ "PH"
+ ],
+ "11": [
+ "PT",
+ "PH"
+ ],
+ "12": [
+ "BC",
+ "PH"
+ ],
+ "13": [
+ "PT",
+ "PH"
+ ],
+ "14": [
+ "PH",
+ "SK"
+ ],
+ "15": [
+ "PT",
+ "PH"
+ ],
+ "16": [
+ "PH",
+ "SK"
+ ],
+ "17": [
+ "BB",
+ "PH"
+ ],
+ "18": [
+ "BB",
+ "PH"
+ ],
+ "19": [
+ "BB",
+ "PH"
+ ],
+ "20": [
+ "BB",
+ "PH"
+ ],
+ "21": [
+ "BC",
+ "BB"
+ ],
+ "22": [
+ "PT",
+ "PH"
+ ],
+ "23": [
+ "BC",
+ "BB"
+ ],
+ "24": [
+ "PT",
+ "PH"
+ ],
+ "25": [
+ "PT",
+ "PH"
+ ],
+ "26": [
+ "BC",
+ "PH"
+ ]
+};
+
+// 3-week optimized calendar
+// Anki: 3 slots/day — morning reviews 1hr, midday new cards 30min, afternoon new cards 1hr
+// Day budgets (self-study, NOT counting mandatory IH class time):
+// Mon/Fri ≤8hrs | Wed ≤8hrs incl 1.5hr PHQ | Tue/Thu ≤6hrs | Sat: Anki+PHQ only | Sun: Anki only
+const CALENDAR_DAYS = [];
+
+const RES_META = {
+ IH:{label:"In-House", emoji:"🏥",cls:"IH"},
+ BC:{label:"Bootcamp", emoji:"🔵",cls:"BC"},
+ BB:{label:"Boards & Beyond",emoji:"🟢",cls:"BB"},
+ PT:{label:"Pathoma", emoji:"🔴",cls:"PT"},
+ PH:{label:"Physeo", emoji:"🟣",cls:"PH"},
+ SK:{label:"Sketchy", emoji:"🟤",cls:"SK"},
+};
+const TP_RES = ['BC','BB','PT','PH','SK'];
+const TASKS = ['watch','ankiSetUp'];
+const TASK_LABELS = {watch:'Watch',ankiSetUp:'Anki Set Up'};
+const STORAGE_KEY = 'gi-planner-v2';
+
+// ══════════════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════════════
+let STATE = {};
+
+function defaultPP{ return {uworld:'Not Started',activeLearning:'Not Started',drillHub:'Not Started',qbank:'Not Started'}; }
+
+function defaultState{
+ const s={};
+ LECTURES.forEach(l=>{
+ s[l.id]={IH:{included:true,watch:false,ankiSetUp:false}};
+ TP_RES.forEach(r=>{
+ s[l.id][r]={included:false,watch:false,ankiSetUp:false};
+ });
+ s[l.id].practiceProblems=defaultPP;
+ });
+ return s;
+}
+
+function loadState{
+ try{
+ const raw=localStorage.getItem(STORAGE_KEY);
+ if(raw) STATE=JSON.parse(raw);
+ else STATE=defaultState;
+ } catch(e){ STATE=defaultState; }
+ // Ensure all keys exist + migrate practiceProblems
+ LECTURES.forEach(l=>{
+ if(!STATE[l.id]) STATE[l.id]=defaultState[l.id];
+ if(!STATE[l.id].IH) STATE[l.id].IH={included:true,watch:false,ankiSetUp:false};
+ TP_RES.forEach(r=>{
+ if(!STATE[l.id][r]) STATE[l.id][r]={included:false,watch:false,ankiSetUp:false};
+ });
+ if(!STATE[l.id].practiceProblems) STATE[l.id].practiceProblems=defaultPP;
+ else{
+ const pp=STATE[l.id].practiceProblems;
+ ['uworld','activeLearning','drillHub','qbank'].forEach(k=>{ if(!pp[k]) pp[k]='Not Started'; });
+ }
+ });
+}
+
+function saveState{
+ try{ localStorage.setItem(STORAGE_KEY,JSON.stringify(STATE)); } catch(e){}
+}
+
+// ══════════════════════════════════════════════════════════════
+// STATS HELPERS
+// ══════════════════════════════════════════════════════════════
+function lecState(id){ return STATE[id]; }
+
+function countThirdParty(id){
+ return TP_RES.filter(r=>STATE[id][r].included).length;
+}
+
+function lecWatchStats(id){
+ const ls=STATE[id];
+ const lec=LECTURES.find(l=>l.id===id);
+ let tot=0, done=0;
+ if(ls.IH.included){ tot+=lec.ihMin; if(ls.IH.watch) done+=lec.ihMin; }
+ TP_RES.forEach(r=>{
+ if(!ls[r].included||!lec.res[r]) return;
+ const m=lec.res[r].min||0;
+ tot+=m; if(ls[r].watch) done+=m;
+ });
+ return {tot, done, remaining:tot-done};
+}
+
+function lecProgress(id){
+ const ls=STATE[id];
+ let tot=0,done=0;
+ const PP_KEYS=['uworld','activeLearning','drillHub','qbank'];
+ // IH — only if included
+ if(ls.IH.included){
+ TASKS.forEach(t=>{ tot++; if(ls.IH[t]) done++; });
+ }
+ // Third-party
+ TP_RES.forEach(r=>{
+ if(!ls[r].included) return;
+ const lec=LECTURES.find(l=>l.id===id);
+ if(!lec.res[r]) return;
+ TASKS.forEach(t=>{ tot++; if(ls[r][t]) done++; });
+ });
+ // Practice problems — 2 points each: +1 for 1st Pass, +1 for RTG!
+ if(ls.practiceProblems){
+ PP_KEYS.forEach(k=>{
+ const v=ls.practiceProblems[k]||'Not Started';
+ tot+=2;
+ if(v!=='Not Started') done++;
+ if(v==='RTG!') done++;
+ });
+ }
+ return {tot,done,pct:tot?Math.round(done/tot*100):0};
+}
+
+function globalStats{
+ let totalTasks=0,doneTasks=0,totalMin=0,doneMin=0,selectedLecs=0;
+ let byRes={IH:{tot:0,done:0},BC:{tot:0,done:0},BB:{tot:0,done:0},PT:{tot:0,done:0},PH:{tot:0,done:0},SK:{tot:0,done:0}};
+ let byWeek={"Wk 1": {"tot": 0, "done": 0}, "Wk 2": {"tot": 0, "done": 0}, "Wk 3": {"tot": 0, "done": 0}};
+ let ankiSelected=0;
+
+ const PP_KEYS=['uworld','activeLearning','drillHub','qbank'];
+ LECTURES.forEach(l=>{
+ const ls=STATE[l.id];
+ const wk=l.week;
+ // IH — only if included
+ if(ls.IH.included){
+ totalMin+=l.ihMin; if(ls.IH.watch) doneMin+=l.ihMin;
+ TASKS.forEach(t=>{
+ totalTasks++;byRes.IH.tot++;byWeek[wk].tot++;
+ if(ls.IH[t]){doneTasks++;byRes.IH.done++;byWeek[wk].done++;}
+ });
+ }
+ // 3rd party
+ TP_RES.forEach(r=>{
+ if(!ls[r].included||!l.res[r]) return;
+ selectedLecs++;
+ const m=l.res[r].min||0;
+ totalMin+=m; if(ls[r].watch) doneMin+=m;
+ TASKS.forEach(t=>{
+ totalTasks++;byRes[r].tot++;byWeek[wk].tot++;
+ if(ls[r][t]){doneTasks++;byRes[r].done++;byWeek[wk].done++;}
+ });
+ if(l.anki&&l.anki[r]) ankiSelected+=l.anki[r];
+ });
+ // Practice problems — 2 points each: +1 for 1st Pass, +1 for RTG!
+ if(ls.practiceProblems){
+ PP_KEYS.forEach(k=>{
+ const v=ls.practiceProblems[k]||'Not Started';
+ totalTasks+=2;byWeek[wk].tot+=2;
+ if(v!=='Not Started'){doneTasks++;byWeek[wk].done++;}
+ if(v==='RTG!'){doneTasks++;byWeek[wk].done++;}
+ });
+ }
+ });
+ return {totalTasks,doneTasks,totalMin,doneMin,selectedLecs,byRes,byWeek,ankiSelected,
+ pct:totalTasks?Math.round(doneTasks/totalTasks*100):0};
+}
+
+// ══════════════════════════════════════════════════════════════
+// RENDER DASHBOARD
+// ══════════════════════════════════════════════════════════════
+function renderDashboard{
+ const s=globalStats;
+ document.getElementById('topbar-pct').textContent=s.pct+'% Complete';
+
+ const grid=document.getElementById('stat-grid');
+ const hrs=(s.totalMin/60).toFixed(1);
+ const doneHrs=(s.doneMin/60).toFixed(1);
+ grid.innerHTML=`
+ <div class="stat-box"><div class="stat-num">${s.pct}%</div><div class="stat-label">Overall Progress</div><div class="stat-sub">${s.doneTasks} / ${s.totalTasks} tasks</div></div>
+ <div class="stat-box"><div class="stat-num">${doneHrs}h</div><div class="stat-label">Hours Completed</div><div class="stat-sub">of ${hrs}h selected</div></div>
+ <div class="stat-box"><div class="stat-num">${s.selectedLecs}</div><div class="stat-label">3rd-Party Selections</div><div class="stat-sub">across 27 lectures</div></div>
+ <div class="stat-box"><div class="stat-num">${s.ankiSelected.toLocaleString}</div><div class="stat-label">Anki Cards Selected</div><div class="stat-sub">~${Math.round(s.ankiSelected/50)} sessions @ 50/day</div></div>
+ `;
+
+ // Resource bars
+ const resBars=document.getElementById('res-progress-bars');
+ resBars.innerHTML='';
+ Object.entries(s.byRes).forEach(([r,{tot,done}])=>{
+ if(!tot) return;
+ const pct=Math.round(done/tot*100);
+ const m=RES_META[r];
+ resBars.innerHTML+=`
+ <div style="display:flex;align-items:center;gap:10px">
+ <span style="font-size:.75rem;min-width:110px;font-weight:600">${m.emoji} ${m.label}</span>
+ <div class="prog-bar-wrap"><div class="prog-bar" style="width:${pct}%"></div></div>
+ <span style="font-size:.72rem;color:var(-ink-3);min-width:36px;text-align:right">${pct}%</span>
+ </div>`;
+ });
+
+ // Week bars
+ const weekBars=document.getElementById('week-progress-bars');
+ weekBars.innerHTML='';
+ [["Wk 1", "Mon Apr 6 – Fri Apr 10"], ["Wk 2", "Mon Apr 13 – Thu Apr 16"], ["Wk 3", "Mon Apr 20 – Fri Apr 24"]].forEach(([wk,dates])=>{
+ const {tot,done}=s.byWeek[wk];
+ const pct=tot?Math.round(done/tot*100):0;
+ weekBars.innerHTML+=`
+ <div style="display:flex;align-items:center;gap:10px">
+ <div style="min-width:110px"><div style="font-size:.75rem;font-weight:600">${wk}</div><div style="font-size:.65rem;color:var(-ink-3)">${dates}</div></div>
+ <div class="prog-bar-wrap"><div class="prog-bar" style="width:${pct}%"></div></div>
+ <span style="font-size:.72rem;color:var(-ink-3);min-width:36px;text-align:right">${pct}%</span>
+ </div>`;
+ });
+}
+
+// ══════════════════════════════════════════════════════════════
+// RENDER LECTURE PLANNER
+// ══════════════════════════════════════════════════════════════
+function renderLecturePlanner(weekFilter){
+ const grid=document.getElementById('lec-grid');
+ grid.innerHTML='';
+
+ LECTURES.forEach(l=>{
+ if(weekFilter&&weekFilter!=='all'&&l.week!==weekFilter) return;
+ const ls=STATE[l.id];
+ const {pct}=lecProgress(l.id);
+ const {tot:wTot,done:wDone,remaining:wRem}=lecWatchStats(l.id);
+ const tpCount=countThirdParty(l.id);
+
+ const card=document.createElement('div');
+ card.className='lec-card';
+ card.id=`lec-card-${l.id}`;
+
+ // Header
+ card.innerHTML=`
+ <div class="lec-card-header" onclick="toggleLecCard(${l.id})">
+ <span class="lec-num">Lec ${l.num}</span>
+ <span class="lec-date-badge">${l.date}</span>
+ <span class="subj-badge subj-${l.subj}">${l.subj}</span>
+ <span class="lec-title">${l.title}</span>
+ <div class="lec-mini-prog">
+ <div class="prog-bar-wrap" style="min-width:60px"><div class="prog-bar" style="width:${pct}%"></div></div>
+ <span class="lec-pct">${pct}%</span>
+ </div>
+ <span class="lec-watch-stat" id="lec-watch-${l.id}">📺 ${wDone}/${wTot} min &middot; <span style="color:${wRem===0?'var(-accent)':'#f59e0b'}">${wRem} min left</span></span>
+ <span class="lec-chevron">▼</span>
+ </div>
+ <div class="lec-body">
+ ${buildResRows(l, ls, tpCount)}
+ </div>`;
+
+ grid.appendChild(card);
+ });
+}
+
+function buildResRows(l, ls, tpCount){
+ let html='';
+
+ // Practice Problems section — shown FIRST
+ const PP_DEFS=[
+ {key:'uworld', label:'UWorld'},
+ {key:'activeLearning', label:'Lecture Drill'},
+ {key:'drillHub', label:'Lecture Active Drill Hub'},
+ {key:'qbank', label:'Lecture Qbank'},
+ ];
+ const PP_OPTS=['Not Started','1st Pass','Completed < 60%','Completed < 75%','RTG!'];
+ const pp=ls.practiceProblems||{};
+ html+=`<div class="pp-section" style="margin-bottom:10px;padding:10px 12px;background:var(-bg);border-radius:8px;border:1px solid var(-rule)">
+ <div style="font-size:.75rem;font-weight:700;color:var(-ink-2);margin-bottom:8px">🎯 Practice Problems</div>
+ <div style="display:flex;flex-wrap:wrap;gap:8px">
+ ${PP_DEFS.map(p=>{
+ const val=pp[p.key]||'Not Started';
+ return `<div style="display:flex;flex-direction:column;gap:3px;min-width:150px;flex:1">
+ <label style="font-size:.68rem;font-weight:600;color:var(-ink-3)">${p.label}</label>
+ <select class="pp-sel pp-sel-${l.id}-${p.key}" data-lid="${l.id}" data-pkey="${p.key}"
+ style="${ppSelectStyle(val)}"
+ onchange="setPracticeProb(${l.id},'${p.key}',this.value)">
+ ${PP_OPTS.map(o=>`<option value="${o}"${o===val?' selected':''}>${o}</option>`).join('')}
+ </select>
+ </div>`;
+ }).join('')}
+ </div>
+ </div>`;
+
+ // In-House row
+ html+=buildRow('IH', l, ls, true);
+
+ // Third-party rows
+ TP_RES.forEach(r=>{
+ if(!l.res[r]){ html+=buildRowNA(r); return; }
+ html+=buildRow(r, l, ls, false, tpCount);
+ });
+
+ if(tpCount>=2){
+ html+=`<div class="limit-tip" style="margin-top:8px">✅ 2 third-party resources selected. Deselect one to choose a different resource.</div>`;
+ }
+
+ return html;
+}
+
+function buildRow(r, l, ls, isIH, tpCount){
+ const meta=RES_META[r];
+ const inc=ls[r].included;
+ const avail=isIH||!!l.res[r];
+ const rowCls=inc?r:'not-included '+r;
+ const canAdd=isIH||inc||(tpCount<2);
+ const cards=l.anki?.[r]||0;
+
+ let incBtn='';
+ if(!isIH){
+ const btnLabel=inc?'✓ Selected':'+ Include';
+ const btnCls=inc?`res-include-btn ${r}`:`res-include-btn not-inc`;
+ const disabled=!canAdd&&!inc?'style="opacity:.4;cursor:not-allowed"':'';
+ incBtn=`<button class="${btnCls}" onclick="toggleResource(${l.id},'${r}')" ${disabled}>${btnLabel}</button>`;
+ } else {
+ const btnLabel=inc?'✓ In-House':'+ In-House';
+ const btnCls=inc?`res-include-btn IH`:`res-include-btn not-inc`;
+ incBtn=`<button class="${btnCls}" onclick="toggleResource(${l.id},'IH')">${btnLabel}</button>`;
+ }
+
+ const modLabel=isIH?l.title:(l.res[r]?.label||'');
+ const timeStr=l.res[r]?.min?`${l.res[r].min} min`:isIH?`${l.ihMin} min`:'TBD';
+
+ let tasks='';
+ if(inc||isIH){
+ TASKS.forEach(t=>{
+ const checked=ls[r][t];
+ const doneCls=checked?' done':'';
+ tasks+=`<label class="task-check${doneCls}">
+ <input type="checkbox" ${checked?'checked':''} onchange="setTask(${l.id},'${r}','${t}',this.checked)">
+ ${TASK_LABELS[t]}
+ </label>`;
+ });
+ if(cards>0&&!isIH){
+ tasks+=`<span style="font-size:.68rem;color:var(-ink-3);margin-left:4px">📚 ${cards} cards</span>`;
+ }
+ } else {
+ tasks=`<span style="font-size:.72rem;color:var(-ink-3)">Select to enable tasks</span>`;
+ }
+
+ return `<div class="res-row ${rowCls}" id="row-${l.id}-${r}">
+ ${incBtn}
+ <span class="res-label">${meta.emoji} ${meta.label}</span>
+ <span class="res-module">${modLabel}</span>
+ <span class="res-time">${timeStr}</span>
+ <div class="res-tasks">${tasks}</div>
+ </div>`;
+}
+
+function buildRowNA(r){
+ const meta=RES_META[r];
+ return `<div class="res-row na">
+ <span class="res-include-btn not-inc" style="cursor:default;opacity:.5">N/A</span>
+ <span class="res-label" style="opacity:.5">${meta.emoji} ${meta.label}</span>
+ <span class="res-module" style="font-size:.72rem;color:var(-ink-3)">Not available for this lecture</span>
+ </div>`;
+}
+
+function ppSelectStyle(val){
+ const base='font-size:.72rem;padding:4px 8px;border-radius:6px;border:1.5px solid;cursor:pointer;width:100%;font-family:inherit;';
+ if(val==='RTG!') return base+'background:#FEF2F2;border-color:#FCA5A5;color:#991B1B;font-weight:700';
+ if(val==='Completed < 75%') return base+'background:#EEF4FF;border-color:#B8D0F5;color:#1F4B99';
+ if(val==='Completed < 60%') return base+'background:#FFF1EE;border-color:#FFBDAD;color:#C0380A';
+ if(val==='1st Pass') return base+'background:#FFF9E6;border-color:#F0C040;color:#7B4F00';
+ return base+'background:var(-surface);border-color:var(-rule);color:var(-ink)';
+}
+
+function setPracticeProb(id, key, val){
+ if(!STATE[id].practiceProblems) STATE[id].practiceProblems=defaultPP;
+ STATE[id].practiceProblems[key]=val;
+ saveState;
+ // Update select styling in-place (no full re-render needed)
+ const sel=document.querySelector(`.pp-sel-${id}-${key}`);
+ if(sel) sel.style.cssText=ppSelectStyle(val);
+ updateLecHeader(id);
+ renderDashboard;
+}
+
+function toggleLecCard(id){
+ const card=document.getElementById(`lec-card-${id}`);
+ card.classList.toggle('open');
+}
+
+function toggleResource(id, r){
+ const ls=STATE[id];
+ const wasInc=ls[r].included;
+ if(r!=='IH'){
+ const tp=countThirdParty(id);
+ if(!wasInc&&tp>=2){
+ // Flash warning
+ const warn=document.getElementById('max-warn');
+ warn.style.display='inline';
+ setTimeout(=>warn.style.display='none',3000);
+ return;
+ }
+ }
+ ls[r].included=!wasInc;
+ saveState;
+ const lec=LECTURES.find(l=>l.id===id);
+ const newTp=countThirdParty(id);
+ // Re-render just this card's body
+ const body=document.querySelector(`#lec-card-${id} .lec-body`);
+ if(body) body.innerHTML=buildResRows(lec,ls,newTp);
+ updateLecHeader(id);
+ renderDashboard;
+}
+
+function setTask(id, r, task, val){
+ STATE[id][r][task]=val;
+ saveState;
+ updateLecHeader(id);
+ renderDashboard;
+ // Update task-check styling
+ const label=document.querySelector(`#row-${id}-${r} input[onchange*="${task}"]`);
+ if(label) label.closest('.task-check').classList.toggle('done',val);
+}
+
+function updateLecHeader(id){
+ const {pct}=lecProgress(id);
+ const {tot:wTot,done:wDone,remaining:wRem}=lecWatchStats(id);
+ const bar=document.querySelector(`#lec-card-${id} .prog-bar`);
+ const pctEl=document.querySelector(`#lec-card-${id} .lec-pct`);
+ const watchEl=document.getElementById(`lec-watch-${id}`);
+ if(bar) bar.style.width=pct+'%';
+ if(pctEl) pctEl.textContent=pct+'%';
+ if(watchEl) watchEl.innerHTML=`📺 ${wDone}/${wTot} min &middot; <span style="color:${wRem===0?'var(-accent)':'#f59e0b'}">${wRem} min left</span>`;
+}
+
+function filterWeek(wk, btn){
+ document.querySelectorAll('.wf-btn').forEach(b=>b.classList.remove('active'));
+ btn.classList.add('active');
+ renderLecturePlanner(wk);
+}
+
+
+// ══════════════════════════════════════════════════════════════
+// TAB SWITCHING
+// ══════════════════════════════════════════════════════════════
+function switchTab(name){
+ document.querySelectorAll('.tab-btn').forEach(b=>{
+ b.classList.toggle('active',b.dataset.tab===name);
+ });
+ document.querySelectorAll('.tab-panel').forEach(p=>{
+ p.classList.toggle('active',p.id==='tab-'+name);
+ });
+ if(name==='dashboard') renderDashboard;
+ if(name==='thisweek') renderThisWeek;
+}
+
+// ══════════════════════════════════════════════════════════════
+// THEME / RESET
+// ══════════════════════════════════════════════════════════════
+function toggleTheme{
+ const curr=document.documentElement.getAttribute('data-theme');
+ const next=curr==='dark'?'light':'dark';
+ document.documentElement.setAttribute('data-theme',next);
+ localStorage.setItem('theme',next);
+}
+
+function confirmReset{
+ if(confirm('Reset ALL progress and selections? This cannot be undone.')){
+ STATE=defaultState;
+ saveState;
+ init;
+ }
+}
+
+// ══════════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════════
+// Seed recommended resources on very first load
+function seedRecommended{
+ const hasAny=LECTURES.some(l=>TP_RES.some(r=>STATE[l.id][r].included));
+ if(hasAny) return; // User already has selections — don't override
+ Object.entries(RECOMMENDED).forEach(([id,recs])=>{
+ recs.forEach(r=>{
+ if(STATE[id]&&STATE[id][r]) STATE[id][r].included=true;
+ });
+ });
+ saveState;
+}
+
+
+// ══════════════════════════════════════════════════════════════
+// EXPORT TO HTML (formatted, interactive)
+// ══════════════════════════════════════════════════════════════
+function exportToHTML{
+ const PP_DEFS=[
+ {key:'uworld', label:'UWorld'},
+ {key:'activeLearning',label:'Lecture Drill'},
+ {key:'drillHub', label:'Lecture Active Drill Hub'},
+ {key:'qbank', label:'Lecture Qbank'},
+ ];
+ const PP_OPTS=['Not Started','1st Pass','Completed \u003c 60%','Completed \u003c 75%','RTG!'];
+ const ALL_RES=['IH','BC','BB','PT','PH','SK'];
+ const RES_LABELS={
+ IH:'\u{1F3E5} In-House',
+ BC:'\u{1F535} Bootcamp',
+ BB:'\u{1F7E2} Boards & Beyond',
+ PT:'\u{1F534} Pathoma',
+ PH:'\u{1F7E3} Physeo',
+ SK:'\u{1F7E4} Sketchy',
+ };
+ const RC={
+ IH:{bg:'#fef2f2',br:'#fca5a5',tx:'#b91c1c'},
+ BC:{bg:'#eff6ff',br:'#bfdbfe',tx:'#1e40af'},
+ BB:{bg:'#fef2f2',br:'#fecaca',tx:'#991b1b'},
+ PT:{bg:'#fff1f2',br:'#fecdd3',tx:'#9f1239'},
+ PH:{bg:'#f5f3ff',br:'#ddd6fe',tx:'#5b21b6'},
+ SK:{bg:'#fef3c7',br:'#fde68a',tx:'#92400e'},
+ };
+
+ function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+ function ppInlineStyle(val){
+ const base='font-size:.72rem;padding:4px 8px;border-radius:6px;border:1.5px solid;cursor:pointer;font-family:inherit;min-width:150px;';
+ if(val==='RTG!') return base+'background:#FEF2F2;border-color:#FCA5A5;color:#991B1B;font-weight:700';
+ if(val==='Completed < 75%') return base+'background:#EEF4FF;border-color:#B8D0F5;color:#1F4B99';
+ if(val==='Completed < 60%') return base+'background:#FFF1EE;border-color:#FFBDAD;color:#C0380A';
+ if(val==='1st Pass') return base+'background:#FFF9E6;border-color:#F0C040;color:#7B4F00';
+ return base+'background:#F8FAFC;border-color:#CBD5E1;color:#64748B';
+ }
+
+ // Build per-week, per-lecture HTML
+ const weeks=[...new Set(LECTURES.map(l=>l.week))];
+ let bodyHtml='';
+
+ weeks.forEach(wk=>{
+ const wkLecs=LECTURES.filter(l=>l.week===wk);
+ let cardsHtml='';
+
+ wkLecs.forEach(l=>{
+ const ls=STATE[l.id];
+ const {pct}=lecProgress(l.id);
+
+ /* ── Practice Problems ── */
+ let ppRows='';
+ PP_DEFS.forEach(p=>{
+ const val=(ls.practiceProblems&&ls.practiceProblems[p.key])||'Not Started';
+ const opts=PP_OPTS.map(o=>'<option value="'+esc(o)+'"'+(o===val?' selected':'')+'>'+esc(o)+'</option>').join('');
+ ppRows+='<div class="pp-row">'
+ +'<label class="pp-lbl">'+esc(p.label)+'</label>'
+ +'<select class="pp-sel" style="'+ppInlineStyle(val)+'" onchange="updatePP(this)">'+opts+'</select>'
+ +'</div>';
+ });
+
+ /* ── Resources ── */
+ let resRows='';
+ ALL_RES.forEach(r=>{
+ const isIH=r==='IH';
+ const avail=isIH||!!l.res[r];
+ if(!avail) return;
+ const inc=ls[r].included;
+ const watch=ls[r].watch;
+ const anki=ls[r].ankiSetUp;
+ const lid='L'+l.id+'_'+r;
+ const rc=RC[r];
+ let minTag='';
+ if(isIH&&l.ihMin) minTag=' <span class="res-min">('+l.ihMin+' min)</span>';
+ else if(!isIH&&l.res[r]&&l.res[r].min) minTag=' <span class="res-min">('+l.res[r].min+' min)</span>';
+ resRows+='<div class="res-row" style="background:'+rc.bg+';border-color:'+rc.br+'">'
+ +'<div class="res-hdr">'
+ +'<span class="res-name" style="color:'+rc.tx+'">'+RES_LABELS[r]+minTag+'</span>'
+ +'<select class="yn-sel" onchange="toggleChecks(\''+lid+'\',this.value)">'
+ +'<option'+(inc?' selected':'')+'>Yes</option>'
+ +'<option'+(!inc?' selected':'')+'>No</option>'
+ +'</select>'
+ +'</div>'
+ +'<div class="res-checks" id="'+lid+'-chk" style="display:'+(inc?'flex':'none')+'">'
+ +'<label class="chk-lbl"><input type="checkbox"'+(watch?' checked':'')+'>&#8202;Watch</label>'
+ +'<label class="chk-lbl"><input type="checkbox"'+(anki?' checked':'')+'>&#8202;Anki Set Up</label>'
+ +'</div>'
+ +'</div>';
+ });
+
+ const pctColor=pct>=80?'#991B1B':pct>=50?'#1e40af':'#9a3412';
+ cardsHtml+='<div class="lec-card">'
+ +'<div class="lec-hdr">'
+ +'<div class="lec-meta-row">'
+ +'<span class="lec-num">Lec '+esc(l.num)+'</span>'
+ +'<span class="lec-date">'+esc(l.date)+'</span>'
+ +'<span class="lec-subj">'+esc(l.subj)+'</span>'
+ +'<div class="prog-wrap">'
+ +'<div class="prog-bar"><div class="prog-fill" style="width:'+pct+'%;background:'+pctColor+'"></div></div>'
+ +'<span class="prog-pct" style="color:'+pctColor+'">'+pct+'%</span>'
+ +'</div>'
+ +'</div>'
+ +'<div class="lec-title">'+esc(l.title)+'</div>'
+ +'</div>'
+ +'<div class="lec-body">'
+ +'<div class="section pp-section"><div class="sec-hdr">\uD83D\uDCDD Practice Problems</div>'+ppRows+'</div>'
+ +'<div class="section res-section"><div class="sec-hdr">\uD83D\uDCDA Resources</div>'+resRows+'</div>'
+ +'</div>'
+ +'</div>';
+ });
+
+ bodyHtml+='<div class="week-block">'
+ +'<div class="week-hdr">'+esc(wk)+'</div>'
+ +cardsHtml
+ +'</div>';
+ });
+
+ const exportDate=new Date.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+
+ const CSS=`
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:#f8fafc;color:#1e293b;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:214px;height:100vh;background:#240d10;padding:22px 16px 28px;display:flex;flex-direction:column;overflow-y:auto}
+.sb-brand{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-bottom:4px}
+.sb-brand-name{font-size:.75rem;font-weight:700;letter-spacing:.04em;opacity:.75;color:#fff}
+.sb-crest{font-size:.85rem}
+.sb-title{font-size:.92rem;font-weight:800;color:#fff;line-height:1.2;margin-bottom:3px}
+.sb-sub{font-size:.68rem;color:rgba(255,255,255,.45);font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:18px}
+.sb-divider{height:1px;background:rgba(255,255,255,.1);margin:10px 0}
+.sb-info{margin-top:auto;background:rgba(255,255,255,.07);border-radius:8px;padding:10px 12px}
+.sb-info p{font-size:.68rem;color:rgba(255,255,255,.5);line-height:1.6}
+.sb-info strong{color:rgba(255,255,255,.8)}
+.main{margin-left:214px;padding:32px 36px 72px;max-width:1140px}
+.page-hdr{margin-bottom:26px}
+.page-hdr h1{font-size:1.45rem;font-weight:800;color:#240d10}
+.page-hdr p{font-size:.8rem;color:#64748b;margin-top:4px}
+.week-block{margin-bottom:34px}
+.week-hdr{font-size:.75rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#240d10;border-left:3px solid #240d10;padding-left:10px;margin-bottom:13px}
+.lec-card{background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;margin-bottom:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.lec-hdr{background:#f8fafc;border-bottom:1.5px solid #e2e8f0;padding:12px 18px}
+.lec-meta-row{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:7px}
+.lec-num{font-size:.63rem;font-weight:700;background:#240d10;color:#fff;border-radius:5px;padding:2px 7px;white-space:nowrap}
+.lec-date{font-size:.7rem;color:#64748b;font-weight:500}
+.lec-subj{font-size:.63rem;font-weight:600;background:#e2e8f0;color:#475569;border-radius:4px;padding:2px 6px}
+.prog-wrap{display:flex;align-items:center;gap:7px;margin-left:auto}
+.prog-bar{width:80px;height:6px;background:#e2e8f0;border-radius:99px;overflow:hidden;flex-shrink:0}
+.prog-fill{height:100%;border-radius:99px}
+.prog-pct{font-size:.7rem;font-weight:700;min-width:32px;text-align:right;white-space:nowrap}
+.lec-title{font-size:.93rem;font-weight:700;color:#1e293b;line-height:1.3}
+.lec-body{display:grid;grid-template-columns:1fr 1fr}
+.section{padding:14px 18px}
+.res-section{border-left:1.5px solid #e2e8f0}
+.sec-hdr{font-size:.67rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#94a3b8;margin-bottom:9px}
+.pp-row{display:flex;align-items:center;gap:10px;margin-bottom:7px;flex-wrap:wrap}
+.pp-lbl{font-size:.72rem;font-weight:600;color:#475569;min-width:148px;flex:1}
+.pp-sel{font-size:.72rem;padding:4px 8px;border-radius:6px;border:1.5px solid;cursor:pointer;font-family:inherit;min-width:150px}
+.res-row{border:1.5px solid;border-radius:8px;padding:9px 11px;margin-bottom:7px}
+.res-hdr{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.res-name{font-size:.77rem;font-weight:600}
+.res-min{font-size:.67rem;font-weight:400;opacity:.7}
+.yn-sel{font-size:.71rem;padding:3px 7px;border-radius:6px;border:1.5px solid #cbd5e1;cursor:pointer;font-family:inherit;background:#fff}
+.res-checks{display:flex;gap:14px;margin-top:7px;flex-wrap:wrap}
+.chk-lbl{font-size:.74rem;font-weight:500;color:#475569;display:flex;align-items:center;gap:4px;cursor:pointer}
+.chk-lbl input{cursor:pointer;accent-color:#240d10}
+@media(max-width:680px){.sidebar{display:none}.main{margin-left:0;padding:16px}.lec-body{grid-template-columns:1fr}.res-section{border-left:none;border-top:1.5px solid #e2e8f0}}
+`;
+
+ const JS=`
+function toggleChecks(lid,val){
+ var el=document.getElementById(lid+'-chk');
+ if(el) el.style.display=val==='Yes'?'flex':'none';
+}
+function updatePP(sel){
+ var val=sel.value;
+ var base='font-size:.72rem;padding:4px 8px;border-radius:6px;border:1.5px solid;cursor:pointer;font-family:inherit;min-width:150px;';
+ if(val==='RTG!') sel.style.cssText=base+'background:#FEF2F2;border-color:#FCA5A5;color:#991B1B;font-weight:700';
+ else if(val==='Completed < 75%') sel.style.cssText=base+'background:#EEF4FF;border-color:#B8D0F5;color:#1F4B99';
+ else if(val==='Completed < 60%') sel.style.cssText=base+'background:#FFF1EE;border-color:#FFBDAD;color:#C0380A';
+ else if(val==='1st Pass') sel.style.cssText=base+'background:#FFF9E6;border-color:#F0C040;color:#7B4F00';
+ else sel.style.cssText=base+'background:#F8FAFC;border-color:#CBD5E1;color:#64748B';
+}
+`;
+
+ const html='<!DOCTYPE html>\n'
+ +'<html lang="en">\n'
+ +'<head>\n'
+ +'<meta charset="UTF-8">\n'
+ +'<meta name="viewport" content="width=device-width,initial-scale=1.0">\n'
+ +'<title>GI Lecture Planner \u2014 Export</title>\n'
+ +'<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">\n'
+ +'<style>'+CSS+'</style>\n'
+ +'</head>\n'
+ +'<body>\n'
+ +'<div class="sidebar">\n'
+ +' <div class="sb-brand"><span class="sb-brand-name">HoyaDocs</span><span class="sb-crest">\uD83C\uDFE5</span></div>\n'
+ +' <div class="sb-title">GI Study Planner</div>\n'
+ +' <div class="sb-sub">Block 4 \u00b7 Repro</div>\n'
+ +' <div class="sb-divider"></div>\n'
+ +' <div class="sb-info"><p><strong>Lecture Export</strong><br>'+exportDate+'</p></div>\n'
+ +'</div>\n'
+ +'<div class="main">\n'
+ +'<div class="page-hdr"><h1>GI Lecture Planner</h1><p>Exported '+exportDate+' \u00b7 Dropdowns &amp; checkboxes are interactive</p></div>\n'
+ +bodyHtml
+ +'</div>\n'
+ +'<script>'+JS+'<\/script>\n'
+ +'</body>\n'
+ +'</html>';
+
+ const blob=new Blob([html],{type:'text/html;charset=utf-8'});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement('a');
+ a.href=url;
+ a.download='GI_LecturePlanner_'+new Date.toISOString.slice(0,10)+'.html';
+ document.body.appendChild(a);
+ a.click;
+ document.body.removeChild(a);
+ URL.revokeObjectURL(url);
+}
+
+// ══════════════════════════════════════════════════════════════
+// EXPORT / IMPORT DATA BACKUP
+// ══════════════════════════════════════════════════════════════
+function exportData{
+ const payload=JSON.stringify({version:1,savedAt:new Date.toISOString,state:STATE},null,2);
+ const blob=new Blob([payload],{type:'application/json'});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement('a');
+ a.href=url;
+ a.download='GI_Planner_Backup_'+new Date.toISOString.slice(0,10)+'.json';
+ document.body.appendChild(a);a.click;document.body.removeChild(a);
+ URL.revokeObjectURL(url);
+}
+
+function importData(input){
+ const file=input.files[0];
+ if(!file) return;
+ const reader=new FileReader;
+ reader.onload=e=>{
+ try{
+ const parsed=JSON.parse(e.target.result);
+ if(!parsed.state) throw new Error('Invalid backup file — no state found.');
+ if(!confirm('This will replace your current progress with the imported data. Continue?')) return;
+ STATE=parsed.state;
+ saveState;
+ renderThisWeek;
+ renderDashboard;
+ renderLecturePlanner;
+ alert('Progress imported successfully!');
+ } catch(err){
+ alert('Import failed: '+err.message);
+ } finally{
+ input.value=''; // reset so the same file can be re-imported if needed
+ }
+ };
+ reader.readAsText(file);
+}
+
+function init{
+ loadState;
+ seedRecommended;
+ renderThisWeek;
+ renderDashboard;
+ renderLecturePlanner;
+}
+
+// ══════════════════════════════════════════════════════════════
+// THIS WEEK TAB
+// ══════════════════════════════════════════════════════════════
+const GI_LECTURES = [{"d": "2026-04-06", "title": "IL GI Overview", "lecturer": "Mulroney", "start": "08:00", "end": "08:30", "course": "Phys", "location": "Pre-recorded", "link": "https://georgetown.instructure.com/courses/228454/pages/il-gi-overview"}, {"d": "2026-04-06", "title": "Introduction/Motility", "lecturer": "Mulroney", "start": "09:00", "end": "10:00", "course": "Phys", "location": "GA-2/4", "link": "https://georgetown.instructure.com/courses/228454/pages/introduction-slash-motility"}, {"d": "2026-04-06", "title": "Anterior Abdominal Wall/Hernia", "lecturer": "Uren", "start": "10:00", "end": "11:00", "course": "Anat", "location": "GA-2/4", "link": "https://georgetown.instructure.com/courses/228454/pages/anterior-abdominal-wall-slash-hernia"}, {"d": "2026-04-06", "title": "Esophagus/Stomach/Intestines", "lecturer":"", "start": "11:00", "end": "12:00", "course": "Hist", "location": "GA-2/4", "link": "https://georgetown.instructure.com/courses/228454/pages/esophagus-slash-stomach-slash-intestines"}, {"d": "2026-04-06", "title": "IL Bile Workshop with Quizzes", "lecturer": "Mulroney", "start": "13:00", "end": "14:00", "course": "Phys", "location": "Pre-recorded", "link": "https://georgetown.instructure.com/courses/228454/pages/il-bile-workshop-and-making-a-micelle"}, {"d": "2026-04-06", "title": "IL Making a Micelle", "lecturer": "Mulroney", "start": "14:00", "end": "14:15", "course": "Phys", "location": "Pre-recorded", "link": "https://georgetown.instructure.com/courses/228454/pages/il-bile-workshop-and-making-a-micelle"}, {"d": "2026-04-06", "title": "IL GI Primer", "lecturer": "Gallicano", "start": "14:30", "end": "15:00", "course": "Embr", "location": "Pre-recorded", "link": "https://georgetown.instructure.com/courses/218027/pages/block-4-primer-materials"}, {"d": "2026-04-07", "title": "Abdominal Viscera I: Gastrointestinal Tract", "lecturer": "Uren", "start": "09:00", "end": "10:00", "course": "Anat", "location": "GA-2/4", "link": "https://georgetown.instructure.com/courses/228454/pages/abdominal-viscera-i-gastrointestinal-tract"}, {"d": "2026-04-07", "title": "Secretions I", "lecturer": "Mulroney", "start": "10:00", "end": "11:00", "course": "Phys", "location": "GA-2/4", "link": "https://georgetown.instructure.com/courses/228454/pages/secretions-i-ii"}, {"d": "2026-04-07", "title": "Secretions II", "lecturer": "Mulroney", "start": "11:00", "end": "12:00", "course": "Phys", "location": "GA-2/4", "link": "https://georgetown.instructure.com/courses/228454/pages/secretions-i-ii"}, {"d": "2026-04-07", "title": "GA Lab #1: Abdominal Wall and Inguinal Region", "lecturer": "GA Faculty", "start": "13:00", "end": "17:00", "course": "Anat", "location": "GA Labs", "link": "https://georgetown.instructure.com/courses/218039/pages/gi-ga-lab-2"}, {"d": "2026-04-08", "title": "GI Embryology", "lecturer": "Coker", "start": "09:00", "end": "10:00", "course": "Embr", "location": "GA-2/4", "link": "https://georgetown.instructure.com/courses/228454/pages/gi-embryology"}, {"d": "2026-04-08", "title": "Abdominal Viscera II: Liver and Pancreas", "lecturer": "Uren", "start": "10:00", "end": "11:00", "course": "Anat", "location": "GA-2/4", "link": "https://georgetown.instructure.com/courses/228454/pages/abdominal-viscera-ii-liver-and-pancreas"}, {"d": "2026-04-08", "title": "Overview of the Liver", "lecturer": "Mulroney", "start": "11:00", "end": "12:00", "course": "Phys", "location": "GA-2/4", "link": "https://georgetown.instructure.com/courses/228454/pages/overview-of-the-liver"}, {"d": "2026-04-08", "title": "Optional Block 3 Post-Exam Review", "lecturer": "N/A", "start": "13:30", "end": "15:30", "course": "N/A", "location": "GA-2/4", "link": ""}, {"d": "2026-04-09", "title": "Esophagus/Stomach Disease", "lecturer": "Zeck", "start": "09:00", "end": "10:00", "course": "Path", "location": "GA-2/4", "link": "https://georgetown.instructure.com/courses/228454/pages/esophagus-slash-stomach-disease"}, {"d": "2026-04-09", "title": "Digestion/Absorption I", "lecturer": "Mulroney", "start": "10:00", "end": "11:00", "course": "Phys", "location": "GA-2/4", "link": "https://georgetown.instructure.com/courses/228454/pages/digestion-slash-absorption-i-ii"}, {"d": "2026-04-09", "title": "Digestion/Absorption II", "lecturer": "Mulroney", "start": "11:00", "end": "12:00", "course": "Phys", "location": "GA-2/4", "link": "https://georgetown.instructure.com/courses/228454/pages/digestion-slash-absorption-i-ii"}, {"d": "2026-04-09", "title": "GA Lab #2: Peritoneal Cavity and Foregut Derivatives", "lecturer": "GA Faculty", "start": "13:00", "end": "17:00", "course": "Anat", "location": "GA Labs", "link": "https://georgetown.instructure.com/courses/218039/pages/gi-ga-lab-2"}, {"d": "2026-04-10", "title": "Intestinal Pathology I", "lecturer": "Zeck", "start": "09:00", "end": "10:00", "course": "Path", "location": "GA-2/4", "link": "https://georgetown.instructure.com/courses/228454/pages/intestinal-pathology-i"}, {"d": "2026-04-10", "title": "Intestinal Pathology II", "lecturer": "Zeck", "start": "10:00", "end": "11:00", "course": "Path", "location": "GA-2/4", "link": "https://georgetown.instructure.com/courses/228454/pages/intestinal-pathology-ii"}, {"d": "2026-04-10", "title": "MANDATORY Foundational Rounds", "lecturer": "N/A", "start": "11:00", "end": "12:00", "course": "N/A", "location": "DML", "link": "https://georgetown.instructure.com/courses/218100/pages/block-4-foundational-rounds"}, {"d": "2026-04-13", "title": "Poisoning Conference and Cases", "lecturer": "Clancy", "start": "13:00", "end": "14:30", "course": "Pharm", "location": "GA-2/4", "link": ""}, {"d": "2026-04-14", "title": "GI Lab", "lecturer":"", "start": "09:00", "end": "10:00", "course": "Path", "location": "Zoom", "link": ""}, {"d": "2026-04-14", "title": "Treatment of Peptic Ulcer Slides", "lecturer": "Mulroney", "start": "10:00", "end": "11:00", "course": "Pharm", "location": "Zoom", "link": "https://georgetown.instructure.com/courses/228454/pages/treatment-of-peptic-ulcer-gerd-and-other-gi-disorders"}, {"d": "2026-04-14", "title": "Treatment of GERD and Other GI Disorders", "lecturer": "Mulroney", "start": "11:00", "end": "12:00", "course": "Pharm", "location": "Zoom", "link": "https://georgetown.instructure.com/courses/228454/pages/treatment-of-peptic-ulcer-gerd-and-other-gi-disorders"}, {"d": "2026-04-14", "title": "GI Development Primer Quiz DUE 11:59", "lecturer": "N/A", "start": "17:00", "end": "17:30", "course": "Embr", "location": "N/A", "link": ""}, {"d": "2026-04-15", "title": "GI Infections", "lecturer": "Kumar, P.", "start": "09:00", "end": "10:30", "course": "Micro", "location": "Zoom", "link": ""}, {"d": "2026-04-15", "title": "Parasitology", "lecturer": "Timpone", "start": "10:30", "end": "12:00", "course": "Micro", "location": "Zoom", "link": ""}, {"d": "2026-04-15", "title": "GA Lab #3: Midgut and Hindgut Derivatives", "lecturer": "GA Faculty", "start": "13:00", "end": "17:00", "course": "Anat", "location": "GA Labs", "link": "https://georgetown.instructure.com/courses/218039/pages/gi-ga-lab-2"}, {"d": "2026-04-16", "title": "Intestinal Pathology Case Review", "lecturer": "Mattar", "start": "09:00", "end": "10:00", "course": "Path", "location": "GA-2/4", "link": "https://georgetown.instructure.com/courses/228454/pages/intestinal-pathology-case-review"}, {"d": "2026-04-16", "title": "Retroperitoneum", "lecturer": "Uren", "start": "10:00", "end": "11:00", "course": "Anat", "location": "GA-2/4", "link": "https://georgetown.instructure.com/courses/228454/pages/retroperitoneum"}, {"d": "2026-04-16", "title": "Medically Assisted Nutrition and Hydration: Ethical Issues and Clinical Grounding", "lecturer": "Sheehan", "start": "13:00", "end": "14:00", "course": "Ethics", "location": "Pre-recorded", "link": "https://georgetown.instructure.com/courses/228454/pages/medically-assisted-nutrition-and-hydration-ethical-issues-and-clinical-grounding"}, {"d": "2026-04-16", "title": "IL Trudy's Ulcer", "lecturer": "Mulroney", "start": "14:00", "end": "15:00", "course": "Phys", "location": "Pre-recorded", "link": "https://georgetown.instructure.com/courses/228454/pages/il-trudys-ulcer-2"}, {"d": "2026-04-17", "title": "Abdominal Pain", "lecturer": "Alimi", "start": "09:00", "end": "10:00", "course": "DRT", "location": "GA-2/4", "link": ""}, {"d": "2026-04-17", "title": "MANDATORY Foundational Round", "lecturer": "N/A", "start": "11:00", "end": "12:00", "course": "N/A", "location": "DML", "link": "https://georgetown.instructure.com/courses/218100/pages/block-4-foundational-rounds"}, {"d": "2026-04-20", "title": "Liver and Biliary Tract", "lecturer": "Djakiew", "start": "11:00", "end": "12:00", "course": "Hist", "location": "GA-2/4", "link": ""}, {"d": "2026-04-21", "title": "Liver Disease I", "lecturer":"", "start": "09:00", "end": "10:00", "course": "Path", "location": "GA-2/4", "link": ""}, {"d": "2026-04-21", "title": "Liver Disease II", "lecturer":"", "start": "10:00", "end": "11:00", "course": "Path", "location": "GA-2/4", "link": ""}, {"d": "2026-04-21", "title": "Liver Enzymes", "lecturer": "Thomas", "start": "11:00", "end": "12:00", "course": "DRT", "location": "GA-2/4", "link": ""}, {"d": "2026-04-21", "title": "GA Lab #4: Posterior Abdominal Wall", "lecturer": "GA Faculty", "start": "13:00", "end": "16:00", "course": "Anat", "location": "GA Labs", "link": "https://georgetown.instructure.com/courses/218039/pages/gi-ga-lab-2"}, {"d": "2026-04-21", "title": "Optional GA Review with Dr. Uren", "lecturer": "Uren", "start": "16:00", "end": "17:00", "course": "Anat", "location": "LA-6", "link": ""}, {"d": "2026-04-21", "title": "Poisoning Cases DUE 11:59pm", "lecturer": "N/A", "start": "17:00", "end": "17:30", "course": "Pharm", "location": "N/A", "link": ""}, {"d": "2026-04-22", "title": "Pancreas Disease", "lecturer": "Wood", "start": "09:00", "end": "10:00", "course": "Path", "location": "Zoom", "link": ""}, {"d": "2026-04-22", "title": "Liver/Pancreas Lab", "lecturer":"", "start": "10:00", "end": "11:00", "course": "Path", "location": "Zoom", "link": ""}, {"d": "2026-04-22", "title": "Mandatory Education Case Review Group A (Iron overload)", "lecturer": "Path Resident", "start": "13:00", "end": "14:00", "course": "Path", "location": "Zoom", "link": ""}, {"d": "2026-04-23", "title": "Mandatory Education Case Review Group B (Iron overload)", "lecturer": "Path Resident", "start": "13:00", "end": "14:00", "course": "Path", "location": "Zoom", "link": ""}, {"d": "2026-04-24", "title": "PSW Cholera/Lactose Intolerance", "lecturer": "Mulroney", "start": "09:00", "end": "10:00", "course": "Phys", "location": "GA-2/4", "link": "https://georgetown.instructure.com/courses/228454/pages/psw-cholera-slash-lactose-intolerance"}, {"d": "2026-04-24", "title": "MANDATORY Foundational Rounds", "lecturer": "N/A", "start": "11:00", "end": "12:00", "course": "N/A", "location": "DML", "link": "https://georgetown.instructure.com/courses/218100/pages/block-4-foundational-rounds"}, {"d": "2026-04-24", "title": "Optional GI GA Practical Review (Snowball", "lecturer": "Coker", "start": "13:00", "end": "14:30", "course": "Anat", "location": "GA Labs", "link": ""}, {"d": "2026-04-26", "title": "Trudy's Ulcer Assignment DUE 11:59pm", "lecturer": "Mulroney", "start": "17:00", "end": "17:30", "course": "Phys", "location": "N/A", "link": ""}, {"d": "2026-04-27", "title": "GI GA Written Exam", "lecturer": "N/A", "start": "09:00", "end": "09:45", "course": "Anat", "location": "LA-6", "link": ""}, {"d": "2026-04-27", "title": "GI GA Practical Exam", "lecturer": "N/A", "start": "10:00", "end": "17:00", "course": "Anat", "location": "GA Labs", "link": ""}, {"d": "2026-04-27", "title": "IL Clinical Conundrum - Mr. Q", "lecturer": "Verbesey", "start": "13:00", "end": "14:00", "course": "Phys", "location": "Assignment", "link": "https://georgetown.instructure.com/courses/228454/pages/clinical-conundrum"}, {"d": "2026-04-28", "title": "Module Wrap-Up", "lecturer": "Carroll", "start": "09:00", "end": "10:00", "course": "Path", "location": "GA-2/4", "link": ""}, {"d": "2026-04-29", "title": "PE-Advanced Abdominal Exam", "lecturer": "Alimi", "start": "13:00", "end": "14:00", "course": "CP", "location": "GA-2/4", "link": ""}, {"d": "2026-04-29", "title": "Abdominal Imaging", "lecturer": "Krishnan", "start": "14:00", "end": "15:00", "course": "DRT", "location": "GA-2/4", "link": "https://georgetown.instructure.com/courses/228454/pages/abdominal-imaging"}, {"d": "2026-04-30", "title": "Mandatory - Clinical Conundrum - Mr. Q", "lecturer": "Verbesey", "start": "09:00", "end": "10:00", "course": "Phys", "location": "GA-2/4", "link": ""}, {"d": "2026-05-01", "title": "PSW Chronic Pancreatitis", "lecturer": "Mulroney", "start": "10:00", "end": "11:00", "course": "Phys", "location": "GA-2/4", "link": "https://georgetown.instructure.com/courses/228454/pages/psw-chronic-pancreatitis"}, {"d": "2026-05-01", "title": "MANDATORY Foundational Rounds", "lecturer": "N/A", "start": "11:00", "end": "12:00", "course": "N/A", "location": "DML", "link": "https://georgetown.instructure.com/courses/218100/pages/block-4-foundational-rounds"}, {"d": "2026-05-02", "title": "Phys Quiz Open", "lecturer": "Mulroney", "start": "09:00", "end": "10:00", "course": "Phys", "location": "N/A", "link": ""}, {"d": "2026-05-03", "title": "Phys Quiz DUE at 11:59pm", "lecturer": "Mulroney", "start": "09:00", "end": "10:00", "course": "Phys", "location": "N/A", "link": ""}, {"d": "2026-05-05", "title": "GI POCUS", "lecturer": "Poon", "start": "13:00", "end": "14:00", "course": "CP", "location": "GA-2/4", "link": ""}, {"d": "2026-05-07", "title": "MANDATORY - Path Gross Conference", "lecturer": "Path Resident", "start": "13:00", "end": "14:00", "course": "Path", "location": "GA-2/4", "link": ""}, {"d": "2026-05-08", "title": "MANDATORY Foundational Rounds", "lecturer": "N/A", "start": "11:00", "end": "12:00", "course": "N/A", "location": "DML", "link": "https://georgetown.instructure.com/courses/218100/pages/block-4-foundational-rounds"}, {"d": "2026-05-08", "title": "Optional Phys Quiz Review", "lecturer": "Mulroney", "start": "12:00", "end": "12:30", "course": "Phys", "location": "N/A", "link": ""}, {"d": "2026-05-15", "title": "Optional GI & RPD GA Written Post-Exam Review", "lecturer": "GA Faculty", "start": "12:00", "end": "12:30", "course": "N/A", "location": "LA-6", "link": ""}, {"d": "2026-05-15", "title": "Optional Review with Dr. Mulroney", "lecturer": "Mulroney", "start": "13:00", "end": "14:00", "course": "Phys/Pharm", "location": "Zoom", "link": ""}, {"d": "2026-05-17", "title": "Radiology Case Assignment DUE at 11:59 PM", "lecturer": "N/A", "start": "09:30", "end": "10:00", "course": "DRT", "location": "N/A", "link": ""}, {"d": "2026-05-18", "title": "DRT Mandatory Session A - Radiology Review", "lecturer": "Thakkar/Haji-Momenian", "start": "15:00", "end": "16:30", "course": "DRT", "location": "See DRT", "link": ""}, {"d": "2026-05-20", "title": "DRT Mandatory Session B - Radiology Review", "lecturer": "Thakkar/Haji-Momenian", "start": "14:30", "end": "16:00", "course": "DRT", "location": "See DRT", "link": ""}, {"d": "2026-05-22", "title": "MANDATORY Foundational Rounds", "lecturer": "N/A", "start": "11:00", "end": "12:00", "course": "N/A", "location": "DML", "link": "https://georgetown.instructure.com/courses/218100/pages/block-4-foundational-rounds"}, {"d": "2026-06-01", "title": "GI Module Exam", "lecturer": "N/A", "start": "09:00", "end": "13:00", "course": "N/A", "location": "N/A", "link": ""}];
+
+const COURSE_TAG_MAP = {
+ 'Phys': ['#dbeafe','#1e40af'], 'Anat': ['#fee2e2','#991b1b'],
+ 'Path': ['#ffe4e6','#9f1239'], 'Pharm': ['#fecaca','#b91c1c'],
+ 'Embr': ['#ede9fe','#5b21b6'], 'Hist': ['#f3e8ff','#6b21a8'],
+ 'Micro': ['#fef3c7','#92400e'], 'DRT': ['#dbeafe','#1e3a8a'],
+ 'Ethics':['#fce7f3','#9d174d'], 'CP': ['#e0f2fe','#0369a1'],
+ 'N/A': ['#f1f5f9','#64748b'],
+};
+
+function isoMonday(d){
+ // Returns a new Date set to Monday 00:00 of the week containing d
+ const day=d.getDay; // 0=Sun,1=Mon,...
+ const diff=day===0?-6:1-day;
+ const m=new Date(d);
+ m.setDate(d.getDate+diff);
+ m.setHours(0,0,0,0);
+ return m;
+}
+
+function toISODate(d){
+ return `${d.getFullYear}-${String(d.getMonth+1).padStart(2,'0')}-${String(d.getDate).padStart(2,'0')}`;
+}
+
+function fmtDate(d){
+ return d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+}
+
+function renderThisWeek{
+ const now=new Date;
+ const todayISO=toISODate(now);
+
+ // ── current week Mon-Fri ─────────────────────────────────
+ const mon=isoMonday(now);
+ const weekDays=[];
+ for(let i=0;i<5;i++){
+ const d=new Date(mon);
+ d.setDate(mon.getDate+i);
+ weekDays.push(d);
+ }
+
+ const rangeEl=document.getElementById('thisweek-range');
+ if(rangeEl) rangeEl.textContent=`${fmtDate(weekDays[0])} – ${fmtDate(weekDays[4])}`;
+
+ // ── render calendar ──────────────────────────────────────
+ const cal=document.getElementById('thisweek-cal');
+ cal.innerHTML='';
+ const DAY_NAMES=['Mon','Tue','Wed','Thu','Fri'];
+ weekDays.forEach((d,i)=>{
+ const iso=toISODate(d);
+ const isToday=iso===todayISO;
+ const dayLecs=GI_LECTURES.filter(l=>l.d===iso);
+
+ const lecsHtml=dayLecs.length===0
+ ?`<div class="wday-none">No lectures</div>`
+ :dayLecs.map(l=>{
+ const [bg,tx]=COURSE_TAG_MAP[l.course]||COURSE_TAG_MAP['N/A'];
+ const name=l.link
+ ?`<a href="${l.link}" target="_blank" rel="noopener">${l.title}</a>`
+ :l.title;
+ const who=(l.lecturer&&l.lecturer!=='N/A')?l.lecturer:'';
+ const loc=(l.location&&l.location!=='N/A'&&l.location!=='N/A')?l.location:'';
+ const meta=[who,loc].filter(Boolean).join(' · ');
+ return `<div class="wday-lec-row">
+ <div class="wday-time">${l.start}</div>
+ <div class="wday-lec-info">
+ <div class="wday-lec-name">${name}</div>
+ <div class="wday-lec-meta">
+ <span class="wday-course-tag" style="background:${bg};color:${tx}">${l.course}</span>
+ ${meta?`<span>${meta}</span>`:''}
+ </div>
+ </div>
+ </div>`;
+ }).join('');
+
+ cal.innerHTML+=`<div class="wday-col${isToday?' today-col':''}">
+ <div class="wday-hdr${isToday?' today-hdr':''}">
+ ${DAY_NAMES[i]}${isToday?' · Today':''}
+ <span class="wday-date-sub">${d.toLocaleDateString('en-US',{month:'short',day:'numeric'})}</span>
+ </div>
+ <div class="wday-lecs">${lecsHtml}</div>
+ </div>`;
+ });
+
+ // ── previous week backlog ────────────────────────────────
+ const prevMon=new Date(mon);
+ prevMon.setDate(mon.getDate-7);
+ const prevFri=new Date(prevMon);
+ prevFri.setDate(prevMon.getDate+4);
+
+ const prevLbl=document.getElementById('prevweek-label');
+ if(prevLbl) prevLbl.textContent=`${fmtDate(prevMon)} – ${fmtDate(prevFri)}`;
+
+ // Week label strings matching LECTURES data (Wk 1 / Wk 2 / Wk 3)
+ // Map ISO Mon dates to week labels
+ const WEEK_MONS={"2026-04-06": "Wk 1", "2026-04-13": "Wk 2", "2026-04-20": "Wk 3"};
+ const prevMonISO=toISODate(prevMon);
+ const prevWkLabel=WEEK_MONS[prevMonISO]||null;
+
+ const backlogGrid=document.getElementById('backlog-grid');
+ const backlogEmpty=document.getElementById('backlog-empty');
+ backlogGrid.innerHTML='';
+
+ if(!prevWkLabel){
+ backlogEmpty.style.display='block';
+ return;
+ }
+
+ const prevLecs=LECTURES.filter(l=>l.week===prevWkLabel);
+ let anyBacklog=false;
+
+ prevLecs.forEach(l=>{
+ const ls=STATE[l.id];
+ const rows=[];
+
+ // IH
+ if(ls.IH.included&&!ls.IH.watch){
+ rows.push({res:'IH',label:'🏥 In-House',min:l.ihMin});
+ }
+ // TP resources
+ TP_RES.forEach(r=>{
+ if(!ls[r].included||!l.res[r]||ls[r].watch) return;
+ const m=RES_META[r];
+ rows.push({res:r,label:`${m.emoji} ${m.label}`,min:l.res[r].min||0});
+ });
+
+ if(!rows.length) return;
+ anyBacklog=true;
+
+ const totalRem=rows.reduce((a,r)=>a+r.min,0);
+ const rowsHtml=rows.map(r=>{
+ const resMeta=r.res==='IH'
+ ?{bg:'var(-c-ih-bg)',br:'var(-c-ih-br)',tx:'var(-c-ih-tx)'}
+ :{bg:`var(-c-${r.res.toLowerCase}-bg)`,br:`var(-c-${r.res.toLowerCase}-br)`,tx:`var(-c-${r.res.toLowerCase}-tx)`};
+ return `<div class="backlog-row">
+ <span class="backlog-res-pill" style="background:${resMeta.bg};border-color:${resMeta.br};color:${resMeta.tx}">${r.label}</span>
+ <span class="backlog-min">${r.min} min</span>
+ </div>`;
+ }).join('');
+
+ backlogGrid.innerHTML+=`<div class="backlog-card">
+ <div class="backlog-card-hdr">
+ <div><span style="font-size:.65rem;color:var(-ink-3);font-weight:400;margin-right:4px">Lec ${l.num}</span>${l.title}</div>
+ <span class="backlog-rem">${totalRem} min left</span>
+ </div>
+ <div class="backlog-rows">${rowsHtml}</div>
+ </div>`;
+ });
+
+ backlogEmpty.style.display=anyBacklog?'none':'block';
+}
+
+
+init;
+</script>
+</body>
+</html>
