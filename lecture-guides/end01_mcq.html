@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Lecture 1: Introduction to Hormones — HoyaDocs Endocrine Block</title>
+ <style> * {
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+ }
+
+ body {
+ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+ background-color: #f8f9fa;
+ color: #1f2937;
+ line-height: 1.6;
+ display: flex;
+ height: 100vh;
+ overflow: hidden;
+ }
+
+ /* Sidebar */
+ .sidebar {
+ position: fixed;
+ left: 0;
+ top: 0;
+ width: 220px;
+ height: 100vh;
+ background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+ color: white;
+ padding: 20px 0 140px;
+ overflow-y: auto;
+ z-index: 100;
+ box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+ }
+
+ .sidebar-header {
+ padding: 0 15px 20px;
+ border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+ margin-bottom: 20px;
+ }
+
+ .sidebar-header h2 {
+ font-size: 14px;
+ font-weight: 600;
+ text-transform: uppercase;
+ letter-spacing: 0.5px;
+ margin-bottom: 5px;
+ }
+
+ .sidebar-header p {
+ font-size: 12px;
+ opacity: 0.8;
+ margin: 0;
+ }
+
+ .sidebar-nav {
+ padding: 0 15px;
+ }
+
+ .sidebar-link {
+ display: block;
+ padding: 10px 12px;
+ background: #1e293b;
+ color: #cbd5e1;
+ border-left: 3px solid transparent;
+ border-radius: 4px;
+ cursor: pointer;
+ font-size: 13px;
+ transition: all 0.2s ease;
+ text-decoration: none;
+ margin-bottom: 6px;
+ }
+
+ .sidebar-link:hover {
+ background: #334155;
+ border-left-color: #2563eb;
+ color: #f1f5f9;
+ }
+
+ .sidebar-footer {
+ position: absolute;
+ bottom: 0;
+ left: 0;
+ width: 100%;
+ padding: 10px 15px 12px;
+ background: linear-gradient(to top, #0f172a 60%, transparent);
+ }
+
+ .export-actions {
+ display: flex;
+ gap: 6px;
+ margin-bottom: 8px;
+ }
+
+ .export-btn {
+ flex: 1;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: 3px;
+ padding: 7px 6px;
+ background: rgba(255, 255, 255, 0.07);
+ border: 1px solid rgba(255, 255, 255, 0.14);
+ border-radius: 6px;
+ color: #cbd5e1;
+ font-size: 10.5px;
+ font-weight: 600;
+ cursor: pointer;
+ transition: all 0.2s ease;
+ font-family: inherit;
+ line-height: 1.2;
+ }
+
+ .export-btn:hover {
+ background: rgba(255, 255, 255, 0.15);
+ border-color: rgba(255, 255, 255, 0.3);
+ color: #f1f5f9;
+ }
+
+ .export-btn .btn-icon {
+ font-size: 16px;
+ line-height: 1;
+ }
+
+ @media print {
+ .sidebar, .sidebar-footer { display: none !important; }
+ body { display: block !important; overflow: visible !important; height: auto !important; background: white !important; }
+ .main { margin-left: 0 !important; height: auto !important; overflow: visible !important; max-width: 100% !important; padding: 20px !important; }
+ .lo-section { display: block !important; box-shadow: none !important; border: 1px solid #e2e8f0; margin-bottom: 30px; page-break-before: always; }
+ .lo-section:first-child { page-break-before: auto; }
+ .section-body, .h4-body, .h5-body, .mnemonic-body { display: block !important; }
+ .section-chevron, .h5-chevron, .mnemonic-chevron { display: none !important; }
+ .header { page-break-after: avoid; }
+ a { color: inherit; text-decoration: none; }
+ }
+
+ .hub-return-btn {
+ display: flex;
+ align-items: center;
+ gap: 7px;
+ width: 100%;
+ padding: 9px 12px;
+ background: rgba(37, 99, 235, 0.18);
+ border: 1px solid rgba(96, 165, 250, 0.35);
+ border-radius: 6px;
+ color: #93c5fd;
+ font-size: 12px;
+ font-weight: 600;
+ text-decoration: none;
+ transition: all 0.2s ease;
+ cursor: pointer;
+ }
+
+ .hub-return-btn:hover {
+ background: rgba(37, 99, 235, 0.32);
+ border-color: rgba(96, 165, 250, 0.7);
+ color: #dbeafe;
+ }
+
+ .hub-return-btn .btn-arrow {
+ font-size: 14px;
+ line-height: 1;
+ }
+
+ .sidebar-link.active {
+ background: #1e293b;
+ border-left-color: #2563eb;
+ color: #2563eb;
+ font-weight: 600;
+ }
+
+ .sidebar-divider {
+ height: 1px;
+ background: #334155;
+ margin: 12px 0;
+ }
+
+ /* Main Content */
+ .main {
+ margin-left: 220px;
+ flex: 1;
+ padding: 40px;
+ max-width: 1000px;
+ overflow-y: auto;
+ height: 100vh;
+ }
+
+ .header {
+ margin-bottom: 40px;
+ }
+
+ .header h1 {
+ font-size: 32px;
+ font-weight: 700;
+ margin-bottom: 10px;
+ color: #0f172a;
+ }
+
+ .header p {
+ font-size: 16px;
+ color: #475569;
+ margin: 0;
+ }
+
+ /* LO Sections — show only active */
+ .lo-section {
+ display: none;
+ background: white;
+ border-radius: 8px;
+ padding: 28px 30px;
+ margin-bottom: 30px;
+ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+ animation: fadeIn 0.3s ease;
+ }
+
+ .lo-section.active {
+ display: block;
+ }
+
+ @keyframes fadeIn {
+ from { opacity: 0; transform: translateY(8px); }
+ to { opacity: 1; transform: translateY(0); }
+ }
+
+ .lo-section.physio {
+ }
+
+ .lo-section.path {
+ }
+
+ .lo-section.pharm {
+ }
+
+ .lo-title {
+ font-size: 20px;
+ font-weight: 700;
+ color: #1f2937;
+ margin-bottom: 5px;
+ }
+
+ .lo-subtitle {
+ font-size: 13px;
+ color: #64748b;
+ margin-bottom: 20px;
+ font-weight: 500;
+ }
+
+ /* ── Section headers inside LO content ── */
+ .lo-content h3 {
+ font-size: 15px;
+ font-weight: 700;
+ color: #1e3a5f;
+ margin: 24px 0 10px;
+ padding: 6px 10px;
+ border-left: 3px solid #2563eb;
+ background: transparent;
+ }
+
+ .lo-content h4 {
+ font-size: 14.5px;
+ font-weight: 700;
+ color: #1e3a5f;
+ background: #dbeafe;
+ border-radius: 4px;
+ padding: 6px 12px;
+ margin: 18px 0 8px;
+ }
+
+ .lo-content h5 {
+ font-size: 13px;
+ font-weight: 700;
+ color: #1e293b;
+ margin: 12px 0 4px;
+ }
+
+ .lo-content p {
+ font-size: 14px;
+ line-height: 1.7;
+ color: #1e293b;
+ margin-bottom: 10px;
+ }
+
+ .lo-content ul {
+ margin-left: 22px;
+ margin-bottom: 12px;
+ }
+
+ .lo-content ol {
+ margin-left: 22px;
+ margin-bottom: 12px;
+ }
+
+ .lo-content li {
+ font-size: 14px;
+ line-height: 1.7;
+ color: #1e293b;
+ margin-bottom: 6px;
+ }
+
+ /* ── Tables ── */
+ .lo-content table {
+ width: 100%;
+ border-collapse: collapse;
+ margin: 16px 0 20px;
+ font-size: 13px;
+ }
+
+ .lo-content table thead tr {
+ background: #1e3a5f;
+ color: white;
+ }
+
+ .lo-content table th {
+ padding: 10px 12px;
+ text-align: left;
+ font-weight: 600;
+ font-size: 12px;
+ letter-spacing: 0.3px;
+ color: white;
+ }
+
+ .lo-content table td {
+ padding: 9px 12px;
+ border-bottom: 1px solid #e2e8f0;
+ color: #1e293b;
+ vertical-align: top;
+ }
+
+ .lo-content table tbody tr:nth-child(even) {
+ background: #eff6ff;
+ }
+
+ .lo-content table tbody tr:hover {
+ background: #dbeafe;
+ }
+
+ /* ── Section rule ── */
+ .section-rule {
+ border: none;
+ border-top: 1px solid #e2e8f0;
+ margin: 22px 0;
+ }
+
+ /* ── Buzzword pills (for key terms row below a concept) ── */
+ .buzzwords {
+ display: flex;
+ flex-wrap: wrap;
+ gap: 6px;
+ margin: 10px 0 16px;
+ }
+
+ .buzzword {
+ background: #f1f5f9;
+ border: 1px solid #cbd5e1;
+ border-radius: 4px;
+ padding: 3px 10px;
+ font-size: 12px;
+ font-weight: 600;
+ color: #334155;
+ }
+
+ /* ── Callout boxes (bottom of each LO) ── */
+ /* TRAP — red */
+ .exam-trap {
+ background-color: #fef2f2;
+ border-left: 4px solid #dc2626;
+ padding: 14px 16px;
+ margin: 16px 0;
+ border-radius: 4px;
+ }
+
+ .exam-trap .trap-header {
+ font-weight: 700;
+ color: #b91c1c;
+ font-size: 12px;
+ text-transform: uppercase;
+ letter-spacing: 0.5px;
+ margin-bottom: 8px;
+ }
+
+ .exam-trap ul { margin-left: 18px; margin-top: 6px; }
+ .exam-trap li { font-size: 13px; margin-bottom: 6px; color: #1f2937; line-height: 1.6; }
+ .exam-trap p { font-size: 13px; color: #1f2937; line-height: 1.6; margin-top: 6px; }
+ .exam-trap strong { color: #991b1b; }
+
+ /* HY bullets — yellow */
+ .hy-box {
+ background-color: #fefce8;
+ border-left: 4px solid #ca8a04;
+ padding: 14px 16px;
+ margin: 16px 0;
+ border-radius: 4px;
+ }
+
+ .hy-box strong { color: #a16207; font-weight: 700; font-size: 13px; }
+ .hy-box ul { margin-left: 18px; margin-top: 6px; }
+ .hy-box li { font-size: 13px; margin-bottom: 6px; color: #1f2937; line-height: 1.6; }
+
+ /* Mnemonic — orange */
+ .mnemonic {
+ background-color: #fff7ed;
+ border-left: 4px solid #ea580c;
+ padding: 14px 16px;
+ margin: 16px 0;
+ border-radius: 4px;
+ }
+
+ .mnemonic .mnemonic-header {
+ font-weight: 700;
+ color: #c2410c;
+ font-size: 12px;
+ text-transform: uppercase;
+ letter-spacing: 0.5px;
+ margin-bottom: 8px;
+ }
+
+ .mnemonic strong { color: #c2410c; font-size: 13px; }
+ .mnemonic ul { margin-left: 18px; margin-top: 6px; }
+ .mnemonic li { font-size: 13px; margin-bottom: 5px; color: #431407; line-height: 1.5; }
+
+ /* ── details/collapsible ── */
+ details { margin: 10px 0; }
+ details summary {
+ cursor: pointer;
+ color: #1e40af;
+ font-weight: 600;
+ font-size: 13px;
+ padding: 5px 0;
+ user-select: none;
+ list-style: none;
+ }
+ details summary:hover { text-decoration: underline; }
+ details summary::before { content: "▶ "; font-size: 10px; }
+ details[open] summary::before { content: "▼ "; }
+
+ /* ── Testing Your Understanding ── */
+ .tyu-section {
+ margin: 24px 0;
+ border-top: 1px solid #e2e8f0;
+ padding-top: 18px;
+ }
+
+ .tyu-section > h4 {
+ font-size: 13px;
+ font-weight: 700;
+ color: #1e293b;
+ margin-bottom: 14px;
+ text-transform: none;
+ letter-spacing: 0;
+ }
+
+ .practice-question {
+ background: #f8fafc;
+ border: 1px solid #e2e8f0;
+ border-left: 3px solid #2563eb;
+ padding: 16px;
+ margin: 14px 0;
+ border-radius: 6px;
+ }
+
+ .practice-question h4 {
+ color: #1d4ed8;
+ font-size: 13px;
+ margin-bottom: 10px;
+ font-weight: 700;
+ text-transform: none;
+ letter-spacing: 0;
+ }
+
+ .practice-question p { font-size: 13px; }
+ .practice-question .option { color: #475569; font-style: italic; margin-bottom: 4px; font-size: 13px; }
+ .answer {
+ display: none;
+ margin-top: 12px;
+ background: #eff6ff;
+ border-left: 3px solid #2563eb;
+ padding: 12px;
+ border-radius: 4px;
+ font-size: 13px;
+ line-height: 1.7;
+ color: #1f2937;
+ }
+ .answer.show { display: block; }
+ .answer strong { color: #1e3a5f; }
+ 
+ 
+ /* In-page Table of Contents */
+ .lo-toc {
+ background: #f8fafc;
+ border: 1px solid #e2e8f0;
+ border-radius: 6px;
+ padding: 14px 18px;
+ margin-bottom: 24px;
+ font-size: 13px;
+ }
+ .lo-toc-title {
+ font-weight: 700;
+ font-size: 12px;
+ text-transform: uppercase;
+ letter-spacing: 0.6px;
+ color: #64748b;
+ margin-bottom: 10px;
+ }
+ .lo-toc ol {
+ margin: 0;
+ padding-left: 20px;
+ }
+ .lo-toc li {
+ margin-bottom: 5px;
+ }
+ .lo-toc a {
+ color: #1e3a5f;
+ text-decoration: none;
+ font-weight: 500;
+ }
+ .lo-toc a:hover {
+ text-decoration: underline;
+ color: #2563eb;
+ }
+
+ 
+ /* Collapsible h3 sections */
+ .collapsible-h3 {
+ cursor: pointer;
+ user-select: none;
+ }
+ .collapsible-h3:hover {
+ color: #1e3a8a;
+ }
+ .section-chevron {
+ display: inline-block;
+ font-size: 12px;
+ color: #2563eb;
+ transition: transform 0.2s ease;
+ margin-right: 6px;
+ }
+ .collapsible-h3.collapsed .section-chevron {
+ transform: rotate(-90deg);
+ }
+ .section-body {
+ padding-left: 16px;
+ margin-left: 4px;
+ }
+ .section-body.collapsed {
+ display: none;
+ }
+
+ 
+ /* Indented content under h4 subheadings */
+ .h4-body {
+ padding-left: 14px;
+ margin-left: 4px;
+ margin-bottom: 6px;
+ }
+ 
+ /* USMLE Summary box */
+ .usmle-summary {
+ background: #eff6ff;
+ border-left: 4px solid #2563eb;
+ padding: 14px 16px;
+ margin: 16px 0;
+ border-radius: 4px;
+ }
+ .usmle-header {
+ font-weight: 700;
+ color: #1e40af;
+ font-size: 12px;
+ text-transform: uppercase;
+ letter-spacing: 0.5px;
+ margin-bottom: 8px;
+ }
+ .usmle-summary ul { margin-left: 18px; margin-top: 6px; }
+ .usmle-summary li { font-size: 13px; margin-bottom: 6px; color: #1f2937; line-height: 1.6; }
+ .usmle-summary p { font-size: 13px; color: #1f2937; line-height: 1.6; margin-top: 6px; }
+ 
+ /* Trap card toggle */
+ .trap-header {
+ cursor: pointer;
+ user-select: none;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ }
+ .trap-chevron {
+ font-size: 11px;
+ font-weight: 400;
+ color: #b91c1c;
+ transition: transform 0.2s ease;
+ margin-left: 8px;
+ flex-shrink: 0;
+ }
+ .trap-header.collapsed .trap-chevron {
+ transform: rotate(-90deg);
+ }
+ .trap-body.collapsed {
+ display: none;
+ }
+ 
+ /* Collapse/Expand All controls */
+ .lo-controls {
+ display: flex;
+ gap: 8px;
+ margin-bottom: 16px;
+ }
+ .lo-controls button {
+ font-size: 12px;
+ font-weight: 600;
+ padding: 5px 12px;
+ border-radius: 4px;
+ border: 1px solid #2563eb;
+ cursor: pointer;
+ background: white;
+ color: #2563eb;
+ transition: all 0.15s ease;
+ }
+ .lo-controls button:hover {
+ background: #2563eb;
+ color: white;
+ }
+
+ /* Collapsible h3 styles applied globally (some h3s may fall outside .lo-content) */
+ h3.collapsible-h3 {
+ font-size: 15px;
+ font-weight: 700;
+ color: #1e3a5f;
+ margin: 24px 0 10px;
+ padding: 6px 10px;
+ border-left: 3px solid #2563eb;
+ cursor: pointer;
+ user-select: none;
+ }
+ /* Override lo-content h4 blue-pill styling inside practice questions */
+ .practice-question h4,
+ .tyu-section .practice-question h4 {
+ background: none !important;
+ padding: 0 !important;
+ border-radius: 0 !important;
+ margin: 4px 0 8px !important;
+ color: #1d4ed8;
+ font-size: 14.5px;
+ font-weight: 700;
+ }
+ /* Learning Objectives covered listing */
+ .lo-covered {
+ background: #f0f4ff;
+ border: 1px solid #c7d2fe;
+ border-left: 4px solid #4f46e5;
+ border-radius: 6px;
+ padding: 12px 16px;
+ margin-bottom: 16px;
+ font-size: 13px;
+ }
+ .lo-covered-title {
+ font-weight: 700;
+ color: #3730a3;
+ font-size: 12px;
+ text-transform: uppercase;
+ letter-spacing: 0.5px;
+ margin-bottom: 8px;
+ }
+ .lo-covered ul {
+ margin: 0;
+ padding-left: 18px;
+ }
+ .lo-covered li {
+ margin-bottom: 3px;
+ color: #1e293b;
+ line-height: 1.5;
+ }
+ .lo-covered li strong {
+ color: #3730a3;
+ }
+
+ .lo-acc-header.open .acc-chevron { transform: rotate(180deg); }
+ .lo-acc-header .acc-chevron { transition: transform 0.2s ease; display:inline-block; }
+ .lo-accordion-item { transition: box-shadow 0.15s; }
+ .lo-acc-header:hover { background: #f1f5f9 !important; }
+
+ /* Sub-subheading h5 inside GPCR sections */
+ .h5-subheading {
+ font-size: 13px;
+ font-weight: 700;
+ color: #1e3a5f;
+ background: #eff6ff;
+ border-left: 2px solid #93c5fd;
+ border-radius: 3px;
+ padding: 4px 10px;
+ margin: 14px 0 6px;
+ cursor: pointer;
+ user-select: none;
+ }
+ .h5-subheading:hover { background: #dbeafe; }
+ .h5-subheading .h5-chevron {
+ display: inline-block;
+ font-size: 10px;
+ color: #2563eb;
+ transition: transform 0.2s ease;
+ margin-right: 5px;
+ }
+ .h5-subheading.collapsed .h5-chevron {
+ transform: rotate(-90deg);
+ }
+ .h5-body {
+ padding-left: 18px;
+ margin-left: 4px;
+ margin-bottom: 8px;
+ }
+ .h5-body.collapsed {
+ display: none;
+ }
+
+ /* Mnemonic toggle */
+ .mnemonic-toggle-header {
+ cursor: pointer;
+ user-select: none;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ }
+ .mnemonic-toggle-header .mnemonic-chevron {
+ font-size: 11px;
+ font-weight: 400;
+ color: #c2410c;
+ transition: transform 0.2s ease;
+ margin-left: 8px;
+ flex-shrink: 0;
+ }
+ .mnemonic-toggle-header.collapsed .mnemonic-chevron {
+ transform: rotate(-90deg);
+ }
+ .mnemonic-body.collapsed {
+ display: none;
+ }
+
+ /* Collapsible h4 (subheader style, not full h3) */
+ h4.collapsible-h4 {
+ cursor: pointer;
+ user-select: none;
+ }
+ h4.collapsible-h4:hover {
+ background: #bfdbfe;
+ }
+ h4.collapsible-h4 .h4-chevron {
+ display: inline-block;
+ font-size: 11px;
+ color: #2563eb;
+ transition: transform 0.2s ease;
+ margin-right: 5px;
+ }
+ h4.collapsible-h4.collapsed .h4-chevron {
+ transform: rotate(-90deg);
+ }
+
+</style>
+</head>
+<body>
+ <!- Sidebar Navigation ->
+ <aside class="sidebar">
+ <div class="sidebar-header">
+ <a href="https://strettyit10.github.io/Block4-Endo/" target="_blank" rel="noopener noreferrer" style="display:inline-block; margin-bottom:8px; font-size:17px; font-weight:700; color:#60a5fa; text-decoration:none; letter-spacing:0.5px; border-bottom:1px solid rgba(96,165,250,0.35); padding-bottom:1px; transition:color 0.2s;" onmouseover="this.style.color='#93c5fd'" onmouseout="this.style.color='#60a5fa'">HoyaDocs ↗</a>
+ <h2>Lecture 1</h2>
+ <p>Introduction to Hormones</p>
+ </div>
+ <nav class="sidebar-nav">
+ <a href="#overview" class="sidebar-link active" onclick="switchLO(event,'overview')">📋 Lecture Overview</a>
+ <div class="sidebar-divider"></div>
+ <a href="#practice" class="sidebar-link" onclick="switchLO(event,'practice')">📝 Practice Questions</a>
+ </nav>
+ <div class="sidebar-footer">
+ <div class="export-actions">
+ <button class="export-btn" onclick="printAll(this)" title="Save as PDF">
+ <span class="btn-icon">🖨️</span>Print PDF
+ </button>
+ <button class="export-btn" onclick="downloadWord(this)" title="Download as Word document">
+ <span class="btn-icon">📄</span>Word Doc
+ </button>
+ </div>
+ <a href="https://strettyit10.github.io/Block4-Endocrine/resource-mapping/resource_hub.html" class="hub-return-btn" target="_blank" rel="noopener noreferrer">
+ <span class="btn-arrow">&#8592;</span> Study Hub Resources
+ </a>
+ </div>
+ </aside>
+
+ <!- Main Content ->
+ <main class="main">
+ <div class="header">
+ <h1>Lecture 1: Introduction to Hormones</h1>
+ <p>HoyaDocs — Endocrine Block | USMLE Step 1 Preparation</p>
+ </div>
+
+ 
+
+ <!- LECTURE OVERVIEW PAGE ->
+ <section class="lo-section active" id="overview">
+ <h2 class="lo-title" style="color:#1e3a5f; font-size:22px; margin-bottom:6px;">Lecture 1 &mdash; Overview</h2>
+ <p class="lo-subtitle" style="margin-bottom:28px;">Introduction to Hormones &middot; HoyaDocs Endocrine Block</p>
+
+ <div class="lo-content">
+
+ <!- Official Learning Objectives (end01) ->
+ <h3 style="font-size:16px; font-weight:700; color:#1e3a5f; margin:0 0 4px; padding:6px 10px; border-left:3px solid #2563eb;">Official Learning Objectives</h3>
+ <p style="font-size:13px; color:#475569; margin:0 0 14px; padding-left:10px;">At the end of the lecture students should be able to&hellip; Click any objective to see the practice questions that test it.</p>
+ <div id="lo-accordion">
+
+ <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+ <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+ style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+ <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">1</span>
+ <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Distinguish between endocrine signaling and other forms of intercellular communication</span>
+ <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+ </div>
+ <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+ <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+ <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q1</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q2</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q3</a></div>
+ </div>
+ </div>
+ <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+ <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+ style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+ <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">2</span>
+ <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Classify hormones based on their structure, solubility, &amp; storability</span>
+ <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+ </div>
+ <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+ <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+ <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q4</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q5</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q6</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q7</a></div>
+ </div>
+ </div>
+ <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+ <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+ style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+ <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">3</span>
+ <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Describe catecholamine biosynthesis</span>
+ <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+ </div>
+ <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+ <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+ <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q8</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q9</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q10</a></div>
+ </div>
+ </div>
+ <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+ <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+ style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+ <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">4</span>
+ <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Describe the initial step of steroid biosynthesis</span>
+ <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+ </div>
+ <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+ <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+ <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q11</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q12</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q13</a></div>
+ </div>
+ </div>
+ <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+ <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+ style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+ <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">5</span>
+ <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Explain the effects of carrier proteins on hormone activity and half-life</span>
+ <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+ </div>
+ <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+ <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+ <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q14</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q15</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q16</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q17</a></div>
+ </div>
+ </div>
+ <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+ <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+ style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+ <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">6</span>
+ <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Classify hormone receptors based on their subcellular location and mechanism of action</span>
+ <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+ </div>
+ <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+ <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+ <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q18</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q19</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q20</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q21</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q22</a></div>
+ </div>
+ </div>
+ <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+ <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+ style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+ <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">7</span>
+ <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Explain the factors that influence cellular sensitivity to hormones and cellular response to hormones</span>
+ <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+ </div>
+ <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+ <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+ <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q23</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q24</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q25</a></div>
+ </div>
+ </div>
+ </div>
+
+ </div>
+ </section>
+
+ <!- Practice Questions ->
+ <section class="practice-section lo-section" id="practice">
+ <h3 id="practice-questions">Practice Questions</h3>
+ <p style="margin-bottom: 20px; color: #475569; font-style: italic;">25 USMLE-style MCQs covering the 7 official end01 learning objectives. Click &ldquo;Reveal Answer&rdquo; to see the explanation.</p>
+
+
+ <!- LO 1 &mdash; Endocrine vs. Other Intercellular Signaling ->
+ <h4 style="font-size:15px; font-weight:700; color:#7c3aed; margin:28px 0 8px; padding-bottom:4px; border-bottom:2px solid #ede9fe;">LO 1 &mdash; Endocrine vs. Other Intercellular Signaling</h4>
+
+ <div class="practice-question">
+ <h4>Question 1</h4>
+ <p>A 45-year-old man has a glucagonoma producing high systemic glucagon that reaches distant hepatocytes via the bloodstream. Within the pancreatic islets themselves, delta cells simultaneously release somatostatin that inhibits adjacent alpha and beta cells without reaching meaningful systemic concentrations. Which terms correctly describe the glucagon and somatostatin signals, respectively?</p>
+ <p class="option">A) Paracrine; endocrine</p>
+ <p class="option">B) Endocrine; paracrine</p>
+ <p class="option">C) Endocrine; autocrine</p>
+ <p class="option">D) Neuroendocrine; paracrine</p>
+ <p class="option">E) Autocrine; endocrine</p>
+ <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+ <div class="answer">
+ <strong>&#10003; Correct Answer: B &mdash; Endocrine; paracrine</strong>
+ <p style="margin-top:10px;">The mode of intercellular signaling is defined by <em>how the molecule is delivered</em>, not by the molecule itself. Glucagon enters the bloodstream and acts on distant hepatocytes &rarr; <strong>endocrine</strong>. Islet-cell somatostatin diffuses through interstitial fluid to neighboring alpha and beta cells without relying on systemic circulation &rarr; <strong>paracrine</strong>. The same molecule (e.g., somatostatin) can be endocrine when released by the hypothalamus, paracrine in the islet, and neurocrine in brain synapses &mdash; the context determines the term.</p>
+ </div>
+ </div>
+
+ <div class="practice-question">
+ <h4>Question 2</h4>
+ <p>An antigen-activated T lymphocyte synthesizes IL-2 and simultaneously up-regulates the IL-2 receptor on its own surface. IL-2 binds to the same cell that released it and drives clonal proliferation. This mode of signaling is best classified as:</p>
+ <p class="option">A) Classic endocrine signaling</p>
+ <p class="option">B) Paracrine signaling</p>
+ <p class="option">C) Autocrine signaling</p>
+ <p class="option">D) Juxtacrine signaling</p>
+ <p class="option">E) Neurocrine (synaptic) signaling</p>
+ <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+ <div class="answer">
+ <strong>&#10003; Correct Answer: C &mdash; Autocrine signaling</strong>
+ <p style="margin-top:10px;">When a cell expresses receptors for a ligand it is itself secreting, the signaling is <strong>autocrine</strong>. Activated T cells and many tumor cells (glioblastomas with PDGF loops, some breast cancers with IGF-1 loops) rely on autocrine signaling for proliferation. Paracrine = to neighbors via interstitial fluid; endocrine = to distant cells via blood; juxtacrine = membrane-to-membrane contact; neurocrine = across a synapse. The defining feature of autocrine is co-expression of ligand and receptor on the same cell.</p>
+ </div>
+ </div>
+
+ <div class="practice-question">
+ <h4>Question 3</h4>
+ <p>A parvocellular neuron in the paraventricular nucleus of the hypothalamus releases corticotropin-releasing hormone (CRH) from its axon terminals. The CRH drains into the hypophyseal portal blood and travels a short distance to stimulate ACTH release from corticotrophs in the anterior pituitary. Which single term best describes this mode of signaling?</p>
+ <p class="option">A) Classical endocrine signaling</p>
+ <p class="option">B) Paracrine signaling</p>
+ <p class="option">C) Synaptic (neurocrine) signaling across a chemical synapse</p>
+ <p class="option">D) Neuroendocrine signaling</p>
+ <p class="option">E) Autocrine signaling</p>
+ <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+ <div class="answer">
+ <strong>&#10003; Correct Answer: D &mdash; Neuroendocrine signaling</strong>
+ <p style="margin-top:10px;">A <strong>neuroendocrine</strong> cell is a neuron that releases its product into the bloodstream rather than across a synaptic cleft. Hypothalamic parvocellular neurons releasing CRH, TRH, GnRH, GHRH, and dopamine into the hypophyseal portal system are the archetypal example; magnocellular neurons releasing ADH and oxytocin from the posterior pituitary into systemic circulation are likewise neuroendocrine. The distinguishing features are a neuronal source plus vascular (rather than synaptic) delivery.</p>
+ </div>
+ </div>
+
+
+ <!- LO 2 &mdash; Hormone Structure, Solubility, &amp; Storability ->
+ <h4 style="font-size:15px; font-weight:700; color:#7c3aed; margin:28px 0 8px; padding-bottom:4px; border-bottom:2px solid #ede9fe;">LO 2 &mdash; Hormone Structure, Solubility, &amp; Storability</h4>
+
+ <div class="practice-question">
+ <h4>Question 4</h4>
+ <p>A researcher isolates a hormone that is synthesized as a large precursor cleaved in the Golgi, stored in secretory granules, and acts within seconds of release. Which additional property would be expected?</p>
+ <p class="option">A) Receptor located in the cytoplasm</p>
+ <p class="option">B) Primary effect via gene transcription</p>
+ <p class="option">C) Second-messenger signaling via cAMP or IP3/DAG</p>
+ <p class="option">D) Synthesis requires 17&alpha;-hydroxylase</p>
+ <p class="option">E) Cannot be measured in the serum during fasting</p>
+ <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+ <div class="answer">
+ <strong>&#10003; Correct Answer: C &mdash; Second-messenger signaling via cAMP or IP3/DAG</strong>
+ <p style="margin-top:10px;">The clues &mdash; synthesized as a preprohormone, cleaved in the Golgi, stored in granules, and acting in seconds &mdash; all point to a <strong>peptide hormone</strong>. Peptides are water-soluble and cannot cross the plasma membrane, so they signal indirectly via cell-surface receptors and second messengers (cAMP, IP3/DAG, RTK, JAK-STAT). A and B describe steroid/thyroid mechanisms; D is a steroidogenic enzyme; E is incorrect (peptide hormones such as glucagon are readily measured in fasting serum).</p>
+ </div>
+ </div>
+
+ <div class="practice-question">
+ <h4>Question 5</h4>
+ <p>Thyroid hormone (T3/T4) is synthesized from tyrosine and is classified structurally as an amine. With respect to <em>mechanism of action</em>, however, thyroid hormone behaves most like which class of hormone?</p>
+ <p class="option">A) Peptide &mdash; acts on cell-surface receptors via cAMP</p>
+ <p class="option">B) Steroid &mdash; binds intracellular/nuclear receptors and alters gene transcription</p>
+ <p class="option">C) Catecholamine &mdash; acts on &alpha;- and &beta;-adrenergic receptors</p>
+ <p class="option">D) Amine &mdash; binds a GPCR on the cell surface like serotonin</p>
+ <p class="option">E) Peptide &mdash; acts via JAK-STAT signaling</p>
+ <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+ <div class="answer">
+ <strong>&#10003; Correct Answer: B &mdash; Steroid &mdash; binds intracellular/nuclear receptors and alters gene transcription</strong>
+ <p style="margin-top:10px;">A classic USMLE trap. Thyroid hormones are structurally amines (two iodinated tyrosines coupled together), but iodination renders them highly lipophilic. They cross the plasma membrane, bind nuclear receptors (TR&alpha;, TR&beta;), and regulate transcription &mdash; behaving like steroids. Onset is hours to days. Don&rsquo;t equate amine <em>structure</em> with amine <em>mechanism</em>: catecholamines are also amines but do act via GPCRs, the opposite of thyroid hormone.</p>
+ </div>
+ </div>
+
+ <div class="practice-question">
+ <h4>Question 6</h4>
+ <p>A patient with an insulinoma undergoes fasting labs. Which set of results is most consistent with endogenous insulin hypersecretion (rather than exogenous insulin injection)?</p>
+ <p class="option">A) High insulin, low C-peptide, low proinsulin</p>
+ <p class="option">B) High insulin, high C-peptide, high proinsulin</p>
+ <p class="option">C) Low insulin, high C-peptide, high glucagon</p>
+ <p class="option">D) High insulin, high C-peptide, undetectable proinsulin</p>
+ <p class="option">E) High insulin, low glucose, elevated GLP-1</p>
+ <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+ <div class="answer">
+ <strong>&#10003; Correct Answer: B &mdash; High insulin, high C-peptide, high proinsulin</strong>
+ <p style="margin-top:10px;">Insulin is synthesized as <strong>proinsulin</strong>, which is cleaved 1:1 in secretory granules into mature insulin plus <strong>C-peptide</strong>. Endogenous hypersecretion (insulinoma) raises insulin, C-peptide, and proinsulin together. Commercial insulin contains no C-peptide and suppresses endogenous &beta;-cells, so exogenous injection produces high insulin with <em>suppressed</em> C-peptide (option A). The peptide-hormone synthesis pathway (preprohormone &rarr; prohormone &rarr; hormone + byproduct, stored together in vesicles) is the reason C-peptide exists as a distinct endogenous marker.</p>
+ </div>
+ </div>
+
+ <div class="practice-question">
+ <h4>Question 7</h4>
+ <p>A 22-year-old with type 1 diabetes injects his pre-dinner insulin but is called away and forgets to eat. He becomes diaphoretic and confused. Labs: glucose 38 mg/dL, insulin 85 &mu;IU/mL (high), C-peptide 0.1 ng/mL (suppressed). Which statement best explains the biochemistry behind these findings?</p>
+ <p class="option">A) Insulinoma &mdash; endogenous hypersecretion with high C-peptide</p>
+ <p class="option">B) Commercial insulin preparations lack C-peptide, so exogenous injection raises serum insulin without contributing to measurable C-peptide</p>
+ <p class="option">C) Reactive hypoglycemia &mdash; elevated post-meal insulin with high C-peptide</p>
+ <p class="option">D) Sulfonylurea ingestion &mdash; stimulates &beta;-cell secretion with high C-peptide</p>
+ <p class="option">E) Hepatic failure decreases insulin clearance, sparing C-peptide</p>
+ <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+ <div class="answer">
+ <strong>&#10003; Correct Answer: B &mdash; Commercial insulin preparations lack C-peptide, so exogenous injection raises serum insulin without contributing to measurable C-peptide</strong>
+ <p style="margin-top:10px;">Endogenously, insulin is stored in &beta;-cell granules as an equimolar mixture with C-peptide (both arise from cleavage of a single proinsulin molecule). Commercial recombinant insulin contains <em>only</em> insulin, so exogenous injection raises serum insulin without raising C-peptide; the high exogenous insulin also feeds back on &beta;-cells, further suppressing endogenous secretion. C-peptide is therefore the key discriminator between endogenous (insulinoma, sulfonylurea) and exogenous hyperinsulinemia.</p>
+ </div>
+ </div>
+
+
+ <!- LO 3 &mdash; Catecholamine Biosynthesis ->
+ <h4 style="font-size:15px; font-weight:700; color:#7c3aed; margin:28px 0 8px; padding-bottom:4px; border-bottom:2px solid #ede9fe;">LO 3 &mdash; Catecholamine Biosynthesis</h4>
+
+ <div class="practice-question">
+ <h4>Question 8</h4>
+ <p>A patient with a large pheochromocytoma is pretreated with metyrosine (&alpha;-methyl-p-tyrosine) prior to surgery to reduce intraoperative catecholamine release. Metyrosine is a competitive inhibitor of the enzyme that performs which function in catecholamine biosynthesis?</p>
+ <p class="option">A) Decarboxylation of L-DOPA to dopamine</p>
+ <p class="option">B) Hydroxylation of tyrosine to L-DOPA (the rate-limiting step)</p>
+ <p class="option">C) &beta;-hydroxylation of dopamine to norepinephrine</p>
+ <p class="option">D) N-methylation of norepinephrine to epinephrine</p>
+ <p class="option">E) Oxidative deamination of epinephrine</p>
+ <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+ <div class="answer">
+ <strong>&#10003; Correct Answer: B &mdash; Hydroxylation of tyrosine to L-DOPA (the rate-limiting step)</strong>
+ <p style="margin-top:10px;">Catecholamines are synthesized Tyr &rarr; L-DOPA &rarr; dopamine &rarr; norepinephrine &rarr; epinephrine. The <strong>rate-limiting step</strong> is the first: tyrosine &rarr; L-DOPA by <strong>tyrosine hydroxylase</strong> (requires BH4 and O&#8322;; feedback-inhibited by end products; activated by PKA/CaMKII phosphorylation during sympathetic drive). Metyrosine competitively blocks tyrosine hydroxylase, depleting catecholamine stores by 50&ndash;80% and preventing intraoperative hypertensive crisis when &alpha;-blockade alone is insufficient.</p>
+ </div>
+ </div>
+
+ <div class="practice-question">
+ <h4>Question 9</h4>
+ <p>A patient with primary adrenal insufficiency (Addison disease) has very low plasma epinephrine but relatively preserved plasma norepinephrine. Which enzymatic step in the catecholamine biosynthetic pathway best explains this finding?</p>
+ <p class="option">A) Tyrosine hydroxylase (Tyr &rarr; L-DOPA)</p>
+ <p class="option">B) DOPA decarboxylase (L-DOPA &rarr; dopamine)</p>
+ <p class="option">C) Dopamine &beta;-hydroxylase (dopamine &rarr; norepinephrine)</p>
+ <p class="option">D) Phenylethanolamine N-methyltransferase (norepinephrine &rarr; epinephrine)</p>
+ <p class="option">E) Monoamine oxidase (catecholamine degradation)</p>
+ <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+ <div class="answer">
+ <strong>&#10003; Correct Answer: D &mdash; Phenylethanolamine N-methyltransferase (norepinephrine &rarr; epinephrine)</strong>
+ <p style="margin-top:10px;"><strong>PNMT</strong> converts norepinephrine to epinephrine and is induced by <em>very high local cortisol</em>. Only the adrenal medulla is bathed in cortisol via the centripetal intra-adrenal portal blood supply from the overlying cortex, which is why the medulla uniquely makes epinephrine. In Addison disease, low cortisol &rarr; no PNMT induction &rarr; failed epinephrine synthesis. Norepinephrine is still produced normally by sympathetic post-ganglionic neurons elsewhere, which never need PNMT. This is also why paragangliomas (extra-adrenal chromaffin tumors) release NE rather than epinephrine.</p>
+ </div>
+ </div>
+
+ <div class="practice-question">
+ <h4>Question 10</h4>
+ <p>Which of the following correctly lists the intermediates of catecholamine biosynthesis in the order they are produced within an adrenal medullary chromaffin cell?</p>
+ <p class="option">A) Tyrosine &rarr; dopamine &rarr; L-DOPA &rarr; norepinephrine &rarr; epinephrine</p>
+ <p class="option">B) Tyrosine &rarr; L-DOPA &rarr; dopamine &rarr; norepinephrine &rarr; epinephrine</p>
+ <p class="option">C) Tyrosine &rarr; L-DOPA &rarr; norepinephrine &rarr; dopamine &rarr; epinephrine</p>
+ <p class="option">D) Phenylalanine &rarr; dopamine &rarr; L-DOPA &rarr; norepinephrine &rarr; epinephrine</p>
+ <p class="option">E) Tyrosine &rarr; norepinephrine &rarr; dopamine &rarr; L-DOPA &rarr; epinephrine</p>
+ <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+ <div class="answer">
+ <strong>&#10003; Correct Answer: B &mdash; Tyrosine &rarr; L-DOPA &rarr; dopamine &rarr; norepinephrine &rarr; epinephrine</strong>
+ <p style="margin-top:10px;">The canonical order is <strong>Tyr &rarr; L-DOPA &rarr; dopamine &rarr; norepinephrine &rarr; epinephrine</strong>. Enzymes/cofactors: tyrosine hydroxylase (rate-limiting; BH4), DOPA decarboxylase (B6/PLP), dopamine &beta;-hydroxylase (vit C, Cu; occurs <em>inside</em> the secretory vesicle), and PNMT (SAM; cortisol-dependent, adrenal medulla only). Phe &rarr; Tyr occurs in the liver via phenylalanine hydroxylase but is not part of the catecholamine pathway proper. Mnemonic: &lsquo;Tyrants Don&rsquo;t Dare Nag Emperors.&rsquo;</p>
+ </div>
+ </div>
+
+
+ <!- LO 4 &mdash; Initial Step of Steroid Biosynthesis ->
+ <h4 style="font-size:15px; font-weight:700; color:#7c3aed; margin:28px 0 8px; padding-bottom:4px; border-bottom:2px solid #ede9fe;">LO 4 &mdash; Initial Step of Steroid Biosynthesis</h4>
+
+ <div class="practice-question">
+ <h4>Question 11</h4>
+ <p>The initial committed step of steroid hormone biosynthesis in every steroidogenic tissue &mdash; adrenal cortex, gonads, and placenta &mdash; converts a common precursor into pregnenolone. Which of the following correctly identifies the precursor, the enzyme, and the subcellular location?</p>
+ <p class="option">A) Progesterone &rarr; pregnenolone by 3&beta;-hydroxysteroid dehydrogenase in the smooth ER</p>
+ <p class="option">B) Cholesterol &rarr; pregnenolone by desmolase (P450scc / CYP11A1) in the mitochondrion</p>
+ <p class="option">C) Cholesterol &rarr; pregnenolone by 21-hydroxylase in the cytoplasm</p>
+ <p class="option">D) Acetyl-CoA &rarr; pregnenolone by HMG-CoA reductase in the ER</p>
+ <p class="option">E) Cholesterol &rarr; pregnenolone by aromatase in the peroxisome</p>
+ <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+ <div class="answer">
+ <strong>&#10003; Correct Answer: B &mdash; Cholesterol &rarr; pregnenolone by desmolase (P450scc / CYP11A1) in the mitochondrion</strong>
+ <p style="margin-top:10px;">Every steroid hormone begins from <strong>cholesterol</strong>. The first committed (and rate-limiting) enzymatic step is side-chain cleavage by <strong>desmolase</strong> (CYP11A1 / P450scc) on the <strong>inner mitochondrial membrane</strong>, yielding pregnenolone (a C21 steroid). All downstream enzymes (3&beta;-HSD, 17&alpha;-hydroxylase, 17,20-lyase, 21-hydroxylase, 11&beta;-hydroxylase, aromatase) act on pregnenolone and its derivatives in a tissue-specific pattern to generate mineralocorticoids, glucocorticoids, androgens, and estrogens.</p>
+ </div>
+ </div>
+
+ <div class="practice-question">
+ <h4>Question 12</h4>
+ <p>A neonate with ambiguous genitalia and salt-wasting is found to have homozygous loss-of-function mutations in the steroidogenic acute regulatory (StAR) protein. Adrenal and gonadal steroid synthesis fails almost completely. Which step does StAR perform, and why is its loss devastating?</p>
+ <p class="option">A) It cleaves the C17&ndash;C20 bond of 17-hydroxy-progesterone; loss blocks androgen synthesis only</p>
+ <p class="option">B) It converts cholesterol to pregnenolone; loss eliminates the initial enzymatic step</p>
+ <p class="option">C) It transports cholesterol from the outer to the inner mitochondrial membrane, delivering substrate to desmolase; loss prevents virtually all steroid synthesis</p>
+ <p class="option">D) It phosphorylates desmolase in response to ACTH; loss prevents enzyme activation</p>
+ <p class="option">E) It is a serum carrier protein that delivers cortisol to target tissues; loss mimics cortisol deficiency</p>
+ <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+ <div class="answer">
+ <strong>&#10003; Correct Answer: C &mdash; It transports cholesterol from the outer to the inner mitochondrial membrane, delivering substrate to desmolase; loss prevents virtually all steroid synthesis</strong>
+ <p style="margin-top:10px;"><strong>StAR</strong> shuttles cholesterol from the outer to the inner mitochondrial membrane, where desmolase resides. Because desmolase is compartmentally isolated, cholesterol delivery <em>by StAR</em> is the true rate-limiting step of all steroidogenesis &mdash; which is why trophic hormones (ACTH, LH, angiotensin II) acutely boost steroid output largely by activating StAR. Loss-of-function mutations cause <strong>congenital lipoid adrenal hyperplasia</strong>: cholesterol accumulates as cytoplasmic lipid droplets but cannot reach desmolase, so essentially no steroid hormone is made. Patients present with neonatal salt-wasting crisis and 46,XY infants appear phenotypically female because androgens cannot be synthesized.</p>
+ </div>
+ </div>
+
+ <div class="practice-question">
+ <h4>Question 13</h4>
+ <p>Unlike peptide hormones, steroid hormones are not pre-stored in meaningful quantities within their producing cells &mdash; their secretion rate essentially equals their synthesis rate. Which property of steroid hormones best explains this &ldquo;made on demand&rdquo; pattern?</p>
+ <p class="option">A) Steroid hormones are too large to be packaged into secretory vesicles</p>
+ <p class="option">B) Steroid hormones are lipid-soluble and would diffuse freely across the phospholipid membrane of any storage vesicle, so they cannot be retained</p>
+ <p class="option">C) Cholesterol is not available inside steroidogenic cells</p>
+ <p class="option">D) Steroidogenic cells lack a rough endoplasmic reticulum</p>
+ <p class="option">E) Steroid hormones are too unstable in aqueous cytoplasm</p>
+ <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+ <div class="answer">
+ <strong>&#10003; Correct Answer: B &mdash; Steroid hormones are lipid-soluble and would diffuse freely across the phospholipid membrane of any storage vesicle, so they cannot be retained</strong>
+ <p style="margin-top:10px;">Peptide hormones are stored in secretory granules because they are water-soluble and cannot cross phospholipid membranes. Steroids are <strong>lipophilic</strong>, so they diffuse through the membrane of any would-be storage vesicle &mdash; keeping a reserve inside the cell is physicochemically impossible. Steroidogenic cells therefore hold cholesterol (often esterified in lipid droplets) as the substrate and activate the synthesis cascade <em>on demand</em> when trophic hormones arrive. This is also why abrupt withdrawal of exogenous glucocorticoids is dangerous: there are no pre-formed cortisol reserves to buffer an acute stress.</p>
+ </div>
+ </div>
+
+
+ <!- LO 5 &mdash; Carrier Proteins: Activity &amp; Half-Life ->
+ <h4 style="font-size:15px; font-weight:700; color:#7c3aed; margin:28px 0 8px; padding-bottom:4px; border-bottom:2px solid #ede9fe;">LO 5 &mdash; Carrier Proteins: Activity &amp; Half-Life</h4>
+
+ <div class="practice-question">
+ <h4>Question 14</h4>
+ <p>Cortisol is a steroid hormone. Which of the following best describes the consequence of its lipid solubility compared with peptide hormones?</p>
+ <p class="option">A) Cortisol is stored in vesicles and released rapidly upon stimulation</p>
+ <p class="option">B) Cortisol must bind a cell-surface G-protein-coupled receptor to act</p>
+ <p class="option">C) Cortisol effects begin within seconds because it acts via cAMP</p>
+ <p class="option">D) Cortisol circulates mostly bound to corticosteroid-binding globulin; only the free fraction is biologically active</p>
+ <p class="option">E) Cortisol is synthesized from tyrosine in the adrenal medulla</p>
+ <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+ <div class="answer">
+ <strong>&#10003; Correct Answer: D &mdash; Cortisol circulates mostly bound to corticosteroid-binding globulin; only the free fraction is biologically active</strong>
+ <p style="margin-top:10px;">Because steroids are lipophilic and poorly soluble in plasma, ~90% of circulating cortisol is bound to <strong>corticosteroid-binding globulin (CBG / transcortin)</strong> and a small fraction to albumin. Only the remaining <strong>free</strong> cortisol can diffuse across cell membranes and activate intracellular glucocorticoid receptors. Carrier binding (1) enables systemic circulation of hydrophobic hormone, (2) creates a reserve pool, and (3) prolongs half-life by shielding the hormone from hepatic metabolism and renal clearance. A&ndash;C and E are all incorrect (steroids are not stored, use nuclear receptors, have slow onset, and are cholesterol-derived).</p>
+ </div>
+ </div>
+
+ <div class="practice-question">
+ <h4>Question 15</h4>
+ <p>A 28-year-old woman at 12 weeks gestation is asymptomatic. TSH is 1.1 mIU/L (normal) and total T4 is 15 &mu;g/dL (high; normal 4.5&ndash;12). Which of the following best explains these findings?</p>
+ <p class="option">A) She has Graves disease with autonomous thyroid hormone production</p>
+ <p class="option">B) Pregnancy-associated estrogen increases thyroxine-binding globulin, so more T4 is bound; total T4 rises while free T4 and TSH remain normal</p>
+ <p class="option">C) hCG stimulates TSH receptors, increasing both total and free T4</p>
+ <p class="option">D) Pregnancy decreases TBG, so less T4 is bound and total T4 rises</p>
+ <p class="option">E) She has developed a TSH-secreting pituitary adenoma</p>
+ <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+ <div class="answer">
+ <strong>&#10003; Correct Answer: B &mdash; Pregnancy-associated estrogen increases thyroxine-binding globulin, so more T4 is bound; total T4 rises while free T4 and TSH remain normal</strong>
+ <p style="margin-top:10px;">Estrogen stimulates hepatic synthesis of <strong>thyroxine-binding globulin (TBG)</strong>. With more carrier, a larger bound pool is needed to keep free T4 at the set-point. Transiently, free T4 dips &rarr; TSH briefly rises &rarr; thyroid produces more T4 &rarr; new equilibrium: total T4 is high while free T4 and TSH are normal. The patient is clinically euthyroid. The same pattern is seen with oral contraceptive use. In nephrotic syndrome the opposite occurs (TBG lost in urine, total T4 falls, free T4 remains normal). Only the free fraction is physiologically active.</p>
+ </div>
+ </div>
+
+ <div class="practice-question">
+ <h4>Question 16</h4>
+ <p>A patient with nephrotic syndrome loses substantial protein in the urine, including thyroxine-binding globulin. Once a new steady state is reached, which thyroid laboratory pattern would you expect?</p>
+ <p class="option">A) Low total T4, high free T4, low TSH (overt hyperthyroidism)</p>
+ <p class="option">B) Low total T4, normal free T4, normal TSH (clinically euthyroid)</p>
+ <p class="option">C) High total T4, normal free T4, normal TSH</p>
+ <p class="option">D) Low total T4, low free T4, high TSH (overt hypothyroidism)</p>
+ <p class="option">E) Normal total T4, high free T4, normal TSH</p>
+ <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+ <div class="answer">
+ <strong>&#10003; Correct Answer: B &mdash; Low total T4, normal free T4, normal TSH (clinically euthyroid)</strong>
+ <p style="margin-top:10px;">Losing TBG reduces plasma T4 binding capacity. Briefly, free T4 rises &rarr; TSH is suppressed &rarr; thyroid output decreases &rarr; free T4 returns to normal. The new equilibrium has less carrier, so <strong>total T4 is low</strong> while <strong>free T4 and TSH are normal</strong> &mdash; the patient is euthyroid. This is the mirror image of pregnancy/estrogen-induced high-TBG states. Only free hormone is active; total-hormone assays can be misleading when carrier-protein levels change.</p>
+ </div>
+ </div>
+
+ <div class="practice-question">
+ <h4>Question 17</h4>
+ <p>A man who abuses anabolic androgens develops gynecomastia. Laboratory testing shows low-normal total testosterone and markedly decreased sex hormone-binding globulin (SHBG). Which of the following best explains the gynecomastia?</p>
+ <p class="option">A) Androgens directly stimulate breast tissue growth</p>
+ <p class="option">B) Reduced SHBG increases free testosterone, which is aromatized peripherally to estradiol in adipose tissue, stimulating breast tissue</p>
+ <p class="option">C) Exogenous testosterone suppresses GnRH and decreases estrogen production</p>
+ <p class="option">D) Elevated SHBG binds estradiol, raising free estradiol levels</p>
+ <p class="option">E) Androgens block aromatase, decreasing estradiol</p>
+ <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+ <div class="answer">
+ <strong>&#10003; Correct Answer: B &mdash; Reduced SHBG increases free testosterone, which is aromatized peripherally to estradiol in adipose tissue, stimulating breast tissue</strong>
+ <p style="margin-top:10px;">Exogenous androgens suppress hepatic SHBG synthesis. With less SHBG, the <strong>free testosterone</strong> fraction rises disproportionately and is available to <strong>aromatase</strong> (in adipose, liver, and skin) &rarr; conversion to <strong>estradiol</strong> &rarr; stimulation of breast ductal tissue &rarr; gynecomastia. Total testosterone may look &lsquo;low-normal&rsquo; because the measurement includes the shrunken bound pool. The same principle underlies obesity-associated gynecomastia (more adipose aromatase) &mdash; and it illustrates why SHBG changes can have clinical effects even with &lsquo;normal&rsquo; total hormone levels. Carrier proteins determine what fraction is biologically available.</p>
+ </div>
+ </div>
+
+
+ <!- LO 6 &mdash; Hormone Receptor Classification (Location + Mechanism) ->
+ <h4 style="font-size:15px; font-weight:700; color:#7c3aed; margin:28px 0 8px; padding-bottom:4px; border-bottom:2px solid #ede9fe;">LO 6 &mdash; Hormone Receptor Classification (Location + Mechanism)</h4>
+
+ <div class="practice-question">
+ <h4>Question 18</h4>
+ <p>A 14-year-old boy with a GH-secreting pituitary adenoma is found to have a somatic activating mutation of Gs&alpha; in the somatotrophs (GNAS mutation). Which of the following best describes the consequence?</p>
+ <p class="option">A) Decreased cAMP, decreased GH secretion</p>
+ <p class="option">B) Increased cAMP, increased GH secretion leading to gigantism</p>
+ <p class="option">C) Increased IP3/DAG signaling, increased GH secretion</p>
+ <p class="option">D) Decreased adenylyl cyclase activity, no change in GH</p>
+ <p class="option">E) Increased Gi signaling, decreased cAMP, acromegaly</p>
+ <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+ <div class="answer">
+ <strong>&#10003; Correct Answer: B &mdash; Increased cAMP, increased GH secretion leading to gigantism</strong>
+ <p style="margin-top:10px;">GHRH signals via a <strong>Gs-coupled GPCR</strong> &rarr; activates adenylyl cyclase &rarr; &uarr;cAMP &rarr; PKA &rarr; GH release. A constitutively active Gs&alpha; mutation (McCune-Albright; ~40% of sporadic GH adenomas) locks Gs in the &lsquo;on&rsquo; state &rarr; continuous cAMP elevation &rarr; unregulated GH secretion. Before epiphyseal closure this produces <strong>gigantism</strong>; after closure, <strong>acromegaly</strong>. The question tests both receptor location (cell-surface GPCR) and mechanism (Gs&rarr;cAMP).</p>
+ </div>
+ </div>
+
+ <div class="practice-question">
+ <h4>Question 19</h4>
+ <p>Epinephrine stimulates hepatic glycogenolysis via &beta;2 receptors (Gs &rarr; cAMP &rarr; PKA) and vascular smooth muscle contraction via &alpha;1 receptors (Gq &rarr; IP3/DAG). A selective Gq blocker would most directly prevent which downstream event?</p>
+ <p class="option">A) cAMP-dependent PKA activation</p>
+ <p class="option">B) Release of intracellular calcium from the endoplasmic reticulum</p>
+ <p class="option">C) Adenylyl cyclase activation</p>
+ <p class="option">D) Phosphodiesterase inhibition</p>
+ <p class="option">E) Nuclear receptor translocation</p>
+ <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+ <div class="answer">
+ <strong>&#10003; Correct Answer: B &mdash; Release of intracellular calcium from the endoplasmic reticulum</strong>
+ <p style="margin-top:10px;">Gq activates phospholipase C, which cleaves PIP2 into IP3 + DAG. <strong>IP3 opens IP3 receptors on the ER</strong>, releasing Ca&sup2;&#8314; into the cytosol; DAG and Ca&sup2;&#8314; activate PKC. Blocking Gq abolishes PLC activation &rarr; no IP3 &rarr; no ER Ca&sup2;&#8314; release &rarr; &alpha;1-mediated vasoconstriction fails. Options A and C describe Gs signaling. PDE inhibition pertains to cyclic-nucleotide degradation; E describes nuclear-receptor (steroid/thyroid) signaling. Classic Gq-coupled hormones: oxytocin, TRH, GnRH, angiotensin II, histamine H1, V1 ADH.</p>
+ </div>
+ </div>
+
+ <div class="practice-question">
+ <h4>Question 20</h4>
+ <p>Growth hormone and prolactin exert their cellular effects through which receptor family?</p>
+ <p class="option">A) G-protein-coupled receptor &mdash; Gs subtype</p>
+ <p class="option">B) Receptor tyrosine kinase with intrinsic kinase activity</p>
+ <p class="option">C) Cytokine receptor associated with JAK kinases &rarr; STAT signaling</p>
+ <p class="option">D) Nuclear receptor &mdash; direct gene transcription</p>
+ <p class="option">E) Ligand-gated ion channel</p>
+ <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+ <div class="answer">
+ <strong>&#10003; Correct Answer: C &mdash; Cytokine receptor associated with JAK kinases &rarr; STAT signaling</strong>
+ <p style="margin-top:10px;">GH, prolactin, erythropoietin, and most interleukins/interferons use <strong>cytokine receptors</strong>, which lack intrinsic kinase activity but recruit and activate <strong>JAK2</strong>. Activated JAKs phosphorylate STAT transcription factors, which dimerize, enter the nucleus, and drive gene expression. This is why JAK inhibitors (ruxolitinib, tofacitinib) affect many hormone/cytokine pathways. In contrast, insulin uses a <em>true</em> RTK &mdash; a frequent USMLE distinguisher.</p>
+ </div>
+ </div>
+
+ <div class="practice-question">
+ <h4>Question 21</h4>
+ <p>A patient is started on a medication that inhibits phosphodiesterase (PDE). Which of the following best describes the most immediate downstream effect?</p>
+ <p class="option">A) Decreased cAMP accumulation &rarr; reduced PKA activity</p>
+ <p class="option">B) Increased cAMP accumulation &rarr; enhanced PKA activity</p>
+ <p class="option">C) Increased IP3 production &rarr; Ca&sup2;&#8314; release</p>
+ <p class="option">D) Activation of nuclear receptors &rarr; increased transcription</p>
+ <p class="option">E) Inhibition of adenylyl cyclase &rarr; decreased cAMP</p>
+ <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+ <div class="answer">
+ <strong>&#10003; Correct Answer: B &mdash; Increased cAMP accumulation &rarr; enhanced PKA activity</strong>
+ <p style="margin-top:10px;">Phosphodiesterase degrades cAMP (&rarr; AMP) and cGMP (&rarr; GMP). Inhibiting PDE lets cyclic nucleotides accumulate, amplifying whatever Gs or guanylyl-cyclase signal is active. Clinical examples: sildenafil (PDE5 &rarr; &uarr;cGMP &rarr; smooth-muscle vasodilation), milrinone (PDE3 &rarr; &uarr;cAMP &rarr; cardiac inotropy), theophylline/caffeine (nonselective PDE &rarr; &uarr;cAMP &rarr; bronchodilation). Receptor mechanism (cell-surface GPCR &rarr; second messenger) determines where these drugs act downstream.</p>
+ </div>
+ </div>
+
+ <div class="practice-question">
+ <h4>Question 22</h4>
+ <p>A patient with a GH-secreting pituitary adenoma is started on octreotide, a somatostatin analog. What is the mechanism by which octreotide reduces GH secretion?</p>
+ <p class="option">A) It blocks GH receptors in peripheral tissues, preventing IGF-1 production</p>
+ <p class="option">B) It stimulates dopamine D2 receptors on somatotrophs, inhibiting GH release</p>
+ <p class="option">C) It mimics somatostatin by activating Gi-coupled somatostatin receptors (SSTRs), lowering cAMP and inhibiting GH secretion</p>
+ <p class="option">D) It blocks GnRH receptors on somatotrophs</p>
+ <p class="option">E) It activates Gs &rarr; &uarr;cAMP &rarr; paradoxical feedback suppression of GH</p>
+ <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+ <div class="answer">
+ <strong>&#10003; Correct Answer: C &mdash; It mimics somatostatin by activating Gi-coupled somatostatin receptors (SSTRs), lowering cAMP and inhibiting GH secretion</strong>
+ <p style="margin-top:10px;">Octreotide is a long-acting somatostatin analog that binds SSTR2/SSTR5 on pituitary somatotrophs. SSTRs are <strong>Gi-coupled</strong>: G&alpha;i inhibits adenylyl cyclase &rarr; &darr;cAMP &rarr; &darr;PKA &rarr; decreased GH secretion (and tumor growth suppression). Other indications: carcinoid syndrome, VIPoma, glucagonoma, variceal bleeding. Cabergoline (D2 agonist, also Gi) is an alternative commonly used for prolactinomas. This tests both receptor location (cell-surface GPCR) and mechanism (Gi &rarr; &darr;cAMP).</p>
+ </div>
+ </div>
+
+
+ <!- LO 7 &mdash; Cellular Sensitivity &amp; Response ->
+ <h4 style="font-size:15px; font-weight:700; color:#7c3aed; margin:28px 0 8px; padding-bottom:4px; border-bottom:2px solid #ede9fe;">LO 7 &mdash; Cellular Sensitivity &amp; Response</h4>
+
+ <div class="practice-question">
+ <h4>Question 23</h4>
+ <p>A researcher compares insulin dose-response curves for glucose uptake in muscle biopsies from a lean control and a patient with long-standing type 2 diabetes. In the diabetic tissue, the <em>maximum</em> glucose uptake at saturating insulin concentrations is markedly reduced compared with the control. Which mechanism best accounts for this pattern?</p>
+ <p class="option">A) Increased insulin-receptor affinity (decreased Kd)</p>
+ <p class="option">B) Decreased number of functional insulin receptors and/or impaired post-receptor signaling (reduced Vmax)</p>
+ <p class="option">C) Increased circulating insulin concentration</p>
+ <p class="option">D) Up-regulation of GLUT-4 expression</p>
+ <p class="option">E) Increased SHBG levels</p>
+ <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+ <div class="answer">
+ <strong>&#10003; Correct Answer: B &mdash; Decreased number of functional insulin receptors and/or impaired post-receptor signaling (reduced Vmax)</strong>
+ <p style="margin-top:10px;">Cellular sensitivity to a hormone can be altered in three main ways: (1) change in receptor <em>number</em>, (2) change in receptor <em>affinity</em> (EC50 shift), and (3) change in downstream signaling capacity. In insulin resistance, receptor number falls and post-receptor tyrosine-kinase signaling is impaired, which collapses the Vmax of glucose uptake rather than shifting the EC50 &mdash; so even saturating insulin can no longer drive normal uptake. This is precisely the insulin-resistance dose-response pattern illustrated in the lecture.</p>
+ </div>
+ </div>
+
+ <div class="practice-question">
+ <h4>Question 24</h4>
+ <p>A patient with untreated primary adrenal insufficiency has a blunted vasoconstrictive response to infused norepinephrine, even at high doses. Replacing physiologic cortisol restores the normal pressor response. Which term best describes the cortisol&ndash;norepinephrine interaction in the vasculature?</p>
+ <p class="option">A) Synergism</p>
+ <p class="option">B) Antagonism</p>
+ <p class="option">C) Permissiveness</p>
+ <p class="option">D) Tonic inhibition</p>
+ <p class="option">E) Competitive agonism</p>
+ <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+ <div class="answer">
+ <strong>&#10003; Correct Answer: C &mdash; Permissiveness</strong>
+ <p style="margin-top:10px;">A <strong>permissive</strong> effect means one hormone has little or no action on its own but is required for another hormone to exert its full effect. Physiologic cortisol <em>permits</em> catecholamine-mediated vasoconstriction, partly by up-regulating &alpha;1-receptor expression. Without cortisol, norepinephrine&rsquo;s pressor effect is blunted &mdash; contributing to the hypotension of Addisonian crisis. Synergism means combined effect exceeds the sum; antagonism is the opposite. This is a classic example of how circulating factors beyond the hormone itself modify cellular sensitivity and response.</p>
+ </div>
+ </div>
+
+ <div class="practice-question">
+ <h4>Question 25</h4>
+ <p>A cell that normally expresses &beta;1-adrenergic receptors is engineered to express &beta;2-adrenergic receptors instead. When exposed to the same concentration of epinephrine, the engineered cell reaches a half-maximal cAMP response at a lower epinephrine concentration (i.e., its EC50 is left-shifted). Which determinant of cellular sensitivity is most directly responsible for this change?</p>
+ <p class="option">A) The second messenger was switched from cAMP to cGMP</p>
+ <p class="option">B) The receptor isoform has a different affinity (Kd) for epinephrine</p>
+ <p class="option">C) There are more G-proteins in the cell</p>
+ <p class="option">D) The receptors have been internalized</p>
+ <p class="option">E) Epinephrine is being degraded faster in the engineered cell</p>
+ <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+ <div class="answer">
+ <strong>&#10003; Correct Answer: B &mdash; The receptor isoform has a different affinity (Kd) for epinephrine</strong>
+ <p style="margin-top:10px;">EC50 is determined largely by receptor <strong>affinity</strong> for the ligand. &beta;2-adrenergic receptors have higher affinity for epinephrine than &beta;1 do, so the same epinephrine concentration produces a half-maximal signal at a lower drug concentration &mdash; the dose-response curve shifts left. This is a pure receptor-isoform (affinity) effect. Changing receptor <em>number</em> typically shifts Vmax; changes in second messenger identity, G-protein availability, or hormone clearance involve different mechanisms. As the lecture emphasized, sensitivity depends on receptor isoform, affinity, number, post-translational modification, and downstream machinery.</p>
+ </div>
+ </div>
+
+ </section>
+ </main>
+
+ <script>
+ function switchLO(event, loId) {
+ event.preventDefault;
+ // Hide all LO sections
+ document.querySelectorAll('.lo-section').forEach(s => s.classList.remove('active'));
+ // Deactivate all sidebar links
+ document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+ // Show the selected section
+ const section = document.getElementById(loId);
+ if (section) section.classList.add('active');
+ // Mark clicked link as active (walk up if needed)
+ let link = event.target;
+ while (link && !link.classList.contains('sidebar-link')) link = link.parentElement;
+ if (link) link.classList.add('active');
+ // Scroll main content back to top
+ const mainEl = document.querySelector('.main');
+ if (mainEl) mainEl.scrollTop = 0;
+ }
+
+ function toggleAnswer(btn) {
+ const answer = btn.nextElementSibling;
+ const isShowing = answer.classList.contains('show');
+ answer.classList.toggle('show');
+ btn.textContent = isShowing ? 'Reveal Answer' : 'Hide Answer';
+ }
+
+ function toggleFlip(card) { card.classList.toggle('flipped'); }
+
+ function scrollToTop { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+ const backToTopBtn = document.getElementById('backToTop');
+ if (backToTopBtn) {
+ window.addEventListener('scroll', => {
+ backToTopBtn.classList.toggle('show', window.scrollY > 300);
+ });
+ }
+
+ document.querySelectorAll('#mindmap circle').forEach(node => {
+ node.style.cursor = 'pointer';
+ node.addEventListener('mouseenter', function {
+ this.style.filter = 'brightness(1.2) drop-shadow(0 0 8px rgba(0,0,0,0.3))';
+ });
+ node.addEventListener('mouseleave', function { this.style.filter = 'none'; });
+ });
+ 
+ function toggleSection(h3El) {
+ h3El.classList.toggle('collapsed');
+ const body = h3El.nextElementSibling;
+ if (body && body.classList.contains('section-body')) {
+ body.classList.toggle('collapsed');
+ }
+ }
+
+ 
+ function toggleTrap(headerEl) {
+ headerEl.classList.toggle('collapsed');
+ const body = headerEl.nextElementSibling;
+ if (body && body.classList.contains('trap-body')) {
+ body.classList.toggle('collapsed');
+ }
+ }
+
+ 
+ function expandAll {
+ document.querySelectorAll('.lo-section.active .section-body').forEach(el => el.classList.remove('collapsed'));
+ document.querySelectorAll('.lo-section.active .collapsible-h3').forEach(el => el.classList.remove('collapsed'));
+ }
+ function collapseAll {
+ document.querySelectorAll('.lo-section.active .section-body').forEach(el => el.classList.add('collapsed'));
+ document.querySelectorAll('.lo-section.active .collapsible-h3').forEach(el => el.classList.add('collapsed'));
+ }
+
+
+ function toggleH5(h5El) {
+ h5El.classList.toggle('collapsed');
+ const body = h5El.nextElementSibling;
+ if (body && body.classList.contains('h5-body')) {
+ body.classList.toggle('collapsed');
+ }
+ }
+
+ function toggleMnemonic(headerEl) {
+ headerEl.classList.toggle('collapsed');
+ const body = headerEl.nextElementSibling;
+ if (body && body.classList.contains('mnemonic-body')) {
+ body.classList.toggle('collapsed');
+ }
+ }
+
+ function toggleH4(h4El) {
+ h4El.classList.toggle('collapsed');
+ const body = h4El.nextElementSibling;
+ if (body && body.classList.contains('section-body')) {
+ body.classList.toggle('collapsed');
+ }
+ }
+
+ // ── Build a complete standalone export document ─────────────────────
+ // Extracts the real page CSS + content, so all class-based styling works.
+ function buildExportDoc(forPrint) {
+ // 1. Snapshot & expand everything
+ const collapsedEls = Array.from(document.querySelectorAll('.collapsed'));
+ const hiddenSections = Array.from(document.querySelectorAll('.lo-section:not(.active)'));
+ hiddenSections.forEach(s => s.style.display = 'block');
+ collapsedEls.forEach(el => el.classList.remove('collapsed'));
+
+ // 2. Clone main content only (no sidebar)
+ const clone = document.querySelector('.main').cloneNode(true);
+
+ // 3. Restore page immediately (clone is independent)
+ hiddenSections.forEach(s => s.style.display = '');
+ collapsedEls.forEach(el => el.classList.add('collapsed'));
+
+ // 4. Strip all interactive chrome from clone
+ clone.querySelectorAll(
+ '.section-chevron, .h5-chevron, .mnemonic-chevron, .trap-chevron, ' +
+ '.export-actions, .sidebar-footer, .hub-return-btn, button'
+ ).forEach(el => el.remove);
+
+ // 5. Extract the page's own CSS (all <style> tags)
+ const pageCSS = Array.from(document.querySelectorAll('style'))
+ .map(s => s.textContent).join('\n');
+
+ // 6. Override CSS — force everything visible, remove layout constraints
+ const overrideCSS = `
+ * { box-sizing: border-box; }
+ body {
+ display: block !important;
+ overflow: visible !important;
+ height: auto !important;
+ background: white !important;
+ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Calibri, sans-serif;
+ }
+ .main {
+ margin-left: 0 !important;
+ height: auto !important;
+ overflow: visible !important;
+ max-width: 100% !important;
+ padding: 24px 32px !important;
+ }
+ .lo-section {
+ display: block !important;
+ box-shadow: none !important;
+ animation: none !important;
+ ${forPrint ? 'page-break-before: always;' : ''}
+ }
+ .lo-section:first-child { page-break-before: auto !important; }
+ .section-body, .h4-body, .h5-body, .mnemonic-body, .trap-body {
+ display: block !important;
+ }
+ .collapsible-h3.collapsed .section-chevron,
+ .h5-subheading.collapsed .h5-chevron,
+ .mnemonic-toggle-header.collapsed .mnemonic-chevron,
+ .trap-header.collapsed .trap-chevron { transform: none !important; }
+ ${forPrint ? '@media print { .main { padding: 0 !important; } }' : ''}
+ `;
+
+ const ns = forPrint ? '' :
+ `xmlns:o='urn:schemas-microsoft-com:office:office'
+ xmlns:w='urn:schemas-microsoft-com:office:word'
+ xmlns='http://www.w3.org/TR/REC-html40'`;
+
+ return `<!DOCTYPE html>
+<html ${ns}>
+<head>
+ <meta charset="UTF-8">
+ <title>Lecture 1: Introduction to Hormones — HoyaDocs Endocrine Block</title>
+ <style>${pageCSS}</style>
+ <style>${overrideCSS}</style>
+</head>
+<body>
+${clone.outerHTML}
+</body>
+</html>`;
+ }
+
+ // ── Print / Save as PDF ─────────────────────────────────────────────
+ function printAll(btn) {
+ const origHTML = btn.innerHTML;
+ btn.innerHTML = '<span class="btn-icon">⏳</span>Opening…';
+ btn.disabled = true;
+
+ const html = buildExportDoc(true);
+
+ const win = window.open('', '_blank', 'width=960,height=750,scrollbars=yes');
+ if (!win) {
+ alert('Pop-ups are blocked. Please allow pop-ups for this page, then try again.');
+ btn.innerHTML = origHTML;
+ btn.disabled = false;
+ return;
+ }
+
+ win.document.open;
+ win.document.write(html);
+ win.document.close;
+
+ // Auto-trigger print dialog once content is loaded
+ win.onload = function {
+ setTimeout( => {
+ win.focus;
+ win.print;
+ }, 1800);
+ };
+
+ btn.innerHTML = origHTML;
+ btn.disabled = false;
+ }
+
+ // ── Download Word Doc (.doc) ────────────────────────────────────────
+ function downloadWord(btn) {
+ const origHTML = btn.innerHTML;
+ btn.innerHTML = '<span class="btn-icon">⏳</span>Building…';
+ btn.disabled = true;
+
+ const html = buildExportDoc(false);
+
+ const blob = new Blob(['\ufeff', html], { type: 'application/msword' });
+ const url = URL.createObjectURL(blob);
+ const a = document.createElement('a');
+ a.href = url;
+ a.download = 'Lec01-Introduction-to-Hormones.doc';
+ document.body.appendChild(a);
+ a.click;
+ document.body.removeChild(a);
+ URL.revokeObjectURL(url);
+
+ btn.innerHTML = origHTML;
+ btn.disabled = false;
+ }
+
+ </script>
+</body>
+</html>

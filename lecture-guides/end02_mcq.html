@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 2: Thyroid Physiology — HoyaDocs Endocrine Block</title>
+    <style>        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #f8f9fa;
+            color: #1f2937;
+            line-height: 1.6;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 220px;
+            height: 100vh;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            padding: 20px 0 140px;
+            overflow-y: auto;
+            z-index: 100;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-header {
+            padding: 0 15px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .sidebar-header h2 {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-header p {
+            font-size: 12px;
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        .sidebar-nav {
+            padding: 0 15px;
+        }
+
+        .sidebar-link {
+            display: block;
+            padding: 10px 12px;
+            background: #1e293b;
+            color: #cbd5e1;
+            border-left: 3px solid transparent;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            margin-bottom: 6px;
+        }
+
+        .sidebar-link:hover {
+            background: #334155;
+            border-left-color: #2563eb;
+            color: #f1f5f9;
+        }
+
+        .sidebar-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px 15px 12px;
+            background: linear-gradient(to top, #0f172a 60%, transparent);
+        }
+
+        .export-actions {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .export-btn {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            padding: 7px 6px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 6px;
+            color: #cbd5e1;
+            font-size: 10.5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            line-height: 1.2;
+        }
+
+        .export-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            color: #f1f5f9;
+        }
+
+        .export-btn .btn-icon {
+            font-size: 16px;
+            line-height: 1;
+        }
+
+        @media print {
+            .sidebar, .sidebar-footer { display: none !important; }
+            body { display: block !important; overflow: visible !important; height: auto !important; background: white !important; }
+            .main { margin-left: 0 !important; height: auto !important; overflow: visible !important; max-width: 100% !important; padding: 20px !important; }
+            .lo-section { display: block !important; box-shadow: none !important; border: 1px solid #e2e8f0; margin-bottom: 30px; page-break-before: always; }
+            .lo-section:first-child { page-break-before: auto; }
+            .section-body, .h4-body, .h5-body, .mnemonic-body { display: block !important; }
+            .section-chevron, .h5-chevron, .mnemonic-chevron { display: none !important; }
+            .header { page-break-after: avoid; }
+            a { color: inherit; text-decoration: none; }
+        }
+
+        .hub-return-btn {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            width: 100%;
+            padding: 9px 12px;
+            background: rgba(37, 99, 235, 0.18);
+            border: 1px solid rgba(96, 165, 250, 0.35);
+            border-radius: 6px;
+            color: #93c5fd;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .hub-return-btn:hover {
+            background: rgba(37, 99, 235, 0.32);
+            border-color: rgba(96, 165, 250, 0.7);
+            color: #dbeafe;
+        }
+
+        .hub-return-btn .btn-arrow {
+            font-size: 14px;
+            line-height: 1;
+        }
+
+        .sidebar-link.active {
+            background: #1e293b;
+            border-left-color: #2563eb;
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        .sidebar-divider {
+            height: 1px;
+            background: #334155;
+            margin: 12px 0;
+        }
+
+        /* Main Content */
+        .main {
+            margin-left: 220px;
+            flex: 1;
+            padding: 40px;
+            max-width: 1000px;
+            overflow-y: auto;
+            height: 100vh;
+        }
+
+        .header {
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #0f172a;
+        }
+
+        .header p {
+            font-size: 16px;
+            color: #475569;
+            margin: 0;
+        }
+
+        /* LO Sections — show only active */
+        .lo-section {
+            display: none;
+            background: white;
+            border-radius: 8px;
+            padding: 28px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lo-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .lo-section.physio {
+        }
+
+        .lo-section.path {
+        }
+
+        .lo-section.pharm {
+        }
+
+        .lo-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 5px;
+        }
+
+        .lo-subtitle {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        /* ── Section headers inside LO content ── */
+        .lo-content h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1e3a5f;
+            margin: 24px 0 10px;
+            padding: 6px 10px;
+            border-left: 3px solid #2563eb;
+            background: transparent;
+        }
+
+        .lo-content h4 {
+            font-size: 14.5px;
+            font-weight: 700;
+            color: #1e3a5f;
+            background: #dbeafe;
+            border-radius: 4px;
+            padding: 6px 12px;
+            margin: 18px 0 8px;
+        }
+
+        .lo-content h5 {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1e293b;
+            margin: 12px 0 4px;
+        }
+
+        .lo-content p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+
+        .lo-content ul {
+            margin-left: 22px;
+            margin-bottom: 12px;
+        }
+
+        .lo-content ol {
+            margin-left: 22px;
+            margin-bottom: 12px;
+        }
+
+        .lo-content li {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #1e293b;
+            margin-bottom: 6px;
+        }
+
+        /* ── Tables ── */
+        .lo-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0 20px;
+            font-size: 13px;
+        }
+
+        .lo-content table thead tr {
+            background: #1e3a5f;
+            color: white;
+        }
+
+        .lo-content table th {
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 12px;
+            letter-spacing: 0.3px;
+            color: white;
+        }
+
+        .lo-content table td {
+            padding: 9px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #1e293b;
+            vertical-align: top;
+        }
+
+        .lo-content table tbody tr:nth-child(even) {
+            background: #eff6ff;
+        }
+
+        .lo-content table tbody tr:hover {
+            background: #dbeafe;
+        }
+
+        /* ── Section rule ── */
+        .section-rule {
+            border: none;
+            border-top: 1px solid #e2e8f0;
+            margin: 22px 0;
+        }
+
+        /* ── Buzzword pills (for key terms row below a concept) ── */
+        .buzzwords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 10px 0 16px;
+        }
+
+        .buzzword {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            padding: 3px 10px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        /* ── Callout boxes (bottom of each LO) ── */
+        /* TRAP — red */
+        .exam-trap {
+            background-color: #fef2f2;
+            border-left: 4px solid #dc2626;
+            padding: 14px 16px;
+            margin: 16px 0;
+            border-radius: 4px;
+        }
+
+        .exam-trap .trap-header {
+            font-weight: 700;
+            color: #b91c1c;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .exam-trap ul { margin-left: 18px; margin-top: 6px; }
+        .exam-trap li { font-size: 13px; margin-bottom: 6px; color: #1f2937; line-height: 1.6; }
+        .exam-trap p { font-size: 13px; color: #1f2937; line-height: 1.6; margin-top: 6px; }
+        .exam-trap strong { color: #991b1b; }
+
+        /* HY bullets — yellow */
+        .hy-box {
+            background-color: #fefce8;
+            border-left: 4px solid #ca8a04;
+            padding: 14px 16px;
+            margin: 16px 0;
+            border-radius: 4px;
+        }
+
+        .hy-box strong { color: #a16207; font-weight: 700; font-size: 13px; }
+        .hy-box ul { margin-left: 18px; margin-top: 6px; }
+        .hy-box li { font-size: 13px; margin-bottom: 6px; color: #1f2937; line-height: 1.6; }
+
+        /* Mnemonic — orange */
+        .mnemonic {
+            background-color: #fff7ed;
+            border-left: 4px solid #ea580c;
+            padding: 14px 16px;
+            margin: 16px 0;
+            border-radius: 4px;
+        }
+
+        .mnemonic .mnemonic-header {
+            font-weight: 700;
+            color: #c2410c;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .mnemonic strong { color: #c2410c; font-size: 13px; }
+        .mnemonic ul { margin-left: 18px; margin-top: 6px; }
+        .mnemonic li { font-size: 13px; margin-bottom: 5px; color: #431407; line-height: 1.5; }
+
+        /* ── details/collapsible ── */
+        details { margin: 10px 0; }
+        details summary {
+            cursor: pointer;
+            color: #1e40af;
+            font-weight: 600;
+            font-size: 13px;
+            padding: 5px 0;
+            user-select: none;
+            list-style: none;
+        }
+        details summary:hover { text-decoration: underline; }
+        details summary::before { content: "▶ "; font-size: 10px; }
+        details[open] summary::before { content: "▼ "; }
+
+        /* ── Testing Your Understanding ── */
+        .tyu-section {
+            margin: 24px 0;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 18px;
+        }
+
+        .tyu-section > h4 {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 14px;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .practice-question {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-left: 3px solid #2563eb;
+            padding: 16px;
+            margin: 14px 0;
+            border-radius: 6px;
+        }
+
+        .practice-question h4 {
+            color: #1d4ed8;
+            font-size: 13px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .practice-question p { font-size: 13px; }
+        .practice-question .option { color: #475569; font-style: italic; margin-bottom: 4px; font-size: 13px; }
+        .answer {
+            display: none;
+            margin-top: 12px;
+            background: #eff6ff;
+            border-left: 3px solid #2563eb;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            line-height: 1.7;
+            color: #1f2937;
+        }
+        .answer.show { display: block; }
+        .answer strong { color: #1e3a5f; }
+    
+    
+        /* In-page Table of Contents */
+        .lo-toc {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 14px 18px;
+            margin-bottom: 24px;
+            font-size: 13px;
+        }
+        .lo-toc-title {
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: #64748b;
+            margin-bottom: 10px;
+        }
+        .lo-toc ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .lo-toc li {
+            margin-bottom: 5px;
+        }
+        .lo-toc a {
+            color: #1e3a5f;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .lo-toc a:hover {
+            text-decoration: underline;
+            color: #2563eb;
+        }
+
+        
+        /* Collapsible h3 sections */
+        .collapsible-h3 {
+            cursor: pointer;
+            user-select: none;
+        }
+        .collapsible-h3:hover {
+            color: #1e3a8a;
+        }
+        .section-chevron {
+            display: inline-block;
+            font-size: 12px;
+            color: #2563eb;
+            transition: transform 0.2s ease;
+            margin-right: 6px;
+        }
+        .collapsible-h3.collapsed .section-chevron {
+            transform: rotate(-90deg);
+        }
+        .section-body {
+            padding-left: 16px;
+            margin-left: 4px;
+        }
+        .section-body.collapsed {
+            display: none;
+        }
+
+        
+        /* Indented content under h4 subheadings */
+        .h4-body {
+            padding-left: 14px;
+            margin-left: 4px;
+            margin-bottom: 6px;
+        }
+        
+        /* USMLE Summary box */
+        .usmle-summary {
+            background: #eff6ff;
+            border-left: 4px solid #2563eb;
+            padding: 14px 16px;
+            margin: 16px 0;
+            border-radius: 4px;
+        }
+        .usmle-header {
+            font-weight: 700;
+            color: #1e40af;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .usmle-summary ul { margin-left: 18px; margin-top: 6px; }
+        .usmle-summary li { font-size: 13px; margin-bottom: 6px; color: #1f2937; line-height: 1.6; }
+        .usmle-summary p  { font-size: 13px; color: #1f2937; line-height: 1.6; margin-top: 6px; }
+        
+        /* Trap card toggle */
+        .trap-header {
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .trap-chevron {
+            font-size: 11px;
+            font-weight: 400;
+            color: #b91c1c;
+            transition: transform 0.2s ease;
+            margin-left: 8px;
+            flex-shrink: 0;
+        }
+        .trap-header.collapsed .trap-chevron {
+            transform: rotate(-90deg);
+        }
+        .trap-body.collapsed {
+            display: none;
+        }
+        
+        /* Collapse/Expand All controls */
+        .lo-controls {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .lo-controls button {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: 4px;
+            border: 1px solid #2563eb;
+            cursor: pointer;
+            background: white;
+            color: #2563eb;
+            transition: all 0.15s ease;
+        }
+        .lo-controls button:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        /* Collapsible h3 styles applied globally (some h3s may fall outside .lo-content) */
+        h3.collapsible-h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1e3a5f;
+            margin: 24px 0 10px;
+            padding: 6px 10px;
+            border-left: 3px solid #2563eb;
+            cursor: pointer;
+            user-select: none;
+        }
+        /* Override lo-content h4 blue-pill styling inside practice questions */
+        .practice-question h4,
+        .tyu-section .practice-question h4 {
+            background: none !important;
+            padding: 0 !important;
+            border-radius: 0 !important;
+            margin: 4px 0 8px !important;
+            color: #1d4ed8;
+            font-size: 14.5px;
+            font-weight: 700;
+        }
+                /* Learning Objectives covered listing */
+        .lo-covered {
+            background: #f0f4ff;
+            border: 1px solid #c7d2fe;
+            border-left: 4px solid #4f46e5;
+            border-radius: 6px;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            font-size: 13px;
+        }
+        .lo-covered-title {
+            font-weight: 700;
+            color: #3730a3;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .lo-covered ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        .lo-covered li {
+            margin-bottom: 3px;
+            color: #1e293b;
+            line-height: 1.5;
+        }
+        .lo-covered li strong {
+            color: #3730a3;
+        }
+
+        .lo-acc-header.open .acc-chevron { transform: rotate(180deg); }
+        .lo-acc-header .acc-chevron { transition: transform 0.2s ease; display:inline-block; }
+        .lo-accordion-item { transition: box-shadow 0.15s; }
+        .lo-acc-header:hover { background: #f1f5f9 !important; }
+
+        /* Sub-subheading h5 inside GPCR sections */
+        .h5-subheading {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1e3a5f;
+            background: #eff6ff;
+            border-left: 2px solid #93c5fd;
+            border-radius: 3px;
+            padding: 4px 10px;
+            margin: 14px 0 6px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .h5-subheading:hover { background: #dbeafe; }
+        .h5-subheading .h5-chevron {
+            display: inline-block;
+            font-size: 10px;
+            color: #2563eb;
+            transition: transform 0.2s ease;
+            margin-right: 5px;
+        }
+        .h5-subheading.collapsed .h5-chevron {
+            transform: rotate(-90deg);
+        }
+        .h5-body {
+            padding-left: 18px;
+            margin-left: 4px;
+            margin-bottom: 8px;
+        }
+        .h5-body.collapsed {
+            display: none;
+        }
+
+        /* Mnemonic toggle */
+        .mnemonic-toggle-header {
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .mnemonic-toggle-header .mnemonic-chevron {
+            font-size: 11px;
+            font-weight: 400;
+            color: #c2410c;
+            transition: transform 0.2s ease;
+            margin-left: 8px;
+            flex-shrink: 0;
+        }
+        .mnemonic-toggle-header.collapsed .mnemonic-chevron {
+            transform: rotate(-90deg);
+        }
+        .mnemonic-body.collapsed {
+            display: none;
+        }
+
+        /* Collapsible h4 (subheader style, not full h3) */
+        h4.collapsible-h4 {
+            cursor: pointer;
+            user-select: none;
+        }
+        h4.collapsible-h4:hover {
+            background: #bfdbfe;
+        }
+        h4.collapsible-h4 .h4-chevron {
+            display: inline-block;
+            font-size: 11px;
+            color: #2563eb;
+            transition: transform 0.2s ease;
+            margin-right: 5px;
+        }
+        h4.collapsible-h4.collapsed .h4-chevron {
+            transform: rotate(-90deg);
+        }
+
+</style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="https://strettyit10.github.io/Block4-Endo/"
+               target="_blank" rel="noopener noreferrer"
+               style="display:inline-block; margin-bottom:8px; font-size:17px; font-weight:700; color:#60a5fa; text-decoration:none; letter-spacing:0.5px; border-bottom:1px solid rgba(96,165,250,0.35); padding-bottom:1px; transition:color 0.2s;"
+               onmouseover="this.style.color='#93c5fd'"
+               onmouseout="this.style.color='#60a5fa'">HoyaDocs ↗</a>
+            <h2>Lecture 2</h2>
+            <p>Thyroid Physiology</p>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#overview" class="sidebar-link active" onclick="switchLO(event,'overview')">📋 Lecture Overview</a>
+            <div class="sidebar-divider"></div>
+            <a href="#practice" class="sidebar-link" onclick="switchLO(event,'practice')">Practice Questions</a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="export-actions">
+                <button class="export-btn" onclick="printAll(this)" title="Save as PDF">
+                    <span class="btn-icon">🖨️</span>Print PDF
+                </button>
+                <button class="export-btn" onclick="downloadWord(this)" title="Download as Word document">
+                    <span class="btn-icon">📄</span>Word Doc
+                </button>
+            </div>
+            <a href="https://strettyit10.github.io/Block4-Endocrine/resource-mapping/resource_hub.html"
+               class="hub-return-btn" target="_blank" rel="noopener noreferrer">
+                <span class="btn-arrow">&#8592;</span> Study Hub Resources
+            </a>
+        </div>
+    </aside>
+    <!-- Main Content -->
+    <main class="main">
+        <div class="header">
+            <h1>Lecture 2: Thyroid Physiology</h1>
+            <p>HoyaDocs — Endocrine Block | USMLE Step 1 Preparation</p>
+        </div>
+        <!-- ======================== OVERVIEW ======================== -->
+        <section class="lo-section active" id="overview">
+            <div class="lo-content">
+
+                <!-- Official LO Map -->
+                <h3 style="font-size:16px; font-weight:700; color:#1e3a5f; margin:32px 0 4px; padding:6px 10px; border-left:3px solid #2563eb;">Official Learning Objectives Map</h3>
+                <p style="font-size:13px; color:#475569; margin-bottom:14px; padding-left:10px;">Click any objective to see where it is covered and which practice questions test it.</p>
+                <div id="lo-accordion">
+
+            <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                     style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                    <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">1</span>
+                    <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Describe the anatomical connections between the hypothalamus and pituitary gland, and explain the functional interactions between them</span>
+                    <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                </div>
+                <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                    <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q1</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q2</a></div>
+                </div>
+            </div>
+            <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                     style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                    <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">2</span>
+                    <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Identify the nuclei of the hypothalamus and the hormones they secrete</span>
+                    <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                </div>
+                <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                    <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q3</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q4</a></div>
+                </div>
+            </div>
+            <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                     style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                    <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">3</span>
+                    <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Describe the anatomical organization and histology of the pituitary gland, and the cells and structures therein</span>
+                    <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                </div>
+                <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                    <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q5</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q6</a></div>
+                </div>
+            </div>
+            <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                     style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                    <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">4</span>
+                    <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Identify the pituitary hormones, and explain how specific hypothalamic hormones regulate the release of each one</span>
+                    <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                </div>
+                <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                    <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q7</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q8</a></div>
+                </div>
+            </div>
+            <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                     style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                    <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">5</span>
+                    <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Describe the feedback loops that regulate hormone secretion, and explain the origin and targets for each loop</span>
+                    <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                </div>
+                <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                    <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q9</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q10</a></div>
+                </div>
+            </div>
+            <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                     style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                    <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">6</span>
+                    <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Predict the changes in hypothalamic, pituitary, and target organ hormone secretion if one particular hormone is increased or decreased (all iterations)</span>
+                    <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                </div>
+                <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                    <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q11</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q12</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q13</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q14</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q15</a></div>
+                </div>
+            </div>
+                </div><!-- /#lo-accordion -->
+
+            </div><!-- /.lo-content (overview) -->
+        </section><!-- /#overview -->
+
+        <!-- ======================== LO1: SYNTHESIS ======================== -->
+
+        <!-- /#lo1 -->
+
+        <!-- ======================== LO2: T3/T4 & TSH ======================== -->
+
+        <!-- /#lo2 -->
+
+        <!-- ======================== LO3: THYROID HORMONE ACTION ======================== -->
+
+        <!-- /#lo3 -->
+
+        <!-- ======================== LO4: LABS & PHARM ======================== -->
+
+        <!-- /#lo4 -->
+
+        <!-- ======================== LO5: GRAVES DISEASE ======================== -->
+
+        <!-- /#lo5 -->
+
+        <!-- ======================== PRACTICE QUESTIONS ======================== -->
+        <section class="practice-section lo-section" id="practice">
+            <h3 id="practice-questions">Practice Questions</h3>
+
+            <!-- LO 1 &mdash; Anatomical Connections Between Hypothalamus and Pituitary -->
+            <h4 style="font-size:15px; font-weight:700; color:#7c3aed; margin:28px 0 8px; padding-bottom:4px; border-bottom:2px solid #ede9fe;">LO 1 &mdash; Anatomical Connections Between Hypothalamus and Pituitary</h4>
+
+            <div class="practice-question">
+                <h4>Question 1</h4>
+                <p>A 45-year-old man undergoes transsphenoidal resection of a large pituitary macroadenoma. The surgeon carefully preserves the infundibular stalk whenever possible because severing it interrupts the anatomical connection that delivers hypothalamic hormones to the anterior pituitary. Which structure is this connection?</p>
+                <p class="option">A) The third ventricle, through which hypothalamic hormones diffuse</p>
+                <p class="option">B) The hypophyseal portal venous system running in the pituitary stalk</p>
+                <p class="option">C) Direct axonal projections from the hypothalamus into the anterior pituitary</p>
+                <p class="option">D) Cerebrospinal fluid circulation via the suprasellar cistern</p>
+                <p class="option">E) The internal carotid artery&rsquo;s cavernous segment</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>&#10003; Correct Answer: B &mdash; The hypophyseal portal venous system running in the pituitary stalk</strong>
+                    <p style="margin-top:10px;">The <strong>hypophyseal portal system</strong> is a capillary-vein-capillary network running in the pituitary stalk: superior hypophyseal arteries form a primary capillary plexus in the median eminence, receiving hypothalamic releasing/inhibiting hormones (TRH, CRH, GnRH, GHRH, dopamine, somatostatin); these drain into the long portal veins, then into a secondary capillary plexus in the anterior pituitary where hormones act on target cells in concentrations ~1000&times; systemic. Stalk injury disconnects this supply &rarr; hypopituitarism with <em>one exception</em>: dopamine (PIH) inhibition of lactotrophs is also lost, so prolactin rises (&lsquo;stalk-effect&rsquo; hyperprolactinemia). The posterior pituitary, by contrast, receives direct axonal projections, not portal blood.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 2</h4>
+                <p>A 30-year-old woman with central diabetes insipidus cannot produce antidiuretic hormone (ADH). Which anatomical connection between hypothalamus and pituitary is most directly disrupted in this condition?</p>
+                <p class="option">A) Portal venous drainage from median eminence to adenohypophysis</p>
+                <p class="option">B) Direct axonal projections from supraoptic and paraventricular nuclei to the neurohypophysis (posterior pituitary)</p>
+                <p class="option">C) Diffusion of hormones across the blood&ndash;brain barrier</p>
+                <p class="option">D) The inferior hypophyseal artery perfusing the anterior lobe</p>
+                <p class="option">E) The pars intermedia secreting MSH</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>&#10003; Correct Answer: B &mdash; Direct axonal projections from supraoptic and paraventricular nuclei to the neurohypophysis (posterior pituitary)</strong>
+                    <p style="margin-top:10px;">The posterior pituitary (neurohypophysis) is a neural extension of the hypothalamus. Magnocellular neurons in the <strong>supraoptic and paraventricular nuclei</strong> send their axons down the pituitary stalk to terminate in the posterior pituitary, where they release <strong>ADH and oxytocin</strong> directly into systemic circulation. The posterior pituitary has no portal blood supply and does not synthesize its own hormones &mdash; it simply stores and releases what the hypothalamus delivers. Damage to these axons (trauma, surgery, tumor, autoimmune hypophysitis) causes central DI. This hypothalamus&ndash;neurohypophysis axonal projection is a defining <em>anatomical and functional</em> connection in LO 1.</p>
+                </div>
+            </div>
+
+
+            <!-- LO 2 &mdash; Hypothalamic Nuclei and Their Hormones -->
+            <h4 style="font-size:15px; font-weight:700; color:#7c3aed; margin:28px 0 8px; padding-bottom:4px; border-bottom:2px solid #ede9fe;">LO 2 &mdash; Hypothalamic Nuclei and Their Hormones</h4>
+
+            <div class="practice-question">
+                <h4>Question 3</h4>
+                <p>A 34-year-old woman in active labor receives an intravenous oxytocin infusion to augment uterine contractions. The endogenous hormone she is receiving is normally synthesized in which hypothalamic nucleus?</p>
+                <p class="option">A) Arcuate nucleus</p>
+                <p class="option">B) Ventromedial nucleus</p>
+                <p class="option">C) Suprachiasmatic nucleus</p>
+                <p class="option">D) Supraoptic and paraventricular nuclei</p>
+                <p class="option">E) Preoptic nucleus</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>&#10003; Correct Answer: D &mdash; Supraoptic and paraventricular nuclei</strong>
+                    <p style="margin-top:10px;"><strong>Oxytocin and ADH</strong> are synthesized by magnocellular neurons in the <strong>supraoptic (SON) and paraventricular (PVN) nuclei</strong> of the hypothalamus and transported via axons to the posterior pituitary, where they are released into systemic circulation. The PVN primarily makes oxytocin (milk let-down, uterine contraction during labor); the SON primarily makes ADH. The arcuate nucleus makes GnRH and GHRH; the ventromedial nucleus is the &lsquo;satiety center&rsquo;; the suprachiasmatic nucleus is the master circadian clock; the preoptic nucleus regulates thermoregulation and gonadotropin release. Mapping hypothalamic nucleus &rarr; hormone is classic LO 2 material.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 4</h4>
+                <p>A patient with Kallmann syndrome has failed pubertal development. Labs show low LH, FSH, and testosterone. The defect involves neurons that normally migrate from the olfactory placode to a hypothalamic nucleus where they secrete a specific releasing hormone. Which nucleus and hormone are affected?</p>
+                <p class="option">A) Arcuate nucleus; GnRH</p>
+                <p class="option">B) Supraoptic nucleus; oxytocin</p>
+                <p class="option">C) Paraventricular nucleus; CRH</p>
+                <p class="option">D) Suprachiasmatic nucleus; melatonin</p>
+                <p class="option">E) Lateral hypothalamus; orexin</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>&#10003; Correct Answer: A &mdash; Arcuate nucleus; GnRH</strong>
+                    <p style="margin-top:10px;">In Kallmann syndrome, GnRH neurons fail to migrate from the olfactory placode to the <strong>arcuate nucleus</strong>, producing hypogonadotropic hypogonadism (&darr;GnRH &rarr; &darr;LH/FSH &rarr; &darr;sex steroids) plus anosmia. The arcuate nucleus is the origin of the <strong>GnRH pulse generator</strong> &mdash; pulsatile GnRH release (every ~90 min) drives LH and FSH secretion. The arcuate also produces GHRH and dopamine (PIH). Understanding which nucleus produces which hormone is exactly what LO 2 asks; Kallmann is the classic clinical corollary.</p>
+                </div>
+            </div>
+
+
+            <!-- LO 3 &mdash; Pituitary Anatomy and Histology -->
+            <h4 style="font-size:15px; font-weight:700; color:#7c3aed; margin:28px 0 8px; padding-bottom:4px; border-bottom:2px solid #ede9fe;">LO 3 &mdash; Pituitary Anatomy and Histology</h4>
+
+            <div class="practice-question">
+                <h4>Question 5</h4>
+                <p>A medical student reviews pituitary histology. Which statement best describes the cellular composition and developmental origin of the anterior pituitary (adenohypophysis)?</p>
+                <p class="option">A) Derived from neural ectoderm; composed of modified glial cells (pituicytes) and unmyelinated axons</p>
+                <p class="option">B) Derived from Rathke&rsquo;s pouch (oral ectoderm); composed of five hormone-secreting cell types stained as acidophils, basophils, or chromophobes</p>
+                <p class="option">C) Derived from mesoderm; composed of chromaffin cells</p>
+                <p class="option">D) Derived from neural crest; composed of parafollicular C-cells</p>
+                <p class="option">E) Derived from endoderm; composed of follicular cells surrounding colloid</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>&#10003; Correct Answer: B &mdash; Derived from Rathke&rsquo;s pouch (oral ectoderm); composed of five hormone-secreting cell types stained as acidophils, basophils, or chromophobes</strong>
+                    <p style="margin-top:10px;">The <strong>adenohypophysis</strong> develops from <strong>Rathke&rsquo;s pouch</strong>, an evagination of oral ectoderm. On H&amp;E, its hormone-secreting cells are classified by staining: <strong>acidophils</strong> (somatotrophs &rarr; GH; lactotrophs &rarr; prolactin), <strong>basophils</strong> (corticotrophs &rarr; ACTH; thyrotrophs &rarr; TSH; gonadotrophs &rarr; LH/FSH), and <strong>chromophobes</strong> (mostly nonsecretory or degranulated). <em>Craniopharyngiomas</em> arise from Rathke&rsquo;s pouch remnants &mdash; that&rsquo;s why they sit suprasellar. The neurohypophysis, by contrast, is neural ectoderm: pituicytes + unmyelinated axon terminals storing ADH/oxytocin. Distinguishing the two embryologic origins is core LO 3 content.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 6</h4>
+                <p>A pituitary adenoma biopsy stains strongly with eosin (acidophilic) on H&amp;E. The patient has coarse facial features, enlarged hands and feet, and elevated IGF-1. Which cell type is the adenoma most likely derived from, and roughly what proportion of the normal anterior pituitary does this cell type represent?</p>
+                <p class="option">A) Corticotroph; ~15%</p>
+                <p class="option">B) Thyrotroph; ~5%</p>
+                <p class="option">C) Gonadotroph; ~10%</p>
+                <p class="option">D) Somatotroph; ~50%</p>
+                <p class="option">E) Lactotroph; ~20%</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>&#10003; Correct Answer: D &mdash; Somatotroph; ~50%</strong>
+                    <p style="margin-top:10px;">Acromegaly from excess GH points to a <strong>somatotroph adenoma</strong>. Somatotrophs are <strong>acidophilic</strong> and constitute the <strong>most abundant</strong> anterior pituitary cell (~50%) &mdash; which is why GH adenomas are the second most common secretory adenoma (after prolactinomas, which also arise from acidophils, ~15&ndash;20%). Approximate proportions to know: somatotrophs ~50%, lactotrophs ~15&ndash;20%, corticotrophs ~15&ndash;20%, gonadotrophs ~10%, thyrotrophs ~5%. LO 3 emphasizes mapping histologic appearance + approximate cell composition to function.</p>
+                </div>
+            </div>
+
+
+            <!-- LO 4 &mdash; Pituitary Hormones and Their Hypothalamic Regulation -->
+            <h4 style="font-size:15px; font-weight:700; color:#7c3aed; margin:28px 0 8px; padding-bottom:4px; border-bottom:2px solid #ede9fe;">LO 4 &mdash; Pituitary Hormones and Their Hypothalamic Regulation</h4>
+
+            <div class="practice-question">
+                <h4>Question 7</h4>
+                <p>A 26-year-old woman with precocious puberty is started on leuprolide, a GnRH agonist given as a continuous long-acting injection. After an initial flare, her LH and FSH levels fall, and pubertal progression halts. Which principle of hypothalamic regulation of the anterior pituitary best explains this paradox?</p>
+                <p class="option">A) Continuous GnRH exposure down-regulates and desensitizes gonadotroph GnRH receptors; only pulsatile GnRH maintains LH/FSH secretion</p>
+                <p class="option">B) Leuprolide is a competitive GnRH receptor antagonist</p>
+                <p class="option">C) Leuprolide directly inhibits the anterior pituitary&rsquo;s Gs-coupled adenylyl cyclase</p>
+                <p class="option">D) Leuprolide crosses the blood&ndash;brain barrier and blocks the arcuate nucleus</p>
+                <p class="option">E) Leuprolide stimulates dopamine release, which tonically inhibits gonadotrophs</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>&#10003; Correct Answer: A &mdash; Continuous GnRH exposure down-regulates and desensitizes gonadotroph GnRH receptors; only pulsatile GnRH maintains LH/FSH secretion</strong>
+                    <p style="margin-top:10px;">Physiologic hypothalamic regulation of the gonadotrophs requires <strong>pulsatile GnRH</strong> release (~1 pulse / 90 min from the arcuate nucleus). Continuous exposure to a GnRH agonist causes an initial LH/FSH flare followed by <strong>desensitization and down-regulation</strong> of gonadotroph GnRH receptors &rarr; suppressed LH/FSH &rarr; suppressed sex steroids. This is used clinically for precocious puberty, prostate cancer, endometriosis, and uterine fibroids. The opposite (pulsatile GnRH infusion via pump) is used to <em>restore</em> fertility in hypothalamic amenorrhea. Pattern of hypothalamic signaling &mdash; tonic vs pulsatile &mdash; is a central LO 4 concept.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 8</h4>
+                <p>A 34-year-old woman is struck by a car; imaging shows a sheared pituitary stalk. Over subsequent weeks, her prolactin rises, while her other anterior pituitary hormones fall. Which hypothalamic&ndash;pituitary regulatory relationship best explains the rise in prolactin?</p>
+                <p class="option">A) TRH is the dominant prolactin stimulus; stalk section increases TRH delivery</p>
+                <p class="option">B) The hypothalamus tonically inhibits prolactin via dopamine (PIH) acting on lactotroph D2 receptors; stalk section removes this inhibition</p>
+                <p class="option">C) Estrogen surges when the stalk is severed</p>
+                <p class="option">D) Lactotrophs begin autocrine signaling after injury</p>
+                <p class="option">E) Prolactin is a posterior pituitary hormone released independently of the stalk</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>&#10003; Correct Answer: B &mdash; The hypothalamus tonically inhibits prolactin via dopamine (PIH) acting on lactotroph D2 receptors; stalk section removes this inhibition</strong>
+                    <p style="margin-top:10px;">Prolactin is unique among anterior pituitary hormones in being under <strong>tonic hypothalamic inhibition</strong> by <strong>dopamine (prolactin-inhibiting hormone, PIH)</strong> acting on lactotroph D2 receptors. When the pituitary stalk is disrupted (trauma, large macroadenoma, stalk mass effect), dopamine no longer reaches the anterior pituitary &rarr; lactotrophs are disinhibited &rarr; prolactin rises (&lsquo;stalk effect&rsquo;); other hormones fall because their hypothalamic <em>stimulators</em> (TRH, CRH, GnRH, GHRH) can no longer reach them. This is also why D2 agonists (cabergoline, bromocriptine) treat prolactinomas. Tonic inhibition is the signature hypothalamic regulation of lactotrophs in LO 4.</p>
+                </div>
+            </div>
+
+
+            <!-- LO 5 &mdash; Feedback Loops Regulating Hormone Secretion -->
+            <h4 style="font-size:15px; font-weight:700; color:#7c3aed; margin:28px 0 8px; padding-bottom:4px; border-bottom:2px solid #ede9fe;">LO 5 &mdash; Feedback Loops Regulating Hormone Secretion</h4>
+
+            <div class="practice-question">
+                <h4>Question 9</h4>
+                <p>A 48-year-old man has been taking 20 mg of prednisone daily for 9 months for rheumatoid arthritis. He is admitted for emergency surgery. The anesthesiologist gives stress-dose hydrocortisone. Which feedback physiology best explains why this is necessary?</p>
+                <p class="option">A) Exogenous prednisone stimulates the adrenal cortex, so extra stimulation is needed for surgery</p>
+                <p class="option">B) Chronic exogenous glucocorticoid exerts negative feedback on hypothalamic CRH and pituitary ACTH, causing adrenal cortex atrophy and an inability to mount a stress cortisol response</p>
+                <p class="option">C) Prednisone blocks cortisol synthesis directly at the level of desmolase</p>
+                <p class="option">D) Prednisone competitively inhibits the glucocorticoid receptor; stress doses overcome the blockade</p>
+                <p class="option">E) Prednisone increases CBG, lowering free cortisol</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>&#10003; Correct Answer: B &mdash; Chronic exogenous glucocorticoid exerts negative feedback on hypothalamic CRH and pituitary ACTH, causing adrenal cortex atrophy and an inability to mount a stress cortisol response</strong>
+                    <p style="margin-top:10px;">The HPA axis is governed by <strong>negative feedback</strong>: cortisol (or exogenous glucocorticoids like prednisone) inhibits hypothalamic CRH and pituitary ACTH. Chronic suppression leads to <strong>adrenal cortex atrophy</strong> over weeks to months. When the stressed axis cannot mount its normal cortisol surge, the patient is at risk for <strong>adrenal crisis</strong>. Stress-dose glucocorticoids are required perioperatively; abrupt steroid withdrawal can also precipitate crisis. This is the signature clinical application of LO 5 feedback physiology.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 10</h4>
+                <p>During the menstrual cycle, a rising estradiol level that exceeds ~200 pg/mL sustained for &gt;48 hours triggers a massive LH surge that causes ovulation. Which type of feedback loop is this, and why is it physiologically notable?</p>
+                <p class="option">A) Negative feedback; preserves homeostasis</p>
+                <p class="option">B) Tonic inhibition; maintains a low resting state</p>
+                <p class="option">C) Positive feedback; rare in endocrinology and essential for the LH surge that drives ovulation</p>
+                <p class="option">D) Feed-forward; anticipatory but not self-amplifying</p>
+                <p class="option">E) Neural reflex; bypasses the HPG axis entirely</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>&#10003; Correct Answer: C &mdash; Positive feedback; rare in endocrinology and essential for the LH surge that drives ovulation</strong>
+                    <p style="margin-top:10px;">Most endocrine feedback is <strong>negative</strong> (HPT, HPA, cortisol/aldo on target organs). The mid-cycle LH surge is one of the few clear examples of <strong>positive feedback</strong> in endocrinology: rising estradiol from the dominant follicle, once it crosses the threshold and is sustained, <em>switches</em> from mild negative feedback to robust positive feedback on the hypothalamus (kisspeptin/GnRH) and pituitary (gonadotroph LH stores) &rarr; surge &rarr; ovulation ~36 hours later. (The other classic positive-feedback example is oxytocin during labor.) LO 5 requires you to name the loop type and trace its origin and target.</p>
+                </div>
+            </div>
+
+
+            <!-- LO 6 &mdash; Predict Hormone Changes Across the Axis -->
+            <h4 style="font-size:15px; font-weight:700; color:#7c3aed; margin:28px 0 8px; padding-bottom:4px; border-bottom:2px solid #ede9fe;">LO 6 &mdash; Predict Hormone Changes Across the Axis</h4>
+
+            <div class="practice-question">
+                <h4>Question 11</h4>
+                <p>A 7-year-old boy living in a mountainous, iodine-deficient region has a visible neck mass that moves with swallowing. TSH is 18 mIU/L (elevated) and free T4 is low. His mother has the same condition. Which set of hormone changes best describes the axis, and what is the most likely mechanism?</p>
+                <p class="option">A) ↑TRH, ↓TSH, ↓T4 &mdash; pituitary failure</p>
+                <p class="option">B) ↓TRH, ↓TSH, ↓T4 &mdash; hypothalamic failure</p>
+                <p class="option">C) ↑TRH, ↑TSH, ↓T4 &mdash; primary thyroid (target organ) failure from iodine deficiency</p>
+                <p class="option">D) ↓TRH, ↓TSH, ↑T4 &mdash; autonomous thyroid nodule</p>
+                <p class="option">E) ↑TRH, ↑TSH, ↑T4 &mdash; TSH-secreting pituitary adenoma</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>&#10003; Correct Answer: C &mdash; ↑TRH, ↑TSH, ↓T4 &mdash; primary thyroid (target organ) failure from iodine deficiency</strong>
+                    <p style="margin-top:10px;">The thyroid gland is the <strong>target organ</strong> of the HPT axis. Iodine deficiency &darr; T3/T4 synthesis &rarr; loss of negative feedback on hypothalamus and pituitary &rarr; &uarr;TRH &rarr; &uarr;TSH &rarr; chronic TSH stimulation of follicular cells &rarr; hypertrophy/hyperplasia &rarr; <strong>goiter</strong>. This is the canonical &lsquo;&uarr;&uarr;TSH + &darr;T4 = primary hypothyroidism&rsquo; pattern that end02 LO 6 asks you to predict when the target organ fails. Secondary (&darr;TSH + &darr;T4) would require pituitary failure; TSH-oma would produce &uarr;TSH + &uarr;T4; autonomous nodule would suppress TSH.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 12</h4>
+                <p>A 35-year-old man has tachycardia, weight loss, and heat intolerance. Labs: TSH = 3.2 mIU/L (normal), free T4 = 4.8 ng/dL (elevated). MRI of the pituitary is normal. Which axis iteration best explains these findings?</p>
+                <p class="option">A) Primary hyperthyroidism &mdash; Graves disease</p>
+                <p class="option">B) Generalized resistance to thyroid hormone (TR-&beta; mutation) &mdash; pituitary cannot sense negative feedback, so TSH is not suppressed despite high T4</p>
+                <p class="option">C) TSH-secreting pituitary adenoma (thyrotropinoma)</p>
+                <p class="option">D) Factitious hyperthyroidism from exogenous T4</p>
+                <p class="option">E) Primary hypothyroidism</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>&#10003; Correct Answer: B &mdash; Generalized resistance to thyroid hormone (TR-&beta; mutation) &mdash; pituitary cannot sense negative feedback, so TSH is not suppressed despite high T4</strong>
+                    <p style="margin-top:10px;">End02 LO 6 asks you to predict hormone iterations at each level of the axis. &uarr;T4 with an <em>inappropriately normal</em> TSH is the classic &lsquo;inappropriate TSH&rsquo; pattern. Generalized <strong>resistance to thyroid hormone</strong> (TR-&beta; mutation): the pituitary&rsquo;s TR-&beta; cannot sense high T4 &rarr; negative feedback fails &rarr; TSH remains normal or slightly elevated even with high T4. Peripheral tissues with normal TR-&alpha; (e.g., heart) still respond to circulating T3 &rarr; symptoms. A TSH-oma would give the same axis pattern but usually shows a pituitary mass on MRI. In Graves or factitious T4 ingestion, negative feedback would suppress TSH toward zero. Primary hypothyroidism shows &uarr;TSH + &darr;T4 (the opposite).</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 13</h4>
+                <p>A 42-year-old woman presents with fatigue, weight gain, cold intolerance, and constipation. Labs: TSH = 45 mIU/L, free T4 = 0.4 ng/dL (low), free T3 = 70 ng/dL (low). Anti-TPO antibodies are positive. Which diagnosis best fits the axis pattern?</p>
+                <p class="option">A) Secondary hypothyroidism from pituitary failure</p>
+                <p class="option">B) Subclinical hypothyroidism</p>
+                <p class="option">C) Primary hypothyroidism (Hashimoto thyroiditis)</p>
+                <p class="option">D) Tertiary hypothyroidism from a hypothalamic lesion</p>
+                <p class="option">E) Graves disease with hypothyroid phase only</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>&#10003; Correct Answer: C &mdash; Primary hypothyroidism (Hashimoto thyroiditis)</strong>
+                    <p style="margin-top:10px;">&uarr;&uarr;TSH + &darr;free T4 + positive anti-TPO = primary hypothyroidism from <strong>Hashimoto thyroiditis</strong> (autoimmune destruction of the thyroid gland). The pituitary is working hard to compensate &rarr; TSH is very high. Secondary (pituitary) hypothyroidism would give &darr;TSH + &darr;T4 (the pituitary cannot drive the gland). Tertiary (hypothalamic) would give &darr;TRH, &darr;TSH, &darr;T4. Subclinical hypothyroidism shows &uarr;TSH with a <em>normal</em> free T4 (earlier stage of the same disease spectrum). The axis iterations of end02 LO 6 let you identify the defective level from labs alone.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 14</h4>
+                <p>A 58-year-old man undergoes transsphenoidal pituitary surgery for a craniopharyngioma. Postoperatively, TSH = 0.1 mIU/L (low) and free T4 = 0.5 ng/dL (low). He feels fatigued. Which axis pattern is this, and what is the most appropriate treatment?</p>
+                <p class="option">A) Primary hypothyroidism &mdash; treat with levothyroxine and monitor TSH</p>
+                <p class="option">B) Secondary (central) hypothyroidism from pituitary damage &mdash; treat with levothyroxine and monitor <em>free T4</em> (not TSH)</p>
+                <p class="option">C) TSH-oma &mdash; treat with somatostatin analog</p>
+                <p class="option">D) Graves disease &mdash; treat with methimazole</p>
+                <p class="option">E) No treatment &mdash; TSH will recover after pituitary swelling resolves</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>&#10003; Correct Answer: B &mdash; Secondary (central) hypothyroidism from pituitary damage &mdash; treat with levothyroxine and monitor <em>free T4</em> (not TSH)</strong>
+                    <p style="margin-top:10px;">&darr;TSH + &darr;free T4 is the classic <strong>secondary (central) hypothyroidism</strong> pattern: the pituitary cannot produce TSH, so the thyroid is not stimulated and T4 falls. A craniopharyngioma and its resection are well-known causes of pituitary dysfunction (damage to thyrotropes). Treat with levothyroxine. <em>Cannot</em> use TSH to monitor adequacy of replacement, because the pituitary itself is broken &mdash; monitor free T4 instead. Primary hypothyroidism would show &uarr;TSH + &darr;T4 (opposite). This question also links to LO 3 (pituitary anatomy/histology) &mdash; craniopharyngiomas damage the adenohypophysis, where thyrotropes live.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 15</h4>
+                <p>A 26-year-old woman presents with palpitations, weight loss, heat intolerance, and a diffusely enlarged thyroid with a bruit. Labs: TSH = 0.01 mIU/L, free T4 = 5.2 ng/dL. Radioiodine scan shows diffusely increased uptake. Anti-TSH-receptor antibodies are positive. Which statement best explains the axis pattern?</p>
+                <p class="option">A) Hypothalamic TRH is elevated, driving both TSH and T4 up</p>
+                <p class="option">B) TSH-receptor stimulating immunoglobulin (TSI) bypasses the pituitary by directly activating the TSH receptor on follicular cells; T4 rises, negative feedback suppresses pituitary TSH</p>
+                <p class="option">C) A somatic mutation in the pituitary TSH gene drives &uarr;TSH and &uarr;T4 together</p>
+                <p class="option">D) Hashimoto-type CD8+ T cell destruction is releasing preformed T3/T4</p>
+                <p class="option">E) Autonomous TSH secretion from a pituitary adenoma</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>&#10003; Correct Answer: B &mdash; TSH-receptor stimulating immunoglobulin (TSI) bypasses the pituitary by directly activating the TSH receptor on follicular cells; T4 rises, negative feedback suppresses pituitary TSH</strong>
+                    <p style="margin-top:10px;">Graves disease is driven by <strong>TSI</strong>, an IgG autoantibody that binds and constitutively activates the TSH receptor, <em>bypassing</em> the pituitary. The thyroid behaves as if it had a permanent TSH signal &rarr; &uarr;&uarr;T4 &rarr; negative feedback suppresses hypothalamic TRH and pituitary TSH &rarr; TSH falls to ~0.01. The axis iteration is &darr;&darr;TRH, &darr;&darr;TSH, &uarr;&uarr;T4. Note that &lsquo;primary hyperthyroidism&rsquo; in end02 LO 6&rsquo;s iteration table also gives &darr;TSH + &uarr;T4, regardless of whether the thyroid is hyper-driven by TSI, a toxic nodule (somatic TSHR mutation), or exogenous T4 &mdash; negative feedback works normally.</p>
+                </div>
+            </div>
+
+        </section><!-- /#practice -->
+
+
+    </main><!-- /.main -->
+
+    <script>
+        function switchLO(event, loId) {
+            event.preventDefault();
+            // Hide all LO sections
+            document.querySelectorAll('.lo-section').forEach(s => s.classList.remove('active'));
+            // Deactivate all sidebar links
+            document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+            // Show the selected section
+            const section = document.getElementById(loId);
+            if (section) section.classList.add('active');
+            // Mark clicked link as active (walk up if needed)
+            let link = event.target;
+            while (link && !link.classList.contains('sidebar-link')) link = link.parentElement;
+            if (link) link.classList.add('active');
+            // Scroll main content back to top
+            const mainEl = document.querySelector('.main');
+            if (mainEl) mainEl.scrollTop = 0;
+        }
+
+        function toggleAnswer(btn) {
+            const answer = btn.nextElementSibling;
+            const isShowing = answer.classList.contains('show');
+            answer.classList.toggle('show');
+            btn.textContent = isShowing ? 'Reveal Answer' : 'Hide Answer';
+        }
+
+        function toggleFlip(card) { card.classList.toggle('flipped'); }
+
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+        const backToTopBtn = document.getElementById('backToTop');
+        if (backToTopBtn) {
+            window.addEventListener('scroll', () => {
+                backToTopBtn.classList.toggle('show', window.scrollY > 300);
+            });
+        }
+
+        document.querySelectorAll('#mindmap circle').forEach(node => {
+            node.style.cursor = 'pointer';
+            node.addEventListener('mouseenter', function() {
+                this.style.filter = 'brightness(1.2) drop-shadow(0 0 8px rgba(0,0,0,0.3))';
+            });
+            node.addEventListener('mouseleave', function() { this.style.filter = 'none'; });
+        });
+    
+    function toggleSection(h3El) {
+        h3El.classList.toggle('collapsed');
+        const body = h3El.nextElementSibling;
+        if (body && body.classList.contains('section-body')) {
+            body.classList.toggle('collapsed');
+        }
+    }
+
+    
+    function toggleTrap(headerEl) {
+        headerEl.classList.toggle('collapsed');
+        const body = headerEl.nextElementSibling;
+        if (body && body.classList.contains('trap-body')) {
+            body.classList.toggle('collapsed');
+        }
+    }
+
+    
+    function expandAll() {
+        document.querySelectorAll('.lo-section.active .section-body').forEach(el => el.classList.remove('collapsed'));
+        document.querySelectorAll('.lo-section.active .collapsible-h3').forEach(el => el.classList.remove('collapsed'));
+    }
+    function collapseAll() {
+        document.querySelectorAll('.lo-section.active .section-body').forEach(el => el.classList.add('collapsed'));
+        document.querySelectorAll('.lo-section.active .collapsible-h3').forEach(el => el.classList.add('collapsed'));
+    }
+
+
+    function toggleH5(h5El) {
+        h5El.classList.toggle('collapsed');
+        const body = h5El.nextElementSibling;
+        if (body && body.classList.contains('h5-body')) {
+            body.classList.toggle('collapsed');
+        }
+    }
+
+    function toggleMnemonic(headerEl) {
+        headerEl.classList.toggle('collapsed');
+        const body = headerEl.nextElementSibling;
+        if (body && body.classList.contains('mnemonic-body')) {
+            body.classList.toggle('collapsed');
+        }
+    }
+
+    function toggleH4(h4El) {
+        h4El.classList.toggle('collapsed');
+        const body = h4El.nextElementSibling;
+        if (body && body.classList.contains('section-body')) {
+            body.classList.toggle('collapsed');
+        }
+    }
+
+    // ── Build a complete standalone export document ─────────────────────
+    // Extracts the real page CSS + content, so all class-based styling works.
+    function buildExportDoc(forPrint) {
+        // 1. Snapshot & expand everything
+        const collapsedEls = Array.from(document.querySelectorAll('.collapsed'));
+        const hiddenSections = Array.from(document.querySelectorAll('.lo-section:not(.active)'));
+        hiddenSections.forEach(s => s.style.display = 'block');
+        collapsedEls.forEach(el => el.classList.remove('collapsed'));
+
+        // 2. Clone main content only (no sidebar)
+        const clone = document.querySelector('.main').cloneNode(true);
+
+        // 3. Restore page immediately (clone is independent)
+        hiddenSections.forEach(s => s.style.display = '');
+        collapsedEls.forEach(el => el.classList.add('collapsed'));
+
+        // 4. Strip all interactive chrome from clone
+        clone.querySelectorAll(
+            '.section-chevron, .h5-chevron, .mnemonic-chevron, .trap-chevron, ' +
+            '.export-actions, .sidebar-footer, .hub-return-btn, button'
+        ).forEach(el => el.remove());
+
+        // 5. Extract the page's own CSS (all <style> tags)
+        const pageCSS = Array.from(document.querySelectorAll('style'))
+            .map(s => s.textContent).join('\n');
+
+        // 6. Override CSS — force everything visible, remove layout constraints
+        const overrideCSS = `
+            * { box-sizing: border-box; }
+            body {
+                display: block !important;
+                overflow: visible !important;
+                height: auto !important;
+                background: white !important;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Calibri, sans-serif;
+            }
+            .main {
+                margin-left: 0 !important;
+                height: auto !important;
+                overflow: visible !important;
+                max-width: 100% !important;
+                padding: 24px 32px !important;
+            }
+            .lo-section {
+                display: block !important;
+                box-shadow: none !important;
+                animation: none !important;
+                ${forPrint ? 'page-break-before: always;' : ''}
+            }
+            .lo-section:first-child { page-break-before: auto !important; }
+            .section-body, .h4-body, .h5-body, .mnemonic-body, .trap-body {
+                display: block !important;
+            }
+            .collapsible-h3.collapsed .section-chevron,
+            .h5-subheading.collapsed .h5-chevron,
+            .mnemonic-toggle-header.collapsed .mnemonic-chevron,
+            .trap-header.collapsed .trap-chevron { transform: none !important; }
+            ${forPrint ? '@media print { .main { padding: 0 !important; } }' : ''}
+        `;
+
+        const ns = forPrint ? '' :
+            `xmlns:o='urn:schemas-microsoft-com:office:office'
+             xmlns:w='urn:schemas-microsoft-com:office:word'
+             xmlns='http://www.w3.org/TR/REC-html40'`;
+
+        return `<!DOCTYPE html>
+<html ${ns}>
+<head>
+    <meta charset="UTF-8">
+    <title>Lecture 2: Thyroid Physiology — HoyaDocs Endocrine Block</title>
+    <style>${pageCSS}</style>
+    <style>${overrideCSS}</style>
+</head>
+<body>
+${clone.outerHTML}
+</body>
+</html>`;
+    }
+
+    // ── Print / Save as PDF ─────────────────────────────────────────────
+    function printAll(btn) {
+        const origHTML = btn.innerHTML;
+        btn.innerHTML = '<span class="btn-icon">⏳</span>Opening…';
+        btn.disabled = true;
+
+        const html = buildExportDoc(true);
+
+        const win = window.open('', '_blank', 'width=960,height=750,scrollbars=yes');
+        if (!win) {
+            alert('Pop-ups are blocked. Please allow pop-ups for this page, then try again.');
+            btn.innerHTML = origHTML;
+            btn.disabled = false;
+            return;
+        }
+
+        win.document.open();
+        win.document.write(html);
+        win.document.close();
+
+        // Auto-trigger print dialog once content is loaded
+        win.onload = function() {
+            setTimeout(() => {
+                win.focus();
+                win.print();
+            }, 1800);
+        };
+
+        btn.innerHTML = origHTML;
+        btn.disabled = false;
+    }
+
+    // ── Download Word Doc (.doc) ────────────────────────────────────────
+    function downloadWord(btn) {
+        const origHTML = btn.innerHTML;
+        btn.innerHTML = '<span class="btn-icon">⏳</span>Building…';
+        btn.disabled = true;
+
+        const html = buildExportDoc(false);
+
+        const blob = new Blob(['\ufeff', html], { type: 'application/msword' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Lec02-Thyroid-Physiology.doc';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        btn.innerHTML = origHTML;
+        btn.disabled = false;
+    }
+
+    </script>
+</body>
+</html>

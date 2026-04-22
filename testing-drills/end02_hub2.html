@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>END02 Hub #2 · Hypothalamic-Pituitary Relationships I — Step 1 Extensions</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;background:#FFF7ED;color:#2C2C2C;min-height:100vh;line-height:1.6}
+.topnav{background:#7C2D12;border-bottom:3px solid #EA580C;padding:0 28px;height:68px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-brand{display:flex;flex-direction:column;justify-content:center;gap:1px}
+.nav-brand-text{font-family:'Crimson Pro',Georgia,serif;font-size:1.55em;font-weight:700;color:#FFEDD5;letter-spacing:.02em;line-height:1.2}
+.nav-brand-sub{font-size:.85em;color:#FDBA74;font-weight:500;letter-spacing:.04em;text-transform:uppercase;line-height:1.2}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.nav-back{display:inline-flex;align-items:center;gap:6px;font-size:.8em;color:#fff;font-weight:600;padding:6px 14px;border-radius:5px;border:1px solid #EA580C;background:#EA580C;text-decoration:none;transition:all .2s}
+.nav-back:hover{background:#C2410C;border-color:#C2410C}
+.container{max-width:1060px;margin:0 auto;padding:28px 24px}
+.header{background:#FFFFFF;border:1px solid #FED7AA;border-radius:6px;padding:28px 32px;margin-bottom:24px;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#7C2D12 0%,#EA580C 50%,#7C2D12 100%)}
+.hub-tag{display:inline-block;background:#7C2D12;color:#FFEDD5;font-size:.82em;font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:5px 14px;border-radius:3px;margin-bottom:10px}
+.header h1{font-family:'Crimson Pro',Georgia,serif;font-size:2.3em;color:#7C2D12;margin-bottom:6px;line-height:1.25;font-weight:700}
+.header h1 span{color:#C2410C;font-weight:600;font-style:italic}
+.header .subtitle{color:#5A5A5A;font-size:.88em;line-height:1.6;margin-bottom:14px}
+.source-strip{display:flex;gap:8px;flex-wrap:wrap}
+.source-badge{background:#FFF7ED;border:1px solid #FED7AA;border-radius:4px;padding:5px 12px;font-size:.85em;color:#5A5A5A}
+.source-badge strong{color:#7C2D12}
+.hub-prog{background:#FFF;border:1px solid #FED7AA;border-radius:6px;padding:12px 18px;margin-bottom:22px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hub-step{padding:8px 18px;border-radius:4px;font-size:.92em;font-weight:600}
+.hub-step.done{background:#7C2D12;border:1px solid #7C2D12;color:#FFEDD5;text-decoration:none;transition:all .2s;font-weight:600}
+.hub-step.done:hover{background:#9A3412;color:#fff}
+.hub-step.current{background:#7C2D12;color:#FFEDD5}
+.hub-step.next{background:#FFF7ED;border:1px solid #FED7AA;color:#7A7060;text-decoration:none;transition:all .2s}
+.hub-step.next:hover{border-color:#EA580C;color:#C2410C}
+.hub-arrow{color:#EA580C;font-size:1.1em;font-weight:700}
+.hub-prog-label{font-size:.88em;color:#7A7060;margin-right:6px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:24px}
+.stat-card{background:#FFF;border:1px solid #FED7AA;border-radius:6px;padding:14px;text-align:center}
+.stat-num{font-family:'Crimson Pro',Georgia,serif;font-size:2.1em;font-weight:700;color:#7C2D12}
+.stat-label{font-size:.8em;color:#7A7060;text-transform:uppercase;letter-spacing:.08em;margin-top:2px;font-weight:600}
+.tab-nav{display:flex;gap:2px;flex-wrap:wrap;margin-bottom:26px;border-bottom:2px solid #FED7AA}
+.tab-btn{background:none;border:none;color:#7A7060;font-size:.96em;font-weight:600;padding:12px 20px;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;margin-bottom:-2px;font-family:inherit}
+.tab-btn:hover{color:#7C2D12}
+.tab-btn.active{color:#7C2D12;border-bottom-color:#EA580C}
+.tab-content{display:none;animation:fi .25s ease}
+.tab-content.active{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.fc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:16px}
+.fc{perspective:1000px;cursor:pointer;position:relative;z-index:1}
+.fc-inner{position:relative;transform-style:preserve-3d;transition:transform .5s,height .3s}
+.fc.flipped{z-index:10}
+.fc.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;top:0;left:0;right:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:6px;padding:22px}
+.fc-front{background:#FFFFFF;border:1px solid #FED7AA;border-top:3px solid #7C2D12}
+.fc-back{transform:rotateY(180deg);background:#FFEDD5;border:1px solid #EA580C}
+.fc-label{font-size:.66em;font-weight:700;color:#EA580C;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.fc-q{font-size:.92em;color:#2C2C2C;line-height:1.55}
+.fc-a{font-size:.88em;color:#2C2C2C;line-height:1.65}
+.fc-a strong{color:#7C2D12}
+.fc-a em{color:#C2410C;font-style:normal}
+.fc-flip-hint{font-size:.67em;color:#9A9080;margin-top:10px;font-style:italic}
+.fc-progress{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:.82em;color:#7A7060}
+.fc-progress .prog-num{color:#7C2D12;font-weight:700}
+.mcq-item,.vig-item{background:#FFFFFF;border:1px solid #FED7AA;border-radius:6px;padding:22px;margin-bottom:18px}
+.mcq-num,.vig-num{font-size:.68em;font-weight:700;color:#EA580C;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.mcq-stem,.vig-stem{font-size:.93em;color:#2C2C2C;line-height:1.7;margin-bottom:14px;background:#FFEDD5;padding:14px;border-radius:6px;border-left:3px solid #EA580C}
+.mcq-stem strong,.vig-stem strong{color:#7C2D12}
+.mcq-opts,.vig-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.mcq-opt,.vig-opt{background:#FFF7ED;border:1px solid #FED7AA;border-radius:5px;padding:10px 14px;cursor:pointer;font-size:.88em;color:#2C2C2C;transition:all .18s;display:flex;align-items:flex-start;gap:10px}
+.mcq-opt:hover:not(.locked),.vig-opt:hover:not(.locked){border-color:#EA580C;background:#FFEDD5}
+.mcq-opt.correct,.vig-opt.correct{background:#F1F8F2;border-color:#2E7D32;color:#1B5E20}
+.mcq-opt.correct .opt-letter,.vig-opt.correct .vig-opt-letter{color:#2E7D32}
+.mcq-opt.wrong,.vig-opt.wrong{background:#FEF5F5;border-color:#C62828;color:#B71C1C}
+.mcq-opt.wrong .opt-letter,.vig-opt.wrong .vig-opt-letter{color:#C62828}
+.mcq-opt.locked,.vig-opt.locked{cursor:default}
+.opt-letter,.vig-opt-letter{font-weight:700;color:#7C2D12;flex-shrink:0;width:18px}
+.mcq-exp,.vig-exp{background:#FFEDD5;border-left:3px solid #EA580C;border-radius:6px;padding:12px 16px;font-size:.84em;color:#5A5A5A;line-height:1.7;display:none;margin-top:12px}
+.mcq-exp.show,.vig-exp.show{display:block}
+.mcq-exp strong,.vig-exp strong{color:#7C2D12}
+.vig-buzzword{color:#C2410C;font-weight:600}
+.cc-card{background:#FFFFFF;border:1px solid #FED7AA;border-radius:6px;padding:22px;margin-bottom:18px;border-left:4px solid #EA580C}
+.cc-tag{display:inline-block;background:#FFEDD5;border:1px solid #FED7AA;border-radius:4px;font-size:.68em;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7C2D12;padding:2px 8px;margin-bottom:10px}
+.cc-title{font-family:'Crimson Pro',Georgia,serif;font-size:1.1em;font-weight:700;color:#7C2D12;margin-bottom:10px}
+.cc-body{font-size:.88em;color:#5A5A5A;line-height:1.7}
+.cc-body strong{color:#2C2C2C}
+.cc-body em{color:#C2410C;font-style:normal}
+.cc-reveal{background:none;border:1px solid #FED7AA;color:#7A7060;padding:7px 14px;border-radius:5px;cursor:pointer;font-size:.8em;font-weight:600;font-family:inherit;margin-top:12px;transition:all .2s}
+.cc-reveal:hover{border-color:#EA580C;color:#C2410C;background:#FFEDD5}
+.cc-detail{display:none;margin-top:12px;padding:14px;background:#FFEDD5;border-radius:5px;border:1px solid #FED7AA;font-size:.85em;color:#2C2C2C;line-height:1.7}
+.cc-detail.open{display:block}
+.cc-detail strong{color:#7C2D12}
+.mcq-intro,.cc-intro,.vig-intro,.hy-intro,.trap-intro,.match-intro{background:#FFEDD5;border:1px solid #FED7AA;border-radius:6px;padding:14px 18px;margin-bottom:20px;font-size:.84em;color:#5A5A5A;line-height:1.6}
+.mcq-intro strong,.cc-intro strong,.vig-intro strong,.hy-intro strong,.trap-intro strong,.match-intro strong{color:#7C2D12}
+table{border-collapse:collapse;width:100%}
+table th{background:#7C2D12;color:#FFEDD5;font-weight:600;text-align:left;padding:10px 14px;font-size:.84em;letter-spacing:.03em}
+table td{padding:10px 14px;border-bottom:1px solid #FED7AA;color:#2C2C2C;vertical-align:top;line-height:1.55;background:#FFF}
+table tr:nth-child(even) td{background:#FFF7ED}
+table tr:hover td{background:#FFEDD5}
+.trap-card{background:#FFF;border:1px solid #FED7AA;border-radius:6px;padding:22px;margin-bottom:18px;border-left:4px solid #EA580C}
+.trap-num{font-size:.68em;font-weight:700;color:#EA580C;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.trap-statement{font-size:.92em;color:#2C2C2C;line-height:1.6;margin-bottom:14px;background:#FFEDD5;padding:14px;border-radius:6px;border-left:3px solid #EA580C;font-weight:500}
+.trap-btns{display:flex;gap:10px;margin-bottom:14px}
+.trap-btn{background:none;border:1px solid #FED7AA;color:#7A7060;padding:10px 16px;border-radius:5px;cursor:pointer;font-weight:600;font-size:.84em;font-family:inherit;transition:all .2s}
+.trap-btn:hover:not(:disabled){border-color:#EA580C;color:#C2410C;background:#FFEDD5}
+.trap-btn:disabled{opacity:.5;cursor:default}
+.trap-btn.sel-correct{border-color:#2E7D32;background:#F1F8F2;color:#1B5E20}
+.trap-btn.sel-wrong{border-color:#C62828;background:#FEF5F5;color:#B71C1C}
+.trap-exp{background:#FFEDD5;border-left:3px solid #EA580C;border-radius:6px;padding:12px 16px;font-size:.84em;color:#5A5A5A;line-height:1.7;display:none}
+.trap-exp.show-c,.trap-exp.show-w{display:block}
+.trap-exp.show-w{border-left-color:#C62828;background:#FEF5F5;color:#B71C1C}
+.trap-exp strong{color:#7C2D12}
+.ref-section{margin-bottom:28px}
+.ref-title{font-family:'Crimson Pro',Georgia,serif;font-size:1.05em;font-weight:700;color:#7C2D12;margin-bottom:14px;padding-bottom:6px;border-bottom:2px solid #EA580C}
+.ref-note{background:#FFFDF0;border:1px solid #FED7AA;border-radius:5px;padding:13px 18px;font-size:.83em;color:#5A5A5A;line-height:1.6;margin-top:10px}
+.ref-note strong{color:#7C2D12}
+.hy-card{background:#FFF;border:1px solid #FED7AA;border-radius:6px;padding:22px;margin-bottom:18px;border-left:4px solid #EA580C}
+.hy-card-title{font-family:'Crimson Pro',Georgia,serif;font-size:1em;font-weight:700;color:#7C2D12;margin-bottom:10px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.hy-card-body{font-size:.88em;color:#5A5A5A;line-height:1.7}
+.hy-card-body strong{color:#2C2C2C}
+.hy-badge{display:inline-block;font-size:.68em;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:3px 10px;border-radius:3px;background:#FFEDD5;color:#7C2D12}
+.hy-badge.trap{background:#FEF5F5;color:#C62828;border:1px solid #C62828}
+.hy-badge.buzzword{background:#FFF8E1;color:#F57F17;border:1px solid #F57F17}
+.hy-badge.testing{background:#E8F5E9;color:#2E7D32;border:1px solid #2E7D32}
+.match-set{background:#FFFFFF;border:1px solid #FED7AA;border-left:4px solid #EA580C;border-radius:6px;padding:22px;margin-bottom:20px}
+.match-set-title{font-family:'Crimson Pro',Georgia,serif;font-size:1.05em;font-weight:700;color:#7C2D12;margin-bottom:4px}
+.match-set-hint{font-size:.79em;color:#7A7060;margin-bottom:14px;font-style:italic}
+.match-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.match-cols{grid-template-columns:1fr}}
+.match-col-label{font-size:.7em;font-weight:700;color:#EA580C;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.match-item{background:#FFF7ED;border:1px solid #FED7AA;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px}
+.match-score{margin-top:12px;font-size:.83em;color:#7A7060}
+.match-reset-btn{background:none;border:1px solid #FED7AA;color:#7A7060;padding:7px 16px;border-radius:5px;cursor:pointer;font-size:.8em;font-weight:600;font-family:inherit;margin-top:10px;transition:all .2s}
+.match-reset-btn:hover{border-color:#EA580C;color:#C2410C;background:#FFEDD5}
+.footer{text-align:center;font-size:.78em;color:#7A7060;border-top:2px solid #FED7AA;padding-top:16px;margin-top:32px}
+.footer a{color:#7C2D12;text-decoration:none;font-weight:600}
+.footer a:hover{color:#EA580C;text-decoration:underline}
+.src-tag{display:inline-block;font-size:.65em;font-weight:600;color:#C2410C;background:#FFEDD5;padding:1px 6px;border-radius:3px;margin-left:4px;letter-spacing:.04em}
+@media(max-width:700px){
+  .container{padding:14px}
+  .header{padding:18px 16px}
+  .header h1{font-size:1.5em}
+  .fc-grid{grid-template-columns:1fr}
+  .hub-prog{flex-direction:column;gap:6px;align-items:flex-start}
+  .hub-arrow{display:none}
+  .tab-btn{font-size:.82em;padding:8px 12px}
+}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <div class="nav-brand">
+    <span class="nav-brand-text">HoyaDocs</span>
+    <span class="nav-brand-sub">Endocrine Block</span>
+  </div>
+  <div class="nav-actions">
+    <a href="../active-recall-hub.html" class="nav-back">← Active Drill Hub</a>
+  </div>
+</nav>
+<div class="container">
+
+<div class="header">
+  <div class="hub-tag">Hub #2 — Step 1 Extensions</div>
+  <h1>Hypothalamic–Pituitary Relationships I <span>Step 1 Extensions</span></h1>
+  <div class="subtitle">Per-LO coverage of in-house lecture material integrated with mapped 3rd-party resources. Each drill cites its source; every item is tagged by LO.</div>
+  <div class="source-strip">
+    <div class="source-badge"><strong>Per-Lecture:</strong> In-house lecture &amp; LOs 1–6</div>
+    <div class="source-badge"><strong>In-House Anki:</strong> <code>Bioch/Phys::ENDO::02-Hypothalamic-Pituitary</code> (92 cards)</div>
+    <div class="source-badge"><strong>3rd-party:</strong> BnB 5.01 Pituitary Anatomy/Physio · Bootcamp 2.01 Hypothalamus + 3.01/3.02/3.04/3.05 · FA 2.01 Pituitary + 3.01/3.02/3.04 · Physeo 6.02 Pituitary Gland</div>
+  </div>
+</div>
+
+<div class="hub-prog">
+  <span class="hub-prog-label">Hub Progression:</span>
+  <a href="end02_hub1.html" class="hub-step done">Hub 1 ✓</a>
+  <span class="hub-arrow">→</span>
+  <span class="hub-step current">Hub 2 — Step 1 Extensions</span>
+  <span class="hub-arrow">→</span>
+  <a href="end02_hub3.html" class="hub-step next">Hub 3 — Practice Questions</a>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-card"><div class="stat-num">34</div><div class="stat-label">Flashcards</div></div>
+  <div class="stat-card"><div class="stat-num">10</div><div class="stat-label">MCQs</div></div>
+  <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">Vignettes</div></div>
+  <div class="stat-card"><div class="stat-num">14</div><div class="stat-label">Traps</div></div>
+  <div class="stat-card"><div class="stat-num">4</div><div class="stat-label">Matching Drills</div></div>
+  <div class="stat-card"><div class="stat-num">10</div><div class="stat-label">Clin. Correlates</div></div>
+  <div class="stat-card"><div class="stat-num">5</div><div class="stat-label">Ref Tables</div></div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('flashcards',this)">Flashcards</button>
+  <button class="tab-btn" onclick="switchTab('mcq',this)">MCQ</button>
+  <button class="tab-btn" onclick="switchTab('vignettes',this)">Vignettes</button>
+  <button class="tab-btn" onclick="switchTab('traps',this)">Step 1 Traps</button>
+  <button class="tab-btn" onclick="switchTab('matching',this)">Matching</button>
+  <button class="tab-btn" onclick="switchTab('clinical',this)">Clinical Correlates + HY Notes</button>
+  <button class="tab-btn" onclick="switchTab('ref',this)">Reference</button>
+</div>
+
+<!-- ══ FLASHCARDS ══════════════════════════════════════════════════════════ -->
+<div class="tab-content active" id="tab-flashcards">
+  <div class="fc-progress"><span>Click any card to flip · 34 cards organized by LO 1–6</span><span class="prog-num">In-House + In-House Anki + BnB 5.01 / Bootcamp 2.01 / FA 3.01 / Physeo 6.02</span></div>
+  <div class="fc-grid">
+
+    <!-- LO 1 — Anatomy/connections -->
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 1 · Anatomy <span class="src-tag">In House · FA 2.01</span></div><div class="fc-q">Where is the pituitary located? What connects it to the hypothalamus? Which lobe is glandular vs neural?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Pituitary</strong> sits in the <em>sella turcica</em> of the sphenoid bone. <strong>Hypothalamus</strong> is in the diencephalon, superior to the pituitary. Connected by the <strong>infundibulum (pituitary stalk)</strong>.<br><br><strong>Adenohypophysis</strong> (anterior) = <em>Rathke's pouch</em>, oral ectoderm (glandular epithelium).<br><strong>Neurohypophysis</strong> (posterior) = <em>neuroectoderm</em> of diencephalon (true neural tissue).<br><strong>Pars intermedia</strong> (also Rathke's pouch) — MSH; mostly nonfunctional in adults.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 1 · Hypophyseal Portal System <span class="src-tag">In House · BnB 5.01</span></div><div class="fc-q">Trace a hypothalamic releasing hormone from its nucleus to the anterior pituitary target cell.</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Hypothalamic neuron → <strong>median eminence</strong> (1st capillary plexus, no BBB) → hypophyseal portal veins → <strong>anterior pituitary</strong> (2nd capillary plexus) → target endocrine cell.<br><br><em>Why it matters:</em> allows very high local concentrations of tiny amounts of releasing hormone at the AP without systemic exposure. The median eminence is a <strong>circumventricular organ</strong> (lacks BBB) — essential for this hypothalamus→AP communication.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 1 · Three Output Pathways <span class="src-tag">In House</span></div><div class="fc-q">By what THREE routes does the hypothalamus control endocrine organs?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>1. Hypophyseal portal system</strong> → anterior pituitary (vascular; releasing/inhibiting hormones).<br><strong>2. Direct axonal projections</strong> → posterior pituitary (neural; ADH + oxytocin stored in Herring bodies).<br><strong>3. Sympathetic nervous system</strong> → direct preganglionic innervation of adrenal medulla chromaffin cells (fight-or-flight, fastest endocrine reflex, seconds).</div></div>
+    </div></div>
+
+    <!-- LO 2 — Hypothalamic nuclei and hormones -->
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 2 · Portal-System Hormones <span class="src-tag">In House · FA 3.01</span></div><div class="fc-q">List the seven hypothalamic hormones that travel via portal system to the anterior pituitary.</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Releasing hormones: <strong>TRH</strong> (→TSH + PRL), <strong>CRH</strong> (→ACTH), <strong>GnRH</strong> (→FSH + LH), <strong>GHRH</strong> (→GH).<br>Inhibiting hormones: <strong>Somatostatin (GHIH)</strong> (→↓GH + ↓TSH), <strong>Dopamine (PIH)</strong> (→↓PRL — tonic), <strong>GnIH</strong> (→↓FSH + ↓LH; 8-AA peptide from dorsomedial nucleus).<br>Most are peptides; <em>dopamine is the exception</em> (amine).</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 2 · PVN and SON <span class="src-tag">In House</span></div><div class="fc-q">Which two hypothalamic nuclei make the nonapeptides ADH and oxytocin? How are they transported?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Supraoptic nucleus (SON)</strong> — primarily ADH (+ some oxytocin).<br><strong>Paraventricular nucleus (PVN)</strong> — primarily oxytocin (+ some ADH, also CRH &amp; TRH).<br><br>Both are <em>nonapeptides</em> (9 amino acids). Synthesized as preprohormones → packaged on <strong>neurophysin carriers</strong> → axonal transport to nerve terminals in posterior pituitary → stored in <strong>Herring bodies</strong> → released into fenestrated capillaries on stimulus.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 2 · Circumventricular Organs <span class="src-tag">In House</span></div><div class="fc-q">What are CVOs and which four are endocrine-relevant?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">CVOs are brain regions near the ventricles with <strong>minimal or absent BBB</strong> → allow direct blood–brain hormonal exchange.<br><br><strong>1. Median eminence</strong> — hypophyseal portal system first plexus.<br><strong>2. Neurohypophysis</strong> — ADH/oxytocin release into fenestrated capillaries.<br><strong>3. OVLT</strong> — osmosensors on anterior wall of 3rd ventricle; drives ADH release + thirst.<br><strong>4. Pineal gland</strong> — melatonin release.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 2 · OVLT <span class="src-tag">In House · Bootcamp 2.01</span></div><div class="fc-q">How does the OVLT sense plasma osmolarity and regulate ADH?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">The <strong>organum vasculosum of the lamina terminalis (OVLT)</strong> sits on the anterior 3rd-ventricle wall — a CVO without BBB. Specialized osmoreceptor neurons shrink in hypertonic plasma and project to SON/PVN → trigger ADH release from posterior pituitary. Also stimulates <em>thirst</em> via cortex projections. OVLT is how the brain "tastes" the plasma.</div></div>
+    </div></div>
+
+    <!-- LO 3 — Pituitary histology/anatomy -->
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 3 · Acidophils vs Basophils <span class="src-tag">In House · FA 2.01</span></div><div class="fc-q">How are anterior pituitary cells classified on H&amp;E and which hormones does each type secrete?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Acidophils</strong> (eosin-pink granules) — 2 of 6 AP hormones: <em>GH</em> (somatotropes), <em>PRL</em> (lactotropes).<br><strong>Basophils</strong> (hematoxylin-blue) — other 4 AP hormones: <em>TSH</em> (thyrotropes), <em>ACTH</em> (corticotropes), <em>FSH + LH</em> (gonadotropes). Mnemonic: <strong>"B-FLAT"</strong> = Basophils secrete FSH, LH, ACTH, TSH.<br><strong>Chromophobes</strong> — pale, non-secretory supporting / stem / degranulated cells.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 3 · Herring Bodies &amp; Pituicytes <span class="src-tag">In House · FA 2.01</span></div><div class="fc-q">What are Herring bodies and pituicytes? What do they tell you about posterior pituitary embryology?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Herring bodies</strong> — eosinophilic swellings at axon terminals of SON/PVN neurons in the posterior pituitary. Store ADH + oxytocin in secretory vesicles, ready for release into fenestrated capillaries.<br><strong>Pituicytes</strong> — glial support cells (similar to astrocytes) of the posterior lobe.<br>Both confirm the posterior pituitary is <em>NEURAL tissue</em> (diencephalic neuroectoderm), NOT glandular. Contrasts with the adenohypophysis (glandular cells + fenestrated capillaries, but no neural parenchyma).</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 3 · Pars Intermedia <span class="src-tag">In House · FA 2.01</span></div><div class="fc-q">What is produced there? How do you recognize it histologically?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">The pars intermedia is derived from <em>Rathke's pouch</em> (oral ectoderm) and sits between the anterior and posterior lobes. It secretes <strong>MSH</strong> (melanocyte-stimulating hormone) and is mostly nonfunctional in adult humans — active in fetuses and young children.<br><strong>Histology:</strong> densely packed basophilic cells + cysts filled with <em>eosinophilic colloid</em> — the characteristic finding. Remnant cysts are the origin of craniopharyngiomas.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 3 · Pituitary Embryology <span class="src-tag">Bootcamp 3.01 · FA</span></div><div class="fc-q">Different embryologic origins of the two pituitary lobes — and their clinical significance?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Adenohypophysis</strong> (anterior + pars intermedia) = <em>Rathke's pouch</em> from oral ectoderm — glandular epithelial cells. Remnants can form <strong>craniopharyngioma</strong> (children, calcified suprasellar mass with "motor-oil" cyst fluid).<br><strong>Neurohypophysis</strong> (posterior) = <em>neuroectoderm</em> of diencephalon — true neural tissue (Herring bodies, pituicytes). Different blood supply from the AP (hypophyseal arteries vs portal veins) — which is why the posterior is <em>SPARED</em> in Sheehan syndrome.</div></div>
+    </div></div>
+
+    <!-- LO 4 — Pituitary hormones -->
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 4 · Six Anterior Pituitary Hormones <span class="src-tag">In House · FA 3.01</span></div><div class="fc-q">Classify each anterior pituitary hormone by its hypothalamic releaser/inhibitor and target.</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>TSH</strong> — TRH ↑ / dopamine + somatostatin ↓ → Thyroid (T3/T4).<br><strong>ACTH</strong> — CRH + ADH ↑ → Adrenal cortex (cortisol).<br><strong>FSH + LH</strong> — pulsatile GnRH ↑ / inhibin + GnIH ↓ → Gonads.<br><strong>GH</strong> — GHRH + ghrelin ↑ / somatostatin ↓ → Liver (IGF-1) + direct growth effects.<br><strong>PRL</strong> — TRH + suckling ↑ / <em>tonic dopamine ↓</em> → Breast (lactation); also inhibits GnRH.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 4 · Prolactin — The Exception <span class="src-tag">In House · FA 3.04</span></div><div class="fc-q">What is unique about prolactin's hypothalamic control, and what happens if the stalk is cut?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Prolactin is the <strong>only AP hormone under TONIC INHIBITION</strong> (by dopamine/PIH from the arcuate nucleus).<br><br><strong>Stalk section</strong> (trauma, tumor compression): removes tonic inhibition → <em>PRL RISES</em>. All other AP hormones fall (losing releasing hormones).<br><strong>D2 antagonists</strong> (antipsychotics, metoclopramide, methyldopa) remove inhibition → hyperprolactinemia → galactorrhea, amenorrhea, infertility.<br><strong>Primary hypothyroidism</strong> → ↑TRH → ↑ PRL (and ↑ TSH).</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 4 · Growth Hormone <span class="src-tag">FA 3.02 · Bootcamp 3.02</span></div><div class="fc-q">GH receptor type, target-organ effects, direct vs indirect actions?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Receptor:</strong> cytokine-family receptor using <strong>JAK2-STAT5</strong> signaling.<br><strong>Direct effects</strong> (of GH itself): anti-insulin — ↑ lipolysis, ↑ hepatic gluconeogenesis, ↑ peripheral insulin resistance (diabetogenic).<br><strong>Indirect effects</strong> (via hepatic IGF-1): linear bone growth, visceromegaly, protein anabolism.<br><strong>Stimuli:</strong> GHRH, ghrelin, hypoglycemia, exercise, deep sleep, stress, ↑AAs.<br><strong>Inhibitors:</strong> somatostatin, IGF-1 (long-loop feedback), hyperglycemia.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 4 · ADH Functions &amp; Receptors <span class="src-tag">In House · FA 3.03</span></div><div class="fc-q">ADH triggers, receptor subtypes, and signaling pathways?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Triggers:</strong> ↑ plasma osmolarity (OVLT) + ↓ effective circulating volume (baroreceptors).<br><strong>V1 receptor</strong> (vascular smooth muscle): Gq → IP3/DAG/Ca²⁺ → vasoconstriction (high-dose ADH, e.g., hemorrhage).<br><strong>V2 receptor</strong> (renal collecting-duct principal cells): Gs → cAMP → PKA → <em>aquaporin-2</em> insertion → water reabsorption (MAIN physiologic effect).<br><strong>V1b/V3</strong> (corticotropes): potentiates CRH → ACTH during stress.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 4 · Oxytocin Functions <span class="src-tag">In House</span></div><div class="fc-q">Classical and neuropeptide functions of oxytocin?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Classical peripheral</strong> (Gq-coupled OTR):<br>• <em>Uterine contractions</em> in labor (positive feedback with cervical stretch — Ferguson reflex).<br>• <em>Milk let-down reflex</em> in breastfeeding.<br><br><strong>Neuropeptide / CNS:</strong> pair bonding, social recognition, anxiolytic, memory (especially social), mild ↓BP.<br>Therapeutic interest: autism spectrum, social anxiety, postpartum depression (efficacy still uncertain).</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 4 · GnRH Pulsatility <span class="src-tag">In House · BnB 5.01</span></div><div class="fc-q">Why must GnRH be PULSATILE? Clinical exploitation.</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Continuous GnRH → receptor down-regulation</strong> on pituitary gonadotropes → LH/FSH fall (medical castration).<br><strong>Pulsatile GnRH (~every 60–90 min)</strong> maintains receptor sensitivity → normal LH/FSH.<br><strong>Clinical use:</strong><br>• Continuous leuprolide — prostate cancer, endometriosis, precocious puberty (initial LH surge/flare; cover with anti-androgen)<br>• Pulsatile GnRH pump — restores fertility in hypothalamic hypogonadism (e.g., Kallmann).</div></div>
+    </div></div>
+
+    <!-- LO 5 — Feedback loops -->
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 5 · Long, Short, Ultra-Short Loops <span class="src-tag">In House · FA 3.01</span></div><div class="fc-q">Define each feedback loop with one concrete example.</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Long loop</strong> — target-organ hormone → hypothalamus + pituitary. <em>Cortisol → ↓CRH + ↓ACTH.</em><br><strong>Short loop</strong> — pituitary hormone → hypothalamus. <em>ACTH → ↓CRH.</em><br><strong>Ultra-short loop</strong> — hypothalamic hormone inhibits its own release via axon collaterals. <em>CRH → ↓CRH.</em> Creates <em>pulsatility</em> (prevents receptor desensitization).</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 5 · Positive Feedback <span class="src-tag">In House · FA</span></div><div class="fc-q">Two classic positive-feedback loops in the H-P system?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>1. LH surge (mid-cycle ovulation):</strong> Rising estradiol late in follicular phase SWITCHES from negative to <em>positive</em> feedback on GnRH + LH → massive LH surge → ovulation ~24 h later.<br><strong>2. Oxytocin &amp; labor (Ferguson reflex):</strong> Uterine stretch → oxytocin release → contractions → more cervical stretch → more oxytocin. Terminates with delivery.<br><strong>Both are self-terminating</strong> — positive loops need an end-point to avoid runaway.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 5 · Pulsatility &amp; Desensitization <span class="src-tag">In House</span></div><div class="fc-q">Why does pulsatile hormone secretion prevent receptor desensitization?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Continuous GPCR agonism → <em>receptor phosphorylation → β-arrestin recruitment → internalization</em> → desensitization. Pulsatile agonism allows receptors to recycle and re-sensitize between pulses.<br><strong>Endocrine examples:</strong><br>• GnRH — pulsatile drives LH/FSH; continuous suppresses (leuprolide medical castration).<br>• GHRH — pulsatile GH secretion; continuous blunts response.<br>• Cortisol — diurnal rhythm maintains receptor responsiveness; chronic glucocorticoid therapy → HPA axis suppression.</div></div>
+    </div></div>
+
+    <!-- LO 6 — Predict changes -->
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 6 · Primary vs Secondary vs Tertiary <span class="src-tag">In House · FA</span></div><div class="fc-q">Using the thyroid axis, what are TRH / TSH / T4 levels in each tier of failure?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Primary (gland failure):</strong> ↓ T4, ↑↑ TSH, ↑ TRH.<br><strong>Secondary (pituitary failure):</strong> ↓ T4, ↓ TSH, ↑ TRH.<br><strong>Tertiary (hypothalamic failure):</strong> ↓ T4, ↓ TSH, ↓ TRH.<br><br><strong>Rule:</strong> the problem is where the hormone LEVEL DROPS first — everything UPSTREAM rises (compensating); everything DOWNSTREAM falls. "Primary" = farthest downstream. Same logic for cortisol/ACTH and sex-steroid axes.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 6 · Exogenous Prednisone <span class="src-tag">In House · FA</span></div><div class="fc-q">Predict CRH, ACTH, and endogenous cortisol levels on chronic oral prednisone. Why does sudden withdrawal cause crisis?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Pattern:</strong> ↓ CRH, ↓ ACTH, ↓ endogenous cortisol — long-loop feedback suppresses the entire axis.<br><strong>Adrenal atrophy</strong> develops from chronic ACTH deficiency.<br><strong>Abrupt withdrawal:</strong> no endogenous cortisol + atrophied adrenal can't respond → <em>adrenal crisis</em> (hypotension, hypoglycemia, shock). Always TAPER steroids after prolonged use (&gt;3 weeks of supraphysiologic dosing).</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 6 · Exogenous Testosterone <span class="src-tag">In House</span></div><div class="fc-q">In a young man on anabolic steroids — predict GnRH, LH/FSH, testes size, sperm count.</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Exogenous T → long-loop suppression:<br>↓ GnRH → ↓ LH + ↓ FSH → ↓ endogenous testosterone (Leydig cells silenced) → <strong>testicular atrophy</strong>.<br>↓ FSH → ↓ Sertoli cell/germ-cell support → ↓ spermatogenesis → <strong>oligospermia / azoospermia</strong> (infertility).<br>Serum total T may look normal (exogenous replaces endogenous) but LH/FSH and intratesticular T are suppressed. hCG (LH-like) is used to preserve fertility during testosterone therapy.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 6 · Stalk Section Pattern <span class="src-tag">In House · BnB 5.02</span></div><div class="fc-q">What happens to each AP hormone after complete pituitary stalk transection?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Stalk section cuts ALL hypothalamic input to the AP.<br><strong>PRL RISES</strong> — only hormone under tonic DOPAMINE inhibition; losing inhibition = disinhibition. (Unique exception.)<br><strong>All other AP hormones fall</strong> — TSH, ACTH, FSH, LH, GH — losing their releasing hormones.<br><strong>Posterior pituitary also affected</strong>: loss of SON/PVN axonal input → central DI (hours–days).<br>Over weeks, pituitary atrophy develops from absent trophic input.</div></div>
+    </div></div>
+
+    <!-- LO 3/4/5 integration with 3rd-party disease content -->
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 4 · Prolactinoma <span class="src-tag">Bootcamp 3.06 · FA 3.04</span></div><div class="fc-q">Typical presentation, biochemical findings, and first-line treatment?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Female:</strong> amenorrhea, galactorrhea, infertility, ↓ libido.<br><strong>Male:</strong> hypogonadism, decreased libido/erectile dysfunction, gynecomastia; mass effect (bitemporal hemianopia) more common.<br><strong>Lab:</strong> PRL often &gt;200 ng/mL (vs mild ↑ in stalk effect).<br><strong>Tx:</strong> <em>cabergoline</em> (D2 agonist, first-line) or bromocriptine — shrink tumor and normalize PRL in &gt;80%. <em>Medical-first</em> approach is unique to PRL because of tonic dopamine inhibition (LO 4 biology applied).<br><strong>Watch out</strong> for "hook effect" — extremely high PRL may read falsely low; dilute sample.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 4 · Acromegaly / Gigantism <span class="src-tag">Bootcamp 3.04 · FA</span></div><div class="fc-q">Cause, labs, and first-line therapy?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Cause:</strong> somatotrope pituitary adenoma → autonomous GH secretion → IGF-1 excess.<br><strong>Pre-epiphyseal closure (child):</strong> gigantism.<br><strong>Post-closure (adult):</strong> acromegaly — jaw/brow enlargement, hands/feet growth, carpal tunnel, sleep apnea, diabetes, cardiomyopathy.<br><strong>Screening:</strong> <em>IGF-1</em> (stable) NOT random GH (pulsatile).<br><strong>Confirm:</strong> oral glucose tolerance test fails to suppress GH.<br><strong>First line:</strong> transsphenoidal surgery. Adjuncts: <em>octreotide / lanreotide</em> (somatostatin analog), <em>cabergoline</em>, <em>pegvisomant</em> (GH-R antagonist).</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 3 · Sheehan Syndrome <span class="src-tag">BnB 5.02 · FA</span></div><div class="fc-q">Who gets it, why is the anterior pituitary uniquely vulnerable, and first clinical sign?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Who:</strong> postpartum women with obstetric hemorrhage / hypotension.<br><strong>Why:</strong> pregnancy doubles lactotrope mass, outstripping portal blood supply → hypertrophied AP is <em>uniquely vulnerable</em> to ischemic necrosis.<br><strong>First sign:</strong> failure to lactate (PRL loss).<br><strong>Later:</strong> fatigue (↓GH); amenorrhea (↓FSH/LH); hypothyroidism (↓TSH); adrenal insufficiency (↓ACTH).<br><strong>Posterior pituitary is SPARED</strong> — different blood supply (hypophyseal arteries, not portal system).</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 3 · Pituitary Apoplexy <span class="src-tag">BnB 5.02</span></div><div class="fc-q">Classic presentation, imaging, and the EMERGENT treatment step?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Sudden hemorrhage or infarction</strong> within a pre-existing pituitary adenoma → acute <em>thunderclap headache</em>, bitemporal hemianopia, cavernous sinus syndrome (CN III, IV, V1-2, VI), altered mental status.<br><strong>Labs:</strong> acute secondary adrenal insufficiency — hypotension, hypoglycemia.<br><strong>MRI:</strong> hemorrhagic sellar mass with suprasellar extension.<br><strong>EMERGENT step:</strong> <em>IV hydrocortisone FIRST</em> (empirically, life-saving), THEN surgical decompression for vision threat. <strong>Never give T4 before cortisol</strong> — accelerated cortisol clearance precipitates crisis.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 3 · Craniopharyngioma <span class="src-tag">Bootcamp · FA</span></div><div class="fc-q">Typical patient, imaging buzzwords, and embryologic origin?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Typical:</strong> child / young adult with growth failure, bitemporal hemianopia (chiasmal compression from below), polyuria (stalk/posterior pituitary involvement → DI), delayed puberty.<br><strong>Imaging buzzwords:</strong> <em>calcified</em> suprasellar mass with <em>"motor-oil" cyst fluid</em>.<br><strong>Origin:</strong> remnants of <em>Rathke's pouch</em> (oral ectoderm). Same embryologic origin as adenohypophysis → arises from adamantinomatous cells.<br>Bimodal age distribution (children + older adults).</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 4 · Central vs Nephrogenic DI <span class="src-tag">Bootcamp 2.04</span></div><div class="fc-q">Distinguish lab-wise. What test discriminates?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Both: polyuria with dilute urine + hypernatremia.<br><strong>Central DI:</strong> ADH deficient. Causes — pituitary surgery, tumor, trauma, autoimmune.<br><strong>Nephrogenic DI:</strong> ADH ineffective at kidney — V2-R mutation (X-linked), AQP2 mutation (AR), <em>lithium</em>, hypercalcemia.<br><strong>Desmopressin (DDAVP) challenge:</strong> central → urine osm rises &gt;50%; nephrogenic → no response.<br><strong>Tx:</strong> Central — desmopressin. Nephrogenic — stop offending drug, HCTZ + low-salt, amiloride (for lithium-induced).</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 4 · SIADH <span class="src-tag">Bootcamp 2.03</span></div><div class="fc-q">Classic electrolyte picture, common triggers, and treatment?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Biochemistry:</strong> inappropriate ADH → water retention → dilutional <strong>hyponatremia</strong>, low serum osm, <em>inappropriately concentrated</em> urine (high urine osm), euvolemic.<br><strong>Causes:</strong> small-cell lung cancer (ectopic ADH), CNS disease (stroke, trauma), drugs (SSRIs, carbamazepine, cyclophosphamide), pulmonary disease, postoperative.<br><strong>Tx:</strong> fluid restriction (first line); vaptans (tolvaptan, conivaptan — V2 antagonists); hypertonic saline for severe/symptomatic. <em>Correct slowly</em> to avoid central pontine myelinolysis.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 4 · Kallmann Syndrome <span class="src-tag">FA · BnB</span></div><div class="fc-q">Classic triad and underlying developmental defect?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Triad:</strong> (1) <em>anosmia / hyposmia</em>; (2) <em>delayed puberty</em> with hypogonadotropic hypogonadism; (3) absent olfactory bulbs on MRI.<br><strong>Mechanism:</strong> failed migration of GnRH neurons from olfactory placode → hypothalamus during embryogenesis. GnRH is deficient → low LH/FSH → low sex steroids.<br><strong>Tx:</strong> pulsatile GnRH (restores fertility) OR exogenous LH/FSH (hCG + FSH); testosterone for virilization without fertility need.<br><strong>Contrast</strong> with Klinefelter (primary testicular failure, HIGH LH/FSH).</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 6 · GH Deficiency in Child <span class="src-tag">Bootcamp 3.05</span></div><div class="fc-q">Clinical picture, stimulation test, treatment?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Child:</strong> short stature, normal body proportions, delayed bone age. Midline defects (cleft palate, central incisor) can indicate congenital pituitary malformation.<br><strong>Adult GH deficiency:</strong> central obesity, low muscle mass, fatigue, ↓ bone density — less obvious than pediatric.<br><strong>Stimulation tests:</strong> insulin tolerance test (hypoglycemia should stimulate GH), arginine, clonidine. Random GH unhelpful (pulsatile).<br><strong>Tx:</strong> recombinant human GH (somatropin) SC; contraindicated in open-angle pituitary adenoma, active cancer.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 4 · Hypothalamic Drug Targets <span class="src-tag">FA · Pharm</span></div><div class="fc-q">Summarize the key drugs that act on the H-P axis and their mechanisms.</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Cabergoline / bromocriptine:</strong> D2 agonists → ↓ PRL (prolactinoma, acromegaly adjunct, Parkinson's).<br><strong>Octreotide / lanreotide:</strong> somatostatin analogs → ↓ GH, ↓ TSH (acromegaly, carcinoid, variceal bleed).<br><strong>Pegvisomant:</strong> GH-receptor antagonist (acromegaly refractory).<br><strong>Leuprolide:</strong> GnRH agonist — pulsatile (fertility) vs continuous (medical castration).<br><strong>Desmopressin:</strong> V2 agonist (central DI, von Willebrand, nocturnal enuresis).<br><strong>Tolvaptan / conivaptan:</strong> V2 antagonists (SIADH, ADPKD).</div></div>
+    </div></div>
+
+  </div>
+</div>
+
+<!-- ══ MCQ ═══════════════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-mcq">
+  <div class="mcq-intro"><strong>Step 1-Style MCQs:</strong> single best answer. Each question cross-references the in-house LO and the mapped 3rd-party resource that teaches it.</div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 1 of 10 · LO 1 — Anatomy of the Stalk <span class="src-tag">In House · FA 2.01</span></div>
+    <div class="mcq-stem">A 42-year-old woman with a non-functioning sellar mass has progressive visual field loss on confrontation. Which of the following best describes the anatomic connection between the mass's origin (pituitary gland) and the hypothalamus?</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>A peripheral nerve extending from the medulla</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,true)"><span class="opt-letter">B</span>The infundibulum (pituitary stalk), containing both the hypophyseal portal system and axonal projections</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">C</span>Direct contact through the sella turcica bone</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">D</span>Cerebrospinal-fluid diffusion via the fourth ventricle</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">E</span>Lymphatic channels in the cavernous sinus</div>
+    </div>
+    <div class="mcq-exp"><strong>B.</strong> The <em>infundibulum</em> (pituitary stalk) carries (1) <strong>hypophyseal portal veins</strong> from median eminence to anterior pituitary and (2) <strong>axons</strong> from SON/PVN to posterior pituitary. Compression of the stalk disconnects both pathways — hence patients present with panhypopituitarism AND prolactin elevation (loss of tonic dopamine). Pituitary sits in the sella turcica of the sphenoid; hypothalamus in the diencephalon — they are connected ONLY through the infundibulum.</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 2 of 10 · LO 2 — Nonapeptide Source <span class="src-tag">In House · FA 3.03</span></div>
+    <div class="mcq-stem">A 55-year-old man develops polyuria (6 L/day) and hypernatremia 2 days after transsphenoidal pituitary adenoma resection. Which hypothalamic structure most directly produces the hormone that is now deficient?</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>Arcuate nucleus</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">B</span>Periventricular nucleus</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,true)"><span class="opt-letter">C</span>Supraoptic nucleus (SON)</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">D</span>Medial preoptic nucleus</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">E</span>Ventromedial nucleus</div>
+    </div>
+    <div class="mcq-exp"><strong>C — SON.</strong> The patient has central diabetes insipidus from disruption of SON (and PVN) axons traversing the stalk. <strong>SON</strong> is the primary source of <em>ADH</em>; <strong>PVN</strong> is primary for oxytocin (plus CRH, TRH). Arcuate (A) = dopamine (PIH); periventricular (B) = somatostatin; medial preoptic (D) = GnRH; ventromedial (E) = GHRH. Desmopressin (V2 agonist) is the treatment.</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 3 of 10 · LO 3 — Acidophil vs Basophil <span class="src-tag">FA 2.01</span></div>
+    <div class="mcq-stem">On H&amp;E staining of a pituitary biopsy, cells with prominent eosinophilic (pink) granules are seen. Which two anterior pituitary hormones are most likely produced by these cells?</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>ACTH and TSH</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">B</span>FSH and LH</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,true)"><span class="opt-letter">C</span>GH and prolactin</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">D</span>ADH and oxytocin</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">E</span>MSH and ACTH</div>
+    </div>
+    <div class="mcq-exp"><strong>C.</strong> Acidophils are somatotropes (GH) and lactotropes (PRL). Basophils (blue) are thyrotropes (TSH), corticotropes (ACTH), and gonadotropes (FSH + LH) — mnemonic <em>"B-FLAT"</em>. ADH/oxytocin (D) are posterior-pituitary hormones stored in Herring bodies, not made by adenohypophyseal cells. MSH (E) is from pars intermedia.</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 4 of 10 · LO 4 — Prolactin Tonic Inhibition <span class="src-tag">In House · Bootcamp 3.06</span></div>
+    <div class="mcq-stem">A 30-year-old woman reports 12 months of amenorrhea and galactorrhea. She is not pregnant. PRL is 340 ng/mL; TSH 2.0; free T4 normal. MRI shows a 9-mm sellar mass. What is the best first-line therapy?</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>Transsphenoidal surgery</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,true)"><span class="opt-letter">B</span>Cabergoline (dopamine D2 agonist)</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">C</span>Octreotide (somatostatin analog)</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">D</span>Levothyroxine</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">E</span>Pituitary radiation</div>
+    </div>
+    <div class="mcq-exp"><strong>B — Cabergoline.</strong> Dopamine tonically inhibits PRL release via D2; D2 agonists (cabergoline, bromocriptine) shrink prolactinomas AND normalize PRL in &gt;80%. Surgery (A) is reserved for drug-intolerant, vision-threatening, or drug-resistant tumors. This "medical-first" approach is unique among pituitary tumors and directly reflects the LO 4 biology of PRL control.</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 5 of 10 · LO 4 — TRH / PRL Cross-Stimulation <span class="src-tag">FA 3.04</span></div>
+    <div class="mcq-stem">A 28-year-old woman has amenorrhea and galactorrhea. PRL 85 ng/mL, TSH 8.2 mIU/L, free T4 0.6 ng/dL (low). What is the PRIMARY mechanism of her hyperprolactinemia?</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>Prolactin-secreting pituitary adenoma</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,true)"><span class="opt-letter">B</span>Primary hypothyroidism → ↑TRH → stimulates both TSH and PRL</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">C</span>Hypothalamic dopamine deficiency</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">D</span>Excess GnRH suppressing dopamine</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">E</span>Primary gonadal dysfunction</div>
+    </div>
+    <div class="mcq-exp"><strong>B.</strong> TRH has TWO pituitary targets: TSH (main) and PRL (lactotropes have TRH receptors). In primary hypothyroidism, low T4 → loss of feedback → ↑ TRH → ↑ TSH AND ↑ PRL. Treat the hypothyroidism (levothyroxine) → both labs normalize. Prolactinoma (A) would typically have PRL &gt;200 and NORMAL TSH. Always check thyroid function in hyperprolactinemia.</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 6 of 10 · LO 4 — Acromegaly Screening <span class="src-tag">FA 3.02 · Bootcamp 3.04</span></div>
+    <div class="mcq-stem">A 52-year-old man with progressive jaw enlargement, carpal tunnel syndrome, and sleep apnea has suspected acromegaly. Which test is best for initial screening?</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>Random serum GH</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,true)"><span class="opt-letter">B</span>Serum IGF-1</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">C</span>MRI pituitary</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">D</span>Serum prolactin</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">E</span>24-hour urine cortisol</div>
+    </div>
+    <div class="mcq-exp"><strong>B — IGF-1.</strong> GH is secreted in <em>pulses</em> (GHRH pulses + ultra-short autoregulation), so random GH can miss active disease. IGF-1 is produced by liver in response to GH and integrates GH exposure over 24 hours → stable index. If IGF-1 elevated → confirm with <em>OGTT</em> (normal GH suppresses with glucose; acromegaly does NOT). MRI (C) follows positive biochemistry, not the screen.</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 7 of 10 · LO 5 — Feedback Hierarchy <span class="src-tag">In House · FA</span></div>
+    <div class="mcq-stem">"Rising CRH inhibits its own subsequent release via axon collaterals within the hypothalamus." Which type of feedback loop does this describe?</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>Long loop</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">B</span>Short loop</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,true)"><span class="opt-letter">C</span>Ultra-short loop</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">D</span>Positive feedback</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">E</span>Feed-forward</div>
+    </div>
+    <div class="mcq-exp"><strong>C.</strong> Ultra-short loop = hypothalamic hormone inhibits ITSELF via axon collaterals within the hypothalamus. This autoregulation creates <em>pulsatile</em> release and prevents receptor desensitization at the pituitary (LO 2 integration). Long loop (A) = target hormone → hypothalamus + pituitary. Short loop (B) = pituitary → hypothalamus.</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 8 of 10 · LO 5 — Positive Feedback <span class="src-tag">In House · FA</span></div>
+    <div class="mcq-stem">Mid-cycle, estradiol rises to peak levels and triggers a surge of LH. Which statement best captures the physiology?</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>Estradiol exerts continuous negative feedback throughout the cycle</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,true)"><span class="opt-letter">B</span>Sustained high estradiol SWITCHES feedback from negative to positive on GnRH, generating the LH surge (self-terminating)</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">C</span>FSH stimulates estradiol release which directly causes ovulation</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">D</span>Progesterone drives the LH surge</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">E</span>LH suppresses GnRH via short-loop feedback</div>
+    </div>
+    <div class="mcq-exp"><strong>B.</strong> Estradiol normally suppresses GnRH/LH (negative feedback). At mid-cycle, <em>sustained high estradiol</em> (from the dominant follicle) SWITCHES to <em>positive feedback</em> on GnRH pulse frequency + pituitary sensitivity → massive LH surge → ovulation ~24h later. The loop is <em>self-terminating</em>: ovulation removes the follicle, progesterone from corpus luteum restores negative feedback.</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 9 of 10 · LO 6 — Cushing Localization <span class="src-tag">FA · Bootcamp</span></div>
+    <div class="mcq-stem">A 45-year-old woman has central obesity, striae, hyperglycemia. Morning cortisol elevated, ACTH elevated. Low-dose dexamethasone fails to suppress cortisol, but HIGH-dose dexamethasone DOES suppress. Which best describes the source?</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>Exogenous glucocorticoid use</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,true)"><span class="opt-letter">B</span>Cushing disease (pituitary ACTH-secreting adenoma)</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">C</span>Ectopic ACTH (e.g., small-cell lung cancer)</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">D</span>Primary adrenal adenoma secreting cortisol</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">E</span>Adrenal insufficiency</div>
+    </div>
+    <div class="mcq-exp"><strong>B — Cushing disease.</strong> Classic pattern: low-dose dex fails to suppress (any cortisol excess), high-dose dex SUPPRESSES → pituitary adenoma retains SOME feedback sensitivity at high dex doses. ACTH mildly elevated. Ectopic ACTH (C) doesn't suppress at any dose + usually higher ACTH + hypokalemic alkalosis. Adrenal (D) and exogenous (A) have LOW ACTH (feedback-suppressed pituitary). Tests the LO 5/6 logic of feedback applied clinically.</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 10 of 10 · LO 6 — Continuous Leuprolide <span class="src-tag">FA · Physeo 6.02</span></div>
+    <div class="mcq-stem">A 66-year-old man with metastatic prostate cancer starts continuous leuprolide. Week 1: worsening bone pain, urinary retention, testosterone RISES. Week 4: symptoms improve, testosterone at castrate level. Which mechanism explains this biphasic response?</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>Leuprolide directly stimulates Leydig cells</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,true)"><span class="opt-letter">B</span>Initial LH/FSH surge (flare) followed by GnRH-receptor down-regulation from continuous (non-pulsatile) agonism</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">C</span>Anti-leuprolide antibodies develop after week 3</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">D</span>Aromatase converts androgens to estrogens</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">E</span>Leuprolide stimulates adrenal androgens</div>
+    </div>
+    <div class="mcq-exp"><strong>B.</strong> Pulsatile GnRH is the physiologic signal. Continuous leuprolide initially AGONIZES GnRH receptors → LH/FSH surge → testosterone spike ("tumor flare"). After 1–2 weeks, constant stimulation → <em>receptor down-regulation</em> → LH/FSH fall → castrate testosterone. Bicalutamide (anti-androgen) is co-administered to blunt the flare. Directly applies LO 5 pulsatility principle.</div>
+  </div>
+
+</div>
+
+<!-- ══ VIGNETTES ══════════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-vignettes">
+  <div class="vig-intro"><strong>Integrated Vignettes:</strong> longer clinical scenarios crossing multiple LOs, drawn from mapped 3rd-party resources (BnB 5.01, Bootcamp, FA, Physeo 6.02).</div>
+
+  <div class="vig-item">
+    <div class="vig-num">Vignette 1 of 6 · LO 3 — Pituitary Apoplexy <span class="src-tag">BnB 5.02 · FA</span></div>
+    <div class="vig-stem">A 54-year-old man with a known non-functioning pituitary macroadenoma presents with acute <strong>thunderclap headache</strong>, bitemporal visual loss, and right-sided ptosis with a fixed mid-dilated pupil. He becomes progressively somnolent. BP 80/50, glucose 58. MRI: hemorrhagic sellar mass with suprasellar extension and right cavernous sinus involvement. What is the most appropriate IMMEDIATE next step?</div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Emergent transsphenoidal decompression</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>IV hydrocortisone 100 mg</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>IV levothyroxine 500 µg</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Continuous IV desmopressin</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>High-dose dexamethasone suppression test</div>
+    </div>
+    <div class="vig-exp"><strong>B — IV hydrocortisone.</strong> Pituitary apoplexy causes <span class="vig-buzzword">acute secondary adrenal insufficiency</span> within hours. Hypotension + hypoglycemia + altered mental status = adrenal crisis until proven otherwise. Give steroids FIRST (empiric, life-saving); surgery follows for vision-threatening compression. <em>Never</em> start T4 before cortisol — accelerated cortisol clearance precipitates crisis.</div>
+  </div>
+
+  <div class="vig-item">
+    <div class="vig-num">Vignette 2 of 6 · LO 3 — Craniopharyngioma <span class="src-tag">Bootcamp · FA</span></div>
+    <div class="vig-stem">A 9-year-old boy presents with growth failure (&lt;3rd percentile), polyuria, and worsening peripheral vision. Exam: <span class="vig-buzzword">bitemporal hemianopia</span>, delayed puberty (Tanner 1). Labs: IGF-1 LOW, urine osm 110, Na⁺ 148. MRI: suprasellar mass with <span class="vig-buzzword">calcifications and cystic components containing "motor-oil" fluid</span>.</div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Medulloblastoma</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Germinoma</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Craniopharyngioma</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Pituitary adenoma</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Meningioma of the tuberculum sellae</div>
+    </div>
+    <div class="vig-exp"><strong>C — Craniopharyngioma.</strong> Buzzwords: <span class="vig-buzzword">child + suprasellar + calcified + motor-oil cyst + bitemporal hemianopia + growth failure + DI</span>. Origin: <em>Rathke's pouch remnants</em> (oral ectoderm). Constellation of AP failure (↓GH → short stature; ↓FSH/LH → delayed puberty) + central DI (stalk involvement) + chiasmal compression is classic. Pituitary adenoma (D) is rare in children and usually doesn't calcify.</div>
+  </div>
+
+  <div class="vig-item">
+    <div class="vig-num">Vignette 3 of 6 · LO 4/6 — Post-Op Central DI <span class="src-tag">Bootcamp 2.04</span></div>
+    <div class="vig-stem">A 55-year-old woman undergoes transsphenoidal resection of a non-functioning pituitary macroadenoma. On post-op day 1: polyuria (550 mL/hr dilute urine), thirst, Na⁺ rises 141 → 149. Urine osm 95, serum osm 305. Desmopressin 2 µg IV → urine osm rises to 420 within 2 hours. What best explains her condition?</div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Nephrogenic DI from post-op contrast exposure</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Central DI from surgical disruption of ADH-producing neurons or their axons</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Primary polydipsia from pain-related anxiety</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>SIADH with inappropriate urine dilution</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Osmotic diuresis from hyperglycemia</div>
+    </div>
+    <div class="vig-exp"><strong>B — Central DI.</strong> SON/PVN neurons or their axons through the stalk can be disrupted during transsphenoidal surgery → ADH deficiency → polyuria + dilute urine + hypernatremia. Desmopressin response (urine osm &gt;50% rise) distinguishes central from nephrogenic. Often evolves through a classic <em>triphasic response</em>: DI days 0–5 → transient SIADH days 5–10 (stored ADH released as cells die) → permanent DI. Reinforces LO 4 posterior-pituitary physiology.</div>
+  </div>
+
+  <div class="vig-item">
+    <div class="vig-num">Vignette 4 of 6 · LO 4/5 — Ectopic ACTH vs Cushing Disease <span class="src-tag">BnB 5.02 · FA</span></div>
+    <div class="vig-stem">A 68-year-old male smoker has 3 months of weight loss, muscle weakness, BP 200/110, hyperpigmentation, K⁺ 2.7, pH 7.52 (metabolic alkalosis). Morning cortisol markedly elevated; ACTH 420 pg/mL. Neither low-dose nor high-dose dexamethasone suppresses cortisol. CT chest: 4-cm central lung mass.</div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Cushing disease (pituitary ACTH-secreting adenoma)</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Ectopic ACTH from small-cell lung carcinoma</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Adrenal adenoma</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Exogenous glucocorticoid administration</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Pseudo-Cushing from alcoholism</div>
+    </div>
+    <div class="vig-exp"><strong>B — Ectopic ACTH (SCLC).</strong> Key distinguishers: <span class="vig-buzzword">failure of BOTH low- and high-dose dex to suppress</span> (tumor feedback-independent), very high ACTH, <em>hyperpigmentation</em> (POMC-cleavage products include α-MSH), severe hypokalemic metabolic alkalosis (extreme cortisol excess overwhelms 11β-HSD2 → cortisol acts on MR at kidney). Pituitary Cushing (A) suppresses at high dose. Adrenal (C) and exogenous (D) = LOW ACTH. Integrates LO 4 + LO 5/6 feedback logic.</div>
+  </div>
+
+  <div class="vig-item">
+    <div class="vig-num">Vignette 5 of 6 · LO 3/4 — Sheehan Syndrome <span class="src-tag">BnB 5.02 · FA</span></div>
+    <div class="vig-stem">A 32-year-old woman had a major post-partum hemorrhage 4 weeks ago requiring multiple transfusions. She now reports <strong>inability to lactate</strong>, fatigue, cold intolerance, and amenorrhea. Labs: low cortisol, low free T4, low FSH/LH, low IGF-1. Serum Na⁺ and urine-concentrating ability are normal.</div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Autoimmune lymphocytic hypophysitis</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Sheehan syndrome — ischemic necrosis of the hypertrophied anterior pituitary</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Panhypopituitarism from craniopharyngioma</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Primary adrenal insufficiency (Addison's)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Empty sella syndrome</div>
+    </div>
+    <div class="vig-exp"><strong>B — Sheehan.</strong> Pregnancy doubles lactotrope mass → hypertrophied anterior pituitary outstrips its low-pressure portal blood supply. Obstetric hemorrhage precipitates AP infarction. <span class="vig-buzzword">Failure to lactate</span> is the EARLIEST sign (PRL loss). Followed by GH ↓ (fatigue), FSH/LH ↓ (amenorrhea), TSH ↓ (hypothyroidism), ACTH ↓ (adrenal insufficiency). <strong>Posterior pituitary SPARED</strong> — different blood supply (hypophyseal arteries, not portal) — explaining normal Na⁺ / urine-concentrating ability.</div>
+  </div>
+
+  <div class="vig-item">
+    <div class="vig-num">Vignette 6 of 6 · LO 4 — Kallmann Syndrome <span class="src-tag">FA · BnB</span></div>
+    <div class="vig-stem">A 17-year-old boy presents with delayed puberty. He has not reached Tanner 2. Testicular volume is 3 mL. He also reports being unable to smell — tested formally with olfactory discrimination cards: severely impaired. Labs: FSH 1.2, LH 0.8, testosterone 80 ng/dL. MRI: <strong>absent olfactory bulbs</strong>.</div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Klinefelter syndrome (47,XXY)</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Kallmann syndrome — failed migration of GnRH neurons</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Constitutional delay of growth and puberty</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Prolactinoma</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Primary testicular failure</div>
+    </div>
+    <div class="vig-exp"><strong>B — Kallmann.</strong> Classic triad: <span class="vig-buzzword">anosmia + delayed puberty + absent olfactory bulbs</span>. GnRH neurons normally migrate from olfactory placode → hypothalamus during embryogenesis; KAL1 (X-linked) or FGFR1 mutations disrupt this → GnRH deficient → low LH/FSH → low T (hypogonadotropic hypogonadism). Contrast Klinefelter (A): primary testicular failure → LH/FSH HIGH. <strong>Tx:</strong> pulsatile GnRH pump (restores fertility), or hCG + FSH; testosterone for virilization alone.</div>
+  </div>
+
+</div>
+
+<!-- ══ STEP 1 TRAPS ══════════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-traps">
+  <div class="trap-intro"><strong>Step 1 Traps:</strong> each statement is TRUE or FALSE. Many reverse facts or mix up similar concepts.</div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 01 · LO 1 — Sheehan Blood Supply <span class="src-tag">In House · BnB 5.02</span></div>
+    <div class="trap-statement">"In Sheehan syndrome, the posterior pituitary infarcts before the anterior pituitary because it has higher metabolic demand."</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn" onclick="judgeTrap(this,true)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE — reversed.</strong> The ANTERIOR pituitary is vulnerable in Sheehan. Pregnancy-induced lactotrope hypertrophy outstrips the low-pressure hypophyseal portal blood supply → ischemic necrosis of AP. The POSTERIOR pituitary has a different blood supply (hypophyseal arteries) and is <em>spared</em>.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 02 · LO 4 — Prolactinoma Treatment <span class="src-tag">In House · FA 3.04</span></div>
+    <div class="trap-statement">"D2 agonists like cabergoline INCREASE prolactin secretion, making them ideal for lactation induction."</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn" onclick="judgeTrap(this,true)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE — opposite.</strong> Dopamine TONICALLY INHIBITS prolactin. D2 AGONISTS (cabergoline, bromocriptine) mimic dopamine → <em>DECREASE</em> PRL and shrink prolactinomas. D2 ANTAGONISTS (antipsychotics, metoclopramide) remove dopamine's inhibition → INCREASE PRL (drug-induced hyperprolactinemia).</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 03 · LO 6 — Ectopic ACTH &amp; High-Dose Dex <span class="src-tag">FA · BnB</span></div>
+    <div class="trap-statement">"Ectopic ACTH-secreting tumors suppress cortisol with HIGH-dose dexamethasone because the pituitary-adrenal axis retains feedback sensitivity."</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn" onclick="judgeTrap(this,true)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Ectopic ACTH sources (SCLC, carcinoid) are FEEDBACK-INDEPENDENT — they don't suppress even at high dex doses. HIGH-dose dex suppression is the SIGNATURE of pituitary Cushing disease (retained partial sensitivity). <em>Neither</em> low nor high dex suppresses ectopic ACTH.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 04 · LO 3 — Hormone Replacement Order <span class="src-tag">In House · FA</span></div>
+    <div class="trap-statement">"In a patient with pituitary apoplexy and panhypopituitarism, levothyroxine should be started immediately, before steroid replacement."</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn" onclick="judgeTrap(this,true)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Always <strong>cortisol BEFORE T4</strong>. Thyroid hormone accelerates cortisol clearance — giving T4 first in an ACTH-deficient patient can precipitate adrenal crisis. Start IV hydrocortisone empirically when acute adrenal insufficiency is possible (apoplexy, Sheehan, acute hypopituitarism).</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 05 · LO 4 — Stalk Section &amp; Prolactin <span class="src-tag">In House</span></div>
+    <div class="trap-statement">"Complete pituitary stalk transection causes all six anterior pituitary hormones — including prolactin — to fall precipitously."</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn" onclick="judgeTrap(this,true)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE — PRL is the exception.</strong> Prolactin is under TONIC DOPAMINE INHIBITION. Cutting the stalk removes dopamine → <em>PRL RISES</em>. All five other AP hormones (TSH, ACTH, FSH, LH, GH) fall because they lose their positive hypothalamic releasing hormones. Mnemonic: stalk section = <em>everything down EXCEPT PRL</em>.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 06 · LO 4 — DDAVP Test <span class="src-tag">Bootcamp 2.04</span></div>
+    <div class="trap-statement">"Desmopressin significantly raises urine osmolality in both central and nephrogenic DI, so the test cannot distinguish them."</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn" onclick="judgeTrap(this,true)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE — it does distinguish.</strong> Central DI = ADH deficient → kidney V2 receptors are normal → DDAVP works → urine osm rises &gt;50%. Nephrogenic DI = ADH adequate but V2/AQP2 broken → DDAVP does NOT raise urine osm. This is THE bedside test for telling them apart.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 07 · LO 5 — LH Surge Driver <span class="src-tag">In House · FA</span></div>
+    <div class="trap-statement">"The LH surge that triggers ovulation is caused by rising progesterone levels exerting positive feedback on GnRH/LH."</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn" onclick="judgeTrap(this,true)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> The mid-cycle LH surge is driven by <em>rising ESTRADIOL</em> (from the dominant follicle) switching from negative to POSITIVE feedback on GnRH/LH. Progesterone rises AFTER ovulation (from the corpus luteum) and restores negative feedback. Don't confuse cause (estradiol) with consequence (progesterone post-ovulation).</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 08 · LO 2 — Osmoreceptor Location <span class="src-tag">In House</span></div>
+    <div class="trap-statement">"Because the hypothalamus lies above the blood-brain barrier, all its neurons can directly sense plasma sodium levels."</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn" onclick="judgeTrap(this,true)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Most of the hypothalamus IS behind the BBB. Osmoreceptors are localized to <strong>circumventricular organs</strong> — especially the <em>OVLT</em> — which lack BBB and CAN directly sense plasma osmolarity. OVLT projects back to SON/PVN → ADH release + thirst. Damage to this specific region causes adipsic DI (loss of thirst drive + ADH).</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 09 · LO 6 — Adrenal Medulla &amp; ACTH <span class="src-tag">In House</span></div>
+    <div class="trap-statement">"A patient with panhypopituitarism from Sheehan syndrome will be unable to produce epinephrine in response to stress because their ACTH-driven adrenal output has failed."</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn" onclick="judgeTrap(this,true)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> ACTH controls the adrenal CORTEX (cortisol, aldosterone, androgens) — NOT the MEDULLA. The adrenal medulla is a modified sympathetic ganglion, innervated directly by preganglionic sympathetic fibers. Sheehan abolishes cortisol but catecholamine release from chromaffin cells is PRESERVED. This separation explains why Addisonian/hypopit patients get hypoglycemia + hypotension but maintain tachycardic stress response.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 10 · LO 5 — Continuous GnRH Direction <span class="src-tag">In House · FA</span></div>
+    <div class="trap-statement">"Continuous GnRH agonist therapy INCREASES LH and FSH throughout treatment because it is the opposite of a GnRH antagonist."</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn" onclick="judgeTrap(this,true)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Continuous GnRH agonism causes an INITIAL LH/FSH surge ("flare"), but within ~2 weeks it <em>DOWN-REGULATES</em> GnRH receptors on gonadotropes → LH/FSH fall to castrate levels. <strong>Pulsatility</strong> is required for stimulation — continuous agonism is effectively suppressive (medical castration). Antagonists (degarelix) block receptors directly, no flare.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 11 · LO 3 — Stain Reversal <span class="src-tag">FA 2.01</span></div>
+    <div class="trap-statement">"Anterior pituitary basophils secrete GH and prolactin; acidophils secrete FSH, LH, ACTH, and TSH."</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn" onclick="judgeTrap(this,true)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE — reversed.</strong> <em>Acidophils</em> = GH + PRL. <em>Basophils</em> = <strong>B-FLAT</strong> = FSH, LH, ACTH, TSH. Easy memory: acidophils are the "2" (GH, PRL); basophils cover the "4" (FLAT).</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 12 · LO 1 — Rathke's Pouch <span class="src-tag">FA · Bootcamp 3.01</span></div>
+    <div class="trap-statement">"Rathke's pouch gives rise to the posterior pituitary (neurohypophysis), while the anterior pituitary arises from neuroectoderm."</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn" onclick="judgeTrap(this,true)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE — reversed.</strong> <em>Rathke's pouch</em> (oral ectoderm) → ANTERIOR pituitary (adenohypophysis) + pars intermedia. <em>Neuroectoderm</em> of diencephalon → POSTERIOR pituitary (neurohypophysis). Remnants of Rathke's pouch cysts give rise to craniopharyngioma.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 13 · LO 4 — Oxytocin Neuropeptide <span class="src-tag">In House</span></div>
+    <div class="trap-statement">"Oxytocin functions only in the uterus (labor) and breast (milk let-down); it has no CNS effects."</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn" onclick="judgeTrap(this,true)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Beyond classical uterine contraction and milk let-down, oxytocin acts as a CNS neuropeptide influencing pair bonding, social recognition, memory, anxiety, and appetite. Active research as therapy for autism spectrum, social anxiety, and postpartum depression (efficacy uncertain).</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 14 · LO 6 — Kallmann Pattern <span class="src-tag">FA · BnB</span></div>
+    <div class="trap-statement">"A 17-year-old with anosmia and delayed puberty has LH/FSH HIGH and testosterone LOW (primary testicular failure)."</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn" onclick="judgeTrap(this,true)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE — inverted.</strong> Kallmann = HYPOGONADOTROPIC hypogonadism. GnRH-neuron migration failure → low GnRH → LOW LH/FSH → LOW T. Contrast with Klinefelter (primary testicular failure) → HIGH LH/FSH. Anosmia is the telltale — olfactory bulbs share embryologic origin with GnRH-producing neurons.</div>
+  </div>
+
+</div>
+
+<!-- ══ MATCHING ══════════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-matching">
+  <div class="match-intro"><strong>Matching drills:</strong> click an item on the left then its match on the right. Four drills: hypothalamic nucleus → hormone, cell type → AP hormone, hypothalamic hormone → target, pituitary disease → mechanism.</div>
+
+  <!-- Drill 1 — Hypothalamic nucleus → hormone -->
+  <div class="match-set">
+    <div class="match-set-title">Drill 1 · LO 2 — Hypothalamic Nucleus → Principal Hormone</div>
+    <div class="match-set-hint">From the in-house lecture's hypothalamic-nucleus map.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Nucleus</div>
+        <div class="match-item" onclick="selectMatch(this,'m1')" data-pair="1">Supraoptic (SON)</div>
+        <div class="match-item" onclick="selectMatch(this,'m1')" data-pair="2">Paraventricular (PVN)</div>
+        <div class="match-item" onclick="selectMatch(this,'m1')" data-pair="3">Arcuate</div>
+        <div class="match-item" onclick="selectMatch(this,'m1')" data-pair="4">Periventricular</div>
+        <div class="match-item" onclick="selectMatch(this,'m1')" data-pair="5">Ventromedial</div>
+        <div class="match-item" onclick="selectMatch(this,'m1')" data-pair="6">Medial preoptic</div>
+        <div class="match-item" onclick="selectMatch(this,'m1')" data-pair="7">Dorsomedial</div>
+      </div>
+      <div>
+        <div class="match-col-label">Hormone</div>
+        <div class="match-item" onclick="selectMatch(this,'m1')" data-pair="5">GHRH</div>
+        <div class="match-item" onclick="selectMatch(this,'m1')" data-pair="7">GnIH (gonadotropin-inhibiting hormone)</div>
+        <div class="match-item" onclick="selectMatch(this,'m1')" data-pair="3">Dopamine (PIH) — inhibits prolactin</div>
+        <div class="match-item" onclick="selectMatch(this,'m1')" data-pair="1">ADH (primary source) + some oxytocin</div>
+        <div class="match-item" onclick="selectMatch(this,'m1')" data-pair="4">Somatostatin (GHIH) — inhibits GH + TSH</div>
+        <div class="match-item" onclick="selectMatch(this,'m1')" data-pair="2">Oxytocin (primary source); CRH, TRH, some ADH</div>
+        <div class="match-item" onclick="selectMatch(this,'m1')" data-pair="6">GnRH</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="m1-score">0</span>/7 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('m1')">Reset</button>
+  </div>
+
+  <!-- Drill 2 — AP cell type → hormone -->
+  <div class="match-set">
+    <div class="match-set-title">Drill 2 · LO 3 — Anterior Pituitary Cell → Hormone (+ Stain)</div>
+    <div class="match-set-hint">H&amp;E reveals acidophil (pink) vs basophil (blue) cells.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Cell Type</div>
+        <div class="match-item" onclick="selectMatch(this,'m2')" data-pair="1">Somatotrope</div>
+        <div class="match-item" onclick="selectMatch(this,'m2')" data-pair="2">Lactotrope</div>
+        <div class="match-item" onclick="selectMatch(this,'m2')" data-pair="3">Corticotrope</div>
+        <div class="match-item" onclick="selectMatch(this,'m2')" data-pair="4">Gonadotrope</div>
+        <div class="match-item" onclick="selectMatch(this,'m2')" data-pair="5">Thyrotrope</div>
+      </div>
+      <div>
+        <div class="match-col-label">Hormone + Stain</div>
+        <div class="match-item" onclick="selectMatch(this,'m2')" data-pair="4">FSH + LH (basophil)</div>
+        <div class="match-item" onclick="selectMatch(this,'m2')" data-pair="1">GH (acidophil)</div>
+        <div class="match-item" onclick="selectMatch(this,'m2')" data-pair="5">TSH (basophil)</div>
+        <div class="match-item" onclick="selectMatch(this,'m2')" data-pair="3">ACTH (basophil)</div>
+        <div class="match-item" onclick="selectMatch(this,'m2')" data-pair="2">Prolactin (acidophil)</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="m2-score">0</span>/5 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('m2')">Reset</button>
+  </div>
+
+  <!-- Drill 3 — Hypothalamic hormone → Pituitary effect -->
+  <div class="match-set">
+    <div class="match-set-title">Drill 3 · LO 4 — Hypothalamic Hormone → Pituitary Effect</div>
+    <div class="match-set-hint">Releasing and inhibiting hormones and what they do to the AP.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Hypothalamic</div>
+        <div class="match-item" onclick="selectMatch(this,'m3')" data-pair="1">CRH</div>
+        <div class="match-item" onclick="selectMatch(this,'m3')" data-pair="2">GnRH (pulsatile)</div>
+        <div class="match-item" onclick="selectMatch(this,'m3')" data-pair="3">GHRH</div>
+        <div class="match-item" onclick="selectMatch(this,'m3')" data-pair="4">Dopamine (PIH)</div>
+        <div class="match-item" onclick="selectMatch(this,'m3')" data-pair="5">Somatostatin (GHIH)</div>
+        <div class="match-item" onclick="selectMatch(this,'m3')" data-pair="6">TRH</div>
+      </div>
+      <div>
+        <div class="match-col-label">Pituitary Effect</div>
+        <div class="match-item" onclick="selectMatch(this,'m3')" data-pair="4">↓ Prolactin (tonic inhibition)</div>
+        <div class="match-item" onclick="selectMatch(this,'m3')" data-pair="6">↑ TSH (and ↑ PRL as secondary effect)</div>
+        <div class="match-item" onclick="selectMatch(this,'m3')" data-pair="1">↑ ACTH</div>
+        <div class="match-item" onclick="selectMatch(this,'m3')" data-pair="3">↑ Growth hormone</div>
+        <div class="match-item" onclick="selectMatch(this,'m3')" data-pair="5">↓ GH and ↓ TSH</div>
+        <div class="match-item" onclick="selectMatch(this,'m3')" data-pair="2">↑ FSH + ↑ LH</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="m3-score">0</span>/6 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('m3')">Reset</button>
+  </div>
+
+  <!-- Drill 4 — Pituitary disease → Mechanism -->
+  <div class="match-set">
+    <div class="match-set-title">Drill 4 · LO 3/4/6 — Pituitary Disease → Molecular / Physiologic Mechanism</div>
+    <div class="match-set-hint">Each disease is covered in mapped 3rd-party resources for end02.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Disease</div>
+        <div class="match-item" onclick="selectMatch(this,'m4')" data-pair="1">Prolactinoma</div>
+        <div class="match-item" onclick="selectMatch(this,'m4')" data-pair="2">Sheehan syndrome</div>
+        <div class="match-item" onclick="selectMatch(this,'m4')" data-pair="3">Craniopharyngioma</div>
+        <div class="match-item" onclick="selectMatch(this,'m4')" data-pair="4">Central DI</div>
+        <div class="match-item" onclick="selectMatch(this,'m4')" data-pair="5">Acromegaly</div>
+        <div class="match-item" onclick="selectMatch(this,'m4')" data-pair="6">Kallmann syndrome</div>
+      </div>
+      <div>
+        <div class="match-col-label">Mechanism</div>
+        <div class="match-item" onclick="selectMatch(this,'m4')" data-pair="5">Autonomous GH from somatotrope adenoma → JAK2/STAT5 → ↑ IGF-1</div>
+        <div class="match-item" onclick="selectMatch(this,'m4')" data-pair="3">Rathke's pouch remnant (oral ectoderm) → calcified suprasellar mass</div>
+        <div class="match-item" onclick="selectMatch(this,'m4')" data-pair="6">Failed migration of GnRH neurons + olfactory placode → anosmia + hypogonadotropic hypogonadism</div>
+        <div class="match-item" onclick="selectMatch(this,'m4')" data-pair="2">Postpartum hemorrhage → ischemic necrosis of hypertrophied anterior pituitary</div>
+        <div class="match-item" onclick="selectMatch(this,'m4')" data-pair="4">Loss of ADH-producing SON/PVN neurons or axons via stalk</div>
+        <div class="match-item" onclick="selectMatch(this,'m4')" data-pair="1">Autonomous PRL secretion escaping tonic dopamine D2 inhibition</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="m4-score">0</span>/6 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('m4')">Reset</button>
+  </div>
+
+</div>
+
+<!-- ══ CLINICAL CORRELATES + HY NOTES ═══════════════════════════════════════ -->
+<div class="tab-content" id="tab-clinical">
+  <div class="cc-intro"><strong>Clinical correlates + HY testing notes:</strong> signature H-P diseases and testing patterns that connect each LO to mapped 3rd-party Step 1 content. Click Expand for mechanism.</div>
+
+  <div class="cc-card">
+    <div class="cc-tag">LO 4 · Lactotrope <span class="src-tag">Bootcamp 3.06 · FA 3.04 · BnB 5.02</span></div>
+    <div class="cc-title">Prolactinoma — Medical Therapy First</div>
+    <div class="cc-body">Functional pituitary adenoma from lactotropes. Classic female: amenorrhea + galactorrhea + infertility. Classic male: hypogonadism + mass effect. PRL typically &gt;200 ng/mL. First-line treatment is medical (cabergoline / bromocriptine) — unique among pituitary adenomas.</div>
+    <button class="cc-reveal" onclick="toggleCC(this)">Expand mechanism</button>
+    <div class="cc-detail"><strong>Why medical first:</strong> PRL is the only AP hormone under tonic dopamine inhibition (LO 4). D2 agonists mimic dopamine → shrink tumor AND normalize PRL in &gt;80%. Surgery reserved for drug-intolerant, drug-resistant, or vision-threatening cases. <strong>Hook effect:</strong> extremely high PRL may saturate immunoassay → falsely low reading; dilute sample. <strong>Differentials for ↑PRL:</strong> prolactinoma (PRL &gt;200), stalk effect (mild ↑ from non-functioning mass compressing stalk), primary hypothyroidism (↑TRH → ↑PRL), D2-antagonist drugs (antipsychotics, metoclopramide).</div>
+  </div>
+
+  <div class="cc-card">
+    <div class="cc-tag">LO 4 · Somatotrope <span class="src-tag">Bootcamp 3.04 · FA 3.02 · BnB 5.02</span></div>
+    <div class="cc-title">Acromegaly &amp; Gigantism — GH Excess</div>
+    <div class="cc-body">Somatotrope adenoma → autonomous GH → IGF-1 excess. In adults (closed epiphyses) → <em>acromegaly</em>: jaw/brow enlargement, hands/feet growth, carpal tunnel, sleep apnea, diabetes, cardiomyopathy. In children (open epiphyses) → <em>gigantism</em>.</div>
+    <button class="cc-reveal" onclick="toggleCC(this)">Expand mechanism</button>
+    <div class="cc-detail"><strong>Screening:</strong> IGF-1 (GH is pulsatile; random GH unreliable). <strong>Confirmation:</strong> OGTT — normal GH suppresses with glucose; acromegaly does NOT.<br><strong>Treatment:</strong> transsphenoidal surgery first line. Adjuncts:<br>• <em>Octreotide / lanreotide</em> — somatostatin analogs → ↓GH<br>• <em>Cabergoline</em> — D2 agonist adjunct<br>• <em>Pegvisomant</em> — GH-receptor antagonist (refractory disease)<br>GH signals via JAK2-STAT5; diabetogenic effects result from direct GH action (anti-insulin) + IGF-1 independent pathways.</div>
+  </div>
+
+  <div class="cc-card">
+    <div class="cc-tag">LO 3 · AP Blood Supply <span class="src-tag">BnB 5.02 · FA 4.03 · Bootcamp 3.07</span></div>
+    <div class="cc-title">Sheehan Syndrome — Postpartum Panhypopituitarism</div>
+    <div class="cc-body">Postpartum hemorrhage → hypotension → ischemic necrosis of the lactotrope-hypertrophied anterior pituitary. First sign: failure to lactate. Progressive AP failure over weeks-years.</div>
+    <button class="cc-reveal" onclick="toggleCC(this)">Expand mechanism</button>
+    <div class="cc-detail"><strong>Why AP is vulnerable:</strong> pregnancy doubles lactotrope mass, outstripping the low-pressure hypophyseal portal blood supply. Hemorrhage precipitates infarction. <strong>Order of symptom emergence:</strong> PRL (lactation failure) → FSH/LH (amenorrhea) → GH (fatigue) → TSH (hypothyroidism) → ACTH (adrenal insufficiency — can be life-threatening). <strong>Posterior pituitary SPARED</strong> — different blood supply (hypophyseal arteries, not portal). <strong>Treatment:</strong> replace deficient hormones; cortisol BEFORE T4.</div>
+  </div>
+
+  <div class="cc-card">
+    <div class="cc-tag">LO 3 · Acute Sellar Emergency <span class="src-tag">BnB 5.02 · FA · Bootcamp 3.07</span></div>
+    <div class="cc-title">Pituitary Apoplexy — Steroids First</div>
+    <div class="cc-body">Sudden hemorrhage or infarction within a pre-existing pituitary adenoma. Thunderclap headache + visual loss + ocular paresis + altered mental status. Life-threatening if adrenal crisis ensues.</div>
+    <button class="cc-reveal" onclick="toggleCC(this)">Expand mechanism</button>
+    <div class="cc-detail"><strong>Pathophysiology:</strong> pituitary adenoma outgrows its blood supply OR hemorrhages into itself → sudden expansion in the rigid sella → compression of optic chiasm (bitemporal hemianopia) + cavernous sinus (CN III, IV, V1-2, VI) + stalk.<br><strong>Labs:</strong> acute secondary adrenal insufficiency (hypotension, hypoglycemia, hyponatremia).<br><strong>MRI:</strong> hemorrhagic sellar mass with suprasellar extension.<br><strong>IMMEDIATE:</strong> <em>IV hydrocortisone 100 mg</em> empirically (life-saving), THEN imaging/surgery for vision threat. Transsphenoidal decompression indicated for vision-threatening compression. Never give T4 before cortisol.</div>
+  </div>
+
+  <div class="cc-card">
+    <div class="cc-tag">LO 3 · Suprasellar Mass <span class="src-tag">Bootcamp 3.01 · FA · BnB 5.02</span></div>
+    <div class="cc-title">Craniopharyngioma — Rathke's Pouch Remnant</div>
+    <div class="cc-body">Benign but locally aggressive tumor from Rathke's pouch remnants. Bimodal age: children and older adults. Classic child presentation: growth failure + visual loss + polyuria.</div>
+    <button class="cc-reveal" onclick="toggleCC(this)">Expand mechanism</button>
+    <div class="cc-detail"><strong>Origin:</strong> same oral ectoderm that gives rise to the adenohypophysis → adamantinomatous craniopharyngioma (children) or papillary (adults).<br><strong>Imaging:</strong> calcified suprasellar mass with cystic components containing <em>"motor-oil" cholesterol-rich fluid</em> — pathognomonic.<br><strong>Clinical cascade:</strong> (1) AP failure → GH deficiency (growth failure) + FSH/LH deficiency (delayed puberty); (2) chiasmal compression → bitemporal hemianopia; (3) stalk/posterior pituitary involvement → central DI; (4) hypothalamic compression → temperature regulation, obesity.<br><strong>Treatment:</strong> surgical resection ± radiation. High recurrence.</div>
+  </div>
+
+  <div class="cc-card">
+    <div class="cc-tag">LO 4 · Posterior Pituitary <span class="src-tag">Bootcamp 2.04 · FA 4.02 · In-House Anki</span></div>
+    <div class="cc-title">Diabetes Insipidus — Central vs Nephrogenic</div>
+    <div class="cc-body">Insufficient water reabsorption at collecting duct → polyuria (&gt;3 L/day), dilute urine, polydipsia, hypernatremia. Central DI = ADH deficient. Nephrogenic DI = ADH effective signal failure at kidney.</div>
+    <button class="cc-reveal" onclick="toggleCC(this)">Expand mechanism</button>
+    <div class="cc-detail"><strong>Central DI causes:</strong> pituitary surgery, trauma, tumor (craniopharyngioma, germinoma), autoimmune hypophysitis, idiopathic.<br><strong>Nephrogenic DI causes:</strong> V2-R mutation (X-linked), AQP2 mutation (AR), lithium, demeclocycline, hypercalcemia, hypokalemia.<br><strong>Diagnosis:</strong> water deprivation test — failure to concentrate urine → DI confirmed. Desmopressin challenge — central responds (urine osm ↑&gt;50%); nephrogenic does NOT.<br><strong>Treatment:</strong><br>• Central: desmopressin (V2 agonist; also nasal, PO).<br>• Nephrogenic: stop offending drug; paradoxical HCTZ + low-salt diet; amiloride (for lithium).<br><em>Triphasic post-surgical DI:</em> early DI → SIADH (days 5-10) → permanent DI.</div>
+  </div>
+
+  <div class="cc-card">
+    <div class="cc-tag">LO 4 · Posterior Pituitary <span class="src-tag">Bootcamp 2.03 · FA 4.01 · In-House Anki</span></div>
+    <div class="cc-title">SIADH — Euvolemic Hyponatremia</div>
+    <div class="cc-body">Inappropriate (excess) ADH → water retention → dilutional hyponatremia with inappropriately concentrated urine. Patient appears clinically euvolemic.</div>
+    <button class="cc-reveal" onclick="toggleCC(this)">Expand mechanism</button>
+    <div class="cc-detail"><strong>Labs:</strong> hyponatremia (&lt;135), serum osm LOW, urine osm HIGH (inappropriately concentrated), urine Na⁺ &gt;40. BUN and uric acid LOW (dilution).<br><strong>Common causes:</strong> SCLC (ectopic ADH), CNS disease (stroke, trauma, meningitis), pulmonary disease (pneumonia), drugs (SSRIs, carbamazepine, cyclophosphamide, NSAIDs), postop, HIV, pain/nausea.<br><strong>Treatment:</strong><br>• First line — fluid restriction.<br>• Chronic — salt tablets ± loop diuretic.<br>• <em>Vaptans</em> (tolvaptan, conivaptan — V2 antagonists) for resistant cases.<br>• Severe/symptomatic (seizures) — hypertonic saline, but <em>correct slowly</em> (&lt;0.5 mEq/L/hr) to avoid central pontine myelinolysis.</div>
+  </div>
+
+  <div class="cc-card">
+    <div class="cc-tag">LO 4 · GnRH <span class="src-tag">FA 3.01 · BnB 5.01 · In-House Anki</span></div>
+    <div class="cc-title">Kallmann Syndrome — Migration Defect</div>
+    <div class="cc-body">Hypogonadotropic hypogonadism + anosmia + absent olfactory bulbs. GnRH-producing neurons fail to migrate from the olfactory placode into the hypothalamus during embryogenesis.</div>
+    <button class="cc-reveal" onclick="toggleCC(this)">Expand mechanism</button>
+    <div class="cc-detail"><strong>Genetics:</strong> KAL1 (X-linked, Anosmin-1), FGFR1 (AD), PROKR2, CHD7, others.<br><strong>Clinical:</strong> delayed/absent puberty, microphallus, cryptorchidism, infertility, anosmia (usually noticed only when asked).<br><strong>Labs:</strong> LOW LH, LOW FSH, LOW T/E2 — <em>hypogonadotropic</em> hypogonadism. Distinguishes from Klinefelter (HIGH LH/FSH, primary testicular failure).<br><strong>Imaging:</strong> MRI shows absent olfactory bulbs.<br><strong>Treatment:</strong> pulsatile GnRH pump (restores fertility) OR hCG + FSH; testosterone/estrogen for virilization only (no fertility needed).</div>
+  </div>
+
+  <div class="cc-card">
+    <div class="cc-tag">LO 5 · Ovarian Cycle <span class="src-tag">In House · FA 3.01 · Physeo 6.02</span></div>
+    <div class="cc-title">The LH Surge — Positive Feedback Physiology</div>
+    <div class="cc-body">Mid-cycle ovulation is driven by the mid-cycle LH surge. The surge is generated when sustained high estradiol SWITCHES from negative to POSITIVE feedback on GnRH/LH — a rare example of positive feedback in the endocrine system.</div>
+    <button class="cc-reveal" onclick="toggleCC(this)">Expand mechanism</button>
+    <div class="cc-detail"><strong>Phase-by-phase:</strong><br>• Early follicular — low E2, modest FSH, negative feedback dominant.<br>• Mid/late follicular — dominant follicle produces rising E2; above a threshold (~200 pg/mL for 48 hours), feedback switches sign.<br>• Pre-ovulatory — sustained high E2 drives GnRH pulse frequency up AND increases pituitary gonadotrope sensitivity → massive LH surge (+ smaller FSH surge).<br>• LH surge triggers ovulation within ~24–36 hours.<br>• After ovulation — corpus luteum secretes progesterone → restores negative feedback; estrogen also drops.<br><strong>Self-terminating:</strong> ovulation removes the high-E2 source, preventing runaway.<br>Clinical: continuous exogenous estrogen (OCPs) prevents the LH surge (maintains negative feedback) → contraception.</div>
+  </div>
+
+  <div class="cc-card">
+    <div class="cc-tag">LO 5 · Pulsatility <span class="src-tag">FA · Physeo 6.02 · BnB 5.01</span></div>
+    <div class="cc-title">Leuprolide Flare — The Pulsatility Principle in Clinical Practice</div>
+    <div class="cc-body">Leuprolide is a GnRH agonist used for prostate cancer, endometriosis, and central precocious puberty. Continuous administration initially STIMULATES (flare) then SUPPRESSES LH/FSH via receptor down-regulation.</div>
+    <button class="cc-reveal" onclick="toggleCC(this)">Expand mechanism</button>
+    <div class="cc-detail"><strong>Flare phenomenon (first 1–2 weeks):</strong> continuous GnRH agonism → initial LH/FSH surge → testosterone/estradiol spike. In prostate cancer this causes <em>pain crisis / urinary retention / spinal cord compression risk</em>. Co-administer <strong>bicalutamide</strong> (AR antagonist) during the flare window.<br><strong>Suppression (week 3+):</strong> sustained agonism → GnRH-receptor down-regulation + desensitization on gonadotropes → LH/FSH fall → castrate T in ~2 weeks.<br><strong>Alternative:</strong> <em>GnRH ANTAGONISTS</em> (degarelix, cetrorelix) block receptors directly with no flare — more expensive but no need for anti-androgen cover.<br>Directly illustrates the LO 5 principle that pulsatility matters: continuous agonism is effectively suppressive.</div>
+  </div>
+
+  <!-- HY NOTES SECTION -->
+  <div style="margin-top:28px;padding-top:20px;border-top:3px solid #EA580C;">
+    <h2 style="font-family:'Crimson Pro',Georgia,serif;font-size:1.4em;color:#7C2D12;margin-bottom:6px;">High-Yield Testing Notes</h2>
+    <div style="color:#5A5A5A;font-size:.9em;margin-bottom:18px;line-height:1.55;">Pattern-matching, buzzwords, and axis rules that recur on Step 1 for LOs 1–6.</div>
+  </div>
+
+  <div class="hy-card">
+    <div class="hy-card-title">Buzzword → Diagnosis <span class="hy-badge buzzword">Pattern Bank</span></div>
+    <div class="hy-card-body">
+      <strong>"Bitemporal hemianopia + headache + ↑PRL":</strong> Prolactinoma (or stalk effect from non-functioning macroadenoma) (LO 4).<br>
+      <strong>"Calcified suprasellar mass + motor-oil cyst in a child":</strong> Craniopharyngioma (LO 3).<br>
+      <strong>"Postpartum hemorrhage + failure to lactate":</strong> Sheehan syndrome (LO 3).<br>
+      <strong>"Thunderclap headache + visual loss + pituitary mass":</strong> Pituitary apoplexy (LO 3/4).<br>
+      <strong>"Jaw enlargement + carpal tunnel + sleep apnea":</strong> Acromegaly (LO 4).<br>
+      <strong>"Moon facies + striae + low-dose dex fails":</strong> Cushing → check ACTH + high-dose dex (LO 5/6).<br>
+      <strong>"Smoker + hyperpigmentation + dex non-suppressible":</strong> Ectopic ACTH (SCLC) (LO 6).<br>
+      <strong>"Polyuria + hypernatremia post-pituitary-surgery":</strong> Central DI (LO 4).<br>
+      <strong>"Delayed puberty + anosmia":</strong> Kallmann syndrome (LO 4).<br>
+      <strong>"Flat / empty pituitary on MRI":</strong> Empty sella syndrome (LO 3).<br>
+      <strong>"Euvolemic hyponatremia + concentrated urine":</strong> SIADH (LO 4).
+    </div>
+  </div>
+
+  <div class="hy-card">
+    <div class="hy-card-title">Rules of the H-P Axis <span class="hy-badge testing">High-Yield</span></div>
+    <div class="hy-card-body">
+      <strong>Steroids before thyroid:</strong> in panhypopituitarism, always give cortisol BEFORE T4 (T4 accelerates cortisol clearance).<br>
+      <strong>PRL is the exception:</strong> only AP hormone under tonic INHIBITION → stalk section RAISES it; all other AP hormones fall.<br>
+      <strong>Pulsatile GnRH matters:</strong> continuous GnRH agonism = receptor downregulation (medical castration). Pulsatile = stimulation (fertility).<br>
+      <strong>Posterior pituitary is spared in Sheehan:</strong> different blood supply (hypophyseal arteries, not portal system).<br>
+      <strong>Hook effect:</strong> extremely high PRL may read FALSELY LOW — dilute sample.<br>
+      <strong>High-dose dex SUPPRESSES Cushing disease, NOT ectopic ACTH or adrenal sources.</strong><br>
+      <strong>Taper steroids:</strong> &gt;3 weeks of supraphysiologic dosing suppresses HPA — abrupt stop = crisis.<br>
+      <strong>Triphasic post-op DI:</strong> DI (days 0-5) → transient SIADH (days 5-10) → permanent DI.
+    </div>
+  </div>
+
+  <div class="hy-card">
+    <div class="hy-card-title">Mnemonics <span class="hy-badge">Memory Hooks</span></div>
+    <div class="hy-card-body">
+      <strong>B-FLAT</strong> (basophils): <em>FSH, LH, ACTH, TSH</em>.<br>
+      <strong>Acidophils do 2</strong>: <em>GH, Prolactin</em>.<br>
+      <strong>SON / PVN → posterior</strong>: nonapeptides (ADH + oxytocin).<br>
+      <strong>"PRL loves TRH, hates dopamine":</strong> TRH stimulates, dopamine inhibits PRL.<br>
+      <strong>Three output pathways:</strong> Portal → AP · Axons → PP · Sympathetic → adrenal medulla.<br>
+      <strong>"Ultra-short = ME ME ME":</strong> hypothalamic hormone inhibits ITSELF → pulsatility.<br>
+      <strong>Rathke's pouch</strong> (oral ectoderm) = ANTERIOR; neuroectoderm = POSTERIOR.
+    </div>
+  </div>
+
+  <div class="hy-card">
+    <div class="hy-card-title">Trap Corner <span class="hy-badge trap">Common Errors</span></div>
+    <div class="hy-card-body">
+      <strong>Do NOT reverse:</strong> PRL goes UP (not down) with stalk section.<br>
+      <strong>Do NOT reverse:</strong> acidophils = GH + PRL; basophils = other 4 (FLAT).<br>
+      <strong>Do NOT reverse:</strong> Rathke's pouch = anterior (oral ectoderm); neuroectoderm = posterior.<br>
+      <strong>Do NOT confuse:</strong> Kallmann (low LH/FSH, GnRH migration defect) with hypergonadotropic hypogonadism (Klinefelter, Turner — gonadal failure with HIGH LH/FSH).<br>
+      <strong>Do NOT confuse:</strong> SIADH (euvolemic, dilute plasma, concentrated urine) with cerebral salt wasting (volume-depleted).<br>
+      <strong>Do NOT confuse:</strong> low-dose dex fails = "Cushing present"; high-dose dex fails = "ectopic or adrenal source."<br>
+      <strong>Do NOT confuse:</strong> adrenal medulla is innervated directly by SNS — Sheehan does NOT abolish epinephrine response.
+    </div>
+  </div>
+
+</div>
+
+<!-- ══ REFERENCE ══════════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-ref">
+
+  <div class="ref-section">
+    <div class="ref-title">Hypothalamic Nuclei &amp; Hormones (quick map)</div>
+    <table>
+      <thead><tr><th>Nucleus</th><th>Hormone(s)</th><th>Pituitary Effect</th><th>Memory Hook</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Supraoptic (SON)</strong></td><td>ADH (primary); some oxytocin</td><td>Posterior → water retention</td><td>"SON keeps you dry"</td></tr>
+        <tr><td><strong>Paraventricular (PVN)</strong></td><td>Oxytocin (primary); CRH, TRH, some ADH</td><td>Posterior + AP releasing hormones</td><td>"PVN = many jobs"</td></tr>
+        <tr><td><strong>Arcuate</strong></td><td>Dopamine (PIH)</td><td>↓ Prolactin (tonic)</td><td>"Arc → dope → no milk"</td></tr>
+        <tr><td><strong>Periventricular</strong></td><td>Somatostatin (GHIH)</td><td>↓ GH and ↓ TSH</td><td>"Peri = stop GH"</td></tr>
+        <tr><td><strong>Ventromedial</strong></td><td>GHRH</td><td>↑ GH</td><td>"Ventro = grow"</td></tr>
+        <tr><td><strong>Medial preoptic</strong></td><td>GnRH (pulsatile)</td><td>↑ FSH + LH</td><td>"Pre-optic = puberty"</td></tr>
+        <tr><td><strong>Dorsomedial</strong></td><td>GnIH (8-AA peptide)</td><td>↓ FSH + LH</td><td>"Dorsal = damper"</td></tr>
+      </tbody>
+    </table>
+    <div class="ref-note"><strong>In-house slide note:</strong> "Don't memorize" the exact nucleus names for exams, but know the SON/PVN → posterior (nonapeptides) and arcuate → dopamine rules, plus the functional categories.</div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Anterior Pituitary Hormones — Cell, Stain, Control, Target</div>
+    <table>
+      <thead><tr><th>Hormone</th><th>Cell (Stain)</th><th>↑ by</th><th>↓ by</th><th>Target</th></tr></thead>
+      <tbody>
+        <tr><td><strong>GH</strong></td><td>Somatotrope (acidophil)</td><td>GHRH, ghrelin, hypoglycemia, stress, sleep, exercise</td><td>Somatostatin, IGF-1 (long loop), hyperglycemia</td><td>Liver → IGF-1; direct anti-insulin effects</td></tr>
+        <tr><td><strong>Prolactin</strong></td><td>Lactotrope (acidophil)</td><td>TRH, suckling, pregnancy, D2 antagonists</td><td><strong>Dopamine — tonic inhibition</strong></td><td>Breast (lactation); suppresses GnRH</td></tr>
+        <tr><td><strong>TSH</strong></td><td>Thyrotrope (basophil)</td><td>TRH</td><td>Somatostatin, dopamine, T3/T4 (long loop)</td><td>Thyroid → T3/T4</td></tr>
+        <tr><td><strong>ACTH</strong></td><td>Corticotrope (basophil)</td><td>CRH, stress, ADH</td><td>Cortisol (long loop)</td><td>Adrenal cortex → cortisol</td></tr>
+        <tr><td><strong>FSH</strong></td><td>Gonadotrope (basophil)</td><td>GnRH (pulsatile)</td><td>Inhibin, GnIH, sex steroids (long loop)</td><td>Gonads → gametogenesis</td></tr>
+        <tr><td><strong>LH</strong></td><td>Gonadotrope (basophil)</td><td>GnRH (pulsatile); E2 surge (positive feedback)</td><td>Sex steroids (long loop)</td><td>Gonads → sex hormones</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Feedback Loop Hierarchy</div>
+    <table>
+      <thead><tr><th>Loop</th><th>Source → Target</th><th>Purpose</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Long</strong></td><td>Target-organ hormone → hypothalamus + pituitary</td><td>Set total hormone level</td><td>Cortisol → ↓CRH + ↓ACTH</td></tr>
+        <tr><td><strong>Short</strong></td><td>Pituitary hormone → hypothalamus</td><td>Fine-tune</td><td>ACTH → ↓CRH</td></tr>
+        <tr><td><strong>Ultra-short</strong></td><td>Hypothalamic hormone → itself (axon collaterals)</td><td>Generate PULSATILITY</td><td>CRH → ↓CRH; TRH → ↓TRH</td></tr>
+        <tr><td><strong>Positive</strong></td><td>Target hormone → more hypothalamic/pituitary release</td><td>Trigger surges (self-terminating)</td><td>E2 surge → LH surge → ovulation; oxytocin in labor</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Drugs Acting on the H-P Axis</div>
+    <table>
+      <thead><tr><th>Drug</th><th>Mechanism</th><th>Clinical Use</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Cabergoline / Bromocriptine</strong></td><td>D2 agonist → ↓PRL</td><td>Prolactinoma (first-line); acromegaly adjunct; Parkinson's</td></tr>
+        <tr><td><strong>Octreotide / Lanreotide</strong></td><td>Somatostatin analog → ↓GH, ↓TSH, ↓GI hormones</td><td>Acromegaly; carcinoid; variceal bleed; VIPoma</td></tr>
+        <tr><td><strong>Pegvisomant</strong></td><td>GH-receptor antagonist</td><td>Acromegaly refractory to surgery/somatostatin</td></tr>
+        <tr><td><strong>Leuprolide (continuous)</strong></td><td>GnRH agonist → receptor downregulation</td><td>Prostate cancer, endometriosis, central precocious puberty</td></tr>
+        <tr><td><strong>Leuprolide (pulsatile)</strong></td><td>Mimics physiologic GnRH pulses</td><td>Restore fertility in hypogonadotropic hypogonadism (Kallmann)</td></tr>
+        <tr><td><strong>Degarelix / Cetrorelix</strong></td><td>GnRH receptor antagonist (no flare)</td><td>Prostate cancer; IVF</td></tr>
+        <tr><td><strong>Desmopressin (DDAVP)</strong></td><td>Selective V2 agonist → AQP2 insertion</td><td>Central DI; von Willebrand; nocturnal enuresis</td></tr>
+        <tr><td><strong>Tolvaptan / Conivaptan</strong></td><td>V2 antagonist</td><td>SIADH; ADPKD</td></tr>
+        <tr><td><strong>Antipsychotics / metoclopramide</strong></td><td>D2 antagonist → ↑PRL (ADR)</td><td>(Cause of drug-induced hyperprolactinemia)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Mapped 3rd-Party Coverage for end02</div>
+    <table>
+      <thead><tr><th>Resource</th><th>Section (primary for end02)</th><th>Cards / Content</th><th>Best Use</th></tr></thead>
+      <tbody>
+        <tr><td><strong>In-house lecture</strong></td><td>Hypothalamic-Pituitary Relationships I</td><td>PDF slides + LO doc</td><td>Baseline — LOs 1–6, slide content, nucleus/hormone map</td></tr>
+        <tr><td><strong>In-house Anki</strong></td><td><code>Bioch/Phys::ENDO::02-Hypothalamic-Pituitary</code></td><td>92 cards</td><td>Facts emphasized in this specific lecture</td></tr>
+        <tr><td><strong>BnB</strong></td><td>5.01 Pituitary Anatomy and Physiology (primary) · 5.02 Pituitary Pathology (xref)</td><td>84 + 90 cards</td><td>Depth on pituitary anatomy/physiology + pathology (apoplexy, Sheehan)</td></tr>
+        <tr><td><strong>First Aid</strong></td><td>2.01 Pituitary gland · 3.01 Hypothalamic-pituitary hormones · 3.02 Growth hormone · 3.04 Prolactin</td><td>36 + 100 + 30 + 33 cards</td><td>Comprehensive pituitary anatomy/histology + AP hormone physiology</td></tr>
+        <tr><td><strong>Bootcamp</strong></td><td>2.01 Hypothalamus · 3.01 Embryology · 3.02 AP Function · 3.04 Gigantism/Acromegaly · 3.05 GH Deficiency</td><td>56 + 18 + 63 + 40 + 22 cards</td><td>Hypothalamic detail + AP disorders, embryology emphasis</td></tr>
+        <tr><td><strong>Physeo</strong></td><td>Physio 6.02 Pituitary Gland</td><td>83 cards</td><td>Physiology reinforcement</td></tr>
+        <tr><td><strong>Pathoma / Sketchy</strong></td><td>No primary end02 coverage</td><td>—</td><td>(Pathology coverage begins in end08; pharmacology in end13)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<div class="footer">
+  <a href="../active-recall-hub.html">← Active Recall Hub</a> &nbsp;·&nbsp; END02 Hub 2 — Step 1 Extensions &nbsp;·&nbsp; HoyaDocs Endocrine Block
+</div>
+
+</div><!-- /container -->
+
+<script>
+function flipCard(fc){
+  const inner=fc.querySelector('.fc-inner');
+  const front=fc.querySelector('.fc-front');
+  const back=fc.querySelector('.fc-back');
+  fc.classList.toggle('flipped');
+  inner.style.height=(fc.classList.contains('flipped')?back:front).scrollHeight+'px';
+}
+function fixCardHeights(){
+  document.querySelectorAll('.fc').forEach(function(fc){
+    const inner=fc.querySelector('.fc-inner');
+    const front=fc.querySelector('.fc-front');
+    inner.style.height=front.scrollHeight+'px';
+  });
+}
+window.addEventListener('load',fixCardHeights);
+
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-content').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='flashcards') requestAnimationFrame(fixCardHeights);
+}
+
+function answerMCQ(el,correct){
+  const item=el.closest('.mcq-item,.vig-item');
+  const opts=item.querySelectorAll('.mcq-opt,.vig-opt');
+  opts.forEach(o=>o.classList.add('locked'));
+  el.classList.add(correct?'correct':'wrong');
+  opts.forEach(o=>{
+    if(o!==el && o.getAttribute('onclick').includes(',true)')) o.classList.add('correct');
+  });
+  const exp=item.querySelector('.mcq-exp,.vig-exp');
+  exp.classList.add('show');
+}
+function answerVig(el,correct){answerMCQ(el,correct);}
+
+function judgeTrap(btn,correct){
+  const card=btn.closest('.trap-card');
+  const btns=card.querySelectorAll('.trap-btn');
+  btns.forEach(b=>b.disabled=true);
+  btn.classList.add(correct?'sel-correct':'sel-wrong');
+  const exp=card.querySelector('.trap-exp');
+  exp.classList.add(correct?'show-c':'show-w');
+}
+
+function toggleCC(btn){
+  const detail=btn.nextElementSibling;
+  detail.classList.toggle('open');
+  btn.textContent=detail.classList.contains('open')?'Collapse':'Expand mechanism';
+}
+
+let matchState={};
+function selectMatch(el,setId){
+  if(el.classList.contains('matched-correct'))return;
+  if(!matchState[setId])matchState[setId]={selected:null,correct:0};
+  const state=matchState[setId];
+  if(!state.selected){
+    state.selected=el;
+    el.style.background='#FFEDD5';
+    el.style.borderColor='#EA580C';
+    el.style.color='#7C2D12';
+    el.style.fontWeight='600';
+    return;
+  }
+  if(state.selected===el){
+    el.style.background='#FFF7ED';
+    el.style.borderColor='#FED7AA';
+    el.style.color='#2C2C2C';
+    el.style.fontWeight='';
+    state.selected=null;
+    return;
+  }
+  const a=state.selected, b=el;
+  if(a.dataset.pair===b.dataset.pair){
+    [a,b].forEach(x=>{
+      x.classList.add('matched-correct');
+      x.style.background='#F1F8F2';
+      x.style.borderColor='#66BB6A';
+      x.style.color='#2E7D32';
+      x.style.cursor='default';
+      x.style.fontWeight='';
+    });
+    state.correct++;
+    const scoreEl=document.getElementById(setId+'-score');
+    if(scoreEl)scoreEl.textContent=state.correct;
+  }else{
+    [a,b].forEach(x=>{
+      x.style.background='#FEF5F5';
+      x.style.borderColor='#EF5350';
+      setTimeout(()=>{
+        x.style.background='#FFF7ED';
+        x.style.borderColor='#FED7AA';
+        x.style.color='#2C2C2C';
+        x.style.fontWeight='';
+      },500);
+    });
+  }
+  state.selected=null;
+}
+function resetMatch(setId){
+  matchState[setId]={selected:null,correct:0};
+  document.querySelectorAll('[onclick*="selectMatch(this,\''+setId+'\')"]').forEach(el=>{
+    el.classList.remove('matched-correct');
+    el.style.background='#FFF7ED';
+    el.style.borderColor='#FED7AA';
+    el.style.color='#2C2C2C';
+    el.style.cursor='pointer';
+    el.style.fontWeight='';
+  });
+  const scoreEl=document.getElementById(setId+'-score');
+  if(scoreEl)scoreEl.textContent='0';
+}
+</script>
+</body>
+</html>

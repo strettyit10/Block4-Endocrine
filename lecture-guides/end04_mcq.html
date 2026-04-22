@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 4: Adrenal Cortex — HoyaDocs Endocrine Block</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #f8f9fa;
+            color: #1f2937;
+            line-height: 1.6;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .sidebar {
+            position: fixed;
+            left: 0; top: 0;
+            width: 220px;
+            height: 100vh;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            padding: 20px 0 140px;
+            overflow-y: auto;
+            z-index: 100;
+            box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+        }
+        .sidebar-header {
+            padding: 0 15px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 20px;
+        }
+        .sidebar-header h2 {
+            font-size: 14px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+        .sidebar-header p { font-size: 12px; opacity: 0.8; margin: 0; }
+        .sidebar-nav { padding: 0 15px; }
+        .sidebar-link {
+            display: block; padding: 10px 12px;
+            background: #1e293b; color: #cbd5e1;
+            border-left: 3px solid transparent; border-radius: 4px;
+            cursor: pointer; font-size: 13px;
+            transition: all 0.2s ease; text-decoration: none; margin-bottom: 6px;
+        }
+        .sidebar-link:hover { background: #334155; border-left-color: #2563eb; color: #f1f5f9; }
+        .sidebar-link.active { background: #1e293b; border-left-color: #2563eb; color: #2563eb; font-weight: 600; }
+        .sidebar-divider { height: 1px; background: #334155; margin: 12px 0; }
+        .sidebar-footer {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            padding: 10px 15px 12px;
+            background: linear-gradient(to top, #0f172a 60%, transparent);
+        }
+        .export-actions { display: flex; gap: 6px; margin-bottom: 8px; }
+        .export-btn {
+            flex: 1; display: flex; flex-direction: column;
+            align-items: center; gap: 3px; padding: 7px 6px;
+            background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 6px; color: #cbd5e1; font-size: 10.5px; font-weight: 600;
+            cursor: pointer; transition: all 0.2s ease; font-family: inherit; line-height: 1.2;
+        }
+        .export-btn:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); color: #f1f5f9; }
+        .export-btn .btn-icon { font-size: 16px; line-height: 1; }
+        .hub-return-btn {
+            display: flex; align-items: center; gap: 7px;
+            width: 100%; padding: 9px 12px;
+            background: rgba(37,99,235,0.18); border: 1px solid rgba(96,165,250,0.35);
+            border-radius: 6px; color: #93c5fd; font-size: 12px; font-weight: 600;
+            text-decoration: none; transition: all 0.2s ease; cursor: pointer;
+        }
+        .hub-return-btn:hover { background: rgba(37,99,235,0.32); border-color: rgba(96,165,250,0.7); color: #dbeafe; }
+        .hub-return-btn .btn-arrow { font-size: 14px; line-height: 1; }
+        @media print {
+            .sidebar, .sidebar-footer { display: none !important; }
+            body { display: block !important; overflow: visible !important; height: auto !important; background: white !important; }
+            .main { margin-left: 0 !important; height: auto !important; overflow: visible !important; max-width: 100% !important; padding: 20px !important; }
+            .lo-section { display: block !important; box-shadow: none !important; border: 1px solid #e2e8f0; margin-bottom: 30px; page-break-before: always; }
+            .lo-section:first-child { page-break-before: auto; }
+            .section-body, .h4-body, .h5-body, .mnemonic-body, .trap-body { display: block !important; }
+            .section-chevron, .h5-chevron, .mnemonic-chevron, .trap-chevron { display: none !important; }
+            .header { page-break-after: avoid; }
+            a { color: inherit; text-decoration: none; }
+        }
+        .main { margin-left: 220px; flex: 1; padding: 40px; max-width: 1000px; overflow-y: auto; height: 100vh; }
+        .header { margin-bottom: 40px; }
+        .header h1 { font-size: 32px; font-weight: 700; margin-bottom: 10px; color: #0f172a; }
+        .header p { font-size: 16px; color: #475569; margin: 0; }
+        .lo-section { display: none; background: white; border-radius: 8px; padding: 28px 30px; margin-bottom: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); animation: fadeIn 0.3s ease; }
+        .lo-section.active { display: block; }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+        .lo-title { font-size: 20px; font-weight: 700; color: #1f2937; margin-bottom: 5px; }
+        .lo-subtitle { font-size: 13px; color: #64748b; margin-bottom: 20px; font-weight: 500; }
+        .lo-content h3 { font-size: 15px; font-weight: 700; color: #1e3a5f; margin: 24px 0 10px; padding: 6px 10px; border-left: 3px solid #2563eb; background: transparent; }
+        .lo-content h4 { font-size: 14.5px; font-weight: 700; color: #1e3a5f; background: #dbeafe; border-radius: 4px; padding: 6px 12px; margin: 18px 0 8px; }
+        .lo-content h5 { font-size: 13px; font-weight: 700; color: #1e293b; margin: 12px 0 4px; }
+        .lo-content p { font-size: 14px; line-height: 1.7; color: #1e293b; margin-bottom: 10px; }
+        .lo-content ul { margin-left: 22px; margin-bottom: 12px; }
+        .lo-content ol { margin-left: 22px; margin-bottom: 12px; }
+        .lo-content li { font-size: 14px; line-height: 1.7; color: #1e293b; margin-bottom: 6px; }
+        .lo-content table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: 13px; }
+        .lo-content table thead tr { background: #1e3a5f; color: white; }
+        .lo-content table th { padding: 10px 12px; text-align: left; font-weight: 600; font-size: 12px; letter-spacing: 0.3px; color: white; }
+        .lo-content table td { padding: 9px 12px; border-bottom: 1px solid #e2e8f0; color: #1e293b; vertical-align: top; }
+        .lo-content table tbody tr:nth-child(even) { background: #eff6ff; }
+        .lo-content table tbody tr:hover { background: #dbeafe; }
+        .section-rule { border: none; border-top: 1px solid #e2e8f0; margin: 22px 0; }
+        .buzzwords { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 16px; }
+        .buzzword { background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 4px; padding: 3px 10px; font-size: 12px; font-weight: 600; color: #334155; }
+        .exam-trap { background-color: #fef2f2; border-left: 4px solid #dc2626; padding: 14px 16px; margin: 16px 0; border-radius: 4px; }
+        .exam-trap .trap-header { font-weight: 700; color: #b91c1c; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .exam-trap ul { margin-left: 18px; margin-top: 6px; }
+        .exam-trap li { font-size: 13px; margin-bottom: 6px; color: #1f2937; line-height: 1.6; }
+        .exam-trap p { font-size: 13px; color: #1f2937; line-height: 1.6; margin-top: 6px; }
+        .exam-trap strong { color: #991b1b; }
+        .hy-box { background-color: #fefce8; border-left: 4px solid #ca8a04; padding: 14px 16px; margin: 16px 0; border-radius: 4px; }
+        .hy-box strong { color: #a16207; font-weight: 700; font-size: 13px; }
+        .hy-box ul { margin-left: 18px; margin-top: 6px; }
+        .hy-box li { font-size: 13px; margin-bottom: 6px; color: #1f2937; line-height: 1.6; }
+        .mnemonic { background-color: #fff7ed; border-left: 4px solid #ea580c; padding: 14px 16px; margin: 16px 0; border-radius: 4px; }
+        .mnemonic .mnemonic-header { font-weight: 700; color: #c2410c; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .mnemonic strong { color: #c2410c; font-size: 13px; }
+        .mnemonic ul { margin-left: 18px; margin-top: 6px; }
+        .mnemonic li { font-size: 13px; margin-bottom: 5px; color: #431407; line-height: 1.5; }
+        .usmle-summary { background: #eff6ff; border-left: 4px solid #2563eb; padding: 14px 16px; margin: 16px 0; border-radius: 4px; }
+        .usmle-header { font-weight: 700; color: #1e40af; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .usmle-summary ul { margin-left: 18px; margin-top: 6px; }
+        .usmle-summary li { font-size: 13px; margin-bottom: 6px; color: #1f2937; line-height: 1.6; }
+        .usmle-summary p { font-size: 13px; color: #1f2937; line-height: 1.6; margin-top: 6px; }
+        .collapsible-h3 { cursor: pointer; user-select: none; }
+        .collapsible-h3:hover { color: #1e3a8a; }
+        h3.collapsible-h3 { font-size: 15px; font-weight: 700; color: #1e3a5f; margin: 24px 0 10px; padding: 6px 10px; border-left: 3px solid #2563eb; cursor: pointer; user-select: none; }
+        .section-chevron { display: inline-block; font-size: 12px; color: #2563eb; transition: transform 0.2s ease; margin-right: 6px; }
+        .collapsible-h3.collapsed .section-chevron { transform: rotate(-90deg); }
+        .section-body { padding-left: 16px; margin-left: 4px; }
+        .section-body.collapsed { display: none; }
+        .h4-body { padding-left: 14px; margin-left: 4px; margin-bottom: 6px; }
+        .trap-header { cursor: pointer; user-select: none; display: flex; justify-content: space-between; align-items: center; }
+        .trap-chevron { font-size: 11px; font-weight: 400; color: #b91c1c; transition: transform 0.2s ease; margin-left: 8px; flex-shrink: 0; }
+        .trap-header.collapsed .trap-chevron { transform: rotate(-90deg); }
+        .trap-body.collapsed { display: none; }
+        .h5-subheading { font-size: 13px; font-weight: 700; color: #1e3a5f; background: #eff6ff; border-left: 2px solid #93c5fd; border-radius: 3px; padding: 4px 10px; margin: 14px 0 6px; cursor: pointer; user-select: none; }
+        .h5-subheading:hover { background: #dbeafe; }
+        .h5-subheading .h5-chevron { display: inline-block; font-size: 10px; color: #2563eb; transition: transform 0.2s ease; margin-right: 5px; }
+        .h5-subheading.collapsed .h5-chevron { transform: rotate(-90deg); }
+        .h5-body { padding-left: 18px; margin-left: 4px; margin-bottom: 8px; }
+        .h5-body.collapsed { display: none; }
+        .mnemonic-toggle-header { cursor: pointer; user-select: none; display: flex; justify-content: space-between; align-items: center; }
+        .mnemonic-toggle-header .mnemonic-chevron { font-size: 11px; color: #c2410c; transition: transform 0.2s ease; margin-left: 8px; flex-shrink: 0; }
+        .mnemonic-toggle-header.collapsed .mnemonic-chevron { transform: rotate(-90deg); }
+        .mnemonic-body.collapsed { display: none; }
+        h4.collapsible-h4 { cursor: pointer; user-select: none; }
+        h4.collapsible-h4:hover { background: #bfdbfe; }
+        h4.collapsible-h4 .h4-chevron { display: inline-block; font-size: 11px; color: #2563eb; transition: transform 0.2s ease; margin-right: 5px; }
+        h4.collapsible-h4.collapsed .h4-chevron { transform: rotate(-90deg); }
+        .lo-controls { display: flex; gap: 8px; margin-bottom: 16px; }
+        .lo-controls button { font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 4px; border: 1px solid #2563eb; cursor: pointer; background: white; color: #2563eb; transition: all 0.15s ease; }
+        .lo-controls button:hover { background: #2563eb; color: white; }
+        .lo-toc { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 14px 18px; margin-bottom: 24px; font-size: 13px; }
+        .lo-toc-title { font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.6px; color: #64748b; margin-bottom: 10px; }
+        .lo-toc ol { margin: 0; padding-left: 20px; }
+        .lo-toc li { margin-bottom: 5px; }
+        .lo-toc a { color: #1e3a5f; text-decoration: none; font-weight: 500; }
+        .lo-toc a:hover { text-decoration: underline; color: #2563eb; }
+        .lo-covered { background: #f0f4ff; border: 1px solid #c7d2fe; border-left: 4px solid #4f46e5; border-radius: 6px; padding: 12px 16px; margin-bottom: 16px; font-size: 13px; }
+        .lo-covered-title { font-weight: 700; color: #3730a3; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .lo-covered ul { margin: 0; padding-left: 18px; }
+        .lo-covered li { margin-bottom: 3px; color: #1e293b; line-height: 1.5; }
+        .lo-covered li strong { color: #3730a3; }
+        .practice-question { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #2563eb; padding: 16px; margin: 14px 0; border-radius: 6px; }
+        .practice-question h4 { background: none !important; padding: 0 !important; border-radius: 0 !important; margin: 4px 0 8px !important; color: #1d4ed8; font-size: 14.5px; font-weight: 700; }
+        .practice-question p { font-size: 13px; }
+        .practice-question .option { color: #475569; font-style: italic; margin-bottom: 4px; font-size: 13px; }
+        .answer { display: none; margin-top: 12px; background: #eff6ff; border-left: 3px solid #2563eb; padding: 12px; border-radius: 4px; font-size: 13px; line-height: 1.7; color: #1f2937; }
+        .answer.show { display: block; }
+        .answer strong { color: #1e3a5f; }
+        .tyu-section { margin: 24px 0; border-top: 1px solid #e2e8f0; padding-top: 18px; }
+        .tyu-section > h4 { font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 14px; }
+        .tyu-section .practice-question h4 { background: none !important; padding: 0 !important; }
+    </style>
+</head>
+<body>
+
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <a href="https://strettyit10.github.io/Block4-Endo/"
+           target="_blank" rel="noopener noreferrer"
+           style="display:inline-block; margin-bottom:8px; font-size:17px; font-weight:700;
+                  color:#60a5fa; text-decoration:none; letter-spacing:0.5px;
+                  border-bottom:1px solid rgba(96,165,250,0.35); padding-bottom:1px;"
+           onmouseover="this.style.color='#93c5fd'"
+           onmouseout="this.style.color='#60a5fa'">HoyaDocs ↗</a>
+        <h2>Lecture 4</h2>
+        <p>Adrenal Cortex</p>
+    </div>
+    <nav class="sidebar-nav">
+        <a href="#overview" class="sidebar-link active" onclick="switchLO(event,'overview')">📋 Lecture Overview</a>
+            <div class="sidebar-divider"></div>
+            <a href="#practice" class="sidebar-link" onclick="switchLO(event,'practice')">Practice Questions</a>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="export-actions">
+            <button class="export-btn" onclick="printAll(this)" title="Save as PDF">
+                <span class="btn-icon">🖨️</span>Print PDF
+            </button>
+            <button class="export-btn" onclick="downloadWord(this)" title="Download as Word document">
+                <span class="btn-icon">📄</span>Word Doc
+            </button>
+        </div>
+        <a href="https://strettyit10.github.io/Block4-Endocrine/resource-mapping/resource_hub.html"
+           class="hub-return-btn" target="_blank" rel="noopener noreferrer">
+            <span class="btn-arrow">&#8592;</span> Study Hub Resources
+        </a>
+    </div>
+</aside>
+
+<main class="main">
+    <div class="header">
+        <h1>Lecture 4: Adrenal Cortex</h1>
+        <p>HoyaDocs — Endocrine Block | USMLE Step 1 Preparation</p>
+    </div>
+
+    <section class="lo-section active" id="overview">
+        <div class="lo-content">
+
+                <!-- Official LOs Map Accordion -->
+            <div style="margin-top:32px;">
+                <h3 style="font-size:16px; font-weight:700; color:#1e3a5f; margin:0 0 12px; padding:6px 10px; border-left:3px solid #2563eb;">Official Learning Objectives Map</h3>
+                <div id="lo-accordion">
+
+            <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                     style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                    <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">1</span>
+                    <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Recognize the structure of steroid hormones and understand the nomenclature used to describe them</span>
+                    <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                </div>
+                <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                    <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q1</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q2</a></div>
+                </div>
+            </div>
+            <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                     style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                    <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">2</span>
+                    <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Describe the synthesis steps shared by all steroid hormones</span>
+                    <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                </div>
+                <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                    <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q3</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q4</a></div>
+                </div>
+            </div>
+            <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                     style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                    <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">3</span>
+                    <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Differentiate between layers of the adrenal cortex, the enzymes that they express, and the hormones that they secrete</span>
+                    <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                </div>
+                <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                    <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q5</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q6</a></div>
+                </div>
+            </div>
+            <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                     style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                    <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">4</span>
+                    <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Describe the biosynthesis pathways for aldosterone, cortisol, and DHEA</span>
+                    <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                </div>
+                <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                    <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q7</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q8</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q9</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q10</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q11</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q12</a></div>
+                </div>
+            </div>
+            <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                     style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                    <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">5</span>
+                    <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Know the mechanisms that facilitate circulation and inactivation of aldosterone, cortisol, and DHEA, and explain their effects on half-life</span>
+                    <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                </div>
+                <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                    <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q13</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q14</a></div>
+                </div>
+            </div>
+            <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                     style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                    <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">6</span>
+                    <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Understand the primary mechanisms of action of aldosterone and cortisol on their target cells</span>
+                    <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                </div>
+                <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                    <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q15</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q16</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q17</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q18</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q19</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q20</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q21</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q22</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q23</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q24</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q25</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q26</a></div>
+                </div>
+            </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        <section class="practice-section lo-section" id="practice">
+            <h3 id="practice-questions">Practice Questions</h3>
+
+            <!-- LO 1 &mdash; Steroid Structure and Nomenclature -->
+            <h4 style="font-size:15px; font-weight:700; color:#7c3aed; margin:28px 0 8px; padding-bottom:4px; border-bottom:2px solid #ede9fe;">LO 1 &mdash; Steroid Structure and Nomenclature</h4>
+
+            <div class="practice-question">
+                <h4>Question 1</h4>
+                <p>A biochemistry lecturer draws the four-ring steroid backbone on the board and asks which of the following correctly pairs the <em>carbon count</em> of a class of steroid hormones with a representative member of that class.</p>
+                <p class="option">A) C18 &mdash; testosterone</p>
+                <p class="option">B) C19 &mdash; estradiol</p>
+                <p class="option">C) C21 &mdash; cortisol</p>
+                <p class="option">D) C27 &mdash; aldosterone</p>
+                <p class="option">E) C24 &mdash; DHEA</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>&#10003; Correct Answer: C &mdash; C21 &mdash; cortisol</strong>
+                    <p style="margin-top:10px;">Steroid hormones are classified by the number of carbons retained from their cholesterol (C27) precursor. <strong>C21</strong> steroids = progestins + corticoids (progesterone, cortisol, aldosterone). <strong>C19</strong> steroids = androgens (DHEA, androstenedione, testosterone, DHT). <strong>C18</strong> steroids = estrogens (estrone, estradiol, estriol) &mdash; loss of the C19 methyl during aromatization. Each synthesis step removes carbons in a fixed order: C27 cholesterol &rarr; C21 pregnenolone (side-chain cleaved by desmolase) &rarr; C19 androgens (17,20-lyase) &rarr; C18 estrogens (aromatase). Mapping carbon count to class is the signature LO 1 fact.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 2</h4>
+                <p>A medical student is told that aromatase converts androstenedione to estrone. Which structural change to the steroid backbone best defines this reaction?</p>
+                <p class="option">A) Addition of a hydroxyl group at C21, creating a mineralocorticoid</p>
+                <p class="option">B) Cleavage of the cholesterol side chain between C20 and C22</p>
+                <p class="option">C) Aromatization of the A-ring with loss of the C19 methyl group, converting a C19 androgen to a C18 estrogen</p>
+                <p class="option">D) Reduction of a C4,5 double bond, converting testosterone to DHT</p>
+                <p class="option">E) N-methylation of the B-ring, converting cortisol to corticosterone</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>&#10003; Correct Answer: C &mdash; Aromatization of the A-ring with loss of the C19 methyl group, converting a C19 androgen to a C18 estrogen</strong>
+                    <p style="margin-top:10px;"><strong>Aromatase</strong> (CYP19A1) aromatizes the steroid A-ring and in the process removes the angular C19 methyl group &mdash; turning a C19 <em>androgen</em> into a C18 <em>estrogen</em>. This is the only enzymatic step that crosses between structural classes (C19 &rarr; C18) and is the rate-limiting step of estrogen synthesis. Aromatase expressed in adipose, placenta, bone, and granulosa cells explains why obese men can develop gynecomastia, why the placenta requires fetal DHEA-S substrate for estriol, and why aromatase inhibitors (anastrozole, letrozole, exemestane) are used in postmenopausal breast cancer. The nomenclature change (C19 &rarr; C18) is an LO 1 structural concept.</p>
+                </div>
+            </div>
+
+
+            <!-- LO 2 &mdash; Synthesis Steps Shared by All Steroid Hormones -->
+            <h4 style="font-size:15px; font-weight:700; color:#7c3aed; margin:28px 0 8px; padding-bottom:4px; border-bottom:2px solid #ede9fe;">LO 2 &mdash; Synthesis Steps Shared by All Steroid Hormones</h4>
+
+            <div class="practice-question">
+                <h4>Question 3</h4>
+                <p>All adrenal cortex steroid hormones begin from a single common precursor, converted in a first committed step that is shared by every steroidogenic tissue. Which of the following correctly identifies the precursor, the enzyme, and the subcellular location of this shared step?</p>
+                <p class="option">A) Progesterone &rarr; pregnenolone by 3&beta;-hydroxysteroid dehydrogenase in the smooth ER</p>
+                <p class="option">B) Cholesterol &rarr; pregnenolone by desmolase (P450scc / CYP11A1) on the inner mitochondrial membrane</p>
+                <p class="option">C) Acetyl-CoA &rarr; pregnenolone by HMG-CoA reductase in the ER</p>
+                <p class="option">D) Cholesterol &rarr; pregnenolone by 21-hydroxylase in the cytoplasm</p>
+                <p class="option">E) Cholesterol &rarr; pregnenolone by aromatase in the peroxisome</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>&#10003; Correct Answer: B &mdash; Cholesterol &rarr; pregnenolone by desmolase (P450scc / CYP11A1) on the inner mitochondrial membrane</strong>
+                    <p style="margin-top:10px;">Every steroid hormone shares the same initial synthesis step: <strong>cholesterol &rarr; pregnenolone</strong> via <strong>desmolase</strong> (also called CYP11A1, P450scc, or side-chain cleavage enzyme) on the <strong>inner mitochondrial membrane</strong>. This is the first committed and rate-limiting enzymatic step, and it is the answer to &lsquo;where do all steroids begin?&rsquo; Downstream, tissue-specific enzymes (3&beta;-HSD, 17&alpha;-hydroxylase, 21-hydroxylase, 11&beta;-hydroxylase, aromatase) produce aldosterone, cortisol, androgens, and estrogens. LO 2 asks for the shared pathway; LO 4 asks about the tissue-specific branches.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 4</h4>
+                <p>ACTH binds a Gs-coupled receptor on zona fasciculata cells and rapidly increases cortisol synthesis within minutes. Its most important acute action is to stimulate the <em>shared</em> first step of steroidogenesis. Which molecular event most directly mediates this ACTH-driven increase in steroid output?</p>
+                <p class="option">A) PKA-mediated phosphorylation of StAR, enabling cholesterol transfer from the outer to the inner mitochondrial membrane</p>
+                <p class="option">B) PKA-mediated activation of HMG-CoA reductase, increasing cholesterol synthesis</p>
+                <p class="option">C) Direct stimulation of 21-hydroxylase by cAMP</p>
+                <p class="option">D) Up-regulation of aromatase transcription</p>
+                <p class="option">E) Inhibition of 11&beta;-HSD, increasing cortisol availability</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>&#10003; Correct Answer: A &mdash; PKA-mediated phosphorylation of StAR, enabling cholesterol transfer from the outer to the inner mitochondrial membrane</strong>
+                    <p style="margin-top:10px;">ACTH &rarr; Gs-GPCR &rarr; &uarr;cAMP &rarr; PKA &rarr; phosphorylation of <strong>StAR</strong> (steroidogenic acute regulatory protein). StAR shuttles cholesterol from the outer to the inner mitochondrial membrane, where desmolase lives. Because desmolase is compartmentally isolated, StAR-mediated cholesterol <em>delivery</em> is the true rate-limiting step of steroidogenesis &mdash; which is why trophic hormones (ACTH, LH, angiotensin II) all acutely boost steroid output by phosphorylating StAR. Loss-of-function StAR mutations cause congenital lipoid adrenal hyperplasia, where cholesterol accumulates in cytoplasm but no steroid hormones are produced. This is a foundational LO 2 concept shared across every steroidogenic tissue.</p>
+                </div>
+            </div>
+
+
+            <!-- LO 3 &mdash; Adrenal Cortex Layers, Enzymes, and Their Hormones -->
+            <h4 style="font-size:15px; font-weight:700; color:#7c3aed; margin:28px 0 8px; padding-bottom:4px; border-bottom:2px solid #ede9fe;">LO 3 &mdash; Adrenal Cortex Layers, Enzymes, and Their Hormones</h4>
+
+            <div class="practice-question">
+                <h4>Question 5</h4>
+                <p>A medical student studies histology slides of the adrenal cortex. Moving from the capsule inward, which of the following correctly pairs the <em>zone of the cortex</em> with the <em>distinctive enzyme expressed</em> and the <em>hormone produced</em>?</p>
+                <p class="option">A) Zona glomerulosa &rarr; aromatase &rarr; estradiol</p>
+                <p class="option">B) Zona fasciculata &rarr; 17&alpha;-hydroxylase + 21-hydroxylase + 11&beta;-hydroxylase &rarr; cortisol</p>
+                <p class="option">C) Zona reticularis &rarr; aldosterone synthase &rarr; aldosterone</p>
+                <p class="option">D) Adrenal medulla &rarr; 11&beta;-hydroxylase &rarr; cortisol</p>
+                <p class="option">E) Zona glomerulosa &rarr; 17,20-lyase &rarr; DHEA</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>&#10003; Correct Answer: B &mdash; Zona fasciculata &rarr; 17&alpha;-hydroxylase + 21-hydroxylase + 11&beta;-hydroxylase &rarr; cortisol</strong>
+                    <p style="margin-top:10px;">Adrenal cortex zonation (outer &rarr; inner): <strong>Zona Glomerulosa</strong> expresses <em>aldosterone synthase (CYP11B2)</em> and 3&beta;-HSD but <em>lacks 17&alpha;-hydroxylase</em> &rarr; makes aldosterone. <strong>Zona Fasciculata</strong> expresses 17&alpha;-hydroxylase, 21-hydroxylase, and 11&beta;-hydroxylase &rarr; makes cortisol (and some androgens). <strong>Zona Reticularis</strong> expresses 17&alpha;-hydroxylase + 17,20-lyase &rarr; makes DHEA/androstenedione (adrenal androgens). (Medulla is a different tissue altogether &mdash; catecholamines, not steroids.) A simple mnemonic for zonal function: &lsquo;GFR&rsquo; (Glomerulosa, Fasciculata, Reticularis) &rarr; &lsquo;salt, sugar, sex&rsquo; (aldosterone, cortisol, androgens). This is the backbone of LO 3.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 6</h4>
+                <p>A patient with 17&alpha;-hydroxylase deficiency (CYP17A1) presents with hypertension, hypokalemia, and absent sex steroids. Which zones of the adrenal cortex would be expected to have compensatory hyperplasia, and which hormone would accumulate to cause the hypertension?</p>
+                <p class="option">A) Zona glomerulosa hyperplasia; excess aldosterone causes hypertension</p>
+                <p class="option">B) Zona glomerulosa hyperplasia; excess 11-deoxycorticosterone (DOC) has mineralocorticoid activity and causes hypertension</p>
+                <p class="option">C) Zona fasciculata hyperplasia; excess cortisol causes hypertension</p>
+                <p class="option">D) Adrenal medulla hyperplasia; excess catecholamines cause hypertension</p>
+                <p class="option">E) Zona reticularis hyperplasia; excess DHEA causes hypertension</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>&#10003; Correct Answer: B &mdash; Zona glomerulosa hyperplasia; excess 11-deoxycorticosterone (DOC) has mineralocorticoid activity and causes hypertension</strong>
+                    <p style="margin-top:10px;">17&alpha;-hydroxylase deficiency blocks the pathway both to cortisol (fasciculata) and to androgens/estrogens (reticularis + gonads). The unblocked pregnenolone/progesterone is shunted toward the mineralocorticoid arm of the glomerulosa &rarr; accumulation of <strong>11-deoxycorticosterone (DOC)</strong>, which has intrinsic mineralocorticoid activity &rarr; hypertension with hypokalemia. Because cortisol is absent, ACTH rises, driving <strong>zona glomerulosa hyperplasia</strong> (via loss of cortisol-mediated feedback). Clinically: 46,XY appear phenotypically female (no androgens), 46,XX have 1&deg; amenorrhea. Understanding which zone makes what, and how blocking one enzyme shunts precursors between zones, is a core LO 3 application (and bridges into LO 4).</p>
+                </div>
+            </div>
+
+
+            <!-- LO 4 &mdash; Biosynthesis Pathways for Aldosterone, Cortisol, and DHEA -->
+            <h4 style="font-size:15px; font-weight:700; color:#7c3aed; margin:28px 0 8px; padding-bottom:4px; border-bottom:2px solid #ede9fe;">LO 4 &mdash; Biosynthesis Pathways for Aldosterone, Cortisol, and DHEA</h4>
+
+            <div class="practice-question">
+                <h4>Question 7</h4>
+                <p>A newborn girl has ambiguous genitalia, salt-wasting (hyponatremia, hyperkalemia), and ↑17-hydroxyprogesterone. Which enzyme is defective?</p>
+                <p class="option">A) StAR protein</p>
+                <p class="option">B) 21α-hydroxylase</p>
+                <p class="option">C) 11β-hydroxylase</p>
+                <p class="option">D) 3β-hydroxysteroid dehydrogenase</p>
+                <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B</strong>
+                    <p style="margin-top:10px;">21α-hydroxylase deficiency causes both cortisol and aldosterone synthesis to block, shunting substrate to androgens. This causes virilization + salt-wasting (↓aldo → Na+ loss).</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 8</h4>
+                <p>A 3-week-old boy presents with poor feeding, weight loss, and hyponatremia (Na+ 120). Newborn screen showed elevated 17-OH-progesterone. Labs: cortisol 1.5 μg/dL, ACTH 210 pg/mL, Na+ 120, K+ 6.2. What is the diagnosis?</p>
+                <p class="option">A) Classic CAH (simple virilizing form)</p>
+                <p class="option">B) Classic CAH (salt-wasting form)</p>
+                <p class="option">C) Non-classic CAH</p>
+                <p class="option">D) Isolated hypoaldosteronism</p>
+                <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B</strong>
+                    <p style="margin-top:10px;">Male infant with hyponatremia, hyperkalemia, ↑17-OH-progesterone, and cortisol deficiency = classic CAH salt-wasting form (complete 21-OH deficiency, no aldosterone). Present earlier than virilizing form (no external virilization in males to clue diagnosis). Life-threatening if untreated.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 9</h4>
+                <p>A 32-year-old woman with irregular menses, hirsutism, and acne is found to have mildly elevated DHEA-S (500 ng/dL) but normal cortisol and ACTH. 17-OH-progesterone is 220 ng/dL after cosyntropin stimulation. What is the diagnosis?</p>
+                <p class="option">A) Classic CAH</p>
+                <p class="option">B) Non-classic CAH</p>
+                <p class="option">C) PCOS</p>
+                <p class="option">D) Androgen-secreting tumor</p>
+                <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B</strong>
+                    <p style="margin-top:10px;">Non-classic CAH presents in adulthood with mild virilization (hirsutism, acne), normal cortisol and ACTH, but ↑17-OH-progesterone after ACTH stimulation. Partial 21-OH deficiency. Most common form of CAH overall.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 10</h4>
+                <p>A 6-year-old boy presents with rapid growth, pubic hair, and bone age 8 years. DHEA-S is elevated. Which of the following is most likely?</p>
+                <p class="option">A) Untreated non-classic CAH</p>
+                <p class="option">B) Adrenal tumor secreting androgens</p>
+                <p class="option">C) Precocious puberty from Leydig cell tumor</p>
+                <p class="option">D) Hyperthyroidism</p>
+                <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: A</strong>
+                    <p style="margin-top:10px;">Adrenal androgens (DHEA-S) cause isosexual precocious puberty in boys with untreated non-classic CAH. If presenting with early puberty and ↑DHEA-S, must test 17-OH-progesterone after cosyntropin to confirm. Distinguishes CAH from tumor (tumors usually very high DHEA-S with suppressed ACTH).</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 11</h4>
+                <p>A 5-day-old girl in the NICU is found to have elevated 17-OH-progesterone on newborn screening. Karyotype is 46,XY. Which of the following is the most likely explanation?</p>
+                <p class="option">A) Classic CAH with virilizing adrenal tissue</p>
+                <p class="option">B) Androgen-insensitivity syndrome</p>
+                <p class="option">C) Müllerian agenesis</p>
+                <p class="option">D) Laboratory error; retest immediately</p>
+                <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: A</strong>
+                    <p style="margin-top:10px;">46,XY individual (genetically male) with elevated 17-OH-progesterone AND female external genitalia = classic CAH with virilization. The virilizing androgens in utero suppressed normal male development. Karyotype is 46,XY but external genitalia appear female due to CAH onset in utero.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 12</h4>
+                <p>Compared to cortisol deficiency alone, which additional findings would you expect in the salt-wasting form of CAH?</p>
+                <p class="option">A) Higher ACTH and lower cortisol</p>
+                <p class="option">B) Hyponatremia, hyperkalemia, and elevated renin</p>
+                <p class="option">C) Complete androgen blockade</p>
+                <p class="option">D) Elevated aldosterone levels</p>
+                <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B</strong>
+                    <p style="margin-top:10px;">Salt-wasting CAH loses BOTH glucocorticoids (cortisol) AND mineralocorticoids (aldosterone) due to complete 21-OH block. Results in hyponatremia, hyperkalemia, and elevated renin (RAAS compensates for low BP). Virilizing form has some residual aldosterone function.</p>
+                </div>
+            </div>
+
+
+            <!-- LO 5 &mdash; Circulation and Inactivation (Carrier Proteins, Half-Life) -->
+            <h4 style="font-size:15px; font-weight:700; color:#7c3aed; margin:28px 0 8px; padding-bottom:4px; border-bottom:2px solid #ede9fe;">LO 5 &mdash; Circulation and Inactivation (Carrier Proteins, Half-Life)</h4>
+
+            <div class="practice-question">
+                <h4>Question 13</h4>
+                <p>A 34-year-old woman on combined oral contraceptives has a baseline <em>total</em> cortisol that is ~50% higher than age-matched non-users. Her free cortisol, ACTH, and urinary cortisol are normal. Which principle of cortisol circulation best explains her lab pattern?</p>
+                <p class="option">A) Estrogen stimulates hepatic CBG synthesis, increasing the bound pool and total cortisol while free cortisol stays normal</p>
+                <p class="option">B) OCPs inhibit 11&beta;-HSD2, increasing circulating cortisol</p>
+                <p class="option">C) Estrogen directly stimulates the adrenal cortex, causing true hypercortisolism</p>
+                <p class="option">D) OCPs block CBG, releasing cortisol and raising total levels</p>
+                <p class="option">E) Estrogen decreases cortisol-degrading sulfotransferases in the liver</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>&#10003; Correct Answer: A &mdash; Estrogen stimulates hepatic CBG synthesis, increasing the bound pool and total cortisol while free cortisol stays normal</strong>
+                    <p style="margin-top:10px;">Cortisol circulates ~90% bound to <strong>corticosteroid-binding globulin (CBG / transcortin)</strong>, a small fraction bound to albumin, and only ~5&ndash;10% free. Only the <em>free</em> fraction is biologically active. <strong>Estrogen</strong> (pregnancy, OCPs) stimulates hepatic synthesis of CBG &mdash; just like it raises TBG and SHBG. More carrier &rarr; larger bound pool &rarr; <strong>total cortisol rises</strong>; free cortisol, ACTH, and urinary free cortisol remain <em>normal</em> after a brief negative-feedback adjustment. Patient is clinically <em>eucortisolemic</em>. This is the cortisol analogue of the classic pregnancy TBG question, and it&rsquo;s the canonical LO 5 pearl: always ask whether a change in hormone level reflects the carrier protein vs the active free hormone.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 14</h4>
+                <p>A clinical pharmacologist compares the half-lives of endogenous steroid hormones. Aldosterone has a half-life of roughly 20 minutes, while cortisol&rsquo;s is ~90 minutes and DHEA-S&rsquo;s is ~10 hours. Which factor best explains the markedly longer half-life of DHEA-S compared with aldosterone and cortisol?</p>
+                <p class="option">A) DHEA-S has a smaller molecular weight, slowing glomerular filtration</p>
+                <p class="option">B) DHEA-S is sulfated in the zona reticularis, producing a highly water-soluble conjugate that is strongly albumin-bound and resistant to hepatic inactivation</p>
+                <p class="option">C) DHEA-S is lipid-soluble, so it cannot be excreted</p>
+                <p class="option">D) Aldosterone is inactivated by aromatase, unlike DHEA-S</p>
+                <p class="option">E) DHEA-S circulates unbound, avoiding hepatic uptake</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>&#10003; Correct Answer: B &mdash; DHEA-S is sulfated in the zona reticularis, producing a highly water-soluble conjugate that is strongly albumin-bound and resistant to hepatic inactivation</strong>
+                    <p style="margin-top:10px;">Half-life of steroid hormones is dictated by (1) carrier-protein binding and (2) rate of hepatic/peripheral inactivation. <strong>Aldosterone</strong> is only weakly bound (~50% to albumin, no high-affinity carrier) and is rapidly inactivated by hepatic A-ring reduction &rarr; very short half-life (~15&ndash;20 min). <strong>Cortisol</strong> is ~90% bound to CBG, slowing clearance &rarr; ~90-min half-life. <strong>DHEA-S</strong> is sulfated in the adrenal zona reticularis (by SULT2A1); the sulfate group makes it water-soluble and strongly albumin-bound, making it resistant to rapid clearance &rarr; half-life of many hours. This is why DHEA-S is a useful stable lab marker of adrenal androgen production. Understanding how carriers and conjugation shape half-life is the heart of LO 5.</p>
+                </div>
+            </div>
+
+
+            <!-- LO 6 &mdash; Mechanisms of Action of Aldosterone and Cortisol on Target Cells -->
+            <h4 style="font-size:15px; font-weight:700; color:#7c3aed; margin:28px 0 8px; padding-bottom:4px; border-bottom:2px solid #ede9fe;">LO 6 &mdash; Mechanisms of Action of Aldosterone and Cortisol on Target Cells</h4>
+
+            <div class="practice-question">
+                <h4>Question 15</h4>
+                <p>A 50-year-old man has HTN, hypokalemia, and proximal muscle weakness. 24-h UFC = 180 μg (normal <90), midnight salivary cortisol = 18 ng/mL (normal <5). His ACTH = 8 pg/mL (suppressed). Which test confirms the diagnosis?</p>
+                <p class="option">A) Low-dose dex suppression</p>
+                <p class="option">B) High-dose dex suppression</p>
+                <p class="option">C) Adrenal CT to find the tumor</p>
+                <p class="option">D) CRH stimulation test</p>
+                <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: C</strong>
+                    <p style="margin-top:10px;">High ACTH suppression with elevated cortisol = primary adrenal tumor (not pituitary or ectopic). Do CT to localize the adenoma. No need for dex suppression (already suppressed ACTH tells you the source).</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 16</h4>
+                <p>A 28-year-old woman presents with severe HTN (180/105), hypokalemia (K+ 2.7), and metabolic alkalosis. Plasma aldosterone = 28 ng/dL, plasma renin = 0.2 ng/mL/hr. What is the diagnosis?</p>
+                <p class="option">A) Renal artery stenosis</p>
+                <p class="option">B) Heart failure with secondary hyperaldosteronism</p>
+                <p class="option">C) Conn syndrome (primary hyperaldosteronism)</p>
+                <p class="option">D) Cushing syndrome</p>
+                <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: C</strong>
+                    <p style="margin-top:10px;">High aldo + LOW renin = autonomous aldo production (Conn). The aldo/renin ratio is very elevated (>20–30). In secondary hyperaldosteronism (RAS, HF), renin would be high.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 17</h4>
+                <p>A 55-year-old man with small-cell lung cancer now has Cushing syndrome. His ACTH = 215 pg/mL, cortisol = 52 μg/dL. After high-dose dex (8 mg), cortisol drops to 48 μg/dL (no meaningful suppression). What is the source of ACTH?</p>
+                <p class="option">A) Pituitary corticotroph adenoma</p>
+                <p class="option">B) Ectopic ACTH from the lung cancer</p>
+                <p class="option">C) Primary adrenal tumor</p>
+                <p class="option">D) SIADH with concurrent adrenal hyperplasia</p>
+                <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B</strong>
+                    <p style="margin-top:10px;">Very high ACTH + very high cortisol + NO suppression to high-dose dex = ectopic ACTH syndrome (lung cancer is classic source). Cushing disease would suppress to high-dose dex.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 18</h4>
+                <p>A 42-year-old man with TB presents with weakness, dark skin pigmentation on palms and mucosa, hyponatremia (Na+ 126), hyperkalemia (K+ 5.9). Cortisol = 3 μg/dL, ACTH = 240 pg/mL. What is the diagnosis?</p>
+                <p class="option">A) Secondary adrenal insufficiency from pituitary TB</p>
+                <p class="option">B) Primary adrenal insufficiency (TB-related Addison disease)</p>
+                <p class="option">C) Ectopic ACTH from TB</p>
+                <p class="option">D) Adrenal hemorrhage with recovered function</p>
+                <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B</strong>
+                    <p style="margin-top:10px;">Low cortisol + VERY HIGH ACTH + hyperpigmentation (dark skin) = primary adrenal insufficiency. TB is a common cause of Addison disease (destroys adrenal cortex). Secondary AI would have low ACTH and no hyperpigmentation.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 19</h4>
+                <p>A 45-year-old woman presents with HTN, hypokalemia (K+ 2.9), and metabolic alkalosis. Plasma renin = 0.1 ng/mL/hr (suppressed), aldosterone = 22 ng/dL (elevated). After 4 weeks of spironolactone, her BP improves and K+ normalizes. What is the diagnosis?</p>
+                <p class="option">A) Renal artery stenosis</p>
+                <p class="option">B) Cushing syndrome</p>
+                <p class="option">C) Conn syndrome (primary hyperaldosteronism)</p>
+                <p class="option">D) Renovascular hypertension</p>
+                <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: C</strong>
+                    <p style="margin-top:10px;">High aldo + suppressed renin + HTN + hypokalemia = Conn syndrome. Responds well to mineralocorticoid antagonist (spironolactone). In secondary hyperaldosteronism (RAS, HF), renin would be elevated, not suppressed.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 20</h4>
+                <p>A 28-year-old previously healthy man is found on routine screening to have HTN (155/92). Plasma aldosterone = 24 ng/dL, plasma renin = 3.2 ng/mL/hr. Hypokalemia (K+ 2.9) and metabolic alkalosis are present. After a saline load test, aldosterone fails to suppress. What test would next localize the source?</p>
+                <p class="option">A) Adrenal biopsy</p>
+                <p class="option">B) Adrenal CT/MRI with contrast</p>
+                <p class="option">C) CRH stimulation test</p>
+                <p class="option">D) Renal artery duplex ultrasound</p>
+                <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B</strong>
+                    <p style="margin-top:10px;">Primary hyperaldosteronism (high aldo, low renin, fails suppression) is confirmed. Now need imaging to find whether it's a unilateral adenoma (Conn adenoma) or bilateral hyperplasia. CT/MRI can visualize adrenal masses.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 21</h4>
+                <p>A 42-year-old woman presents with proximal muscle weakness, easy bruising, facial plethora, and hirsutism. 24-h UFC = 195 μg (normal <90), midnight serum cortisol = 22 ng/mL (normal <5). Low-dose dex (1 mg) overnight: cortisol = 18 ng/mL (no suppression). What is the next step?</p>
+                <p class="option">A) Start dexamethasone therapy</p>
+                <p class="option">B) Perform high-dose dex suppression test (8 mg) and measure ACTH</p>
+                <p class="option">C) Adrenal CT immediately</p>
+                <p class="option">D) Pituitary MRI immediately</p>
+                <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B</strong>
+                    <p style="margin-top:10px;">Low-dose dex confirms cortisol excess (Cushing syndrome). Now need to determine the source: pituitary vs. ectopic vs. primary adrenal. High-dose dex suppression + ACTH level will differentiate: suppression → pituitary disease (Cushing disease); no suppression → ectopic or primary adrenal.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 22</h4>
+                <p>A 55-year-old man with a history of small-cell lung cancer now presents with Cushing syndrome. His ACTH = 380 pg/mL (markedly elevated), cortisol = 58 μg/dL. High-dose dex (8 mg): cortisol = 55 μg/dL (fails to suppress). What is the diagnosis?</p>
+                <p class="option">A) Cushing disease from a pituitary adenoma</p>
+                <p class="option">B) Primary adrenal adenoma (ACTH-independent Cushing)</p>
+                <p class="option">C) Ectopic ACTH syndrome from small-cell lung cancer</p>
+                <p class="option">D) Acute adrenal crisis</p>
+                <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: C</strong>
+                    <p style="margin-top:10px;">VERY high ACTH + high cortisol + no suppression to high-dose dex + small-cell lung cancer = ectopic ACTH from lung cancer. This is classic. A pituitary adenoma would typically suppress to high-dose dex. Ectopic ACTH is autonomous and doesn't respond to dex.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 23</h4>
+                <p>A 32-year-old woman with Cushing syndrome and a pituitary MRI showing a 6 mm microadenoma undergoes transsphenoidal surgery. Postop cortisol = 3 μg/dL. After 6 months she develops weakness, fatigue, orthostatic hypotension, and anorexia. What is the most likely diagnosis?</p>
+                <p class="option">A) Recurrent Cushing syndrome</p>
+                <p class="option">B) Postoperative secondary adrenal insufficiency</p>
+                <p class="option">C) Pituitary apoplexy</p>
+                <p class="option">D) Hypothyroidism</p>
+                <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B</strong>
+                    <p style="margin-top:10px;">Successful surgery normalizes cortisol (3 μg/dL is low). The normal hypothalamic-pituitary-adrenal (HPA) axis shuts down during Cushing (ACTH suppression). Postop recovery is slow (6–12 months) because the HPA axis takes time to reawaken. Patients need glucocorticoid replacement until the axis recovers. Symptoms of weakness, fatigue, orthostatic hypotension = secondary adrenal insufficiency.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 24</h4>
+                <p>A 38-year-old man presents with weakness, hyperpigmentation (especially in oral mucosa and palmar creases), hyponatremia (Na+ 128), hyperkalemia (K+ 5.7). Morning cortisol = 2.5 μg/dL, ACTH = 310 pg/mL. What is the diagnosis?</p>
+                <p class="option">A) Secondary adrenal insufficiency from pituitary tumor</p>
+                <p class="option">B) Primary adrenal insufficiency (Addison disease)</p>
+                <p class="option">C) Ectopic ACTH syndrome</p>
+                <p class="option">D) Septic shock</p>
+                <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B</strong>
+                    <p style="margin-top:10px;">Low cortisol + VERY HIGH ACTH + hyperpigmentation + hyponatremia + hyperkalemia = primary adrenal insufficiency (Addison disease). The hyperpigmentation is pathognomonic (high ACTH stimulates melanocytes). Secondary AI would have low ACTH and no hyperpigmentation. Electrolyte abnormalities indicate aldo loss.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 25</h4>
+                <p>A 55-year-old woman with a history of TB is found to have hyponatremia (Na+ 130) and hyperkalemia (K+ 5.4). Morning cortisol = 3.2 μg/dL, ACTH = 220 pg/mL. ACTH stimulation test: cortisol rises to only 4.5 μg/dL (normal >18). What is the most likely diagnosis?</p>
+                <p class="option">A) SIADH alone</p>
+                <p class="option">B) Secondary adrenal insufficiency</p>
+                <p class="option">C) Primary adrenal insufficiency (TB-related Addison disease)</p>
+                <p class="option">D) Hyperkalemic renal tubular acidosis</p>
+                <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: C</strong>
+                    <p style="margin-top:10px;">TB is the #1 global cause of Addison disease (TB granulomas destroy adrenal cortex). Very high ACTH + low cortisol + poor response to ACTH stimulation = primary AI. The adrenal gland itself is destroyed, so exogenous ACTH cannot stimulate cortisol. Secondary AI (pituitary destruction) would show ACTH recovery with stimulation.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 26</h4>
+                <p>A 62-year-old man on long-term prednisone (20 mg daily) for rheumatoid arthritis presents with weakness and fatigue. Morning cortisol = 1.5 μg/dL, ACTH = 2 pg/mL (suppressed). What is the diagnosis?</p>
+                <p class="option">A) Addison disease</p>
+                <p class="option">B) Ectopic ACTH syndrome</p>
+                <p class="option">C) Iatrogenic secondary adrenal insufficiency from chronic glucocorticoid suppression</p>
+                <p class="option">D) Cushing syndrome</p>
+                <button onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: C</strong>
+                    <p style="margin-top:10px;">Long-term glucocorticoid therapy suppresses the HPA axis. ACTH is low (not elevated like in Addison), indicating the problem is pituitary/hypothalamic suppression, not primary adrenal disease. This is secondary adrenal insufficiency from pharmacologic glucocorticoid suppression. Patients on chronic steroids need a taper, not abrupt discontinuation.</p>
+                </div>
+            </div>
+
+        </section>
+
+</main>
+
+<script>
+    // ── Tab switching ────────────────────────────────────────────────────────
+    function switchLO(event, loId) {
+        event.preventDefault();
+        document.querySelectorAll('.lo-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+        const section = document.getElementById(loId);
+        if (section) section.classList.add('active');
+        let link = event.target;
+        while (link && !link.classList.contains('sidebar-link')) link = link.parentElement;
+        if (link) link.classList.add('active');
+        const mainEl = document.querySelector('.main');
+        if (mainEl) mainEl.scrollTop = 0;
+    }
+
+    // ── Practice question answer reveal ─────────────────────────────────────
+    function toggleAnswer(btn) {
+        const answer = btn.nextElementSibling;
+        const isShowing = answer.classList.contains('show');
+        answer.classList.toggle('show');
+        btn.textContent = isShowing ? 'Reveal Answer' : 'Hide Answer';
+    }
+
+    // ── Collapsible sections ─────────────────────────────────────────────────
+    function toggleSection(h3El) {
+        h3El.classList.toggle('collapsed');
+        const body = h3El.nextElementSibling;
+        if (body && body.classList.contains('section-body')) body.classList.toggle('collapsed');
+    }
+    function toggleTrap(headerEl) {
+        headerEl.classList.toggle('collapsed');
+        const body = headerEl.nextElementSibling;
+        if (body && body.classList.contains('trap-body')) body.classList.toggle('collapsed');
+    }
+    function toggleH5(h5El) {
+        h5El.classList.toggle('collapsed');
+        const body = h5El.nextElementSibling;
+        if (body && body.classList.contains('h5-body')) body.classList.toggle('collapsed');
+    }
+    function toggleMnemonic(headerEl) {
+        headerEl.classList.toggle('collapsed');
+        const body = headerEl.nextElementSibling;
+        if (body && body.classList.contains('mnemonic-body')) body.classList.toggle('collapsed');
+    }
+    function toggleH4(h4El) {
+        h4El.classList.toggle('collapsed');
+        const body = h4El.nextElementSibling;
+        if (body && body.classList.contains('section-body')) body.classList.toggle('collapsed');
+    }
+
+    // ── LO Accordion toggle ──────────────────────────────────────────────────
+    function toggleLOAccordion(headerEl) {
+        headerEl.classList.toggle('collapsed');
+        const body = headerEl.parentElement.querySelector('.lo-accordion-body');
+        if (body) {
+            body.classList.toggle('collapsed');
+            body.style.display = body.classList.contains('collapsed') ? 'none' : 'block';
+        }
+    }
+
+    // ── Expand / Collapse All (active tab only) ──────────────────────────────
+    function expandAll() {
+        document.querySelectorAll('.lo-section.active .section-body').forEach(el => el.classList.remove('collapsed'));
+        document.querySelectorAll('.lo-section.active .collapsible-h3').forEach(el => el.classList.remove('collapsed'));
+    }
+    function collapseAll() {
+        document.querySelectorAll('.lo-section.active .section-body').forEach(el => el.classList.add('collapsed'));
+        document.querySelectorAll('.lo-section.active .collapsible-h3').forEach(el => el.classList.add('collapsed'));
+    }
+
+    // ── Export: build standalone document (shared by Print PDF + Word Doc) ───
+    function buildExportDoc(forPrint) {
+        const collapsedEls = Array.from(document.querySelectorAll('.collapsed'));
+        const hiddenSections = Array.from(document.querySelectorAll('.lo-section:not(.active)'));
+        hiddenSections.forEach(s => s.style.display = 'block');
+        collapsedEls.forEach(el => el.classList.remove('collapsed'));
+
+        const clone = document.querySelector('.main').cloneNode(true);
+
+        hiddenSections.forEach(s => s.style.display = '');
+        collapsedEls.forEach(el => el.classList.add('collapsed'));
+
+        clone.querySelectorAll(
+            '.section-chevron, .h5-chevron, .mnemonic-chevron, .trap-chevron, ' +
+            '.export-actions, .sidebar-footer, .hub-return-btn, button'
+        ).forEach(el => el.remove());
+
+        const pageCSS = Array.from(document.querySelectorAll('style')).map(s => s.textContent).join('\n');
+
+        const overrideCSS = `
+            * { box-sizing: border-box; }
+            body { display:block !important; overflow:visible !important; height:auto !important; background:white !important; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Calibri,sans-serif; }
+            .main { margin-left:0 !important; height:auto !important; overflow:visible !important; max-width:100% !important; padding:24px 32px !important; }
+            .lo-section { display:block !important; box-shadow:none !important; animation:none !important; ${forPrint ? 'page-break-before:always;' : ''} }
+            .lo-section:first-child { page-break-before:auto !important; }
+            .section-body, .h4-body, .h5-body, .mnemonic-body, .trap-body { display:block !important; }
+            .collapsible-h3.collapsed .section-chevron,
+            .h5-subheading.collapsed .h5-chevron,
+            .mnemonic-toggle-header.collapsed .mnemonic-chevron,
+            .trap-header.collapsed .trap-chevron { transform:none !important; }
+            ${forPrint ? '@media print { .main { padding:0 !important; } }' : ''}
+        `;
+
+        const ns = forPrint ? '' :
+            `xmlns:o='urn:schemas-microsoft-com:office:office'
+             xmlns:w='urn:schemas-microsoft-com:office:word'
+             xmlns='http://www.w3.org/TR/REC-html40'`;
+
+        return `<!DOCTYPE html>
+<html ${ns}>
+<head>
+    <meta charset="UTF-8">
+    <title>Lecture 4: Adrenal Cortex — HoyaDocs Endocrine Block</title>
+    <style>${pageCSS}</style>
+    <style>${overrideCSS}</style>
+</head>
+<body>
+${clone.outerHTML}
+</body>
+</html>`;
+    }
+
+    // ── Print / Save as PDF ──────────────────────────────────────────────────
+    function printAll(btn) {
+        const origHTML = btn.innerHTML;
+        btn.innerHTML = '<span class="btn-icon">⏳</span>Opening…';
+        btn.disabled = true;
+        const html = buildExportDoc(true);
+        const win = window.open('', '_blank', 'width=960,height=750,scrollbars=yes');
+        if (!win) {
+            alert('Pop-ups are blocked. Please allow pop-ups for this page, then try again.');
+            btn.innerHTML = origHTML; btn.disabled = false; return;
+        }
+        win.document.open(); win.document.write(html); win.document.close();
+        win.onload = function() { setTimeout(() => { win.focus(); win.print(); }, 1800); };
+        btn.innerHTML = origHTML; btn.disabled = false;
+    }
+
+    // ── Download Word Doc (.doc) ─────────────────────────────────────────────
+    function downloadWord(btn) {
+        const origHTML = btn.innerHTML;
+        btn.innerHTML = '<span class="btn-icon">⏳</span>Building…';
+        btn.disabled = true;
+        const html = buildExportDoc(false);
+        const blob = new Blob(['\ufeff', html], { type: 'application/msword' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Lec03-Adrenal-Cortex.doc';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        btn.innerHTML = origHTML; btn.disabled = false;
+    }
+</script>
+</body>
+</html>

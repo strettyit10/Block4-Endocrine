@@ -45,17 +45,49 @@ from typing import Dict, List, Optional
 import content as content_mod
 
 # ---------------------------------------------------------------------------
-# Paths
+# Paths & block-specific config
 # ---------------------------------------------------------------------------
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-ENDO_ROOT = SCRIPT_DIR.parent  # .../endocrine/
+BLOCK_ROOT = SCRIPT_DIR.parent  # .../<block>/
 
-PER_LECTURE_DIR = ENDO_ROOT / "Per Lecture"
-LO_DIR = PER_LECTURE_DIR / "Learning Objectives"
-LECTURE_GUIDES_DIR = ENDO_ROOT / "lecture-guides"
-ACTIVE_RECALL_DIR = ENDO_ROOT / "active-lesson-drills"
-TESTING_DRILLS_DIR = ENDO_ROOT / "testing-drills"
+# Block config lets the same scan.py work across different block folders
+# (endocrine, GI, Repro). Defaults here match the original endocrine layout.
+_DEFAULT_BLOCK_CONFIG = {
+    "block_id": "end",
+    "block_label": "Endocrine",
+    "lecture_prefix": "end",          # used in hub file names, e.g. end01-*.html
+    "lecture_count": 25,
+    "per_lecture_folder": "Per Lecture",
+    "lo_folder": "Per Lecture/Learning Objectives",
+    "lecture_guides_folder": "lecture-guides",
+    "active_recall_folder": "active-lesson-drills",
+    "testing_drills_folder": "testing-drills",
+}
+
+def _load_block_config() -> dict:
+    path = SCRIPT_DIR / "block_config.json"
+    cfg = dict(_DEFAULT_BLOCK_CONFIG)
+    if path.exists():
+        try:
+            cfg.update(json.loads(path.read_text()))
+        except Exception as e:
+            print(f"warning: couldn't parse block_config.json ({e}); using defaults")
+    return cfg
+
+BLOCK_CONFIG = _load_block_config()
+BLOCK_ID = BLOCK_CONFIG["block_id"]
+LECTURE_PREFIX = BLOCK_CONFIG["lecture_prefix"]
+BLOCK_LABEL = BLOCK_CONFIG["block_label"]
+
+PER_LECTURE_DIR = BLOCK_ROOT / BLOCK_CONFIG["per_lecture_folder"]
+LO_DIR = BLOCK_ROOT / BLOCK_CONFIG["lo_folder"]
+LECTURE_GUIDES_DIR = BLOCK_ROOT / BLOCK_CONFIG["lecture_guides_folder"]
+ACTIVE_RECALL_DIR = BLOCK_ROOT / BLOCK_CONFIG["active_recall_folder"]
+TESTING_DRILLS_DIR = BLOCK_ROOT / BLOCK_CONFIG["testing_drills_folder"]
+
+# Alias kept for backward compatibility with older imports
+ENDO_ROOT = BLOCK_ROOT
 
 BASELINE_FILE = SCRIPT_DIR / "baseline.json"
 STATUS_FILE = SCRIPT_DIR / "status.json"
@@ -73,10 +105,11 @@ LO_COVERAGE_THRESHOLD = 0.6
 
 HUB_TYPES = ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"]
 
-# Lectures end01..end25 (pad to 2 digits)
-LECTURE_IDS = [f"end{i:02d}" for i in range(1, 26)]
+# Lecture IDs like "end01", "gi01", "rpd01" (prefix + 2-digit number)
+LECTURE_IDS = [f"{LECTURE_PREFIX}{i:02d}" for i in range(1, BLOCK_CONFIG["lecture_count"] + 1)]
 
-LECTURE_PREFIX_RE = re.compile(r"^end(\d{2})", re.IGNORECASE)
+# Regex to extract the lecture number from a lecture ID (case-insensitive)
+LECTURE_PREFIX_RE = re.compile(rf"^{re.escape(LECTURE_PREFIX)}(\d{{2}})", re.IGNORECASE)
 
 
 # ---------------------------------------------------------------------------
@@ -121,6 +154,7 @@ class SourceFile:
     mtime_ts: float
     size: int
     kind: str            # "pdf" | "lo" | "other"
+    display_name: str = ""   # cleaned filename for UI (no LO/subject/professor/prefix)
 
 
 @dataclass
@@ -153,53 +187,101 @@ class LectureStatus:
     orphan_los: List[str] = field(default_factory=list)
 
 
+def _extract_lecture_numbers_from_name(name: str) -> set:
+    """
+    Given a folder or filename, extract lecture numbers.
+    Handles patterns like:
+      - "end01_intro" → {1}
+      - "03 Anterior Abdominal Wall" → {3}
+      - "GI-09,10-physioogy-LO-*.pdf" → {9, 10}
+      - "rpd05-06_LO_Endo.docx" → {5, 6}
+      - "GI-01-physiology-LO-*.pdf" → {1}
+    """
+    nums: set = set()
+    # Strip extension first so it doesn't confuse numeric extraction
+    base = re.sub(r"\.[A-Za-z0-9]{1,5}$", "", name)
+    # Match ranges/lists near the start of the name: "NN,NN" or "NN-NN" patterns
+    # Examples: "end01_", "GI-09,10-", "rpd05-06_", "09, 10 Secretions"
+    # First find a leading block of digits+separators.
+    m = re.match(r"[A-Za-z\-]*\s*0*(\d{1,2})(?:\s*[,\-]\s*0*(\d{1,2}))?", base.strip())
+    if m:
+        try:
+            nums.add(int(m.group(1)))
+        except Exception:
+            pass
+        if m.group(2):
+            try:
+                nums.add(int(m.group(2)))
+            except Exception:
+                pass
+    return nums
+
+
+def _path_mentions_lecture(rel_path: Path, num: int) -> bool:
+    """True if any part of the path (filename or ancestor folder) references `num`."""
+    for part in rel_path.parts:
+        if num in _extract_lecture_numbers_from_name(part):
+            return True
+    return False
+
+
 def discover_sources_for_lecture(lecture_id: str) -> List[SourceFile]:
-    """Find all source files (PDF slides + LO docx) that belong to a lecture."""
-    num = int(lecture_id[3:])
-    prefix_patterns = [
-        f"end{num:02d}",          # end01, end02, ...
-        f"{num:02d}_",            # 01_..., 02_... (file prefix style)
-    ]
+    """Find all source files (PDF slides + LO docx) that belong to a lecture.
+
+    Works across block layouts:
+      - Endocrine: flat "Per Lecture/endNN_*/"
+      - GI: subject-first "Per Lectures/<Subject>/NN Name/"
+      - Repro: "Per Lecture/rpdNN_*/"
+    """
+    m = re.match(rf"^{re.escape(LECTURE_PREFIX)}(\d+)$", lecture_id, re.IGNORECASE)
+    if not m:
+        return []
+    num = int(m.group(1))
 
     sources: List[SourceFile] = []
+    seen_paths = set()
 
-    # 1. Per Lecture/endNN_*/ folders
+    def add_file(f: Path):
+        if not f.is_file() or f.name.startswith("."):
+            return
+        kind = _kind_of(f)
+        if kind == "other":
+            return
+        rel = rel_to_endo(f)
+        if rel in seen_paths:
+            return
+        seen_paths.add(rel)
+        sources.append(_file_to_source(f, kind))
+
+    # 1) Recursive walk under the Per Lecture(s) folder — any file whose
+    #    path mentions this lecture's number (in filename or ancestor folder)
     if PER_LECTURE_DIR.exists():
-        for child in PER_LECTURE_DIR.iterdir():
-            if not child.is_dir():
-                continue
-            cname = child.name.strip()
-            if not cname.lower().startswith(f"end{num:02d}"):
-                continue
-            for f in child.rglob("*"):
-                if not f.is_file():
-                    continue
-                if f.name.startswith("."):
-                    continue
-                kind = _kind_of(f)
-                if kind == "other":
-                    continue
-                sources.append(_file_to_source(f, kind))
-
-    # 2. Per Lecture/Learning Objectives/ (files may match endNN_*, NN-LO-*, or endNN-LO-*)
-    if LO_DIR.exists():
-        for f in LO_DIR.iterdir():
+        for f in PER_LECTURE_DIR.rglob("*"):
             if not f.is_file() or f.name.startswith("."):
                 continue
-            lname = f.name.lower()
-            # Match endNN_ or endNN- at the start
-            if (lname.startswith(f"end{num:02d}_") or
-                lname.startswith(f"end{num:02d}-") or
-                lname.startswith(f"end{num:02d} ")):
-                kind = _kind_of(f)
-                if kind == "other":
-                    continue
-                # Skip if we already found this file (same path) under Per Lecture
-                if any(s.path == rel_to_endo(f) for s in sources):
-                    continue
-                sources.append(_file_to_source(f, kind))
+            try:
+                rel = f.relative_to(PER_LECTURE_DIR)
+            except ValueError:
+                continue
+            if _path_mentions_lecture(rel, num):
+                add_file(f)
 
-    # Stable sort by path
+    # 2) Dedicated LO folder (may be the same as Per Lecture or a separate folder)
+    if LO_DIR.exists() and LO_DIR != PER_LECTURE_DIR:
+        for f in LO_DIR.rglob("*"):
+            if not f.is_file() or f.name.startswith("."):
+                continue
+            # Check the file's path relative to LO_DIR for lecture number
+            try:
+                rel = f.relative_to(LO_DIR)
+            except ValueError:
+                continue
+            if _path_mentions_lecture(rel, num):
+                add_file(f)
+    elif LO_DIR.exists():
+        # LO_DIR == PER_LECTURE_DIR — already covered by the recursive walk above
+        pass
+
     sources.sort(key=lambda s: s.path)
     return sources
 
@@ -216,6 +298,47 @@ def _kind_of(f: Path) -> str:
     return "other"
 
 
+def clean_source_display_name(filename: str) -> str:
+    """Return a clean display name for a source file: lecture title only,
+    with LO tag, subject, professor name, endNN prefix, year/course tokens,
+    and 'Objectives'/'video slides'/'notes' suffix all stripped. Extension
+    is also removed.
+    """
+    # Drop extension
+    stem = re.sub(r"\.[A-Za-z0-9]+$", "", filename)
+    # Drop leading 'endNN' (with any separator)
+    stem = re.sub(rf"^{re.escape(LECTURE_PREFIX)}\d+[-_ ,]*", "", stem, flags=re.I)
+    # Drop a lingering leading number chunk like "18-" or "17-18-" or "04_"
+    stem = re.sub(r"^(?:\d+[-_ ,]+)+", "", stem)
+    # Drop 'LO-<Subject>-<Professor>_' hyphen-style pattern
+    stem = re.sub(
+        r"^LO[-_][A-Za-z]+[-_][A-Za-z'\-]+_\s*",
+        "",
+        stem,
+        flags=re.I,
+    )
+    # Drop trailing "Objectives"/"video"/"video slides"/"notes" and anything after
+    stem = re.sub(r"\s*(Objectives|video slides|video|notes).*$", "", stem, flags=re.I)
+
+    # Strip leading underscore-delimited metadata tokens
+    # (e.g. "LO_Kothmann_", "Endo_2026_Kothmann_", "Danielsen_").
+    # A metadata token has no spaces; the real title almost always has spaces.
+    if "_" in stem:
+        parts = stem.split("_")
+        title_start = None
+        for i, p in enumerate(parts):
+            if " " in p.strip():
+                title_start = i
+                break
+        if title_start is not None:
+            stem = "_".join(parts[title_start:])
+        else:
+            # No part has spaces — fall back to the last token.
+            stem = parts[-1]
+
+    return stem.strip(" -_,")
+
+
 def _file_to_source(f: Path, kind: str) -> SourceFile:
     st = f.stat()
     return SourceFile(
@@ -225,14 +348,16 @@ def _file_to_source(f: Path, kind: str) -> SourceFile:
         mtime_ts=st.st_mtime,
         size=st.st_size,
         kind=kind,
+        display_name=clean_source_display_name(f.name),
     )
 
 
 def discover_hub_pages(lecture_id: str) -> List[HubPage]:
     """Find each of the 5 hub page types for a lecture (if present)."""
-    num = int(lecture_id[3:])
-    prefix_hyphen = f"end{num:02d}-"   # lecture-guide style: end01-...
-    prefix_uscore = f"end{num:02d}_"   # active-recall style: end01_active_recall.html
+    m = re.match(rf"^{re.escape(LECTURE_PREFIX)}(\d+)$", lecture_id, re.IGNORECASE)
+    num = int(m.group(1)) if m else 0
+    prefix_hyphen = f"{LECTURE_PREFIX}{num:02d}-"   # lecture-guide style: gi01-...
+    prefix_uscore = f"{LECTURE_PREFIX}{num:02d}_"   # active-recall style: gi01_active_recall.html
 
     pages: List[HubPage] = []
 
@@ -313,27 +438,58 @@ def lecture_source_fingerprint(sources: List[SourceFile]) -> str:
     return h.hexdigest()
 
 
+def _strip_lo_subject_professor(name: str) -> str:
+    """Remove 'LO-Subject-Professor_' style prefixes from a title candidate.
+
+    Examples stripped:
+      'LO-Biochem-Sherman_Posterior Pituitary Hormones' -> 'Posterior Pituitary Hormones'
+      '18-LO-Pharm-Janicic_Type I & II Diabetes'        -> 'Type I & II Diabetes'
+      'LO-Path-Furlong_ Endocrine Path Lab'             -> 'Endocrine Path Lab'
+    """
+    # Strip any leading number (e.g., '18-' in 'end17-18-LO-...')
+    name = re.sub(r"^\d+[-_ ]*", "", name)
+    # Strip "LO-<Subject>-<Professor>_" (Subject and Professor are single tokens)
+    name = re.sub(
+        r"^LO[-_][A-Za-z]+[-_][A-Za-z'\-]+_\s*",
+        "",
+        name,
+        flags=re.I,
+    )
+    return name.strip(" -_,")
+
+
 def lecture_title(lecture_id: str, sources: List[SourceFile],
                   hub_pages: List[HubPage]) -> str:
     """Best-effort human title for the lecture."""
-    # Prefer the Per Lecture folder name
-    num = int(lecture_id[3:])
+    m = re.match(rf"^{re.escape(LECTURE_PREFIX)}(\d+)$", lecture_id, re.IGNORECASE)
+    num = int(m.group(1)) if m else 0
+    # Prefer a Per Lecture folder name containing this lecture number
     if PER_LECTURE_DIR.exists():
-        for child in PER_LECTURE_DIR.iterdir():
-            if child.is_dir() and child.name.strip().lower().startswith(f"end{num:02d}"):
-                return child.name.strip().replace(f"end{num:02d}_", "").replace("-", " ").strip()
+        for f in PER_LECTURE_DIR.rglob("*"):
+            if not f.is_dir():
+                continue
+            if num in _extract_lecture_numbers_from_name(f.name):
+                title = f.name.strip()
+                # Strip common prefixes
+                title = re.sub(rf"^{re.escape(LECTURE_PREFIX)}\d+[_\- ]*", "", title, flags=re.I)
+                title = re.sub(r"^\d+[\s\-,]*\d*[-_\s]*", "", title)  # leading number + separators
+                title = _strip_lo_subject_professor(title)
+                title = title.replace("_", " ").replace("-", " ").strip()
+                if title:
+                    return title[:80]
     # Fall back to any source file name
     for s in sources:
         name = Path(s.path).stem
-        name = re.sub(r"^(?:end)?\d+[-_ ]*", "", name, count=1, flags=re.I)
+        name = re.sub(rf"^({re.escape(LECTURE_PREFIX)})?\d+[-_ ,]*", "", name, count=1, flags=re.I)
         name = re.sub(r"(Objectives|video slides|video).*$", "", name, flags=re.I).strip()
+        name = _strip_lo_subject_professor(name)
         if name:
             return name[:80]
     # Otherwise take from a hub page
     for hp in hub_pages:
         if hp.path:
             stem = Path(hp.path).stem
-            stem = re.sub(r"^end\d{2}[-_]", "", stem)
+            stem = re.sub(rf"^{re.escape(LECTURE_PREFIX)}\d{{2}}[-_]", "", stem)
             stem = re.sub(r"^hub\d-", "", stem)
             return stem.replace("-", " ")
     return lecture_id
@@ -569,14 +725,15 @@ def render_dashboard(status: dict) -> str:
     data_json = json.dumps(status)
     # Escape </script> defensively
     data_json = data_json.replace("</", "<\\/")
-    return DASHBOARD_TEMPLATE.replace("__STATUS_JSON__", data_json)
+    html = DASHBOARD_TEMPLATE.replace("__STATUS_JSON__", data_json)
+    return html.replace("__BLOCK_LABEL__", BLOCK_LABEL)
 
 
 DASHBOARD_TEMPLATE = r"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Endocrine Hub Update Tracker</title>
+<title>__BLOCK_LABEL__ Hub Update Tracker</title>
 <style>
   :root {
     --amber-50:#FFFBEB;
@@ -898,7 +1055,7 @@ DASHBOARD_TEMPLATE = r"""<!DOCTYPE html>
 </head>
 <body>
 <header>
-  <h1>Endocrine Hub Update Tracker</h1>
+  <h1>__BLOCK_LABEL__ Hub Update Tracker</h1>
   <div class="sub">Flags which hub pages need rebuilding when lecture sources change.</div>
   <div class="scanned">Scanned: <span id="scanned-at"></span></div>
 </header>
@@ -1092,7 +1249,7 @@ function toggleDetail(row, lec) {
           el("ul", {class:"file-list"},
             ...lec.sources.map(s => el("li", {title: s.path},
               el("span", {class:"badge-kind"}, s.kind),
-              (s.path || "").split("/").pop(),
+              s.display_name || (s.path || "").split("/").pop(),
               el("span", {class:"hash"}, " " + s.sha256.slice(0,10) + "…")
             ))
           )
@@ -1287,7 +1444,7 @@ JV_DASHBOARD_TEMPLATE = r"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>JV Hub Content Check — Endocrine</title>
+<title>Endocrine Study Hub Mapping Tool</title>
 <style>
   :root {
     --amber-50:#FFFBEB; --amber-100:#FEF3C7; --amber-200:#FDE68A;
@@ -1336,11 +1493,24 @@ JV_DASHBOARD_TEMPLATE = r"""<!DOCTYPE html>
   }
   .submit-row { display: flex; gap: 10px; align-items: center; }
   button.primary {
-    padding: 10px 18px; border: none; background: var(--amber-600); color: #fff;
+    padding: 10px 18px; border: none; background: #000; color: #fff;
     border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer;
   }
-  button.primary:hover:not([disabled]) { background: var(--amber-700); }
+  button.primary:hover:not([disabled]) { background: #1f1f1f; }
   button.primary[disabled] { opacity: 0.6; cursor: wait; }
+  button.secondary {
+    padding: 10px 18px; border: 1px solid var(--amber-600); background: #fff; color: var(--amber-700);
+    border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer;
+  }
+  button.secondary:hover:not([disabled]) { background: var(--amber-50); }
+  button.secondary[disabled] { opacity: 0.6; cursor: wait; }
+  #reformat-output .card { background: #fff; border: 1px solid var(--amber-200); border-radius: 10px; padding: 16px 20px; margin-bottom: 18px; }
+  #reformat-output h2 { font-size: 16px; margin: 0 0 10px; color: var(--amber-900); }
+  #reformat-output ol { margin: 6px 0 0; padding-left: 22px; font-size: 14px; line-height: 1.55; color: var(--slate-700); }
+  #reformat-output ol li { padding: 3px 0; }
+  #reformat-output .reformat-meta { color: var(--slate-500); font-size: 12px; margin-bottom: 8px; }
+  #reformat-output .copy-hint { color: var(--slate-500); font-size: 11px; margin-top: 10px; }
+  #reformat-output pre.plain { margin-top: 10px; background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: 8px; padding: 10px 12px; font-size: 12px; line-height: 1.5; white-space: pre-wrap; word-break: break-word; font-family: ui-monospace, Menlo, monospace; color: var(--slate-700); max-height: 280px; overflow: auto; }
   .hint { font-size: 12px; color: var(--slate-500); }
 
   .banner { padding: 10px 14px; border-radius: 8px; font-size: 13px; margin-bottom: 14px; }
@@ -1387,11 +1557,8 @@ JV_DASHBOARD_TEMPLATE = r"""<!DOCTYPE html>
 <body>
 <header>
   <span class="meta" id="generated"></span>
-  <h1>JV Hub Content Check</h1>
+  <h1>Endocrine Study Hub Mapping Tool</h1>
   <div class="sub">Standalone tool. Upload an updated learning-objectives <code>.docx</code> for a single lecture — the tool parses the LOs in your browser and tells you which ones are already covered by each existing hub page.</div>
-  <div class="topnav">
-    <a href="dashboard.html">← Hub Update Tracker</a>
-  </div>
 </header>
 
 <main>
@@ -1406,16 +1573,18 @@ JV_DASHBOARD_TEMPLATE = r"""<!DOCTYPE html>
       <div class="field">
         <span class="label">Updated Learning Objectives file (.docx)</span>
         <input type="file" id="loFile" accept=".docx" required />
-        <div class="hint">Must be a Word <code>.docx</code> with a heading "At the end of the lecture students should be able to:" followed by the objective paragraphs.</div>
+        <div class="hint">Upload a Word <code>.docx</code> containing the learning objectives — numbered, bulleted, or one-per-line. No header required.</div>
       </div>
 
       <div class="submit-row">
+        <button type="button" id="reformatBtn" class="secondary">Reformat</button>
         <button type="submit" class="primary">Analyze</button>
         <span class="hint">Results appear below. Nothing is uploaded — parsing happens in your browser.</span>
       </div>
     </form>
   </div>
 
+  <div id="reformat-output"></div>
   <div id="results"></div>
 </main>
 
@@ -1525,10 +1694,9 @@ function parseDocxParagraphs(xmlText) {
 // ---------------------------------------------------------------------------
 // LO parsing (port of Python _parse_los)
 // ---------------------------------------------------------------------------
-const LO_PREAMBLE_RE = /at the end of the (lecture|video|session|module|activity|class|reading)s?\s+students should be able to/i;
 const LO_SKIP_PATTERNS = [/^(textbook|reading|reference|assessment|homework|assignment)s?\b/i, /^(suggested )?readings?\b/i];
 const LO_VERBS = new Set(["describe","identify","explain","understand","know","discuss","list","state","define","recognize","predict","distinguish","compare","classify","demonstrate","outline","summarize","illustrate","apply","evaluate","analyze","interpret","assess","diagram","differentiate","relate","derive","solve","determine","calculate","draw","characterize","contrast","label"]);
-const LO_MIN_LEN = 20;
+const LO_MIN_LEN = 10;
 
 function startsWithLoVerb(text) {
   const m = text.match(/^\s*(\w+)/);
@@ -1540,15 +1708,16 @@ function cleanLo(text) {
 }
 
 function parseLOs(paragraphs) {
+  // Assume every uploaded file is a learning-objectives list. LOs are
+  // numbered items or separated by new lines/bullets at the same hierarchy
+  // level. No preamble header is required.
   const los = [];
-  let afterPreamble = false;
   for (const { style, text } of paragraphs) {
-    if (LO_PREAMBLE_RE.test(text)) { afterPreamble = true; continue; }
-    if (!afterPreamble) continue;
+    if (!text || !text.trim()) continue;
     if (style && style.toLowerCase().startsWith("heading")) continue;
     if (LO_SKIP_PATTERNS.some(re => re.test(text.trim()))) continue;
     if (text.trimEnd().endsWith(":") && !startsWithLoVerb(text)) continue;
-    if (text.length < LO_MIN_LEN) continue;
+    if (text.trim().length < LO_MIN_LEN) continue;
     los.push(cleanLo(text));
   }
   const seen = new Set();
@@ -1638,6 +1807,13 @@ document.getElementById("jv-form").addEventListener("submit", async (e) => {
     return;
   }
 
+  // Block analysis when no hub pages exist yet for this lecture.
+  const existingPages = lec.hub_pages.filter(h => h.path);
+  if (existingPages.length === 0) {
+    results.innerHTML = '<div class="banner err">Error! This lecture\'s HoyaDocs are still being made - cannot complete mapping request!</div>';
+    return;
+  }
+
   let los;
   try {
     const buf = await file.arrayBuffer();
@@ -1681,6 +1857,92 @@ document.getElementById("jv-form").addEventListener("submit", async (e) => {
   });
 });
 
+// ---------------------------------------------------------------------------
+// Reformat: aggressively split uploaded content into clean, numbered LOs
+// ---------------------------------------------------------------------------
+const reformatOut = document.getElementById("reformat-output");
+
+function reformatLOs(paragraphs) {
+  const strict = parseLOs(paragraphs);
+  if (strict.length >= 2) return { method: "parsed as-is", los: strict };
+
+  const bodyLines = [];
+  for (const { style, text } of paragraphs) {
+    if (!text || !text.trim()) continue;
+    if (style && style.toLowerCase().startsWith("heading")) continue;
+    if (LO_SKIP_PATTERNS.some(re => re.test(text.trim()))) continue;
+    bodyLines.push(text.trim());
+  }
+  if (!bodyLines.length) return { method: "no content", los: [] };
+
+  let blob = bodyLines.join(" ").replace(/\s+/g, " ").trim();
+  blob = blob.replace(/^[^:]*:\s*/, "");
+
+  const markerRe = /(^|\s)(\d{1,2}[.)\:]|[•·●○◦‣▪▫⁃\-–—])\s+/g;
+  let segmented = blob.replace(markerRe, "\n");
+  const verbAlt = Array.from(LO_VERBS).join("|");
+  const verbBreakRe = new RegExp("([.!?])\\s+(?=(?:" + verbAlt + ")\\b)", "gi");
+  segmented = segmented.replace(verbBreakRe, "$1\n");
+
+  let candidates = segmented.split(/\n+/).map(s => s.trim()).filter(Boolean).map(cleanLo);
+  const looksLikeLo = s => s.length >= LO_MIN_LEN && (startsWithLoVerb(s) || /[a-z]\s+\w+/i.test(s));
+  const kept = candidates.filter(looksLikeLo);
+
+  const seen = new Set();
+  const out = [];
+  for (const lo of kept) {
+    const k = lo.toLowerCase();
+    if (!seen.has(k)) { seen.add(k); out.push(lo); }
+  }
+  return { method: out.length ? "reformatted from blob" : "no LOs detected", los: out };
+}
+
+document.getElementById("reformatBtn").addEventListener("click", async () => {
+  const file = document.getElementById("loFile").files[0];
+  const btn = document.getElementById("reformatBtn");
+  const lid = document.getElementById("lecture").value;
+  if (!file) {
+    reformatOut.innerHTML = '<div class="card"><div class="banner err">Upload a .docx file first.</div></div>';
+    return;
+  }
+  // Block reformat when the selected lecture has no hub pages yet.
+  if (lid) {
+    const lec = JV_DATA.lectures.find(l => l.lecture_id === lid);
+    if (lec && lec.hub_pages.filter(h => h.path).length === 0) {
+      reformatOut.innerHTML = '<div class="card"><div class="banner err">Error! This lecture\'s HoyaDocs are still being made - cannot complete mapping request!</div></div>';
+      return;
+    }
+  }
+  btn.disabled = true;
+  reformatOut.innerHTML = '<div class="card"><div class="banner info">Reformatting ' + escapeHtml(file.name) + '…</div></div>';
+  try {
+    const buf = await file.arrayBuffer();
+    const xml = await extractDocxXml(buf);
+    const paras = parseDocxParagraphs(xml);
+    const { method, los } = reformatLOs(paras);
+    const card = document.createElement("div");
+    card.className = "card";
+    if (!los.length) {
+      card.innerHTML = '<h2>Reformatted Learning Objectives</h2>' +
+        '<div class="banner err">Could not detect any learning objectives in the uploaded file.</div>';
+    } else {
+      const plain = los.map((lo, i) => (i + 1) + ". " + lo).join("\n");
+      card.innerHTML =
+        '<h2>Reformatted Learning Objectives</h2>' +
+        '<div class="reformat-meta">' + los.length + ' objective' + (los.length === 1 ? '' : 's') + ' detected · <em>' + escapeHtml(method) + '</em></div>' +
+        '<ol>' + los.map(lo => '<li>' + escapeHtml(lo) + '</li>').join('') + '</ol>' +
+        '<div class="copy-hint">Plain-text version (for copy/paste):</div>' +
+        '<pre class="plain">' + escapeHtml(plain) + '</pre>';
+    }
+    reformatOut.innerHTML = '';
+    reformatOut.appendChild(card);
+  } catch (err) {
+    reformatOut.innerHTML = '<div class="card"><div class="banner err">Could not reformat file: ' + escapeHtml(err.message) + '</div></div>';
+  } finally {
+    btn.disabled = false;
+  }
+});
+
 function el(tag, attrs = {}, ...kids) {
   const e = document.createElement(tag);
   for (const [k,v] of Object.entries(attrs)) {
@@ -1720,8 +1982,8 @@ function renderResults(data) {
 
   if (!data.los.length) {
     wrap.append(el("div", {class:"banner err"},
-      "No learning objectives could be parsed. Make sure the docx contains a heading like " +
-      "\"At the end of the lecture students should be able to:\" followed by the objective paragraphs."));
+      "No learning objectives could be parsed. Make sure the docx contains the objectives as " +
+      "numbered, bulleted, or separate lines of text."));
     results.append(wrap);
     return;
   }
@@ -1858,7 +2120,7 @@ def render_jv_dashboard(status: dict) -> str:
 
 REPORT_TEMPLATE = r"""<!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8" />
-<title>Endocrine Hub Update Tracker — Report</title>
+<title>__BLOCK_LABEL__ Hub Update Tracker — Report</title>
 <style>
   :root{color-scheme:light;--amber-50:#FFFBEB;--amber-100:#FEF3C7;--amber-200:#FDE68A;--amber-600:#D97706;--amber-700:#B45309;--amber-900:#78350F;--slate-50:#F8FAFC;--slate-100:#F1F5F9;--slate-200:#E2E8F0;--slate-300:#CBD5E1;--slate-400:#94A3B8;--slate-500:#64748B;--slate-600:#475569;--slate-700:#334155;--slate-900:#0F172A;--green-100:#DCFCE7;--green-600:#16A34A;--green-700:#15803D;--red-100:#FEE2E2;--red-600:#DC2626;--red-700:#B91C1C;--blue-100:#DBEAFE;--blue-700:#1D4ED8;--yellow-100:#FEF9C3;--yellow-700:#A16207}
   *{box-sizing:border-box}
@@ -1912,13 +2174,16 @@ REPORT_TEMPLATE = r"""<!DOCTYPE html>
   .lo-list .lo-dot{display:inline-block;width:16px;font-weight:700}
   .lo-orphan{color:var(--red-700)}.lo-orphan .lo-dot{color:var(--red-600)}
   .lo-missing{color:var(--amber-900)}.lo-missing .lo-dot{color:var(--amber-600)}
+  header{position:relative}
+  header .home-link{display:inline-block;margin-bottom:12px;font-size:13px;font-weight:600;color:var(--amber-700);text-decoration:underline;background:none;border:none;padding:0}
+  header .home-link:hover{color:var(--amber-900)}
 </style></head><body>
 <header>
-  <h1>Endocrine Hub Update Tracker</h1>
+  <a class="home-link" href="https://hoyadocs.com/documentation">HoyaDocs</a>
+  <h1>__BLOCK_LABEL__ Hub Update Tracker</h1>
   <div class="scanned" id="scanned-at"></div>
 </header>
 <main>
-  <section class="summary" id="summary"></section>
   <div class="toolbar">
     <input type="search" id="search" placeholder="Search lectures, titles, file names…" />
     <button class="filter-btn active" data-filter="all">All</button>
@@ -1939,7 +2204,6 @@ REPORT_TEMPLATE = r"""<!DOCTYPE html>
       <th class="ctr" style="width:50px;">Hub 1</th>
       <th class="ctr" style="width:50px;">Hub 2</th>
       <th class="ctr" style="width:50px;">Hub 3</th>
-      <th class="ctr" style="width:60px;">Sources</th>
     </tr></thead>
     <tbody id="rows"></tbody>
   </table>
@@ -1957,14 +2221,13 @@ const HUB_ORDER=["lecture-guide","active-recall","hub1","hub2","hub3"];
 let currentFilter="all",currentQuery="";
 function el(t,a={},...k){const e=document.createElement(t);for(const[K,V]of Object.entries(a)){if(K==="class")e.className=V;else if(K.startsWith("on"))e.addEventListener(K.slice(2),V);else e.setAttribute(K,V);}for(const c of k)if(c!=null)e.append(c.nodeType?c:document.createTextNode(c));return e;}
 document.getElementById("scanned-at").textContent="Scanned: "+STATUS.scanned_at;
-function renderSummary(){const s=STATUS.summary,b=document.getElementById("summary");b.innerHTML="";const stats=[["fresh","Fresh",s.fresh],["stale","Stale (content changed)",s.stale],["new","New (unbaselined)",s.new],["missing","Missing hub pages",s.missing_hub_pages],["fresh","Total LOs tracked",s.total_los],["stale","Hub pages with LO gaps",s.hub_pages_with_gaps],["missing","Orphan LOs",s.orphan_los]];for(const[c,l,n]of stats)b.append(el("div",{class:"stat "+c},el("div",{class:"n"},String(n)),el("div",{class:"label"},l)));}
 function hubCell(type,lec){const hp=lec.hub_pages.find(h=>h.type===type);if(!hp||!hp.path)return el("span",{class:"hub-cell hub-missing",title:"missing"},"—");const miss=(hp.missing_idx||[]).length,stale=!!hp.stale_reason,tip=[];if(stale)tip.push(hp.stale_reason==="hash-changed"?"stale: content changed since build":"stale: source newer than hub page");else if(miss>0)tip.push(miss+" LO"+(miss===1?"":"s")+" not covered");else if(hp.lo_total>0)tip.push("all "+hp.lo_total+" LOs covered");if(hp.path)tip.push(hp.path);if(hp.mtime)tip.push("updated "+hp.mtime);if(stale)return el("span",{class:"hub-cell hub-stale",title:tip.join("\n")},"!");if(miss>0)return el("span",{class:"hub-cell hub-gap",title:tip.join("\n")},String(miss));return el("span",{class:"hub-cell hub-fresh",title:tip.join("\n")},"✓");}
-function renderRows(){const tb=document.getElementById("rows");tb.innerHTML="";const q=currentQuery.trim().toLowerCase();const visible=STATUS.lectures.filter(lec=>{if(q){const hay=[lec.lecture_id,lec.title,lec.state,...(lec.sources||[]),...lec.hub_pages.map(h=>h.path||"")].join(" ").toLowerCase();if(!hay.includes(q))return false;}const anyG=lec.hub_pages.some(h=>h.path&&(h.missing_idx||[]).length>0);const hasO=(lec.orphan_lo_idx||[]).length>0;switch(currentFilter){case"needs-update":return lec.state==="stale"||lec.state==="new"||lec.missing_pages.length>0||anyG;case"stale":return lec.state==="stale";case"has-gaps":return anyG;case"orphan":return hasO;case"missing":return lec.missing_pages.length>0;case"fresh":return lec.state==="fresh"&&!anyG;default:return true;}});if(!visible.length){tb.append(el("tr",{},el("td",{colspan:9,style:"text-align:center;padding:24px;color:var(--slate-500)"},"No matches.")));return;}for(const lec of visible){const row=el("tr",{class:"lecture-row"},el("td",{class:"lid"},lec.lecture_id.toUpperCase()),el("td",{},lec.title),el("td",{},el("span",{class:"state-pill state-"+lec.state},lec.state.replace("-"," "))),...HUB_ORDER.map(t=>el("td",{class:"ctr"},hubCell(t,lec))),el("td",{class:"ctr"},String((lec.sources||[]).length)));row.addEventListener("click",()=>toggleDetail(row,lec));tb.append(row);}}
-function toggleDetail(row,lec){const nx=row.nextElementSibling;if(nx&&nx.classList.contains("detail-row")){nx.remove();return;}const anyG=lec.hub_pages.some(h=>h.path&&(h.missing_idx||[]).length>0);const need=(lec.state==="stale"||lec.state==="new"||lec.missing_pages.length>0||anyG);const d=el("tr",{class:"detail-row"},el("td",{colspan:9},el("div",{class:"details grid-2"},el("div",{},el("h3",{},"In House Sources ("+(lec.sources||[]).length+")"),el("ul",{class:"file-list"},...(lec.sources||[]).map(name=>el("li",{},name)))),el("div",{},el("h3",{},"Hub pages"),el("ul",{class:"file-list"},...lec.hub_pages.map(h=>{const gc=(h.missing_idx||[]).length;const st=h.path?(h.stale_reason?" — stale ("+h.stale_reason.replace("-"," ")+")":(gc?" — "+gc+" LO"+(gc===1?"":"s")+" not covered":(h.lo_total?" — all "+h.lo_total+" LOs covered":" — fresh"))):"";const cl=h.path?(h.stale_reason?"color:var(--red-600)":(gc?"color:var(--amber-700)":"color:var(--green-700)")):"color:var(--slate-400)";return el("li",{},el("span",{class:"badge-kind"},h.type),h.path||"(missing)",h.mtime?el("span",{class:"hash"}," updated "+h.mtime):null,st?el("span",{class:"hash",style:cl},st):null);})))),renderGaps(lec),need?el("div",{class:"action-hint"},el("strong",{},"Needs attention. "),lec.stale_pages.length?"Stale: "+lec.stale_pages.join(", ")+". ":"",lec.missing_pages.length?"Missing: "+lec.missing_pages.join(", ")+". ":"",anyG?"Has LO gaps (see above). ":""):el("div",{class:"action-hint"},el("strong",{},"Up to date."))));row.after(d);}
+function renderRows(){const tb=document.getElementById("rows");tb.innerHTML="";const q=currentQuery.trim().toLowerCase();const visible=STATUS.lectures.filter(lec=>{if(!lec.hub_pages.some(h=>!!h.path))return false;if(q){const hay=[lec.lecture_id,lec.title,lec.state,...(lec.sources||[]),...lec.hub_pages.map(h=>h.path||"")].join(" ").toLowerCase();if(!hay.includes(q))return false;}const anyG=lec.hub_pages.some(h=>h.path&&(h.missing_idx||[]).length>0);const hasO=(lec.orphan_lo_idx||[]).length>0;switch(currentFilter){case"needs-update":return lec.state==="stale"||lec.state==="new"||lec.missing_pages.length>0||anyG;case"stale":return lec.state==="stale";case"has-gaps":return anyG;case"orphan":return hasO;case"missing":return lec.missing_pages.length>0;case"fresh":return lec.state==="fresh"&&!anyG;default:return true;}});if(!visible.length){tb.append(el("tr",{},el("td",{colspan:8,style:"text-align:center;padding:24px;color:var(--slate-500)"},"No matches.")));return;}for(const lec of visible){const row=el("tr",{class:"lecture-row"},el("td",{class:"lid"},lec.lecture_id.toUpperCase()),el("td",{},lec.title),el("td",{},el("span",{class:"state-pill state-"+lec.state},lec.state.replace("-"," "))),...HUB_ORDER.map(t=>el("td",{class:"ctr"},hubCell(t,lec))));row.addEventListener("click",()=>toggleDetail(row,lec));tb.append(row);}}
+function toggleDetail(row,lec){const nx=row.nextElementSibling;if(nx&&nx.classList.contains("detail-row")){nx.remove();return;}const anyG=lec.hub_pages.some(h=>h.path&&(h.missing_idx||[]).length>0);const need=(lec.state==="stale"||lec.state==="new"||lec.missing_pages.length>0||anyG);const d=el("tr",{class:"detail-row"},el("td",{colspan:8},el("div",{class:"details grid-2"},el("div",{},el("h3",{},"In House Sources ("+(lec.sources||[]).length+")"),el("ul",{class:"file-list"},...(lec.sources||[]).map(name=>el("li",{},name)))),el("div",{},el("h3",{},"Hub pages"),el("ul",{class:"file-list"},...lec.hub_pages.map(h=>{const gc=(h.missing_idx||[]).length;const st=h.path?(h.stale_reason?" — stale ("+h.stale_reason.replace("-"," ")+")":(gc?" — "+gc+" LO"+(gc===1?"":"s")+" not covered":(h.lo_total?" — all "+h.lo_total+" LOs covered":" — fresh"))):"";const cl=h.path?(h.stale_reason?"color:var(--red-600)":(gc?"color:var(--amber-700)":"color:var(--green-700)")):"color:var(--slate-400)";return el("li",{},el("span",{class:"badge-kind"},h.type),h.path||"(missing)",h.mtime?el("span",{class:"hash"}," updated "+h.mtime):null,st?el("span",{class:"hash",style:cl},st):null);})))),renderGaps(lec),need?el("div",{class:"action-hint"},el("strong",{},"Needs attention. "),lec.stale_pages.length?"Stale: "+lec.stale_pages.join(", ")+". ":"",lec.missing_pages.length?"Missing: "+lec.missing_pages.join(", ")+". ":"",anyG?"Has LO gaps (see above). ":""):el("div",{class:"action-hint"},el("strong",{},"Up to date."))));row.after(d);}
 function renderGaps(lec){const orph=(lec.orphan_lo_idx||[]).map(i=>lec.los[i]).filter(Boolean);const pg=lec.hub_pages.filter(h=>h.path&&(h.missing_idx||[]).length>0);if(!lec.los||!lec.los.length)return el("div",{class:"gaps"},el("h3",{},"Content gaps"),el("div",{class:"gap-empty"},"No LOs parsed for this lecture."));if(!orph.length&&!pg.length)return el("div",{class:"gaps"},el("h3",{},"Content coverage ("+lec.los.length+" LOs)"),el("div",{class:"gap-empty ok"},"✓ Every LO is covered on at least one hub page."));const ch=[el("h3",{},"Content gaps ("+lec.los.length+" LOs total)")];if(orph.length)ch.push(el("div",{class:"gap-block"},el("div",{class:"gap-heading"},el("strong",{},orph.length+" LO"+(orph.length===1?"":"s")+" not reflected on ANY existing hub page"),lec.hub_pages.every(h=>!h.path)?el("span",{class:"hash"}," (no hub pages exist yet)"):null),el("ul",{class:"lo-list"},...orph.map(lo=>el("li",{class:"lo-orphan"},el("span",{class:"lo-dot"},"⚠"),lo)))));for(const hp of pg)ch.push(el("div",{class:"gap-block"},el("div",{class:"gap-heading"},el("span",{class:"badge-kind"},hp.type),el("strong",{},hp.missing_idx.length+" of "+hp.lo_total+" LO"+(hp.lo_total===1?"":"s")+" not covered")),el("ul",{class:"lo-list"},...hp.missing_idx.map(([idx,score])=>el("li",{class:"lo-missing"},el("span",{class:"lo-dot"},"•"),lec.los[idx]||"(unknown)",el("span",{class:"hash"}," (coverage "+Math.round((score||0)*100)+"%)"))))));return el("div",{class:"gaps"},...ch);}
 for(const b of document.querySelectorAll(".filter-btn"))b.addEventListener("click",()=>{for(const x of document.querySelectorAll(".filter-btn"))x.classList.remove("active");b.classList.add("active");currentFilter=b.getAttribute("data-filter");renderRows();});
 document.getElementById("search").addEventListener("input",e=>{currentQuery=e.target.value;renderRows();});
-renderSummary();renderRows();
+renderRows();
 </script></body></html>"""
 
 
@@ -1979,17 +2242,19 @@ def _slim_for_report(status: dict) -> dict:
         los = lec.get("los", [])
         lo_idx = {lo: i for i, lo in enumerate(los)}
         # In-house sources = Learning Objective files from Learning Objectives folder only,
-        # filenames only (no paths).
+        # presented as cleaned display names (lecture title only — no LO tag,
+        # subject, professor name, prefix, or "Objectives" suffix).
         seen, src_names = set(), []
         for s in lec.get("sources", []):
             if s.get("kind") != "lo":
                 continue
             if "Learning Objectives" not in (s.get("path") or ""):
                 continue
-            name = s["path"].rsplit("/", 1)[-1]
-            if name not in seen:
-                seen.add(name)
-                src_names.append(name)
+            raw_name = s["path"].rsplit("/", 1)[-1]
+            display = s.get("display_name") or clean_source_display_name(raw_name)
+            if display and display not in seen:
+                seen.add(display)
+                src_names.append(display)
         slim["lectures"].append({
             "lecture_id": lec["lecture_id"],
             "title": lec["title"],
@@ -2018,7 +2283,8 @@ def _slim_for_report(status: dict) -> dict:
 def render_report(status: dict) -> str:
     """Downloadable clean report — sources are LO filenames only, no path/JV/rebuild hints."""
     data_json = json.dumps(_slim_for_report(status), ensure_ascii=False).replace("</", "<\\/")
-    return REPORT_TEMPLATE.replace("__STATUS__", data_json)
+    html = REPORT_TEMPLATE.replace("__STATUS__", data_json)
+    return html.replace("__BLOCK_LABEL__", BLOCK_LABEL)
 
 
 # ---------------------------------------------------------------------------
