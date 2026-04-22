@@ -121,6 +121,7 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
     <div class="source-badge"><strong>Style:</strong> USMLE Step 1 clinical vignettes</div>
     <div class="source-badge"><strong>Pace:</strong> ~1.5 min / question</div>
     <div class="source-badge"><strong>Coverage:</strong> LOs 1–5 integrated</div>
+    <div class="source-badge"><strong>Extension:</strong> BRS Biochem/Physio + Waite &amp; Sheakley 3rd Party Bank</div>
   </div>
 </div>
 
@@ -134,8 +135,8 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
 </div>
 
 <div class="stats-bar">
-  <div class="stat-card"><div class="stat-num">15</div><div class="stat-label">Questions</div></div>
-  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Exam Blocks</div></div>
+  <div class="stat-card"><div class="stat-num">15<span style="font-size:.5em;color:#D4A84C"> + 8</span></div><div class="stat-label">Questions</div></div>
+  <div class="stat-card"><div class="stat-num">3<span style="font-size:.5em;color:#D4A84C"> + 1</span></div><div class="stat-label">Exam Blocks</div></div>
   <div class="stat-card"><div class="stat-num">5</div><div class="stat-label">LOs Covered</div></div>
   <div class="stat-card"><div class="stat-num" id="global-score">—</div><div class="stat-label">Your Score</div></div>
 </div>
@@ -144,6 +145,7 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
   <button class="tab-btn active" onclick="switchTab('block1',this)">Block 1</button>
   <button class="tab-btn" onclick="switchTab('block2',this)">Block 2</button>
   <button class="tab-btn" onclick="switchTab('block3',this)">Block 3</button>
+  <button class="tab-btn" onclick="switchTab('ext',this)">3rd Party Bank</button>
   <button class="tab-btn" onclick="switchTab('score',this)">Score Report</button>
 </div>
 
@@ -417,6 +419,152 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
 
 </div>
 
+<!-- ════════════════════════════════════════════════════════════════════════
+     3RD PARTY BANK — BRS Biochem / BRS Physio / Waite &amp; Sheakley Physio Q&amp;A
+     Curated questions mapped to END03 LOs 1–5 (GH Axis)
+     ════════════════════════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-ext">
+  <div class="exam-header">
+    <div class="exam-header-left">
+      <div class="exam-header-title">3rd Party Bank — END03 LO-Mapped Items</div>
+      <div class="exam-header-sub">8 questions · Untimed practice · BRS Biochem + BRS Physio + Waite &amp; Sheakley Physio Q&amp;A</div>
+    </div>
+    <div class="exam-timer">
+      <span class="timer-icon">⏱</span>
+      <div>
+        <div class="timer-display" id="timer-ext">12:00</div>
+        <div class="timer-label">Optional Timer</div>
+      </div>
+    </div>
+    <div class="exam-controls">
+      <button class="exam-ctrl-btn" onclick="toggleTimer('ext')">Start / Pause</button>
+      <button class="exam-ctrl-btn" onclick="resetTimer('ext',720)">Reset</button>
+    </div>
+  </div>
+  <div class="exam-intro">
+    <strong>Source review.</strong> Every item below was pulled from your 3rd Party Biochem + Physio folders and hand-mapped to END03 Hypothalamic-Pituitary Relationships Part 2 (GH axis) LOs — signaling pathway (hypothalamus → pituitary → liver → tissues), physiologic effects of GH + IGF-1, regulation of secretion, physiologic stimulators/inhibitors, and altered-signaling syndromes. Grouped by LO to complement — not duplicate — the in-house exam Blocks 1-3 above.
+    <br><br>
+    <strong>Legend:</strong>
+    <span style="display:inline-block;margin:4px 6px 0 0;padding:2px 8px;background:#EDEAE3;border:1px solid #D2CDC4;border-radius:3px;font-size:.82em;color:#8B6914">BRS Biochem</span>
+    <span style="display:inline-block;margin:4px 6px 0 0;padding:2px 8px;background:#EDEAE3;border:1px solid #D2CDC4;border-radius:3px;font-size:.82em;color:#8B6914">BRS Physio</span>
+    <span style="display:inline-block;margin:4px 6px 0 0;padding:2px 8px;background:#EDEAE3;border:1px solid #D2CDC4;border-radius:3px;font-size:.82em;color:#8B6914">Waite &amp; Sheakley</span>
+  </div>
+
+  <!-- ── GROUP A ── -->
+  <div class="sec">Group A · GH Signaling Pathway &amp; Physiologic Effects (LOs 1, 2)</div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q1 — LO 1/3/4 · GH Secretion Properties — BRS Physio Ch 27 Q5</div>
+    <div class="vig-stem"><strong>Growth hormone secretion:</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Occurs in pulses, mainly during sleep</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Is stimulated by a specific hypothalamic neurohormone (GHRH)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Is inhibited by somatostatin</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Results in synthesis of insulin-like growth factor in a variety of target tissues</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">E</span>All of the above</div>
+    </div>
+    <div class="vig-exp"><strong>E — All of the above.</strong> This is the one-stem composite of LOs 1/3/4. GH is released from anterior pituitary <span class="vig-buzzword">somatotrophs</span> in <strong>pulses mainly during deep (stage N3) sleep</strong> plus a basal level — this is the "dynamic circadian" property in LO 3. It is stimulated by hypothalamic <span class="vig-buzzword">GHRH</span> and inhibited by <span class="vig-buzzword">somatostatin (SST)</span> — the two antagonistic tonic inputs in LO 4. Peripherally, GH drives <span class="vig-buzzword">IGF-1</span> synthesis primarily in liver but also in bone, muscle, kidney — completing the "hypothalamus → pituitary → liver → target tissues" circuit in LO 1.</div>
+  </div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q2 — LO 1 · GH → IGF-1 Target Mapping — BRS Biochem Q3</div>
+    <div class="vig-stem">A hypothalamic-pituitary hormone is described as follows: <strong>"Stimulates the production of insulin-like growth factor (IGF)."</strong> Which of the following hormones matches this description?</div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Luteinizing hormone (LH)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Prolactin (PRL)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Thyroid-stimulating hormone (TSH)</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">D</span>Growth hormone (GH)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Follicle-stimulating hormone (FSH)</div>
+    </div>
+    <div class="vig-exp"><strong>D — Growth hormone.</strong> GH released from pituitary somatotrophs binds the <span class="vig-buzzword">GH receptor (JAK2-STAT5 cytokine-family)</span> on hepatocytes and other tissues → induces <span class="vig-buzzword">IGF-1</span> (somatomedin C) synthesis. IGF-1 is the primary mediator of GH's <strong>anabolic growth effects</strong> on cartilage (long bones), muscle, and many visceral organs. Direct GH effects (anti-insulin / metabolic) are distinct from the IGF-1-mediated growth effects — a key LO 2 distinction. None of the other pituitary hormones in this list drive IGF-1.</div>
+  </div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q3 — LO 2 · Composite GH Functions — Waite &amp; Sheakley Q12</div>
+    <div class="vig-stem">As part of an anti-doping educational session for athletes, the normal functions of various hormones are introduced. <strong>Which of the following hormones is best described as follows: "Increases lipolysis, stimulates protein synthesis, decreases glucose uptake, and supports calcium retention"?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Cortisol</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Glucagon</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Growth hormone</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Insulin</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Parathyroid hormone</div>
+    </div>
+    <div class="vig-exp"><strong>C — Growth hormone.</strong> LO 2 fully mapped out: GH is anabolic for <span class="vig-buzzword">protein synthesis</span> (positive N₂ balance, muscle growth via IGF-1) but simultaneously <span class="vig-buzzword">diabetogenic</span> — it <strong>decreases peripheral glucose uptake</strong> and stimulates hepatic gluconeogenesis/glycogenolysis to maintain serum glucose during fasting/stress. It stimulates <span class="vig-buzzword">lipolysis</span> in adipose (shifts fuel source to fatty acids) and <span class="vig-buzzword">supports Ca²⁺ retention</span> and bone mineralization (important for longitudinal bone growth). Cortisol (A) also increases lipolysis and decreases glucose uptake but DECREASES protein synthesis (catabolic). PTH (E) handles Ca²⁺ homeostasis but not the metabolic effects listed.</div>
+  </div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q4 — LO 1 · Liver Cirrhosis &amp; GH/IGF-1 Axis — Waite &amp; Sheakley Q48</div>
+    <div class="vig-stem">A 52-year-old man with alcoholism, liver cirrhosis, and chronic fatigue presents with acute back pain and is diagnosed with a vertebral fracture. He also reports tingling and numbness of his skin. Ascites and a mild Trousseau sign are present. Insulin, glucagon, epinephrine, cortisol, growth hormone, thyroid hormone, and thyroid-stimulating hormone are all normal. <strong>Insulin-like growth factor 1 and reverse triiodothyronine (rT3) are reduced.</strong> Given these GH-axis findings, which statement best explains the reduced IGF-1 despite normal GH?</div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Pituitary somatotrophs are functionally exhausted</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Hypothalamic somatostatin is secreted in excess</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Hepatic disease reduces the liver's capacity to respond to GH and make IGF-1</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Skeletal muscle absorbs all circulating IGF-1</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>IGFBP-3 is upregulated and sequesters all IGF-1</div>
+    </div>
+    <div class="vig-exp"><strong>C.</strong> LO 1 end-organ step: GH acts on hepatocytes → IGF-1 synthesis. In <span class="vig-buzzword">liver failure</span>, hepatocellular dysfunction means GH cannot drive normal IGF-1 production (and cannot deiodinate T4 to rT3 — explaining the concurrent low rT3). GH itself stays normal because its feedback is largely driven by IGF-1, which is lost. The same cirrhotic liver also fails to 25-hydroxylate vitamin D → hypocalcemia (positive Trousseau, paresthesias) and weak bones (vertebral fracture). This elegantly illustrates that a normal pituitary signal can still produce clinical GH deficiency IF the liver target tissue is broken — a frequent Step 1 pitfall.</div>
+  </div>
+
+  <!-- ── GROUP B ── -->
+  <div class="sec" style="margin-top:28px">Group B · Regulation, Stimulators &amp; Inhibitors (LOs 3, 4)</div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q5 — LO 4 · GHRH Stalk Effect — Waite &amp; Sheakley Q8</div>
+    <div class="vig-stem">A male soldier experienced severe head trauma that resulted in permanent interruption of his hypothalamohypophyseal portal vessels. <strong>Which of the following would be expected to develop?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Acromegaly</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Excessive aggressiveness (↑ testosterone)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Hyperpigmentation</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">D</span>Hyperprolactinemia</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Hyperthyroidism</div>
+    </div>
+    <div class="vig-exp"><strong>D — Hyperprolactinemia</strong>, not acromegaly. This is the <span class="vig-buzzword">"stalk effect"</span> — KEY LO 4 teaching for GH. GHRH TONICALLY STIMULATES somatotrophs; losing GHRH means GH secretion FALLS, so acromegaly is impossible after portal disruption. Only prolactin goes UP because PRL is the sole anterior pituitary hormone under tonic <em>inhibition</em> (by hypothalamic dopamine). Contrast with Ext Q7 below: tumors of the hypothalamus that OVERPRODUCE GHRH DO cause acromegaly. Choice A is the tempting wrong answer — it confuses disrupting a stimulatory pathway (↓ GH) with oversupplying it (↑ GH).</div>
+  </div>
+
+  <!-- ── GROUP C ── -->
+  <div class="sec" style="margin-top:28px">Group C · Altered/Disordered GH Signaling (LO 5)</div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q6 — LO 5 · Acromegaly Recognition — BRS Biochem Q7</div>
+    <div class="vig-stem">A 56-year-old patient presents with <strong>a large, protruding jaw, large hands and feet, normal height, and an elevated blood glucose level.</strong> Which of the following is the most likely underlying cause?</div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Hyperprolactinemia due to a pituitary tumor</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Acromegaly due to a GH-producing tumor that developed in adulthood</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Cushing syndrome due to an adrenal tumor</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Elevated aldosterone and renin resulting from renal artery plaque</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Primary hyperparathyroidism</div>
+    </div>
+    <div class="vig-exp"><strong>B — Acromegaly.</strong> Adult excess GH causes <span class="vig-buzzword">acral enlargement</span> without added height because <strong>epiphyses are already closed</strong> (the same GH excess BEFORE closure = gigantism). The jaw, hands, feet, and soft tissues thicken. Diabetes mellitus frequently coexists because <span class="vig-buzzword">GH stimulates gluconeogenesis</span> and opposes insulin at the tissue level — LO 2 physiology driving the LO 5 clinical picture. Other diagnostic features not listed: carpal tunnel syndrome, deep voice, macroglossia, obstructive sleep apnea, and ~2× cardiovascular mortality.</div>
+  </div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q7 — LO 1/5 · Ectopic GHRH Tumor — BRS Biochem Q25</div>
+    <div class="vig-stem">A 30-year-old female presents with a need to progressively buy larger and wider shoes. She also cannot wear any of her rings anymore because they are too small. A physical exam shows a prominent brow, protruding lower jaw, and spaces between all of her teeth. <strong>This woman may have a tumor in which one of the following organs/tissues?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">A</span>Hypothalamus</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Bone marrow</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Adrenal glands</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Pancreas</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Adipose tissue</div>
+    </div>
+    <div class="vig-exp"><strong>A — Hypothalamus.</strong> The patient shows classic acromegaly features (acral/soft-tissue overgrowth, mandibular prognathism with interdental spacing = "spaces between all her teeth"). LO 1 pathway: a hypothalamic tumor producing excess <span class="vig-buzzword">GHRH</span> drives the <strong>pituitary</strong> to hypersecrete GH → liver IGF-1 ↑ → acral growth. Although most clinical acromegaly is a pituitary somatotroph adenoma, the Step 1 teaching is that <span class="vig-buzzword">hypothalamic GHRH-omas</span> and <span class="vig-buzzword">ectopic GHRH</span> (e.g., pancreatic neuroendocrine tumors, small-cell lung) are also important causes. Pearl: serum GHRH ↑ in ectopic causes but would be ↓ in a pituitary somatotroph adenoma (where feedback from IGF-1 suppresses hypothalamic GHRH).</div>
+  </div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q8 — LO 3/5 · Failed GH Suppression on OGTT — Waite &amp; Sheakley Q13</div>
+    <div class="vig-stem">A 50-year-old man has not seen a doctor for 8 years. His feet and hands have grown larger, his jaw is protruding, and his face is looking strangely "out of shape." He has slight difficulty breathing, frequent headaches, fatigue, impotence, and excessive sweating. MRI reveals a 1.5-cm mass on the anterior pituitary. <strong>An oral glucose tolerance test is given. Which of the following is a positive test result that supports the diagnosis of acromegaly?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Increased serum ghrelin</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Failed growth hormone suppression</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Failed insulin-like growth factor 1 increase</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Increased serum glucose</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Increased somatostatin</div>
+    </div>
+    <div class="vig-exp"><strong>B — Failed GH suppression.</strong> This is THE gold-standard screening test for acromegaly — tests LOs 3 &amp; 5 together. Normally, a glucose load causes <strong>hyperglycemia → ↑ somatostatin → GH suppression below 1 ng/mL within 2 hours</strong> (part of LO 3 regulation). A somatotroph adenoma secretes GH <span class="vig-buzzword">autonomously</span> — it fails to suppress. Elevated IGF-1 is the best confirmatory test, but in the OGTT the DIAGNOSTIC finding is that GH does NOT fall (C is the wrong direction — IGF-1 should already be HIGH at baseline, not rise in response to glucose). Ghrelin (A) and somatostatin (E) decline physiologically after glucose and cannot be used diagnostically.</div>
+  </div>
+
+</div>
+
 <!-- ══ SCORE REPORT ══ -->
 <div class="tab-content" id="tab-score">
   <div class="sec">Performance Dashboard</div>
@@ -441,6 +589,11 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
       <div class="score-card-num" id="sc-b3">— <span class="pct"></span></div>
       <div class="score-card-label">Block 3 — Disorders</div>
       <div class="score-bar-wrap"><div class="score-bar" id="bar-b3" style="width:0%"></div></div>
+    </div>
+    <div class="score-card">
+      <div class="score-card-num" id="sc-ext">— <span class="pct"></span></div>
+      <div class="score-card-label">3rd Party Bank</div>
+      <div class="score-bar-wrap"><div class="score-bar" id="bar-ext" style="width:0%"></div></div>
     </div>
   </div>
 
@@ -498,7 +651,7 @@ function updateGlobalScore(){
   if(total>0) el.textContent=right+'/'+total;
 }
 function updateScoreReport(){
-  var blocks={b1:{right:0,total:0,max:5},b2:{right:0,total:0,max:5},b3:{right:0,total:0,max:5}};
+  var blocks={b1:{right:0,total:0,max:5},b2:{right:0,total:0,max:5},b3:{right:0,total:0,max:5},ext:{right:0,total:0,max:8}};
   var totalRight=0,totalAnswered=0;
   for(var k in answers){
     var a=answers[k];
@@ -517,7 +670,7 @@ function updateScoreReport(){
     el.innerHTML=right+'/'+max+' <span class="pct">'+pct+'%</span>';
     bar.style.width=pct+'%';
   }
-  var totalMax=15;
+  var totalMax=23; // 15 exam items + 8 3rd-party items
   var totalPct=totalAnswered>0?Math.round((totalRight/totalMax)*100):0;
   var scTotal=document.getElementById('sc-total');
   var barTotal=document.getElementById('bar-total');
@@ -526,6 +679,7 @@ function updateScoreReport(){
   setCard('sc-b1','bar-b1',blocks.b1.right,blocks.b1.total,blocks.b1.max);
   setCard('sc-b2','bar-b2',blocks.b2.right,blocks.b2.total,blocks.b2.max);
   setCard('sc-b3','bar-b3',blocks.b3.right,blocks.b3.total,blocks.b3.max);
+  setCard('sc-ext','bar-ext',blocks.ext.right,blocks.ext.total,blocks.ext.max);
   var bd=document.getElementById('q-breakdown');
   if(totalAnswered===0){bd.innerHTML='<div class="exam-intro" style="text-align:center">Answer questions in the Exam Blocks to see your breakdown here.</div>';return;}
   var html='';
@@ -573,6 +727,7 @@ window.addEventListener('load',function(){
   initTimer('b1',450);
   initTimer('b2',450);
   initTimer('b3',450);
+  initTimer('ext',720);
 });
 </script>
 </body>
