@@ -158,6 +158,7 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
     <div class="source-badge"><strong>Style:</strong> USMLE Step 1 clinical vignettes</div>
     <div class="source-badge"><strong>Pace:</strong> ~1.5 min / question (Step 1 timing)</div>
     <div class="source-badge"><strong>Coverage:</strong> LOs 1–7 incl. eicosanoids &amp; EC50 framework</div>
+    <div class="source-badge"><strong>Extension:</strong> BRS Biochem/Physio + Waite &amp; Sheakley 3rd Party Bank</div>
   </div>
 </div>
 
@@ -171,8 +172,8 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
 </div>
 
 <div class="stats-bar">
-  <div class="stat-card"><div class="stat-num">15</div><div class="stat-label">Questions</div></div>
-  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Exam Blocks</div></div>
+  <div class="stat-card"><div class="stat-num">15<span style="font-size:.5em;color:#D4A84C"> + 12</span></div><div class="stat-label">Questions</div></div>
+  <div class="stat-card"><div class="stat-num">3<span style="font-size:.5em;color:#D4A84C"> + 1</span></div><div class="stat-label">Exam Blocks</div></div>
   <div class="stat-card"><div class="stat-num">7</div><div class="stat-label">LOs Covered</div></div>
   <div class="stat-card"><div class="stat-num" id="global-score">—</div><div class="stat-label">Your Score</div></div>
 </div>
@@ -181,6 +182,7 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
   <button class="tab-btn active" onclick="switchTab('block1',this)">Block 1</button>
   <button class="tab-btn" onclick="switchTab('block2',this)">Block 2</button>
   <button class="tab-btn" onclick="switchTab('block3',this)">Block 3</button>
+  <button class="tab-btn" onclick="switchTab('ext',this)">3rd Party Bank</button>
   <button class="tab-btn" onclick="switchTab('score',this)">Score Report</button>
 </div>
 
@@ -454,6 +456,226 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
 
 </div>
 
+<!-- ════════════════════════════════════════════════════════════════════════
+     3RD PARTY BANK — BRS Biochem / BRS Physio / Waite &amp; Sheakley Physio Q&amp;A
+     Curated questions mapped to END01 LOs 1–7 (Intro to Hormones)
+     ════════════════════════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-ext">
+  <div class="exam-header">
+    <div class="exam-header-left">
+      <div class="exam-header-title">3rd Party Bank — END01 LO-Mapped Items</div>
+      <div class="exam-header-sub">12 questions · Untimed practice · BRS Biochem + BRS Physio + Waite &amp; Sheakley Physio Q&amp;A</div>
+    </div>
+    <div class="exam-timer">
+      <span class="timer-icon">⏱</span>
+      <div>
+        <div class="timer-display" id="timer-ext">15:00</div>
+        <div class="timer-label">Optional Timer</div>
+      </div>
+    </div>
+    <div class="exam-controls">
+      <button class="exam-ctrl-btn" onclick="toggleTimer('ext')">Start / Pause</button>
+      <button class="exam-ctrl-btn" onclick="resetTimer('ext',900)">Reset</button>
+    </div>
+  </div>
+  <div class="exam-intro">
+    <strong>Source review.</strong> Every item below was pulled from your 3rd Party Biochem + Physio folders and hand-mapped to END01 Intro-to-Hormones LOs (hormone classification, catecholamine/steroid biosynthesis, carrier proteins &amp; half-life, receptor location &amp; signaling, cellular sensitivity). Questions are grouped by LO to complement — not duplicate — the in-house exam Blocks 1-3 above.
+    <br><br>
+    <strong>Legend:</strong>
+    <span style="display:inline-block;margin:4px 6px 0 0;padding:2px 8px;background:#EDEAE3;border:1px solid #D2CDC4;border-radius:3px;font-size:.82em;color:#8B6914">BRS Biochem</span>
+    <span style="display:inline-block;margin:4px 6px 0 0;padding:2px 8px;background:#EDEAE3;border:1px solid #D2CDC4;border-radius:3px;font-size:.82em;color:#8B6914">BRS Physio</span>
+    <span style="display:inline-block;margin:4px 6px 0 0;padding:2px 8px;background:#EDEAE3;border:1px solid #D2CDC4;border-radius:3px;font-size:.82em;color:#8B6914">Waite &amp; Sheakley</span>
+  </div>
+
+  <!-- ── GROUP A ── -->
+  <div class="sec">Group A · Hormone Classification &amp; Biosynthesis (LOs 2, 3, 4)</div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q1 — LO 2 · Chemical Classes — Waite &amp; Sheakley Q6</div>
+    <div class="vig-stem">A 68-year-old woman with type 2 diabetes mellitus and hypothyroidism, who occasionally uses a hydrocortisone topical cream, asks about the potential to administer thyroxine and insulin through the skin. The physician's answer includes information about the chemical versatility of hormones. <strong>To which chemical classes of hormones do cortisol, thyroxine (T4), and insulin belong, respectively?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">A</span>Steroid hormones · Amino acid derivatives · Peptide hormones</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Protein hormones · Amino acid derivatives · Steroid hormones</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Catecholamines · Amino acid derivatives · Peptide hormones</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Steroid hormones · Peptide hormones · Catecholamines</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Protein hormones · Peptide hormones · Catecholamines</div>
+    </div>
+    <div class="vig-exp"><strong>A.</strong> <span class="vig-buzzword">Cortisol</span> is a <strong>steroid</strong> (cholesterol-derived, names end in "-ol"/"-one"; also aldosterone, testosterone, progesterone, estradiol). <span class="vig-buzzword">Thyroxine (T4)</span> is an <strong>amino-acid-derived</strong> hormone (from tyrosine; other tyrosine-derived hormones are epinephrine, norepinephrine, dopamine). <span class="vig-buzzword">Insulin</span> is a <strong>peptide</strong>. This maps directly onto LO 2: hormones are classified by structure, solubility, and storability — steroids are lipid-soluble and not stored, amino acid derivatives split into water-soluble catecholamines vs. lipid-soluble thyroxine, and peptides are water-soluble and vesicle-stored. Transcutaneous delivery of lipid-insoluble hormones (insulin, T4 when salt-form) is hard because they need lipid-soluble carriers.</div>
+  </div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q2 — LO 3 · Tyrosine as Hormone Precursor — Waite &amp; Sheakley Q1</div>
+    <div class="vig-stem">Clinical studies that examine the effectiveness of L-tyrosine as a dietary supplement to increase cognitive performance have thus far shown inconclusive results. Nevertheless, advertisements for L-tyrosine supplements are common. <strong>Physicians should discourage patients with which of the following conditions from taking tyrosine supplements without supervision?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Addison's disease</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Congenital adrenal hyperplasia (21-hydroxylase form)</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Graves' disease</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Hashimoto's disease</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Type 1 diabetes</div>
+    </div>
+    <div class="vig-exp"><strong>C — Graves' disease.</strong> <span class="vig-buzzword">Tyrosine is the precursor for epinephrine, dopamine, norepinephrine, AND thyroxine</span>. In hyperthyroid Graves' patients, extra tyrosine substrate can push T4 synthesis further into the danger zone. Addison's (A) and 21-OH CAH (B) have LOW cortisol; tyrosine may actually help stress tolerance. Hashimoto's (D) is hypothyroid — the substrate-loading is not contraindicated. Diabetes (E) is not on the tyrosine axis. LO 3 note: the same tyrosine → L-DOPA → dopamine → NE → Epi pathway that makes catecholamines ALSO feeds thyroid hormone synthesis via iodination of tyrosine residues on thyroglobulin.</div>
+  </div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q3 — LO 2/3 · Hormone from Tyrosine — BRS Biochem Q14</div>
+    <div class="vig-stem">A 20-year-old male presents with weight loss, heat intolerance, bilateral exophthalmos, lid lag, sweating, and tachycardia. These symptoms are due to an increased production and secretion of a hormone. <strong>From which of the following is this hormone derived?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Cholesterol</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Dopamine</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Tryptophan</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">D</span>Tyrosine</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Glutamate</div>
+    </div>
+    <div class="vig-exp"><strong>D — Tyrosine.</strong> The patient has Graves hyperthyroidism. <span class="vig-buzzword">Thyroid hormone is derived from tyrosine</span> (iodinated at two sites on tyrosyl residues of thyroglobulin → MIT + DIT → T3/T4). Catecholamines (dopamine, NE, Epi) are ALSO derived from tyrosine but via a separate enzymatic pathway (TH → DDC → DBH → PNMT). Cholesterol (A) gives rise to steroid hormones. Tryptophan (C) gives rise to serotonin and melatonin. Glutamate (E) gives rise to GABA via decarboxylation. LO 3 directly.</div>
+  </div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q4 — LO 4 · Steroid Biosynthesis Precursor — BRS Biochem Q11</div>
+    <div class="vig-stem">A 35-year-old female presents with central obesity, a "buffalo hump," Type 2 diabetes, abdominal striae, and "moon facies." <strong>The hormone being overproduced in this syndrome is produced from which one of the following compounds?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">A</span>Progesterone</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Testosterone</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Estradiol</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Aldosterone</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Chenocholic acid</div>
+    </div>
+    <div class="vig-exp"><strong>A — Progesterone.</strong> The patient has Cushing syndrome → overproducing <span class="vig-buzzword">cortisol</span>. In the steroid biosynthesis pathway, cholesterol → pregnenolone (via desmolase / StAR — the rate-limiting step, LO 4) → <strong>progesterone</strong> → 17-OH progesterone → 11-deoxycortisol → cortisol. Progesterone is also an intermediate upstream of aldosterone and testosterone. Testosterone (B) is a precursor for estradiol (via aromatase), not cortisol. Chenocholic acid (E) is a bile salt derived directly from cholesterol, not through progesterone. LO 4 directly.</div>
+  </div>
+
+  <!-- ── GROUP B ── -->
+  <div class="sec" style="margin-top:28px">Group B · Carrier Proteins &amp; Hormone Half-Life (LO 5)</div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q5 — LO 5 · Half-Life &amp; Carrier Proteins — Waite &amp; Sheakley Q4</div>
+    <div class="vig-stem">In a research study with healthy people, the half-lives of four hormones in serum were measured and the following average results were recorded:
+    <br><br>
+    <span style="font-family:'Source Sans 3',monospace;background:#F4F3EF;padding:8px 12px;display:inline-block;border-radius:4px;line-height:1.9">
+      Hormone 1: 1–3 minutes<br>
+      Hormone 2: 4–6 minutes<br>
+      Hormone 3: 8–24 hours<br>
+      Hormone 4: 7 days
+    </span>
+    <br><br>
+    <strong>Which of the following are the four measured hormones (1 → 4)?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">A</span>Angiotensin II · Insulin · Total T3 · Total T4</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Total T4 · Angiotensin II · Insulin · Total T3</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Total T4 · Total T3 · Angiotensin II · Insulin</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Insulin · Total T3 · Total T4 · Angiotensin II</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Angiotensin II · Total T3 · Insulin · Total T4</div>
+    </div>
+    <div class="vig-exp"><strong>A.</strong> <span class="vig-buzzword">Peptide hormones</span> are water-soluble, circulate free, and have SHORT half-lives roughly proportional to size. Angiotensin II (8 aa) &lt; insulin (51 aa). <span class="vig-buzzword">Lipid-soluble hormones</span> (T3, T4, steroids) bind carriers (TBG, albumin, CBG, SHBG) → LONG half-life proportional to carrier affinity. T4 binds TBG tightly → ~7-day half-life. T3 is loosely bound → hours. Net LO 5: <strong>carriers extend half-life</strong>, and only the FREE fraction is biologically active. The rank order 1→4 is angiotensin II → insulin → T3 → T4.</div>
+  </div>
+
+  <!-- ── GROUP C ── -->
+  <div class="sec" style="margin-top:28px">Group C · Receptor Classification &amp; Signaling (LO 6)</div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q6 — LO 6 · Nuclear Receptor Binding — BRS Physio Ch 27 Q1</div>
+    <div class="vig-stem"><strong>Which of the following hormones initiates its actions at target tissues by binding to nuclear receptors?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Adrenocorticotropic hormone (ACTH)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Vasopressin</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Epinephrine</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Insulin-like growth factor-1</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">E</span>Thyroid hormone</div>
+    </div>
+    <div class="vig-exp"><strong>E — Thyroid hormone.</strong> Per LO 6: receptor classification is by <span class="vig-buzzword">subcellular location</span>. <strong>Thyroid hormone, steroid hormones, and vitamin D</strong> are lipophilic → diffuse across the plasma membrane → bind <span class="vig-buzzword">nuclear receptors</span> (some pre-bound to DNA, some cytoplasmic/HSP90-bound) → act as transcription factors. ACTH (A, peptide) and vasopressin (B, peptide) bind membrane GPCRs. Epinephrine (C) binds α/β-adrenergic GPCRs. IGF-1 (D) binds a membrane receptor tyrosine kinase. This is the canonical "lipid-soluble → nuclear / water-soluble → membrane" split.</div>
+  </div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q7 — LO 6 · Shared Receptor Strategy — BRS Biochem Q12</div>
+    <div class="vig-stem">Patients with both Graves disease and Cushing syndrome are overproducing hormones that have <strong>which one of the following in common?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Reacting with receptors in the cell membrane</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Utilizing second messengers (cAMP / IP3)</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Binding to intracellular receptors</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Binding RNA to produce physiologically active proteins</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Inducing rRNA to ablate target-gene expression</div>
+    </div>
+    <div class="vig-exp"><strong>C — Intracellular receptors.</strong> Graves = excess thyroid hormone; Cushing = excess cortisol. Both are <span class="vig-buzzword">lipophilic</span> → cross the plasma membrane → bind <strong>intracellular (cytoplasmic/nuclear) receptors</strong> → the hormone-receptor complex binds DNA hormone response elements to regulate transcription. Peptide hormones and catecholamines are the ones that use membrane receptors + second messengers (A, B). The HRE binds DNA, not RNA (D). rRNA does not ablate gene expression — microRNAs do (E). LO 6 at the clinical-overlap level.</div>
+  </div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q8 — LO 4/6 · Steroid Hormone Properties Table — BRS Biochem Q31</div>
+    <div class="vig-stem">A 69-year-old man has been feeling lethargic, and at his yearly physical exam had his testosterone levels determined. The blood work came back with a value of 168 ng/dL (normal 250-800). He agrees to biweekly testosterone injections. <strong>Which row best represents the properties of testosterone in this patient?</strong>
+    <br><br>
+    <span style="display:block;font-family:'Source Sans 3',monospace;background:#F4F3EF;padding:10px 12px;border-radius:4px;font-size:.82em;line-height:1.7;overflow-x:auto">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Precursor to&nbsp;&nbsp;&nbsp;Receptor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Estradiol is&nbsp;&nbsp;Represses GC&nbsp;&nbsp;Stimulates<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;active androgen?&nbsp;location&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;precursor?&nbsp;&nbsp;&nbsp;synthesis?&nbsp;&nbsp;&nbsp;GnRH release?<br>
+    A.&nbsp;&nbsp;&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cytoplasm&nbsp;&nbsp;&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No<br>
+    B.&nbsp;&nbsp;&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nucleus&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes<br>
+    C.&nbsp;&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nucleus&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes<br>
+    D.&nbsp;&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cytoplasm&nbsp;&nbsp;&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes<br>
+    E.&nbsp;&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nucleus&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No
+    </span></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Row A</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Row B</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Row C</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Row D</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">E</span>Row E</div>
+    </div>
+    <div class="vig-exp"><strong>E.</strong> Testosterone is reduced to <span class="vig-buzzword">DHT (dihydrotestosterone)</span>, the more active androgen (→ "Yes"). As a steroid, it binds an <span class="vig-buzzword">intracellular/nuclear receptor</span> (→ "Nucleus"); the hormone-receptor complex acts as a transcription factor. Testosterone is a PRECURSOR of estradiol (via aromatase) — NOT the other way around (→ "No"). It does not repress glucocorticoid synthesis (→ "No"). Negative feedback: testosterone INHIBITS GnRH release, so "Stimulates GnRH" is "No". LO 4 (steroid precursor relationships) + LO 6 (intracellular receptor location) jointly.</div>
+  </div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q9 — LO 6 · Thyroid Hormone Mechanism — Waite &amp; Sheakley Q33</div>
+    <div class="vig-stem">A patient with hypothyroidism is prescribed a synthetic thyroxine analogue, 50 µg orally each day. He reads about the multiple functions of this drug and wants to understand the mechanism of action. <strong>To which of the following does the drug bind, in order to activate its cellular mechanism of action?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">A</span>Nuclear thyroid hormone receptors in order to regulate DNA transcription</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Iodine in order to be transported across cell membranes</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Plasma membrane receptors in order to activate secondary messengers</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Retinoid X nuclear receptors in order to bind iodine</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>RNA polymerase in order to bind to nuclear receptors</div>
+    </div>
+    <div class="vig-exp"><strong>A.</strong> Thyroid hormones bind <span class="vig-buzzword">nuclear thyroid hormone receptors</span>. The hormone-receptor complex binds <strong>thyroid hormone response elements (TREs)</strong> on DNA of target cells → regulates transcription. The TH receptor often heterodimerizes with RXR (D is close but the purpose of RXR is NOT "to bind iodine" — iodine is already on the hormone). Thyroid hormones do not use plasma-membrane receptors or 2nd messengers (C). RNA polymerase (E) is recruited BY the hormone-receptor-HRE complex, not the target of the hormone. LO 6: receptor location drives mechanism.</div>
+  </div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q10 — LO 6 · RTK Signaling &amp; Cross-Reactivity — Waite &amp; Sheakley Q3</div>
+    <div class="vig-stem">A new long-acting insulin analogue is tested for potential carcinogenicity. As part of drug development, tests for abnormal cell growth must always be included, since an insulin analogue carries the risk of enhancing signaling of which of the following hormones?</div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Glucagon</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Insulin-like growth factor 1 (IGF-1)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Thyroid hormone</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Thyroid-stimulating hormone</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Thyrotropin-releasing hormone</div>
+    </div>
+    <div class="vig-exp"><strong>B — IGF-1.</strong> Insulin and IGF-1 both bind <span class="vig-buzzword">receptor tyrosine kinases (RTKs)</span> and their receptors share ~50% sequence identity with overlapping ligand specificity at high concentrations. A pharmacologic insulin analog may unintentionally over-activate IGF-1 mitogenic pathways (MAPK/ERK arm) → cell-proliferation / carcinogenicity risk. Glucagon (A) uses a GPCR (Gs → cAMP). Thyroid hormone (C) uses a NUCLEAR receptor regulating transcription. TSH (D) uses GPCR → cAMP; TRH (E) uses GPCR → IP3/DAG — none of those intersect with RTK signaling. Tests LO 6 receptor-class distinctions used clinically in drug design.</div>
+  </div>
+
+  <!-- ── GROUP D ── -->
+  <div class="sec" style="margin-top:28px">Group D · Cellular Sensitivity &amp; Response (LO 7)</div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q11 — LO 5/7 · What Regulates Hormone Action — BRS Physio Ch 27 Q2</div>
+    <div class="vig-stem"><strong>Hormonal actions are regulated by:</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Affinity of receptors for the hormone</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>The number of receptors for the hormone</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>The degree of binding of hormone to plasma proteins</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>The concentration of hormone in the blood</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">E</span>All of the above</div>
+    </div>
+    <div class="vig-exp"><strong>E — All of the above.</strong> This is the composite of LOs 5 and 7 in one stem. Cellular response is governed by: (1) <span class="vig-buzzword">receptor affinity</span>, (2) <span class="vig-buzzword">receptor number</span> (up/down-regulation = sensitivity regulation), (3) <span class="vig-buzzword">fraction of free hormone</span> (carrier-bound vs free — only free is bioactive), and (4) <span class="vig-buzzword">total circulating concentration</span>. Any single factor can shift the dose-response curve; together they determine EC50 and maximum response. The LO 7 shorthand: "Little hormone → lots of receptors; lots of hormone → lose receptors."</div>
+  </div>
+
+  <div class="vig-item" data-block="ext">
+    <div class="vig-num">Ext Q12 — LO 7 · Responsiveness vs Sensitivity — Waite &amp; Sheakley Q5</div>
+    <div class="vig-stem">An in vitro insulin dose-response curve was created from a patient with multiple endocrine neoplasia. Glucose in the form of [14C-U] 2-deoxyglucose was added to freshly isolated adipocytes, and glucose transport was quantified at increasing insulin concentrations. The patient's curve is <strong>shifted to the right compared to controls, but maximum glucose uptake is still reached at very high insulin levels</strong>. <strong>Which best describes the patient's insulin responsiveness and insulin sensitivity?</strong></div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Responsiveness ↓ · Sensitivity unchanged</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Responsiveness ↓ · Sensitivity ↑</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Responsiveness ↓ · Sensitivity ↓</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">D</span>Responsiveness unchanged · Sensitivity ↓</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Responsiveness unchanged · Sensitivity ↑</div>
+    </div>
+    <div class="vig-exp"><strong>D — Responsiveness unchanged; Sensitivity decreased.</strong> Key LO 7 vocabulary: <span class="vig-buzzword">Responsiveness = maximal effect</span> (plateau of the curve). <span class="vig-buzzword">Sensitivity = EC50</span> (concentration producing half-maximal effect). A <strong>rightward shift with preserved maximum</strong> = normal responsiveness but decreased sensitivity (↑ EC50). This typically reflects decreased receptor AFFINITY, fewer receptors at given dose, excess hormone degradation, or a competitive antagonist. If responsiveness were decreased, the curve would be FLATTENED (lower plateau) — which instead points to post-receptor signaling defects or a loss of target cells. Compare with the T2DM vignette in Block 3 Q4, which combines BOTH patterns.</div>
+  </div>
+
+</div>
+
 <!-- ══ SCORE REPORT ══════════════════════════════════════════════════════ -->
 <div class="tab-content" id="tab-score">
   <div class="sec">Performance Dashboard</div>
@@ -478,6 +700,11 @@ body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;backgrou
       <div class="score-card-num" id="sc-b3">— <span class="pct"></span></div>
       <div class="score-card-label">Block 3 — Regulation</div>
       <div class="score-bar-wrap"><div class="score-bar" id="bar-b3" style="width:0%"></div></div>
+    </div>
+    <div class="score-card">
+      <div class="score-card-num" id="sc-ext">— <span class="pct"></span></div>
+      <div class="score-card-label">3rd Party Bank</div>
+      <div class="score-bar-wrap"><div class="score-bar" id="bar-ext" style="width:0%"></div></div>
     </div>
   </div>
 
@@ -541,7 +768,7 @@ function updateGlobalScore(){
 
 // ── SCORE REPORT ──
 function updateScoreReport(){
-  var blocks={b1:{right:0,total:0,max:5},b2:{right:0,total:0,max:5},b3:{right:0,total:0,max:5}};
+  var blocks={b1:{right:0,total:0,max:5},b2:{right:0,total:0,max:5},b3:{right:0,total:0,max:5},ext:{right:0,total:0,max:12}};
   var totalRight=0,totalAnswered=0;
   for(var k in answers){
     var a=answers[k];
@@ -560,7 +787,7 @@ function updateScoreReport(){
     el.innerHTML=right+'/'+max+' <span class="pct">'+pct+'%</span>';
     bar.style.width=pct+'%';
   }
-  var totalMax=15;
+  var totalMax=27; // 15 exam items + 12 3rd-party items
   var totalPct=totalAnswered>0?Math.round((totalRight/totalMax)*100):0;
   var scTotal=document.getElementById('sc-total');
   var barTotal=document.getElementById('bar-total');
@@ -569,6 +796,7 @@ function updateScoreReport(){
   setCard('sc-b1','bar-b1',blocks.b1.right,blocks.b1.total,blocks.b1.max);
   setCard('sc-b2','bar-b2',blocks.b2.right,blocks.b2.total,blocks.b2.max);
   setCard('sc-b3','bar-b3',blocks.b3.right,blocks.b3.total,blocks.b3.max);
+  setCard('sc-ext','bar-ext',blocks.ext.right,blocks.ext.total,blocks.ext.max);
   var bd=document.getElementById('q-breakdown');
   if(totalAnswered===0){bd.innerHTML='<div class="exam-intro" style="text-align:center">Answer questions in the Exam Blocks to see your breakdown here.</div>';return;}
   var html='';
@@ -621,6 +849,7 @@ window.addEventListener('load',function(){
   initTimer('b1',450);
   initTimer('b2',450);
   initTimer('b3',450);
+  initTimer('ext',900);
 });
 </script>
 </body>
