@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HoyaDocs · Endo 02 · Hypothalamic-Pituitary Relationships I</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root{
     --navy:#1F3864; --blue:#2E75B6; --red:#C00000; --purple:#7030A0;
@@ -26,25 +29,26 @@
   /* ---------- Top bar / progress ---------- */
   header.topbar{
     position:sticky;top:0;z-index:50;
-    background:linear-gradient(90deg,var(--navy),#2E4A7A);
-    color:#fff;padding:10px 20px;border-bottom:3px solid var(--blue);
+    background:linear-gradient(90deg,#B8860B,#9B7A00);
+    color:#1F3864;padding:10px 20px;border-bottom:3px solid #6B4423;
     box-shadow:0 2px 8px rgba(0,0,0,0.1);
   }
-  .topbar-inner{max-width:1100px;margin:0 auto;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  .topbar-inner{max-width:100%;margin:0;display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:0 8px}
   .topbar h1{margin:0;font-size:16px;font-weight:700;letter-spacing:.3px}
   .topbar .brand{
     font-family:Georgia, "Times New Roman", serif;
-    font-size:20px;font-weight:700;color:#FFD54F;letter-spacing:.5px;
-    padding:2px 0;border-right:1px solid rgba(255,255,255,0.25);padding-right:16px;
+    font-size:20px;font-weight:700;color:#3E2723;letter-spacing:.5px;
+    padding:2px 0;border-right:1px solid rgba(62,39,35,0.35);padding-right:16px;
   }
-  .topbar .tag{background:rgba(255,255,255,0.18);padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600}
+  .brand-arrow{font-family:-apple-system,Arial,sans-serif;font-size:14px;margin-left:3px;color:#3E2723;opacity:.85;vertical-align:baseline}
+  .topbar .tag{background:rgba(255,255,255,0.85);color:#1F3864;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700}
   .progress-wrap{flex:1;min-width:200px}
-  .progress-track{height:8px;background:rgba(255,255,255,0.25);border-radius:4px;overflow:hidden}
-  .progress-fill{height:100%;background:#FFD54F;width:0%;transition:width .4s ease}
-  .progress-label{font-size:12px;margin-top:3px;opacity:.9}
+  .progress-track{height:8px;background:rgba(31,56,100,0.22);border-radius:4px;overflow:hidden;border:1px solid rgba(31,56,100,0.15)}
+  .progress-fill{height:100%;background:#1F3864;width:0%;transition:width .4s ease}
+  .progress-label{font-size:12px;margin-top:3px;color:#1F3864;font-weight:600}
 
   /* ---------- Layout ---------- */
-  .wrap{max-width:1100px;margin:0 auto;padding:24px 20px 80px;display:grid;grid-template-columns:220px 1fr;gap:28px;transition:grid-template-columns .25s ease}
+  .wrap{max-width:100%;margin:0;padding:24px 28px 80px;display:grid;grid-template-columns:220px 1fr;gap:28px;transition:grid-template-columns .25s ease}
   .wrap.sidebar-collapsed{grid-template-columns:44px 1fr;gap:16px}
   @media (max-width:900px){.wrap,.wrap.sidebar-collapsed{grid-template-columns:1fr}}
 
@@ -78,6 +82,7 @@
   .cover h1{font-size:36px;color:var(--navy);margin:8px 0 4px;line-height:1.15}
   .cover .how{background:#F9FAFB;border-left:5px solid var(--navy);border-radius:0 8px 8px 0;padding:14px 18px;margin-top:16px}
   .cover .how h3{margin:0 0 8px;color:var(--navy);font-size:16px}
+  .cover .how p,.cover .how ul,.cover .how ol,.cover .how li{font-size:13.5px;line-height:1.5;margin:6px 0}
   .cover .how.alt{border-left-color:var(--purple)}
   .cover .how.alt h3{color:var(--purple)}
   .how-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
@@ -109,9 +114,7 @@
   section.obj ul{margin:6px 0 12px 0;padding-left:22px}
   section.obj li{margin:4px 0}
 
-  .gist{
-    background:#F7F9FC;border-left:5px solid var(--blue);border-radius:0 8px 8px 0;padding:14px 18px;margin:10px 0 18px;font-size:15px;
-  }
+  .gist{background:#F7F9FC;border-left:5px solid var(--blue);border-radius:0 8px 8px 0;padding:14px 18px;margin:10px 0 18px;font-size:13.5px;line-height:1.5}
   .gist-label{color:var(--blue);font-weight:700;font-size:16px;letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:8px}
 
   /* Gist → Going Deeper preview */
@@ -233,6 +236,180 @@
     vertical-align:baseline;
   }
 
+  
+  .topbar-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-left:auto}
+  .btn-export{display:inline-flex;align-items:center;gap:6px;background:#1F3864;color:#fff;padding:6px 14px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.3px;text-decoration:none;border:none;cursor:pointer;transition:all .15s ease;box-shadow:0 1px 3px rgba(0,0,0,0.18);white-space:nowrap}
+  .btn-export:hover{background:#2E4A7A;transform:translateY(-1px);box-shadow:0 2px 6px rgba(0,0,0,0.25)}
+  .btn-export::before{content:"\2B07";font-weight:800;font-size:12px}
+  @media (max-width:900px){
+    .wrap{padding:20px 16px 60px}
+    .topbar .brand{padding-right:12px;border-right:1px solid rgba(255,255,255,0.25)}
+    .topbar h1{font-size:15px}
+    .progress-wrap{min-width:160px}
+  }
+  @media (max-width:700px){
+    header.topbar{padding:10px 12px}
+    .topbar-inner{gap:8px 10px}
+    .topbar .brand{font-size:18px;padding-right:10px}
+    .topbar .tag{font-size:11px;padding:2px 8px}
+    .topbar h1{font-size:13.5px;width:100%;order:2}
+    .progress-wrap{order:10;width:100%;flex:1 0 100%;min-width:0}
+    .progress-label{font-size:11px}
+    .topbar-actions{order:3;margin-left:auto}
+    .btn-export{font-size:11px;padding:5px 11px;gap:4px}
+    .btn-export::before{font-size:11px}
+    .wrap{padding:16px 12px 60px;gap:14px}
+    .cover{padding:18px;border-radius:10px}
+    .cover h1{font-size:24px;line-height:1.2}
+    .cover .how{padding:12px 14px}
+    .cover .how h3{font-size:14.5px}
+    .how-grid{gap:10px}
+    section.obj{padding:18px;border-radius:10px}
+    section.obj h2{font-size:19px;gap:8px}
+    section.obj h2 .num{width:28px;height:28px;font-size:13px}
+    section.obj h3{font-size:15.5px;margin:18px 0 6px}
+    section.obj h4{font-size:14px}
+    section.obj p,section.obj li{font-size:14px}
+    .gist{padding:12px 14px;font-size:14px}
+    .gist-label{font-size:13.5px;letter-spacing:.5px}
+    .gist-deeper{font-size:13px}
+    .callout{padding:12px 14px;margin:12px 0}
+    .callout .ctitle{font-size:14px;letter-spacing:.3px}
+    .callout p,.callout ul li,.callout ol li{font-size:13.5px}
+    .deep-dive{padding:12px 12px 8px 14px;margin:14px 0}
+    .deep-dive .dd-title{font-size:13.5px;letter-spacing:.5px}
+    .deep-dive h4{font-size:13.5px;padding:5px 6px}
+    .deep-dive > ul > li,.deep-dive ul:not(.sublist) > li{font-size:12.5px}
+    .deep-dive .sublist li{font-size:12px}
+    .deep-dive .group-label{font-size:12.5px}
+    table{font-size:12.5px}
+    thead th,tbody td{padding:7px 9px}
+    .pathway{font-size:12px;padding:10px;gap:4px}
+    .pathway .step{padding:5px 7px;font-size:12px}
+    .pathway .arrow{margin:0 3px;font-size:14px}
+    .pathway .enz{font-size:10px}
+    .roadmap a{font-size:13px;padding:9px 12px;gap:8px}
+    .roadmap .num{width:22px;height:22px;font-size:11px}
+    .quiz-item{padding:12px 14px}
+    .quiz-item .qn,.quiz-item{font-size:13.5px}
+    .quiz-item button.show{font-size:12px;padding:5px 11px}
+    .mark-done{font-size:12px;padding:5px 11px}
+    .flashcard .q{padding:10px 12px;font-size:13.5px;gap:8px}
+    .flashcard.open .a{padding:10px 12px}
+    .flashcard .a span,.flashcard .a{font-size:13.5px}
+    nav.sidebar{padding:12px;background:#F7F9FC;border:1px solid var(--border);border-radius:10px;margin-bottom:4px;max-height:none}
+    nav.sidebar .sidebar-toggle{display:none}
+    nav.sidebar a{padding:6px 10px;font-size:13px;margin:1px 0}
+    nav.sidebar .controls{margin-top:8px}
+    nav.sidebar .controls .btn-reset{font-size:11px}
+    .src-pill{font-size:10px;padding:1px 6px}
+    .cite{font-size:10px;padding:1px 5px;margin-left:2px}
+    #references p,#references ul li,#references .ref-list li{font-size:13.5px}
+    #audit p,#audit li{font-size:13.5px}
+    #audit .legend{padding:10px 12px}
+    .obj-header{gap:8px}
+  }
+  @media (max-width:420px){
+    .cover h1{font-size:21px}
+    section.obj h2{font-size:17.5px}
+    .topbar .brand{font-size:17px}
+    .pathway{font-size:11.5px}
+  }
+
+  
+  /* Back-to-Lectures button */
+  .btn-back{display:inline-flex;align-items:center;gap:4px;background:rgba(31,56,100,0.15);color:#1F3864;padding:5px 11px;border-radius:999px;font-size:12px;font-weight:700;text-decoration:none;border:1px solid rgba(31,56,100,0.22);transition:all .15s ease;white-space:nowrap}
+  .btn-back:hover{background:rgba(31,56,100,0.28);transform:translateY(-1px);box-shadow:0 1px 3px rgba(0,0,0,0.15)}
+  /* Compact progress bar pinned to the right with a gap after the title */
+  .progress-wrap.compact{flex:none;min-width:180px;max-width:220px;margin-left:auto}
+  .progress-wrap.compact .progress-label{text-align:right}
+  /* Cover "How to use" collapsible cards */
+  .cover .how h3.how-title{cursor:pointer;user-select:none;display:flex;align-items:center;gap:8px;padding:4px 0;margin:0 0 8px}
+  .cover .how h3.how-title::after{content:"\25BC";font-size:12px;color:var(--navy);margin-left:auto;transition:transform .2s ease}
+  .cover .how.alt h3.how-title::after{color:var(--purple)}
+  .cover .how.collapsed h3.how-title{margin-bottom:0}
+  .cover .how.collapsed h3.how-title::after{content:"\25B6"}
+  .cover .how.collapsed .how-body{display:none}
+  /* Source Audit per-objective collapsible */
+  .audit-obj{margin:10px 0;border:1px solid var(--border);border-radius:8px;background:#fff;overflow:hidden}
+  .audit-obj .audit-head{margin:0;padding:10px 14px;cursor:pointer;font-size:14.5px;font-weight:700;color:var(--navy);background:#F7F9FC;display:flex;align-items:center;gap:8px;user-select:none;border:none}
+  .audit-obj .audit-head::after{content:"\25BC";margin-left:auto;font-size:12px;color:var(--muted);transition:transform .2s ease}
+  .audit-obj.collapsed .audit-head::after{content:"\25B6"}
+  .audit-obj.collapsed .audit-body{display:none}
+  .audit-obj .audit-body{padding:10px 14px 14px}
+  #references .audit-block{margin-top:18px}
+  #references .audit-block .legend{background:#F7F9FC;border-left:4px solid var(--navy);padding:12px 16px;border-radius:0 6px 6px 0;margin:10px 0 16px}
+  #references .audit-block .legend ul{margin:6px 0 0 0;padding-left:22px}
+
+  
+  /* Right-anchored topbar cluster: progress + export + back */
+  .topbar-right{display:flex;gap:10px;align-items:center;margin-left:auto;flex-wrap:wrap;justify-content:flex-end}
+  .topbar-right .progress-wrap.compact{margin-left:0}
+  .topbar-right .topbar-actions{margin-left:0}
+  /* 3-column callout row (HY / MN / CL) on wide viewports; stack below */
+  .callout-trio{display:grid;grid-template-columns:1fr;gap:14px;margin:14px 0}
+  .callout-trio .callout{margin:0;align-self:stretch}
+  @media (min-width:1100px){
+    .callout-trio{grid-template-columns:repeat(3,minmax(0,1fr))}
+  }
+
+  
+  /* ---------- Hub-style topnav (matches active-recall-hub.html) ---------- */
+  .topnav{width:100%;background:#2e2405;position:sticky;top:0;left:0;z-index:400;display:flex;align-items:center;padding:0 20px;height:52px;gap:0;border-bottom:1px solid rgba(255,255,255,0.06);flex-shrink:0;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  .tn-brand{display:flex;flex-direction:column;justify-content:center;margin-right:28px;flex-shrink:0;gap:1px}
+  .tn-name{font-size:1.4rem;font-weight:900;color:#fff;letter-spacing:-0.01em;text-decoration:none;text-shadow:0 1px 8px rgba(0,0,0,0.25)}
+  .tn-name:hover{color:rgba(255,255,255,0.80)}
+  .tn-nav{display:flex;align-items:center;gap:5px;flex:1;justify-content:flex-end;flex-wrap:wrap}
+  .tn-link{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:7px;font-size:0.80rem;font-weight:600;color:rgba(255,255,255,0.70);border:1px solid rgba(255,255,255,0.12);transition:background 0.13s, color 0.13s, border-color 0.13s;white-space:nowrap;text-decoration:none}
+  .tn-link:hover{background:rgba(255,255,255,0.08);color:#fff;border-color:rgba(255,255,255,0.26)}
+  .tn-link.active{background:rgba(255,255,255,0.14);color:#fff;border-color:rgba(255,255,255,0.32)}
+  .tn-link-export{background:rgba(234,179,8,0.18);border-color:rgba(234,179,8,0.38);color:#FFD54F}
+  .tn-link-export:hover{background:rgba(234,179,8,0.30);color:#fff;border-color:rgba(234,179,8,0.60)}
+  .tn-right{flex-shrink:0;display:flex;align-items:center;gap:8px;margin-left:12px}
+  .dark-toggle{width:32px;height:32px;border-radius:7px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);display:flex;align-items:center;justify-content:center;font-size:0.85rem;color:rgba(255,255,255,0.85);flex-shrink:0;transition:background 0.14s;cursor:pointer}
+  .dark-toggle:hover{background:rgba(255,255,255,0.18)}
+  @media (max-width:900px){
+    .topnav{padding:0 12px}
+    .tn-brand{margin-right:14px}
+    .tn-name{font-size:1.15rem}
+    .tn-link{padding:5px 9px;font-size:0.72rem}
+  }
+  @media (max-width:640px){
+    .tn-link:not(.tn-link-export){display:none}
+  }
+  /* ---------- Cover progress bar (replaces the old in-topbar one) -------- */
+  .cover-progress{margin:22px 0 10px;display:flex;align-items:center;gap:14px;background:#F7F9FC;border:1px solid #E5E7EB;border-radius:10px;padding:12px 16px}
+  .cover-progress .progress-label{font-size:13px;color:var(--navy);font-weight:700;white-space:nowrap;margin:0;letter-spacing:.2px}
+  .cover-progress .progress-track{flex:1;height:10px;background:#E5E7EB;border-radius:5px;overflow:hidden;border:1px solid #D4D8E0}
+  .cover-progress .progress-fill{height:100%;background:linear-gradient(90deg,#CA8A04,#EAB308);border-radius:5px;width:0%;transition:width .4s ease}
+  @media (max-width:700px){
+    .cover-progress{padding:10px 12px;gap:10px}
+    .cover-progress .progress-label{font-size:12px}
+  }
+  /* ---------- Minimal dark-mode override -------------------------------- */
+  [data-theme="dark"]{color-scheme:dark}
+  [data-theme="dark"] body{background:#151A1F;color:#E5E7EB}
+  [data-theme="dark"] .cover,[data-theme="dark"] section.obj,[data-theme="dark"] #references,[data-theme="dark"] .audit-obj,[data-theme="dark"] .quiz-item,[data-theme="dark"] .flashcard{background:#1F2937;border-color:#374151;color:#E5E7EB}
+  [data-theme="dark"] .cover h1{color:#FCD34D}
+  [data-theme="dark"] section.obj h2,[data-theme="dark"] section.obj h3{color:#93C5FD}
+  [data-theme="dark"] .gist{background:#111827;color:#E5E7EB;border-left-color:#60A5FA}
+  [data-theme="dark"] .deep-dive{background:#111827;border-color:#374151}
+  [data-theme="dark"] .deep-dive h4{color:#E5E7EB}
+  [data-theme="dark"] nav.sidebar a{color:#CBD5E1}
+  [data-theme="dark"] nav.sidebar a:hover{background:#374151;color:#fff}
+  [data-theme="dark"] nav.sidebar a.active{background:#0B1220;color:#FCD34D;border-left-color:#FCD34D}
+  [data-theme="dark"] .sidebar-toggle{background:#253040;color:#E5E7EB;border-color:#374151}
+  [data-theme="dark"] tbody td{background:#1F2937;border-color:#374151;color:#E5E7EB}
+  [data-theme="dark"] tbody tr:nth-child(even) td{background:#253040}
+  [data-theme="dark"] tbody tr:hover td{background:#2C3644}
+  [data-theme="dark"] thead th{background:#0F172A}
+  [data-theme="dark"] .audit-obj .audit-head{background:#111827;color:#E5E7EB}
+  [data-theme="dark"] #references .audit-block .legend{background:#111827;color:#E5E7EB}
+  [data-theme="dark"] .cover-progress{background:#1F2937;border-color:#374151}
+  [data-theme="dark"] .cover-progress .progress-label{color:#FCD34D}
+  [data-theme="dark"] .cover-progress .progress-track{background:#0F172A;border-color:#374151}
+  [data-theme="dark"] .how.alt h3.how-title,[data-theme="dark"] .cover .how h3{color:#93C5FD}
+
   @media print {
     header.topbar,nav.sidebar,.mark-done,.controls{display:none}
     .wrap{grid-template-columns:1fr;padding:10px}
@@ -247,15 +424,18 @@
 </head>
 <body>
 
-<header class="topbar">
-  <div class="topbar-inner">
-    <span class="brand">HoyaDocs</span>
-    <span class="tag">ENDO · 02</span>
-    <h1>Hypothalamic-Pituitary Relationships I</h1>
-    <div class="progress-wrap">
-      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-      <div class="progress-label" id="progressLabel">0 / 6 objectives complete</div>
-    </div>
+<header class="topnav">
+  <div class="tn-brand">
+    <a class="tn-name" href="https://hoyadocs.com/Block4-Endocrine/index.html">HoyaDocs ↗</a>
+  </div>
+  <nav class="tn-nav">
+    <a class="tn-link" href="https://hoyadocs.com/Block4-Endocrine/lecture-guides/index.html">📖 Lecture Guides</a>
+    <a class="tn-link" href="https://hoyadocs.com/Block4-Endocrine/resource-mapping/endocrine_resource_hub.html">🔗 Lecture Resources</a>
+    <a class="tn-link" href="https://hoyadocs.com/Block4-Endocrine/resource-mapping/endocrine_mapping.html">🗂 3rd Party Mapping</a>
+    <a class="tn-link tn-link-export" href="end02-lg-word.docx" download title="Download Word (.docx) version">⬇ Export to Word</a>
+  </nav>
+  <div class="tn-right">
+    <button class="dark-toggle" id="darkToggle" onclick="toggleDark()" title="Toggle dark mode">🌙</button>
   </div>
 </header>
 
@@ -274,7 +454,6 @@
     <a href="#cheatsheet">Cheat Sheet</a>
     <a href="#quiz">Self-Quiz</a>
     <a href="#references">References</a>
-    <a href="#audit">Source Audit</a>
     <div class="controls" style="margin-top:14px;flex-direction:column;align-items:stretch">
       <button class="btn-reset" onclick="toggleAllDeepDives(true)">Collapse all sub-sections</button>
       <button class="btn-reset" onclick="toggleAllDeepDives(false)">Expand all sub-sections</button>
@@ -288,8 +467,9 @@
       <h1>Endocrine Module 02: Hypothalamic-Pituitary Relationships (Part 1)</h1>
 
       <div class="how-grid">
-        <div class="how">
-          <h3>How to use this guide (60 seconds)</h3>
+        <div class="how collapsed">
+          <h3 class="how-title">How to use this guide</h3>
+          <div class="how-body">
           <p>Each objective follows the same pattern:</p>
           <ul>
             <li><b>Gist</b> (one paragraph) — the big idea</li>
@@ -297,21 +477,46 @@
             <li><b>Yellow ★ High-Yield</b>, <b>green 🧠 Memory Trick</b>, <b>orange 🏥 Clinical Pearl</b></li>
             <li><b>Blue ✏️ Active Recall</b> — click each question to reveal the answer</li>
             <li><b>Mark Done</b> on each objective; the bar at the top tracks you</li>
-          </ul>
-          <p style="margin-top:8px"><b style="color:var(--red)">Rule:</b> don't just read. Before you click to reveal, say the answer out loud. If you can't, reread the section.</p>
+          </ul></div>
         </div>
 
-        <div class="how alt">
-          <h3>How to use this guide with other resources</h3>
-          <ul>
-            <li>Early in study: <b>read this guide → watch the corresponding B&amp;B videos → review First Aid</b> section. Three modalities = better retention.</li>
-            <li>For pharmacology (leuprolide, bromocriptine, desmopressin, dexamethasone test): cross-reference <b>Lippincott Pharm</b>.</li>
-            <li>For pathology (pituitary adenomas, Cushing, Addison, Sheehan): watch <b>Pathoma ch 15</b>.</li>
-            <li>Finish with <b>UWorld Qbank</b> questions tagged "hypothalamus," "pituitary," "HPA axis," "HPT axis."</li>
-          </ul>
+        <div class="how alt collapsed">
+          <h3 class="how-title">How to use this guide with other resources</h3>
+          <div class="how-body">
+            <ul>
+              <li>Read this guide → watch the corresponding 3rd-party video / in-house lecture → fill in the recall sheets → complete self-quiz
+                <ul class="sublist">
+                  <li><b>Spaced repetition options:</b>
+                    <ul>
+                      <li>Anki</li>
+                      <li>Drill Hubs #1, #2, and #3</li>
+                    </ul>
+                  </li>
+                  <li><b>Formative Feedback options:</b>
+                    <ul>
+                      <li>Canvas provided material</li>
+                      <li>UWorld mapped QID</li>
+                      <li>HoyaDocs Question Bank</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>Link to:
+                <ul class="sublist">
+                  <li><a href="https://hoyadocs.com/Block4-Endocrine/resource-mapping/index.html">Resource Mapping hub</a></li>
+                  <li><a href="https://hoyadocs.com/Block4-Endocrine/resource-explorer/index.html">Resource Explorer</a></li>
+                  <li><a href="https://hoyadocs.com/Block4-Endocrine/active-recall-drills/index.html">Active Recall Drills Hub</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
+      <div class="cover-progress">
+        <span class="progress-label" id="progressLabel">0 / 6 objectives complete</span>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
       <h3 style="margin-top:22px;color:var(--navy);font-size:16px">Jump to any objective:</h3>
       <div class="roadmap">
         <a href="#obj1"><span class="num">1</span><span>Describe the anatomical connections between the hypothalamus and pituitary gland, and explain the functional interactions between them</span></a>
@@ -532,7 +737,8 @@
         </ul>
       </div>
 
-      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+      <div class="callout-trio">
+        <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
         <ul>
           <li><b>Pituitary mass → bitemporal hemianopsia</b> (optic chiasm compression; crossing fibers from nasal retinas). <span class="cite">FA 2.01 Pituitary gland; B&amp;B 5.01</span></li>
           <li><b>Sheehan syndrome:</b> postpartum hypopituitarism from pituitary infarction. First and most common sign is <b>failure to lactate</b> (PRL). <span class="cite">AI Generated · see end08</span></li>
@@ -541,21 +747,20 @@
           <li><b>Empty sella syndrome:</b> CSF herniation into sella flattens the pituitary (often asymptomatic, imaging finding). <span class="cite">AI Generated · see end08</span></li>
         </ul>
       </div>
-
-      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
         <p><b>"Sella = Saddle"</b> — the Turkish saddle of the sphenoid holds the pituitary.</p>
         <p><b>"Two pipelines":</b> portal carries <i>peptides</i> (releasing/inhibiting hormones) to anterior; <i>axons</i> carry ADH/oxytocin to posterior.</p>
         <p><b>"Anterior toward chiasm":</b> on a sagittal diagram, anterior pituitary is the side closer to the optic chiasm.</p>
         <p><b>"Stalk cut, prolactin up":</b> remember the dopamine exception.</p>
       </div>
-
-      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
         <ul>
           <li>Classic Sheehan presentation: postpartum woman, failure to lactate, amenorrhea, fatigue, hypotension, cold intolerance. <span class="cite">AI Generated · see end08</span></li>
           <li>Pituitary adenoma workup: prolactin, IGF-1, TSH/fT4, AM cortisol + ACTH, FSH/LH + sex steroids, MRI with contrast. <span class="cite">FA 2.01 Pituitary gland; B&amp;B 5.01</span></li>
           <li>Craniopharyngioma: suprasellar calcified mass in children (Rathke's pouch remnant) — can cause bitemporal hemianopsia AND endocrine dysfunction. <span class="cite">Bootcamp 3.01 Pituitary Embryology</span></li>
           <li>Bitemporal hemianopsia: spares central vision; the classic "tunnel vision" of pituitary disease. <span class="cite">FA 2.01; B&amp;B 5.01</span></li>
         </ul>
+      </div>
       </div>
 
       <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL — click each question to reveal</div>
@@ -812,7 +1017,8 @@
         </ul>
       </div>
 
-      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+      <div class="callout-trio">
+        <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
         <ul>
           <li><b>Dopamine = PIH</b> and the only non-peptide hypothalamic hormone. Everything else is a peptide. <span class="cite">end02 lecture</span></li>
           <li><b>TRH stimulates BOTH TSH and PRL</b> — primary hypothyroidism can cause galactorrhea. <span class="cite">FA 3.04 Prolactin; HPT clinical in end10/11</span></li>
@@ -822,16 +1028,14 @@
           <li><b>SON = ADH-dominant; PVN = oxytocin-dominant</b> — but both produce both. <span class="cite">end02 lecture</span></li>
         </ul>
       </div>
-
-      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
         <p><b>"SOS — Supraoptic Sends ADH."</b> (Aqua → ADH)</p>
         <p><b>"PVN plays with Party hormones":</b> Paraventricular = oxytocin + ADH + CRH + TRH.</p>
         <p><b>"Arcuate = A.D. + GHRH"</b> (dopamine, i.e., PIH, and GHRH).</p>
         <p><b>"Dopamine is the Black Sheep"</b> — the only monoamine in the hypothalamic cast.</p>
         <p><b>GnRH timing:</b> "Pulse to play, steady to sedate" — pulsatile drives; continuous suppresses.</p>
       </div>
-
-      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
         <ul>
           <li><b>Antipsychotics / metoclopramide</b> → D2 blockade → hyperprolactinemia → galactorrhea, amenorrhea. <span class="cite">FA 3.04 Prolactin</span></li>
           <li><b>Prolactinoma:</b> treat with dopamine AGONISTS (bromocriptine, cabergoline). Surgery only if refractory. <span class="cite">FA 3.04 Prolactin</span></li>
@@ -839,6 +1043,7 @@
           <li><b>Kallmann syndrome:</b> primary amenorrhea + anosmia; low GnRH, low LH/FSH, low estradiol. <span class="cite">AI Generated · see end05/repro</span></li>
           <li><b>Primary hypothyroidism → ↑TRH → ↑TSH + ↑PRL</b> → can present with galactorrhea + constipation + cold intolerance. <span class="cite">FA 3.04 Prolactin; HPT clinical in end10/11</span></li>
         </ul>
+      </div>
       </div>
 
       <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL — click each question to reveal</div>
@@ -1087,7 +1292,8 @@
         </ul>
       </div>
 
-      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+      <div class="callout-trio">
+        <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
         <ul>
           <li><b>Basophils = B-FLAT</b>: FSH, LH, ACTH, TSH (all "tropic" hormones). <span class="cite">end02 lecture</span></li>
           <li><b>Acidophils = GPA</b> (GH + PRL are Acidophilic). <span class="cite">end02 lecture</span></li>
@@ -1097,22 +1303,21 @@
           <li><b>Gigantism (pre-closure) vs. acromegaly (post-closure)</b> from GH-secreting somatotrope adenomas. <span class="cite">Bootcamp 3.04; FA 3.02 GH</span></li>
         </ul>
       </div>
-
-      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
         <p><b>B-FLAT</b> → Basophils make FSH, LH, ACTH, TSH.</p>
         <p><b>"Acidophils get GPA"</b> → GH + PRL.</p>
         <p><b>"Rathke's Remnant = cRanioCalcifications"</b> — craniopharyngioma has calcifications.</p>
         <p><b>"Addison's = Addition of pigment"</b> — MSH goes up alongside ACTH when cortisol is low.</p>
         <p><b>"Herring Bodies Hoard Hormones"</b> — posterior pituitary axon swellings stockpile ADH/oxytocin.</p>
       </div>
-
-      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
         <ul>
           <li>Suspect prolactinoma with: galactorrhea, amenorrhea, infertility, bitemporal hemianopsia. Check prolactin → MRI. <span class="cite">FA 3.04 Prolactin; Bootcamp 3.02</span></li>
           <li>Acromegaly: enlarged jaw (prognathism), hands (ring/glove size up), feet (shoe size up), coarse facial features, skin tags, carpal tunnel syndrome, DM, cardiomegaly. <span class="cite">Bootcamp 3.04; FA 3.02 GH</span></li>
           <li>Cushing disease workup: elevated midnight salivary cortisol, elevated 24-hr urinary free cortisol, failure of low-dose dexamethasone suppression; high-dose dex does suppress (pituitary origin). <span class="cite">AI Generated · see end19/20/21</span></li>
           <li>Craniopharyngioma in a child with growth failure + bitemporal hemianopsia + calcified suprasellar mass on imaging — classic. <span class="cite">Bootcamp 3.01 Pituitary Embryology</span></li>
         </ul>
+      </div>
       </div>
 
       <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL — click each question to reveal</div>
@@ -1430,7 +1635,8 @@
         </ul>
       </div>
 
-      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+      <div class="callout-trio">
+        <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
         <ul>
           <li><b>FLAT PiG</b>: anterior pituitary hormones — FSH, LH, ACTH, TSH, Prolactin, GH. <span class="cite">end02 lecture</span></li>
           <li><b>Basophils</b> make FLAT (tropic). <b>Acidophils</b> make PiG (direct). <span class="cite">end02 lecture</span></li>
@@ -1440,16 +1646,14 @@
           <li><b>Mid-cycle estradiol switch to positive feedback → LH surge → ovulation.</b> <span class="cite">end02 lecture</span></li>
         </ul>
       </div>
-
-      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
         <p><b>FLAT PiG</b> lists the six anterior pituitary hormones (FSH, LH, ACTH, TSH, PRL, GH).</p>
         <p><b>"GH is the Gains Hormone"</b> — acromegaly = big hands, big feet, big jaw.</p>
         <p><b>"Oxytocin Outs the baby, Outs the milk, Outs the love"</b> — labor, lactation, bonding.</p>
         <p><b>"ADH = Aqua Deficit Helper"</b> — saves water.</p>
         <p><b>"Acromegaly: change shoes, change rings, change jaw."</b></p>
       </div>
-
-      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
         <ul>
           <li>Acromegaly triad: increased shoe/ring/hat size + facial coarsening + joint pain. Labs: ↑ IGF-1, failure of GH suppression on OGTT. <span class="cite">Bootcamp 3.04; FA 3.02 GH</span></li>
           <li>Prolactinoma: galactorrhea, amenorrhea, infertility, decreased libido, bitemporal hemianopsia if large. Treat with cabergoline. <span class="cite">FA 3.04 Prolactin</span></li>
@@ -1457,6 +1661,7 @@
           <li>SIADH: hyponatremia with inappropriately concentrated urine; fluid restriction, tolvaptan (V2 antagonist), demeclocycline. <span class="cite">AI Generated · see end07</span></li>
           <li>Sheehan's first sign: failure to lactate (low PRL from ischemic lactotropes). <span class="cite">AI Generated · see end08</span></li>
         </ul>
+      </div>
       </div>
 
       <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL — click each question to reveal</div>
@@ -1676,7 +1881,8 @@
         </ul>
       </div>
 
-      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+      <div class="callout-trio">
+        <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
         <ul>
           <li><b>Pulsatility matters.</b> Continuous GnRH desensitizes gonadotropes — this is why leuprolide causes chemical castration. <span class="cite">end02 concept; leuprolide AI Generated · see end13</span></li>
           <li><b>Most feedback is negative.</b> Main positive-feedback examples: estradiol → LH surge; oxytocin in labor and lactation. <span class="cite">end02 lecture</span></li>
@@ -1685,15 +1891,13 @@
           <li><b>Surreptitious thyroid hormone use</b> → suppressed TSH, elevated T4 → no goiter (distinguishing from Graves). <span class="cite">AI Generated · see end10/13</span></li>
         </ul>
       </div>
-
-      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
         <p><b>"Ultra-Short-Long"</b> = hypothalamus / pituitary / target-organ feedback.</p>
         <p><b>"Negative normally, Positive for Ovulation and Parturition"</b> — the two big positive loops.</p>
         <p><b>"Pulse or Suppress"</b> — for GnRH therapy, pulsatile stimulates, continuous suppresses.</p>
         <p><b>"Cortisol morning peak = CORTisol-PEAKs-when-you-wake"</b>.</p>
       </div>
-
-      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
         <ul>
           <li>A patient on chronic steroids cannot be abruptly stopped — taper to allow HPA axis recovery. <span class="cite">AI Generated · see end21</span></li>
           <li>Leuprolide + flutamide combination is used in metastatic prostate cancer (blocks both pituitary drive and peripheral androgen receptor). <span class="cite">AI Generated · oncology/repro pharm</span></li>
@@ -1701,6 +1905,7 @@
           <li>Oxytocin (Pitocin) is given to induce/augment labor — therapeutic use of positive feedback. <span class="cite">AI Generated · obstetrics</span></li>
           <li>Kallmann patients can be treated with pulsatile GnRH (infertility) or testosterone replacement (virilization). <span class="cite">AI Generated · see end05/repro</span></li>
         </ul>
+      </div>
       </div>
 
       <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL — click each question to reveal</div>
@@ -1988,7 +2193,8 @@
         </ul>
       </div>
 
-      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+      <div class="callout-trio">
+        <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
         <ul>
           <li><b>Primary = gland failure; secondary = pituitary; tertiary = hypothalamus.</b> Know all 6 permutations for every axis. <span class="cite">end02 lecture (LO 6)</span></li>
           <li><b>Hyperpigmentation = primary adrenal insufficiency</b> (↑ POMC → ↑ MSH alongside ↑ ACTH). <span class="cite">AI Generated · POMC in end02; Addison clinical end20/21</span></li>
@@ -1998,15 +2204,13 @@
           <li><b>Klinefelter (primary hypogonadism)</b>: ↑ LH/FSH + ↓ testosterone + ↑ estradiol (from aromatase) → tall stature, gynecomastia, small firm testes. <span class="cite">AI Generated · see end05/repro</span></li>
         </ul>
       </div>
-
-      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
         <p><b>"PST ladder":</b> Primary (gland), Secondary (pituitary), Tertiary (top — hypothalamus).</p>
         <p><b>Rule of thumb:</b> "If it's broken upstream, everything downstream falls. If it's broken at the output, upstream rises."</p>
         <p><b>"Pigmentation = Primary"</b> for adrenal insufficiency — memorize this one.</p>
         <p><b>"Dex fails? Think Ectopic."</b> High-dose dexamethasone failing to suppress → ectopic ACTH (small cell lung).</p>
       </div>
-
-      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
         <ul>
           <li>Workup for hyperthyroidism: check TSH first. Low TSH → measure free T4 → Graves, toxic adenoma, etc. Normal/high TSH with high T4 → TSHoma. <span class="cite">AI Generated · see end10/11; TSHoma end08</span></li>
           <li>Workup for hypothyroidism: TSH first. High → primary (Hashimoto). Low/normal with low T4 → central hypothyroidism → MRI pituitary. <span class="cite">AI Generated · see end10/11</span></li>
@@ -2014,6 +2218,7 @@
           <li>Primary vs. secondary adrenal insufficiency: ACTH level + cosyntropin test + electrolytes (primary has hyponatremia/hyperkalemia, secondary usually has intact aldosterone). <span class="cite">AI Generated · see end20/21</span></li>
           <li>Patient on long-term prednisone undergoes surgery → give stress-dose steroids to prevent Addisonian crisis. <span class="cite">AI Generated · see end21</span></li>
         </ul>
+      </div>
       </div>
 
       <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL — click each question to reveal</div>
@@ -2089,11 +2294,9 @@
         <li><b>UWorld USMLE Step 1 Qbank</b>. Referenced for clinical workup sequences (Cushing, hypothyroidism, prolactinoma).</li>
       </ol>
 
-    </section>
-
-<!-- ============ SOURCE AUDIT ============ -->
-    <section class="obj" id="audit">
-      <h2><span class="num" style="background:var(--orange)">⚠</span>Clinical Correlation &amp; Drug Source Audit</h2>
+    
+      <div class="audit-block" id="audit">
+      <h3>Clinical Correlation &amp; Drug Source Audit</h3>
       <div class="legend">
         <b>Source legend</b>
         <ul>
@@ -2108,9 +2311,9 @@
           </li>
         </ul>
       </div>
-
-      <h3>Objective 1 — Anatomy</h3>
-      <div class="tbl-wrap"><table>
+      <div class="audit-obj collapsed">
+        <h4 class="audit-head">Objective 1 — Anatomy</h4>
+        <div class="audit-body"><div class="tbl-wrap"><table>
         <thead><tr><th>Item</th><th>Source category</th><th>Where it's referenced</th></tr></thead>
         <tbody>
           <tr><td>Sella turcica / sphenoid / infundibulum anatomy</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture</td></tr>
@@ -2126,10 +2329,11 @@
           <tr><td><b>Empty sella syndrome</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Sella anatomy is end02-core; clinical entity in end08. <i>Included for pattern recognition.</i></td></tr>
           <tr><td>Craniopharyngioma (Rathke's pouch remnant, suprasellar calcified, motor-oil fluid)</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>Bootcamp 3.01 Pituitary Embryology (primary to end02); also referenced in end08</td></tr>
         </tbody>
-      </table></div>
-
-      <h3>Objective 2 — Hypothalamic nuclei &amp; hormones</h3>
-      <div class="tbl-wrap"><table>
+      </table></div></div>
+      </div>
+      <div class="audit-obj collapsed">
+        <h4 class="audit-head">Objective 2 — Hypothalamic nuclei &amp; hormones</h4>
+        <div class="audit-body"><div class="tbl-wrap"><table>
         <thead><tr><th>Item</th><th>Source category</th><th>Where it's referenced</th></tr></thead>
         <tbody>
           <tr><td>Hypothalamic nuclei map (SON, PVN, arcuate, etc.)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture</td></tr>
@@ -2145,10 +2349,11 @@
           <tr><td><b>Leuprolide</b> (continuous vs pulsatile)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>GnRH pulsatility is end02-core; drug detail primarily in end13. <i>Included for pattern recognition — the clinical flip of the pulsatility rule.</i></td></tr>
           <tr><td><b>Reserpine</b> (VMAT inhibitor)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Vesicular catecholamine packaging. <i>Ties back to end01 catecholamine synthesis (previously completed).</i></td></tr>
         </tbody>
-      </table></div>
-
-      <h3>Objective 3 — Pituitary anatomy &amp; histology</h3>
-      <div class="tbl-wrap"><table>
+      </table></div></div>
+      </div>
+      <div class="audit-obj collapsed">
+        <h4 class="audit-head">Objective 3 — Pituitary anatomy &amp; histology</h4>
+        <div class="audit-body"><div class="tbl-wrap"><table>
         <thead><tr><th>Item</th><th>Source category</th><th>Where it's referenced</th></tr></thead>
         <tbody>
           <tr><td>Pars distalis / intermedia / tuberalis</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture</td></tr>
@@ -2168,10 +2373,11 @@
           <tr><td><b>Addison disease &amp; hyperpigmentation via POMC/MSH</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>POMC &amp; MSH are end02-core; Addison clinical is primarily in end20 (Adrenal Pathology) and end21 (Adrenal Pharm). <i>Core concept here, clinical association in other lectures.</i></td></tr>
           <tr><td><b>Cushing disease</b> (pituitary corticotrope adenoma)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Pituitary corticotropes are end02-core; Cushing clinical primarily in end19/20/21. <i>Included for pattern recognition on pituitary adenoma subtypes.</i></td></tr>
         </tbody>
-      </table></div>
-
-      <h3>Objective 4 — Pituitary hormones &amp; regulation</h3>
-      <div class="tbl-wrap"><table>
+      </table></div></div>
+      </div>
+      <div class="audit-obj collapsed">
+        <h4 class="audit-head">Objective 4 — Pituitary hormones &amp; regulation</h4>
+        <div class="audit-body"><div class="tbl-wrap"><table>
         <thead><tr><th>Item</th><th>Source category</th><th>Where it's referenced</th></tr></thead>
         <tbody>
           <tr><td>FLAT PiG framework (six anterior hormones)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture (all 6 hormones explicitly covered)</td></tr>
@@ -2190,10 +2396,11 @@
           <tr><td>Oxytocin positive feedback in labor (Ferguson reflex)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture (explicit example)</td></tr>
           <tr><td>Oxytocin milk let-down reflex</td><td><span class="src-pill src-mapped">end02-mapped</span></td><td>FA 3.01 Hypothalamic-pituitary hormones</td></tr>
         </tbody>
-      </table></div>
-
-      <h3>Objective 5 — Feedback loops</h3>
-      <div class="tbl-wrap"><table>
+      </table></div></div>
+      </div>
+      <div class="audit-obj collapsed">
+        <h4 class="audit-head">Objective 5 — Feedback loops</h4>
+        <div class="audit-body"><div class="tbl-wrap"><table>
         <thead><tr><th>Item</th><th>Source category</th><th>Where it's referenced</th></tr></thead>
         <tbody>
           <tr><td>Ultrashort / short / long loop definitions</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture</td></tr>
@@ -2207,10 +2414,11 @@
           <tr><td>Exogenous glucocorticoid HPA suppression</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>HPA feedback is end02-core; clinical implications in end21. <i>Clinical application of long-loop feedback.</i></td></tr>
           <tr><td>Surreptitious levothyroxine labs pattern</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>HPT feedback is end02-core; clinical pattern in end10 / end13. <i>Included for pattern recognition on exogenous thyroid hormone.</i></td></tr>
         </tbody>
-      </table></div>
-
-      <h3>Objective 6 — Predict hormone changes (all iterations)</h3>
-      <div class="tbl-wrap"><table>
+      </table></div></div>
+      </div>
+      <div class="audit-obj collapsed">
+        <h4 class="audit-head">Objective 6 — Predict hormone changes (all iterations)</h4>
+        <div class="audit-body"><div class="tbl-wrap"><table>
         <thead><tr><th>Item</th><th>Source category</th><th>Where it's referenced</th></tr></thead>
         <tbody>
           <tr><td>Primary / secondary / tertiary framework</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end02 lecture (predict-all-iterations objective)</td></tr>
@@ -2224,8 +2432,9 @@
           <tr><td>Anabolic steroid abuse → testicular atrophy</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>HPG feedback is end02-core; clinical scenario primarily in repro / end05. <i>Clinical application of long-loop feedback.</i></td></tr>
           <tr><td>Oral contraceptives and HPG suppression</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>HPG feedback is end02-core; OCP detail primarily in repro pharm. <i>Clinical application of long-loop feedback.</i></td></tr>
         </tbody>
-      </table></div>
-
+      </table></div></div>
+      </div>
+    </div>
     </section>
 
         <div class="footer-note">
@@ -2397,6 +2606,34 @@ const obs = new IntersectionObserver((entries) => {
   });
 }, { rootMargin: '-30% 0px -60% 0px' });
 sections.forEach(s => obs.observe(s));
+
+/* --- how-callout & audit-obj collapsibles ------------------------------- */
+document.querySelectorAll('.cover .how h3.how-title').forEach(h => {
+  h.addEventListener('click', () => h.closest('.how').classList.toggle('collapsed'));
+});
+document.querySelectorAll('.audit-obj .audit-head').forEach(h => {
+  h.addEventListener('click', () => h.closest('.audit-obj').classList.toggle('collapsed'));
+});
+
+/* ---- Dark-mode toggle (matches active-recall-hub) ---- */
+function toggleDark(){
+  const cur = document.documentElement.getAttribute('data-theme')==='dark';
+  const next = cur ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch(e) {}
+  const btn = document.getElementById('darkToggle');
+  if (btn) btn.textContent = next==='dark' ? '☀️' : '🌙';
+}
+(function(){
+  try {
+    const t = localStorage.getItem('theme');
+    if (t === 'dark'){
+      document.documentElement.setAttribute('data-theme','dark');
+      const btn = document.getElementById('darkToggle');
+      if (btn) btn.textContent = '☀️';
+    }
+  } catch(e) {}
+})();
 </script>
 
 </body>

@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HoyaDocs · Endo 04 · Adrenal Hormone Synthesis &amp; Action</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root{
     --navy:#1F3864; --blue:#2E75B6; --red:#C00000; --purple:#7030A0;
@@ -19,16 +22,17 @@
   *{box-sizing:border-box}
   html{scroll-behavior:smooth;scroll-padding-top:84px}
   body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;margin:0;background:var(--bg);color:var(--text);line-height:1.55}
-  header.topbar{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,var(--navy),#2E4A7A);color:#fff;padding:10px 20px;border-bottom:3px solid var(--blue);box-shadow:0 2px 8px rgba(0,0,0,0.1)}
-  .topbar-inner{max-width:1100px;margin:0 auto;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  header.topbar{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,#B8860B,#9B7A00);color:#1F3864;padding:10px 20px;border-bottom:3px solid #6B4423;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+  .topbar-inner{max-width:100%;margin:0;display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:0 8px}
   .topbar h1{margin:0;font-size:16px;font-weight:700;letter-spacing:.3px}
-  .topbar .brand{font-family:Georgia,"Times New Roman",serif;font-size:20px;font-weight:700;color:#FFD54F;letter-spacing:.5px;padding:2px 0;border-right:1px solid rgba(255,255,255,0.25);padding-right:16px}
-  .topbar .tag{background:rgba(255,255,255,0.18);padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600}
+  .topbar .brand{font-family:Georgia,"Times New Roman",serif;font-size:20px;font-weight:700;color:#3E2723;letter-spacing:.5px;padding:2px 0;border-right:1px solid rgba(62,39,35,0.35);padding-right:16px}
+  .brand-arrow{font-family:-apple-system,Arial,sans-serif;font-size:14px;margin-left:3px;color:#3E2723;opacity:.85;vertical-align:baseline}
+  .topbar .tag{background:rgba(255,255,255,0.85);color:#1F3864;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700}
   .progress-wrap{flex:1;min-width:200px}
-  .progress-track{height:8px;background:rgba(255,255,255,0.25);border-radius:4px;overflow:hidden}
-  .progress-fill{height:100%;background:#FFD54F;width:0%;transition:width .4s ease}
-  .progress-label{font-size:12px;margin-top:3px;opacity:.9}
-  .wrap{max-width:1100px;margin:0 auto;padding:24px 20px 80px;display:grid;grid-template-columns:220px 1fr;gap:28px;transition:grid-template-columns .25s ease}
+  .progress-track{height:8px;background:rgba(31,56,100,0.22);border-radius:4px;overflow:hidden;border:1px solid rgba(31,56,100,0.15)}
+  .progress-fill{height:100%;background:#1F3864;width:0%;transition:width .4s ease}
+  .progress-label{font-size:12px;margin-top:3px;color:#1F3864;font-weight:600}
+  .wrap{max-width:100%;margin:0;padding:24px 28px 80px;display:grid;grid-template-columns:220px 1fr;gap:28px;transition:grid-template-columns .25s ease}
   .wrap.sidebar-collapsed{grid-template-columns:44px 1fr;gap:16px}
   @media (max-width:900px){.wrap,.wrap.sidebar-collapsed{grid-template-columns:1fr}}
   nav.sidebar{position:sticky;top:80px;align-self:start;max-height:calc(100vh - 100px);overflow-y:auto;padding-right:8px}
@@ -49,6 +53,7 @@
   .cover h1{font-size:36px;color:var(--navy);margin:8px 0 4px;line-height:1.15}
   .cover .how{background:#F9FAFB;border-left:5px solid var(--navy);border-radius:0 8px 8px 0;padding:14px 18px;margin-top:16px}
   .cover .how h3{margin:0 0 8px;color:var(--navy);font-size:16px}
+  .cover .how p,.cover .how ul,.cover .how ol,.cover .how li{font-size:13.5px;line-height:1.5;margin:6px 0}
   .cover .how.alt{border-left-color:var(--purple)}
   .cover .how.alt h3{color:var(--purple)}
   .how-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
@@ -69,7 +74,7 @@
   section.obj ul{margin:6px 0 12px 0;padding-left:22px}
   section.obj li{margin:4px 0}
 
-  .gist{background:#F7F9FC;border-left:5px solid var(--blue);border-radius:0 8px 8px 0;padding:14px 18px;margin:10px 0 18px;font-size:15px}
+  .gist{background:#F7F9FC;border-left:5px solid var(--blue);border-radius:0 8px 8px 0;padding:14px 18px;margin:10px 0 18px;font-size:13.5px;line-height:1.5}
   .gist-label{color:var(--blue);font-weight:700;font-size:16px;letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:8px}
   .gist-deeper{margin-top:10px;padding-top:10px;border-top:1px dashed #CDD5E0;font-size:13.5px}
   .gist-deeper .preview-label{display:block;color:var(--purple);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
@@ -163,6 +168,180 @@
   #audit .legend{background:#F7F9FC;border-left:4px solid var(--navy);padding:12px 16px;border-radius:0 6px 6px 0;margin:10px 0 16px}
   #audit .legend ul{margin:6px 0 0 0}
 
+  
+  .topbar-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-left:auto}
+  .btn-export{display:inline-flex;align-items:center;gap:6px;background:#1F3864;color:#fff;padding:6px 14px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.3px;text-decoration:none;border:none;cursor:pointer;transition:all .15s ease;box-shadow:0 1px 3px rgba(0,0,0,0.18);white-space:nowrap}
+  .btn-export:hover{background:#2E4A7A;transform:translateY(-1px);box-shadow:0 2px 6px rgba(0,0,0,0.25)}
+  .btn-export::before{content:"\2B07";font-weight:800;font-size:12px}
+  @media (max-width:900px){
+    .wrap{padding:20px 16px 60px}
+    .topbar .brand{padding-right:12px;border-right:1px solid rgba(255,255,255,0.25)}
+    .topbar h1{font-size:15px}
+    .progress-wrap{min-width:160px}
+  }
+  @media (max-width:700px){
+    header.topbar{padding:10px 12px}
+    .topbar-inner{gap:8px 10px}
+    .topbar .brand{font-size:18px;padding-right:10px}
+    .topbar .tag{font-size:11px;padding:2px 8px}
+    .topbar h1{font-size:13.5px;width:100%;order:2}
+    .progress-wrap{order:10;width:100%;flex:1 0 100%;min-width:0}
+    .progress-label{font-size:11px}
+    .topbar-actions{order:3;margin-left:auto}
+    .btn-export{font-size:11px;padding:5px 11px;gap:4px}
+    .btn-export::before{font-size:11px}
+    .wrap{padding:16px 12px 60px;gap:14px}
+    .cover{padding:18px;border-radius:10px}
+    .cover h1{font-size:24px;line-height:1.2}
+    .cover .how{padding:12px 14px}
+    .cover .how h3{font-size:14.5px}
+    .how-grid{gap:10px}
+    section.obj{padding:18px;border-radius:10px}
+    section.obj h2{font-size:19px;gap:8px}
+    section.obj h2 .num{width:28px;height:28px;font-size:13px}
+    section.obj h3{font-size:15.5px;margin:18px 0 6px}
+    section.obj h4{font-size:14px}
+    section.obj p,section.obj li{font-size:14px}
+    .gist{padding:12px 14px;font-size:14px}
+    .gist-label{font-size:13.5px;letter-spacing:.5px}
+    .gist-deeper{font-size:13px}
+    .callout{padding:12px 14px;margin:12px 0}
+    .callout .ctitle{font-size:14px;letter-spacing:.3px}
+    .callout p,.callout ul li,.callout ol li{font-size:13.5px}
+    .deep-dive{padding:12px 12px 8px 14px;margin:14px 0}
+    .deep-dive .dd-title{font-size:13.5px;letter-spacing:.5px}
+    .deep-dive h4{font-size:13.5px;padding:5px 6px}
+    .deep-dive > ul > li,.deep-dive ul:not(.sublist) > li{font-size:12.5px}
+    .deep-dive .sublist li{font-size:12px}
+    .deep-dive .group-label{font-size:12.5px}
+    table{font-size:12.5px}
+    thead th,tbody td{padding:7px 9px}
+    .pathway{font-size:12px;padding:10px;gap:4px}
+    .pathway .step{padding:5px 7px;font-size:12px}
+    .pathway .arrow{margin:0 3px;font-size:14px}
+    .pathway .enz{font-size:10px}
+    .roadmap a{font-size:13px;padding:9px 12px;gap:8px}
+    .roadmap .num{width:22px;height:22px;font-size:11px}
+    .quiz-item{padding:12px 14px}
+    .quiz-item .qn,.quiz-item{font-size:13.5px}
+    .quiz-item button.show{font-size:12px;padding:5px 11px}
+    .mark-done{font-size:12px;padding:5px 11px}
+    .flashcard .q{padding:10px 12px;font-size:13.5px;gap:8px}
+    .flashcard.open .a{padding:10px 12px}
+    .flashcard .a span,.flashcard .a{font-size:13.5px}
+    nav.sidebar{padding:12px;background:#F7F9FC;border:1px solid var(--border);border-radius:10px;margin-bottom:4px;max-height:none}
+    nav.sidebar .sidebar-toggle{display:none}
+    nav.sidebar a{padding:6px 10px;font-size:13px;margin:1px 0}
+    nav.sidebar .controls{margin-top:8px}
+    nav.sidebar .controls .btn-reset{font-size:11px}
+    .src-pill{font-size:10px;padding:1px 6px}
+    .cite{font-size:10px;padding:1px 5px;margin-left:2px}
+    #references p,#references ul li,#references .ref-list li{font-size:13.5px}
+    #audit p,#audit li{font-size:13.5px}
+    #audit .legend{padding:10px 12px}
+    .obj-header{gap:8px}
+  }
+  @media (max-width:420px){
+    .cover h1{font-size:21px}
+    section.obj h2{font-size:17.5px}
+    .topbar .brand{font-size:17px}
+    .pathway{font-size:11.5px}
+  }
+
+  
+  /* Back-to-Lectures button */
+  .btn-back{display:inline-flex;align-items:center;gap:4px;background:rgba(31,56,100,0.15);color:#1F3864;padding:5px 11px;border-radius:999px;font-size:12px;font-weight:700;text-decoration:none;border:1px solid rgba(31,56,100,0.22);transition:all .15s ease;white-space:nowrap}
+  .btn-back:hover{background:rgba(31,56,100,0.28);transform:translateY(-1px);box-shadow:0 1px 3px rgba(0,0,0,0.15)}
+  /* Compact progress bar pinned to the right with a gap after the title */
+  .progress-wrap.compact{flex:none;min-width:180px;max-width:220px;margin-left:auto}
+  .progress-wrap.compact .progress-label{text-align:right}
+  /* Cover "How to use" collapsible cards */
+  .cover .how h3.how-title{cursor:pointer;user-select:none;display:flex;align-items:center;gap:8px;padding:4px 0;margin:0 0 8px}
+  .cover .how h3.how-title::after{content:"\25BC";font-size:12px;color:var(--navy);margin-left:auto;transition:transform .2s ease}
+  .cover .how.alt h3.how-title::after{color:var(--purple)}
+  .cover .how.collapsed h3.how-title{margin-bottom:0}
+  .cover .how.collapsed h3.how-title::after{content:"\25B6"}
+  .cover .how.collapsed .how-body{display:none}
+  /* Source Audit per-objective collapsible */
+  .audit-obj{margin:10px 0;border:1px solid var(--border);border-radius:8px;background:#fff;overflow:hidden}
+  .audit-obj .audit-head{margin:0;padding:10px 14px;cursor:pointer;font-size:14.5px;font-weight:700;color:var(--navy);background:#F7F9FC;display:flex;align-items:center;gap:8px;user-select:none;border:none}
+  .audit-obj .audit-head::after{content:"\25BC";margin-left:auto;font-size:12px;color:var(--muted);transition:transform .2s ease}
+  .audit-obj.collapsed .audit-head::after{content:"\25B6"}
+  .audit-obj.collapsed .audit-body{display:none}
+  .audit-obj .audit-body{padding:10px 14px 14px}
+  #references .audit-block{margin-top:18px}
+  #references .audit-block .legend{background:#F7F9FC;border-left:4px solid var(--navy);padding:12px 16px;border-radius:0 6px 6px 0;margin:10px 0 16px}
+  #references .audit-block .legend ul{margin:6px 0 0 0;padding-left:22px}
+
+  
+  /* Right-anchored topbar cluster: progress + export + back */
+  .topbar-right{display:flex;gap:10px;align-items:center;margin-left:auto;flex-wrap:wrap;justify-content:flex-end}
+  .topbar-right .progress-wrap.compact{margin-left:0}
+  .topbar-right .topbar-actions{margin-left:0}
+  /* 3-column callout row (HY / MN / CL) on wide viewports; stack below */
+  .callout-trio{display:grid;grid-template-columns:1fr;gap:14px;margin:14px 0}
+  .callout-trio .callout{margin:0;align-self:stretch}
+  @media (min-width:1100px){
+    .callout-trio{grid-template-columns:repeat(3,minmax(0,1fr))}
+  }
+
+  
+  /* ---------- Hub-style topnav (matches active-recall-hub.html) ---------- */
+  .topnav{width:100%;background:#2e2405;position:sticky;top:0;left:0;z-index:400;display:flex;align-items:center;padding:0 20px;height:52px;gap:0;border-bottom:1px solid rgba(255,255,255,0.06);flex-shrink:0;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  .tn-brand{display:flex;flex-direction:column;justify-content:center;margin-right:28px;flex-shrink:0;gap:1px}
+  .tn-name{font-size:1.4rem;font-weight:900;color:#fff;letter-spacing:-0.01em;text-decoration:none;text-shadow:0 1px 8px rgba(0,0,0,0.25)}
+  .tn-name:hover{color:rgba(255,255,255,0.80)}
+  .tn-nav{display:flex;align-items:center;gap:5px;flex:1;justify-content:flex-end;flex-wrap:wrap}
+  .tn-link{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:7px;font-size:0.80rem;font-weight:600;color:rgba(255,255,255,0.70);border:1px solid rgba(255,255,255,0.12);transition:background 0.13s, color 0.13s, border-color 0.13s;white-space:nowrap;text-decoration:none}
+  .tn-link:hover{background:rgba(255,255,255,0.08);color:#fff;border-color:rgba(255,255,255,0.26)}
+  .tn-link.active{background:rgba(255,255,255,0.14);color:#fff;border-color:rgba(255,255,255,0.32)}
+  .tn-link-export{background:rgba(234,179,8,0.18);border-color:rgba(234,179,8,0.38);color:#FFD54F}
+  .tn-link-export:hover{background:rgba(234,179,8,0.30);color:#fff;border-color:rgba(234,179,8,0.60)}
+  .tn-right{flex-shrink:0;display:flex;align-items:center;gap:8px;margin-left:12px}
+  .dark-toggle{width:32px;height:32px;border-radius:7px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);display:flex;align-items:center;justify-content:center;font-size:0.85rem;color:rgba(255,255,255,0.85);flex-shrink:0;transition:background 0.14s;cursor:pointer}
+  .dark-toggle:hover{background:rgba(255,255,255,0.18)}
+  @media (max-width:900px){
+    .topnav{padding:0 12px}
+    .tn-brand{margin-right:14px}
+    .tn-name{font-size:1.15rem}
+    .tn-link{padding:5px 9px;font-size:0.72rem}
+  }
+  @media (max-width:640px){
+    .tn-link:not(.tn-link-export){display:none}
+  }
+  /* ---------- Cover progress bar (replaces the old in-topbar one) -------- */
+  .cover-progress{margin:22px 0 10px;display:flex;align-items:center;gap:14px;background:#F7F9FC;border:1px solid #E5E7EB;border-radius:10px;padding:12px 16px}
+  .cover-progress .progress-label{font-size:13px;color:var(--navy);font-weight:700;white-space:nowrap;margin:0;letter-spacing:.2px}
+  .cover-progress .progress-track{flex:1;height:10px;background:#E5E7EB;border-radius:5px;overflow:hidden;border:1px solid #D4D8E0}
+  .cover-progress .progress-fill{height:100%;background:linear-gradient(90deg,#CA8A04,#EAB308);border-radius:5px;width:0%;transition:width .4s ease}
+  @media (max-width:700px){
+    .cover-progress{padding:10px 12px;gap:10px}
+    .cover-progress .progress-label{font-size:12px}
+  }
+  /* ---------- Minimal dark-mode override -------------------------------- */
+  [data-theme="dark"]{color-scheme:dark}
+  [data-theme="dark"] body{background:#151A1F;color:#E5E7EB}
+  [data-theme="dark"] .cover,[data-theme="dark"] section.obj,[data-theme="dark"] #references,[data-theme="dark"] .audit-obj,[data-theme="dark"] .quiz-item,[data-theme="dark"] .flashcard{background:#1F2937;border-color:#374151;color:#E5E7EB}
+  [data-theme="dark"] .cover h1{color:#FCD34D}
+  [data-theme="dark"] section.obj h2,[data-theme="dark"] section.obj h3{color:#93C5FD}
+  [data-theme="dark"] .gist{background:#111827;color:#E5E7EB;border-left-color:#60A5FA}
+  [data-theme="dark"] .deep-dive{background:#111827;border-color:#374151}
+  [data-theme="dark"] .deep-dive h4{color:#E5E7EB}
+  [data-theme="dark"] nav.sidebar a{color:#CBD5E1}
+  [data-theme="dark"] nav.sidebar a:hover{background:#374151;color:#fff}
+  [data-theme="dark"] nav.sidebar a.active{background:#0B1220;color:#FCD34D;border-left-color:#FCD34D}
+  [data-theme="dark"] .sidebar-toggle{background:#253040;color:#E5E7EB;border-color:#374151}
+  [data-theme="dark"] tbody td{background:#1F2937;border-color:#374151;color:#E5E7EB}
+  [data-theme="dark"] tbody tr:nth-child(even) td{background:#253040}
+  [data-theme="dark"] tbody tr:hover td{background:#2C3644}
+  [data-theme="dark"] thead th{background:#0F172A}
+  [data-theme="dark"] .audit-obj .audit-head{background:#111827;color:#E5E7EB}
+  [data-theme="dark"] #references .audit-block .legend{background:#111827;color:#E5E7EB}
+  [data-theme="dark"] .cover-progress{background:#1F2937;border-color:#374151}
+  [data-theme="dark"] .cover-progress .progress-label{color:#FCD34D}
+  [data-theme="dark"] .cover-progress .progress-track{background:#0F172A;border-color:#374151}
+  [data-theme="dark"] .how.alt h3.how-title,[data-theme="dark"] .cover .how h3{color:#93C5FD}
+
   @media print{
     header.topbar,nav.sidebar,.mark-done,.controls{display:none}
     .wrap{grid-template-columns:1fr;padding:10px}
@@ -177,15 +356,18 @@
 </head>
 <body>
 
-<header class="topbar">
-  <div class="topbar-inner">
-    <span class="brand">HoyaDocs</span>
-    <span class="tag">ENDO · 04</span>
-    <h1>Adrenal Hormone Synthesis &amp; Action</h1>
-    <div class="progress-wrap">
-      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-      <div class="progress-label" id="progressLabel">0 / 6 objectives complete</div>
-    </div>
+<header class="topnav">
+  <div class="tn-brand">
+    <a class="tn-name" href="https://hoyadocs.com/Block4-Endocrine/index.html">HoyaDocs ↗</a>
+  </div>
+  <nav class="tn-nav">
+    <a class="tn-link" href="https://hoyadocs.com/Block4-Endocrine/lecture-guides/index.html">📖 Lecture Guides</a>
+    <a class="tn-link" href="https://hoyadocs.com/Block4-Endocrine/resource-mapping/endocrine_resource_hub.html">🔗 Lecture Resources</a>
+    <a class="tn-link" href="https://hoyadocs.com/Block4-Endocrine/resource-mapping/endocrine_mapping.html">🗂 3rd Party Mapping</a>
+    <a class="tn-link tn-link-export" href="end04-lg-word.docx" download title="Download Word (.docx) version">⬇ Export to Word</a>
+  </nav>
+  <div class="tn-right">
+    <button class="dark-toggle" id="darkToggle" onclick="toggleDark()" title="Toggle dark mode">🌙</button>
   </div>
 </header>
 
@@ -204,7 +386,6 @@
     <a href="#cheatsheet">Cheat Sheet</a>
     <a href="#quiz">Self-Quiz</a>
     <a href="#references">References</a>
-    <a href="#audit">Source Audit</a>
     <div class="controls" style="margin-top:14px;flex-direction:column;align-items:stretch">
       <button class="btn-reset" onclick="toggleAllDeepDives(true)">Collapse all sub-sections</button>
       <button class="btn-reset" onclick="toggleAllDeepDives(false)">Expand all sub-sections</button>
@@ -218,8 +399,9 @@
       <h1>Endocrine Module 04: Adrenal Hormone Synthesis &amp; Action</h1>
 
       <div class="how-grid">
-        <div class="how">
-          <h3>How to use this guide (60 seconds)</h3>
+        <div class="how collapsed">
+          <h3 class="how-title">How to use this guide</h3>
+          <div class="how-body">
           <p>All 6 objectives revolve around <b>adrenal cortex steroid synthesis</b>. Each follows the same pattern:</p>
           <ul>
             <li><b>Gist</b> (one paragraph) — the big idea</li>
@@ -227,21 +409,46 @@
             <li><b>Yellow ★ High-Yield</b>, <b>green 🧠 Memory Trick</b>, <b>orange 🏥 Clinical Pearl</b></li>
             <li><b>Blue ✏️ Active Recall</b> — click each question to reveal the answer</li>
             <li><b>Mark Done</b> on each objective; the bar at the top tracks you</li>
-          </ul>
-          <p style="margin-top:8px"><b style="color:var(--red)">Rule:</b> say the answer out loud BEFORE you peek. That's active recall.</p>
+          </ul></div>
         </div>
 
-        <div class="how alt">
-          <h3>How to use this guide with other resources</h3>
-          <ul>
-            <li>Pair this guide with <b>B&amp;B 2.01 Adrenal Glands</b> and <b>Physeo 6.07 Adrenal Glands</b>.</li>
-            <li>Cross-reference <b>FA 3.11 Adrenal steroids &amp; CAH</b> and <b>3.12 Cortisol</b> for Step 1 HY facts.</li>
-            <li>For CAH enzyme-deficiency pattern recognition: review <b>Bootcamp 6.11/6.12/6.13</b> and <b>Physeo 6.08 CAH</b>.</li>
-            <li>Finish with <b>UWorld Qbank</b> questions tagged "adrenal," "aldosterone," "cortisol," "CAH."</li>
-          </ul>
+        <div class="how alt collapsed">
+          <h3 class="how-title">How to use this guide with other resources</h3>
+          <div class="how-body">
+            <ul>
+              <li>Read this guide → watch the corresponding 3rd-party video / in-house lecture → fill in the recall sheets → complete self-quiz
+                <ul class="sublist">
+                  <li><b>Spaced repetition options:</b>
+                    <ul>
+                      <li>Anki</li>
+                      <li>Drill Hubs #1, #2, and #3</li>
+                    </ul>
+                  </li>
+                  <li><b>Formative Feedback options:</b>
+                    <ul>
+                      <li>Canvas provided material</li>
+                      <li>UWorld mapped QID</li>
+                      <li>HoyaDocs Question Bank</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>Link to:
+                <ul class="sublist">
+                  <li><a href="https://hoyadocs.com/Block4-Endocrine/resource-mapping/index.html">Resource Mapping hub</a></li>
+                  <li><a href="https://hoyadocs.com/Block4-Endocrine/resource-explorer/index.html">Resource Explorer</a></li>
+                  <li><a href="https://hoyadocs.com/Block4-Endocrine/active-recall-drills/index.html">Active Recall Drills Hub</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
+      <div class="cover-progress">
+        <span class="progress-label" id="progressLabel">0 / 6 objectives complete</span>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
       <h3 style="margin-top:22px;color:var(--navy);font-size:16px">Jump to any objective:</h3>
       <div class="roadmap">
         <a href="#obj1"><span class="num">1</span><span>Recognize the structure of steroid hormones and understand the nomenclature used to describe them</span></a>
@@ -372,7 +579,8 @@
         </ul>
       </div>
 
-      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+      <div class="callout-trio">
+        <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
         <ul>
           <li>All steroid hormones share the <b>4-ring cyclopentanoperhydrophenanthrene backbone</b> from cholesterol. <span class="cite">end04 lecture</span></li>
           <li><b>C21 = progestins / corticoids. C19 = androgens. C18 = estrogens.</b> <span class="cite">FA 3.11 Adrenal steroids and CAH</span></li>
@@ -381,20 +589,19 @@
           <li><b>17,20-lyase</b> drops 2 carbons → makes androgens (C19). <span class="cite">end04 lecture</span></li>
         </ul>
       </div>
-
-      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
         <p><b>"Count the carbons to name the class"</b>: 21 = corticoid, 19 = androgen, 18 = estrogen.</p>
         <p><b>"Δ5 is Pregnen-side; Δ4 is Progestin-side"</b> — 3β-HSD flips the switch.</p>
         <p><b>"Aromatase Aromatizes A-ring"</b> — removes C19 methyl to make estrogen.</p>
         <p><b>"-ase names describe what they do"</b>: hydroxylase adds OH; lyase cuts; HSD flips OH; aromatase aromatizes.</p>
       </div>
-
-      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
         <ul>
           <li><b>Aromatase inhibitors (anastrozole, letrozole, exemestane)</b> are used in postmenopausal ER+ breast cancer. Aromatase is the bridge from C19 → C18 — inhibiting it starves ER+ tumors of estrogen. <span class="cite">AI Generated · repro / oncology pharm</span></li>
           <li><b>3β-HSD deficiency</b> (rare CAH) causes accumulation of Δ5 precursors (pregnenolone, DHEA) and deficient Δ4 hormones (aldosterone, cortisol, testosterone). <span class="cite">AI Generated · see end06 / end20</span></li>
           <li><b>17,20-lyase deficiency</b> blocks androgen formation → incomplete virilization in 46,XY. <span class="cite">AI Generated · see end05 / end06</span></li>
         </ul>
+      </div>
       </div>
 
       <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL — click each question to reveal</div>
@@ -588,7 +795,8 @@
         </ul>
       </div>
 
-      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+      <div class="callout-trio">
+        <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
         <ul>
           <li><b>Rate-limiting step of steroidogenesis = StAR-mediated cholesterol import.</b> <span class="cite">end04 lecture; FA 3.11</span></li>
           <li><b>First committed enzymatic step = desmolase (P450scc / CYP11A1)</b> → pregnenolone. <span class="cite">end04 lecture</span></li>
@@ -598,21 +806,20 @@
           <li><b>StAR mutation</b> → congenital lipoid adrenal hyperplasia (lipid-engorged adrenals, deficiency of ALL steroids). <span class="cite">AI Generated · see end20</span></li>
         </ul>
       </div>
-
-      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
         <p><b>"Cholesterol is Pregnant with every steroid"</b> — cholesterol → pregnenolone is the first step.</p>
         <p><b>"SCC = Scissors on the Side Chain"</b> — P450scc literally cleaves it.</p>
         <p><b>"StAR is the bouncer"</b> — cholesterol can't enter the mitochondrial VIP room without it.</p>
         <p><b>"cAMP is the conductor"</b> — coordinates HSL + StAR + LDLR + P450scc.</p>
       </div>
-
-      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
         <ul>
           <li><b>Congenital lipoid adrenal hyperplasia (StAR mutation):</b> lipid-engorged adrenals, deficiency of ALL steroids → salt-wasting, hypotension, 46,XY phenotypic females (no androgens). <span class="cite">AI Generated · see end06/end20</span></li>
           <li><b>Ketoconazole</b> broad CYP inhibition → used in Cushing's; can cause gynecomastia from ↓ testosterone. <span class="cite">AI Generated · see end21</span></li>
           <li><b>Aminoglutethimide</b> is an old desmolase inhibitor; largely replaced. <span class="cite">AI Generated · see end21</span></li>
           <li>Chronic ACTH excess (Cushing disease, ectopic ACTH) → adrenal cortex hyperplasia + upregulated LDLR. <span class="cite">AI Generated · see end19/20</span></li>
         </ul>
+      </div>
       </div>
 
       <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL</div>
@@ -816,7 +1023,8 @@
         </ul>
       </div>
 
-      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+      <div class="callout-trio">
+        <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
         <ul>
           <li><b>GFR → salt, sugar, sex (+ deeper = sweeter).</b> Zona Glomerulosa → salt (aldosterone). Fasciculata → sugar (cortisol). Reticularis → sex (DHEA). <span class="cite">end04 lecture; FA 3.11</span></li>
           <li><b>Aldosterone synthase (CYP11B2)</b> is found ONLY in zona glomerulosa. <span class="cite">end04 lecture</span></li>
@@ -826,16 +1034,14 @@
           <li><b>Medulla = modified sympathetic ganglion</b> making catecholamines (~80% Epi, 20% NE). <span class="cite">end04 lecture</span></li>
         </ul>
       </div>
-
-      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
         <p><b>"GFR → Salt, Sugar, Sex"</b> = Glomerulosa / Fasciculata / Reticularis → Aldosterone / Cortisol / DHEA.</p>
         <p><b>"The deeper you go, the sweeter it gets"</b> — salt → sugar → sex as you move from outer to inner cortex.</p>
         <p><b>"ZG has the BOUNCER CYP11B2"</b> — only zone with aldosterone synthase.</p>
         <p><b>"Medulla = Modified Sympathetic — Makes Epi."</b></p>
         <p><b>"Adrenarche starts when kids start school"</b> (~6–8 years).</p>
       </div>
-
-      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
         <ul>
           <li><b>Primary hyperaldosteronism (Conn):</b> ZG adenoma → HTN, hypokalemia, metabolic alkalosis, low renin. <span class="cite">AI Generated · see end20/21</span></li>
           <li><b>Adrenal adenoma causing Cushing syndrome (ACTH-independent):</b> ZF lesion → high cortisol, suppressed ACTH. <span class="cite">AI Generated · see end20/21</span></li>
@@ -843,6 +1049,7 @@
           <li><b>Pheochromocytoma:</b> medulla tumor — episodic HTN, palpitations, diaphoresis, pallor, panic ("5 P's"). <span class="cite">AI Generated · see end20/21</span></li>
           <li><b>Premature adrenarche</b> (pubarche &lt;8 girls / &lt;9 boys): early DHEA surge → axillary hair, acne. Often benign. <span class="cite">AI Generated · pediatrics</span></li>
         </ul>
+      </div>
       </div>
 
       <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL — click each question to reveal</div>
@@ -1056,7 +1263,8 @@
         </ul>
       </div>
 
-      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+      <div class="callout-trio">
+        <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
         <ul>
           <li><b>21-hydroxylase deficiency</b>: ↓ cortisol + ↓ aldo + ↑ androgens → <b>virilization + salt wasting + hypotension</b>. Elevated 17-OH-progesterone is the screening marker. <span class="cite">Bootcamp 6.11; FA 3.11</span></li>
           <li><b>11β-hydroxylase deficiency</b>: ↓ cortisol + DOC accumulates (weak mineralocorticoid) + ↑ androgens → <b>virilization + HTN + hypokalemia</b>. <span class="cite">Bootcamp 6.13; FA 3.11</span></li>
@@ -1066,16 +1274,14 @@
           <li><b>Aldosterone synthase (CYP11B2) is unique to ZG</b>; cortisol's CYP11B1 is in ZF. <span class="cite">end04 lecture</span></li>
         </ul>
       </div>
-
-      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
         <p><b>"HYPER = 11 or 17. HYPO = 21."</b></p>
         <p><b>"21 and 11 Virilize. 17 doesn't."</b></p>
         <p><b>Aldosterone pathway enzymes:</b> "DES-3-21-11-B2" (Desmolase, 3β-HSD, 21-hyd, 11β-hyd, aldo synthase).</p>
         <p><b>Cortisol pathway:</b> "17-3-21-11" (17α, 3β-HSD, 21-hyd, 11β-hyd).</p>
         <p><b>DHEA pathway:</b> "17-then-lyase" (17α-hyd → 17,20-lyase).</p>
       </div>
-
-      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
         <ul>
           <li><b>Newborn screening</b> for CAH uses <b>17-OH-progesterone</b> (elevated in 21-hydroxylase deficiency). <span class="cite">AI Generated · see end06/end20</span></li>
           <li><b>Salt-wasting CAH</b> presents with hypotension, hyperkalemia, hyponatremia, and virilized external genitalia (XX) in the newborn period. <span class="cite">AI Generated · see end06/end20</span></li>
@@ -1083,6 +1289,7 @@
           <li><b>Nonclassic CAH</b> (mildest form) presents in adolescence/adulthood with hirsutism, acne, irregular menses — often mistaken for PCOS. <span class="cite">AI Generated · see end06/end20</span></li>
           <li><b>Apparent mineralocorticoid excess</b>: 11β-HSD2 deficiency (or licorice/glycyrrhizic acid inhibition) → cortisol activates MR → hypertension with low renin + low aldosterone. <span class="cite">AI Generated · see end20/21</span></li>
         </ul>
+      </div>
       </div>
 
       <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL</div>
@@ -1250,7 +1457,8 @@
         </ul>
       </div>
 
-      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+      <div class="callout-trio">
+        <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
         <ul>
           <li><b>Cortisol: 90% CBG / 6% albumin / 4% free</b>; T½ ~70 min. <span class="cite">end04 lecture</span></li>
           <li><b>Aldosterone: ~35% free</b>, rest low-affinity CBG/albumin; T½ ~20 min. <span class="cite">end04 lecture</span></li>
@@ -1259,15 +1467,13 @@
           <li><b>11β-HSD2</b> in kidney converts cortisol → cortisone to protect MR from cortisol. Its deficiency (or inhibition by licorice) → apparent mineralocorticoid excess. <span class="cite">AI Generated · see end20/21</span></li>
         </ul>
       </div>
-
-      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
         <p><b>"Cortisol clings to CBG"</b> — 90% bound.</p>
         <p><b>"DHEA-S = DHEA's reservoir — Sulfate Sticks to albumin."</b></p>
         <p><b>"Aldo is almost always free — quick in, quick out."</b></p>
         <p><b>"Free = Active. Bound = Backup."</b></p>
       </div>
-
-      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
         <ul>
           <li><b>Pregnancy / OCPs</b> → ↑ CBG → ↑ total cortisol but normal free cortisol. Don't mistake this for Cushing's. <span class="cite">AI Generated · see end19/21</span></li>
           <li><b>DHEA-S</b> is the preferred test for adrenal androgen excess (hirsutism, acne, virilization workup) — stable levels. <span class="cite">AI Generated · repro</span></li>
@@ -1275,6 +1481,7 @@
           <li><b>Licorice (glycyrrhizic acid)</b> inhibits 11β-HSD2 → apparent mineralocorticoid excess (HTN with low renin / low aldo). <span class="cite">AI Generated · see end20/21</span></li>
           <li><b>Hydrocortisone dosing</b> takes advantage of cortisol's ~70 min half-life — divided daily doses (mimic diurnal variation). <span class="cite">AI Generated · see end21</span></li>
         </ul>
+      </div>
       </div>
 
       <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL</div>
@@ -1518,7 +1725,8 @@
         </ul>
       </div>
 
-      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+      <div class="callout-trio">
+        <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
         <ul>
           <li><b>Both MR and GR are Type I nuclear receptors</b> — cytoplasmic with HSP90, dimerize and translocate to nucleus after ligand binding. <span class="cite">end04 lecture; FA 3.15</span></li>
           <li><b>Aldosterone on principal cells:</b> ↑ ENaC + ↑ Na/K-ATPase + ↑ ROMK → Na reabsorption, K⁺ &amp; H⁺ secretion. <span class="cite">Physeo 6.07; end04 lecture</span></li>
@@ -1529,16 +1737,14 @@
           <li><b>Spironolactone</b> = nonselective MR antagonist (off-target: gynecomastia). <b>Eplerenone</b> = selective. <span class="cite">AI Generated · see end21</span></li>
         </ul>
       </div>
-
-      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
         <p><b>"Both MR and GR Sneak into the Cytoplasm; HSP90 Holds them"</b> — classic steroid receptor mechanism.</p>
         <p><b>"Aldosterone = ENaC ON, ROMK ON, Pump ON"</b> — all three principal cell channels upregulated.</p>
         <p><b>"Cortisol is a triple-C drug: Catabolic, anti-inflammatory Cytokine suppressor, Cardiovascular permit."</b></p>
         <p><b>"Licorice Locks out 11β-HSD2"</b> — apparent mineralocorticoid excess.</p>
         <p><b>"Spironolactone is dirty; Eplerenone is clean."</b></p>
       </div>
-
-      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
         <ul>
           <li><b>Addisonian crisis</b>: give IV hydrocortisone FIRST. Catecholamine pressors won't work without cortisol's permissive effect. <span class="cite">AI Generated · see end20/21</span></li>
           <li><b>Chronic glucocorticoid therapy</b> adverse effects: Cushingoid appearance, osteoporosis, thin skin, muscle wasting, cataracts, DM, infection risk. <span class="cite">AI Generated · see end21</span></li>
@@ -1546,6 +1752,7 @@
           <li><b>Licorice / glycyrrhizic acid</b> in large amounts (candy, tea) → apparent mineralocorticoid excess. <span class="cite">AI Generated · see end20/21</span></li>
           <li><b>Fludrocortisone</b> is a potent mineralocorticoid used in primary adrenal insufficiency (Addison's) and orthostatic hypotension. <span class="cite">Physeo 7.14 Fludrocortisone</span></li>
         </ul>
+      </div>
       </div>
 
       <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL — click each question to reveal</div>
@@ -1619,12 +1826,9 @@
         <li><b>Lippincott Illustrated Reviews: Pharmacology (7th ed.)</b> — ketoconazole, metyrapone, aromatase inhibitors, spironolactone, eplerenone, fludrocortisone.</li>
         <li><b>UWorld USMLE Step 1 Qbank</b> — adrenal enzyme deficiency vignettes and diagnostic workup.</li>
       </ol>
-    </section>
-
-    <!-- ============ SOURCE AUDIT ============ -->
-    <section class="obj" id="audit">
-      <h2><span class="num" style="background:var(--orange)">⚠</span>Clinical Correlation &amp; Drug Source Audit</h2>
-
+    
+      <div class="audit-block" id="audit">
+      <h3>Clinical Correlation &amp; Drug Source Audit</h3>
       <div class="legend">
         <b>Source legend</b>
         <ul>
@@ -1639,9 +1843,9 @@
           </li>
         </ul>
       </div>
-
-      <h3>Objective 1 — Steroid structure &amp; nomenclature</h3>
-      <div class="tbl-wrap"><table>
+      <div class="audit-obj collapsed">
+        <h4 class="audit-head">Objective 1 — Steroid structure &amp; nomenclature</h4>
+        <div class="audit-body"><div class="tbl-wrap"><table>
         <thead><tr><th>Item</th><th>Source</th><th>Where referenced</th></tr></thead>
         <tbody>
           <tr><td>4-ring cholesterol backbone, carbon count classes (C21/C19/C18)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end04 lecture</td></tr>
@@ -1651,10 +1855,11 @@
           <tr><td>Aromatase inhibitors (anastrozole, letrozole, exemestane)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Aromatase mechanism is end04-core; drugs primarily repro / oncology pharm. <i>Clinical application of C19→C18 pathway.</i></td></tr>
           <tr><td>3β-HSD and 17,20-lyase deficiency (rare CAH)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Enzyme biology is end04-core; clinical presentations primarily in end06/end20. <i>Core concept here, clinical association elsewhere.</i></td></tr>
         </tbody>
-      </table></div>
-
-      <h3>Objective 2 — Shared steroidogenesis steps</h3>
-      <div class="tbl-wrap"><table>
+      </table></div></div>
+      </div>
+      <div class="audit-obj collapsed">
+        <h4 class="audit-head">Objective 2 — Shared steroidogenesis steps</h4>
+        <div class="audit-body"><div class="tbl-wrap"><table>
         <thead><tr><th>Item</th><th>Source</th><th>Where referenced</th></tr></thead>
         <tbody>
           <tr><td>HSL, StAR, desmolase sequence</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end04 lecture</td></tr>
@@ -1666,10 +1871,11 @@
           <tr><td><b>Ketoconazole</b> (desmolase inhibitor)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Desmolase is end04-core; drug detail primarily in end21. <i>Clinical application.</i></td></tr>
           <tr><td>ACTH-driven adrenal hyperplasia (chronic excess)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>cAMP-driven upregulation is end04-core; Cushing pathology primarily in end19/20/21. <i>Included for pattern recognition.</i></td></tr>
         </tbody>
-      </table></div>
-
-      <h3>Objective 3 — Adrenal cortex zonation</h3>
-      <div class="tbl-wrap"><table>
+      </table></div></div>
+      </div>
+      <div class="audit-obj collapsed">
+        <h4 class="audit-head">Objective 3 — Adrenal cortex zonation</h4>
+        <div class="audit-body"><div class="tbl-wrap"><table>
         <thead><tr><th>Item</th><th>Source</th><th>Where referenced</th></tr></thead>
         <tbody>
           <tr><td>GFR zonation + hormones + signature enzymes</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end04 lecture</td></tr>
@@ -1681,10 +1887,11 @@
           <tr><td><b>Androgen-secreting adrenal tumor / premature adrenarche</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>ZR biology is end04-core; clinical entities in end20 / pediatrics. <i>Included for pattern recognition.</i></td></tr>
           <tr><td><b>Pheochromocytoma</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Medulla biology is end04-adjacent; clinical in end20/21. <i>Included for pattern recognition on adrenal tumor types.</i></td></tr>
         </tbody>
-      </table></div>
-
-      <h3>Objective 4 — Biosynthesis pathways &amp; CAH</h3>
-      <div class="tbl-wrap"><table>
+      </table></div></div>
+      </div>
+      <div class="audit-obj collapsed">
+        <h4 class="audit-head">Objective 4 — Biosynthesis pathways &amp; CAH</h4>
+        <div class="audit-body"><div class="tbl-wrap"><table>
         <thead><tr><th>Item</th><th>Source</th><th>Where referenced</th></tr></thead>
         <tbody>
           <tr><td>Aldosterone / cortisol / DHEA biosynthetic pathways</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end04 lecture</td></tr>
@@ -1697,10 +1904,11 @@
           <tr><td>Nonclassic 21-hydroxylase deficiency (adolescent presentation)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Enzyme deficiency biology end04-core; clinical phenotype end06/20 / repro. <i>Forward reference.</i></td></tr>
           <tr><td>Apparent mineralocorticoid excess (11β-HSD2)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>11β-HSD2 biology end04-core; clinical syndrome in end20/21. <i>Core concept here, clinical association elsewhere.</i></td></tr>
         </tbody>
-      </table></div>
-
-      <h3>Objective 5 — Circulation &amp; inactivation</h3>
-      <div class="tbl-wrap"><table>
+      </table></div></div>
+      </div>
+      <div class="audit-obj collapsed">
+        <h4 class="audit-head">Objective 5 — Circulation &amp; inactivation</h4>
+        <div class="audit-body"><div class="tbl-wrap"><table>
         <thead><tr><th>Item</th><th>Source</th><th>Where referenced</th></tr></thead>
         <tbody>
           <tr><td>Carrier proteins, free fraction, half-life for aldo / cortisol / DHEA / DHEA-S</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end04 lecture</td></tr>
@@ -1713,10 +1921,11 @@
           <tr><td>Licorice-induced apparent mineralocorticoid excess</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>11β-HSD2 biology end04-core; clinical in end20/21. <i>Clinical application.</i></td></tr>
           <tr><td>Midnight salivary cortisol for Cushing screening</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Cortisol half-life / diurnal variation is end04-core; diagnostic test primarily in end19/21. <i>Clinical application.</i></td></tr>
         </tbody>
-      </table></div>
-
-      <h3>Objective 6 — Mechanisms of action</h3>
-      <div class="tbl-wrap"><table>
+      </table></div></div>
+      </div>
+      <div class="audit-obj collapsed">
+        <h4 class="audit-head">Objective 6 — Mechanisms of action</h4>
+        <div class="audit-body"><div class="tbl-wrap"><table>
         <thead><tr><th>Item</th><th>Source</th><th>Where referenced</th></tr></thead>
         <tbody>
           <tr><td>MR and GR cytoplasmic with HSP90; dimerize; nuclear HRE</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end04 lecture</td></tr>
@@ -1730,7 +1939,9 @@
           <tr><td>Fludrocortisone (potent mineralocorticoid)</td><td><span class="src-pill src-mapped">end04-mapped</span></td><td>Physeo Pharm 7.14 Fludrocortisone (primary to end04)</td></tr>
           <tr><td>Mifepristone (GR antagonist)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>GR biology end04-core; drug detail primarily in end21 / repro. <i>Clinical application.</i></td></tr>
         </tbody>
-      </table></div>
+      </table></div></div>
+      </div>
+    </div>
     </section>
 
     <div class="footer-note">
@@ -1902,6 +2113,34 @@ const obs = new IntersectionObserver((entries) => {
   });
 }, { rootMargin: '-30% 0px -60% 0px' });
 sections.forEach(s => obs.observe(s));
+
+/* --- how-callout & audit-obj collapsibles ------------------------------- */
+document.querySelectorAll('.cover .how h3.how-title').forEach(h => {
+  h.addEventListener('click', () => h.closest('.how').classList.toggle('collapsed'));
+});
+document.querySelectorAll('.audit-obj .audit-head').forEach(h => {
+  h.addEventListener('click', () => h.closest('.audit-obj').classList.toggle('collapsed'));
+});
+
+/* ---- Dark-mode toggle (matches active-recall-hub) ---- */
+function toggleDark(){
+  const cur = document.documentElement.getAttribute('data-theme')==='dark';
+  const next = cur ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch(e) {}
+  const btn = document.getElementById('darkToggle');
+  if (btn) btn.textContent = next==='dark' ? '☀️' : '🌙';
+}
+(function(){
+  try {
+    const t = localStorage.getItem('theme');
+    if (t === 'dark'){
+      document.documentElement.setAttribute('data-theme','dark');
+      const btn = document.getElementById('darkToggle');
+      if (btn) btn.textContent = '☀️';
+    }
+  } catch(e) {}
+})();
 </script>
 
 </body>

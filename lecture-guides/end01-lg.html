@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HoyaDocs · Endo 01 · Intro to Hormones</title>
+<title>HoyaDocs · Endo 01 · Module Introduction / Introduction to Hormones</title>
 <style>
   :root{
     --navy:#1F3864; --blue:#2E75B6; --red:#C00000; --purple:#7030A0;
@@ -18,173 +18,78 @@
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth;scroll-padding-top:84px}
-  body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    margin:0;background:var(--bg);color:var(--text);line-height:1.55;
-  }
-
-  /* ---------- Top bar / progress ---------- */
-  header.topbar{
-    position:sticky;top:0;z-index:50;
-    background:linear-gradient(90deg,var(--navy),#2E4A7A);
-    color:#fff;padding:10px 20px;border-bottom:3px solid var(--blue);
-    box-shadow:0 2px 8px rgba(0,0,0,0.1);
-  }
-  .topbar-inner{max-width:1100px;margin:0 auto;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;margin:0;background:var(--bg);color:var(--text);line-height:1.55}
+  header.topbar{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,#B8860B,#9B7A00);color:#1F3864;padding:10px 20px;border-bottom:3px solid #6B4423;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+  .topbar-inner{max-width:100%;margin:0;display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:0 8px}
   .topbar h1{margin:0;font-size:16px;font-weight:700;letter-spacing:.3px}
-  .topbar .brand{
-    font-family:Georgia, "Times New Roman", serif;
-    font-size:20px;font-weight:700;color:#FFD54F;letter-spacing:.5px;
-    padding:2px 0;border-right:1px solid rgba(255,255,255,0.25);padding-right:16px;
-  }
-  .topbar .tag{background:rgba(255,255,255,0.18);padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600}
+  .topbar .brand{font-family:Georgia,"Times New Roman",serif;font-size:20px;font-weight:700;color:#3E2723;letter-spacing:.5px;padding:2px 0;border-right:1px solid rgba(62,39,35,0.35);padding-right:16px}
+  .brand-arrow{font-family:-apple-system,Arial,sans-serif;font-size:14px;margin-left:3px;color:#3E2723;opacity:.85;vertical-align:baseline}
+  .topbar .tag{background:rgba(255,255,255,0.85);color:#1F3864;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700}
   .progress-wrap{flex:1;min-width:200px}
-  .progress-track{height:8px;background:rgba(255,255,255,0.25);border-radius:4px;overflow:hidden}
-  .progress-fill{height:100%;background:#FFD54F;width:0%;transition:width .4s ease}
-  .progress-label{font-size:12px;margin-top:3px;opacity:.9}
-
-  /* ---------- Layout ---------- */
-  .wrap{max-width:1100px;margin:0 auto;padding:24px 20px 80px;display:grid;grid-template-columns:220px 1fr;gap:28px;transition:grid-template-columns .25s ease}
+  .progress-track{height:8px;background:rgba(31,56,100,0.22);border-radius:4px;overflow:hidden;border:1px solid rgba(31,56,100,0.15)}
+  .progress-fill{height:100%;background:#1F3864;width:0%;transition:width .4s ease}
+  .progress-label{font-size:12px;margin-top:3px;color:#1F3864;font-weight:600}
+  .wrap{max-width:100%;margin:0;padding:24px 28px 80px;display:grid;grid-template-columns:220px 1fr;gap:28px;transition:grid-template-columns .25s ease}
   .wrap.sidebar-collapsed{grid-template-columns:44px 1fr;gap:16px}
   @media (max-width:900px){.wrap,.wrap.sidebar-collapsed{grid-template-columns:1fr}}
-
   nav.sidebar{position:sticky;top:80px;align-self:start;max-height:calc(100vh - 100px);overflow-y:auto;padding-right:8px}
   @media (max-width:900px){nav.sidebar{position:static;max-height:none}}
-  /* Sidebar toggle button */
-  .sidebar-toggle{
-    display:flex;align-items:center;justify-content:center;
-    width:100%;padding:8px 10px;margin-bottom:10px;
-    background:#EEF2F7;border:1px solid var(--border);border-radius:6px;
-    cursor:pointer;font-weight:700;color:var(--navy);font-size:13px;
-    transition:background .15s ease;
-  }
+  .sidebar-toggle{display:flex;align-items:center;justify-content:center;width:100%;padding:8px 10px;margin-bottom:10px;background:#EEF2F7;border:1px solid var(--border);border-radius:6px;cursor:pointer;font-weight:700;color:var(--navy);font-size:13px;transition:background .15s ease}
   .sidebar-toggle:hover{background:#DDEAF7}
   .sidebar-toggle .label{margin-left:6px;transition:opacity .2s ease}
-  /* Collapsed sidebar hides its links + controls, keeps toggle visible */
   nav.sidebar.collapsed{overflow-x:hidden;padding-right:0}
-  nav.sidebar.collapsed a,
-  nav.sidebar.collapsed .controls{display:none}
+  nav.sidebar.collapsed a,nav.sidebar.collapsed .controls{display:none}
   nav.sidebar.collapsed .sidebar-toggle{padding:8px 0;min-width:32px}
   nav.sidebar.collapsed .sidebar-toggle .label{display:none}
-  nav.sidebar a{
-    display:block;padding:8px 12px;margin:2px 0;border-radius:6px;color:var(--navy);
-    text-decoration:none;font-weight:600;font-size:14px;border-left:3px solid transparent;
-    transition:all .15s ease;
-  }
+  nav.sidebar a{display:block;padding:8px 12px;margin:2px 0;border-radius:6px;color:var(--navy);text-decoration:none;font-weight:600;font-size:14px;border-left:3px solid transparent;transition:all .15s ease}
   nav.sidebar a:hover{background:#EEF2F7;border-left-color:var(--blue)}
   nav.sidebar a.active{background:#DDEAF7;border-left-color:var(--red);color:var(--red)}
   nav.sidebar .done::after{content:" ✓";color:var(--green);font-weight:800}
-
-  /* ---------- Cover ---------- */
-  .cover{
-    background:linear-gradient(135deg,#FFFFFF 0%,#F0F4F8 100%);
-    border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:24px;
-    box-shadow:0 2px 6px rgba(0,0,0,0.04);
-  }
-  .cover .kicker{color:var(--purple);font-weight:700;font-size:13px;letter-spacing:1.5px;text-transform:uppercase}
+  .cover{background:linear-gradient(135deg,#FFFFFF 0%,#F0F4F8 100%);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:24px;box-shadow:0 2px 6px rgba(0,0,0,0.04)}
   .cover h1{font-size:36px;color:var(--navy);margin:8px 0 4px;line-height:1.15}
-  .cover .sub{color:var(--blue);font-weight:600;margin-bottom:16px}
   .cover .how{background:#F9FAFB;border-left:5px solid var(--navy);border-radius:0 8px 8px 0;padding:14px 18px;margin-top:16px}
   .cover .how h3{margin:0 0 8px;color:var(--navy);font-size:16px}
-
-  .roadmap{display:grid;grid-template-columns:1fr;gap:8px;margin-top:12px}
-  .roadmap a{
-    display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#fff;border:1px solid var(--border);
-    border-radius:8px;text-decoration:none;color:var(--navy);font-weight:500;font-size:13.5px;line-height:1.4;
-    transition:all .15s ease;
-  }
-  .roadmap a:hover{border-color:var(--blue);transform:translateY(-1px);box-shadow:0 2px 6px rgba(0,0,0,0.06);background:#F8FBFF}
-  .roadmap .num{flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;background:var(--navy);color:#fff;border-radius:999px;width:24px;height:24px;font-size:12px;font-weight:700;margin-top:1px}
-
-  /* ---------- How-to 2-column grid + alt panel ---------- */
+  .cover .how p,.cover .how ul,.cover .how ol,.cover .how li{font-size:13.5px;line-height:1.5;margin:6px 0}
   .cover .how.alt{border-left-color:var(--purple)}
   .cover .how.alt h3{color:var(--purple)}
   .how-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
   .how-grid .how{margin-top:0}
   @media (max-width:700px){.how-grid{grid-template-columns:1fr}}
-
-  /* ---------- Source audit + inline AI markers ---------- */
-  #audit{background:var(--card)}
-  #audit p,#audit li{font-size:14px}
-  .src-pill{
-    display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;
-    font-weight:700;text-transform:uppercase;letter-spacing:0.3px;margin-right:4px;
-  }
-  .src-lecture{background:#E8F5E9;color:#2E7D32;border:1px solid #81C784}
-  .src-mapped{background:#E3F2FD;color:#0D47A1;border:1px solid #64B5F6}
-  .src-ai{background:#FFEBEE;color:#B71C1C;border:1px solid #EF9A9A}
-  #audit .legend{background:#F7F9FC;border-left:4px solid var(--navy);padding:12px 16px;border-radius:0 6px 6px 0;margin:10px 0 16px}
-  #audit .legend ul{margin:6px 0 0 0}
-  .ai-inline{
-    display:inline-block;font-size:10px;padding:1px 6px;border-radius:3px;
-    background:#FFEBEE;color:#B71C1C;border:1px solid #EF9A9A;font-weight:700;
-    margin-left:4px;text-transform:uppercase;letter-spacing:0.3px;white-space:nowrap;
-    vertical-align:baseline;
-  }
-
-  /* ---------- Sections ---------- */
-  section.obj{
-    background:var(--card);border:1px solid var(--border);border-radius:12px;
-    padding:28px;margin-bottom:24px;box-shadow:0 1px 3px rgba(0,0,0,0.04);
-  }
-  section.obj h2{
-    color:var(--navy);font-size:26px;margin:0 0 8px;line-height:1.2;
-    display:flex;align-items:center;gap:12px;flex-wrap:wrap
-  }
-  section.obj h2 .num{
-    background:var(--navy);color:#fff;border-radius:999px;width:36px;height:36px;
-    display:inline-flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;
-  }
+  .roadmap{display:grid;grid-template-columns:1fr;gap:8px;margin-top:12px}
+  .roadmap a{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#fff;border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--navy);font-weight:500;font-size:13.5px;line-height:1.4;transition:all .15s ease}
+  .roadmap a:hover{border-color:var(--blue);transform:translateY(-1px);box-shadow:0 2px 6px rgba(0,0,0,0.06);background:#F8FBFF}
+  .roadmap .num{flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;background:var(--navy);color:#fff;border-radius:999px;width:24px;height:24px;font-size:12px;font-weight:700;margin-top:1px}
+  section.obj{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:24px;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+  section.obj h2{color:var(--navy);font-size:26px;margin:0 0 8px;line-height:1.2;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  section.obj h2 .num{background:var(--navy);color:#fff;border-radius:999px;width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
   section.obj h3{color:var(--blue);font-size:19px;margin:22px 0 8px;padding-bottom:4px;border-bottom:2px solid #DDEAF7}
   section.obj h4{color:var(--red);font-size:16px;margin:18px 0 6px}
   section.obj p{margin:8px 0}
   section.obj ul{margin:6px 0 12px 0;padding-left:22px}
   section.obj li{margin:4px 0}
-
-  .gist{
-    background:#F7F9FC;border-left:5px solid var(--blue);border-radius:0 8px 8px 0;
-    padding:14px 18px;margin:10px 0 18px;font-size:15px;
-  }
+  .gist{background:#F7F9FC;border-left:5px solid var(--blue);border-radius:0 8px 8px 0;padding:14px 18px;margin:10px 0 18px;font-size:13.5px;line-height:1.5}
   .gist-label{color:var(--blue);font-weight:700;font-size:16px;letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:8px}
-
-  /* ---------- Callouts ---------- */
-  .callout{
-    border-radius:8px;padding:14px 16px;margin:14px 0;border-left:6px solid;position:relative;
-  }
-  .callout .ctitle{
-    font-weight:700;font-size:16px;letter-spacing:0.5px;margin-bottom:10px;
-    display:flex;align-items:center;gap:8px;
-    cursor:pointer;user-select:none;
-    padding:4px 6px;border-radius:6px;transition:background .15s ease;
-  }
-  .callout .ctitle::after{
-    content:"▼";font-size:13px;margin-left:auto;transition:transform .2s ease;display:inline-block;
-  }
+  .gist-deeper{margin-top:10px;padding-top:10px;border-top:1px dashed #CDD5E0;font-size:13.5px}
+  .gist-deeper .preview-label{display:block;color:var(--purple);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+  .gist-deeper ul{margin:4px 0 0 0;padding-left:22px}
+  .gist-deeper li{margin:3px 0;color:#333;line-height:1.45}
+  .gist-deeper li b{color:var(--navy)}
+  .callout{border-radius:8px;padding:14px 16px;margin:14px 0;border-left:6px solid;position:relative}
+  .callout .ctitle{font-weight:700;font-size:16px;letter-spacing:0.5px;margin-bottom:10px;display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;padding:4px 6px;border-radius:6px;transition:background .15s ease}
+  .callout .ctitle::after{content:"▼";font-size:13px;margin-left:auto;transition:transform .2s ease;display:inline-block}
   .callout.collapsed .ctitle::after{content:"▶"}
   .callout.collapsed > *:not(.ctitle){display:none}
-  /* Per-callout hover shade matches the banner color */
-  .callout.hy .ctitle:hover{background:#FDE8B0}
-  .callout.hy .ctitle::after{color:var(--hyBorder)}
-  .callout.mn .ctitle:hover{background:#D7F0DB}
-  .callout.mn .ctitle::after{color:var(--mnBorder)}
-  .callout.cl .ctitle:hover{background:#FDD6BB}
-  .callout.cl .ctitle::after{color:var(--clBorder)}
-  .callout.rc .ctitle:hover{background:#CFE0F5}
-  .callout.rc .ctitle::after{color:var(--rcBorder)}
-  /* Callout body text standardized to match reference list sizing (14px) */
+  .callout.hy .ctitle:hover{background:#FDE8B0} .callout.hy .ctitle::after{color:var(--hyBorder)}
+  .callout.mn .ctitle:hover{background:#D7F0DB} .callout.mn .ctitle::after{color:var(--mnBorder)}
+  .callout.cl .ctitle:hover{background:#FDD6BB} .callout.cl .ctitle::after{color:var(--clBorder)}
+  .callout.rc .ctitle:hover{background:#CFE0F5} .callout.rc .ctitle::after{color:var(--rcBorder)}
   .callout p,.callout ul li,.callout ol li{font-size:14px;line-height:1.5}
   .callout ul{margin:6px 0 0 0;padding-left:20px}
   .flashcard .q,.flashcard .a span{font-size:14px}
-  .callout ul{margin:6px 0 0 0;padding-left:20px}
-  .callout p{margin:6px 0}
-  .callout b{color:inherit}
-  .hy{background:var(--hy);border-color:var(--hyBorder)}      .hy .ctitle{color:var(--hyBorder)}
-  .mn{background:var(--mn);border-color:var(--mnBorder)}      .mn .ctitle{color:var(--mnBorder)}
-  .cl{background:var(--cl);border-color:var(--clBorder)}      .cl .ctitle{color:var(--clBorder)}
-  .rc{background:var(--rc);border-color:var(--rcBorder)}      .rc .ctitle{color:var(--rcBorder)}
-  .tp{background:var(--tp);border-color:var(--tpBorder)}      .tp .ctitle{color:var(--tpBorder)}
-
-  /* ---------- Tables ---------- */
+  .hy{background:var(--hy);border-color:var(--hyBorder)} .hy .ctitle{color:var(--hyBorder)}
+  .mn{background:var(--mn);border-color:var(--mnBorder)} .mn .ctitle{color:var(--mnBorder)}
+  .cl{background:var(--cl);border-color:var(--clBorder)} .cl .ctitle{color:var(--clBorder)}
+  .rc{background:var(--rc);border-color:var(--rcBorder)} .rc .ctitle{color:var(--rcBorder)}
   .tbl-wrap{overflow-x:auto;margin:14px 0}
   table{border-collapse:collapse;width:100%;font-size:14px;background:#fff}
   thead th{background:var(--navy);color:#fff;text-align:left;padding:10px 12px;font-weight:600;vertical-align:top}
@@ -192,165 +97,260 @@
   tbody tr:nth-child(even){background:#FAFBFC}
   tbody tr:hover{background:#F0F6FC}
   td b{color:var(--navy)}
-
-  /* ---------- Flashcards (active recall) ---------- */
-  .flashcard{
-    background:#fff;border:1px solid var(--rcBorder);border-radius:8px;
-    margin:8px 0;overflow:hidden;cursor:pointer;transition:all .15s ease;
-  }
+  .flashcard{background:#fff;border:1px solid var(--rcBorder);border-radius:8px;margin:8px 0;overflow:hidden;cursor:pointer;transition:all .15s ease}
   .flashcard:hover{box-shadow:0 2px 6px rgba(46,117,182,0.2)}
   .flashcard .q{padding:12px 16px;font-weight:600;display:flex;align-items:flex-start;gap:10px}
   .flashcard .q::before{content:"Q";background:var(--blue);color:#fff;border-radius:4px;padding:2px 8px;font-size:12px;font-weight:700;flex-shrink:0;margin-top:2px}
-  .flashcard .a{
-    max-height:0;overflow:hidden;transition:max-height .25s ease, padding .2s ease;
-    background:#F0F7FF;padding:0 16px;border-top:1px solid transparent;
-  }
+  .flashcard .a{max-height:0;overflow:hidden;transition:max-height .25s ease, padding .2s ease;background:#F0F7FF;padding:0 16px;border-top:1px solid transparent}
   .flashcard.open .a{max-height:400px;padding:12px 16px;border-top:1px solid #CFE0F5}
   .flashcard .a::before{content:"A";background:var(--red);color:#fff;border-radius:4px;padding:2px 8px;font-size:12px;font-weight:700;margin-right:8px}
   .flashcard .a span{color:var(--red);font-weight:500}
-  .flip-hint{font-size:12px;color:var(--muted);margin:6px 0 0 42px;font-style:italic}
-
-  /* ---------- Quiz ---------- */
-  .quiz-item{
-    background:#fff;border:1px solid var(--border);border-left:4px solid var(--purple);
-    border-radius:8px;padding:14px 16px;margin:10px 0;
-  }
+  .quiz-item{background:#fff;border:1px solid var(--border);border-left:4px solid var(--purple);border-radius:8px;padding:14px 16px;margin:10px 0}
   .quiz-item .qn{color:var(--purple);font-weight:700;margin-right:8px}
-  .quiz-item button.show{
-    background:var(--purple);color:#fff;border:none;padding:6px 14px;border-radius:6px;
-    font-size:13px;font-weight:600;cursor:pointer;margin-top:8px;
-  }
+  .quiz-item button.show{background:var(--purple);color:#fff;border:none;padding:6px 14px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;margin-top:8px}
   .quiz-item button.show:hover{background:#5E1D88}
   .quiz-item .ans{display:none;margin-top:10px;padding:10px 14px;background:#F4EEFA;border-radius:6px;border-left:3px solid var(--purple);color:var(--purple);font-weight:500}
   .quiz-item.revealed .ans{display:block}
   .quiz-item.revealed button.show{background:var(--muted)}
-
-  /* ---------- Completion toggle ---------- */
   .obj-header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-  .mark-done{
-    background:#fff;border:2px solid var(--green);color:var(--green);
-    padding:6px 14px;border-radius:999px;font-weight:600;font-size:13px;cursor:pointer;
-    transition:all .15s ease;white-space:nowrap
-  }
+  .mark-done{background:#fff;border:2px solid var(--green);color:var(--green);padding:6px 14px;border-radius:999px;font-weight:600;font-size:13px;cursor:pointer;transition:all .15s ease;white-space:nowrap}
   .mark-done:hover{background:#E8F5E9}
   .mark-done.done{background:var(--green);color:#fff}
   .mark-done.done::before{content:"✓ "}
-
-  /* ---------- Utilities ---------- */
-  .badge{display:inline-block;background:#EEF2F7;color:var(--navy);padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;margin-right:6px}
-  .pathway{
-    display:flex;gap:0;align-items:center;flex-wrap:wrap;margin:14px 0;padding:14px;
-    background:#F7F9FC;border-radius:8px;font-weight:600;font-size:14px;
-  }
+  .pathway{display:flex;gap:0;align-items:center;flex-wrap:wrap;margin:14px 0;padding:14px;background:#F7F9FC;border-radius:8px;font-weight:600;font-size:14px}
   .pathway .step{background:#fff;border:2px solid var(--navy);color:var(--navy);padding:6px 10px;border-radius:6px;white-space:nowrap}
   .pathway .arrow{color:var(--red);font-weight:800;margin:0 8px}
   .pathway .enz{color:var(--red);font-size:11px;font-weight:700;display:block;text-align:center;letter-spacing:.4px}
   .footer-note{text-align:center;padding:24px;color:var(--muted);font-style:italic}
-
-  /* ---------- Deep Dive sub-sections ---------- */
-  .deep-dive{
-    background:#FCFCFE;border-radius:8px;border:1px solid #E5E7EB;
-    padding:14px 18px 10px 20px;margin:16px 0;box-shadow:0 1px 2px rgba(0,0,0,0.03);
-  }
-  .deep-dive .dd-title{
-    color:var(--purple);font-weight:700;font-size:16px;text-transform:uppercase;
-    letter-spacing:0.8px;margin-bottom:10px;display:flex;align-items:center;gap:8px;
-  }
-  /* h4 inside deep-dive is collapsible — click to toggle */
-  .deep-dive h4{
-    color:var(--navy);margin:14px 0 6px;font-size:14px;
-    cursor:pointer;user-select:none;
-    display:flex;align-items:center;gap:8px;
-    padding:6px 8px;border-radius:6px;
-    transition:background .15s ease;
-  }
+  .controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+  .btn-reset{background:#fff;border:1px solid var(--border);color:var(--muted);padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer}
+  .btn-reset:hover{border-color:var(--red);color:var(--red)}
+  .deep-dive{background:#FCFCFE;border-radius:8px;border:1px solid #E5E7EB;padding:14px 18px 10px 20px;margin:16px 0;box-shadow:0 1px 2px rgba(0,0,0,0.03)}
+  .deep-dive .dd-title{color:var(--purple);font-weight:700;font-size:16px;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .deep-dive h4{color:var(--navy);margin:14px 0 6px;font-size:14px;cursor:pointer;user-select:none;display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:6px;transition:background .15s ease}
   .deep-dive h4:hover{background:#F3EEFA}
-  .deep-dive h4::after{
-    content:"▼";font-size:12px;color:var(--purple);margin-left:auto;
-    transition:transform .2s ease;display:inline-block;
-  }
+  .deep-dive h4::after{content:"▼";font-size:12px;color:var(--purple);margin-left:auto;transition:transform .2s ease;display:inline-block}
   .deep-dive h4.collapsed::after{content:"▶"}
   .deep-dive h4.collapsed{background:#FAFAFC}
-  /* Content hidden when its parent h4 is collapsed — handled by JS setting data-hidden */
   .deep-dive [data-h4-hidden="true"]{display:none}
-  .deep-dive .group-label{
-    font-weight:700;color:var(--navy);font-size:13.5px;
-    margin:10px 0 4px;padding:2px 0 2px 0;
-    border-bottom:1px dashed #CDD5E0;display:inline-block;
-  }
-  /* Parent bullet sized between the sub-heading and the sub-bullet */
-  .deep-dive > ul > li,
-  .deep-dive > ul > li > br + *,
-  .deep-dive ul:not(.sublist) > li{
-    font-size:13px;font-weight:600;color:#1A1A1A;line-height:1.5;
-  }
-  /* Sub-bullets slightly smaller and lighter */
+  .deep-dive .group-label{font-weight:700;color:var(--navy);font-size:13.5px;margin:10px 0 4px;padding:2px 0 2px 0;border-bottom:1px dashed #CDD5E0;display:inline-block}
+  .deep-dive > ul > li,.deep-dive > ul > li > br + *,.deep-dive ul:not(.sublist) > li{font-size:13px;font-weight:600;color:#1A1A1A;line-height:1.5}
   .deep-dive .sublist li{font-size:12.5px;font-weight:400;color:#333}
-
-  .deep-dive .dd-hint{
-    font-size:11px;color:var(--muted);font-weight:500;letter-spacing:0;
-    text-transform:none;margin-left:10px;font-style:italic;
-  }
-
-  /* Gist → Going Deeper preview */
-  .gist-deeper{
-    margin-top:10px;padding-top:10px;border-top:1px dashed #CDD5E0;
-    font-size:13.5px;
-  }
-  .gist-deeper .preview-label{
-    display:block;color:var(--purple);font-weight:700;font-size:12px;
-    text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;
-  }
-  .gist-deeper ul{margin:4px 0 0 0;padding-left:22px}
-  .gist-deeper li{margin:3px 0;color:#333;line-height:1.45}
-  .gist-deeper li b{color:var(--navy)}
-  .deep-dive ul{margin:4px 0 10px 0}
-  .deep-dive li{margin:4px 0;line-height:1.5}
-  .deep-dive .sublist{margin:2px 0 6px 0;padding-left:16px}
-  .deep-dive .sublist li{list-style:circle;font-size:13.5px;color:#333}
-  .cite{
-    display:inline-block;font-size:11px;color:var(--muted);background:#EEF2F7;
-    padding:1px 7px;border-radius:3px;margin-left:4px;font-style:italic;white-space:nowrap;
-    border:1px solid #E0E5EC;vertical-align:baseline;
-  }
-  .deep-dive table{margin:8px 0 10px}
-  .deep-dive thead th{background:var(--purple);font-size:13px;padding:8px 10px}
-  .deep-dive tbody td{font-size:13px;padding:7px 10px}
-
-  /* References section */
+  .cite{display:inline-block;font-size:11px;color:var(--muted);background:#EEF2F7;padding:1px 7px;border-radius:3px;margin-left:4px;font-style:italic;white-space:nowrap;border:1px solid #E0E5EC;vertical-align:baseline}
   #references{background:var(--card)}
   #references p,#references ul li,#references .ref-list li{font-size:14px;line-height:1.55}
   #references .ref-list{margin:10px 0;padding-left:22px}
   #references .ref-list li{margin:6px 0}
   #references .ref-list b{color:var(--navy)}
   #references ul{margin:6px 0 12px 0;padding-left:22px}
-  .controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
-  .btn-reset{background:#fff;border:1px solid var(--border);color:var(--muted);padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer}
-  .btn-reset:hover{border-color:var(--red);color:var(--red)}
-  .print-only{display:none}
-  @media print {
+  #audit{background:var(--card)}
+  #audit p,#audit li{font-size:14px}
+  .src-pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px;margin-right:4px}
+  .src-lecture{background:#E8F5E9;color:#2E7D32;border:1px solid #81C784}
+  .src-mapped{background:#E3F2FD;color:#0D47A1;border:1px solid #64B5F6}
+  .src-ai{background:#FFEBEE;color:#B71C1C;border:1px solid #EF9A9A}
+  #audit .legend{background:#F7F9FC;border-left:4px solid var(--navy);padding:12px 16px;border-radius:0 6px 6px 0;margin:10px 0 16px}
+  #audit .legend ul{margin:6px 0 0 0}
+  
+  .topbar-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-left:auto}
+  .btn-export{display:inline-flex;align-items:center;gap:6px;background:#1F3864;color:#fff;padding:6px 14px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.3px;text-decoration:none;border:none;cursor:pointer;transition:all .15s ease;box-shadow:0 1px 3px rgba(0,0,0,0.18);white-space:nowrap}
+  .btn-export:hover{background:#2E4A7A;transform:translateY(-1px);box-shadow:0 2px 6px rgba(0,0,0,0.25)}
+  .btn-export::before{content:"\2B07";font-weight:800;font-size:12px}
+  @media (max-width:900px){
+    .wrap{padding:20px 16px 60px}
+    .topbar .brand{padding-right:12px;border-right:1px solid rgba(255,255,255,0.25)}
+    .topbar h1{font-size:15px}
+    .progress-wrap{min-width:160px}
+  }
+  @media (max-width:700px){
+    header.topbar{padding:10px 12px}
+    .topbar-inner{gap:8px 10px}
+    .topbar .brand{font-size:18px;padding-right:10px}
+    .topbar .tag{font-size:11px;padding:2px 8px}
+    .topbar h1{font-size:13.5px;width:100%;order:2}
+    .progress-wrap{order:10;width:100%;flex:1 0 100%;min-width:0}
+    .progress-label{font-size:11px}
+    .topbar-actions{order:3;margin-left:auto}
+    .btn-export{font-size:11px;padding:5px 11px;gap:4px}
+    .btn-export::before{font-size:11px}
+    .wrap{padding:16px 12px 60px;gap:14px}
+    .cover{padding:18px;border-radius:10px}
+    .cover h1{font-size:24px;line-height:1.2}
+    .cover .how{padding:12px 14px}
+    .cover .how h3{font-size:14.5px}
+    .how-grid{gap:10px}
+    section.obj{padding:18px;border-radius:10px}
+    section.obj h2{font-size:19px;gap:8px}
+    section.obj h2 .num{width:28px;height:28px;font-size:13px}
+    section.obj h3{font-size:15.5px;margin:18px 0 6px}
+    section.obj h4{font-size:14px}
+    section.obj p,section.obj li{font-size:14px}
+    .gist{padding:12px 14px;font-size:14px}
+    .gist-label{font-size:13.5px;letter-spacing:.5px}
+    .gist-deeper{font-size:13px}
+    .callout{padding:12px 14px;margin:12px 0}
+    .callout .ctitle{font-size:14px;letter-spacing:.3px}
+    .callout p,.callout ul li,.callout ol li{font-size:13.5px}
+    .deep-dive{padding:12px 12px 8px 14px;margin:14px 0}
+    .deep-dive .dd-title{font-size:13.5px;letter-spacing:.5px}
+    .deep-dive h4{font-size:13.5px;padding:5px 6px}
+    .deep-dive > ul > li,.deep-dive ul:not(.sublist) > li{font-size:12.5px}
+    .deep-dive .sublist li{font-size:12px}
+    .deep-dive .group-label{font-size:12.5px}
+    table{font-size:12.5px}
+    thead th,tbody td{padding:7px 9px}
+    .pathway{font-size:12px;padding:10px;gap:4px}
+    .pathway .step{padding:5px 7px;font-size:12px}
+    .pathway .arrow{margin:0 3px;font-size:14px}
+    .pathway .enz{font-size:10px}
+    .roadmap a{font-size:13px;padding:9px 12px;gap:8px}
+    .roadmap .num{width:22px;height:22px;font-size:11px}
+    .quiz-item{padding:12px 14px}
+    .quiz-item .qn,.quiz-item{font-size:13.5px}
+    .quiz-item button.show{font-size:12px;padding:5px 11px}
+    .mark-done{font-size:12px;padding:5px 11px}
+    .flashcard .q{padding:10px 12px;font-size:13.5px;gap:8px}
+    .flashcard.open .a{padding:10px 12px}
+    .flashcard .a span,.flashcard .a{font-size:13.5px}
+    nav.sidebar{padding:12px;background:#F7F9FC;border:1px solid var(--border);border-radius:10px;margin-bottom:4px;max-height:none}
+    nav.sidebar .sidebar-toggle{display:none}
+    nav.sidebar a{padding:6px 10px;font-size:13px;margin:1px 0}
+    nav.sidebar .controls{margin-top:8px}
+    nav.sidebar .controls .btn-reset{font-size:11px}
+    .src-pill{font-size:10px;padding:1px 6px}
+    .cite{font-size:10px;padding:1px 5px;margin-left:2px}
+    #references p,#references ul li,#references .ref-list li{font-size:13.5px}
+    #audit p,#audit li{font-size:13.5px}
+    #audit .legend{padding:10px 12px}
+    .obj-header{gap:8px}
+  }
+  @media (max-width:420px){
+    .cover h1{font-size:21px}
+    section.obj h2{font-size:17.5px}
+    .topbar .brand{font-size:17px}
+    .pathway{font-size:11.5px}
+  }
+
+  
+  /* Back-to-Lectures button */
+  .btn-back{display:inline-flex;align-items:center;gap:4px;background:rgba(31,56,100,0.15);color:#1F3864;padding:5px 11px;border-radius:999px;font-size:12px;font-weight:700;text-decoration:none;border:1px solid rgba(31,56,100,0.22);transition:all .15s ease;white-space:nowrap}
+  .btn-back:hover{background:rgba(31,56,100,0.28);transform:translateY(-1px);box-shadow:0 1px 3px rgba(0,0,0,0.15)}
+  /* Compact progress bar pinned to the right with a gap after the title */
+  .progress-wrap.compact{flex:none;min-width:180px;max-width:220px;margin-left:auto}
+  .progress-wrap.compact .progress-label{text-align:right}
+  /* Cover "How to use" collapsible cards */
+  .cover .how h3.how-title{cursor:pointer;user-select:none;display:flex;align-items:center;gap:8px;padding:4px 0;margin:0 0 8px}
+  .cover .how h3.how-title::after{content:"\25BC";font-size:12px;color:var(--navy);margin-left:auto;transition:transform .2s ease}
+  .cover .how.alt h3.how-title::after{color:var(--purple)}
+  .cover .how.collapsed h3.how-title{margin-bottom:0}
+  .cover .how.collapsed h3.how-title::after{content:"\25B6"}
+  .cover .how.collapsed .how-body{display:none}
+  /* Source Audit per-objective collapsible */
+  .audit-obj{margin:10px 0;border:1px solid var(--border);border-radius:8px;background:#fff;overflow:hidden}
+  .audit-obj .audit-head{margin:0;padding:10px 14px;cursor:pointer;font-size:14.5px;font-weight:700;color:var(--navy);background:#F7F9FC;display:flex;align-items:center;gap:8px;user-select:none;border:none}
+  .audit-obj .audit-head::after{content:"\25BC";margin-left:auto;font-size:12px;color:var(--muted);transition:transform .2s ease}
+  .audit-obj.collapsed .audit-head::after{content:"\25B6"}
+  .audit-obj.collapsed .audit-body{display:none}
+  .audit-obj .audit-body{padding:10px 14px 14px}
+  #references .audit-block{margin-top:18px}
+  #references .audit-block .legend{background:#F7F9FC;border-left:4px solid var(--navy);padding:12px 16px;border-radius:0 6px 6px 0;margin:10px 0 16px}
+  #references .audit-block .legend ul{margin:6px 0 0 0;padding-left:22px}
+
+  
+  /* Right-anchored topbar cluster: progress + export + back */
+  .topbar-right{display:flex;gap:10px;align-items:center;margin-left:auto;flex-wrap:wrap;justify-content:flex-end}
+  .topbar-right .progress-wrap.compact{margin-left:0}
+  .topbar-right .topbar-actions{margin-left:0}
+  /* 3-column callout row (HY / MN / CL) on wide viewports; stack below */
+  .callout-trio{display:grid;grid-template-columns:1fr;gap:14px;margin:14px 0}
+  .callout-trio .callout{margin:0;align-self:stretch}
+  @media (min-width:1100px){
+    .callout-trio{grid-template-columns:repeat(3,minmax(0,1fr))}
+  }
+
+  
+  /* ---------- Hub-style topnav (matches active-recall-hub.html) ---------- */
+  .topnav{width:100%;background:#2e2405;position:sticky;top:0;left:0;z-index:400;display:flex;align-items:center;padding:0 20px;height:52px;gap:0;border-bottom:1px solid rgba(255,255,255,0.06);flex-shrink:0;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  .tn-brand{display:flex;flex-direction:column;justify-content:center;margin-right:28px;flex-shrink:0;gap:1px}
+  .tn-name{font-size:1.4rem;font-weight:900;color:#fff;letter-spacing:-0.01em;text-decoration:none;text-shadow:0 1px 8px rgba(0,0,0,0.25)}
+  .tn-name:hover{color:rgba(255,255,255,0.80)}
+  .tn-nav{display:flex;align-items:center;gap:5px;flex:1;justify-content:flex-end;flex-wrap:wrap}
+  .tn-link{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:7px;font-size:0.80rem;font-weight:600;color:rgba(255,255,255,0.70);border:1px solid rgba(255,255,255,0.12);transition:background 0.13s, color 0.13s, border-color 0.13s;white-space:nowrap;text-decoration:none}
+  .tn-link:hover{background:rgba(255,255,255,0.08);color:#fff;border-color:rgba(255,255,255,0.26)}
+  .tn-link.active{background:rgba(255,255,255,0.14);color:#fff;border-color:rgba(255,255,255,0.32)}
+  .tn-link-export{background:rgba(234,179,8,0.18);border-color:rgba(234,179,8,0.38);color:#FFD54F}
+  .tn-link-export:hover{background:rgba(234,179,8,0.30);color:#fff;border-color:rgba(234,179,8,0.60)}
+  .tn-right{flex-shrink:0;display:flex;align-items:center;gap:8px;margin-left:12px}
+  .dark-toggle{width:32px;height:32px;border-radius:7px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);display:flex;align-items:center;justify-content:center;font-size:0.85rem;color:rgba(255,255,255,0.85);flex-shrink:0;transition:background 0.14s;cursor:pointer}
+  .dark-toggle:hover{background:rgba(255,255,255,0.18)}
+  @media (max-width:900px){
+    .topnav{padding:0 12px}
+    .tn-brand{margin-right:14px}
+    .tn-name{font-size:1.15rem}
+    .tn-link{padding:5px 9px;font-size:0.72rem}
+  }
+  @media (max-width:640px){
+    .tn-link:not(.tn-link-export){display:none}
+  }
+  /* ---------- Cover progress bar (replaces the old in-topbar one) -------- */
+  .cover-progress{margin:22px 0 10px;display:flex;align-items:center;gap:14px;background:#F7F9FC;border:1px solid #E5E7EB;border-radius:10px;padding:12px 16px}
+  .cover-progress .progress-label{font-size:13px;color:var(--navy);font-weight:700;white-space:nowrap;margin:0;letter-spacing:.2px}
+  .cover-progress .progress-track{flex:1;height:10px;background:#E5E7EB;border-radius:5px;overflow:hidden;border:1px solid #D4D8E0}
+  .cover-progress .progress-fill{height:100%;background:linear-gradient(90deg,#CA8A04,#EAB308);border-radius:5px;width:0%;transition:width .4s ease}
+  @media (max-width:700px){
+    .cover-progress{padding:10px 12px;gap:10px}
+    .cover-progress .progress-label{font-size:12px}
+  }
+  /* ---------- Minimal dark-mode override -------------------------------- */
+  [data-theme="dark"]{color-scheme:dark}
+  [data-theme="dark"] body{background:#151A1F;color:#E5E7EB}
+  [data-theme="dark"] .cover,[data-theme="dark"] section.obj,[data-theme="dark"] #references,[data-theme="dark"] .audit-obj,[data-theme="dark"] .quiz-item,[data-theme="dark"] .flashcard{background:#1F2937;border-color:#374151;color:#E5E7EB}
+  [data-theme="dark"] .cover h1{color:#FCD34D}
+  [data-theme="dark"] section.obj h2,[data-theme="dark"] section.obj h3{color:#93C5FD}
+  [data-theme="dark"] .gist{background:#111827;color:#E5E7EB;border-left-color:#60A5FA}
+  [data-theme="dark"] .deep-dive{background:#111827;border-color:#374151}
+  [data-theme="dark"] .deep-dive h4{color:#E5E7EB}
+  [data-theme="dark"] nav.sidebar a{color:#CBD5E1}
+  [data-theme="dark"] nav.sidebar a:hover{background:#374151;color:#fff}
+  [data-theme="dark"] nav.sidebar a.active{background:#0B1220;color:#FCD34D;border-left-color:#FCD34D}
+  [data-theme="dark"] .sidebar-toggle{background:#253040;color:#E5E7EB;border-color:#374151}
+  [data-theme="dark"] tbody td{background:#1F2937;border-color:#374151;color:#E5E7EB}
+  [data-theme="dark"] tbody tr:nth-child(even) td{background:#253040}
+  [data-theme="dark"] tbody tr:hover td{background:#2C3644}
+  [data-theme="dark"] thead th{background:#0F172A}
+  [data-theme="dark"] .audit-obj .audit-head{background:#111827;color:#E5E7EB}
+  [data-theme="dark"] #references .audit-block .legend{background:#111827;color:#E5E7EB}
+  [data-theme="dark"] .cover-progress{background:#1F2937;border-color:#374151}
+  [data-theme="dark"] .cover-progress .progress-label{color:#FCD34D}
+  [data-theme="dark"] .cover-progress .progress-track{background:#0F172A;border-color:#374151}
+  [data-theme="dark"] .how.alt h3.how-title,[data-theme="dark"] .cover .how h3{color:#93C5FD}
+
+  @media print{
     header.topbar,nav.sidebar,.mark-done,.controls{display:none}
     .wrap{grid-template-columns:1fr;padding:10px}
     section.obj{page-break-after:always;box-shadow:none;border:none}
     .flashcard .a{max-height:none!important;padding:12px 16px!important;border-top:1px solid #CFE0F5!important}
     .quiz-item .ans{display:block!important}
     .deep-dive [data-h4-hidden="true"]{display:block!important}
-    .callout.rc.collapsed .flashcard{display:block!important}
-    .deep-dive h4::after,.callout.rc .ctitle::after{display:none!important}
+    .callout.collapsed > *{display:block!important}
+    .deep-dive h4::after,.callout .ctitle::after{display:none!important}
   }
 </style>
 </head>
 <body>
 
-<header class="topbar">
-  <div class="topbar-inner">
-    <span class="brand">HoyaDocs</span>
-    <span class="tag">ENDO · 01</span>
-    <h1>Intro to Hormones</h1>
-    <div class="progress-wrap">
-      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-      <div class="progress-label" id="progressLabel">0 / 7 objectives complete</div>
-    </div>
+<header class="topnav">
+  <div class="tn-brand">
+    <a class="tn-name" href="https://hoyadocs.com/Block4-Endocrine/index.html">HoyaDocs ↗</a>
+  </div>
+  <nav class="tn-nav">
+    <a class="tn-link" href="https://hoyadocs.com/Block4-Endocrine/lecture-guides/index.html">📖 Lecture Guides</a>
+    <a class="tn-link" href="https://hoyadocs.com/Block4-Endocrine/resource-mapping/endocrine_resource_hub.html">🔗 Lecture Resources</a>
+    <a class="tn-link" href="https://hoyadocs.com/Block4-Endocrine/resource-mapping/endocrine_mapping.html">🗂 3rd Party Mapping</a>
+    <a class="tn-link tn-link-export" href="end01-lg-word.docx" download title="Download Word (.docx) version">⬇ Export to Word</a>
+  </nav>
+  <div class="tn-right">
+    <button class="dark-toggle" id="darkToggle" onclick="toggleDark()" title="Toggle dark mode">🌙</button>
   </div>
 </header>
 
@@ -372,7 +372,6 @@
     <a href="#cheatsheet">Cheat Sheet</a>
     <a href="#quiz">Self-Quiz</a>
     <a href="#references">References</a>
-    <a href="#audit">Source Audit</a>
     <div class="controls" style="margin-top:14px;flex-direction:column;align-items:stretch">
       <button class="btn-reset" onclick="toggleAllDeepDives(true)">Collapse all sub-sections</button>
       <button class="btn-reset" onclick="toggleAllDeepDives(false)">Expand all sub-sections</button>
@@ -387,39 +386,67 @@
       <h1>Endocrine Module 01: Introduction to Hormones</h1>
 
       <div class="how-grid">
-        <div class="how">
-          <h3>How to use this guide (60 seconds)</h3>
-          <p>Each objective follows the same pattern so your brain can cruise on autopilot:</p>
-          <ul>
-            <li><b>Gist</b> (one paragraph) — the big idea</li>
-            <li><b>Tables</b> for side-by-side comparison</li>
-            <li><b>Yellow ★ High-Yield</b>, <b>green 🧠 Memory Trick</b>, <b>orange 🏥 Clinical Pearl</b></li>
-            <li><b>Blue ✏️ Active Recall</b> — <u>click each question to reveal the answer</u></li>
-            <li><b>Mark Done</b> on each objective; the bar at the top tracks you</li>
-          </ul>
-          <p style="margin-top:8px"><b style="color:var(--red)">Rule:</b> don't just read. Before you click to reveal, say the answer out loud. If you can't, reread the section. That's active recall — 2–3× more effective than passive reading.</p>
+        <div class="how collapsed">
+          <h3 class="how-title">How to use this guide</h3>
+          <div class="how-body">
+            <p>Each objective follows the same pattern so your brain can cruise on autopilot:</p>
+            <ul>
+              <li><b>Gist</b> (one paragraph) — the big idea</li>
+              <li><b>Tables</b> for side-by-side comparison</li>
+              <li><b>Yellow ★ High-Yield</b>, <b>green 🧠 Memory Trick</b>, <b>orange 🏥 Clinical Pearl</b></li>
+              <li><b>Blue ✏️ Active Recall</b> — <u>click each question to reveal the answer</u></li>
+              <li><b>Mark Done</b> on each objective; the bar at the top tracks you</li>
+            </ul>
+          </div>
         </div>
 
-        <div class="how alt">
-          <h3>How to use this guide with other resources</h3>
-          <ul>
-            <li>If you're early in your study: <b>read this guide → watch the corresponding B&amp;B video → review First Aid</b> for the topic. Same content, 3 different modalities = better retention.</li>
-            <li>For drug-heavy questions (pharmacology): cross-reference the <b>Lippincott Pharm</b> chapter for each drug mentioned here.</li>
-            <li>For pathology (CAH, pheochromocytoma, Cushing's): watch the relevant <b>Pathoma</b> chapter 15 sections; they're short and high-yield.</li>
-            <li>Then hit <b>UWorld Qbank</b> questions on the Endocrine section — particularly the ones tagged "hormone synthesis," "receptor," and "adrenal pathway" — to consolidate.</li>
-          </ul>
+        <div class="how alt collapsed">
+          <h3 class="how-title">How to use this guide with other resources</h3>
+          <div class="how-body">
+            <ul>
+              <li>Read this guide → watch the corresponding 3rd-party video / in-house lecture → fill in the recall sheets → complete self-quiz
+                <ul class="sublist">
+                  <li><b>Spaced repetition options:</b>
+                    <ul>
+                      <li>Anki</li>
+                      <li>Drill Hubs #1, #2, and #3</li>
+                    </ul>
+                  </li>
+                  <li><b>Formative Feedback options:</b>
+                    <ul>
+                      <li>Canvas provided material</li>
+                      <li>UWorld mapped QID</li>
+                      <li>HoyaDocs Question Bank</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>Link to:
+                <ul class="sublist">
+                  <li><a href="https://hoyadocs.com/Block4-Endocrine/resource-mapping/index.html">Resource Mapping hub</a></li>
+                  <li><a href="https://hoyadocs.com/Block4-Endocrine/resource-explorer/index.html">Resource Explorer</a></li>
+                  <li><a href="https://hoyadocs.com/Block4-Endocrine/active-recall-drills/index.html">Active Recall Drills Hub</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
+
+      <div class="cover-progress">
+        <span class="progress-label" id="progressLabel">0 / 7 objectives complete</span>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
       </div>
 
       <h3 style="margin-top:22px;color:var(--navy);font-size:16px">Jump to any objective:</h3>
       <div class="roadmap">
-        <a href="#obj1"><span class="num">1</span><span>Distinguish between endocrine signaling and other forms of intercellular communication</span></a>
-        <a href="#obj2"><span class="num">2</span><span>Classify hormones based on their structure, solubility, &amp; storability</span></a>
-        <a href="#obj3"><span class="num">3</span><span>Describe catecholamine biosynthesis</span></a>
-        <a href="#obj4"><span class="num">4</span><span>Describe the initial step of steroid biosynthesis</span></a>
-        <a href="#obj5"><span class="num">5</span><span>Explain the effects of carrier proteins on hormone activity and half-life</span></a>
-        <a href="#obj6"><span class="num">6</span><span>Classify hormone receptors based on their subcellular location and mechanism of action</span></a>
-        <a href="#obj7"><span class="num">7</span><span>Explain the factors that influence cellular sensitivity to hormones and cellular response to hormones</span></a>
+        <a href="#obj1"><span class="num">1</span>Signaling modes</a>
+        <a href="#obj2"><span class="num">2</span>Hormone classes</a>
+        <a href="#obj3"><span class="num">3</span>Catecholamine synthesis</a>
+        <a href="#obj4"><span class="num">4</span>Steroid synthesis</a>
+        <a href="#obj5"><span class="num">5</span>Carrier proteins</a>
+        <a href="#obj6"><span class="num">6</span>Receptors</a>
+        <a href="#obj7"><span class="num">7</span>Sensitivity</a>
       </div>
     </div>
 
@@ -613,26 +640,26 @@
         </ul>
       </div>
 
-      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+      <div class="callout-trio">
+        <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
         <ul>
-          <li><b>Endocrine vs. exocrine:</b> endocrine = ductless, into blood. Exocrine = into a duct (sweat, saliva, pancreatic enzymes). <span class="cite">Bootcamp 1.02 Endocrine Glands</span></li>
-          <li>A "hormone" is defined by <b>endocrine delivery</b>. The same molecule can act as neurotransmitter, paracrine, or hormone depending on context (dopamine, somatostatin, gastrin). <span class="cite">end01 lecture</span></li>
-          <li><b>Specificity = receptor expression</b>, not hormone distribution. <span class="cite">end01 lecture</span></li>
+          <li><b>Endocrine vs. exocrine:</b> endocrine = ductless, into blood. Exocrine = into a duct (sweat, saliva, pancreatic enzymes).</li>
+          <li>A "hormone" is defined by <b>endocrine delivery</b>. The same molecule can act as neurotransmitter, paracrine, or hormone depending on context (dopamine, somatostatin, gastrin).</li>
+          <li><b>Specificity = receptor expression</b>, not hormone distribution.</li>
         </ul>
       </div>
-
-      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
         <p><b>PANE-J:</b> Paracrine, Autocrine, Neural, Endocrine, Juxtacrine.</p>
         <p><b>Distance mantra:</b> "Autocrine whispers to itself, paracrine gossips to neighbors, endocrine shouts across the body."</p>
         <p><b>Neuroendocrine</b> = "the neuron that hijacks the bloodstream" (posterior pituitary, hypothalamic releasing hormones).</p>
       </div>
-
-      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
         <ul>
-          <li><b>Pheochromocytoma</b> dumps catecholamines systemically → endocrine effect (episodic HTN, palpitations). <span class="cite">AI Generated · see end20</span></li>
-          <li><b>IGF-1 from liver</b> = endocrine. IGF-1 locally = paracrine/autocrine. Same molecule, different modes. <span class="cite">FA 3.14 Signaling pathways; Bootcamp 1.01</span></li>
-          <li><b>Gastrinoma (Zollinger-Ellison):</b> gastrin normally paracrine, but a tumor makes it endocrine → systemic acid hypersecretion, refractory ulcers. <span class="cite">AI Generated · GI module</span></li>
+          <li><b>Pheochromocytoma</b> dumps catecholamines systemically → endocrine effect (episodic HTN, palpitations).</li>
+          <li><b>IGF-1 from liver</b> = endocrine. IGF-1 locally = paracrine/autocrine. Same molecule, different modes.</li>
+          <li><b>Gastrinoma (Zollinger-Ellison):</b> gastrin normally paracrine, but a tumor makes it endocrine → systemic acid hypersecretion, refractory ulcers.</li>
         </ul>
+      </div>
       </div>
 
       <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL — click each question to reveal</div>
@@ -934,26 +961,26 @@
         </ul>
       </div>
 
-      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
-        <p><b>THE REBEL: Thyroid hormone (T3/T4).</b> Amino-acid-derived but behaves like a steroid — lipophilic, TBG-bound, nuclear receptor, long half-life (T4 ≈ 7 days). Don't be caught on this one. <span class="cite">end01 lecture</span></p>
+      <div class="callout-trio">
+        <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+        <p><b>THE REBEL: Thyroid hormone (T3/T4).</b> Amino-acid-derived but behaves like a steroid — lipophilic, TBG-bound, nuclear receptor, long half-life (T4 ≈ 7 days). Don't be caught on this one.</p>
         <ul>
-          <li><b>Glycoprotein hormones</b> (TSH, FSH, LH, hCG) share a common <b>α-subunit</b>; the <b>β-subunit</b> gives receptor specificity. <span class="cite">end01 lecture</span></li>
-          <li><b>Peptide hormones are cleaved from pre-pro forms</b> (pre-pro-insulin → pro-insulin → insulin + C-peptide). C-peptide distinguishes endogenous from exogenous insulin. <span class="cite">FA 3.14 Signaling pathways</span></li>
+          <li><b>Glycoprotein hormones</b> (TSH, FSH, LH, hCG) share a common <b>α-subunit</b>; the <b>β-subunit</b> gives receptor specificity.</li>
+          <li><b>Peptide hormones are cleaved from pre-pro forms</b> (pre-pro-insulin → pro-insulin → insulin + C-peptide). C-peptide distinguishes endogenous from exogenous insulin.</li>
         </ul>
       </div>
-
-      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
         <p><b>"Steroids and Thyroid are Siblings" (S.T.S.)</b> — both lipophilic, carrier-bound, nuclear receptors, slow + long-lasting.</p>
         <p><b>"CAT PEP"</b> = hydrophilic: CATecholamines + PEPtides. Stored, short-lived, membrane receptors.</p>
         <p><b>"TFL-hC"</b> = glycoprotein α-subunit sharers: TSH, FSH, LH, hCG.</p>
       </div>
-
-      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
         <ul>
-          <li><b>C-peptide measurement</b> distinguishes insulinoma / endogenous insulin (↑ C-peptide) from surreptitious insulin injection (↓ C-peptide). <span class="cite">AI Generated · see end17/18</span></li>
-          <li><b>Pregnancy → ↑TBG → ↑ total T4, normal free T4.</b> Patient is euthyroid — classic trap. <span class="cite">AI Generated · see end10/11</span></li>
-          <li><b>hCG cross-reacts with TSH receptor</b> (shared α) → gestational hyperthyroidism in hyperemesis gravidarum. <span class="cite">AI Generated · see end11</span></li>
+          <li><b>C-peptide measurement</b> distinguishes insulinoma / endogenous insulin (↑ C-peptide) from surreptitious insulin injection (↓ C-peptide).</li>
+          <li><b>Pregnancy → ↑TBG → ↑ total T4, normal free T4.</b> Patient is euthyroid — classic trap.</li>
+          <li><b>hCG cross-reacts with TSH receptor</b> (shared α) → gestational hyperthyroidism in hyperemesis gravidarum.</li>
         </ul>
+      </div>
       </div>
 
       <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL</div>
@@ -1302,30 +1329,30 @@
         </ul>
       </div>
 
-      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
-        <p><b>Rate-limiting enzyme = Tyrosine Hydroxylase.</b> Regulated by end-product feedback and phosphorylation during sympathetic activation. <span class="cite">end01 lecture</span></p>
-        <p><b>Why only the medulla makes Epi:</b> PNMT needs HIGH cortisol. Cortisol drains from the adrenal cortex <i>through</i> the medulla via portal venous drainage. Post-ganglionic sympathetic neurons release <b>NE only</b>. <span class="cite">end01 lecture</span></p>
+      <div class="callout-trio">
+        <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+        <p><b>Rate-limiting enzyme = Tyrosine Hydroxylase.</b> Regulated by end-product feedback and phosphorylation during sympathetic activation.</p>
+        <p><b>Why only the medulla makes Epi:</b> PNMT needs HIGH cortisol. Cortisol drains from the adrenal cortex <i>through</i> the medulla via portal venous drainage. Post-ganglionic sympathetic neurons release <b>NE only</b>.</p>
         <ul>
-          <li>Adrenal medulla output ≈ <b>80% Epi / 20% NE</b>. <span class="cite">end01 lecture</span></li>
-          <li>Sympathetic nerve terminals ≈ <b>100% NE</b>. <span class="cite">end01 lecture</span></li>
-          <li>Degradation by MAO + COMT → <b>VMA</b> (urine) and <b>metanephrines</b> (plasma/urine — more sensitive for pheochromocytoma). <span class="cite">Bootcamp 10.04 Phe/Tyr/Catecholamines; pheo clinical end20</span></li>
+          <li>Adrenal medulla output ≈ <b>80% Epi / 20% NE</b>.</li>
+          <li>Sympathetic nerve terminals ≈ <b>100% NE</b>.</li>
+          <li>Degradation by MAO + COMT → <b>VMA</b> (urine) and <b>metanephrines</b> (plasma/urine — more sensitive for pheochromocytoma).</li>
         </ul>
       </div>
-
-      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
         <p><b>"Tyrants Don't Dare Nag Emperors"</b> = Tyrosine → DOPA → Dopamine → NE → Epi.</p>
         <p><b>"The Boss Hydroxylates First"</b> — Tyrosine Hydroxylase is the rate-limiting boss.</p>
         <p><b>PNMT</b> = "Please iNject More Cortisol To make Epi" — only the medulla gets cortisol.</p>
         <p>Cofactor trick: <b>B6 before B6 of breakfast</b> → DOPA decarboxylase. <b>"C sees Cu"</b> → DBH needs Vit C and copper.</p>
       </div>
-
-      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
         <ul>
-          <li><b>Parkinson's:</b> give L-DOPA (crosses BBB; dopamine doesn't). Pair with carbidopa (blocks peripheral DOPA decarboxylase) → more L-DOPA reaches the brain, fewer peripheral side effects. <span class="cite">AI Generated · neuro pharm</span></li>
-          <li><b>Pheochromocytoma — 5 P's:</b> Pressure (HTN), Pain (headache), Palpitations, Perspiration, Pallor. Dx: plasma free metanephrines. Tx: <b>α-blocker FIRST</b> (phenoxybenzamine), then β-blocker. <span class="cite">AI Generated · see end20/21</span></li>
-          <li><b>MAO inhibitor + tyramine foods</b> → hypertensive crisis. <span class="cite">AI Generated · psychiatry pharm</span></li>
-          <li><b>Addison's disease:</b> low cortisol → ↓ PNMT → ↓ Epi synthesis. <span class="cite">AI Generated · PNMT in end01; Addison clinical end20/21</span></li>
+          <li><b>Parkinson's:</b> give L-DOPA (crosses BBB; dopamine doesn't). Pair with carbidopa (blocks peripheral DOPA decarboxylase) → more L-DOPA reaches the brain, fewer peripheral side effects.</li>
+          <li><b>Pheochromocytoma — 5 P's:</b> Pressure (HTN), Pain (headache), Palpitations, Perspiration, Pallor. Dx: plasma free metanephrines. Tx: <b>α-blocker FIRST</b> (phenoxybenzamine), then β-blocker.</li>
+          <li><b>MAO inhibitor + tyramine foods</b> → hypertensive crisis.</li>
+          <li><b>Addison's disease:</b> low cortisol → ↓ PNMT → ↓ Epi synthesis.</li>
         </ul>
+      </div>
       </div>
 
       <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL</div>
@@ -1634,29 +1661,29 @@
         </ul>
       </div>
 
-      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
-        <p><b>Rate-limiting step of steroidogenesis = Cholesterol → Pregnenolone (desmolase).</b> StAR-mediated import is the actual bottleneck. <span class="cite">end01 lecture</span></p>
+      <div class="callout-trio">
+        <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+        <p><b>Rate-limiting step of steroidogenesis = Cholesterol → Pregnenolone (desmolase).</b> StAR-mediated import is the actual bottleneck.</p>
         <ul>
-          <li><b>ACTH upregulates</b> StAR and desmolase → increases cortisol in minutes (acute) and hours (chronic). <span class="cite">FA 3.15 Signaling pathways of steroid hormones</span></li>
-          <li><b>Desmolase inhibitors:</b> ketoconazole, aminoglutethimide (used in Cushing's). <span class="cite">AI Generated · see end21</span></li>
-          <li><b>Metyrapone</b> blocks 11β-hydroxylase (Cushing testing/treatment). <span class="cite">AI Generated · see end21</span></li>
+          <li><b>ACTH upregulates</b> StAR and desmolase → increases cortisol in minutes (acute) and hours (chronic).</li>
+          <li><b>Desmolase inhibitors:</b> ketoconazole, aminoglutethimide (used in Cushing's).</li>
+          <li><b>Metyrapone</b> blocks 11β-hydroxylase (Cushing testing/treatment).</li>
         </ul>
       </div>
-
-      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
         <p><b>"Cholesterol is Pregnant with every steroid"</b> — Cholesterol → Pregnenolone → all others. Desmolase is the "midwife."</p>
         <p><b>"SCC = Scissors on the Side Chain"</b> — P450scc literally cleaves the side chain.</p>
         <p><b>"StAR is the bouncer"</b> — cholesterol can't enter the mitochondrial VIP room without StAR.</p>
         <p>Carbon counts <b>descend</b>: C21 → C19 → C18 (progesterone → androgens → estrogens).</p>
       </div>
-
-      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
         <ul>
-          <li><b>21-hydroxylase deficiency</b> (most common CAH): ↓ cortisol & aldo, ↑ androgens → virilization, salt-wasting, hypotension. <span class="cite">AI Generated · see end04/end20</span></li>
-          <li><b>17α-hydroxylase deficiency:</b> ↓ cortisol & sex steroids, ↑ mineralocorticoids → HTN, hypokalemia, sexual infantilism. <span class="cite">AI Generated · see end04/end20</span></li>
-          <li><b>11β-hydroxylase deficiency:</b> ↓ cortisol, ↑ 11-DOC (weak mineralocorticoid) + ↑ androgens → HTN + virilization. <span class="cite">AI Generated · see end04/end20</span></li>
-          <li><b>Ketoconazole</b> (broad CYP inhibitor) → can cause gynecomastia in men from ↓ testosterone. <span class="cite">AI Generated · see end21</span></li>
+          <li><b>21-hydroxylase deficiency</b> (most common CAH): ↓ cortisol & aldo, ↑ androgens → virilization, salt-wasting, hypotension.</li>
+          <li><b>17α-hydroxylase deficiency:</b> ↓ cortisol & sex steroids, ↑ mineralocorticoids → HTN, hypokalemia, sexual infantilism.</li>
+          <li><b>11β-hydroxylase deficiency:</b> ↓ cortisol, ↑ 11-DOC (weak mineralocorticoid) + ↑ androgens → HTN + virilization.</li>
+          <li><b>Ketoconazole</b> (broad CYP inhibitor) → can cause gynecomastia in men from ↓ testosterone.</li>
         </ul>
+      </div>
       </div>
 
       <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL</div>
@@ -1958,29 +1985,29 @@
         </ul>
       </div>
 
-      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+      <div class="callout-trio">
+        <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
         <ul>
-          <li><b>Pregnancy/OCP/estrogen → ↑TBG → ↑ total T4, normal free T4.</b> Patient is euthyroid — do NOT treat based on total T4. <span class="cite">AI Generated · see end10/11</span></li>
-          <li><b>Nephrotic/liver failure → ↓TBG → ↓ total T4</b>, but normal free T4. Still euthyroid. <span class="cite">AI Generated · see end10</span></li>
-          <li><b>Half-life ranking:</b> catecholamines (~1–2 min) &lt; peptides (5–60 min) &lt; steroids (hours) &lt; thyroid (T3 ~1 day, <b>T4 ~7 days</b>). <span class="cite">FA 3.14 Signaling pathways; Bootcamp 1.01</span></li>
-          <li><b>Hyperthyroidism</b> ↑ SHBG → ↓ free testosterone in men (gynecomastia, low libido). <span class="cite">AI Generated · SHBG in end01; clinical end10/11</span></li>
+          <li><b>Pregnancy/OCP/estrogen → ↑TBG → ↑ total T4, normal free T4.</b> Patient is euthyroid — do NOT treat based on total T4.</li>
+          <li><b>Nephrotic/liver failure → ↓TBG → ↓ total T4</b>, but normal free T4. Still euthyroid.</li>
+          <li><b>Half-life ranking:</b> catecholamines (~1–2 min) &lt; peptides (5–60 min) &lt; steroids (hours) &lt; thyroid (T3 ~1 day, <b>T4 ~7 days</b>).</li>
+          <li><b>Hyperthyroidism</b> ↑ SHBG → ↓ free testosterone in men (gynecomastia, low libido).</li>
         </ul>
       </div>
-
-      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
         <p><b>"Free = Active. Bound = Backup."</b> Bound pool = savings account; free = spending money.</p>
         <p><b>TBG, CBG, SHBG</b> — the "BG" family of Binding Globulins: Thyroid, Cortisol, Sex steroids.</p>
         <p><b>Estrogen raises ALL carrier proteins</b> (TBG, CBG, SHBG) — think "estrogen dresses up all the hormones in carrier coats."</p>
         <p>Half-life: <b>"Catecholamines are TINY (sec), Thyroid is TITANIC (days)."</b></p>
       </div>
-
-      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
         <ul>
-          <li><b>Levothyroxine once daily</b> works because T4 half-life is ~7 days — plasma levels are stable. <span class="cite">AI Generated · see end13</span></li>
-          <li><b>Pregnancy thyroid labs:</b> always order <b>FREE T4</b> (and TSH). Total T4 is falsely high. <span class="cite">AI Generated · see end10/11</span></li>
-          <li><b>Cirrhosis:</b> ↓ albumin + ↑ SHBG (↑ estrogen from failed liver clearance) → low free T, high estradiol → gynecomastia, spider angiomas. <span class="cite">AI Generated · GI / repro</span></li>
-          <li><b>Why pheochromocytoma is EPISODIC:</b> catecholamine half-life is minutes, so bursts give paroxysmal symptoms. <span class="cite">AI Generated · see end20</span></li>
+          <li><b>Levothyroxine once daily</b> works because T4 half-life is ~7 days — plasma levels are stable.</li>
+          <li><b>Pregnancy thyroid labs:</b> always order <b>FREE T4</b> (and TSH). Total T4 is falsely high.</li>
+          <li><b>Cirrhosis:</b> ↓ albumin + ↑ SHBG (↑ estrogen from failed liver clearance) → low free T, high estradiol → gynecomastia, spider angiomas.</li>
+          <li><b>Why pheochromocytoma is EPISODIC:</b> catecholamine half-life is minutes, so bursts give paroxysmal symptoms.</li>
         </ul>
+      </div>
       </div>
 
       <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL</div>
@@ -2404,32 +2431,32 @@
         </ul>
       </div>
 
-      <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
+      <div class="callout-trio">
+        <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
         <ul>
-          <li><b>GPCR G-protein assignments are repeat questions.</b> You must know α1 = Gq, β1 = Gs, etc. <span class="cite">FA 3.14 Signaling pathways; B&amp;B 5.06</span></li>
-          <li><b>Acidophiles use JAK-STAT:</b> GH and Prolactin (from pituitary acidophils). Also EPO, TPO. <span class="cite">FA 3.14 Signaling pathways</span></li>
-          <li><b>Insulin receptor is an RTK</b> (α₂β₂ tetramer). Many cancer drug targets too (HER2, EGFR). <span class="cite">FA 3.14 Signaling pathways; oncology xref</span></li>
-          <li><b>ANP/BNP</b> → membrane guanylyl cyclase → cGMP → natriuresis, vasodilation. BNP ↑ in heart failure. <span class="cite">AI Generated · cardiology</span></li>
-          <li><b>Thyroid &amp; Vit D receptors live in the NUCLEUS.</b> Steroid receptors live in the CYTOPLASM with HSP90. <span class="cite">FA 3.15 Signaling pathways of steroid hormones</span></li>
+          <li><b>GPCR G-protein assignments are repeat questions.</b> You must know α1 = Gq, β1 = Gs, etc.</li>
+          <li><b>Acidophiles use JAK-STAT:</b> GH and Prolactin (from pituitary acidophils). Also EPO, TPO.</li>
+          <li><b>Insulin receptor is an RTK</b> (α₂β₂ tetramer). Many cancer drug targets too (HER2, EGFR).</li>
+          <li><b>ANP/BNP</b> → membrane guanylyl cyclase → cGMP → natriuresis, vasodilation. BNP ↑ in heart failure.</li>
+          <li><b>Thyroid & Vit D receptors live in the NUCLEUS.</b> Steroid receptors live in the CYTOPLASM with HSP90.</li>
         </ul>
       </div>
-
-      <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
+        <div class="callout mn"><div class="ctitle">🧠 MEMORY TRICK</div>
         <p><b>"HAVe 1 M&M of GQs":</b> Gq = H1, α1, V1, M1, M3 + GnRH, TRH, Ang II, oxytocin.</p>
         <p><b>"MAD 2":</b> Gi = M2, α2, D2.</p>
         <p><b>"Big Box Always Bends":</b> Gs = β1, β2, D1, H2, V2 (+ glucagon, ACTH, PTH, CRH, GHRH).</p>
         <p><b>"GPE = JAK":</b> GH, Prolactin, EPO all use JAK-STAT.</p>
         <p><b>"Steroids Sneak into the Cytoplasm; Thyroid goes straight to the Nucleus."</b></p>
       </div>
-
-      <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
+        <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
         <ul>
-          <li><b>Cholera toxin</b> ADP-ribosylates Gs → locked ON → ↑↑ cAMP → rice-water diarrhea. <span class="cite">AI Generated · microbiology</span></li>
-          <li><b>Pertussis toxin</b> ADP-ribosylates Gi → locked OFF → ↑ cAMP (disinhibited) → lymphocytosis, whooping cough. <span class="cite">AI Generated · microbiology</span></li>
-          <li><b>Pseudohypoparathyroidism 1A (Albright):</b> defective Gs → PTH doesn't signal → hypocalcemia, short 4th/5th digits. <span class="cite">AI Generated · see end12/parathyroid</span></li>
-          <li><b>Androgen insensitivity:</b> mutant cytoplasmic AR → 46,XY phenotypic female with testes, no axillary/pubic hair. <span class="cite">AI Generated · repro/genetics</span></li>
-          <li><b>Thyroid hormone resistance:</b> mutant TRβ nuclear receptor. <span class="cite">AI Generated · see end10</span></li>
+          <li><b>Cholera toxin</b> ADP-ribosylates Gs → locked ON → ↑↑ cAMP → rice-water diarrhea.</li>
+          <li><b>Pertussis toxin</b> ADP-ribosylates Gi → locked OFF → ↑ cAMP (disinhibited) → lymphocytosis, whooping cough.</li>
+          <li><b>Pseudohypoparathyroidism 1A (Albright):</b> defective Gs → PTH doesn't signal → hypocalcemia, short 4th/5th digits.</li>
+          <li><b>Androgen insensitivity:</b> mutant cytoplasmic AR → 46,XY phenotypic female with testes, no axillary/pubic hair.</li>
+          <li><b>Thyroid hormone resistance:</b> mutant TRβ nuclear receptor.</li>
         </ul>
+      </div>
       </div>
 
       <div class="callout rc"><div class="ctitle">✏️ ACTIVE RECALL</div>
@@ -2775,10 +2802,10 @@
       </div>
 
       <div class="callout hy"><div class="ctitle">★ HIGH-YIELD for USMLE</div>
-        <p><b>Insulin resistance = RIGHT shift (↑EC50).</b> Higher insulin needed for same effect. Advanced T2DM also drops Emax (β-cell failure + receptor down-reg + post-receptor defects). <span class="cite">AI Generated · see end16/17/18</span></p>
+        <p><b>Insulin resistance = RIGHT shift (↑EC50).</b> Higher insulin needed for same effect. Advanced T2DM also drops Emax (β-cell failure + receptor down-reg + post-receptor defects).</p>
         <ul>
-          <li>Chronic hormone <b>excess → down-regulation</b> (β-agonist tolerance, insulin resistance). <span class="cite">end01 lecture; clinical examples AI Generated</span></li>
-          <li>Chronic hormone <b>deficit → up-regulation</b> (denervation hypersensitivity). <span class="cite">end01 lecture</span></li>
+          <li>Chronic hormone <b>excess → down-regulation</b> (β-agonist tolerance, insulin resistance).</li>
+          <li>Chronic hormone <b>deficit → up-regulation</b> (denervation hypersensitivity).</li>
         </ul>
       </div>
 
@@ -2832,11 +2859,11 @@
 
       <div class="callout cl"><div class="ctitle">🏥 CLINICAL PEARL</div>
         <ul>
-          <li><b>Addisonian crisis:</b> hypotension won't respond to pressors until hydrocortisone is given. Cortisol permits vasoconstriction. <span class="cite">AI Generated · see end20/21</span></li>
-          <li><b>T2DM:</b> primarily <b>post-receptor</b> defect (IRS-1 serine phosphorylation, ↓ PI3K/AKT, GLUT4 trafficking). <span class="cite">AI Generated · see end16/17/18</span></li>
-          <li><b>β-blocker withdrawal tachycardia:</b> chronic blockade up-regulates β1 → sudden stop → reflex tachycardia/HTN. <span class="cite">AI Generated · cardiology pharm</span></li>
-          <li><b>Albuterol tachyphylaxis:</b> β2 receptor desensitization + internalization. <span class="cite">AI Generated · pulmonology pharm</span></li>
-          <li><b>T1DM honeymoon phase:</b> after starting insulin, receptor up-reg + residual β-cell → transient low insulin needs. <span class="cite">AI Generated · see end17</span></li>
+          <li><b>Addisonian crisis:</b> hypotension won't respond to pressors until hydrocortisone is given. Cortisol permits vasoconstriction.</li>
+          <li><b>T2DM:</b> primarily <b>post-receptor</b> defect (IRS-1 serine phosphorylation, ↓ PI3K/AKT, GLUT4 trafficking).</li>
+          <li><b>β-blocker withdrawal tachycardia:</b> chronic blockade up-regulates β1 → sudden stop → reflex tachycardia/HTN.</li>
+          <li><b>Albuterol tachyphylaxis:</b> β2 receptor desensitization + internalization.</li>
+          <li><b>T1DM honeymoon phase:</b> after starting insulin, receptor up-reg + residual β-cell → transient low insulin needs.</li>
         </ul>
       </div>
 
@@ -2912,151 +2939,14 @@
         <li><b>UWorld USMLE Step 1 Qbank</b>. Referenced for clinical workup sequences (pheochromocytoma labs, Cushing diagnostic testing).</li>
       </ol>
 
-    </section>
+      <h3>How to use this guide with other resources</h3>
+      <ul>
+        <li>If you're early in your study: <b>read this guide → watch the corresponding B&amp;B video → review First Aid</b> for the topic. Same content, 3 different modalities = better retention.</li>
+        <li>For drug-heavy questions (pharmacology): cross-reference the <b>Lippincott Pharm</b> chapter for each drug mentioned here.</li>
+        <li>For pathology (CAH, pheochromocytoma, Cushing's): watch the relevant <b>Pathoma</b> chapter 15 sections; they're short and high-yield.</li>
+        <li>Then hit <b>UWorld Qbank</b> questions on the Endocrine section — particularly the ones tagged "hormone synthesis," "receptor," and "adrenal pathway" — to consolidate.</li>
+      </ul>
 
-    <!-- ============ SOURCE AUDIT ============ -->
-    <section class="obj" id="audit">
-      <h2><span class="num" style="background:var(--orange)">⚠</span>Clinical Correlation &amp; Drug Source Audit</h2>
-
-      <div class="legend">
-        <b>Source legend</b>
-        <ul>
-          <li><span class="src-pill src-lecture">In lecture</span> The topic appears explicitly in the end01 lecture.</li>
-          <li><span class="src-pill src-mapped">end01-mapped</span> The topic is covered in a 3rd-party resource primarily mapped to end01 (Bootcamp, Boards &amp; Beyond, Physeo, First Aid).</li>
-          <li><span class="src-pill src-ai">AI generated reference</span> An item where the core concept sits in end01 but the clinical / drug association is primarily taught in another lecture. Kept here because it falls into one of three buckets:
-            <ul style="margin-top:4px">
-              <li>The core concept is in end01 and the clinical association lives elsewhere (e.g., POMC is a signaling concept here, Addison clinical is end20).</li>
-              <li>Included for pattern recognition tied directly to an end01 concept.</li>
-              <li>Forward reference to an upcoming lecture so you start building the pattern now.</li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-
-      <h3>Objective 1 — Endocrine signaling vs. other modes</h3>
-      <div class="tbl-wrap"><table>
-        <thead><tr><th>Item</th><th>Source</th><th>Where it's referenced</th></tr></thead>
-        <tbody>
-          <tr><td>Endocrine / paracrine / autocrine / neural / neuroendocrine / juxtacrine modes</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
-          <tr><td>Specificity = receptor expression</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
-          <tr><td>Endocrine vs. exocrine distinction</td><td><span class="src-pill src-mapped">end01-mapped</span></td><td>Bootcamp 1.02 Endocrine Glands (primary to end01)</td></tr>
-          <tr><td>Hypophyseal portal system (neuroendocrine concept)</td><td><span class="src-pill src-mapped">end01-mapped</span></td><td>Physeo 6.01 Introduction to Endocrinology (primary to end01)</td></tr>
-          <tr><td><b>Pheochromocytoma</b> (endocrine delivery of catecholamines)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Endocrine delivery concept is end01-core; pheo clinical is primarily in end20 (Adrenal Pathology). <i>Included for pattern recognition on endocrine mode.</i></td></tr>
-          <tr><td>IGF-1 endocrine vs. paracrine</td><td><span class="src-pill src-mapped">end01-mapped</span></td><td>Bootcamp 1.01 General Principles; FA 3.14 Signaling pathways</td></tr>
-          <tr><td><b>Gastrinoma (Zollinger-Ellison)</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Paracrine vs. endocrine mode is end01-core; gastrinoma clinical is primarily GI. <i>Included for pattern recognition on mode-switching of a single molecule.</i></td></tr>
-        </tbody>
-      </table></div>
-
-      <h3>Objective 2 — Hormone classes</h3>
-      <div class="tbl-wrap"><table>
-        <thead><tr><th>Item</th><th>Source</th><th>Where it's referenced</th></tr></thead>
-        <tbody>
-          <tr><td>3 structural classes (amine, peptide, steroid) + eicosanoids</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
-          <tr><td>Hydrophilic vs. hydrophobic determines storage, carriers, receptor location</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
-          <tr><td>Glycoprotein hormone α/β subunit sharing (TSH, FSH, LH, hCG)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
-          <tr><td>Thyroid hormone "rebel" (amine-derived, lipophilic)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
-          <tr><td>C-peptide &amp; pre-pro-insulin processing</td><td><span class="src-pill src-mapped">end01-mapped</span></td><td>FA 3.14 Signaling pathways; B&amp;B 5.06 Signaling</td></tr>
-          <tr><td><b>Insulinoma vs. factitious insulin</b> (C-peptide test)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>C-peptide physiology is end01-core; insulinoma clinical is primarily in end17/18 (Diabetes). <i>Included for pattern recognition on peptide hormone processing.</i></td></tr>
-          <tr><td>Pregnancy ↑TBG → ↑ total T4</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Carrier protein concept is end01-core; thyroid function testing is primarily in end10/11. <i>Clinical application of carrier protein physiology.</i></td></tr>
-          <tr><td>hCG cross-reactivity with TSH receptor</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Shared α-subunit is end01-core; gestational hyperthyroidism clinical is in end11. <i>Included for pattern recognition on glycoprotein subunit sharing.</i></td></tr>
-        </tbody>
-      </table></div>
-
-      <h3>Objective 3 — Catecholamine biosynthesis</h3>
-      <div class="tbl-wrap"><table>
-        <thead><tr><th>Item</th><th>Source</th><th>Where it's referenced</th></tr></thead>
-        <tbody>
-          <tr><td>Tyr → DOPA → DA → NE → Epi pathway</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
-          <tr><td>Tyrosine hydroxylase is rate-limiting</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
-          <tr><td>PNMT requires cortisol → only adrenal medulla makes Epi</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
-          <tr><td>Catecholamine synthesis enzymes &amp; cofactors (B6, Vit C, Cu)</td><td><span class="src-pill src-mapped">end01-mapped</span></td><td>Bootcamp 10.04 Phenylalanine/Tyrosine/Catecholamines (xref to end01); FA Phe/Tyr pathway</td></tr>
-          <tr><td><b>PKU</b> (phenylalanine hydroxylase deficiency)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Phe → Tyr is end01-adjacent via catecholamine precursor; PKU clinical is primarily biochemistry. <i>Included for pattern recognition on upstream pathway disease.</i></td></tr>
-          <tr><td><b>Parkinson's disease</b> (L-DOPA, carbidopa)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>DOPA decarboxylase / dopamine physiology is end01-core; Parkinson's clinical and pharm live in neuro/pharm. <i>Included for pattern recognition on clinical use of pathway intermediates.</i></td></tr>
-          <tr><td><b>Pheochromocytoma</b> (5 P's, metanephrines, α-blocker first)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Catecholamine synthesis is end01-core; pheo clinical is primarily end20 (Adrenal Pathology). <i>Included for pattern recognition on catecholamine excess.</i></td></tr>
-          <tr><td>MAOI + tyramine hypertensive crisis</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>MAO/COMT degradation pathway concept is end01-adjacent; MAOI drugs are primarily psychiatry pharm. <i>Included for pattern recognition on catecholamine degradation.</i></td></tr>
-          <tr><td>Addison disease causing ↓ PNMT / ↓ Epi</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>PNMT mechanism is end01-core; Addison clinical is primarily end20/21. <i>Core concept here, clinical association elsewhere.</i></td></tr>
-          <tr><td>Reserpine (VMAT inhibitor)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Vesicular packaging is end01-core; reserpine drug detail primarily cardiovascular/pharm. <i>Clinical application of an in-lecture concept.</i></td></tr>
-          <tr><td>Metyrosine (tyrosine hydroxylase inhibitor for pheo pre-op)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Rate-limiting enzyme concept is end01-core; metyrosine drug primarily in end21. <i>Clinical application of the rate-limiting step.</i></td></tr>
-        </tbody>
-      </table></div>
-
-      <h3>Objective 4 — Steroid synthesis (initial step)</h3>
-      <div class="tbl-wrap"><table>
-        <thead><tr><th>Item</th><th>Source</th><th>Where it's referenced</th></tr></thead>
-        <tbody>
-          <tr><td>Cholesterol → Pregnenolone by desmolase (CYP11A1)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
-          <tr><td>StAR is the true rate-limiting transport step</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
-          <tr><td>ACTH / LH / AngII stimulate steroidogenesis</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
-          <tr><td>Carbon counts (C21 progestins/corticoids, C19 androgens, C18 estrogens)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
-          <tr><td>Steroid signaling pathway (hormone response elements)</td><td><span class="src-pill src-mapped">end01-mapped</span></td><td>FA 3.15 Signaling pathways of steroid hormones (primary to end01); B&amp;B 5.06</td></tr>
-          <tr><td><b>Congenital lipoid adrenal hyperplasia</b> (StAR mutation)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>StAR is end01-core; lipoid hyperplasia is primarily end04 (Adrenal Synthesis) / end20. <i>Clinical association in other lectures.</i></td></tr>
-          <tr><td><b>Congenital adrenal hyperplasia (21, 11β, 17α)</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Steroidogenesis backup logic is end01-adjacent; CAH clinical and enzyme specifics are primarily in end04 (Adrenal Synthesis) / end20. <i>Included for pattern recognition on steroid pathway disease.</i></td></tr>
-          <tr><td>Ketoconazole, metyrapone, aminoglutethimide, mitotane</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Steroid pathway is end01-core; these pharmacologic inhibitors are primarily in end21 (Adrenal Pharm). <i>Clinical application of the steroidogenesis pathway.</i></td></tr>
-          <tr><td>Finasteride (5α-reductase inhibitor)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Steroid modification is end01-adjacent; finasteride primarily in repro pharm. <i>Clinical application of steroid metabolism.</i></td></tr>
-          <tr><td>Aromatase inhibitors (anastrozole, letrozole, exemestane)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>C19→C18 aromatization is end01-core; aromatase inhibitors primarily in repro / breast cancer pharm. <i>Clinical application of carbon-count conversion.</i></td></tr>
-          <tr><td>Abiraterone (17α-hydroxylase/17,20-lyase inhibitor)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>17α-hydroxylase pathway is end01-adjacent; abiraterone primarily in prostate cancer pharm. <i>Clinical application of steroidogenesis inhibition.</i></td></tr>
-        </tbody>
-      </table></div>
-
-      <h3>Objective 5 — Carrier proteins</h3>
-      <div class="tbl-wrap"><table>
-        <thead><tr><th>Item</th><th>Source</th><th>Where it's referenced</th></tr></thead>
-        <tbody>
-          <tr><td>Free vs. bound hormone; carrier proteins (TBG, CBG, SHBG, albumin)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
-          <tr><td>Carriers ↑ half-life, ↓ active fraction, buffer free hormone</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
-          <tr><td>Kd (dissociation constant) concept</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
-          <tr><td>Typical free fractions (T4 0.03%, T3 0.3%, cortisol 5%)</td><td><span class="src-pill src-mapped">end01-mapped</span></td><td>FA 3.14 Signaling pathways; Bootcamp 1.01 General Principles</td></tr>
-          <tr><td>Pregnancy / OCP ↑TBG → ↑ total T4, normal free T4</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Carrier protein concept is end01-core; thyroid function testing primarily in end10/11. <i>Clinical application of carrier protein physiology.</i></td></tr>
-          <tr><td>Nephrotic syndrome / cirrhosis effects on carriers</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Carrier protein concept is end01-core; clinical scenarios span renal / GI. <i>Clinical application of carrier physiology.</i></td></tr>
-          <tr><td>PCOS ↓SHBG → ↑ free testosterone</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>SHBG regulation is end01-adjacent; PCOS clinical primarily in repro/end05. <i>Clinical application of SHBG physiology.</i></td></tr>
-          <tr><td>Euthyroid sick syndrome (reverse T3, altered carriers)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Carrier + deiodinase biology is end01-adjacent; clinical syndrome primarily end10. <i>Included for pattern recognition on carrier disturbances.</i></td></tr>
-          <tr><td>Megalin-mediated endocytosis (kidney vit D binding protein)</td><td><span class="src-pill src-mapped">end01-mapped</span></td><td>FA 3.14 Signaling pathways (general carrier physiology)</td></tr>
-          <tr><td>Levothyroxine once-daily dosing (T4 ~7 day half-life)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Half-life concept is end01-core; levothyroxine pharm primarily in end13. <i>Clinical application of the half-life principle.</i></td></tr>
-        </tbody>
-      </table></div>
-
-      <h3>Objective 6 — Hormone receptors</h3>
-      <div class="tbl-wrap"><table>
-        <thead><tr><th>Item</th><th>Source</th><th>Where it's referenced</th></tr></thead>
-        <tbody>
-          <tr><td>Membrane vs. intracellular receptor classification</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
-          <tr><td>GPCR (Gs / Gi / Gq), RTK, JAK-STAT, guanylyl cyclase, nuclear receptors</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
-          <tr><td>Direct vs. indirect signaling, amplification concept</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
-          <tr><td>Signaling pathway details (cAMP, IP3/DAG, MAPK, PI3K-AKT, cGMP)</td><td><span class="src-pill src-mapped">end01-mapped</span></td><td>FA 3.14 Signaling pathways of endocrine hormones (primary to end01); B&amp;B 5.06 Signaling Pathways</td></tr>
-          <tr><td>Nuclear receptor mechanism (HSP90, hormone response elements)</td><td><span class="src-pill src-mapped">end01-mapped</span></td><td>FA 3.15 Signaling pathways of steroid hormones (primary to end01)</td></tr>
-          <tr><td><b>Cholera toxin</b> (Gs lock-on) → rice-water diarrhea</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Gs cascade is end01-core; cholera toxin clinical primarily in microbiology. <i>Included for pattern recognition on GPCR disruption.</i></td></tr>
-          <tr><td><b>Pertussis toxin</b> (Gi lock-off)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Gi cascade is end01-core; pertussis toxin clinical primarily in microbiology. <i>Included for pattern recognition on GPCR disruption.</i></td></tr>
-          <tr><td><b>Pseudohypoparathyroidism 1A (Albright)</b> — defective Gsα</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>GPCR Gs mechanism is end01-core; Albright clinical primarily in end12/parathyroid. <i>Core concept here, clinical association elsewhere.</i></td></tr>
-          <tr><td><b>Androgen insensitivity syndrome</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Nuclear receptor biology is end01-core; AIS clinical primarily in repro/genetics. <i>Core concept here, clinical association elsewhere.</i></td></tr>
-          <tr><td>Thyroid hormone resistance</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Nuclear receptor biology is end01-core; TR resistance clinical primarily in end10. <i>Core concept here, clinical association elsewhere.</i></td></tr>
-          <tr><td>BNP in heart failure; nitroglycerin; sildenafil (PDE5)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>cGMP signaling / guanylyl cyclase is end01-core; clinical use primarily in cardiology. <i>Clinical application of cGMP signaling.</i></td></tr>
-          <tr><td>Cancer drugs targeting RTKs (trastuzumab, imatinib, cetuximab, bevacizumab)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>RTK signaling is end01-core; targeted therapies primarily in oncology pharm. <i>Clinical application of RTK signaling.</i></td></tr>
-          <tr><td>JAK inhibitors (tofacitinib, ruxolitinib)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>JAK-STAT signaling is end01-core; JAK inhibitors primarily in rheumatology / heme pharm. <i>Clinical application of JAK-STAT signaling.</i></td></tr>
-        </tbody>
-      </table></div>
-
-      <h3>Objective 7 — Cellular sensitivity &amp; response</h3>
-      <div class="tbl-wrap"><table>
-        <thead><tr><th>Item</th><th>Source</th><th>Where it's referenced</th></tr></thead>
-        <tbody>
-          <tr><td>3 A's of sensitivity (Amount, Affinity, Activation)</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
-          <tr><td>EC50, Emax, dose-response curve shifts</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
-          <tr><td>Up-regulation vs. down-regulation</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
-          <tr><td>Permissive / synergistic / antagonistic effects</td><td><span class="src-pill src-lecture">In lecture</span></td><td>end01 lecture</td></tr>
-          <tr><td>Hill equation, spare receptors</td><td><span class="src-pill src-mapped">end01-mapped</span></td><td>FA 3.14 Signaling pathways of endocrine hormones; Rang &amp; Dale pharm</td></tr>
-          <tr><td>Receptor desensitization (GRK, β-arrestin, internalization)</td><td><span class="src-pill src-mapped">end01-mapped</span></td><td>FA 3.14 Signaling pathways; B&amp;B 5.06</td></tr>
-          <tr><td><b>Insulin resistance / T2DM</b> (post-receptor IRS-1 defect)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Sensitivity / dose-response is end01-core; T2DM clinical primarily in end16/17/18. <i>Clinical application of post-receptor signaling defects.</i></td></tr>
-          <tr><td>Metformin, thiazolidinediones, GLP-1 agonists</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Sensitivity concept is end01-core; diabetes pharm primarily in end17/18. <i>Clinical application.</i></td></tr>
-          <tr><td>β-blocker withdrawal tachycardia</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Receptor up-regulation is end01-core; clinical scenario primarily in cardiovascular pharm. <i>Clinical application of up-regulation.</i></td></tr>
-          <tr><td>Albuterol tachyphylaxis</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Receptor desensitization is end01-core; clinical scenario primarily in pulmonology pharm. <i>Clinical application of desensitization.</i></td></tr>
-          <tr><td>Opioid tolerance, nitrate tolerance</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Tolerance concept is end01-adjacent; clinical specifics in other pharm disciplines. <i>Included for pattern recognition on tachyphylaxis.</i></td></tr>
-          <tr><td><b>Laron syndrome</b> (GH receptor defect)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Receptor defect concept is end01-core; Laron clinical primarily in end02 (HP Relationships I). <i>Forward reference to end02.</i></td></tr>
-          <tr><td><b>Nephrogenic DI</b> (V2 / AQP-2 mutation)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Receptor defect concept is end01-core; DI clinical primarily in end07. <i>Forward reference to end07.</i></td></tr>
-          <tr><td><b>Leptin receptor deficiency</b></td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Receptor defect is end01-core; obesity clinical primarily elsewhere. <i>Included for pattern recognition on hormone resistance syndromes.</i></td></tr>
-          <tr><td>Addisonian crisis &amp; cortisol permissiveness for catecholamines</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Permissive effect is end01-core; Addisonian crisis clinical primarily in end20/21. <i>Clinical application of permissive effect.</i></td></tr>
-          <tr><td>Stress counter-regulatory hormone synergy (cortisol + Epi + glucagon)</td><td><span class="src-pill src-ai">AI generated reference</span></td><td>Synergy concept is end01-core; stress physiology primarily in end23. <i>Forward reference / clinical application of synergy.</i></td></tr>
-        </tbody>
-      </table></div>
     </section>
 
     <div class="footer-note">
@@ -3144,35 +3034,70 @@ function applyH4Collapse(h4){
   }
 }
 
-// Wire up h4 click handlers and default-collapse every one
-document.querySelectorAll('.deep-dive h4').forEach(h4 => {
+// Give each h4 a stable key so we can persist state
+document.querySelectorAll('.deep-dive h4').forEach((h4, idx) => {
+  const objEl = h4.closest('.obj');
+  const key = (objEl ? objEl.id : 'dd') + '-h4-' + idx;
+  h4.dataset.ddKey = key;
   h4.addEventListener('click', () => {
     h4.classList.toggle('collapsed');
     applyH4Collapse(h4);
+    try {
+      const states = JSON.parse(sessionStorage.getItem('deepDiveH4States_v1') || '{}');
+      states[key] = h4.classList.contains('collapsed');
+      sessionStorage.setItem('deepDiveH4States_v1', JSON.stringify(states));
+    } catch (e) {}
   });
-  // Default-collapsed on every page load
-  h4.classList.add('collapsed');
-  applyH4Collapse(h4);
 });
+
+// Restore h4 collapsed states on load
+try {
+  const h4States = JSON.parse(sessionStorage.getItem('deepDiveH4States_v1') || '{}');
+  document.querySelectorAll('.deep-dive h4').forEach(h4 => {
+    const key = h4.dataset.ddKey;
+    if (h4States[key]) {
+      h4.classList.add('collapsed');
+      applyH4Collapse(h4);
+    }
+  });
+} catch (e) {}
 
 // Bulk toggle all deep-dive h4 sub-sections
 function toggleAllDeepDives(collapse) {
+  const states = {};
   document.querySelectorAll('.deep-dive h4').forEach(h4 => {
     if (collapse) h4.classList.add('collapsed');
     else h4.classList.remove('collapsed');
     applyH4Collapse(h4);
+    if (h4.dataset.ddKey) states[h4.dataset.ddKey] = collapse;
   });
+  try { sessionStorage.setItem('deepDiveH4States_v1', JSON.stringify(states)); } catch (e) {}
 }
 
-// ============ Callout toggles (HY / Mnemonic / Clinical / Active Recall) ============
-document.querySelectorAll('.callout.hy .ctitle, .callout.mn .ctitle, .callout.cl .ctitle, .callout.rc .ctitle').forEach(title => {
-  const box = title.parentElement;
-  // Default-collapsed on every page load
-  box.classList.add('collapsed');
+// ============ Active Recall callout toggle ============
+document.querySelectorAll('.callout.rc .ctitle').forEach(title => {
+  const objEl = title.closest('.obj');
+  const key = objEl ? objEl.id + '-rc' : 'rc-' + Math.random();
+  title.dataset.rcKey = key;
   title.addEventListener('click', () => {
+    const box = title.parentElement;
     box.classList.toggle('collapsed');
+    try {
+      const states = JSON.parse(sessionStorage.getItem('recallStates_v1') || '{}');
+      states[key] = box.classList.contains('collapsed');
+      sessionStorage.setItem('recallStates_v1', JSON.stringify(states));
+    } catch (e) {}
   });
 });
+
+// Restore Active Recall collapsed states
+try {
+  const rcStates = JSON.parse(sessionStorage.getItem('recallStates_v1') || '{}');
+  document.querySelectorAll('.callout.rc .ctitle').forEach(title => {
+    const key = title.dataset.rcKey;
+    if (rcStates[key]) title.parentElement.classList.add('collapsed');
+  });
+} catch (e) {}
 
 // ============ Mark Done / Progress ============
 const STORAGE_KEY = 'endo01_progress_v1';
@@ -3218,12 +3143,15 @@ document.querySelectorAll('.mark-done').forEach(btn => {
 function resetProgress(){
   if (!confirm('Reset all progress?')) return;
   setDone({});
-  // Re-collapse every h4 and every callout (matches default page-load state)
-  document.querySelectorAll('.deep-dive h4').forEach(h4 => {
-    h4.classList.add('collapsed');
+  try {
+    sessionStorage.removeItem('deepDiveH4States_v1');
+    sessionStorage.removeItem('recallStates_v1');
+  } catch (e) {}
+  document.querySelectorAll('.deep-dive h4.collapsed').forEach(h4 => {
+    h4.classList.remove('collapsed');
     applyH4Collapse(h4);
   });
-  document.querySelectorAll('.callout.hy, .callout.mn, .callout.cl, .callout.rc').forEach(b => b.classList.add('collapsed'));
+  document.querySelectorAll('.callout.rc.collapsed').forEach(b => b.classList.remove('collapsed'));
   document.querySelectorAll('.flashcard.open').forEach(f => f.classList.remove('open'));
   document.querySelectorAll('.quiz-item.revealed').forEach(q => {
     q.classList.remove('revealed');
@@ -3247,6 +3175,34 @@ const obs = new IntersectionObserver((entries) => {
   });
 }, { rootMargin: '-30% 0px -60% 0px' });
 sections.forEach(s => obs.observe(s));
+
+/* ---- Dark-mode toggle (matches active-recall-hub) ---- */
+function toggleDark(){
+  const cur = document.documentElement.getAttribute('data-theme')==='dark';
+  const next = cur ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch(e) {}
+  const btn = document.getElementById('darkToggle');
+  if (btn) btn.textContent = next==='dark' ? '☀️' : '🌙';
+}
+(function(){
+  try {
+    const t = localStorage.getItem('theme');
+    if (t === 'dark'){
+      document.documentElement.setAttribute('data-theme','dark');
+      const btn = document.getElementById('darkToggle');
+      if (btn) btn.textContent = '☀️';
+    }
+  } catch(e) {}
+})();
+
+/* --- how-callout & audit-obj collapsibles ------------------------------- */
+document.querySelectorAll('.cover .how h3.how-title').forEach(h => {
+  h.addEventListener('click', () => h.closest('.how').classList.toggle('collapsed'));
+});
+document.querySelectorAll('.audit-obj .audit-head').forEach(h => {
+  h.addEventListener('click', () => h.closest('.audit-obj').classList.toggle('collapsed'));
+});
 </script>
 
 </body>

@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<!-- HOYA DOCS — ENDOCRINE BLOCK | Lecture 5: Sex Steroid Synthesis & Action -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 5: Sex Steroid Synthesis &amp; Action — HoyaDocs Endocrine Block</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #f8f9fa; color: #1f2937; line-height: 1.6;
+            display: flex; height: 100vh; overflow: hidden;
+        }
+        .sidebar {
+            position: fixed; left: 0; top: 0;
+            width: 220px; height: 100vh;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white; padding: 20px 0 140px; overflow-y: auto;
+            z-index: 100; box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+        }
+        .sidebar-header {
+            padding: 0 15px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.2); margin-bottom: 20px;
+        }
+        .sidebar-header h2 { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; }
+        .sidebar-header p { font-size: 12px; opacity: 0.8; margin: 0; }
+        .sidebar-nav { padding: 0 15px; }
+        .sidebar-link {
+            display: block; padding: 10px 12px;
+            background: #1e293b; color: #cbd5e1;
+            border-left: 3px solid transparent; border-radius: 4px;
+            cursor: pointer; font-size: 13px; transition: all 0.2s ease;
+            text-decoration: none; margin-bottom: 6px;
+        }
+        .sidebar-link:hover { background: #334155; border-left-color: #2563eb; color: #f1f5f9; }
+        .sidebar-link.active { background: #1e293b; border-left-color: #2563eb; color: #2563eb; font-weight: 600; }
+        .sidebar-divider { height: 1px; background: #334155; margin: 12px 0; }
+        .sidebar-footer {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            padding: 10px 15px 12px;
+            background: linear-gradient(to top, #0f172a 60%, transparent);
+        }
+        .export-actions { display: flex; gap: 6px; margin-bottom: 8px; }
+        .export-btn {
+            flex: 1; display: flex; flex-direction: column;
+            align-items: center; gap: 3px; padding: 7px 6px;
+            background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 6px; color: #cbd5e1; font-size: 10.5px; font-weight: 600;
+            cursor: pointer; transition: all 0.2s ease; font-family: inherit; line-height: 1.2;
+        }
+        .export-btn:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); color: #f1f5f9; }
+        .export-btn .btn-icon { font-size: 16px; line-height: 1; }
+        .hub-return-btn {
+            display: flex; align-items: center; gap: 7px;
+            width: 100%; padding: 9px 12px;
+            background: rgba(37,99,235,0.18); border: 1px solid rgba(96,165,250,0.35);
+            border-radius: 6px; color: #93c5fd; font-size: 12px; font-weight: 600;
+            text-decoration: none; transition: all 0.2s ease; cursor: pointer;
+        }
+        .hub-return-btn:hover { background: rgba(37,99,235,0.32); border-color: rgba(96,165,250,0.7); color: #dbeafe; }
+        .hub-return-btn .btn-arrow { font-size: 14px; line-height: 1; }
+        @media print {
+            .sidebar, .sidebar-footer { display: none !important; }
+            body { display: block !important; overflow: visible !important; height: auto !important; background: white !important; }
+            .main { margin-left: 0 !important; height: auto !important; overflow: visible !important; max-width: 100% !important; padding: 20px !important; }
+            .lo-section { display: block !important; box-shadow: none !important; border: 1px solid #e2e8f0; margin-bottom: 30px; page-break-before: always; }
+            .lo-section:first-child { page-break-before: auto; }
+            .section-body, .h4-body, .h5-body, .mnemonic-body, .trap-body { display: block !important; }
+            .section-chevron, .h5-chevron, .mnemonic-chevron, .trap-chevron { display: none !important; }
+            a { color: inherit; text-decoration: none; }
+        }
+        .main { margin-left: 220px; flex: 1; padding: 40px; max-width: 1000px; overflow-y: auto; height: 100vh; }
+        .header { margin-bottom: 40px; }
+        .header h1 { font-size: 32px; font-weight: 700; margin-bottom: 10px; color: #0f172a; }
+        .header p { font-size: 16px; color: #475569; margin: 0; }
+        .lo-section { display: none; background: white; border-radius: 8px; padding: 28px 30px; margin-bottom: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); animation: fadeIn 0.3s ease; }
+        .lo-section.active { display: block; }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+        .lo-title { font-size: 20px; font-weight: 700; color: #1f2937; margin-bottom: 5px; }
+        .lo-subtitle { font-size: 13px; color: #64748b; margin-bottom: 20px; font-weight: 500; }
+        .lo-content h3 { font-size: 15px; font-weight: 700; color: #1e3a5f; margin: 24px 0 10px; padding: 6px 10px; border-left: 3px solid #2563eb; background: transparent; }
+        .lo-content h4 { font-size: 14.5px; font-weight: 700; color: #1e3a5f; background: #dbeafe; border-radius: 4px; padding: 6px 12px; margin: 18px 0 8px; }
+        .lo-content h5 { font-size: 13px; font-weight: 700; color: #1e293b; margin: 12px 0 4px; }
+        .lo-content p { font-size: 14px; line-height: 1.7; color: #1e293b; margin-bottom: 10px; }
+        .lo-content ul { margin-left: 22px; margin-bottom: 12px; }
+        .lo-content ol { margin-left: 22px; margin-bottom: 12px; }
+        .lo-content li { font-size: 14px; line-height: 1.7; color: #1e293b; margin-bottom: 6px; }
+        .lo-content table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: 13px; }
+        .lo-content table thead tr { background: #1e3a5f; color: white; }
+        .lo-content table th { padding: 10px 12px; text-align: left; font-weight: 600; font-size: 12px; letter-spacing: 0.3px; color: white; }
+        .lo-content table td { padding: 9px 12px; border-bottom: 1px solid #e2e8f0; color: #1e293b; vertical-align: top; }
+        .lo-content table tbody tr:nth-child(even) { background: #eff6ff; }
+        .lo-content table tbody tr:hover { background: #dbeafe; }
+        .section-rule { border: none; border-top: 1px solid #e2e8f0; margin: 22px 0; }
+        .exam-trap { background-color: #fef2f2; border-left: 4px solid #dc2626; padding: 14px 16px; margin: 16px 0; border-radius: 4px; }
+        .exam-trap .trap-header { font-weight: 700; color: #b91c1c; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; cursor: pointer; user-select: none; display: flex; justify-content: space-between; align-items: center; }
+        .exam-trap ul { margin-left: 18px; margin-top: 6px; }
+        .exam-trap li { font-size: 13px; margin-bottom: 6px; color: #1f2937; line-height: 1.6; }
+        .exam-trap p { font-size: 13px; color: #1f2937; line-height: 1.6; margin-top: 6px; }
+        .exam-trap strong { color: #991b1b; }
+        .trap-chevron { font-size: 11px; font-weight: 400; color: #b91c1c; transition: transform 0.2s ease; margin-left: 8px; flex-shrink: 0; }
+        .trap-header.collapsed .trap-chevron { transform: rotate(-90deg); }
+        .trap-body.collapsed { display: none; }
+        .hy-box { background-color: #fefce8; border-left: 4px solid #ca8a04; padding: 14px 16px; margin: 16px 0; border-radius: 4px; }
+        .hy-box strong { color: #a16207; font-weight: 700; font-size: 13px; }
+        .hy-box ul { margin-left: 18px; margin-top: 6px; }
+        .hy-box li { font-size: 13px; margin-bottom: 6px; color: #1f2937; line-height: 1.6; }
+        .mnemonic { background-color: #fff7ed; border-left: 4px solid #ea580c; padding: 14px 16px; margin: 16px 0; border-radius: 4px; }
+        .mnemonic .mnemonic-header { font-weight: 700; color: #c2410c; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .mnemonic strong { color: #c2410c; font-size: 13px; }
+        .mnemonic ul { margin-left: 18px; margin-top: 6px; }
+        .mnemonic li { font-size: 13px; margin-bottom: 5px; color: #431407; line-height: 1.5; }
+        .usmle-summary { background: #eff6ff; border-left: 4px solid #2563eb; padding: 14px 16px; margin: 16px 0; border-radius: 4px; }
+        .usmle-header { font-weight: 700; color: #1e40af; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .usmle-summary ul { margin-left: 18px; margin-top: 6px; }
+        .usmle-summary li { font-size: 13px; margin-bottom: 6px; color: #1f2937; line-height: 1.6; }
+        .usmle-summary p { font-size: 13px; color: #1f2937; line-height: 1.6; margin-top: 6px; }
+        .collapsible-h3 { cursor: pointer; user-select: none; }
+        .collapsible-h3:hover { color: #1e3a8a; }
+        h3.collapsible-h3 { font-size: 15px; font-weight: 700; color: #1e3a5f; margin: 24px 0 10px; padding: 6px 10px; border-left: 3px solid #2563eb; cursor: pointer; user-select: none; }
+        .section-chevron { display: inline-block; font-size: 12px; color: #2563eb; transition: transform 0.2s ease; margin-right: 6px; }
+        .collapsible-h3.collapsed .section-chevron { transform: rotate(-90deg); }
+        .section-body { padding-left: 16px; margin-left: 4px; }
+        .section-body.collapsed { display: none; }
+        .h4-body { padding-left: 14px; margin-left: 4px; margin-bottom: 6px; }
+        .h5-subheading { font-size: 13px; font-weight: 700; color: #1e3a5f; background: #eff6ff; border-left: 2px solid #93c5fd; border-radius: 3px; padding: 4px 10px; margin: 14px 0 6px; cursor: pointer; user-select: none; }
+        .h5-subheading:hover { background: #dbeafe; }
+        .h5-subheading .h5-chevron { display: inline-block; font-size: 10px; color: #2563eb; transition: transform 0.2s ease; margin-right: 5px; }
+        .h5-subheading.collapsed .h5-chevron { transform: rotate(-90deg); }
+        .h5-body { padding-left: 18px; margin-left: 4px; margin-bottom: 8px; }
+        .h5-body.collapsed { display: none; }
+        .mnemonic-toggle-header { cursor: pointer; user-select: none; display: flex; justify-content: space-between; align-items: center; }
+        .mnemonic-toggle-header .mnemonic-chevron { font-size: 11px; color: #c2410c; transition: transform 0.2s ease; margin-left: 8px; flex-shrink: 0; }
+        .mnemonic-toggle-header.collapsed .mnemonic-chevron { transform: rotate(-90deg); }
+        .mnemonic-body.collapsed { display: none; }
+        .lo-controls { display: flex; gap: 8px; margin-bottom: 16px; }
+        .lo-controls button { font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 4px; border: 1px solid #2563eb; cursor: pointer; background: white; color: #2563eb; transition: all 0.15s ease; }
+        .lo-toc {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 14px 18px;
+            margin-bottom: 24px;
+            font-size: 13px;
+        }
+        .lo-toc-title {
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+        .lo-toc ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .lo-toc li {
+            margin-bottom: 5px;
+        }
+        .lo-toc a {
+            color: #1e3a5f;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .lo-toc a:hover {
+            text-decoration: underline;
+            color: #2563eb;
+        }
+        .lo-controls button:hover { background: #2563eb; color: white; }
+        .lo-covered { background: #f0f4ff; border: 1px solid #c7d2fe; border-left: 4px solid #4f46e5; border-radius: 6px; padding: 12px 16px; margin-bottom: 16px; font-size: 13px; }
+        .lo-covered-title { font-weight: 700; color: #3730a3; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .lo-covered ul { margin: 0; padding-left: 18px; }
+        .lo-covered li { margin-bottom: 3px; color: #1e293b; line-height: 1.5; }
+        .lo-covered li strong { color: #3730a3; }
+        .practice-question { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #2563eb; padding: 16px; margin: 14px 0; border-radius: 6px; }
+        .practice-question h4 { background: none !important; padding: 0 !important; border-radius: 0 !important; margin: 4px 0 8px !important; color: #1d4ed8; font-size: 14.5px; font-weight: 700; }
+        .practice-question p { font-size: 13px; }
+        .practice-question .option { color: #475569; font-style: italic; margin-bottom: 4px; font-size: 13px; }
+        .answer { display: none; margin-top: 12px; background: #eff6ff; border-left: 3px solid #2563eb; padding: 12px; border-radius: 4px; font-size: 13px; line-height: 1.7; color: #1f2937; }
+        .answer.show { display: block; }
+        .answer strong { color: #1e3a5f; }
+        .tyu-section { margin: 24px 0; border-top: 1px solid #e2e8f0; padding-top: 18px; }
+        .tyu-section > h4 { font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 14px; }
+    </style>
+</head>
+<body>
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <a href="https://strettyit10.github.io/Block4-Endo/"
+           target="_blank" rel="noopener noreferrer"
+           style="display:inline-block; margin-bottom:8px; font-size:17px; font-weight:700;
+                  color:#60a5fa; text-decoration:none; letter-spacing:0.5px;
+                  border-bottom:1px solid rgba(96,165,250,0.35); padding-bottom:1px;"
+           onmouseover="this.style.color='#93c5fd'"
+           onmouseout="this.style.color='#60a5fa'">HoyaDocs &#8599;</a>
+        <h2>Lecture 5</h2>
+        <p>Sex Steroid Synthesis</p>
+    </div>
+    <nav class="sidebar-nav">
+        <a href="#overview" class="sidebar-link active" onclick="switchLO(event,'overview')">&#128203; Lecture Overview</a>
+            <div class="sidebar-divider"></div>
+            <a href="#practice" class="sidebar-link" onclick="switchLO(event,'practice')">Practice Questions</a>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="export-actions">
+            <button class="export-btn" onclick="printAll(this)" title="Save as PDF">
+                <span class="btn-icon">&#128424;</span>Print PDF
+            </button>
+            <button class="export-btn" onclick="downloadWord(this)" title="Download as Word document">
+                <span class="btn-icon">&#128196;</span>Word Doc
+            </button>
+        </div>
+        <a href="https://strettyit10.github.io/Block4-Endocrine/resource-mapping/resource_hub.html"
+           class="hub-return-btn" target="_blank" rel="noopener noreferrer">
+            <span class="btn-arrow">&#8592;</span> Study Hub Resources
+        </a>
+    </div>
+</aside>
+
+<main class="main">
+    <div class="header">
+        <h1>Lecture 5: Sex Steroid Synthesis &amp; Action</h1>
+        <p>HoyaDocs &mdash; Endocrine Block | USMLE Step 1 Preparation</p>
+    </div>
+
+    <!-- OVERVIEW TAB -->
+    <section class="lo-section active" id="overview">
+        <div class="lo-content">
+
+                <div class="lo-controls" style="margin-top:24px;">
+                <button onclick="expandAll()">Expand All</button>
+                <button onclick="collapseAll()">Collapse All</button>
+            </div>
+
+            <hr class="section-rule" style="margin-top:28px;">
+            <h3 style="font-size:16px; font-weight:700; color:#1e3a5f; margin:24px 0 6px; padding:6px 10px; border-left:3px solid #2563eb;">Official Learning Objectives Map</h3>
+            <p style="font-size:13px; color:#475569; margin-bottom:14px; padding-left:10px;">Click any objective to see where it is covered and which practice questions test it.</p>
+            <div id="lo-accordion">
+
+            <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                     style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                    <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">1</span>
+                    <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Differentiate between C21 steroids and androgen and estrogen hormones</span>
+                    <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                </div>
+                <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                    <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q1</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q2</a></div>
+                </div>
+            </div>
+            <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                     style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                    <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">2</span>
+                    <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">List the androgen and estrogen hormones and identify their relative affinity for their receptors</span>
+                    <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                </div>
+                <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                    <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q3</a></div>
+                </div>
+            </div>
+            <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                     style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                    <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">3</span>
+                    <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Identify the sources of androgen and estrogen hormones</span>
+                    <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                </div>
+                <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                    <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q4</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q5</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q6</a></div>
+                </div>
+            </div>
+            <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                     style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                    <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">4</span>
+                    <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Describe the biosynthesis pathways for androgens and estrogens</span>
+                    <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                </div>
+                <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                    <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q7</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q8</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q9</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q10</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q11</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q12</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q13</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q14</a></div>
+                </div>
+            </div>
+            <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                     style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                    <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">5</span>
+                    <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Know the mechanisms that facilitate circulation and inactivation of androgens and estrogens, and explain their effects on half-life</span>
+                    <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                </div>
+                <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                    <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q15</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q16</a></div>
+                </div>
+            </div>
+            <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                     style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                    <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">6</span>
+                    <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Understand the primary mechanisms of action of sex steroid hormones on their target cells</span>
+                    <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                </div>
+                <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                    <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                    <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q17</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q18</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q19</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q20</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q21</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q22</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q23</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q24</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q25</a>, <a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q26</a></div>
+                </div>
+            </div>
+                </div>
+
+        </div>
+    </section>
+
+    <!-- LO 1: STEROIDOGENESIS PATHWAY -->
+
+        <!-- LO 2: TESTOSTERONE & ANDROGENS -->
+
+        <!-- LO 3: ESTROGENS & SERMs -->
+
+        <!-- LO 4: PROGESTERONE & CORPUS LUTEUM -->
+
+        <!-- LO 5: DISORDERS OF SEXUAL DIFFERENTIATION -->
+
+        <!-- PRACTICE QUESTIONS TAB -->
+    <section class="practice-section lo-section" id="practice">
+            <h3 id="practice-questions">Practice Questions</h3>
+
+            <!-- LO 1 &mdash; C21 Steroids vs. Androgens vs. Estrogens -->
+            <h4 style="font-size:15px; font-weight:700; color:#7c3aed; margin:28px 0 8px; padding-bottom:4px; border-bottom:2px solid #ede9fe;">LO 1 &mdash; C21 Steroids vs. Androgens vs. Estrogens</h4>
+
+            <div class="practice-question">
+                <h4>Question 1</h4>
+                <p>A medical student learns that sex steroids are grouped by carbon count and that a single enzymatic step interconverts the androgen class with the estrogen class. Which pairing correctly identifies a C19 androgen precursor, the enzyme, and its C18 estrogen product?</p>
+                <p class="option">A) Cortisol (C19) &rarr; estradiol (C18) via desmolase</p>
+                <p class="option">B) Progesterone (C19) &rarr; estradiol (C18) via 17&alpha;-hydroxylase</p>
+                <p class="option">C) Androstenedione (C19) &rarr; estrone (C18) via aromatase</p>
+                <p class="option">D) Testosterone (C19) &rarr; DHT (C18) via 5&alpha;-reductase</p>
+                <p class="option">E) DHEA (C19) &rarr; pregnenolone (C18) via 3&beta;-HSD</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>&#10003; Correct Answer: C &mdash; Androstenedione (C19) &rarr; estrone (C18) via aromatase</strong>
+                    <p style="margin-top:10px;">Steroid hormones are classified by carbon count: <strong>C21</strong> = progestins/corticoids, <strong>C19</strong> = androgens (DHEA, androstenedione, testosterone, DHT), <strong>C18</strong> = estrogens (estrone, estradiol, estriol). The only enzyme that crosses between classes is <strong>aromatase</strong> (CYP19A1): it aromatizes the A-ring and removes the C19 methyl, converting a C19 androgen into a C18 estrogen (androstenedione &rarr; estrone; testosterone &rarr; estradiol; 16&alpha;-OH-DHEA via fetal-placental unit &rarr; estriol). Cortisol is C21 not C19, 5&alpha;-reductase converts testosterone to the <em>still-C19</em> DHT (no class change), and 3&beta;-HSD interconverts progestins/corticoids (still C21). LO 1 is about correctly classifying hormones by structure and recognizing the transitions between classes.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 2</h4>
+                <p>A 48-year-old postmenopausal woman with estrogen-receptor-positive breast cancer is started on letrozole, an aromatase inhibitor. Levels of estradiol and estrone fall, while testosterone and androstenedione rise slightly. Which structural class transition does this drug block, and what carbon-count change accompanies it?</p>
+                <p class="option">A) Blocks C27 cholesterol &rarr; C21 progestin conversion (desmolase step)</p>
+                <p class="option">B) Blocks C21 progestin &rarr; C19 androgen conversion (17,20-lyase step)</p>
+                <p class="option">C) Blocks C19 androgen &rarr; C18 estrogen conversion (aromatase step), causing a rise in the upstream C19 androgens</p>
+                <p class="option">D) Blocks C19 &rarr; C19 conversion (5&alpha;-reductase), shifting balance toward testosterone</p>
+                <p class="option">E) Blocks C18 estrogen sulfation, altering half-life but not class</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>&#10003; Correct Answer: C &mdash; Blocks C19 androgen &rarr; C18 estrogen conversion (aromatase step), causing a rise in the upstream C19 androgens</strong>
+                    <p style="margin-top:10px;">Aromatase performs the <strong>C19 &rarr; C18</strong> transition (androgen &rarr; estrogen) by aromatizing the A-ring and removing the angular C19 methyl. Aromatase inhibitors (letrozole, anastrozole, exemestane) thus prevent estrogen synthesis and cause modest accumulation of the C19 substrates upstream (androstenedione, testosterone). Contrast with the other class transitions: desmolase/P450scc cleaves the C22&ndash;C27 side chain (C27 &rarr; C21, shared for all steroids), and 17,20-lyase cleaves the C20&ndash;C21 side chain of 17-OH-progesterone/pregnenolone (C21 &rarr; C19, commits toward androgens). Knowing which enzyme changes the carbon-count class is the key LO 1 pattern.</p>
+                </div>
+            </div>
+
+
+            <!-- LO 2 &mdash; Hormones and Relative Receptor Affinities -->
+            <h4 style="font-size:15px; font-weight:700; color:#7c3aed; margin:28px 0 8px; padding-bottom:4px; border-bottom:2px solid #ede9fe;">LO 2 &mdash; Hormones and Relative Receptor Affinities</h4>
+
+            <div class="practice-question">
+                <h4>Question 3</h4>
+                <p>Adrenal DHEA-S is classified as a "weak androgen." Which statement best explains this designation?</p>
+                <p class="option">A) DHEA-S binds androgen receptors with 100-fold lower affinity than testosterone</p>
+                <p class="option">B) DHEA-S requires peripheral conversion to testosterone or DHT to exert androgenic effects</p>
+                <p class="option">C) DHEA-S is exclusively converted to estrogens, not androgens</p>
+                <p class="option">D) DHEA-S is rapidly cleared by renal excretion before reaching target tissues</p>
+                <p class="option">E) DHEA-S only stimulates androgen receptors in adipose tissue</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B — Requires peripheral conversion to T or DHT</strong>
+                    <p style="margin-top:10px;">DHEA-S and DHEA have negligible direct androgen receptor activity. Their androgenicity requires peripheral conversion: DHEA-S → DHEA (sulfatase) → androstenedione (3β-HSD) → testosterone (17β-HSD) → DHT (5α-reductase). This conversion occurs in skin, hair follicles, and adipose tissue. DHEA-S is sulfated by DHEA-sulfotransferase (SULT2A1) in the adrenal → long half-life (hours to days) → useful androgen reservoir. Elevated in adrenarche, CAH, PCOS, adrenal adenomas. High DHEA-S preferentially suggests an adrenal (not ovarian) androgen source.</p>
+                </div>
+            </div>
+
+
+            <!-- LO 3 &mdash; Sources of Androgens and Estrogens -->
+            <h4 style="font-size:15px; font-weight:700; color:#7c3aed; margin:28px 0 8px; padding-bottom:4px; border-bottom:2px solid #ede9fe;">LO 3 &mdash; Sources of Androgens and Estrogens</h4>
+
+            <div class="practice-question">
+                <h4>Question 4</h4>
+                <p>A 35-year-old woman is found to have markedly elevated DHEAS (800 µg/dL, normal &lt;350). She has new-onset hirsutism and clitoromegaly. What is the most likely anatomical source of this excess androgen?</p>
+                <p class="option">A) Ovary (theca cells)</p>
+                <p class="option">B) Adrenal gland</p>
+                <p class="option">C) Peripheral adipose tissue</p>
+                <p class="option">D) Liver</p>
+                <p class="option">E) Placenta</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B — Adrenal gland</strong>
+                    <p style="margin-top:10px;">DHEAS is produced exclusively by the adrenal gland (zona reticularis). Markedly elevated DHEAS (&gt;700 µg/dL) strongly suggests adrenal etiology: adrenocortical carcinoma (most common cause of very high DHEAS), adrenal adenoma, or rarely ectopic ACTH. Normal or mildly elevated DHEAS is seen in PCOS (ovarian source). Ovarian androgens cause elevated testosterone/androstenedione but not isolated DHEAS elevation.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 5</h4>
+                <p>A 35-year-old man presents with bilateral gynecomastia, reduced libido, and infertility. Labs show markedly elevated estradiol, low-normal testosterone, and suppressed LH. Imaging reveals an adrenal adenoma. Which enzyme is most likely overactive in this adenoma?</p>
+                <p class="option">A) 3β-hydroxysteroid dehydrogenase (3β-HSD)</p>
+                <p class="option">B) 17β-hydroxysteroid dehydrogenase (17β-HSD)</p>
+                <p class="option">C) Aromatase (CYP19A1)</p>
+                <p class="option">D) 5α-reductase type 2</p>
+                <p class="option">E) CYP17A1 (17α-hydroxylase)</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: C — Aromatase (CYP19A1)</strong>
+                    <p style="margin-top:10px;">Aromatase (CYP19A1) converts androgens → estrogens: testosterone → estradiol; androstenedione → estrone. An aromatase-secreting adrenal adenoma or testicular Sertoli cell tumor elevates estradiol → suppresses LH/FSH via negative feedback → low testosterone → gynecomastia and infertility. Aromatase is the only enzyme capable of converting C19 androgens to C18 estrogens (requires three oxidation steps). Treatment: aromatase inhibitors (anastrozole, letrozole) for tumor-associated aromatase excess or surgical resection.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 6</h4>
+                <p>A mid-cycle serum progesterone drawn on day 21 of a regular 28-day cycle returns at 2.1 ng/mL. Which interpretation is most appropriate?</p>
+                <p class="option">A) Normal ovulatory cycle — progesterone &gt;1.5 ng/mL confirms ovulation</p>
+                <p class="option">B) Possible anovulation — mid-luteal progesterone &gt;3 ng/mL (some labs &gt;10) is needed to confirm ovulation</p>
+                <p class="option">C) Luteal phase defect — progesterone must be &gt;20 ng/mL by day 21</p>
+                <p class="option">D) Normal result — progesterone peaks at ovulation (day 14), not day 21</p>
+                <p class="option">E) Adrenal insufficiency — low progesterone indicates cortisol deficiency</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B — Possible anovulation; threshold for ovulation confirmation is &gt;3 ng/mL</strong>
+                    <p style="margin-top:10px;">In an ovulatory cycle, corpus luteum progesterone peaks around <strong>day 21</strong> (mid-luteal phase). A value <strong>&gt;3 ng/mL</strong> suggests ovulation occurred; &gt;10 ng/mL reflects a robust luteal phase. A value of 2.1 ng/mL is below threshold → suggests anovulation or inadequate luteal function. If anovulatory: evaluate for PCOS (LH:FSH ratio, free testosterone, SHBG), thyroid dysfunction (TSH), hyperprolactinemia (prolactin), and hypothalamic amenorrhea (FSH, LH, estradiol). Note: the progesterone surge is also used in temperature charting (rises ~0.5°F post-ovulation) and home LH testing confirms the ovulatory trigger.</p>
+                </div>
+            </div>
+
+
+            <!-- LO 4 &mdash; Biosynthesis Pathways for Androgens and Estrogens -->
+            <h4 style="font-size:15px; font-weight:700; color:#7c3aed; margin:28px 0 8px; padding-bottom:4px; border-bottom:2px solid #ede9fe;">LO 4 &mdash; Biosynthesis Pathways for Androgens and Estrogens</h4>
+
+            <div class="practice-question">
+                <h4>Question 7</h4>
+                <p>A newborn 46,XY male cannot synthesize any steroid hormones. He presents with salt-wasting crisis and appears phenotypically female despite a male karyotype. Which protein is most likely deficient?</p>
+                <p class="option">A) Aromatase (CYP19A1)</p>
+                <p class="option">B) 3β-HSD</p>
+                <p class="option">C) StAR protein</p>
+                <p class="option">D) 17β-HSD</p>
+                <p class="option">E) CYP17A1</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: C — StAR protein</strong>
+                    <p style="margin-top:10px;">StAR (Steroidogenic Acute Regulatory) protein transports cholesterol from outer to inner mitochondrial membrane — the rate-limiting step for ALL steroid synthesis. Its deficiency causes congenital lipoid adrenal hyperplasia: no cortisol, no aldosterone, no sex steroids. Salt-wasting crisis from aldosterone deficiency + female phenotype in 46,XY from absent testosterone/DHT. Cholesterol accumulates in the adrenal and gonads (lipoid appearance). Aromatase deficiency prevents estrogen synthesis but not all steroids. CYP17A1 deficiency blocks sex steroids + cortisol but spares mineralocorticoids (↑BP instead of salt-wasting).</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 8</h4>
+                <p>A 46,XY patient with a known enzyme deficiency presents with hypertension, hypokalemia, and complete female external genitalia. Internal examination reveals no uterus. Labs show low cortisol, low sex steroids, and elevated 11-deoxycorticosterone. Which enzyme is deficient?</p>
+                <p class="option">A) 21-hydroxylase (CYP21A2)</p>
+                <p class="option">B) 11β-hydroxylase (CYP11B1)</p>
+                <p class="option">C) 17α-hydroxylase (CYP17A1)</p>
+                <p class="option">D) 3β-HSD</p>
+                <p class="option">E) Aromatase</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: C — 17α-Hydroxylase (CYP17A1)</strong>
+                    <p style="margin-top:10px;">CYP17A1 deficiency blocks: (1) 17α-hydroxylation → no cortisol, (2) 17,20-lyase activity → no androgens or estrogens. Precursors shunt to mineralocorticoids (↑DOC, ↑corticosterone) → hypertension + hypokalemia. In 46,XY: no testosterone → no Wolffian duct development, no DHT → female external genitalia; but AMH intact (from Sertoli cells) → no Müllerian structures → no uterus. The key distinguishing feature from 21-hydroxylase deficiency: hypertension (not salt-wasting) and NO androgen excess.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 9</h4>
+                <p>In the two-cell, two-gonadotropin model of ovarian steroidogenesis, which cell type expresses aromatase and under which hormonal control?</p>
+                <p class="option">A) Theca cells; LH</p>
+                <p class="option">B) Granulosa cells; FSH</p>
+                <p class="option">C) Theca cells; FSH</p>
+                <p class="option">D) Granulosa cells; LH</p>
+                <p class="option">E) Stromal cells; ACTH</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B — Granulosa cells; FSH</strong>
+                    <p style="margin-top:10px;">The two-cell model: LH → theca cells → androstenedione/testosterone → diffuses to granulosa cells; FSH → granulosa cells → upregulates aromatase (CYP19A1) → converts androgens → estradiol. This is the basis of estradiol production in the follicular phase. PCOS disrupts this: ↑LH/FSH ratio → excess theca androgen production without adequate aromatase activity → hyperandrogenism + anovulation.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 10</h4>
+                <p>A 65-year-old man with BPH is started on dutasteride. After 6 months, his prostate volume has decreased. Compared to finasteride, what is the key advantage of dutasteride?</p>
+                <p class="option">A) Acts specifically on type 2 5α-reductase only</p>
+                <p class="option">B) Blocks both type 1 and type 2 5α-reductase</p>
+                <p class="option">C) Acts as an androgen receptor antagonist</p>
+                <p class="option">D) Increases SHBG levels</p>
+                <p class="option">E) Stimulates DHT conversion to an inactive metabolite</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B — Blocks both type 1 and type 2 5α-reductase</strong>
+                    <p style="margin-top:10px;">Finasteride specifically inhibits type 2 5α-reductase (predominant in prostate and genital skin). Dutasteride inhibits both type 1 (skin, liver, other tissues) AND type 2 — resulting in more complete DHT suppression (&gt;90% vs ~70% with finasteride). This more potent DHT suppression can translate to greater prostate volume reduction. Both drugs increase testosterone (less converted to DHT) and may cause gynecomastia through increased aromatization. Note: neither is an androgen receptor antagonist (unlike flutamide, bicalutamide, enzalutamide).</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 11</h4>
+                <p>Maternal serum unconjugated estriol (uE3) is used in the second-trimester quad screen. Which condition would cause UNDETECTABLE uE3 with associated maternal virilization?</p>
+                <p class="option">A) Gestational diabetes with elevated maternal insulin</p>
+                <p class="option">B) Pre-eclampsia with placental insufficiency</p>
+                <p class="option">C) Placental aromatase (CYP19A1) deficiency</p>
+                <p class="option">D) Fetal congenital hypothyroidism</p>
+                <p class="option">E) Twin pregnancy (two placentas, twice the estriol)</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: C — Placental aromatase deficiency</strong>
+                    <p style="margin-top:10px;">Estriol production requires the fetoplacental unit: fetal adrenal → DHEA-S → fetal liver 16α-hydroxylates → 16-OH-DHEA-S → <strong>placental CYP19A1</strong> converts to estriol. Placental aromatase deficiency: estriol undetectable + androgens cannot be converted → <strong>maternal virilization</strong> (clitoromegaly, acne, deepened voice) and female fetal virilization. Note: Down syndrome (trisomy 21) also shows LOW uE3 on quad screen (due to impaired fetal adrenal/liver maturation), but is not zero and does not cause maternal virilization. Quad screen for Down: ↓AFP, ↓uE3, ↑hCG, ↑inhibin A.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 12</h4>
+                <p>A 2-week-old neonate with 46,XX karyotype presents with ambiguous genitalia (clitoromegaly and labial fusion) and a salt-wasting crisis (hyponatremia, hyperkalemia, hypotension). Labs: ↑17-OH-progesterone, ↓cortisol, ↓aldosterone. Which enzyme is deficient?</p>
+                <p class="option">A) 11β-hydroxylase</p>
+                <p class="option">B) 17α-hydroxylase</p>
+                <p class="option">C) 21-hydroxylase</p>
+                <p class="option">D) 3β-HSD</p>
+                <p class="option">E) StAR protein</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: C — 21-Hydroxylase</strong>
+                    <p style="margin-top:10px;">Classic presentation of salt-wasting congenital adrenal hyperplasia (CAH) due to 21-hydroxylase deficiency. The enzyme block: ↑17-OH-progesterone (substrate accumulation → diagnostic marker), ↓cortisol → ↑ACTH → shunts precursors to androgens (virilization of 46,XX) + ↓aldosterone → salt-wasting crisis. The elevated androgens in utero cause virilization of XX external genitalia. 11β-hydroxylase deficiency also causes CAH with virilization but causes hypertension (not salt-wasting) from ↑DOC. 17α-hydroxylase causes hypertension, no virilization.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 13</h4>
+                <p>A 14-year-old 46,XY patient with known 5α-reductase type 2 deficiency was raised as female. At puberty, he begins to virilize with penile growth, voice deepening, and testicular descent. Which finding would be expected on labs?</p>
+                <p class="option">A) Low testosterone, high DHT, high LH</p>
+                <p class="option">B) High testosterone, low DHT, high testosterone:DHT ratio</p>
+                <p class="option">C) Low testosterone, low DHT, low LH</p>
+                <p class="option">D) High testosterone, high DHT, normal LH</p>
+                <p class="option">E) Low testosterone, high LH, high FSH (hypergonadotropic)</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B — High testosterone, low DHT, high testosterone:DHT ratio</strong>
+                    <p style="margin-top:10px;">5α-reductase type 2 deficiency: testosterone is produced normally by Leydig cells but cannot be converted to DHT in target tissues. At puberty: LH surge → high testosterone → virilization via testosterone's direct androgen receptor activity (AR works; it's the 5α-reductase that's broken). Labs: ↑testosterone, ↓DHT, ↑T:DHT ratio (&gt;30:1 diagnostic). LH may be slightly elevated (partial AR resistance feedback). In CAIS, the AR itself is broken → no virilization at puberty + very high LH (complete AR resistance). The distinguishing feature: 5α-reductase deficiency VIRILIZES at puberty; CAIS does NOT.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 14</h4>
+                <p>A 46,XX newborn presents with clitoromegaly, posterior labial fusion, and salt-wasting crisis on day 7 of life. Serum 17-hydroxyprogesterone is markedly elevated. Which enzyme is deficient, and why does 17-OHP accumulate?</p>
+                <p class="option">A) 11β-hydroxylase (CYP11B1); cannot convert 11-deoxycortisol → cortisol, causing 17-OHP to back up</p>
+                <p class="option">B) 21-hydroxylase (CYP21A2); cannot convert 17-OHP → 11-deoxycortisol, accumulating 17-OHP and shunting to androgens</p>
+                <p class="option">C) 3β-HSD; cannot convert 17-OH-pregnenolone → 17-OHP, causing paradoxical 17-OHP accumulation</p>
+                <p class="option">D) 17α-hydroxylase (CYP17A1); cannot add the 17-OH group, so 17-OHP cannot form</p>
+                <p class="option">E) StAR protein; cholesterol accumulation cross-reacts with 17-OHP immunoassay</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B — 21-Hydroxylase (CYP21A2) deficiency</strong>
+                    <p style="margin-top:10px;"><strong>21-Hydroxylase (CYP21A2)</strong> is required for: (1) 17-OHP → 11-deoxycortisol → cortisol; (2) Progesterone → deoxycorticosterone → aldosterone. Without CYP21A2: <strong>17-OHP accumulates</strong> (pathognomonic marker; detected on newborn screening); ACTH rises (absent cortisol feedback) → substrate shunted into androgen pathway (→ androstenedione → testosterone → DHT) → virilization of 46,XX fetus. Absent aldosterone → salt-wasting (hyponatremia, hyperkalemia, hypotension, dehydration). Compare: <strong>11β-hydroxylase deficiency</strong> also causes virilization + elevated 17-OHP (mildly) but causes <strong>hypertension</strong> (DOC accumulates → mineralocorticoid activity) rather than salt-wasting.</p>
+                </div>
+            </div>
+
+
+            <!-- LO 5 &mdash; Circulation and Inactivation (Carrier Proteins, Half-Life) -->
+            <h4 style="font-size:15px; font-weight:700; color:#7c3aed; margin:28px 0 8px; padding-bottom:4px; border-bottom:2px solid #ede9fe;">LO 5 &mdash; Circulation and Inactivation (Carrier Proteins, Half-Life)</h4>
+
+            <div class="practice-question">
+                <h4>Question 15</h4>
+                <p>A 50-year-old woman with obesity and type 2 diabetes presents with hirsutism and irregular menses. Total testosterone is 65 ng/dL (normal &lt;55) but free testosterone is markedly elevated. What explains the discrepancy?</p>
+                <p class="option">A) Increased SHBG from estrogen</p>
+                <p class="option">B) Decreased SHBG from insulin resistance</p>
+                <p class="option">C) Increased aromatase activity in adipose tissue</p>
+                <p class="option">D) Decreased 5α-reductase activity</p>
+                <p class="option">E) Increased renal testosterone clearance</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B — Decreased SHBG from insulin resistance</strong>
+                    <p style="margin-top:10px;">Insulin resistance and hyperinsulinemia suppress hepatic SHBG synthesis → low SHBG → greater proportion of testosterone is free/bioavailable → hyperandrogenism even when total testosterone is only borderline elevated. This is the mechanism in PCOS: insulin resistance → ↓SHBG → ↑free T → hirsutism, acne, anovulation. Weight loss and metformin (improve insulin sensitivity) → ↑SHBG → ↓free T → improvement in symptoms.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 16</h4>
+                <p>A 30-year-old woman with PCOS has elevated free testosterone despite normal total testosterone. Which of the following best explains this?</p>
+                <p class="option">A) Increased ovarian aromatase activity elevates free estradiol, which displaces testosterone from SHBG</p>
+                <p class="option">B) Insulin resistance suppresses hepatic SHBG production, increasing the free androgen fraction</p>
+                <p class="option">C) Elevated LH directly releases testosterone from albumin-bound storage</p>
+                <p class="option">D) Elevated FSH stimulates adrenal SHBG synthesis, paradoxically lowering binding capacity</p>
+                <p class="option">E) PCOS upregulates albumin synthesis, displacing testosterone from SHBG</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B — Insulin suppresses hepatic SHBG, increasing free androgen fraction</strong>
+                    <p style="margin-top:10px;">SHBG is produced by the liver; insulin and IGF-1 suppress its synthesis. Hyperinsulinemia in PCOS → ↓SHBG → larger free testosterone fraction despite normal total testosterone. The Free Androgen Index (FAI = total T/SHBG × 100) reflects this. Clinical pearl: OCPs (estrogen component) raise SHBG → ↓free androgens → treat hirsutism/acne in PCOS. Exogenous androgens also suppress SHBG. Thyroid hormone elevates SHBG (explains elevated total T4 in pregnancy without clinical hyperthyroidism).</p>
+                </div>
+            </div>
+
+
+            <!-- LO 6 &mdash; Mechanisms of Action of Sex Steroids on Target Cells -->
+            <h4 style="font-size:15px; font-weight:700; color:#7c3aed; margin:28px 0 8px; padding-bottom:4px; border-bottom:2px solid #ede9fe;">LO 6 &mdash; Mechanisms of Action of Sex Steroids on Target Cells</h4>
+
+            <div class="practice-question">
+                <h4>Question 17</h4>
+                <p>Which aromatase inhibitor would be used to treat postmenopausal women with hormone receptor-positive breast cancer as adjuvant therapy?</p>
+                <p class="option">A) Tamoxifen</p>
+                <p class="option">B) Anastrozole</p>
+                <p class="option">C) Fulvestrant</p>
+                <p class="option">D) Clomiphene</p>
+                <p class="option">E) Megestrol</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B — Anastrozole</strong>
+                    <p style="margin-top:10px;">Anastrozole (and letrozole, exemestane) are aromatase inhibitors (AIs) that block CYP19A1 → prevent peripheral conversion of androgens → estrogen. They are preferred over tamoxifen as adjuvant therapy in postmenopausal ER+ breast cancer (ATAC trial: superior disease-free survival). Key point: AIs only work in postmenopausal women (not premenopausal) because ovarian estrogen production overwhelms peripheral block. Postmenopausal women rely primarily on peripheral aromatization. Fulvestrant is a selective estrogen receptor degrader (SERD). Tamoxifen is a SERM, not an AI.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 18</h4>
+                <p>A 55-year-old postmenopausal woman is placed on tamoxifen after resection of an ER-positive breast cancer. Two years later she reports vaginal bleeding. Endometrial biopsy shows endometrial hyperplasia. Which property of tamoxifen explains this complication?</p>
+                <p class="option">A) Tamoxifen acts as an ERα antagonist in uterine tissue</p>
+                <p class="option">B) Tamoxifen acts as an ERα partial agonist in uterine tissue</p>
+                <p class="option">C) Tamoxifen degrades ERα in uterine tissue</p>
+                <p class="option">D) Tamoxifen inhibits aromatase in uterine tissue</p>
+                <p class="option">E) Tamoxifen has no effect on uterine ERα</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B — Tamoxifen acts as an ERα partial agonist in uterine tissue</strong>
+                    <p style="margin-top:10px;">Tamoxifen is a SERM with tissue-selective activity: ER antagonist in breast (blocks tumor proliferation) but ER partial agonist in uterus/endometrium. This endometrial agonism leads to proliferation → endometrial hyperplasia → up to 3× increased risk of endometrial carcinoma. Any postmenopausal woman on tamoxifen with vaginal bleeding requires urgent endometrial biopsy. Raloxifene is preferred for breast cancer prevention in postmenopausal women with intact uterus as it lacks this agonist effect in the endometrium.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 19</h4>
+                <p>A 28-year-old woman with PCOS and anovulatory infertility is started on clomiphene. What is the mechanism by which clomiphene induces ovulation?</p>
+                <p class="option">A) Direct stimulation of granulosa cell aromatase</p>
+                <p class="option">B) Blocks hypothalamic ER → removes estrogen negative feedback → ↑GnRH → ↑FSH/LH</p>
+                <p class="option">C) Acts as FSH receptor agonist to directly stimulate folliculogenesis</p>
+                <p class="option">D) Blocks ovarian progesterone receptors → prevents luteolysis</p>
+                <p class="option">E) Stimulates GnRH pulsatility by acting on kisspeptin neurons</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B — Blocks hypothalamic ER → removes estrogen negative feedback → ↑GnRH → ↑FSH/LH</strong>
+                    <p style="margin-top:10px;">Clomiphene is an ER antagonist at the hypothalamus. By blocking estrogen receptors in the hypothalamus, it prevents estrogen from exerting negative feedback on GnRH neurons → GnRH pulse frequency increases → ↑LH and FSH from pituitary → follicle recruitment and growth → ovulation. It is first-line for ovulation induction in anovulatory infertility (PCOS). Side effects: hot flashes (anti-estrogenic), multiple gestation (multiple follicle recruitment), ovarian hyperstimulation syndrome (rare), hostile cervical mucus (can reduce conception despite ovulation).</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 20</h4>
+                <p>A 52-year-old postmenopausal woman with ER-positive breast cancer is started on anastrozole. The oncologist explains this is NOT appropriate as monotherapy for premenopausal women. Which mechanism best explains why?</p>
+                <p class="option">A) Anastrozole blocks only ERα, which is not expressed in premenopausal ovaries</p>
+                <p class="option">B) Premenopausal ovaries compensate via increased FSH when peripheral aromatase is inhibited</p>
+                <p class="option">C) Anastrozole is metabolized too rapidly in premenopausal women due to CYP enzyme induction</p>
+                <p class="option">D) Premenopausal women have lower adipose aromatase expression, so blockade has minimal effect</p>
+                <p class="option">E) Premenopausal ovaries synthesize estradiol from cholesterol without using aromatase</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B — Premenopausal ovaries compensate via FSH feedback</strong>
+                    <p style="margin-top:10px;">In <strong>postmenopausal</strong> women, peripheral aromatization (adipose, liver, muscle) is the only estrogen source → anastrozole fully suppresses estrogen. In <strong>premenopausal</strong> women, blocking peripheral aromatase lowers estrogen → ↑FSH → stimulates ovarian follicles → granulosa cell aromatase (abundant) produces compensatory estradiol. Solution: combine aromatase inhibitor with ovarian suppression (GnRH agonist) in premenopausal ER+ breast cancer. SOFT and TEXT trials established GnRH agonist + AI as superior to tamoxifen alone in high-risk premenopausal patients.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 21</h4>
+                <p>A 28-year-old woman with PCOS-related anovulatory infertility is given clomiphene citrate. Which mechanism explains the resulting increase in FSH and LH?</p>
+                <p class="option">A) Clomiphene directly stimulates the anterior pituitary to release FSH and LH</p>
+                <p class="option">B) Clomiphene blocks estrogen receptors at the hypothalamus/pituitary, preventing negative feedback</p>
+                <p class="option">C) Clomiphene inhibits aromatase, lowering estrogen and reflexively raising gonadotropins</p>
+                <p class="option">D) Clomiphene activates ERβ at the pituitary to upregulate FSH beta-subunit gene expression</p>
+                <p class="option">E) Clomiphene suppresses progesterone receptors in the hypothalamus, removing luteal phase inhibition</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B — ER antagonist at hypothalamus/pituitary blocks negative feedback → ↑GnRH/FSH/LH</strong>
+                    <p style="margin-top:10px;">Clomiphene is a SERM: <strong>ER antagonist</strong> at hypothalamus and pituitary → blocks estrogen negative feedback → pituitary interprets low estrogen → ↑GnRH → ↑FSH/LH → follicle recruitment and ovulation. Clomiphene is ER agonist at bone and partially at endometrium (thickens cervical mucus — can reduce fertility at high doses). Key comparison: <strong>Letrozole</strong> (aromatase inhibitor) reduces estrogen synthesis → same net effect (↑FSH/LH) but fewer anti-estrogenic endometrial effects → now preferred first-line for PCOS anovulation (Legro et al., NEJM 2014: higher ovulation and live birth rates vs. clomiphene).</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 22</h4>
+                <p>Mifepristone (RU-486) is administered to a 10-week pregnant woman for medical termination. Which receptor does mifepristone target, and what is its mechanism of action?</p>
+                <p class="option">A) Estrogen receptor antagonist → prevents endometrial proliferation</p>
+                <p class="option">B) Progesterone receptor antagonist → cervical softening + uterine contractions</p>
+                <p class="option">C) Oxytocin receptor agonist → directly stimulates uterine contractions</p>
+                <p class="option">D) Glucocorticoid receptor agonist → induces fetal lung maturity</p>
+                <p class="option">E) hCG receptor antagonist → blocks corpus luteum rescue</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B — Progesterone receptor antagonist → cervical softening + uterine contractions</strong>
+                    <p style="margin-top:10px;">Mifepristone (RU-486) is a progesterone receptor (PR) antagonist. By blocking PR in the endometrium and myometrium, it: (1) causes decidual breakdown → endometrial detachment; (2) increases uterine sensitivity to prostaglandins and oxytocin; (3) promotes cervical ripening. It is used with misoprostol (PGE1 analog → cervical ripening + uterine contractions) for medical abortion up to 70 days gestation. Mifepristone also has glucocorticoid receptor activity (used in Cushing syndrome at higher doses).</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 23</h4>
+                <p>Mifepristone (RU-486) is used for medical termination of a 9-week pregnancy, followed by misoprostol 48 hours later. What is mifepristone's primary mechanism of action at the uterus?</p>
+                <p class="option">A) Inhibition of placental CYP11A1, blocking progesterone synthesis from cholesterol</p>
+                <p class="option">B) Competitive antagonism of the progesterone receptor, reversing uterine quiescence</p>
+                <p class="option">C) Stimulation of endometrial PGF2α synthesis to induce contractions</p>
+                <p class="option">D) Prevention of hCG binding to corpus luteum LH/hCG receptors</p>
+                <p class="option">E) Inhibition of 3β-HSD, blocking trophoblastic progesterone production</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B — Competitive PR antagonism reverses uterine quiescence</strong>
+                    <p style="margin-top:10px;">Mifepristone is a <strong>competitive progesterone receptor antagonist</strong> (also anti-glucocorticoid; weak anti-androgen at high doses). By blocking PR in the myometrium and decidua: (1) uterine quiescence is reversed (progesterone normally suppresses oxytocin receptor expression and gap junction formation), (2) decidual regression occurs, (3) cervical softening/dilation. Misoprostol (PGE1) then amplifies contractions and cervical ripening for complete expulsion. At 9 weeks, the placenta is the progesterone source (not corpus luteum) — so corpus luteum hCG blockade is irrelevant; the PR antagonism at the uterine level is the operative mechanism.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 24</h4>
+                <p>In an IVF cycle using a GnRH antagonist protocol, progesterone vaginal suppositories are prescribed after egg retrieval. Why is luteal phase support required?</p>
+                <p class="option">A) The GnRH antagonist directly destroys corpus luteum cells via apoptosis</p>
+                <p class="option">B) GnRH antagonist suppresses LH, preventing adequate corpus luteum function post-retrieval</p>
+                <p class="option">C) Oocyte retrieval removes the progesterone-secreting granulosa cell layer</p>
+                <p class="option">D) Progesterone suppositories prevent ovarian hyperstimulation syndrome (OHSS)</p>
+                <p class="option">E) Progesterone is needed to trigger the LH surge for final oocyte maturation</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B — GnRH antagonist suppresses LH → inadequate corpus luteum support</strong>
+                    <p style="margin-top:10px;">In IVF protocols, GnRH antagonist (or agonist) suppresses pituitary LH to prevent premature ovulation. The corpus luteum requires LH (or hCG) stimulation to sustain progesterone output. With pituitary suppressed, LH is absent → corpus luteum undergoes early luteolysis → progesterone falls → endometrial support fails → implantation failure. Exogenous progesterone bridges this gap until the developing embryo produces hCG and eventually the placenta becomes steroidogenically autonomous (luteal-placental shift ~weeks 8–10). Luteal phase support is standard of care for ALL IVF cycles using GnRH analogues.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 25</h4>
+                <p>A 17-year-old assigned female at birth presents with primary amenorrhea, normal breast development, and completely absent pubic and axillary hair. Karyotype: 46,XY. Pelvic ultrasound: no uterus, gonads in inguinal canal. Testosterone: 680 ng/dL (male range). LH: markedly elevated. What is the most important next management step after confirming the diagnosis?</p>
+                <p class="option">A) Start testosterone replacement immediately</p>
+                <p class="option">B) Begin GnRH pulsatile therapy for fertility</p>
+                <p class="option">C) Plan gonadectomy to prevent malignancy, then estrogen replacement</p>
+                <p class="option">D) Perform vaginal dilation immediately and obtain uterine transplant</p>
+                <p class="option">E) Refer for 5α-reductase inhibitor therapy</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: C — Plan gonadectomy to prevent malignancy, then estrogen replacement</strong>
+                    <p style="margin-top:10px;">This is CAIS. The undescended testes in CAIS carry a significant risk of malignancy (gonadoblastoma, dysgerminoma) — estimated 3–22% lifetime risk. Standard management: allow puberty to complete naturally (the testes are the source of aromatizable testosterone → estrogen → breast development and bone density), THEN perform gonadectomy. After removal: lifelong estrogen replacement to maintain bone density and quality of life. Vaginal dilation may be needed (blind vaginal pouch) for sexual function. Genetic counseling for family members (X-linked recessive). Fertility is not possible (no uterus/ovaries).</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 26</h4>
+                <p>A 15-year-old 46,XY patient raised female presents with primary amenorrhea and bilateral inguinal masses confirmed to be testes. The endocrinologist recommends eventual gonadectomy. What is the PRIMARY indication for removing the testes?</p>
+                <p class="option">A) Testes produce virilizing testosterone levels that will cause progressive masculinization</p>
+                <p class="option">B) Undescended testes in CAIS carry significantly elevated risk of gonadoblastoma/dysgerminoma</p>
+                <p class="option">C) Testes produce excess estrogen, increasing endometrial hyperplasia risk</p>
+                <p class="option">D) Testosterone suppresses pituitary LH, causing permanent hypogonadotropic hypogonadism</p>
+                <p class="option">E) Testes interfere with exogenous estrogen receptor signaling needed for further feminization</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct Answer: B — Undescended testes have elevated gonadoblastoma/dysgerminoma risk</strong>
+                    <p style="margin-top:10px;">In CAIS, undescended (intra-abdominal or inguinal) testes carry ~2–3% lifetime risk of germ cell malignancy (gonadoblastoma in childhood, seminoma/dysgerminoma in adulthood). Current guidelines: consider deferring gonadectomy until <strong>after puberty</strong> — testicular aromatization of testosterone → estradiol drives natural breast development and bone density accrual without needing exogenous estrogen during puberty. After puberty, gonadectomy + lifelong HRT. These patients are <strong>never virilized</strong> regardless of testosterone levels (AR is completely nonfunctional), so the indication is purely malignancy prevention, not androgen suppression.</p>
+                </div>
+            </div>
+
+        </section>
+
+</main>
+
+<script>
+    function switchLO(event, loId) {
+        event.preventDefault();
+        document.querySelectorAll('.lo-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+        const section = document.getElementById(loId);
+        if (section) section.classList.add('active');
+        let link = event.target;
+        while (link && !link.classList.contains('sidebar-link')) link = link.parentElement;
+        if (link) link.classList.add('active');
+        const mainEl = document.querySelector('.main');
+        if (mainEl) mainEl.scrollTop = 0;
+    }
+
+    function toggleAnswer(btn) {
+        const answer = btn.nextElementSibling;
+        const isShowing = answer.classList.contains('show');
+        answer.classList.toggle('show');
+        btn.textContent = isShowing ? 'Reveal Answer' : 'Hide Answer';
+    }
+
+    function toggleSection(h3El) {
+        h3El.classList.toggle('collapsed');
+        const body = h3El.nextElementSibling;
+        if (body && body.classList.contains('section-body')) body.classList.toggle('collapsed');
+    }
+    function toggleTrap(headerEl) {
+        headerEl.classList.toggle('collapsed');
+        const body = headerEl.nextElementSibling;
+        if (body && body.classList.contains('trap-body')) body.classList.toggle('collapsed');
+    }
+    function toggleH5(h5El) {
+        h5El.classList.toggle('collapsed');
+        const body = h5El.nextElementSibling;
+        if (body && body.classList.contains('h5-body')) body.classList.toggle('collapsed');
+    }
+    function toggleMnemonic(headerEl) {
+        headerEl.classList.toggle('collapsed');
+        const body = headerEl.nextElementSibling;
+        if (body && body.classList.contains('mnemonic-body')) body.classList.toggle('collapsed');
+    }
+
+    function expandAll() {
+        document.querySelectorAll('.lo-section.active .section-body').forEach(el => el.classList.remove('collapsed'));
+        document.querySelectorAll('.lo-section.active .collapsible-h3').forEach(el => el.classList.remove('collapsed'));
+    }
+    function collapseAll() {
+        document.querySelectorAll('.lo-section.active .section-body').forEach(el => el.classList.add('collapsed'));
+        document.querySelectorAll('.lo-section.active .collapsible-h3').forEach(el => el.classList.add('collapsed'));
+    }
+
+    function buildExportDoc(forPrint) {
+        const collapsedEls = Array.from(document.querySelectorAll('.collapsed'));
+        const hiddenSections = Array.from(document.querySelectorAll('.lo-section:not(.active)'));
+        hiddenSections.forEach(s => s.style.display = 'block');
+        collapsedEls.forEach(el => el.classList.remove('collapsed'));
+
+        const clone = document.querySelector('.main').cloneNode(true);
+
+        hiddenSections.forEach(s => s.style.display = '');
+        collapsedEls.forEach(el => el.classList.add('collapsed'));
+
+        clone.querySelectorAll(
+            '.section-chevron, .h5-chevron, .mnemonic-chevron, .trap-chevron, ' +
+            '.export-actions, .sidebar-footer, .hub-return-btn, button'
+        ).forEach(el => el.remove());
+
+        const pageCSS = Array.from(document.querySelectorAll('style')).map(s => s.textContent).join('\n');
+        const overrideCSS = `
+            * { box-sizing: border-box; }
+            body { display:block !important; overflow:visible !important; height:auto !important; background:white !important; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Calibri,sans-serif; }
+            .main { margin-left:0 !important; height:auto !important; overflow:visible !important; max-width:100% !important; padding:24px 32px !important; }
+            .lo-section { display:block !important; box-shadow:none !important; animation:none !important; ${forPrint ? 'page-break-before:always;' : ''} }
+            .lo-section:first-child { page-break-before:auto !important; }
+            .section-body, .h4-body, .h5-body, .mnemonic-body, .trap-body { display:block !important; }
+            ${forPrint ? '@media print { .main { padding:0 !important; } }' : ''}
+        `;
+        const ns = forPrint ? '' :
+            `xmlns:o='urn:schemas-microsoft-com:office:office'
+             xmlns:w='urn:schemas-microsoft-com:office:word'
+             xmlns='http://www.w3.org/TR/REC-html40'`;
+        return `<!DOCTYPE html>
+<html ${ns}>
+<head>
+    <meta charset="UTF-8">
+    <title>Lecture 5: Sex Steroid Synthesis &amp; Action — HoyaDocs Endocrine Block</title>
+    <style>${pageCSS}</style>
+    <style>${overrideCSS}</style>
+</head>
+<body>
+${clone.outerHTML}
+</body>
+</html>`;
+    }
+
+    function printAll(btn) {
+        const origHTML = btn.innerHTML;
+        btn.innerHTML = '<span class="btn-icon">&#9203;</span>Opening…';
+        btn.disabled = true;
+        const html = buildExportDoc(true);
+        const win = window.open('', '_blank', 'width=960,height=750,scrollbars=yes');
+        if (!win) {
+            alert('Pop-ups are blocked. Please allow pop-ups for this page, then try again.');
+            btn.innerHTML = origHTML; btn.disabled = false; return;
+        }
+        win.document.open(); win.document.write(html); win.document.close();
+        win.onload = function() { setTimeout(() => { win.focus(); win.print(); }, 1800); };
+        btn.innerHTML = origHTML; btn.disabled = false;
+    }
+
+    function downloadWord(btn) {
+        const origHTML = btn.innerHTML;
+        btn.innerHTML = '<span class="btn-icon">&#9203;</span>Building…';
+        btn.disabled = true;
+        const html = buildExportDoc(false);
+        const blob = new Blob(['\ufeff', html], { type: 'application/msword' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Lec04-Sex-Steroid-Synthesis.doc';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        btn.innerHTML = origHTML; btn.disabled = false;
+    }
+</script>
+</body>
+</html>
