@@ -119,6 +119,8 @@
       transition: background 0.13s, color 0.13s;
     }
     .sb-link:hover { background: var(--sb-hover); color: rgba(255,255,255,0.92); }
+    .sb-link-disabled { opacity: 0.55; cursor: not-allowed; pointer-events: none; font-style: italic; }
+    .mobile-nav-item-disabled { opacity: 0.55; cursor: not-allowed; pointer-events: none; font-style: italic; }
 
     .sb-link-icon {
       width: 22px; height: 22px; border-radius: 6px;
@@ -609,6 +611,14 @@
         <span class="sb-link-icon sb-icon-green">🎯</span>
         Active Drills
       </a>
+      <a class="sb-link" href="./resource-mapping/HoyaDocs-UWorld-QID-Mapping.xlsx">
+        <span class="sb-link-icon sb-icon-amber">⭐</span>
+        UWorld QID Mapping
+      </a>
+      <a class="sb-link" href="./resource-mapping/Endocrine_Resource_Mapping.xlsx">
+        <span class="sb-link-icon sb-icon-amber">⭐</span>
+        Resource Mapping
+      </a>
     </nav>
 
     <div class="sb-rule"></div>
@@ -617,20 +627,20 @@
     <nav class="sb-nav">
       <a class="sb-link" href="./resource-mapping-tool.html">
         <span class="sb-link-icon sb-icon-green">🧾</span>
-        On Demand Per Lecture Mapping
+        On Demand 3rd Party Resource Mapping
       </a>
       <a class="sb-link" href="./hub-status-report.html">
         <span class="sb-link-icon sb-icon-teal">📋</span>
-        Lecture Audit
+        HoyaDocs Audit
       </a>
       <a class="sb-link" href="./anki_package_parser_v10.html">
         <span class="sb-link-icon sb-icon-amber">🃏</span>
-        Anki Mapping
+        Anki package parser
       </a>
-      <a class="sb-link" href="./hub-map.html">
+      <span class="sb-link sb-link-disabled">
         <span class="sb-link-icon sb-icon-amber">🗺️</span>
-        Hub Map
-      </a>
+        TBD: Training Mapping
+      </span>
     </nav>
 
     <div class="sb-spacer"></div>
@@ -730,15 +740,6 @@
               <div class="mlc-body">
                 <div class="mlc-title">Block 4 Endocrine Check List</div>
                 <div class="mlc-desc">Google sheet of Endocrine lectures</div>
-              </div>
-              <span class="mlc-arrow">→</span>
-            </a>
-
-            <a class="mini-link-card mlc-themed" href="./planning/lecture_planner.html">
-              <span class="mlc-icon">📅</span>
-              <div class="mlc-body">
-                <div class="mlc-title">Lecture Planning</div>
-                <div class="mlc-desc">Plan your lecture study week</div>
               </div>
               <span class="mlc-arrow">→</span>
             </a>
@@ -860,7 +861,7 @@
               <div class="bcard-icon">🩺</div>
               <div class="bcard-header-text">
                 <span class="bcard-label">Exam · 01</span>
-                <h3>Board-Style Practice</h3>
+                <h3>Coming Soon! Board-Style Practice</h3>
               </div>
             </div>
             <p>Exam-oriented question sets and external QBank links organized in one place.</p>
@@ -920,7 +921,7 @@
           </div>
           <div class="wf-item">
             <div class="wf-num">04</div>
-            <div class="wf-title">Board-Style Practice</div>
+            <div class="wf-title">Coming Soon! Board-Style Practice</div>
             <div class="wf-desc">Shift into question-based reasoning and exam-style thinking with practice sets.</div>
           </div>
           <div class="wf-item">
@@ -954,6 +955,12 @@
       <a class="mobile-nav-item" href="https://strettyit10.github.io/Block4-Endocrine/active-recall-hub.html" target="_blank" rel="noopener">
         <span class="mobile-nav-icon">🎯</span>Active Drills
       </a>
+      <a class="mobile-nav-item" href="./resource-mapping/HoyaDocs-UWorld-QID-Mapping.xlsx">
+        <span class="mobile-nav-icon">⭐</span>UWorld QID Mapping
+      </a>
+      <a class="mobile-nav-item" href="./resource-mapping/Endocrine_Resource_Mapping.xlsx">
+        <span class="mobile-nav-icon">⭐</span>Resource Mapping
+      </a>
     </div>
   </div>
 
@@ -961,20 +968,17 @@
     <div class="mobile-nav-label">Tools</div>
     <div class="mobile-nav-items">
       <a class="mobile-nav-item" href="./resource-mapping-tool.html">
-        <span class="mobile-nav-icon">🧾</span>On Demand Per Lecture Mapping
+        <span class="mobile-nav-icon">🧾</span>On Demand 3rd Party Resource Mapping
       </a>
       <a class="mobile-nav-item" href="./hub-status-report.html">
-        <span class="mobile-nav-icon">📋</span>Lecture Audit
+        <span class="mobile-nav-icon">📋</span>HoyaDocs Audit
       </a>
       <a class="mobile-nav-item" href="./anki_package_parser_v10.html">
-        <span class="mobile-nav-icon">🃏</span>Anki Mapping
+        <span class="mobile-nav-icon">🃏</span>Anki package parser
       </a>
-      <a class="mobile-nav-item" href="./resource-mapping/HoyaDocs-UWorld-QID-Mapping.xlsx">
-        <span class="mobile-nav-icon">📊</span>UWorld QID Mapping
-      </a>
-      <a class="mobile-nav-item" href="./resource-mapping/Endocrine_Resource_Mapping.xlsx">
-        <span class="mobile-nav-icon">📑</span>Resource Mapping
-      </a>
+      <span class="mobile-nav-item mobile-nav-item-disabled">
+        <span class="mobile-nav-icon">🗺️</span>TBD: Training Mapping
+      </span>
     </div>
   </div>
 
