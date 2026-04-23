@@ -92,38 +92,39 @@
     .sb-crest { display: none; }
 
     .sb-name {
-      font-size: 1.35rem; font-weight: 900; color: #fff;
+      font-size: 1.2rem; font-weight: 900; color: #fff;
       letter-spacing: -0.01em; flex: 1;
       text-shadow: 0 1px 8px rgba(0,0,0,0.25);
     }
 
     .sb-block {
-      font-size: 0.82rem; font-weight: 600;
+      font-size: 0.74rem; font-weight: 600;
       color: #ffffff;
       margin-bottom: 4px; padding-left: 2px;
     }
 
     .sb-text-link {
-      display: inline-block; font-size: 0.78rem; font-weight: 500;
+      display: inline-block; font-size: 0.70rem; font-weight: 500;
       color: rgba(255,255,255,0.60); text-decoration: underline;
-      text-underline-offset: 2px; padding-left: 2px; margin-bottom: 22px;
+      text-underline-offset: 2px; padding-left: 2px; margin-bottom: 20px;
       transition: color 0.13s;
     }
     .sb-text-link:hover { color: #fff; }
 
     .sb-section-label {
-      font-size: 0.82rem; font-weight: 700;
-      letter-spacing: 0.08em; text-transform: uppercase;
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.10em; text-transform: uppercase;
       color: #ffffff;
       margin-bottom: 8px; padding: 0 8px;
     }
 
-    .sb-nav { display: flex; flex-direction: column; gap: 2px; margin-bottom: 20px; }
+    .sb-nav { display: flex; flex-direction: column; gap: 2px; margin-bottom: 18px; }
 
     .sb-link {
       display: flex; align-items: center; gap: 9px;
-      padding: 8px 10px; border-radius: 8px;
-      font-size: 0.82rem; font-weight: 500;
+      padding: 7px 10px; border-radius: 8px;
+      font-size: 0.74rem; font-weight: 500;
+      line-height: 1.3;
       color: rgba(255,255,255,0.60);
       transition: background 0.13s, color 0.13s;
     }
@@ -132,10 +133,10 @@
     .mobile-nav-item-disabled { opacity: 0.55; cursor: not-allowed; pointer-events: none; font-style: italic; }
 
     .sb-link-icon {
-      width: 22px; height: 22px; border-radius: 6px;
+      width: 20px; height: 20px; border-radius: 6px;
       background: rgba(255,255,255,0.08);
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.82rem; flex-shrink: 0;
+      font-size: 0.74rem; flex-shrink: 0;
     }
     .sb-icon-blue  { background: rgba(99,140,220,0.32); }
     .sb-icon-green { background: rgba(74,180,120,0.32); }
@@ -148,8 +149,8 @@
     .sb-spacer { flex: 1; }
 
     .sb-ext-label {
-      font-size: 0.82rem; font-weight: 700;
-      letter-spacing: 0.08em; text-transform: uppercase;
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.10em; text-transform: uppercase;
       color: #ffffff;
       margin-bottom: 8px; padding: 0 8px;
     }
@@ -157,15 +158,15 @@
     .sb-link.sb-link-highlight {
       background: rgba(250,204,21,0.10);
       border: 1px solid rgba(250,204,21,0.25);
-      font-size: 0.74rem; line-height: 1.25; padding: 7px 9px;
+      font-size: 0.70rem; line-height: 1.25; padding: 7px 9px;
     }
     .sb-link.sb-link-highlight:hover { background: rgba(250,204,21,0.18); color: rgba(255,255,255,0.92); }
     .sb-icon-gold { background: rgba(250,204,21,0.32); }
 
     .sb-ext-link {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 9px 10px; border-radius: 8px;
-      font-size: 0.82rem; font-weight: 600;
+      padding: 8px 10px; border-radius: 8px;
+      font-size: 0.74rem; font-weight: 600;
       color: rgba(255,255,255,0.65);
       border: 1px solid rgba(255,255,255,0.10);
       margin-bottom: 6px;
@@ -211,7 +212,7 @@
     .find-what > summary::-webkit-details-marker { display: none; }
     .find-what-chevron { display: inline-block; transition: transform 0.18s ease; color: var(--hero-em); font-size: 0.9rem; line-height: 1; }
     .find-what[open] .find-what-chevron { transform: rotate(90deg); }
-    .find-what-body { padding: 12px 0 8px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; border-top: 1px solid var(--rule); }
+    .find-what-body { padding: 12px 0 8px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; border-top: 1px solid var(--rule); }
     .find-what-footer { padding: 10px 0 0; font-size: 0.82rem; color: var(--ink-2); border-top: 1px dashed var(--rule); margin-top: 4px; }
     .find-what-footer a { color: var(--hero-em); font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 2px; }
     .find-what-footer a:hover { color: var(--ink); }
@@ -237,30 +238,61 @@
 
     .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; }
 
-    /* ── HERO JUMP BUTTONS ── */
-    .hero-jump {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    /* ── HERO TOP GRID (Where Do I Find + Calendar/Checklist column) ── */
+    .hero-top-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: start;
+      margin-bottom: 18px;
+    }
+    .hero-side-col { display: flex; flex-direction: column; gap: 12px; }
+    .hero-side-col .bcard { margin: 0; }
+    .hero-top-grid .find-what { margin: 0; }
+    .hero-top-grid .find-what-body { grid-template-columns: 1fr; gap: 14px; }
+    @media (max-width: 720px) {
+      .hero-top-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── HERO JUMP / FILTER BUTTONS ── */
+    .hero-filter {
       margin-top: 18px; padding-top: 18px;
       border-top: 1px solid var(--rule);
     }
-    @media (max-width: 1024px) { .hero-jump { grid-template-columns: repeat(2, 1fr); } }
+    .hero-filter-label {
+      font-size: 0.85rem; font-weight: 900;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+    .hero-jump {
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
     .hero-jump-btn {
-      display: flex; align-items: center; justify-content: center; gap: 7px;
-      padding: 10px 14px; border-radius: 10px;
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 6px 10px; border-radius: 8px;
       background: var(--surface); border: 1px solid var(--rule);
-      font-size: 0.82rem; font-weight: 700; color: var(--ink-2);
+      font-size: 0.70rem; font-weight: 700; color: var(--ink-2);
       box-shadow: var(--card-sh);
       transition: border-color 0.15s, color 0.15s, transform 0.15s, background 0.15s;
       text-align: center; line-height: 1.2;
+      font-family: inherit;
+      white-space: nowrap;
     }
     .hero-jump-btn:hover {
       border-color: var(--hero-em); color: var(--hero-em);
       transform: translateY(-1px);
     }
-    .hero-jump-icon { font-size: 1rem; line-height: 1; }
+    .hero-jump-btn.active,
+    .hero-jump-btn.active:hover {
+      background: var(--hero-em);
+      color: #fff;
+      border-color: var(--hero-em);
+      transform: none;
+    }
+    .hero-jump-icon { font-size: 0.9rem; line-height: 1; }
     @media (max-width: 680px) {
-      .hero-jump { grid-template-columns: 1fr; }
-      .hero-jump-btn { padding: 8px 12px; font-size: 0.78rem; }
+      .hero-jump-btn { padding: 6px 9px; font-size: 0.68rem; }
     }
 
     .hero-tag {
@@ -392,13 +424,13 @@
     .bc-dkpurple .bcard-icon  { background: rgba(255,255,255,0.18); }
     .bc-dkpurple .bcard-watermark { color: #fff; }
 
-    .bc-dark { background: #5b4608; border-color: #854d0e; color: #f1f5f9; }
-    .bc-dark:hover { box-shadow: 0 12px 40px rgba(91,70,8,0.35), 0 3px 10px rgba(91,70,8,0.2); }
-    .bc-dark h3 { color: #f1f5f9; }
+    .bc-dark { background: #A16207; border-color: #854d0e; color: #f1f5f9; }
+    .bc-dark:hover { box-shadow: 0 12px 40px rgba(161,98,7,0.35), 0 3px 10px rgba(161,98,7,0.2); }
+    .bc-dark h3 { color: #fff; }
     .bc-dark p  { color: #fef3c7; }
     .bc-dark .bcard-label { color: #fde68a; }
     .bc-dark .bcard-cta   { color: #fef08a; }
-    .bc-dark .bcard-icon  { background: rgba(255,255,255,0.18); }
+    .bc-dark .bcard-icon  { background: rgba(255,255,255,0.22); }
     .bc-dark .bcard-watermark { color: #fff; }
 
     /* ══════════════════════════════════════
@@ -638,19 +670,15 @@
 
     <div class="sb-rule"></div>
 
-    <div class="sb-section-label">Mapping Files</div>
+    <div class="sb-section-label">Resource Mapping Files</div>
     <nav class="sb-nav">
-      <a class="sb-link" href="https://docs.google.com/spreadsheets/d/1SMDEGCMRUBjNL7vrkp1YLqKC_9CsNciMul-BcPU5yO4/edit?usp=sharing" target="_blank" rel="noopener">
-        <span class="sb-link-icon sb-icon-amber">📋</span>
-        Endocrine Lecture Check List
+      <a class="sb-link" href="./end_Resource_Mapping.xlsx">
+        <span class="sb-link-icon sb-icon-amber">📊</span>
+        3rd Party Resource Mapping (xlsx)
       </a>
-      <a class="sb-link sb-link-highlight" href="./end_Resource_Mapping.xlsx">
-        <span class="sb-link-icon sb-icon-gold">⭐</span>
-        3rd Party Resource Mapping
-      </a>
-      <a class="sb-link sb-link-highlight" href="./end-UWorld-QID-Mapping.xlsx">
-        <span class="sb-link-icon sb-icon-gold">⭐</span>
-        UWorld QID Mapping
+      <a class="sb-link" href="./end-UWorld-QID-Mapping.xlsx">
+        <span class="sb-link-icon sb-icon-amber">📊</span>
+        UWorld QID Mapping (xlsx)
       </a>
     </nav>
 
@@ -658,22 +686,20 @@
 
     <div class="sb-section-label">Tools</div>
     <nav class="sb-nav">
-      <a class="sb-link" href="#">
-        <span class="sb-link-icon sb-icon-green">🧾</span>
-        On Demand 3rd Party Resource Mapping
+      <a class="sb-link" href="https://docs.google.com/spreadsheets/d/1SMDEGCMRUBjNL7vrkp1YLqKC_9CsNciMul-BcPU5yO4/edit?usp=sharing" target="_blank" rel="noopener">
+        <span class="sb-link-icon sb-icon-amber">📋</span>
+        Endocrine Lecture Check List
       </a>
-      <a class="sb-link" href="./hub-update-tracker/hub-status-report.html">
-        <span class="sb-link-icon sb-icon-teal">📋</span>
-        HoyaDocs Audit
+    </nav>
+
+    <div class="sb-rule"></div>
+
+    <div class="sb-section-label">HoyaDocs Info</div>
+    <nav class="sb-nav">
+      <a class="sb-link" href="https://hoyadocs.com/hoyadocs-101" target="_blank" rel="noopener">
+        <span class="sb-link-icon sb-icon-blue">ℹ️</span>
+        HoyaDocs 101
       </a>
-      <a class="sb-link" href="#">
-        <span class="sb-link-icon sb-icon-amber">🃏</span>
-        Anki package parser
-      </a>
-      <span class="sb-link sb-link-disabled">
-        <span class="sb-link-icon sb-icon-amber">🗺️</span>
-        TBD: Training Mapping
-      </span>
     </nav>
 
     <div class="sb-spacer"></div>
@@ -699,60 +725,38 @@
         <h1 class="hero-title">Endocrine <em>Study Hub.</em></h1>
         <p class="hero-sub"><strong>In-house exam prep and USMLE Step 1 review — all your tools in one place.</strong></p>
 
-        <details class="find-what" open>
-          <summary>
-            <span class="find-what-chevron">▸</span>
-            <span><em>Where Do I Find What?</em></span>
-          </summary>
-          <div class="find-what-body">
-            <div class="find-what-group">
-              <h4>Practice Problems</h4>
-              <ul>
-                <li>Lecture Study Guides <span class="find-what-note">(MCQ and Q&amp;A; LO focus)</span></li>
-                <li>Active Drills <span class="find-what-note">(LO &amp; USMLE focus)</span></li>
-                <li>Board-Style Practice <span class="find-what-note">(sample USMLE qs)</span></li>
-              </ul>
+        <div class="hero-top-grid">
+          <details class="find-what" open>
+            <summary>
+              <span class="find-what-chevron">▸</span>
+              <span><em>Where Do I Find What?</em></span>
+            </summary>
+            <div class="find-what-body">
+              <div class="find-what-group">
+                <h4>Practice Problems</h4>
+                <ul>
+                  <li>Lecture Study Guide Hub <span class="find-what-note">(MCQ and Q&amp;A; LO focus)</span></li>
+                  <li>Recall Drills <span class="find-what-note">(fib; LO focus)</span></li>
+                  <li>Active Drill Hub <span class="find-what-note">(LO &amp; USMLE focus)</span></li>
+                  <li>Question Banks <span class="find-what-note">(sample USMLE qs)</span></li>
+                </ul>
+              </div>
+              <div class="find-what-group">
+                <h4>3rd Party &amp; UWorld QID Mapping</h4>
+                <ul>
+                  <li>Resource Mapping Hub <span class="find-what-note">(Lecture Specific)</span></li>
+                  <li>Resource Explorer</li>
+                  <li>UWorld QID Mapping <span class="find-what-note">(Excel file)</span></li>
+                  <li>3rd Party Resource Mapping <span class="find-what-note">(Excel file)</span></li>
+                </ul>
+              </div>
             </div>
-            <div class="find-what-group">
-              <h4>Resource &amp; UWorld QID Mapping</h4>
-              <ul>
-                <li>3rd Party Resources <span class="find-what-note">(Lecture Specific)</span></li>
-                <li>Resource Explorer</li>
-                <li>UWorld QID Mapping <span class="find-what-note">(Excel file)</span></li>
-                <li>3rd Party Resource Mapping <span class="find-what-note">(Excel file)</span></li>
-              </ul>
+            <div class="find-what-footer">
+              Still have questions? Visit <a href="https://hoyadocs.com/hoyadocs-101" target="_blank" rel="noopener"><strong>HoyaDocs 101</strong></a>
             </div>
-            <div class="find-what-group">
-              <h4>HY Information</h4>
-              <ul>
-                <li>Lecture Study Guides <span class="find-what-note">(LO focus)</span></li>
-                <li>Atlases <span class="find-what-note">(Subject / Disease Focus)</span></li>
-              </ul>
-            </div>
-          </div>
-          <div class="find-what-footer">
-            Still have questions? Visit <a href="https://hoyadocs.com/hoyadocs-101" target="_blank" rel="noopener"><strong>HoyaDocs 101</strong></a>
-          </div>
-        </details>
+          </details>
 
-        <div class="hero-jump">
-          <a class="hero-jump-btn" href="#lecture-tools"><span class="hero-jump-icon">📘</span>Lecture Study Tools</a>
-          <a class="hero-jump-btn" href="#mapping-tools"><span class="hero-jump-icon">🗂</span>3rd Party × Lecture Mapping</a>
-          <a class="hero-jump-btn" href="#exam-tools"><span class="hero-jump-icon">🩺</span>HY Atlas &amp; Databases</a>
-        </div>
-      </section>
-
-      <!-- LECTURE STUDY TOOLS -->
-      <div class="section-block" id="lecture-tools">
-        <div class="section-divider">
-          <span class="section-divider-text">Lecture Study Tools</span>
-          <div class="section-divider-line"></div>
-        </div>
-        <div class="bento">
-
-          <!-- Column 1: Check List + Calendar (stacked) -->
-          <div style="display:flex; flex-direction:column; gap:12px;">
-
+          <div class="hero-side-col">
             <a class="mini-link-card mlc-themed" href="https://docs.google.com/spreadsheets/d/1SMDEGCMRUBjNL7vrkp1YLqKC_9CsNciMul-BcPU5yO4/edit?usp=sharing" target="_blank" rel="noopener">
               <span class="mlc-icon">📋</span>
               <div class="mlc-body">
@@ -762,7 +766,7 @@
               <span class="mlc-arrow">→</span>
             </a>
 
-            <div class="bcard bc-blue" style="flex:1;">
+            <div class="bcard bc-blue">
               <span class="bcard-watermark">📅</span>
               <div class="bcard-header">
                 <div class="bcard-icon">📅</div>
@@ -775,52 +779,63 @@
                 <div class="lec-none">Loading…</div>
               </div>
             </div>
-
           </div>
+        </div>
 
-          <!-- Column 2: Lecture Study Guides + Active Drills + Board-Style Practice -->
-          <div style="display:flex; flex-direction:column; gap:12px;">
-
-            <a class="bcard bc-green" href="./lecture-guides/index.html" style="flex:1; border: 3px solid #854d0e;">
-              <span class="bcard-watermark">📖</span>
-              <div class="bcard-header">
-                <div class="bcard-icon">📖</div>
-                <div class="bcard-header-text">
-                  <span class="bcard-label">Lecture · 01</span>
-                  <h3>Lecture Study Guides</h3>
-                </div>
-              </div>
-              <p>Per-lecture organized guides with key concepts, diagrams, and exam-focused notes.</p>
-              <span class="bcard-cta">Open guide →</span>
-            </a>
-
-            <a class="bcard bc-dark" href="./active-recall-hub.html" style="flex:1;">
-              <span class="bcard-watermark">🎯</span>
-              <div class="bcard-header">
-                <div class="bcard-icon">🎯</div>
-                <div class="bcard-header-text">
-                  <span class="bcard-label">Lecture · 02</span>
-                  <h3>Active Drills</h3>
-                </div>
-              </div>
-              <p>Gamified practice for vignettes, trap questions, mechanisms, and drug facts.</p>
-              <span class="bcard-cta">Launch drills →</span>
-            </a>
-
-            <a class="bcard bc-dark" href="https://strettyit10.github.io/Block4-Endocrine/QuestionBank.html" style="flex:1;">
-              <span class="bcard-watermark">🩺</span>
-              <div class="bcard-header">
-                <div class="bcard-icon">🩺</div>
-                <div class="bcard-header-text">
-                  <span class="bcard-label">Lecture · 03</span>
-                  <h3>Coming Soon! Board-Style Practice</h3>
-                </div>
-              </div>
-              <p>Exam-oriented question sets and external QBank links organized in one place.</p>
-              <span class="bcard-cta">Practice questions →</span>
-            </a>
-
+        <div class="hero-filter">
+          <div class="hero-filter-label">Select filter</div>
+          <div class="hero-jump">
+            <button class="hero-jump-btn filter-btn active" data-filter="all" type="button"><span class="hero-jump-icon">✨</span>All</button>
+            <button class="hero-jump-btn filter-btn" data-filter="lecture-tools" type="button"><span class="hero-jump-icon">📘</span>Lecture Study Tools</button>
+            <button class="hero-jump-btn filter-btn" data-filter="mapping-tools" type="button"><span class="hero-jump-icon">🗂</span>3rd Party × Lecture Mapping</button>
+            <button class="hero-jump-btn filter-btn" data-filter="exam-tools" type="button"><span class="hero-jump-icon">🩺</span>Atlases</button>
           </div>
+        </div>
+      </section>
+
+      <!-- LECTURE STUDY TOOLS -->
+      <div class="section-block" id="lecture-tools">
+        <div class="section-divider">
+          <span class="section-divider-text">Lecture Study Tools</span>
+          <div class="section-divider-line"></div>
+        </div>
+        <div class="bento bento-3">
+
+          <a class="bcard bc-green" href="./lecture-guides/index.html">
+            <span class="bcard-watermark">📖</span>
+            <div class="bcard-header">
+              <div class="bcard-icon">📖</div>
+              <div class="bcard-header-text">
+                <span class="bcard-label">Lecture · 01</span>
+                <h3>Lecture Study Guides</h3>
+              </div>
+            </div>
+            <span class="bcard-cta">Open guide →</span>
+          </a>
+
+          <a class="bcard bc-dark" href="./active-recall-hub.html">
+            <span class="bcard-watermark">🎯</span>
+            <div class="bcard-header">
+              <div class="bcard-icon">🎯</div>
+              <div class="bcard-header-text">
+                <span class="bcard-label">Lecture · 02</span>
+                <h3>Active Drills Hub</h3>
+              </div>
+            </div>
+            <span class="bcard-cta">Launch drills →</span>
+          </a>
+
+          <a class="bcard bc-dark" href="https://strettyit10.github.io/Block4-Endocrine/QuestionBank.html">
+            <span class="bcard-watermark">🩺</span>
+            <div class="bcard-header">
+              <div class="bcard-icon">🩺</div>
+              <div class="bcard-header-text">
+                <span class="bcard-label">Lecture · 03</span>
+                <h3>Coming Soon! Board-Style Practice</h3>
+              </div>
+            </div>
+            <span class="bcard-cta">Practice questions →</span>
+          </a>
 
         </div>
       </div>
@@ -833,29 +848,15 @@
         </div>
         <div class="bento bento-3">
 
-          <a class="bcard bc-purple" href="./resource-mapping/end_mapping.html">
-            <span class="bcard-watermark">🗂</span>
-            <div class="bcard-header">
-              <div class="bcard-icon">🗂</div>
-              <div class="bcard-header-text">
-                <span class="bcard-label">Mapping · 01</span>
-                <h3>Lecture × 3rd Party Mapping</h3>
-              </div>
-            </div>
-            <p>3rd party resources mapped to each lecture — BnB, Bootcamp, Pathoma, Physeo, and Sketchy.</p>
-            <span class="bcard-cta">Open section →</span>
-          </a>
-
           <a class="bcard bc-purple" href="./resource-mapping/end_resource-hub.html">
             <span class="bcard-watermark">🔗</span>
             <div class="bcard-header">
               <div class="bcard-icon">🔗</div>
               <div class="bcard-header-text">
-                <span class="bcard-label">Mapping · 02</span>
-                <h3>Lecture Specific Resources</h3>
+                <span class="bcard-label">Mapping · 01</span>
+                <h3>Resource Mapping Hub</h3>
               </div>
             </div>
-            <p>Per-lecture study guides, practice questions, UWorld QIDs, and Anki cards.</p>
             <span class="bcard-cta">Open section →</span>
           </a>
 
@@ -864,11 +865,10 @@
             <div class="bcard-header">
               <div class="bcard-icon">🔍</div>
               <div class="bcard-header-text">
-                <span class="bcard-label">Mapping · 03</span>
-                <h3>Resource Explorer</h3>
+                <span class="bcard-label">Mapping · 02</span>
+                <h3>Extended Resource Explorer</h3>
               </div>
             </div>
-            <p>Pick your resources and explore mapped tags, card counts, and watch times — with Excel export.</p>
             <span class="bcard-cta">Open explorer →</span>
           </a>
 
@@ -877,11 +877,10 @@
             <div class="bcard-header">
               <div class="bcard-icon">📊</div>
               <div class="bcard-header-text">
-                <span class="bcard-label">Mapping · 04</span>
-                <h3>UWorld QID Mapping</h3>
+                <span class="bcard-label">Mapping · 03</span>
+                <h3>UWorld QID x In House Lecture (xlsx)</h3>
               </div>
             </div>
-            <p>Spreadsheet of UWorld QIDs mapped to each Endocrine lecture for targeted review.</p>
             <span class="bcard-cta">Download xlsx →</span>
           </a>
 
@@ -890,21 +889,20 @@
             <div class="bcard-header">
               <div class="bcard-icon">📊</div>
               <div class="bcard-header-text">
-                <span class="bcard-label">Mapping · 05</span>
-                <h3>Resource Mapping</h3>
+                <span class="bcard-label">Mapping · 04</span>
+                <h3>3rd Party Resource x In House Lecture (xlsx)</h3>
               </div>
             </div>
-            <p>Master spreadsheet of all 3rd party resources mapped to Endocrine lectures.</p>
             <span class="bcard-cta">Download xlsx →</span>
           </a>
 
         </div>
       </div>
 
-      <!-- HY ATLAS & DATABASES -->
+      <!-- ATLASES -->
       <div class="section-block" id="exam-tools">
         <div class="section-divider">
-          <span class="section-divider-text">HY Atlas &amp; Databases</span>
+          <span class="section-divider-text">Atlases</span>
           <div class="section-divider-line"></div>
         </div>
         <div class="bento bento-3">
@@ -918,7 +916,6 @@
                 <h3>Coming Soon! Subject Based HY Study Guides</h3>
               </div>
             </div>
-            <p>Summary notes, curated review pages, and structured study documents for in-house and Step 1 prep.</p>
             <span class="bcard-cta">Coming soon →</span>
           </a>
 
@@ -931,7 +928,6 @@
                 <h3>Coming Soon! Databases</h3>
               </div>
             </div>
-            <p>High-yield tables, fact banks, and reference repositories for quick lookup.</p>
             <span class="bcard-cta">Coming soon →</span>
           </a>
 
@@ -953,16 +949,13 @@
 <nav class="mobile-nav">
 
   <div class="mobile-nav-group">
-    <div class="mobile-nav-label">Mapping Files</div>
+    <div class="mobile-nav-label">Resource Mapping Files</div>
     <div class="mobile-nav-items">
-      <a class="mobile-nav-item" href="https://docs.google.com/spreadsheets/d/1SMDEGCMRUBjNL7vrkp1YLqKC_9CsNciMul-BcPU5yO4/edit?usp=sharing" target="_blank" rel="noopener">
-        <span class="mobile-nav-icon">📋</span>Endo Check List
-      </a>
       <a class="mobile-nav-item" href="./end_Resource_Mapping.xlsx">
-        <span class="mobile-nav-icon">⭐</span>3rd Party Map
+        <span class="mobile-nav-icon">📊</span>3rd Party Map (xlsx)
       </a>
       <a class="mobile-nav-item" href="./end-UWorld-QID-Mapping.xlsx">
-        <span class="mobile-nav-icon">⭐</span>UWorld QIDs
+        <span class="mobile-nav-icon">📊</span>UWorld QIDs (xlsx)
       </a>
     </div>
   </div>
@@ -970,18 +963,18 @@
   <div class="mobile-nav-group">
     <div class="mobile-nav-label">Tools</div>
     <div class="mobile-nav-items">
-      <a class="mobile-nav-item" href="#">
-        <span class="mobile-nav-icon">🧾</span>On Demand 3rd Party Resource Mapping
+      <a class="mobile-nav-item" href="https://docs.google.com/spreadsheets/d/1SMDEGCMRUBjNL7vrkp1YLqKC_9CsNciMul-BcPU5yO4/edit?usp=sharing" target="_blank" rel="noopener">
+        <span class="mobile-nav-icon">📋</span>Endo Check List
       </a>
-      <a class="mobile-nav-item" href="./hub-update-tracker/hub-status-report.html">
-        <span class="mobile-nav-icon">📋</span>HoyaDocs Audit
+    </div>
+  </div>
+
+  <div class="mobile-nav-group">
+    <div class="mobile-nav-label">HoyaDocs Info</div>
+    <div class="mobile-nav-items">
+      <a class="mobile-nav-item" href="https://hoyadocs.com/hoyadocs-101" target="_blank" rel="noopener">
+        <span class="mobile-nav-icon">ℹ️</span>HoyaDocs 101
       </a>
-      <a class="mobile-nav-item" href="#">
-        <span class="mobile-nav-icon">🃏</span>Anki package parser
-      </a>
-      <span class="mobile-nav-item mobile-nav-item-disabled">
-        <span class="mobile-nav-icon">🗺️</span>TBD: Training Mapping
-      </span>
     </div>
   </div>
 
@@ -1053,6 +1046,30 @@
     }
   }
   document.addEventListener('DOMContentLoaded', renderBuildMeta);
+
+  // ── Section Filter Buttons ──
+  function initSectionFilter() {
+    const buttons = document.querySelectorAll('.filter-btn');
+    const sections = document.querySelectorAll('.main-inner .section-block');
+    if (!buttons.length || !sections.length) return;
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        sections.forEach(section => {
+          if (filter === 'all' || section.id === filter) {
+            section.style.display = '';
+          } else {
+            section.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+  document.addEventListener('DOMContentLoaded', initSectionFilter);
 
 </script>
 
