@@ -87,6 +87,24 @@
       text-shadow: 0 1px 8px rgba(0,0,0,0.25);
     }
     .tn-name:hover { color: rgba(255,255,255,0.75); }
+    .tn-block {
+      font-size: 0.72rem; font-weight: 600;
+      color: rgba(255,255,255,0.65); letter-spacing: 0.02em;
+      margin-top: 1px;
+    }
+
+    /* ── FEEDBACK BUTTON (fixed top-right) ── */
+    .feedback-fab {
+      position: fixed; top: 11px; right: 20px; z-index: 500;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 14px; border-radius: 20px;
+      background: var(--hero-em); color: #fff;
+      font-size: 0.78rem; font-weight: 700;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+      transition: opacity 0.15s, transform 0.15s;
+      text-decoration: none;
+    }
+    .feedback-fab:hover { opacity: 0.88; transform: translateY(-1px); }
 
     .tn-nav { display: flex; align-items: center; gap: 4px; flex: 1; justify-content: flex-end; }
     .tn-link {
@@ -115,31 +133,48 @@
     /* ══════════════════════════════════════
        SHELL
     ══════════════════════════════════════ */
-    .shell { display: flex; flex-direction: row; flex: 1; margin-top: 52px; }
+    .shell { display: flex; flex-direction: row; flex: 1; }
 
     /* ══════════════════════════════════════
        LEFT SIDEBAR
     ══════════════════════════════════════ */
     .sidebar {
-      width: 200px; flex-shrink: 0;
+      width: 240px; flex-shrink: 0;
       background: var(--sb);
-      position: fixed; top: 52px; height: calc(100vh - 52px);
+      position: fixed; top: 0; height: 100vh;
       display: flex; flex-direction: column;
       padding: 24px 12px 24px;
       overflow-y: auto;
       transition: background 0.2s;
     }
+    .sb-brand {
+      display: flex; flex-direction: column; gap: 2px;
+      padding: 0 4px 14px; margin-bottom: 16px;
+      border-bottom: 1px solid var(--sb-line);
+    }
+    .sb-name {
+      font-size: 1.2rem; font-weight: 900; color: #fff;
+      letter-spacing: -0.01em; text-decoration: none;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.25);
+    }
+    .sb-name:hover { color: rgba(255,255,255,0.78); }
+    .sb-block {
+      font-size: 0.74rem; font-weight: 600;
+      color: rgba(255,255,255,0.65); letter-spacing: 0.01em;
+    }
+
     .sb-section-label {
-      font-size: 0.60rem; font-weight: 700;
+      font-size: 0.62rem; font-weight: 700;
       letter-spacing: 0.10em; text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
+      color: #ffffff;
       margin-bottom: 8px; padding: 0 10px;
     }
     .sb-nav { display: flex; flex-direction: column; gap: 2px; }
     .sb-link {
       display: flex; align-items: center; gap: 9px;
       padding: 9px 10px; border-radius: 8px;
-      font-size: 0.83rem; font-weight: 500;
+      font-size: 0.78rem; font-weight: 500;
+      line-height: 1.3;
       color: rgba(255,255,255,0.58);
       transition: background 0.13s, color 0.13s;
       text-decoration: none; white-space: nowrap;
@@ -154,12 +189,35 @@
     .sb-icon-blue   { background: rgba(99,140,220,0.32); }
     .sb-icon-green  { background: rgba(74,180,120,0.32); }
     .sb-icon-purple { background: rgba(139,92,246,0.32); }
+    .sb-icon-rose   { background: rgba(220,90,110,0.32); }
+
+    .sb-spacer { flex: 1; }
+    .sb-rule { height: 1px; background: var(--sb-line); margin: 14px 0 14px; }
+    .sb-ext-label {
+      font-size: 0.60rem; font-weight: 700;
+      letter-spacing: 0.10em; text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 8px; padding: 0 10px;
+    }
+    .sb-ext-link {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 10px; border-radius: 8px;
+      font-size: 0.78rem; font-weight: 600;
+      color: rgba(255,255,255,0.65);
+      border: 1px solid rgba(255,255,255,0.10);
+      margin-bottom: 6px;
+      transition: background 0.13s, color 0.13s, border-color 0.13s;
+      text-decoration: none;
+    }
+    .sb-ext-link:hover { background: rgba(255,255,255,0.08); color: #fff; border-color: rgba(255,255,255,0.20); }
+    .sb-ext-link:last-child { margin-bottom: 0; }
+    .sb-ext-arrow { opacity: 0.55; font-size: 0.75rem; }
 
     /* ══════════════════════════════════════
        MAIN CONTENT
     ══════════════════════════════════════ */
-    .main { flex: 1; min-width: 0; background: var(--bg); transition: background 0.2s; margin-left: 200px; }
-    .main-inner { max-width: none; padding: 48px 44px 80px; }
+    .main { flex: 1; min-width: 0; background: var(--bg); transition: background 0.2s; margin-left: 240px; }
+    .main-inner { max-width: none; padding: 24px 44px 80px; }
 
     /* ── HERO ── */
     .hero { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--rule); }
@@ -178,45 +236,57 @@
     .hero-title em { font-style: normal; color: var(--hero-em); }
 
     .hero-sub {
-      font-size: 0.97rem; color: var(--ink-2);
-      line-height: 1.7; margin-bottom: 22px;
+      font-size: 0.85rem; color: var(--ink-2);
+      line-height: 1.65; margin-bottom: 22px;
     }
 
     /* ── HUB LEGEND CARDS ── */
+    .legend-section {
+      width: max-content; max-width: 100%;
+      margin: 0 auto;
+    }
     .res-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 12px; margin-bottom: 22px;
+      display: grid;
+      grid-template-columns: 170px 24px 170px 24px 170px;
+      align-items: stretch;
+      margin-bottom: 14px;
     }
     .bcard {
-      border-radius: 14px; padding: 18px 18px 16px;
-      display: flex; flex-direction: column;
+      border-radius: 10px; padding: 6px 8px;
+      display: flex; flex-direction: row; align-items: center;
+      gap: 7px; min-width: 0;
       border: 1px solid transparent;
       position: relative; overflow: hidden;
     }
     .bcard-watermark {
-      position: absolute; bottom: -14px; right: -4px;
-      font-size: 4.5rem; opacity: 0.07;
+      position: absolute; bottom: -10px; right: -3px;
+      font-size: 2.4rem; opacity: 0.07;
       pointer-events: none; user-select: none; line-height: 1;
     }
     .bcard-icon {
-      width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+      width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
       background: rgba(255,255,255,0.75);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.05rem; margin-bottom: 10px;
+      font-size: 0.7rem;
+    }
+    .bcard-body {
+      display: flex; flex-direction: column; min-width: 0; flex: 1;
     }
     .bcard-label {
-      font-size: 0.60rem; font-weight: 700;
-      letter-spacing: 0.10em; text-transform: uppercase; opacity: 0.75;
-      margin-bottom: 4px;
+      font-size: 0.78rem; font-weight: 800;
+      letter-spacing: -0.01em; opacity: 1;
+      margin-bottom: 0;
     }
     .bcard h3 {
-      font-size: 0.90rem; font-weight: 800;
-      letter-spacing: -0.02em; color: var(--ink); margin: 0 0 5px; line-height: 1.2;
+      font-size: 0.62rem; font-weight: 500;
+      letter-spacing: 0; color: var(--ink-2); margin: 0; line-height: 1.2;
     }
-    .bcard p {
-      font-size: 0.75rem; color: var(--ink-2);
-      line-height: 1.55; margin: 0;
+    .bcard-arrow {
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.1rem; color: var(--ink-3);
+      font-weight: 700; opacity: 0.55;
     }
 
     .bc-green  { background: var(--bc-grn-bg); border-color: var(--bc-grn-br); }
@@ -226,44 +296,87 @@
     .bc-blue   { background: var(--bc-blue-bg); border-color: var(--bc-blue-br); }
     .bc-blue   .bcard-label { color: var(--bc-blue-tx); }
 
-    @media (max-width: 640px) { .res-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 760px) {
+      .res-grid { grid-template-columns: 1fr; width: 100%; }
+      .legend-section { width: 100%; }
+      .bcard-arrow { transform: rotate(90deg); }
+      .workflow { grid-template-columns: 1fr; }
+      .wfl-connectors { display: none; }
+      .wf-divider { display: none; }
+    }
 
     /* ── WORKFLOW STEPS ── */
     .workflow {
-      display: flex; align-items: flex-start; gap: 0;
-      margin: 20px 0 6px; flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: 1fr 33px 1fr 33px 1fr;
+      align-items: start;
+      margin: 20px 0 0;
     }
     .wf-step {
-      display: flex; align-items: flex-start; gap: 10px;
-      flex: 1; min-width: 140px;
+      display: flex; align-items: center; gap: 12px;
+      min-width: 0;
     }
     .wf-num {
-      font-size: 2rem; font-weight: 900; letter-spacing: -0.06em;
+      font-size: 3.4rem; font-weight: 900; letter-spacing: -0.06em;
       color: var(--rule); line-height: 1; flex-shrink: 0;
     }
-    .wf-body { padding-top: 2px; }
-    .wf-title { font-size: 0.82rem; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
-    .wf-desc  { font-size: 0.72rem; color: var(--ink-3); line-height: 1.5; }
+    .wf-body { min-width: 0; }
+    .wf-title { font-size: 0.98rem; font-weight: 800; color: var(--ink); margin-bottom: 3px; letter-spacing: -0.01em; }
+    .wf-desc  { font-size: 0.74rem; color: var(--ink-3); line-height: 1.5; }
     .wf-divider {
       width: 1px; background: var(--rule);
-      margin: 4px 16px 0; align-self: stretch; flex-shrink: 0;
+      margin: 4px auto 0; align-self: stretch; justify-self: center;
+    }
+
+    /* Connector funnel: three diagonals from cards converge under step 2 */
+    .wfl-connectors {
+      height: 38px;
+      margin: 6px 0 0;
+    }
+    .wfl-connectors svg {
+      width: 100%; height: 100%; display: block;
+      overflow: visible;
+    }
+    .wfl-connectors svg line {
+      stroke: var(--hero-em);
+      stroke-width: 2;
+      vector-effect: non-scaling-stroke;
+      stroke-linecap: round;
     }
     .hero-note {
-      font-size: 0.75rem; color: var(--ink-3);
-      line-height: 1.6; margin-top: 18px;
-      border-top: 1px solid var(--rule); padding-top: 14px;
+      font-size: 0.85rem; color: var(--ink-3);
+      line-height: 1.55; margin-top: 14px;
+      display: flex; justify-content: center; gap: 22px;
+    }
+    .hero-note .hni-toggle {
+      flex: 0 1 auto;
+      max-width: 360px;
+    }
+    @media (max-width: 720px) {
+      .hero-note { flex-direction: column; align-items: center; gap: 8px; }
+    }
+    .hero-note-divider {
+      height: 1px; background: var(--rule);
+      margin: 18px 0;
+    }
+    .hero-note-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 10px 14px; border-radius: 10px;
+      background: var(--bc-amb-bg);
+      border: 1px solid var(--bc-amb-br);
+    }
+    .hero-note-item .hni-icon {
+      flex-shrink: 0; font-size: 1rem; line-height: 1.4;
     }
     .hero-note a {
       color: #CA8A04; text-decoration: underline;
-      text-underline-offset: 2px; transition: color 0.15s; font-weight: 600;
+      text-underline-offset: 2px; transition: color 0.15s; font-weight: 700;
     }
     .hero-note a:hover { color: #14532d; }
     [data-theme="dark"] .hero-note a { color: #EAB308; }
     [data-theme="dark"] .hero-note a:hover { color: #86efac; }
     @media (max-width: 640px) {
-      .wf-divider { display: none; }
-      .wf-step { min-width: 45%; }
-      .workflow { gap: 14px; }
+      .workflow { gap: 14px 0; }
     }
 
     /* ── STATS — horizontal pill cards, distribute across full width ── */
@@ -322,6 +435,78 @@
       outline: none; box-shadow: var(--card-sh);
     }
     .search-bar:focus { border-color: #CA8A04; box-shadow: 0 0 0 3px rgba(234,179,8,0.12); }
+
+    /* ── HERO-NOTE TOGGLES (collapsed by default) ── */
+    .hni-toggle {
+      background: transparent;
+      border: none; border-radius: 0;
+      overflow: hidden;
+    }
+    .hni-header {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 0; cursor: pointer;
+      user-select: none; background: transparent;
+      border: none; text-align: left;
+      font-family: inherit; color: inherit;
+      transition: opacity 0.13s;
+    }
+    .hni-header:hover { opacity: 0.78; }
+    .hni-icon { font-size: 1rem; line-height: 1.2; flex-shrink: 0; }
+    .hni-title {
+      font-size: 0.9rem; font-weight: 800;
+      color: var(--ink); letter-spacing: -0.01em;
+    }
+    .hni-chevron {
+      flex-shrink: 0; font-size: 0.7rem; color: var(--ink-3);
+      transition: transform 0.2s;
+    }
+    .hni-toggle.open .hni-chevron { transform: rotate(90deg); }
+    .hni-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.25s ease;
+    }
+    .hni-toggle.open .hni-body { max-height: 200px; }
+    .hni-body-inner {
+      padding: 4px 0 6px;
+      font-size: 0.82rem; color: var(--ink-2); line-height: 1.5;
+    }
+    .hni-body-inner a {
+      color: #CA8A04; text-decoration: underline;
+      text-underline-offset: 2px; font-weight: 700;
+    }
+    .hni-body-inner a:hover { color: #14532d; }
+    [data-theme="dark"] .hni-body-inner a { color: #EAB308; }
+    [data-theme="dark"] .hni-body-inner a:hover { color: #86efac; }
+
+    /* ── SUBJECT FILTER PILLS ── */
+    .filter-row {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-top: 12px; margin-bottom: 0;
+    }
+    .filter-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 12px; border-radius: 20px;
+      font-size: 0.78rem; font-weight: 600;
+      background: var(--surface); color: var(--ink-2);
+      border: 1px solid var(--rule);
+      cursor: pointer; user-select: none;
+      transition: background 0.13s, border-color 0.13s, color 0.13s, box-shadow 0.13s;
+      font-family: inherit;
+    }
+    .filter-pill:hover {
+      background: var(--bc-amb-bg);
+      border-color: var(--bc-amb-br);
+      color: var(--ink);
+    }
+    .filter-pill.active {
+      background: var(--hero-em); color: #fff;
+      border-color: var(--hero-em);
+      box-shadow: 0 1px 4px rgba(202,138,4,0.25);
+    }
+    .filter-pill .fp-icon { font-size: 0.9rem; line-height: 1; }
+    [data-theme="dark"] .filter-pill { background: var(--surface); color: var(--ink-2); border-color: var(--rule); }
+    [data-theme="dark"] .filter-pill:hover { background: rgba(234,179,8,0.10); }
+    [data-theme="dark"] .filter-pill.active { background: var(--hero-em); color: #1e1800; border-color: var(--hero-em); }
     .search-bar::placeholder { color: var(--ink-3); }
 
     /* ── SECTION DIVIDER ── */
@@ -333,8 +518,26 @@
     .section-divider-line { flex: 1; height: 1px; background: #CA8A04; }
     [data-theme="dark"] .section-divider-line { background: #1e5c35; }
 
-    .section-block { margin-bottom: 44px; }
+    .section-block { margin-bottom: 0; scroll-margin-top: 20px; }
     .section-block.hidden { display: none; }
+
+    /* "All" view — sections in 3-column grid */
+    .sections-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+    @media (max-width: 1100px) {
+      .sections-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 760px) {
+      .sections-grid { grid-template-columns: 1fr; }
+    }
+    /* When filtering to a single subject, that section gets full width */
+    body.filtered-2col .sections-grid {
+      grid-template-columns: 1fr;
+    }
 
     /* ── UTIL LIST ── */
     .util-list {
@@ -351,6 +554,27 @@
     .util-row:hover { background: color-mix(in srgb, var(--bg) 60%, var(--surface)); }
     .util-row.hidden { display: none; }
 
+    /* 2-column layout when a subject filter is active */
+    body.filtered-2col .util-list {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      background: transparent;
+      border: none; box-shadow: none;
+      padding: 0;
+    }
+    body.filtered-2col .util-row {
+      background: var(--surface);
+      border: 1px solid var(--rule) !important;
+      border-radius: 12px;
+      box-shadow: var(--card-sh);
+    }
+    body.filtered-2col .util-row:hover {
+      background: color-mix(in srgb, var(--bg) 60%, var(--surface));
+    }
+    @media (max-width: 900px) {
+      body.filtered-2col .util-list { grid-template-columns: 1fr; }
+    }
+
     .util-icon {
       width: 40px; height: 40px; border-radius: 10px;
       display: flex; align-items: center; justify-content: center;
@@ -359,10 +583,12 @@
     .ui-blue   { background: #dbeafe; }
     .ui-green  { background: #dcfce7; }
     .ui-purple { background: #ede9fe; }
+    .ui-rose   { background: #ffe4e6; }
 
     [data-theme="dark"] .ui-blue   { background: rgba(99,140,220,0.20); }
     [data-theme="dark"] .ui-green  { background: rgba(74,180,120,0.20); }
     [data-theme="dark"] .ui-purple { background: rgba(139,92,246,0.20); }
+    [data-theme="dark"] .ui-rose   { background: rgba(220,90,110,0.20); }
 
     .util-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
     .util-text .util-badge { align-self: flex-start; margin-bottom: 2px; }
@@ -377,20 +603,23 @@
     .ub-blue   { background: var(--bc-blue-bg); color: var(--bc-blue-tx); border: 1px solid var(--bc-blue-br); }
     .ub-green  { background: var(--bc-grn-bg);  color: var(--bc-grn-tx);  border: 1px solid var(--bc-grn-br); }
     .ub-purple { background: var(--bc-pur-bg);  color: var(--bc-pur-tx);  border: 1px solid var(--bc-pur-br); }
+    .ub-rose   { background: var(--bc-ros-bg);  color: var(--bc-ros-tx);  border: 1px solid var(--bc-ros-br); }
 
     /* ── ROW ACTION BUTTONS ── */
     .row-actions {
-      display: flex; align-items: center; gap: 6px;
-      flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end;
+      display: flex; flex-direction: column; align-items: stretch;
+      gap: 5px; flex-shrink: 0; width: 92px;
     }
     .row-btn {
-      display: inline-flex; align-items: center; gap: 4px;
+      display: flex; align-items: center; justify-content: flex-start;
+      gap: 6px;
       padding: 5px 10px; border-radius: 6px;
-      font-size: 0.72rem; font-weight: 600;
+      font-size: 1.05rem; font-weight: 600;
       text-decoration: none; white-space: nowrap;
       border: 1px solid transparent; transition: all 0.14s;
       line-height: 1;
     }
+    .row-btn .rb-label { font-size: 0.72rem; }
 
     /* Hub 1 — teal/green */
     .rb-h1 { background: #FEFCE8; border-color: #fde68a; color: #CA8A04; }
@@ -491,45 +720,53 @@
 </head>
 <body>
 
-  <!-- ══ TOPNAV ════════════════════════════════════════════════════════════ -->
-  <header class="topnav">
-    <div class="tn-brand">
-      <a class="tn-name" href="index.html">HoyaDocs ↗</a>
-    </div>
-    <nav class="tn-nav">
-      <a class="tn-link" href="lecture-guides/index.html">📖 Lecture Guides</a>
-      <a class="tn-link" href="resource-mapping/end_resource-hub.html">🔗 Lecture Resources</a>
-      <a class="tn-link" href="resource-mapping/end_mapping.html">🗂 3rd Party Mapping</a>
-    </nav>
-    <div class="tn-right">
-      <button class="dark-toggle" id="darkToggle" onclick="toggleDark()" title="Toggle dark mode">🌙</button>
-    </div>
-  </header>
+  <!-- Feedback button fixed top-right -->
+  <a class="feedback-fab" href="https://forms.gle/382rWjcPXC1beo8G8" target="_blank" rel="noopener">
+    💬 Feedback
+  </a>
 
   <!-- ══ SHELL ══════════════════════════════════════════════════════════════ -->
   <div class="shell">
 
     <!-- ══ LEFT SIDEBAR ══════════════════════════════════════════════════════ -->
     <aside class="sidebar">
-      <div class="sb-section-label">Browse</div>
-<nav class="sb-nav">
-        <a class="sb-link active" href="#physio">
-          <span class="sb-link-icon sb-icon-blue">⚗️</span>Physiology
+      <div class="sb-brand">
+        <a class="sb-name" href="index.html">HoyaDocs ↗</a>
+        <div class="sb-block">Block 4 - Endocrine</div>
+      </div>
+      <div class="sb-section-label">Lecture Tools</div>
+      <nav class="sb-nav">
+        <a class="sb-link" href="lecture-guides/index.html">
+          <span class="sb-link-icon sb-icon-blue">📖</span>Lecture Guides
         </a>
-        <a class="sb-link" href="#biochem">
-          <span class="sb-link-icon sb-icon-blue">🧪</span>Biochemistry
-        </a>
-        <a class="sb-link" href="#histo">
-          <span class="sb-link-icon sb-icon-green">🔬</span>Histology
-        </a>
-        <a class="sb-link" href="#path">
-          <span class="sb-link-icon sb-icon-purple">🧫</span>Pathology
-        </a>
-        <a class="sb-link" href="#drt">
-          <span class="sb-link-icon sb-icon-rose">💊</span>DRT &amp; Pharm
+        <a class="sb-link" href="active-lesson-drills/end01_active_recall.html">
+          <span class="sb-link-icon sb-icon-rose">🎯</span>Recall Drills
         </a>
       </nav>
-        </aside>
+
+      <div class="sb-section-label" style="margin-top:14px;">Mapping Resources</div>
+      <nav class="sb-nav">
+        <a class="sb-link" href="resource-mapping/end_resource-explorer.html">
+          <span class="sb-link-icon sb-icon-green">📚</span>Extended Resource Explorer
+        </a>
+        <a class="sb-link" href="resource-mapping/end_resource-hub.html">
+          <span class="sb-link-icon sb-icon-purple">🗂</span>Resource Mapping Hub
+        </a>
+      </nav>
+
+      <div class="sb-spacer"></div>
+
+      <div class="sb-ext-label">Quick Access</div>
+      <a class="sb-ext-link" href="https://www.uworld.com/" target="_blank" rel="noopener">
+        <span>UWorld</span><span class="sb-ext-arrow">↗</span>
+      </a>
+      <a class="sb-ext-link" href="https://drive.google.com/" target="_blank" rel="noopener">
+        <span>Class Drive</span><span class="sb-ext-arrow">↗</span>
+      </a>
+      <a class="sb-ext-link" href="https://docs.google.com/spreadsheets/d/14WyUf7nLK21R5drauE0qpBrFZ-gNnyo6d4O1ymhvj4Y/edit?usp=sharing" target="_blank" rel="noopener">
+        <span>HoyaDocs Work In Progress</span><span class="sb-ext-arrow">↗</span>
+      </a>
+    </aside>
 
     <!-- ══ MAIN ══════════════════════════════════════════════════════════════ -->
     <main class="main">
@@ -537,8 +774,7 @@
 
         <!-- HERO -->
         <section class="hero" id="hero">
-          <p class="hero-eyebrow">HoyaDocs · Endocrine Block</p>
-          <h1 class="hero-title">Active Recall <em>Drill Hubs.</em></h1>
+          <h1 class="hero-title">Active Recall <em>Drill Hub</em></h1>
           <p class="hero-sub">These materials are designed to <strong style="color:var(--hero-em);">supplement</strong> your learning — whether that's in-house lectures, BnB, Pathoma, Physeo, Sketchy, the BK Anki deck, ANKing, or anything else you use. Whatever your primary sources, this is your one-stop shop to <strong style="color:var(--hero-em);">test and consolidate</strong> that learning.</p>
 
           <!-- WORKFLOW -->
@@ -546,32 +782,102 @@
             <a class="wf-step" href="./lecture-guides/index.html" style="text-decoration:none; color:inherit;">
               <div class="wf-num">1</div>
               <div class="wf-body">
-                <div class="wf-title">Lecture Guide + MCQ</div>
-                <div class="wf-desc">Read the guide, work through the embedded practice questions</div>
+                <div class="wf-title">↗ Lecture Guide + 1st Pass</div>
+                <div class="wf-desc">Read the guide, work through the embedded questions and recall drill</div>
               </div>
             </a>
             <div class="wf-divider"></div>
             <div class="wf-step">
               <div class="wf-num" style="color:#CA8A04;">2</div>
               <div class="wf-body">
-                <div class="wf-title">Active Drills + Testing Hub Drills</div>
-                <div class="wf-desc">Fill-in-the-blank active recall, flashcards, and timed question sets for deeper retrieval practice</div>
+                <div class="wf-title">↗ Active Recall Drill Hub</div>
+                <div class="wf-desc">Variety of active learning methods to engage in spaced repetition practice and enforce deeper retrieval of content</div>
               </div>
             </div>
             <div class="wf-divider"></div>
             <div class="wf-step">
               <div class="wf-num">3</div>
               <div class="wf-body">
-                <div class="wf-title">UWorld / HoyaDocs QBank</div>
-                <div class="wf-desc">Formative feedback with high-yield clinical vignettes</div>
+                <div class="wf-title">↗ Question Banks</div>
+                <div class="wf-desc">USMLE Step style questions ranging from 3rd party resources to AI Generated</div>
               </div>
             </div>
           </div>
 
-          <p class="hero-note">
-            For 3rd party resource mapping (BnB, Bootcamp, Pathoma, Physeo, Sketchy) by lecture, see the <a href="resource-mapping/end_mapping.html">Endocrine Mapping resource</a>.
-            For UWorld QIDs and Anki deck tags by lecture, see the <a href="resource-mapping/end_resource-hub.html">Endocrine Resource Hub</a>.
-          </p>
+          <div class="legend-section">
+            <!-- Connector funnel: cards converge into step 2 -->
+            <div class="wfl-connectors" aria-hidden="true">
+              <svg viewBox="0 0 100 38" preserveAspectRatio="none">
+                <!-- Vertical from step 2 down to convergence point -->
+                <line x1="50" y1="0" x2="50" y2="14"/>
+                <!-- Diagonal from convergence to top of card 1 -->
+                <line x1="50" y1="14" x2="15.2" y2="38"/>
+                <!-- Vertical from convergence to top of card 2 -->
+                <line x1="50" y1="14" x2="50" y2="38"/>
+                <!-- Diagonal from convergence to top of card 3 -->
+                <line x1="50" y1="14" x2="84.8" y2="38"/>
+              </svg>
+            </div>
+
+            <!-- Hub legend cards (extension of workflow steps) -->
+            <div class="res-grid">
+            <div class="bcard bc-green">
+              <div class="bcard-watermark">1</div>
+              <div class="bcard-icon">🟢</div>
+              <div class="bcard-body">
+                <div class="bcard-label">Hub 1</div>
+                <h3>In House Core Concepts</h3>
+              </div>
+            </div>
+            <div class="bcard-arrow">→</div>
+            <div class="bcard bc-amber">
+              <div class="bcard-watermark">2</div>
+              <div class="bcard-icon">🟡</div>
+              <div class="bcard-body">
+                <div class="bcard-label">Hub 2</div>
+                <h3>Step 1 Extensions</h3>
+              </div>
+            </div>
+            <div class="bcard-arrow">→</div>
+            <div class="bcard bc-blue">
+              <div class="bcard-watermark">3</div>
+              <div class="bcard-icon">🔵</div>
+              <div class="bcard-body">
+                <div class="bcard-label">Hub 3</div>
+                <h3>USMLE Style Questions</h3>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <div class="hero-note">
+            <div class="hni-toggle" id="hniResHub">
+              <button type="button" class="hni-header" onclick="toggleRes('hniResHub')" aria-expanded="false">
+                <span class="hni-icon">🗂</span>
+                <span class="hni-title">Resource Mapping Hub</span>
+                <span class="hni-chevron">▶</span>
+              </button>
+              <div class="hni-body">
+                <div class="hni-body-inner">
+                  For UWorld QIDs, 3rd party resource mapping (BnB, Bootcamp, Pathoma, Physeo, Sketchy), and HoyaDoc Resources per lecture, go to the <a href="resource-mapping/end_resource-hub.html">Resource Mapping Hub</a>.
+                </div>
+              </div>
+            </div>
+            <div class="hni-toggle" id="hniResExp">
+              <button type="button" class="hni-header" onclick="toggleRes('hniResExp')" aria-expanded="false">
+                <span class="hni-icon">📚</span>
+                <span class="hni-title">Extended Resource Explorer</span>
+                <span class="hni-chevron">▶</span>
+              </button>
+              <div class="hni-body">
+                <div class="hni-body-inner">
+                  For additional resource mapping (First Aid, Textbooks, In House Anki and ANKing) per lecture go to <a href="resource-mapping/end_resource-explorer.html">Extended Resource Explorer</a>.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-note-divider"></div>
 
           <!-- SEARCH -->
           <div class="search-bar-wrap" style="margin-top:20px; margin-bottom:0;">
@@ -586,162 +892,19 @@
             />
           </div>
 
-          <!-- Hub legend cards -->
-          <div class="res-grid" style="margin-top:28px;">
-            <div class="bcard bc-green">
-              <div class="bcard-watermark">1</div>
-              <div class="bcard-icon">🟢</div>
-              <div class="bcard-label">Hub 1</div>
-              <h3>Core Concepts</h3>
-              <p>Flashcards, fill-in-the-blank, ordering &amp; matching — reinforce lecture fundamentals</p>
-            </div>
-            <div class="bcard bc-amber">
-              <div class="bcard-watermark">2</div>
-              <div class="bcard-icon">🟡</div>
-              <div class="bcard-label">Hub 2</div>
-              <h3>Step 1 Extensions</h3>
-              <p>High-yield clinical correlates &amp; USMLE framing — bridge lecture to boards</p>
-            </div>
-            <div class="bcard bc-blue">
-              <div class="bcard-watermark">3</div>
-              <div class="bcard-icon">🔵</div>
-              <div class="bcard-label">Hub 3</div>
-              <h3>Practice Questions</h3>
-              <p>Full-stem USMLE-style vignettes with detailed answer explanations</p>
-            </div>
+          <!-- SUBJECT FILTERS -->
+          <div class="filter-row" id="filterRow" role="group" aria-label="Filter lectures by subject">
+            <button type="button" class="filter-pill active" data-filter="all">All</button>
+            <button type="button" class="filter-pill" data-filter="biochem"><span class="fp-icon">🧪</span>Biochemistry</button>
+            <button type="button" class="filter-pill" data-filter="drt"><span class="fp-icon">💊</span>DRT &amp; Pharm</button>
+            <button type="button" class="filter-pill" data-filter="histo"><span class="fp-icon">🔬</span>Histology</button>
+            <button type="button" class="filter-pill" data-filter="path"><span class="fp-icon">🧫</span>Pathology</button>
+            <button type="button" class="filter-pill" data-filter="physio"><span class="fp-icon">⚗️</span>Physiology</button>
           </div>
 
         </section>
 
-        <!-- PROGRESS -->
-        <div class="progress-wrap">
-          <div class="prog-bar-track"><div class="prog-bar-fill"></div></div>
-          <span class="prog-label"><strong>3</strong> of 78 hubs live</span>
-        </div>
-
-                <!-- ── PHYSIOLOGY ── -->
-        <div class="section-block" id="physio" data-cat="physio">
-          <div class="section-divider">
-            <span class="section-divider-text">⚗️ Physiology</span>
-            <div class="section-divider-line"></div>
-          </div>
-          <div class="util-list">
-
-            <div class="util-row" data-cat="physio" data-search="end02 hypothalamic pituitary tropic hormones feedback anterior">
-              <div class="util-icon ui-blue">🧠</div>
-              <div class="util-text">
-                <span class="util-badge ub-blue">Lecture 02</span>
-                <strong>HP Hormone Relationships I</strong>
-                <span>Hypothalamic control of anterior pituitary, tropic hormones, feedback architecture</span>
-              </div>
-              <div class="row-actions">
-                <a href="./testing-drills/end02_hub1.html" class="row-btn">🟢 <span class="rb-label">Hub 1</span></a>
-                <a href="./testing-drills/end02_hub2.html" class="row-btn">🟡 <span class="rb-label">Hub 2</span></a>
-                <a href="./testing-drills/end02_hub3.html" class="row-btn">🔵 <span class="rb-label">Hub 3</span></a>
-              </div>
-            </div>
-
-            <div class="util-row" data-cat="physio" data-search="end03 anterior pituitary GH prolactin TSH ACTH FSH LH growth hormone IGF-1 acromegaly">
-              <div class="util-icon ui-blue">🧠</div>
-            <div class="util-text">
-              <span class="util-badge ub-blue">Lecture 03</span>
-              <strong>HP Hormone Relationships II</strong>
-              <span>Growth hormone axis: GH/IGF-1 signaling, direct vs indirect effects, stimulators/inhibitors, 4 GH-axis disorders</span>
-            </div>
-            <div class="row-actions">
-              <a href="./testing-drills/end03_hub1.html" class="row-btn">🟢 <span class="rb-label">Hub 1</span></a>
-              <a href="./testing-drills/end03_hub2.html" class="row-btn">🟡 <span class="rb-label">Hub 2</span></a>
-              <a href="./testing-drills/end03_hub3.html" class="row-btn">🔵 <span class="rb-label">Hub 3</span></a>
-            </div>
-            </div>
-
-            <div class="util-row" data-cat="physio" data-search="end07 posterior pituitary ADH oxytocin SIADH diabetes insipidus hyponatremia vasopressin">
-              <div class="util-icon ui-blue">💧</div>
-              <div class="util-text">
-                <span class="util-badge ub-blue">Lecture 07</span>
-                <strong>Posterior Pituitary Hormones *</strong>
-                <span>ADH and oxytocin physiology, SIADH, central/nephrogenic DI, hyponatremia  ·  * also Biochemistry</span>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" data-cat="physio" data-search="end12 pancreas islet alpha beta delta insulin glucagon glucose homeostasis fed fasting">
-              <div class="util-icon ui-blue">🧊</div>
-              <div class="util-text">
-                <span class="util-badge ub-blue">Lecture 12</span>
-                <strong>Pancreatic Hormone Synthesis, Action &amp; Regulation *</strong>
-                <span>Islet cell biology (α, β, δ), insulin and glucagon, glucose homeostasis  ·  * also Biochemistry</span>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" data-cat="physio" data-search="end14 TBL growth hormone thyroid CCS team based case">
-              <div class="util-icon ui-blue">📈</div>
-              <div class="util-text">
-                <span class="util-badge ub-blue">Lecture 14</span>
-                <strong>TBL — Growth &amp; Thyroid Hormones CCS</strong>
-                <span>Team-based case review integrating growth hormone and thyroid hormone physiology</span>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" data-cat="physio" data-search="end19 HPA axis CRH ACTH cortisol circadian feedback">
-              <div class="util-icon ui-blue">🔄</div>
-              <div class="util-text">
-                <span class="util-badge ub-blue">Lecture 19</span>
-                <strong>Hypothalamic-Pituitary-Adrenal Axis</strong>
-                <span>CRH → ACTH → cortisol cascade, circadian rhythms, feedback regulation</span>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" data-cat="physio" data-search="end23 stress hormones cortisol chronic acute pathophysiology ILS integrated">
-              <div class="util-icon ui-blue">⚡</div>
-              <div class="util-text">
-                <span class="util-badge ub-blue">Lecture 23</span>
-                <strong>ILS: Stress, Stress Hormones &amp; Pathophysiology</strong>
-                <span>Acute &amp; chronic stress physiology, cortisol effects, stress-related pathophysiology</span>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" data-cat="physio" data-search="end26 longitudinal wrap-up capstone integration">
-              <div class="util-icon ui-blue">🎯</div>
-              <div class="util-text">
-                <span class="util-badge ub-blue">Lecture 26</span>
-                <strong>Longitudinal Case Wrap-Up *</strong>
-                <span>Capstone case integrating endocrine physiology, pathology, diagnostics, pharmacotherapy  ·  * also DRT/Pharm</span>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
+        <div class="sections-grid">
         <!-- ── BIOCHEMISTRY ── -->
         <div class="section-block" id="biochem" data-cat="biochem">
           <div class="section-divider">
@@ -750,12 +913,11 @@
           </div>
           <div class="util-list">
 
-            <div class="util-row" data-cat="biochem" data-search="end01 intro hormones classes peptide steroid amine signaling receptors feedback">
-              <div class="util-icon ui-blue">🧬</div>
+            <div class="util-row" id="end01" data-cat="biochem" data-search="end01 intro hormones classes peptide steroid amine signaling receptors feedback">
+              <div class="util-icon ui-blue">🧪</div>
             <div class="util-text">
               <span class="util-badge ub-blue">Lecture 01</span>
               <strong>Module Introduction / Intro to Hormones</strong>
-              <span>Hormone classes (peptide, steroid, amine), mechanisms of action, receptor signaling, feedback</span>
             </div>
             <div class="row-actions">
               <a href="./testing-drills/end01_hub1.html" class="row-btn">🟢 <span class="rb-label">Hub 1</span></a>
@@ -764,12 +926,11 @@
             </div>
             </div>
 
-            <div class="util-row" data-cat="biochem" data-search="end04 adrenal steroidogenesis cortisol aldosterone androgens zonation">
-              <div class="util-icon ui-blue">⚡</div>
+            <div class="util-row" id="end04" data-cat="biochem" data-search="end04 adrenal steroidogenesis cortisol aldosterone androgens zonation">
+              <div class="util-icon ui-blue">🧪</div>
               <div class="util-text">
                 <span class="util-badge ub-blue">Lecture 04</span>
                 <strong>IL — Adrenal Hormone Synthesis &amp; Action</strong>
-                <span>Adrenal steroidogenesis, zonation, mineralocorticoids, glucocorticoids, androgens</span>
               </div>
               <div class="row-actions">
                 <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
@@ -778,12 +939,11 @@
               </div>
             </div>
 
-            <div class="util-row" data-cat="biochem" data-search="end05 sex steroid testosterone DHT estradiol aromatase 5-alpha-reductase">
+            <div class="util-row" id="end05" data-cat="biochem" data-search="end05 sex steroid testosterone DHT estradiol aromatase 5-alpha-reductase">
               <div class="util-icon ui-blue">🧪</div>
               <div class="util-text">
                 <span class="util-badge ub-blue">Lecture 05</span>
                 <strong>IL — Sex Steroid Synthesis &amp; Action</strong>
-                <span>Testosterone, DHT, estradiol, aromatase, 5-α-reductase, receptor action</span>
               </div>
               <div class="row-actions">
                 <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
@@ -792,12 +952,11 @@
               </div>
             </div>
 
-            <div class="util-row" data-cat="biochem" data-search="end06 adrenal sex steroid CAH biosynthesis integration">
-              <div class="util-icon ui-blue">⚡</div>
+            <div class="util-row" id="end06" data-cat="biochem" data-search="end06 adrenal sex steroid CAH biosynthesis integration">
+              <div class="util-icon ui-blue">🧪</div>
               <div class="util-text">
                 <span class="util-badge ub-blue">Lecture 06</span>
                 <strong>Adrenal &amp; Sex Steroid Hormone Synthesis &amp; Action</strong>
-                <span>Integrated adrenal and sex steroid biosynthesis applied to CAH and hormone disorders</span>
               </div>
               <div class="row-actions">
                 <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
@@ -806,12 +965,11 @@
               </div>
             </div>
 
-            <div class="util-row" data-cat="biochem" data-search="end10 thyroid synthesis T3 T4 iodine thyroglobulin deiodinase TSH">
-              <div class="util-icon ui-blue">🦋</div>
+            <div class="util-row" id="end10" data-cat="biochem" data-search="end10 thyroid synthesis T3 T4 iodine thyroglobulin deiodinase TSH">
+              <div class="util-icon ui-blue">🧪</div>
               <div class="util-text">
                 <span class="util-badge ub-blue">Lecture 10</span>
                 <strong>Thyroid Hormone Synthesis &amp; Action</strong>
-                <span>Iodine uptake, thyroglobulin, T4/T3 synthesis, deiodinases, nuclear receptor action</span>
               </div>
               <div class="row-actions">
                 <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
@@ -820,118 +978,11 @@
               </div>
             </div>
 
-            <div class="util-row" data-cat="biochem" data-search="end15 gender identity ethics panel DSD 5-alpha-reductase CAH androgen insensitivity">
-              <div class="util-icon ui-blue">🌈</div>
+            <div class="util-row" id="end15" data-cat="biochem" data-search="end15 gender identity ethics panel DSD 5-alpha-reductase CAH androgen insensitivity">
+              <div class="util-icon ui-blue">🧪</div>
               <div class="util-text">
                 <span class="util-badge ub-blue">Lecture 15</span>
                 <strong>Gender Identity &amp; Ethics Panel</strong>
-                <span>Panel: intersex conditions, gender identity, DSDs (5-α-reductase, CAH, AIS), hormone therapy</span>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- ── HISTOLOGY ── -->
-        <div class="section-block" id="histo" data-cat="histo">
-          <div class="section-divider">
-            <span class="section-divider-text">🔬 Histology</span>
-            <div class="section-divider-line"></div>
-          </div>
-          <div class="util-list">
-
-            <div class="util-row" data-cat="histo" data-search="end09 histology thyroid parathyroid adrenal follicle chief oxyphil zonation">
-              <div class="util-icon ui-green">🔬</div>
-              <div class="util-text">
-                <span class="util-badge ub-green">Lecture 09</span>
-                <strong>Thyroid / Parathyroid / Adrenal (Histology)</strong>
-                <span>Follicular histology, chief/oxyphil cells, adrenal cortex zonation + medulla</span>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- ── PATHOLOGY ── -->
-        <div class="section-block" id="path" data-cat="path">
-          <div class="section-divider">
-            <span class="section-divider-text">🧫 Pathology</span>
-            <div class="section-divider-line"></div>
-          </div>
-          <div class="util-list">
-
-            <div class="util-row" data-cat="path" data-search="end08 pituitary pathology adenoma acromegaly gigantism prolactinoma hypopituitarism sheehan">
-              <div class="util-icon ui-purple">🧠</div>
-              <div class="util-text">
-                <span class="util-badge ub-purple">Lecture 08</span>
-                <strong>Pituitary Pathology</strong>
-                <span>Pituitary adenomas, acromegaly/gigantism, hyperprolactinemia, hypopituitarism</span>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" data-cat="path" data-search="end11 thyroid pathology graves hashimoto parathyroid hyperparathyroidism hypoparathyroidism cancer vit D">
-              <div class="util-icon ui-purple">🦋</div>
-              <div class="util-text">
-                <span class="util-badge ub-purple">Lecture 11</span>
-                <strong>Thyroid &amp; Parathyroid Pathology</strong>
-                <span>Thyroiditis (Graves, Hashimoto, De Quervain), thyroid neoplasms, parathyroid disorders</span>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" data-cat="path" data-search="end16 diabetes mellitus T1DM T2DM pathophysiology DKA HHS complications nephropathy neuropathy">
-              <div class="util-icon ui-purple">🩸</div>
-              <div class="util-text">
-                <span class="util-badge ub-purple">Lecture 16</span>
-                <strong>Pathophysiology of Diabetes Mellitus</strong>
-                <span>T1DM vs T2DM pathogenesis, DKA, HHS, micro-/macrovascular complications</span>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" data-cat="path" data-search="end20 adrenal pathology addison cushing conn pheochromocytoma CAH congenital adrenal hyperplasia">
-              <div class="util-icon ui-purple">⚡</div>
-              <div class="util-text">
-                <span class="util-badge ub-purple">Lecture 20</span>
-                <strong>Adrenal Pathology</strong>
-                <span>Adrenal insufficiency, Cushing, Conn, pheochromocytoma, CAH, adrenal neoplasms</span>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" data-cat="path" data-search="end24 endocrine lab histopathology specimens gross microscopic">
-              <div class="util-icon ui-purple">🔬</div>
-              <div class="util-text">
-                <span class="util-badge ub-purple">Lecture 24</span>
-                <strong>Endocrine Lab</strong>
-                <span>Histopathology lab: thyroid, parathyroid, adrenal, pituitary specimens with clinical correlates</span>
               </div>
               <div class="row-actions">
                 <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
@@ -951,12 +1002,11 @@
           </div>
           <div class="util-list">
 
-            <div class="util-row" data-cat="drt" data-search="end13 DRT pituitary thyroid pharmacology bromocriptine octreotide levothyroxine PTU methimazole RAI">
+            <div class="util-row" id="end13" data-cat="drt" data-search="end13 DRT pituitary thyroid pharmacology bromocriptine octreotide levothyroxine PTU methimazole RAI">
               <div class="util-icon ui-rose">💊</div>
               <div class="util-text">
                 <span class="util-badge ub-rose">Lecture 13</span>
                 <strong>Pituitary &amp; Thyroid Disorders</strong>
-                <span>Pituitary adenoma mgmt (bromocriptine, octreotide); thyroid pharm (levothyroxine, PTU/methimazole, RAI)</span>
               </div>
               <div class="row-actions">
                 <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
@@ -965,12 +1015,11 @@
               </div>
             </div>
 
-            <div class="util-row" data-cat="drt" data-search="end17 T1DM type 1 diabetes insulin basal bolus DKA CGM diagnosis">
-              <div class="util-icon ui-rose">💉</div>
+            <div class="util-row" id="end17" data-cat="drt" data-search="end17 T1DM type 1 diabetes insulin basal bolus DKA CGM diagnosis">
+              <div class="util-icon ui-rose">💊</div>
               <div class="util-text">
                 <span class="util-badge ub-rose">Lecture 17</span>
                 <strong>Diabetes Type 1 Diagnosis &amp; Treatment</strong>
-                <span>T1DM diagnostic criteria, insulin regimens (basal-bolus, CGM), DKA management</span>
               </div>
               <div class="row-actions">
                 <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
@@ -979,12 +1028,11 @@
               </div>
             </div>
 
-            <div class="util-row" data-cat="drt" data-search="end18 T2DM type 2 diabetes metformin SGLT2 GLP-1 sulfonylureas insulin HHS">
+            <div class="util-row" id="end18" data-cat="drt" data-search="end18 T2DM type 2 diabetes metformin SGLT2 GLP-1 sulfonylureas insulin HHS">
               <div class="util-icon ui-rose">💊</div>
               <div class="util-text">
                 <span class="util-badge ub-rose">Lecture 18</span>
                 <strong>Diabetes Type 2 Diagnosis &amp; Treatment</strong>
-                <span>T2DM diagnosis, metformin, SGLT2i, GLP-1 RA, sulfonylureas, insulin; HHS management</span>
               </div>
               <div class="row-actions">
                 <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
@@ -993,12 +1041,11 @@
               </div>
             </div>
 
-            <div class="util-row" data-cat="drt" data-search="end21 DRT adrenal glucocorticoid replacement metyrapone ketoconazole phenoxybenzamine pheo">
-              <div class="util-icon ui-rose">⚡</div>
+            <div class="util-row" id="end21" data-cat="drt" data-search="end21 DRT adrenal glucocorticoid replacement metyrapone ketoconazole phenoxybenzamine pheo">
+              <div class="util-icon ui-rose">💊</div>
               <div class="util-text">
                 <span class="util-badge ub-rose">Lecture 21</span>
                 <strong>Adrenal Disorders</strong>
-                <span>Adrenal insufficiency replacement, Cushing mgmt (metyrapone, ketoconazole), α-blockade for pheo</span>
               </div>
               <div class="row-actions">
                 <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
@@ -1007,12 +1054,11 @@
               </div>
             </div>
 
-            <div class="util-row" data-cat="drt" data-search="end22 pituitary thyroid case discussion DRT">
-              <div class="util-icon ui-rose">👥</div>
+            <div class="util-row" id="end22" data-cat="drt" data-search="end22 pituitary thyroid case discussion DRT">
+              <div class="util-icon ui-rose">💊</div>
               <div class="util-text">
                 <span class="util-badge ub-rose">Lecture 22</span>
                 <strong>Pituitary &amp; Thyroid Case Discussion</strong>
-                <span>Case-based integration of pituitary and thyroid pharmacology, diagnostics, management</span>
               </div>
               <div class="row-actions">
                 <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
@@ -1021,12 +1067,11 @@
               </div>
             </div>
 
-            <div class="util-row" data-cat="drt" data-search="end25 diabetes clinical cases T1DM T2DM management monitoring complications">
-              <div class="util-icon ui-rose">🏥</div>
+            <div class="util-row" id="end25" data-cat="drt" data-search="end25 diabetes clinical cases T1DM T2DM management monitoring complications">
+              <div class="util-icon ui-rose">💊</div>
               <div class="util-text">
                 <span class="util-badge ub-rose">Lecture 25</span>
                 <strong>Diabetes Clinical Cases</strong>
-                <span>Applied case-based review of T1DM + T2DM diagnosis, management, monitoring, complications</span>
               </div>
               <div class="row-actions">
                 <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
@@ -1038,6 +1083,223 @@
           </div>
         </div>
 
+        <!-- ── HISTOLOGY ── -->
+        <div class="section-block" id="histo" data-cat="histo">
+          <div class="section-divider">
+            <span class="section-divider-text">🔬 Histology</span>
+            <div class="section-divider-line"></div>
+          </div>
+          <div class="util-list">
+
+            <div class="util-row" id="end09" data-cat="histo" data-search="end09 histology thyroid parathyroid adrenal follicle chief oxyphil zonation">
+              <div class="util-icon ui-green">🔬</div>
+              <div class="util-text">
+                <span class="util-badge ub-green">Lecture 09</span>
+                <strong>Thyroid / Parathyroid / Adrenal (Histology)</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ── PATHOLOGY ── -->
+        <div class="section-block" id="path" data-cat="path">
+          <div class="section-divider">
+            <span class="section-divider-text">🧫 Pathology</span>
+            <div class="section-divider-line"></div>
+          </div>
+          <div class="util-list">
+
+            <div class="util-row" id="end08" data-cat="path" data-search="end08 pituitary pathology adenoma acromegaly gigantism prolactinoma hypopituitarism sheehan">
+              <div class="util-icon ui-purple">🧫</div>
+              <div class="util-text">
+                <span class="util-badge ub-purple">Lecture 08</span>
+                <strong>Pituitary Pathology</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="end11" data-cat="path" data-search="end11 thyroid pathology graves hashimoto parathyroid hyperparathyroidism hypoparathyroidism cancer vit D">
+              <div class="util-icon ui-purple">🧫</div>
+              <div class="util-text">
+                <span class="util-badge ub-purple">Lecture 11</span>
+                <strong>Thyroid &amp; Parathyroid Pathology</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="end16" data-cat="path" data-search="end16 diabetes mellitus T1DM T2DM pathophysiology DKA HHS complications nephropathy neuropathy">
+              <div class="util-icon ui-purple">🧫</div>
+              <div class="util-text">
+                <span class="util-badge ub-purple">Lecture 16</span>
+                <strong>Pathophysiology of Diabetes Mellitus</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="end20" data-cat="path" data-search="end20 adrenal pathology addison cushing conn pheochromocytoma CAH congenital adrenal hyperplasia">
+              <div class="util-icon ui-purple">🧫</div>
+              <div class="util-text">
+                <span class="util-badge ub-purple">Lecture 20</span>
+                <strong>Adrenal Pathology</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="end24" data-cat="path" data-search="end24 endocrine lab histopathology specimens gross microscopic">
+              <div class="util-icon ui-purple">🧫</div>
+              <div class="util-text">
+                <span class="util-badge ub-purple">Lecture 24</span>
+                <strong>Endocrine Lab</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+                <!-- ── PHYSIOLOGY ── -->
+        <div class="section-block" id="physio" data-cat="physio">
+          <div class="section-divider">
+            <span class="section-divider-text">⚗️ Physiology</span>
+            <div class="section-divider-line"></div>
+          </div>
+          <div class="util-list">
+
+            <div class="util-row" id="end02" data-cat="physio" data-search="end02 hypothalamic pituitary tropic hormones feedback anterior">
+              <div class="util-icon ui-blue">⚗️</div>
+              <div class="util-text">
+                <span class="util-badge ub-blue">Lecture 02</span>
+                <strong>HP Hormone Relationships I</strong>
+              </div>
+              <div class="row-actions">
+                <a href="./testing-drills/end02_hub1.html" class="row-btn">🟢 <span class="rb-label">Hub 1</span></a>
+                <a href="./testing-drills/end02_hub2.html" class="row-btn">🟡 <span class="rb-label">Hub 2</span></a>
+                <a href="./testing-drills/end02_hub3.html" class="row-btn">🔵 <span class="rb-label">Hub 3</span></a>
+              </div>
+            </div>
+
+            <div class="util-row" id="end03" data-cat="physio" data-search="end03 anterior pituitary GH prolactin TSH ACTH FSH LH growth hormone IGF-1 acromegaly">
+              <div class="util-icon ui-blue">⚗️</div>
+            <div class="util-text">
+              <span class="util-badge ub-blue">Lecture 03</span>
+              <strong>HP Hormone Relationships II</strong>
+            </div>
+            <div class="row-actions">
+              <a href="./testing-drills/end03_hub1.html" class="row-btn">🟢 <span class="rb-label">Hub 1</span></a>
+              <a href="./testing-drills/end03_hub2.html" class="row-btn">🟡 <span class="rb-label">Hub 2</span></a>
+              <a href="./testing-drills/end03_hub3.html" class="row-btn">🔵 <span class="rb-label">Hub 3</span></a>
+            </div>
+            </div>
+
+            <div class="util-row" id="end07" data-cat="physio" data-search="end07 posterior pituitary ADH oxytocin SIADH diabetes insipidus hyponatremia vasopressin">
+              <div class="util-icon ui-blue">⚗️</div>
+              <div class="util-text">
+                <span class="util-badge ub-blue">Lecture 07</span>
+                <strong>Posterior Pituitary Hormones *</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="end12" data-cat="physio" data-search="end12 pancreas islet alpha beta delta insulin glucagon glucose homeostasis fed fasting">
+              <div class="util-icon ui-blue">⚗️</div>
+              <div class="util-text">
+                <span class="util-badge ub-blue">Lecture 12</span>
+                <strong>Pancreatic Hormone Synthesis, Action &amp; Regulation *</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="end14" data-cat="physio" data-search="end14 TBL growth hormone thyroid CCS team based case">
+              <div class="util-icon ui-blue">⚗️</div>
+              <div class="util-text">
+                <span class="util-badge ub-blue">Lecture 14</span>
+                <strong>TBL — Growth &amp; Thyroid Hormones CCS</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="end19" data-cat="physio" data-search="end19 HPA axis CRH ACTH cortisol circadian feedback">
+              <div class="util-icon ui-blue">⚗️</div>
+              <div class="util-text">
+                <span class="util-badge ub-blue">Lecture 19</span>
+                <strong>Hypothalamic-Pituitary-Adrenal Axis</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="end23" data-cat="physio" data-search="end23 stress hormones cortisol chronic acute pathophysiology ILS integrated">
+              <div class="util-icon ui-blue">⚗️</div>
+              <div class="util-text">
+                <span class="util-badge ub-blue">Lecture 23</span>
+                <strong>ILS: Stress, Stress Hormones &amp; Pathophysiology</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="end26" data-cat="physio" data-search="end26 longitudinal wrap-up capstone integration">
+              <div class="util-icon ui-blue">⚗️</div>
+              <div class="util-text">
+                <span class="util-badge ub-blue">Lecture 26</span>
+                <strong>Longitudinal Case Wrap-Up *</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        </div>
+
+
         <!-- Empty state -->
         <div class="empty-state" id="emptyState">
           <div class="empty-icon">🔍</div>
@@ -1046,8 +1308,8 @@
 
         <!-- FOOTER -->
         <footer class="footer">
-          <span><strong>HoyaDocs Endocrine Block</strong> · Active Recall Drill Hubs · 10 lectures across 3 subject areas</span>
-          <span>USMLE Step 1 Integrated</span>
+          <span><strong>HoyaDocs Endocrine Block</strong></span>
+          <span>v1.0 · revised 2026-04-22</span>
         </footer>
 
       </div>
@@ -1070,13 +1332,17 @@
   })();
 
   /* ── SEARCH ── */
+  let activeFilter = 'all';
+
   function handleSearch() {
     const query = document.getElementById('searchInput').value.toLowerCase().trim();
     let totalVisible = 0;
 
     document.querySelectorAll('.util-row').forEach(row => {
       const text = (row.dataset.search + ' ' + row.querySelector('.util-text').textContent).toLowerCase();
-      const show = query === '' || text.includes(query);
+      const matchesQuery = query === '' || text.includes(query);
+      const matchesFilter = activeFilter === 'all' || row.dataset.cat === activeFilter;
+      const show = matchesQuery && matchesFilter;
       row.classList.toggle('hidden', !show);
       if (show) totalVisible++;
     });
@@ -1088,6 +1354,27 @@
 
     document.getElementById('emptyState').classList.toggle('show', totalVisible === 0);
   }
+
+  /* ── HERO-NOTE TOGGLES ── */
+  function toggleRes(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const opening = !el.classList.contains('open');
+    el.classList.toggle('open');
+    const btn = el.querySelector('.hni-header');
+    if (btn) btn.setAttribute('aria-expanded', String(opening));
+  }
+
+  /* ── SUBJECT FILTER PILLS ── */
+  document.querySelectorAll('#filterRow .filter-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('#filterRow .filter-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      activeFilter = pill.dataset.filter;
+      document.body.classList.toggle('filtered-2col', activeFilter !== 'all');
+      handleSearch();
+    });
+  });
 
   /* ── ACTIVE SIDEBAR LINK on scroll ── */
   const sections = ["physio", "biochem", "histo", "path", "drt"];
