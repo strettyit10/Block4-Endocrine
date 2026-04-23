@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<!- saved from url=(0056)./endocrine_mapping.html ->
+<!-- saved from url=(0056)./endocrine_mapping.html -->
 <html lang="en" data-theme="light"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>HoyaDocs | Endocrine Study Hub</title>
 
- <!- Prevents flash of wrong theme on load ->
- <script>(function{const t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);});</script>
+ <!-- Prevents flash of wrong theme on load -->
+ <script>(function(){const t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);})();</script>
 
  <link rel="preconnect" href="https://fonts.googleapis.com/">
  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
@@ -19,46 +19,46 @@
  DESIGN TOKENS — light mode defaults
  ══════════════════════════════════════ */
  :root {
- -sb: #2e2405;
- -sb-hover: rgba(255,255,255,0.07);
- -sb-line: rgba(255,255,255,0.09);
- -bg: #FEFCE8;
- -surface: #ffffff;
- -ink: #0f172a;
- -ink-2: #334155;
- -ink-3: #64748b;
- -rule: #e2e8f0;
- -card-sh: 0 1px 3px rgba(0,0,0,0.05);
- -bc-blue-bg: #eef4ff; -bc-blue-br: #c7d9f5; -bc-blue-tx: #1f4b99;
- -bc-grn-bg: #FEF9C3; -bc-grn-br: #FDE68A; -bc-grn-tx: #A67C00;
- -bc-ros-bg: #fff1f2; -bc-ros-br: #fda4af; -bc-ros-tx: #9f1239;
- -bc-pur-bg: #f5f0ff; -bc-pur-br: #d8b4fe; -bc-pur-tx: #6d28d9;
- -hero-em: #A67C00;
- -accent: #854d0e;
+ --sb: #2e2405;
+ --sb-hover: rgba(255,255,255,0.07);
+ --sb-line: rgba(255,255,255,0.09);
+ --bg: #FEFCE8;
+ --surface: #ffffff;
+ --ink: #0f172a;
+ --ink-2: #334155;
+ --ink-3: #64748b;
+ --rule: #e2e8f0;
+ --card-sh: 0 1px 3px rgba(0,0,0,0.05);
+ --bc-blue--bg: #eef4ff; --bc-blue-br: #c7d9f5; --bc-blue-tx: #1f4b99;
+ --bc-grn--bg: #FEF9C3; --bc-grn-br: #FDE68A; --bc-grn-tx: #A67C00;
+ --bc-ros--bg: #fff1f2; --bc-ros-br: #fda4af; --bc-ros-tx: #9f1239;
+ --bc-pur--bg: #f5f0ff; --bc-pur-br: #d8b4fe; --bc-pur-tx: #6d28d9;
+ --hero-em: #A67C00;
+ --accent: #854d0e;
  }
 
  /* ── DARK MODE ── */
  [data-theme="dark"] {
- -bg: #1f1700;
- -surface: #3d2f08;
- -ink: #f1f5f9;
- -ink-2: #cbd5e1;
- -ink-3: #94a3b8;
- -rule: #5b4608;
- -card-sh: 0 1px 3px rgba(0,0,0,0.4);
- -bc-blue-bg: #1a2744; -bc-blue-br: #2d4a8a; -bc-blue-tx: #6ba3e8;
- -bc-grn-bg: #1f1700; -bc-grn-br: #7a5f10; -bc-grn-tx: #fbbf24;
- -bc-ros-bg: #250a12; -bc-ros-br: #6b1a2e; -bc-ros-tx: #e06b8a;
- -bc-pur-bg: #1a1033; -bc-pur-br: #4c1d95; -bc-pur-tx: #a78bfa;
- -hero-em: #EAB308;
+ --bg: #1f1700;
+ --surface: #3d2f08;
+ --ink: #f1f5f9;
+ --ink-2: #cbd5e1;
+ --ink-3: #94a3b8;
+ --rule: #5b4608;
+ --card-sh: 0 1px 3px rgba(0,0,0,0.4);
+ --bc-blue--bg: #1a2744; --bc-blue-br: #2d4a8a; --bc-blue-tx: #6ba3e8;
+ --bc-grn--bg: #1f1700; --bc-grn-br: #7a5f10; --bc-grn-tx: #fbbf24;
+ --bc-ros--bg: #250a12; --bc-ros-br: #6b1a2e; --bc-ros-tx: #e06b8a;
+ --bc-pur--bg: #1a1033; --bc-pur-br: #4c1d95; --bc-pur-tx: #a78bfa;
+ --hero-em: #EAB308;
  }
 
  html, body { height: 100%; }
 
  body {
  font-family: 'Inter', -apple-system, sans-serif;
- background: var(-bg);
- color: var(-ink);
+ background: var(--bg);
+ color: var(--ink);
  line-height: 1.6;
  transition: background 0.2s, color 0.2s;
  }
@@ -76,7 +76,7 @@
  ══════════════════════════════════════ */
  .sidebar {
  width: 232px; flex-shrink: 0;
- background: var(-sb);
+ background: var(--sb);
  display: flex; flex-direction: column;
  padding: 28px 18px 24px;
  transition: background 0.2s;
@@ -128,7 +128,7 @@
  color: rgba(255,255,255,0.60);
  transition: background 0.13s, color 0.13s;
  }
- .sb-link:hover { background: var(-sb-hover); color: rgba(255,255,255,0.92); }
+ .sb-link:hover { background: var(--sb-hover); color: rgba(255,255,255,0.92); }
 
  .sb-link-icon {
  width: 22px; height: 22px; border-radius: 6px;
@@ -143,7 +143,7 @@
  .sb-icon-amber { background: rgba(245,158,11,0.32); }
  .sb-icon-qref { background: rgba(139,92,246,0.32); }
 
- .sb-rule { height: 1px; background: var(-sb-line); margin: 4px 0 18px; }
+ .sb-rule { height: 1px; background: var(--sb-line); margin: 4px 0 18px; }
  .sb-spacer { flex: 1; }
 
  .sb-ext-label {
@@ -169,29 +169,29 @@
  /* ══════════════════════════════════════
  MAIN CONTENT
  ══════════════════════════════════════ */
- .main { flex: 1; min-width: 0; background: var(-bg); transition: background 0.2s; }
+ .main { flex: 1; min-width: 0; background: var(--bg); transition: background 0.2s; }
 
  .main-inner { max-width: 860px; padding: 52px 48px 80px; margin: 0 auto; }
 
  /* ── HERO ── */
- .hero { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(-rule); }
+ .hero { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--rule); }
 
  .hero-eyebrow {
  font-size: 0.68rem; font-weight: 700;
  letter-spacing: 0.12em; text-transform: uppercase;
- color: var(-ink-3); margin-bottom: 16px;
+ color: var(--ink-3); margin-bottom: 16px;
  }
 
  .hero-title {
  font-size: clamp(2.0rem, 4vw, 3.2rem);
  font-weight: 900; letter-spacing: -0.045em;
- color: var(-ink); line-height: 0.98; margin-bottom: 20px;
+ color: var(--ink); line-height: 0.98; margin-bottom: 20px;
  }
 
- .hero-title em { font-style: normal; color: var(-hero-em); }
+ .hero-title em { font-style: normal; color: var(--hero-em); }
 
  .hero-sub {
- font-size: 0.97rem; color: var(-ink-2);
+ font-size: 0.97rem; color: var(--ink-2);
  line-height: 1.7; margin-bottom: 22px; max-width: 780px;
  }
 
@@ -200,7 +200,7 @@
  .hero-cta {
  display: inline-flex; align-items: center; gap: 8px;
  padding: 9px 18px; border-radius: 999px;
- background: var(-hero-em); color: #fff;
+ background: var(--hero-em); color: #fff;
  font-size: 0.85rem; font-weight: 700;
  box-shadow: 0 2px 8px rgba(166,124,0,0.25);
  transition: opacity 0.15s, transform 0.15s;
@@ -211,17 +211,17 @@
  .hero-cta-secondary {
  display: inline-flex; align-items: center; gap: 6px;
  padding: 9px 16px; border-radius: 999px;
- background: var(-surface); color: var(-ink-2);
+ background: var(--surface); color: var(--ink-2);
  font-size: 0.82rem; font-weight: 600;
- border: 1px solid var(-rule);
- box-shadow: var(-card-sh);
+ border: 1px solid var(--rule);
+ box-shadow: var(--card-sh);
  transition: background 0.15s, border-color 0.15s, transform 0.15s, color 0.15s;
  text-decoration: none;
  }
  .hero-cta-secondary:hover {
- background: var(-bc-grn-bg);
- border-color: var(-bc-grn-br);
- color: var(-bc-grn-tx);
+ background: var(--bc-grn-bg);
+ border-color: var(--bc-grn-br);
+ color: var(--bc-grn-tx);
  transform: translateY(-1px);
  }
  .hero-cta-secondary .cta-ext { opacity: 0.55; font-size: 0.72rem; margin-left: 2px; }
@@ -231,7 +231,7 @@
  position: fixed; top: 16px; right: 20px; z-index: 500;
  display: inline-flex; align-items: center; gap: 6px;
  padding: 7px 14px; border-radius: 20px;
- background: var(-hero-em); color: #fff;
+ background: var(--hero-em); color: #fff;
  font-size: 0.78rem; font-weight: 700;
  box-shadow: 0 2px 10px rgba(0,0,0,0.18);
  transition: opacity 0.15s, transform 0.15s;
@@ -244,7 +244,7 @@
 
  .section-divider-text {
  font-size: 1.25rem; font-weight: 800;
- letter-spacing: -0.02em; color: var(-ink); white-space: nowrap;
+ letter-spacing: -0.02em; color: var(--ink); white-space: nowrap;
  }
 
  .section-divider-line { flex: 1; height: 1px; background: #A67C00; }
@@ -255,11 +255,11 @@
  FOOTER
  ══════════════════════════════════════ */
  .footer {
- border-top: 1px solid var(-rule); padding-top: 22px;
+ border-top: 1px solid var(--rule); padding-top: 22px;
  display: flex; align-items: center; justify-content: space-between;
- gap: 16px; font-size: 0.8rem; color: var(-ink-3);
+ gap: 16px; font-size: 0.8rem; color: var(--ink-3);
  }
- .footer strong { color: var(-ink-2); font-weight: 600; }
+ .footer strong { color: var(--ink-2); font-weight: 600; }
 
  /* ══════════════════════════════════════
  MOBILE BOTTOM NAV
@@ -267,8 +267,8 @@
  .mobile-nav {
  display: none;
  position: fixed; bottom: 0; left: 0; right: 0; z-index: 500;
- background: var(-surface);
- border-top: 1px solid var(-rule);
+ background: var(--surface);
+ border-top: 1px solid var(--rule);
  padding: 8px 0 max(8px, env(safe-area-inset-bottom));
  box-shadow: 0 -4px 20px rgba(0,0,0,0.10);
  transition: background 0.2s, border-color 0.2s;
@@ -278,7 +278,7 @@
 
  .mobile-nav-item {
  display: flex; flex-direction: column; align-items: center; gap: 3px;
- padding: 4px 10px; color: var(-ink-3);
+ padding: 4px 10px; color: var(--ink-3);
  font-size: 0.6rem; font-weight: 600; letter-spacing: 0.02em;
  transition: color 0.13s;
  }
@@ -326,57 +326,57 @@
 
  /* Intro / instructions card */
  .map-intro {
- background: var(-surface); border: 1px solid var(-rule);
+ background: var(--surface); border: 1px solid var(--rule);
  border-radius: 12px; padding: 14px 18px;
- font-size: 0.82rem; color: var(-ink-2); line-height: 1.65;
- margin-bottom: 16px; box-shadow: var(-card-sh);
+ font-size: 0.82rem; color: var(--ink-2); line-height: 1.65;
+ margin-bottom: 16px; box-shadow: var(--card-sh);
  }
- .map-intro-title { font-size: 0.88rem; font-weight: 800; color: var(-ink); margin-bottom: 6px; }
+ .map-intro-title { font-size: 0.88rem; font-weight: 800; color: var(--ink); margin-bottom: 6px; }
  .map-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 18px; }
  .map-intro-grid > div { font-size: 0.78rem; }
- .map-intro-grid strong { color: var(-ink); font-weight: 700; }
+ .map-intro-grid strong { color: var(--ink); font-weight: 700; }
  @media (max-width: 680px) { .map-intro-grid { grid-template-columns: 1fr; } }
 
  /* Legend */
  .cov-legend { display: flex; flex-wrap: wrap; gap: 8px 14px; }
  .cov-legend-item {
- display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(-ink-2);
+ display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--ink-2);
  padding: 5px 10px; border-radius: 8px; border: 1px solid transparent;
  text-decoration: none; transition: .15s; white-space: nowrap;
- background: var(-surface);
+ background: var(--surface);
  }
- a.cov-legend-item { border-color: var(-rule); box-shadow: var(-card-sh); }
- a.cov-legend-item:hover { border-color: var(-hero-em); color: var(-ink); }
+ a.cov-legend-item { border-color: var(--rule); box-shadow: var(--card-sh); }
+ a.cov-legend-item:hover { border-color: var(--hero-em); color: var(--ink); }
  a.cov-legend-item .cov-legend-ext {
  font-size: 0.68rem; font-weight: 700; margin-left: 4px;
- background: var(-bc-grn-bg); color: var(-bc-grn-tx);
- border: 1px solid var(-bc-grn-br);
+ background: var(--bc-grn-bg); color: var(--bc-grn-tx);
+ border: 1px solid var(--bc-grn-br);
  padding: 1px 6px; border-radius: 6px; letter-spacing: .2px; transition: .15s;
  }
- a.cov-legend-item:hover .cov-legend-ext { background: var(-hero-em); color: #fff; border-color: var(-hero-em); }
+ a.cov-legend-item:hover .cov-legend-ext { background: var(--hero-em); color: #fff; border-color: var(--hero-em); }
  .cov-legend-dot { width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
- .cov-legend-hint { font-size: 0.72rem; color: var(-ink-3); font-style: italic; margin-top: 6px; }
+ .cov-legend-hint { font-size: 0.72rem; color: var(--ink-3); font-style: italic; margin-top: 6px; }
 
  /* Mapping files sidebar */
  .home-sidebar {
  width: 220px; flex-shrink: 0; position: sticky; top: 20px;
- background: var(-surface); border: 1px solid var(-rule);
+ background: var(--surface); border: 1px solid var(--rule);
  border-radius: 12px; padding: 14px 12px;
  display: flex; flex-direction: column; gap: 6px;
- box-shadow: var(-card-sh);
+ box-shadow: var(--card-sh);
  }
- .home-sidebar .sidebar-title { font-size: 0.75rem; font-weight: 800; color: var(-ink); margin-bottom: 4px; }
+ .home-sidebar .sidebar-title { font-size: 0.75rem; font-weight: 800; color: var(--ink); margin-bottom: 4px; }
  .ref-file-card {
  display: flex; align-items: center; gap: 8px;
  padding: 8px 10px; border-radius: 8px;
- border: 1px solid var(-rule); background: var(-bg);
- text-decoration: none; color: var(-ink); transition: .15s;
+ border: 1px solid var(--rule); background: var(--bg);
+ text-decoration: none; color: var(--ink); transition: .15s;
  }
- .ref-file-card:hover { background: var(-bc-grn-bg); border-color: var(-bc-grn-br); }
+ .ref-file-card:hover { background: var(--bc-grn-bg); border-color: var(--bc-grn-br); }
  .ref-file-icon { font-size: 18px; flex-shrink: 0; line-height: 1; }
  .ref-file-body { min-width: 0; }
- .ref-file-name { font-size: 0.7rem; font-weight: 700; color: var(-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
- .ref-file-type { font-size: 0.58rem; color: var(-ink-3); margin-top: 2px; font-weight: 600; text-transform: uppercase; letter-spacing: .4px; }
+ .ref-file-name { font-size: 0.7rem; font-weight: 700; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+ .ref-file-type { font-size: 0.58rem; color: var(--ink-3); margin-top: 2px; font-weight: 600; text-transform: uppercase; letter-spacing: .4px; }
 
  /* Home layout — sidebar + content */
  .home-layout { display: flex; gap: 24px; align-items: flex-start; }
@@ -389,13 +389,13 @@
  /* Coverage matrix table */
  .coverage-wrap {
  overflow-x: auto; border-radius: 12px;
- border: 1px solid var(-rule);
- background: var(-surface);
- box-shadow: var(-card-sh);
+ border: 1px solid var(--rule);
+ background: var(--surface);
+ box-shadow: var(--card-sh);
  margin-bottom: 4px; width: 100%;
  }
  .coverage-table { width: 100%; min-width: 796px; border-collapse: collapse; font-size: 0.8rem; table-layout: fixed; }
- .cov-res-hdr { background: var(-sb); }
+ .cov-res-hdr { background: var(--sb); }
  .cov-res-hdr th {
  padding: 10px 7px; text-align: center; font-size: 0.78rem; font-weight: 700;
  color: #fff; letter-spacing: .3px;
@@ -412,17 +412,17 @@
  }
 
  .cov-lec-row td {
- padding: 8px 6px; border-bottom: 1px solid var(-rule);
- background: var(-surface); transition: background .1s; cursor: pointer;
- color: var(-ink-2);
+ padding: 8px 6px; border-bottom: 1px solid var(--rule);
+ background: var(--surface); transition: background .1s; cursor: pointer;
+ color: var(--ink-2);
  }
- .cov-lec-row:hover td { background: color-mix(in srgb, var(-bg) 60%, var(-surface)); }
+ .cov-lec-row:hover td { background: color-mix(in srgb, var(--bg) 60%, var(--surface)); }
  .cov-lec-row td:first-child {
- padding-left: 16px; font-size: 0.78rem; color: var(-ink); font-weight: 500;
+ padding-left: 16px; font-size: 0.78rem; color: var(--ink); font-weight: 500;
  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
  }
  .cov-lec-row:last-child td { border-bottom: none; }
- .cov-cell { text-align: center; border-right: 1px solid var(-rule); }
+ .cov-cell { text-align: center; border-right: 1px solid var(--rule); }
  .cov-cell:last-child { border-right: none; }
  .cov-pip {
  display: inline-block; width: 18px; height: 18px; border-radius: 5px;
@@ -430,41 +430,41 @@
  }
  .cov-empty {
  display: inline-block; width: 18px; height: 18px; border-radius: 5px;
- background: var(-bg); vertical-align: middle;
+ background: var(--bg); vertical-align: middle;
  }
 
  /* Cov cell popup */
  #covTip {
  display: none; position: fixed; z-index: 600;
- background: var(-surface); border: 1px solid var(-rule);
+ background: var(--surface); border: 1px solid var(--rule);
  border-radius: 12px; box-shadow: 0 6px 24px rgba(0,0,0,.18);
  padding: 12px 16px; min-width: 210px; max-width: 280px;
- color: var(-ink);
+ color: var(--ink);
  }
  #covTip.open { display: block; }
- .covtip-res { font-size: 0.66rem; font-weight: 700; color: var(-ink-3); letter-spacing: .4px; text-transform: uppercase; margin-bottom: 3px; }
- .covtip-chapter { font-size: 0.82rem; font-weight: 600; color: var(-ink); margin-bottom: 10px; line-height: 1.4; }
+ .covtip-res { font-size: 0.66rem; font-weight: 700; color: var(--ink-3); letter-spacing: .4px; text-transform: uppercase; margin-bottom: 3px; }
+ .covtip-chapter { font-size: 0.82rem; font-weight: 600; color: var(--ink); margin-bottom: 10px; line-height: 1.4; }
  .covtip-btn {
  display: inline-block; padding: 6px 14px; border-radius: 16px;
- background: var(-hero-em); color: #fff; font-size: 0.72rem; font-weight: 700;
+ background: var(--hero-em); color: #fff; font-size: 0.72rem; font-weight: 700;
  cursor: pointer; border: none; text-decoration: none; transition: .15s;
  }
  .covtip-btn:hover { opacity: 0.9; }
- .covtip-close { float: right; background: none; border: none; font-size: 16px; color: var(-ink-3); cursor: pointer; padding: 0; margin-top: -2px; line-height: 1; }
- .covtip-close:hover { color: var(-ink); }
+ .covtip-close { float: right; background: none; border: none; font-size: 16px; color: var(--ink-3); cursor: pointer; padding: 0; margin-top: -2px; line-height: 1; }
+ .covtip-close:hover { color: var(--ink); }
 
  /* Modals (shared by overlay containers) */
  .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 500; align-items: center; justify-content: center; }
  .overlay.open { display: flex; }
  .modal {
- background: var(-surface); border-radius: 14px;
+ background: var(--surface); border-radius: 14px;
  box-shadow: 0 10px 50px rgba(0,0,0,.3);
  max-width: 90vw; max-height: 90vh;
  display: flex; flex-direction: column; overflow: hidden; min-width: 560px;
- color: var(-ink);
+ color: var(--ink);
  }
  .modal-hdr {
- background: var(-sb); color: #fff;
+ background: var(--sb); color: #fff;
  padding: 13px 18px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
  }
  .modal-hdr h3 { font-size: 0.85rem; font-weight: 700; }
@@ -476,11 +476,11 @@
 
  /* UWorld modal table */
  .uw-tbl-wrap { overflow-x: auto; }
- .uw-tbl { width: 100%; border-collapse: collapse; font-size: 0.78rem; color: var(-ink); }
- .uw-tbl th { background: var(-sb); color: #fff; padding: 8px 12px; text-align: left; font-size: 0.72rem; position: sticky; top: 0; z-index: 10; }
- .uw-tbl td { padding: 7px 12px; border-bottom: 1px solid var(-rule); vertical-align: top; }
- .uw-tbl tr:hover td { background: color-mix(in srgb, var(-bg) 60%, var(-surface)); }
- .uw-qid-num { font-weight: 800; color: var(-hero-em); font-size: 0.82rem; }
+ .uw-tbl { width: 100%; border-collapse: collapse; font-size: 0.78rem; color: var(--ink); }
+ .uw-tbl th { background: var(--sb); color: #fff; padding: 8px 12px; text-align: left; font-size: 0.72rem; position: sticky; top: 0; z-index: 10; }
+ .uw-tbl td { padding: 7px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+ .uw-tbl tr:hover td { background: color-mix(in srgb, var(--bg) 60%, var(--surface)); }
+ .uw-qid-num { font-weight: 800; color: var(--hero-em); font-size: 0.82rem; }
  .subj-pill { font-size: 0.66rem; padding: 2px 7px; border-radius: 8px; font-weight: 600; white-space: nowrap; }
 
  /* Feedback small button (for "suggest a change") */
@@ -502,7 +502,7 @@
 <body>
 <div class="shell">
 
- <!- ══ SIDEBAR ══ ->
+ <!-- ══ SIDEBAR ══ -->
  <aside class="sidebar">
  <div class="sb-brand">
  <a class="sb-name" href="https://hoyadocs.com/Block4-Endocrine/" style="flex:1;text-decoration:none;">HoyaDocs</a>
@@ -531,11 +531,11 @@
  <div class="sb-spacer"></div>
  </aside>
 
- <!- ══ MAIN ══ ->
+ <!-- ══ MAIN ══ -->
  <main class="main">
  <div class="main-inner">
 
- <!- HERO ->
+ <!-- HERO -->
  <section class="hero" id="hero">
  <p class="hero-eyebrow">HoyaDocs · ENDOCRINE</p>
  <h1 class="hero-title">Endocrine <em>Study Hub.</em></h1>
@@ -547,7 +547,7 @@
  </div>
  </section>
 
- <!- MAIN MAPPING CONTENT (built by JS) ->
+ <!-- MAIN MAPPING CONTENT (built by JS) -->
  <div class="section-block" id="mapping-section">
  <div class="section-divider">
  <span class="section-divider-text">Lecture × Resource Matrix</span>
@@ -556,7 +556,7 @@
 
  <div class="home-layout">
 
- <!- Main content — JS populates #homeContent ->
+ <!-- Main content — JS populates #homeContent -->
  <div class="home-content">
  <div id="homeContent"><div class="home-page"><div class="home-content"><div style="background:#FEFCE8;border:1.5px solid #FDE68A;border-radius:10px;padding:12px 16px;font-size:11.5px;color:#243D31;line-height:1.65;margin-bottom:12px"><div style="font-size:12.5px;font-weight:800;color:#1B4332;margin-bottom:6px">📚 How to Use This Matrix</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:2px 16px"><div>📊&nbsp;<strong>Resource labels in the legend</strong> identify each column color — use the buttons above the matrix to open the full spreadsheet.</div><div>■&nbsp;<strong>Click a colored cell</strong> to see which chapter covers that lecture, then jump to it in the Resource Hub.</div><div>📚&nbsp;<strong>Click a lecture name</strong> in the left column to open its full resource view in the Resource Hub.</div><div>△&nbsp;<strong>ANKing</strong> column = total ANKing cards across all resources &nbsp;|&nbsp; <strong>UW</strong> column = UWorld QIDs mapped to that lecture.</div></div></div><div style="margin-bottom:12px"><div style="font-size:12.5px;font-weight:800;color:#1B4332;margin-bottom:7px">📈 Legend</div><div style="display:flex;flex-wrap:wrap;gap:6px 14px"><div class="cov-legend-item" style="cursor:default"><div class="cov-legend-dot" style="background:#2E7D32"></div>Boards &amp; Beyond</div><div class="cov-legend-item" style="cursor:default"><div class="cov-legend-dot" style="background:#1565C0"></div>Bootcamp</div><div class="cov-legend-item" style="cursor:default"><div class="cov-legend-dot" style="background:#BF360C"></div>Pathoma</div><div class="cov-legend-item" style="cursor:default"><div class="cov-legend-dot" style="background:#00695C"></div>Physeo</div><div class="cov-legend-item" style="cursor:default"><div class="cov-legend-dot" style="background:#4A148C"></div>Sketchy</div><div class="cov-legend-item" style="cursor:default"><div class="cov-legend-dot" style="background:#1a4731"></div>UWorld QIDs (count)</div><div class="cov-legend-item" style="cursor:default"><div class="cov-legend-dot" style="background:#7B1FA2"></div>ANKing Cards (count)</div></div></div><div class="coverage-wrap" style="margin-top:10px"><table class="coverage-table"><thead class="cov-res-hdr"><tr><th>Lecture</th><th title="Boards &amp; Beyond">B&amp;B</th><th title="Bootcamp">BC</th><th title="Pathoma">PM</th><th title="Physeo">Physeo</th><th title="Sketchy">Sketchy</th><th title="Total ANKing cards available for this lecture" style="color:#DDB8FF">ANKing</th><th title="UWorld QIDs mapped to this lecture">UW</th></tr></thead><tbody><tr class="cov-subj-row"><td colspan="8" style="background:#1565C0">Physiology</td></tr><tr class="cov-lec-row"><td title="IL Endocrine Overview" onclick="selectLecture(0)" style="cursor:pointer">IL Endocrine Overview</td><td class="cov-cell"><span class="cov-pip" style="background:#2E7D32;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Boards &amp;amp; Beyond&#39;,&#39;1.04 Gastrointestinal Tract, 1.06 Salivary Glands&#39;,0)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#1565C0;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Bootcamp&#39;,&#39;2.02 Tongue and Gustation, 2.06 Salivary Glands&#39;,0)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#00695C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Physeo&#39;,&#39;physeo-phys 5.01 Gastrointestinal Overview, physeo-phys 5.05 Hormones&#39;,0)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="246 ANKing cards available">246</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#C0CBDA;background:transparent" title="0 UWorld QIDs mapped">—</td></tr><tr class="cov-lec-row"><td title="Introduction/Motility" onclick="selectLecture(1)" style="cursor:pointer">Introduction/Motility</td><td class="cov-cell"><span class="cov-pip" style="background:#2E7D32;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Boards &amp;amp; Beyond&#39;,&#39;2.03 Gastrointestinal Secretions, 2.04 Gastrointestinal Hormones&#39;,1)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#1565C0;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Bootcamp&#39;,&#39;8.01 General Principles Duodenum, 8.02 Jejunum and Ileum General Principles, 9.01 General Overview, 9.02 Pectinate Line&#39;,1)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#00695C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Physeo&#39;,&#39;physeo-phys 5.01 Gastrointestinal Overview, physeo-phys 5.05 Hormones&#39;,1)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="314 ANKing cards available">314</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#1a4731;background:#EEF8F3" title="6 UWorld QIDs mapped">6</td></tr><tr class="cov-lec-row"><td title="IL Bile Workshop &amp; Making a Micelle" onclick="selectLecture(4)" style="cursor:pointer">IL Bile Workshop &amp; Making a Micelle</td><td class="cov-cell"><span class="cov-pip" style="background:#2E7D32;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Boards &amp;amp; Beyond&#39;,&#39;2.01 Bile, 2.02 Bilirubin, 3.06 Gallstones, 3.07 Biliary Disorders&#39;,4)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#1565C0;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Bootcamp&#39;,&#39;6.01 General Principles Biliary System, 6.03 General Principles of Hyperbilirubinemia, 6.06 Bile Acids, 6.07 Cholelithiasis, 6.10 Acute Cholecystitis&#39;,4)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#00695C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Physeo&#39;,&#39;physeo-phys 5.03 Liver &amp; Bilirubin Metabolism, physeo-phys 5.04 Gallbladder&#39;,4)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="360 ANKing cards available">360</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#1a4731;background:#EEF8F3" title="14 UWorld QIDs mapped">14</td></tr><tr class="cov-lec-row"><td title="Secretions I &amp; II" onclick="selectLecture(7)" style="cursor:pointer">Secretions I &amp; II</td><td class="cov-cell"><span class="cov-pip" style="background:#2E7D32;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Boards &amp;amp; Beyond&#39;,&#39;2.03 Gastrointestinal Secretions, 2.04 Gastrointestinal Hormones, 2.05 Exocrine Pancreas&#39;,7)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#1565C0;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Bootcamp&#39;,&#39;4.01 General Principles, 4.04 Gastric Cells, 4.05 Gastric Acid And Gastrin, 4.06 Pepsinogen Histamine Somatostatin, 4.09 Parietal Cell Physiology, 4.22 Antacids, 7.01 General Principles, 7.02 Exocrine Pancreas, 2.06 Salivary Glands, 2.08 Salivary Gland Tumors&#39;,7)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#00695C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Physeo&#39;,&#39;physeo-phys 5.02 Exocrine Pancreas &amp; Metabolism, physeo-phys 5.05 Hormones, physeo-phys 5.06 Satiety &amp; Hunger&#39;,7)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="465 ANKing cards available">465</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#1a4731;background:#EEF8F3" title="11 UWorld QIDs mapped">11</td></tr><tr class="cov-lec-row"><td title="Overview of the Liver" onclick="selectLecture(10)" style="cursor:pointer">Overview of the Liver</td><td class="cov-cell"><span class="cov-pip" style="background:#2E7D32;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Boards &amp;amp; Beyond&#39;,&#39;2.01 Bile, 2.02 Bilirubin, 3.02 Liver Disease, 3.03 Cirrhosis&#39;,10)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#1565C0;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Bootcamp&#39;,&#39;5.01 Hepatic Anatomy And Metabolism, 5.02 Hepatic Microarchitecture, 5.03 Hepatic Zones, 5.13 Cirrhosis Fundamental Pathophysiology, 5.14 Cirrhosis Advanced Pathophysiology, 5.15 Cirrhosis Clinical Diagnostics, 5.17 Pathophysiology of Portal Hypertension, 5.18 Portal HTN Presentation and SAAG, 5.23 Additional Liver Masses, 6.01 General Principles Biliary System, 6.03 General Principles of Hyperbilirubinemia, 6.06 Bile Acids&#39;,10)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#00695C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Physeo&#39;,&#39;physeo-phys 5.03 Liver &amp; Bilirubin Metabolism, physeo-phys 5.04 Gallbladder&#39;,10)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="538 ANKing cards available">538</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#1a4731;background:#EEF8F3" title="4 UWorld QIDs mapped">4</td></tr><tr class="cov-lec-row"><td title="Digestion/Absorption I &amp; II" onclick="selectLecture(12)" style="cursor:pointer">Digestion/Absorption I &amp; II</td><td class="cov-cell"><span class="cov-pip" style="background:#2E7D32;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Boards &amp;amp; Beyond&#39;,&#39;2.01 Bile, 3.09 Malabsorption&#39;,12)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#1565C0;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Bootcamp&#39;,&#39;8.04 Nutrient Absorption, 8.14 Additional Malabsorption Disorders&#39;,12)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#00695C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Physeo&#39;,&#39;physeo-phys 5.01 Gastrointestinal Overview, physeo-phys 5.02 Exocrine Pancreas &amp; Metabolism&#39;,12)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="253 ANKing cards available">253</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#1a4731;background:#EEF8F3" title="15 UWorld QIDs mapped">15</td></tr><tr class="cov-lec-row"><td title="PSW: Cholera/Lactose Intolerance" onclick="selectLecture(26)" style="cursor:pointer">PSW: Cholera/Lactose Intolerance</td><td class="cov-cell"><span class="cov-pip" style="background:#2E7D32;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Boards &amp;amp; Beyond&#39;,&#39;2.03 Gastrointestinal Secretions, 3.09 Malabsorption&#39;,26)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#1565C0;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Bootcamp&#39;,&#39;8.01 General Principles Duodenum, 8.02 Jejunum and Ileum General Principles, 8.04 Nutrient Absorption, 8.09 Celiac Disease Pathophysiology, 8.10 Celiac Disease Presentation and Diagnostics, 8.11 Lactose Intolerance, 8.14 Additional Malabsorption Disorders&#39;,26)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#00695C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Physeo&#39;,&#39;physeo-phys 5.01 Gastrointestinal Overview, physeo-phys 5.02 Exocrine Pancreas &amp; Metabolism&#39;,26)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#4A148C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Sketchy&#39;,&#39;Xref: sketchy-micro 5.08 08 Vibrio spp., Xref: sketchy-micro 11.05 05 Vibrio spp. [Old Version]&#39;,26)"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="381 ANKing cards available">381</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#C0CBDA;background:transparent" title="0 UWorld QIDs mapped">—</td></tr><tr class="cov-subj-row"><td colspan="8" style="background:#2E7D32">Anatomy</td></tr><tr class="cov-lec-row"><td title="Anterior Abdominal Wall/Hernia" onclick="selectLecture(2)" style="cursor:pointer">Anterior Abdominal Wall/Hernia</td><td class="cov-cell"><span class="cov-pip" style="background:#2E7D32;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Boards &amp;amp; Beyond&#39;,&#39;1.02 Gastrointestinal Anatomy, 1.07 Hernias&#39;,2)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#1565C0;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Bootcamp&#39;,&#39;10.01 General Principles of Hernias, 10.02 Inguinal Hernias, 10.03 Femoral Hernias, 10.04 Diaphragmatic Hernias, 10.05 Spigelian Hernias&#39;,2)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="116 ANKing cards available">116</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#1a4731;background:#EEF8F3" title="7 UWorld QIDs mapped">7</td></tr><tr class="cov-lec-row"><td title="Abdominal Viscera I: Endocrine Tract" onclick="selectLecture(6)" style="cursor:pointer">Abdominal Viscera I: Endocrine Tract</td><td class="cov-cell"><span class="cov-pip" style="background:#2E7D32;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Boards &amp;amp; Beyond&#39;,&#39;1.02 Gastrointestinal Anatomy, 1.03 Gastrointestinal Blood Supply, 1.04 Gastrointestinal Tract&#39;,6)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#1565C0;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Bootcamp&#39;,&#39;8.01 General Principles Duodenum, 8.02 Jejunum and Ileum General Principles, 9.01 General Overview&#39;,6)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="200 ANKing cards available">200</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#1a4731;background:#EEF8F3" title="12 UWorld QIDs mapped">12</td></tr><tr class="cov-lec-row"><td title="Abdominal Viscera II: Liver &amp; Pancreas" onclick="selectLecture(9)" style="cursor:pointer">Abdominal Viscera II: Liver &amp; Pancreas</td><td class="cov-cell"><span class="cov-pip" style="background:#2E7D32;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Boards &amp;amp; Beyond&#39;,&#39;1.03 Gastrointestinal Blood Supply, 1.05 Liver Gallbladder and Pancreas&#39;,9)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#1565C0;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Bootcamp&#39;,&#39;5.01 Hepatic Anatomy And Metabolism, 7.01 General Principles, 6.01 General Principles Biliary System, 6.03 General Principles of Hyperbilirubinemia&#39;,9)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#00695C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Physeo&#39;,&#39;physeo-phys 5.02 Exocrine Pancreas &amp; Metabolism, physeo-phys 5.03 Liver &amp; Bilirubin Metabolism, physeo-phys 5.04 Gallbladder&#39;,9)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="278 ANKing cards available">278</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#1a4731;background:#EEF8F3" title="5 UWorld QIDs mapped">5</td></tr><tr class="cov-lec-row"><td title="Retroperitoneum" onclick="selectLecture(20)" style="cursor:pointer">Retroperitoneum</td><td class="cov-cell"><span class="cov-pip" style="background:#2E7D32;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Boards &amp;amp; Beyond&#39;,&#39;1.02 Gastrointestinal Anatomy, 1.03 Gastrointestinal Blood Supply&#39;,20)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#1565C0;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Bootcamp&#39;,&#39;7.01 General Principles&#39;,20)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="97 ANKing cards available">97</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#C0CBDA;background:transparent" title="0 UWorld QIDs mapped">—</td></tr><tr class="cov-subj-row"><td colspan="8" style="background:#6A1B9A">Histology</td></tr><tr class="cov-lec-row"><td title="Esophagus/Stomach/Intestines (Histology)" onclick="selectLecture(3)" style="cursor:pointer">Esophagus/Stomach/Intestines (Histology)</td><td class="cov-cell"><span class="cov-pip" style="background:#2E7D32;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Boards &amp;amp; Beyond&#39;,&#39;1.04 Gastrointestinal Tract&#39;,3)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#1565C0;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Bootcamp&#39;,&#39;3.01 General Principles Esophagus, 4.01 General Principles, 4.04 Gastric Cells, 8.01 General Principles Duodenum, 8.02 Jejunum and Ileum General Principles&#39;,3)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="160 ANKing cards available">160</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#1a4731;background:#EEF8F3" title="15 UWorld QIDs mapped">15</td></tr><tr class="cov-lec-row"><td title="Liver and Biliary Tract (Histology)" onclick="selectLecture(21)" style="cursor:pointer">Liver and Biliary Tract (Histology)</td><td class="cov-cell"><span class="cov-pip" style="background:#2E7D32;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Boards &amp;amp; Beyond&#39;,&#39;1.05 Liver Gallbladder and Pancreas&#39;,21)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="36 ANKing cards available">36</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#C0CBDA;background:transparent" title="0 UWorld QIDs mapped">—</td></tr><tr class="cov-subj-row"><td colspan="8" style="background:#AD1457">Embryology</td></tr><tr class="cov-lec-row"><td title="IL Endocrine Primer" onclick="selectLecture(5)" style="cursor:pointer">IL Endocrine Primer</td><td class="cov-cell"><span class="cov-pip" style="background:#2E7D32;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Boards &amp;amp; Beyond&#39;,&#39;1.01 Gastrointestinal Embryology&#39;,5)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#1565C0;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Bootcamp&#39;,&#39;1.01 General Embyrology, 1.02 Midgut Development, 1.03 Foregut Development&#39;,5)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="151 ANKing cards available">151</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#1a4731;background:#EEF8F3" title="1 UWorld QID mapped">1</td></tr><tr class="cov-lec-row"><td title="Endocrine Embryology" onclick="selectLecture(8)" style="cursor:pointer">Endocrine Embryology</td><td class="cov-cell"><span class="cov-pip" style="background:#2E7D32;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Boards &amp;amp; Beyond&#39;,&#39;1.01 Gastrointestinal Embryology&#39;,8)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#1565C0;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Bootcamp&#39;,&#39;1.01 General Embyrology, 1.02 Midgut Development, 1.03 Foregut Development, 1.04 Ventral And Abdominal Wall Defects, 1.05 Tracheoesophageal Defects, 1.06 Hypertrophic Pyloric Stenosis, 1.07 Intestinal And Biliary Atresia, 1.08 Pancreatic Anomalies&#39;,8)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="249 ANKing cards available">249</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#1a4731;background:#EEF8F3" title="7 UWorld QIDs mapped">7</td></tr><tr class="cov-subj-row"><td colspan="8" style="background:#B71C1C">Pathology</td></tr><tr class="cov-lec-row"><td title="Esophagus/Stomach Disease" onclick="selectLecture(11)" style="cursor:pointer">Esophagus/Stomach Disease</td><td class="cov-cell"><span class="cov-pip" style="background:#2E7D32;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Boards &amp;amp; Beyond&#39;,&#39;3.01 Esophageal Disorders, 3.08 Gastric Disorders&#39;,11)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#1565C0;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Bootcamp&#39;,&#39;3.02 Esophageal Motility, 3.03 Achalasia, 3.04 Additional Disorders of Esophageal Motility, 3.05 Gastroesophageal Reflux Disease, 3.06 Barrett Esophagus, 3.07 Esophagitis, 3.08 Plummer Vinson Syndrome Zenker Diverticulum, 3.09 Additional Causes Of Dysphagia, 3.10 Esophageal Barotrauma and Bleeding, 3.11 Esophageal Malignancy, 4.12 Gastritis Overview, 4.13 Acute Erosive Gastritis Stress Ulcers and Chronic Gastritis, 4.14 Helicobacter Pylori Infection, 4.16 Peptic Ulcer Disease, 4.19 Gastric Malignancy Overview, 4.20 Gastric adenocarcinoma GIST and MALT Lymphoma&#39;,11)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#BF360C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Pathoma&#39;,&#39;10.01 Oral Cavity, 10.02 Salivary Gland, 10.03 Esophagus, 10.04 Stomach&#39;,11)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#00695C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Physeo&#39;,&#39;physeo-path 6.01 Oral Cavity, physeo-path 6.02 Salivary Glands, physeo-path 6.03 Esophagus, physeo-path 6.04 Stomach&#39;,11)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#4A148C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Sketchy&#39;,&#39;Xref: sketchy-micro 5.09 09 Helicobacter pylori, Xref: sketchy-micro 3.01 01 Candida albicans&#39;,11)"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="1065 ANKing cards available">1,065</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#1a4731;background:#EEF8F3" title="16 UWorld QIDs mapped">16</td></tr><tr class="cov-lec-row"><td title="Intestinal Pathology I &amp; II" onclick="selectLecture(13)" style="cursor:pointer">Intestinal Pathology I &amp; II</td><td class="cov-cell"><span class="cov-pip" style="background:#2E7D32;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Boards &amp;amp; Beyond&#39;,&#39;3.09 Malabsorption, 3.12 Intestinal Disorders, 3.13 Inflammatory Bowel Disease, 3.14 Colon Cancer, 3.15 Carcinoid Tumors&#39;,13)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#1565C0;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Bootcamp&#39;,&#39;8.09 Celiac Disease Pathophysiology, 8.10 Celiac Disease Presentation and Diagnostics, 8.14 Additional Malabsorption Disorders, 8.15 Mesenteric Ischemia, 8.16 Meckel Diverticulum, 8.17 Intussusception, 9.04 Crohn Disease, 9.05 Ulcerative Colitis, 9.08 Diverticulosis and Diverticulitis, 9.09 Hirschsprung Disease, 9.10 Volvulus, 9.12 Colon Ischemia, 9.13 Colonic Polyps, 9.14 Colorectal Carcinogenesis Molecular Pathway, 9.15 Colorectal Cancer, 9.16 Polyposis Syndrome&#39;,13)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#BF360C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Pathoma&#39;,&#39;10.05 Small Bowel, 10.06 Appendix, 10.07 Inflammatory Bowel Disease, 10.08 Colon, 10.09 Colorectal Carcinoma&#39;,13)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#00695C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Physeo&#39;,&#39;physeo-path 6.05 Small Bowel, physeo-path 6.06 Appendix, physeo-path 6.07 Inflammatory Bowel Disease, physeo-path 6.08 Diseases Of Colon, physeo-path 6.09 Colon Polyps Carcinoma&#39;,13)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#4A148C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Sketchy&#39;,&#39;Xref: sketchy-micro 1.02 02 Entamoeba histolytica, Xref: sketchy-micro 1.07 07 Streptococcus gallolyticus (Group D Strep), Xref: sketchy-micro 3.01 01 Trypanosoma cruzi&#39;,13)"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="1226 ANKing cards available">1,226</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#1a4731;background:#EEF8F3" title="76 UWorld QIDs mapped">76</td></tr><tr class="cov-lec-row"><td title="Endocrine Lab" onclick="selectLecture(15)" style="cursor:pointer">Endocrine Lab</td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#1565C0;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Bootcamp&#39;,&#39;4.01 General Principles&#39;,15)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#BF360C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Pathoma&#39;,&#39;10.01 Oral Cavity, 10.02 Salivary Gland, 10.03 Esophagus, 10.04 Stomach, 10.05 Small Bowel, 10.06 Appendix, 10.07 Inflammatory Bowel Disease, 10.08 Colon, 10.09 Colorectal Carcinoma&#39;,15)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#00695C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Physeo&#39;,&#39;physeo-path 6.03 Esophagus, physeo-path 6.04 Stomach, physeo-path 6.05 Small Bowel, physeo-path 6.06 Appendix, physeo-path 6.07 Inflammatory Bowel Disease, physeo-path 6.08 Diseases Of Colon, physeo-path 6.09 Colon Polyps Carcinoma&#39;,15)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="986 ANKing cards available">986</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#1a4731;background:#EEF8F3" title="1 UWorld QID mapped">1</td></tr><tr class="cov-lec-row"><td title="Intestinal Pathology Case Review" onclick="selectLecture(19)" style="cursor:pointer">Intestinal Pathology Case Review</td><td class="cov-cell"><span class="cov-pip" style="background:#2E7D32;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Boards &amp;amp; Beyond&#39;,&#39;3.12 Intestinal Disorders, 3.13 Inflammatory Bowel Disease, 3.14 Colon Cancer&#39;,19)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#1565C0;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Bootcamp&#39;,&#39;9.13 Colonic Polyps, 9.14 Colorectal Carcinogenesis Molecular Pathway, 9.15 Colorectal Cancer, 9.16 Polyposis Syndrome&#39;,19)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#BF360C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Pathoma&#39;,&#39;10.07 Inflammatory Bowel Disease, 10.08 Colon, 10.09 Colorectal Carcinoma&#39;,19)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#00695C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Physeo&#39;,&#39;physeo-path 6.07 Inflammatory Bowel Disease, physeo-path 6.08 Diseases Of Colon, physeo-path 6.09 Colon Polyps Carcinoma&#39;,19)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="615 ANKing cards available">615</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#C0CBDA;background:transparent" title="0 UWorld QIDs mapped">—</td></tr><tr class="cov-lec-row"><td title="Liver Disease I &amp; II" onclick="selectLecture(22)" style="cursor:pointer">Liver Disease I &amp; II</td><td class="cov-cell"><span class="cov-pip" style="background:#2E7D32;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Boards &amp;amp; Beyond&#39;,&#39;3.02 Liver Disease, 3.03 Cirrhosis, 3.04 Liver Tumors, 3.05 Wilson&#39;s Disease and Hemochromatosis&#39;,22)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#1565C0;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Bootcamp&#39;,&#39;5.04 Alcohol Induced Hepatitis Pathophysiology and Presentation, 5.05 Alcohol Induced Hepatitis Diagnostics and Histopathology, 5.07 Autoimmune Hepatitis, 5.08 Wilson Disease, 5.09 Hemochromatosis, 5.10 Alpha 1 Antitrypsin Deficiency and Ischemic Hepatitis 10 Alpha 1 Antitrypsin Deficiency and Ischemic Hepatitis, 5.12 Inhaled Anesthetic Toxicity Acute Viral Hepatitis, 5.13 Cirrhosis Fundamental Pathophysiology, 5.14 Cirrhosis Advanced Pathophysiology, 5.15 Cirrhosis Clinical Diagnostics, 5.17 Pathophysiology of Portal Hypertension, 5.18 Portal HTN Presentation and SAAG, 5.21 Spontaneous Bacterial Peritonitis Peritoneal Carcinomatosis and SAAG, 5.22 Hepatocellular Carcinoma&#39;,22)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#BF360C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Pathoma&#39;,&#39;11.03 Liver&#39;,22)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#00695C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Physeo&#39;,&#39;physeo-path 6.12 Jaundice, physeo-path 6.13 Cirrhosis Liver Cancer, physeo-path 6.14 Other Liver Conditions&#39;,22)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#4A148C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Sketchy&#39;,&#39;sketchy-micro 1.05 05 Hepatitis A Virus (PicoRNAviridae), sketchy-micro 1.08 08 Hepatitis C Virus (Flaviviridae), sketchy-micro 3.12 12 Hepatitis B Viral Basics &amp; Infectious Diseases (Hepadnaviridae), sketchy-micro 3.13 13 Hepatitis B Viral Life Cycle (Hepadnaviridae), sketchy-micro 4.01 01 Hepatitis A Virus (PicoRNAviridae) [Old Version], sketchy-micro 4.02 02 Hepatitis B Virus (HepaDNAviridae) [Old Version], sketchy-micro 4.03 03 Hepatitis C Virus (Flaviviridae) [Old Version], Xref: sketchy-micro 1.02 02 Entamoeba histolytica, Xref: sketchy-micro 6.02 02 Trematodes, Xref: sketchy-micro 3.02 02 Aspergillus fumigatus&#39;,22)"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="1069 ANKing cards available">1,069</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#1a4731;background:#EEF8F3" title="28 UWorld QIDs mapped">28</td></tr><tr class="cov-lec-row"><td title="Pancreas Disease" onclick="selectLecture(24)" style="cursor:pointer">Pancreas Disease</td><td class="cov-cell"><span class="cov-pip" style="background:#2E7D32;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Boards &amp;amp; Beyond&#39;,&#39;2.05 Exocrine Pancreas, 3.10 Acute Pancreatitis, 3.11 Chronic Pancreatitis &amp; Pancreatic Cancer&#39;,24)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#1565C0;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Bootcamp&#39;,&#39;7.01 General Principles, 7.04 Acute Pancreatitis, 7.05 Complications of Pancreatitis, 7.06 Chronic Pancreatitis, 7.07 Pancreatic Adenocarcinoma, 7.08 Pancreatic Neuroendocrine Tumors&#39;,24)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#BF360C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Pathoma&#39;,&#39;11.01 Exocrine Pancreas&#39;,24)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#00695C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Physeo&#39;,&#39;physeo-path 6.10 Pancreas&#39;,24)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="378 ANKing cards available">378</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#1a4731;background:#EEF8F3" title="10 UWorld QIDs mapped">10</td></tr><tr class="cov-lec-row"><td title="Liver/Pancreas Lab" onclick="selectLecture(25)" style="cursor:pointer">Liver/Pancreas Lab</td><td class="cov-cell"><span class="cov-pip" style="background:#2E7D32;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Boards &amp;amp; Beyond&#39;,&#39;3.04 Liver Tumors, 3.06 Gallstones, 3.07 Biliary Disorders&#39;,25)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#1565C0;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Bootcamp&#39;,&#39;6.07 Cholelithiasis, 6.10 Acute Cholangitis, 6.10 Acute Cholecystitis, 6.12 Acute Cholangitis, 6.13 Primary Sclerosing Cholangitis, 6.14 Primary Biliary Cholangitis, 5.21 Spontaneous Bacterial Peritonitis Peritoneal Carcinomatosis and SAAG, 5.22 Hepatocellular Carcinoma&#39;,25)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#BF360C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Pathoma&#39;,&#39;11.02 Gallbladder &amp; Biliary Tract, 11.03 Liver&#39;,25)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#00695C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Physeo&#39;,&#39;physeo-path 6.11 Gallbladder Biliary Tract&#39;,25)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="519 ANKing cards available">519</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#C0CBDA;background:transparent" title="0 UWorld QIDs mapped">—</td></tr><tr class="cov-subj-row"><td colspan="8" style="background:#155724">Pharmacology</td></tr><tr class="cov-lec-row"><td title="Poisoning Conference and Cases" onclick="selectLecture(14)" style="cursor:pointer">Poisoning Conference and Cases</td><td class="cov-cell"><span class="cov-pip" style="background:#2E7D32;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Boards &amp;amp; Beyond&#39;,&#39;3.16 Gastrointestinal Pharmacology&#39;,14)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#4A148C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Sketchy&#39;,&#39;sketchy-pharm 1.01 Antiemetic Agents, Xref: sketchy-micro 2.03 03 Clostridium botulinum, Xref: sketchy-micro 2.04 04 Clostridium perfringens&#39;,14)"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="117 ANKing cards available">117</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#C0CBDA;background:transparent" title="0 UWorld QIDs mapped">—</td></tr><tr class="cov-lec-row"><td title="Treatment of Peptic Ulcer/GERD &amp; Other Endocrine Disorders" onclick="selectLecture(16)" style="cursor:pointer">Treatment of Peptic Ulcer/GERD &amp; Other Endocrine Disorders</td><td class="cov-cell"><span class="cov-pip" style="background:#2E7D32;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Boards &amp;amp; Beyond&#39;,&#39;3.01 Esophageal Disorders, 3.16 Gastrointestinal Pharmacology&#39;,16)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#1565C0;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Bootcamp&#39;,&#39;4.21 Proton Pump Inhibitors and H2 Antagonists, 4.22 Antacids, 4.23 Additional Gastric Pharmacology, 3.05 Gastroesophageal Reflux Disease&#39;,16)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#00695C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Physeo&#39;,&#39;physeo-pharm 11.01 Histamine-2 (H2) Blockers, physeo-pharm 11.02 Proton Pump Inhibitors, physeo-pharm 11.03 Antacids, physeo-pharm 11.04 Bismuth and Sucralfate, physeo-pharm 11.05 Misoprostol, physeo-pharm 11.06 Octreotide, physeo-pharm 11.07 Sulfasalazine, physeo-pharm 11.08 Loperamide and Diphenoxylate, physeo-pharm 11.09 Ondansetron, physeo-pharm 11.10 Metoclopramide, physeo-pharm 11.11 Orlistat, physeo-pharm 11.12 Laxatives, physeo-pharm 11.13 Aprepitant&#39;,16)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#4A148C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Sketchy&#39;,&#39;sketchy-pharm 1.01 Antiemetic Agents, sketchy-pharm 1.02 H2 Receptor Blockers &amp; PPIs, sketchy-pharm 1.03 Laxatives, sketchy-pharm 1.04 Antidiarrheal Agents, Xref: sketchy-micro 5.09 09 Helicobacter pylori&#39;,16)"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="441 ANKing cards available">441</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#1a4731;background:#EEF8F3" title="14 UWorld QIDs mapped">14</td></tr><tr class="cov-subj-row"><td colspan="8" style="background:#BF360C">Microbiology</td></tr><tr class="cov-lec-row"><td title="Endocrine Infections" onclick="selectLecture(17)" style="cursor:pointer">Endocrine Infections</td><td class="cov-cell"><span class="cov-pip" style="background:#2E7D32;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Boards &amp;amp; Beyond&#39;,&#39;3.12 Intestinal Disorders&#39;,17)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#1565C0;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Bootcamp&#39;,&#39;9.05 Ulcerative Colitis&#39;,17)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#4A148C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Sketchy&#39;,&#39;sketchy-micro 2.01 01 Bacillus anthracis &amp; cereus, sketchy-micro 2.03 03 Clostridium botulinum, sketchy-micro 2.04 04 Clostridium perfringens, sketchy-micro 2.05 05 Clostridioides difficile, sketchy-micro 2.07 07 Listeria monocytogenes, sketchy-micro 5.01 01 Klebsiella pneumoniae, Enterobacter spp., Serratia marcescens, sketchy-micro 5.02 02 Salmonella Part 1 Introduction to Salmonella &amp; NTS, sketchy-micro 5.03 03 Salmonella Part 2 Typhoidal Salmonella, sketchy-micro 5.04 04 Shigella spp., sketchy-micro 5.05 05 Escherichia coli (ETEC, EHEC), sketchy-micro 5.06 06 Yersinia enterocolitica &amp; pestis, sketchy-micro 5.07 07 Campylobacter jejuni, sketchy-micro 5.08 08 Vibrio spp., sketchy-micro 5.09 09 Helicobacter pylori, sketchy-micro 1.05 05 Hepatitis A Virus (PicoRNAviridae), sketchy-micro 1.06 06 Norovirus &amp; Norwalk Virus (Caliciviridae), sketchy-micro 2.08 08 Rotavirus &amp; Colorado Tick Fever Virus (Reoviridae), sketchy-micro 11.01 01 Clostridioides difficile [Old Version], sketchy-micro 11.05 05 Vibrio spp. [Old Version], sketchy-micro 11.06 06 Salmonella enteritidis &amp; typhi [Retired Video], Xref: sketchy-micro 1.07 07 Streptococcus gallolyticus (Group D Strep)&#39;,17)"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="504 ANKing cards available">504</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#1a4731;background:#EEF8F3" title="9 UWorld QIDs mapped">9</td></tr><tr class="cov-lec-row"><td title="Parasitology" onclick="selectLecture(18)" style="cursor:pointer">Parasitology</td><td class="cov-cell"><span class="cov-pip" style="background:#2E7D32;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Boards &amp;amp; Beyond&#39;,&#39;3.12 Intestinal Disorders&#39;,18)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#00695C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Physeo&#39;,&#39;physeo-pharm 3.01 Malathion, Permethrin, &amp; Lindane&#39;,18)"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#4A148C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Sketchy&#39;,&#39;sketchy-micro 1.01 01 Giardia lamblia, sketchy-micro 1.02 02 Entamoeba histolytica, sketchy-micro 1.03 03 Cryptosporidium spp., sketchy-micro 5.01 01 Intestinal Nematodes - Enterobius, Ancylostoma, Necator, Ascaris, Strongyloides, and Trichinella, sketchy-micro FAadd Trichuris trichiura (whipworm), sketchy-micro 6.01 01 Cestodes, sketchy-micro 6.02 02 Trematodes, Xref: sketchy-micro 2.01 01 Toxoplasma gondii, Xref: sketchy-micro 3.01 01 Trypanosoma cruzi&#39;,18)"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="296 ANKing cards available">296</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#1a4731;background:#EEF8F3" title="2 UWorld QIDs mapped">2</td></tr><tr class="cov-subj-row"><td colspan="8" style="background:#283593">Disease-Related Topics</td></tr><tr class="cov-lec-row"><td title="DRT: Liver Enzymes" onclick="selectLecture(23)" style="cursor:pointer">DRT: Liver Enzymes</td><td class="cov-cell"><span class="cov-pip" style="background:#2E7D32;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Boards &amp;amp; Beyond&#39;,&#39;2.02 Bilirubin, 3.02 Liver Disease&#39;,23)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell"><span class="cov-pip" style="background:#00695C;opacity:.85;cursor:pointer" onclick="showCovTip(event,&#39;Physeo&#39;,&#39;physeo-phys 5.03 Liver &amp; Bilirubin Metabolism&#39;,23)"></span></td><td class="cov-cell"><span class="cov-empty"></span></td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#7B1FA2;background:#F5EEF8" title="210 ANKing cards available">210</td><td class="cov-cell" style="font-size:11px;font-weight:700;color:#1a4731;background:#EEF8F3" title="1 UWorld QID mapped">1</td></tr></tbody></table></div></div></div></div>
  </div>
@@ -564,7 +564,7 @@
  </div>
  </div>
 
- <!- FOOTER ->
+ <!-- FOOTER -->
  <footer class="footer">
  <span>Built as a shared entry point for HoyaDocs Endocrine mapping resources.</span>
  <span><strong>Last updated: 2026-04-21 · Mapping v1.0 · 2026-04-21</strong></span>
@@ -575,7 +575,7 @@
 
 </div>
 
-<!- ══ MOBILE BOTTOM NAV ══ ->
+<!-- ══ MOBILE BOTTOM NAV ══ -->
 <nav class="mobile-nav">
  <div class="mobile-nav-items">
  <a class="mobile-nav-item" href="../index.html">
@@ -596,7 +596,7 @@
  </div>
 </nav>
 
-<!- ANKI MODAL ->
+<!-- ANKI MODAL -->
 <div class="overlay" id="ankiOv" onclick="closeM(&#39;ankiOv&#39;)">
  <div class="modal" onclick="event.stopPropagation" style="width:82vw">
  <div class="modal-hdr">
@@ -612,7 +612,7 @@
  </div>
 </div>
 
-<!- UWORLD MODAL ->
+<!-- UWORLD MODAL -->
 <div class="overlay" id="uwOv" onclick="closeM(&#39;uwOv&#39;)">
  <div class="modal" onclick="event.stopPropagation" style="width:78vw;max-width:860px">
  <div class="modal-hdr">
@@ -632,7 +632,7 @@
  </div>
 </div>
 
-<!- COV CELL POPUP ->
+<!-- COV CELL POPUP -->
 <div id="covTip">
  <button class="covtip-close" onclick="closeCovTip">✕</button>
  <div class="covtip-res" id="covTipRes"></div>
@@ -1275,7 +1275,7 @@ function closeMobNav {
 }
 </script>
 
-<!- Feedback button fixed top-right ->
+<!-- Feedback button fixed top-right -->
 <a class="feedback-fab" href="https://forms.gle/spz5TRQfjjc7kbQh6" target="_blank" rel="noopener">
  💬 Feedback
 </a>
