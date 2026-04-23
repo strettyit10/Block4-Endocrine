@@ -652,6 +652,8 @@
       .rb-label { display: none; }
       .row-btn  { padding: 5px 7px; }
       .util-badge { display: none; }
+      /* icon-only buttons don't need 92px anymore — let the column size itself */
+      .row-actions { width: auto; }
     }
 
     /* ── FOOTER ── */
@@ -685,6 +687,100 @@
       .footer { flex-direction: column; align-items: flex-start; gap: 6px; }
       .util-row { padding: 14px 14px; }
       .main-inner { padding: 24px 14px 60px; }
+    }
+
+    /* ── MOBILE POLISH (phones) ── */
+    /* overflow safety belt — nothing should ever cause horizontal scroll on phones */
+    html, body { max-width: 100%; overflow-x: hidden; }
+
+    @media (max-width: 560px) {
+      /* Topnav: compress so brand + dark toggle + fixed feedback pill all fit */
+      .topnav { padding: 0 12px; height: 48px; }
+      .tn-brand { margin-right: 10px; gap: 0; }
+      .tn-name { font-size: 1.05rem; }
+      .tn-block { font-size: 0.64rem; }
+      .tn-right { margin-right: 80px; } /* reserve room for the fixed feedback FAB */
+      .dark-toggle { width: 28px; height: 28px; font-size: 0.76rem; }
+      .feedback-fab {
+        top: 9px; right: 12px;
+        padding: 5px 11px; font-size: 0.7rem; gap: 4px;
+      }
+
+      .main-inner { padding: 18px 12px 56px; }
+
+      /* Hero */
+      .hero { margin-bottom: 18px; padding-bottom: 18px; }
+      .hero-eyebrow { font-size: 0.62rem; margin-bottom: 10px; }
+      .hero-title { font-size: 1.95rem; line-height: 1.05; margin-bottom: 14px; }
+      .hero-sub { font-size: 0.82rem; margin-bottom: 14px; }
+
+      .hero-stats { gap: 10px; }
+      .h-stat { padding: 12px 16px; gap: 10px; border-radius: 12px; }
+      .h-stat-n { font-size: 1.5rem; }
+      .h-stat-l { font-size: 0.72rem; letter-spacing: 0.06em; }
+
+      .progress-wrap { gap: 10px; margin-bottom: 20px; }
+      .prog-label { font-size: 0.72rem; }
+
+      /* Search + filter */
+      .search-bar-wrap { margin-bottom: 22px; }
+      .search-bar { padding: 10px 14px 10px 38px; font-size: 0.88rem; }
+      .filter-row { gap: 6px; }
+      .filter-pill { padding: 5px 10px; font-size: 0.74rem; }
+
+      /* Section dividers */
+      .section-divider { gap: 10px; margin-bottom: 14px; }
+      .section-divider-text { font-size: 1rem; }
+
+      /* Util list rows */
+      .util-row { padding: 12px 12px; gap: 10px; align-items: center; }
+      .util-icon { width: 34px; height: 34px; font-size: 1rem; border-radius: 8px; }
+      .util-text strong { font-size: 0.88rem; }
+      .util-text span { font-size: 0.74rem; }
+
+      /* Action buttons — horizontal row of icon-only pills on phone */
+      .row-actions { flex-direction: row; gap: 4px; align-items: center; }
+      .row-btn { padding: 6px 8px; font-size: 1.05rem; border-radius: 6px; }
+      /* min tap target for accessibility */
+      .row-btn { min-width: 32px; min-height: 32px; justify-content: center; }
+
+      /* Legend (bcards) */
+      .bcard { padding: 8px 10px; }
+      .bcard-label { font-size: 0.88rem; }
+      .bcard h3 { font-size: 0.68rem; }
+
+      /* Workflow steps */
+      .wf-step { gap: 10px; }
+      .wf-num { font-size: 2.6rem; }
+      .wf-title { font-size: 0.9rem; }
+      .wf-desc { font-size: 0.72rem; }
+
+      /* Hero-note collapsibles stay readable */
+      .hni-title { font-size: 0.84rem; }
+      .hni-body-inner { font-size: 0.78rem; }
+    }
+
+    /* Extra-narrow (older/cheaper phones, iPhone SE portrait) */
+    @media (max-width: 380px) {
+      .topnav { padding: 0 10px; }
+      .tn-name { font-size: 0.98rem; }
+      .tn-block { display: none; }
+      .feedback-fab { padding: 4px 9px; font-size: 0.66rem; }
+      .tn-right { margin-right: 66px; }
+
+      .main-inner { padding: 14px 10px 48px; }
+      .hero-title { font-size: 1.7rem; }
+      .hero-sub { font-size: 0.78rem; }
+
+      .util-row { padding: 10px 10px; gap: 8px; }
+      .util-icon { width: 30px; height: 30px; font-size: 0.92rem; }
+      .util-text strong { font-size: 0.84rem; }
+      .util-text span { font-size: 0.7rem; }
+
+      .row-btn { padding: 5px 6px; font-size: 0.98rem; min-width: 30px; min-height: 30px; }
+      .filter-pill { padding: 4px 9px; font-size: 0.72rem; }
+
+      .section-divider-text { font-size: 0.92rem; }
     }
   </style>
 <!-- hoyadocs:link-availability:css -->
