@@ -31,9 +31,10 @@ button{font-family:inherit;cursor:pointer}
  background:var(--sb);color:#fff;padding:16px 28px;display:flex;align-items:center;gap:14px;
  position:sticky;top:0;z-index:100;
 }
-.topbar-brand{font-size:1.25rem;font-weight:800;letter-spacing:-.01em}
-.topbar-sep{width:1px;height:24px;background:rgba(255,255,255,.15)}
-.topbar-title{font-size:.95rem;font-weight:500;opacity:.85}
+.topbar-brand-stack{display:flex;flex-direction:column;gap:2px;text-decoration:none}
+.topbar-brand{font-size:1.2rem;font-weight:900;color:#fff;letter-spacing:-0.01em;text-decoration:none;text-shadow:0 1px 8px rgba(0,0,0,0.25)}
+.topbar-brand:hover{color:rgba(255,255,255,0.78)}
+.topbar-block{font-size:0.74rem;font-weight:600;color:rgba(255,255,255,0.65);letter-spacing:0.01em}
 .topbar-right{margin-left:auto;display:flex;gap:10px;align-items:center}
 .dark-toggle{
  width:32px;height:32px;border-radius:8px;border:1px solid rgba(255,255,255,.12);
@@ -47,6 +48,26 @@ button{font-family:inherit;cursor:pointer}
  transition:background .15s;text-decoration:none;
 }
 .back-link:hover{background:rgba(255,255,255,.14)}
+.back-link.gold{
+ background:#fbbf24;color:#3d2f08;border-color:#f59e0b;font-weight:700;
+}
+.back-link.gold:hover{background:#f59e0b;color:#3d2f08}
+
+/* ── PAGE HERO TITLE (matches index.html .hero-title) ── */
+.page-hero{margin:28px 0 20px;padding:0 4px}
+.page-hero-title{
+ font-size:clamp(2.4rem, 5vw, 4.2rem);
+ font-weight:900;letter-spacing:-0.045em;
+ color:var(--ink);line-height:0.98;
+}
+.page-hero-title em{font-style:normal;color:var(--hero-em)}
+
+/* ── PAGE FOOTER (version meta) ── */
+.page-footer{
+ margin:48px auto 24px;padding:18px 24px 0;max-width:1100px;
+ border-top:1px solid var(--rule);
+ font-size:0.78rem;color:var(--ink-3);text-align:center;
+}
 
 /* ── LAYOUT ── */
 .container{max-width:1100px;margin:0 auto;padding:28px 24px 60px}
@@ -226,16 +247,21 @@ button{font-family:inherit;cursor:pointer}
 
 <!-- TOPBAR -->
 <div class="topbar">
- <a class="topbar-brand" href="https://hoyadocs.com/Block4-Endocrine/">HoyaDocs↗</a>
- <div class="topbar-sep"></div>
- <div class="topbar-title">Endocrine Resource Explorer</div>
- <div class="topbar-sub" style="font-size:.78rem;opacity:.85;margin-top:2px">Mapping v1.0 · 2026-04-21</div>
+ <a class="topbar-brand-stack" href="https://hoyadocs.com/Block4-Endocrine/">
+  <span class="topbar-brand">HoyaDocs ↗</span>
+  <span class="topbar-block">Block 4 - Endocrine</span>
+ </a>
  <div class="topbar-right">
- <a class="back-link" href="https://hoyadocs.com/Block4-Endocrine/resource-mapping/end_resource-hub.html">Per Lecture Resource Hub</a>
+ <a class="back-link gold" href="https://hoyadocs.com/Block4-Endocrine/resource-mapping/end_resource-hub.html">Resource Mapping Hub</a>
  </div>
 </div>
 
 <div class="container">
+
+ <!-- PAGE HERO TITLE -->
+ <header class="page-hero">
+ <h1 class="page-hero-title">Endocrine <em>Resource Explorer.</em></h1>
+ </header>
 
  <!-- STEPPER -->
  <div class="stepper" id="stepper">
@@ -260,7 +286,7 @@ button{font-family:inherit;cursor:pointer}
  <!-- PANELS -->
  <div id="panel-1" class="panel">
  <div class="card">
- <div class="card-title">&#128218; Select a Endocrine Lecture</div>
+ <div class="card-title">&#128218; Select Lecture</div>
  <div class="lecture-grid" id="lectureGrid"></div>
  </div>
  <div class="btn-row">
@@ -273,8 +299,8 @@ button{font-family:inherit;cursor:pointer}
  <div class="card-title">&#128214; Select Resources</div>
  <p style="font-size:.82rem;color:var(--ink-3);margin-bottom:14px">Choose which in-house or 3rd-party resources to explore for the selected lecture. Greyed-out resources have no mapping for this lecture.</p>
  <div class="select-all-row">
- <button class="select-all-btn" onclick="selectAllResources">Select All Available</button>
- <button class="select-all-btn" onclick="clearAllResources">Clear All</button>
+ <button class="select-all-btn" onclick="selectAllResources()">Select All Available</button>
+ <button class="select-all-btn" onclick="clearAllResources()">Clear All</button>
  </div>
  <div class="resource-grid" id="resourceGrid"></div>
  </div>
@@ -295,7 +321,7 @@ button{font-family:inherit;cursor:pointer}
  </div>
  <div class="btn-row">
  <button class="btn btn-outline" onclick="goStep(2)">&larr; Back</button>
- <button class="btn btn-primary" id="btnSubmit" disabled onclick="showResults">Submit &amp; View Results</button>
+ <button class="btn btn-primary" id="btnSubmit" disabled onclick="showResults()">Submit &amp; View Results</button>
  </div>
  </div>
 
@@ -307,13 +333,16 @@ button{font-family:inherit;cursor:pointer}
  </div>
  <div class="btn-row" style="margin-top:0">
  <button class="btn btn-outline" onclick="goStep(1)">&#8634; Start Over</button>
- <button class="btn btn-export" onclick="exportExcel">&#128229; Export to Excel</button>
+ <button class="btn btn-export" onclick="exportExcel()">&#128229; Export to Excel</button>
  </div>
  </div>
  <div id="resultsContainer"></div>
  </div>
 
 </div>
+
+<!-- PAGE FOOTER -->
+<footer class="page-footer">Mapping v1.0 &middot; 2026-04-21</footer>
 
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
@@ -346,9 +375,15 @@ const FIELDS = [
 ];
 
 const SUBJECT_COLORS = {
- 'Phys':['#dbeafe','#1e40af'],'Anat':['#dcfce7','#A67C00'],'Path':['#FEF3C7','#A67C00'],
- 'Pharm':['#d1fae5','#065f46'],'Embr':['#ede9fe','#5b21b6'],'Hist':['#f3e8ff','#6b21a8'],
- 'Micro':['#fef3c7','#92400e'],'DRT':['#dbeafe','#1e3a8a']
+ 'Phys':       ['#dbeafe','#1e40af'], 'Anat':       ['#dcfce7','#854d0e'],
+ 'Path':       ['#ffe4e6','#CA8A04'], 'Pharm':      ['#d1fae5','#065f46'],
+ 'Embr':       ['#ede9fe','#5b21b6'], 'Embr-HS':    ['#ede9fe','#5b21b6'],
+ 'Hist':       ['#f3e8ff','#6b21a8'], 'Micro':      ['#fef3c7','#92400e'],
+ 'DRT':        ['#dbeafe','#1e3a8a'], 'Ethics':     ['#fce7f3','#9d174d'],
+ 'CP':         ['#e0f2fe','#0369a1'], 'HS':         ['#ffe4e6','#CA8A04'],
+ 'EBM':        ['#fef3c7','#92400e'], 'Bioch':      ['#d1fae5','#065f46'],
+ 'Phys-Bioch': ['#dbeafe','#1e40af'],
+ 'N/A':        ['#f1f5f9','#64748b']
 };
 
 // ══════════════════════════════════════
@@ -384,11 +419,10 @@ function renderLectures() {
  const grid = document.getElementById('lectureGrid');
  grid.innerHTML = MAPPING.map((lec, i) => {
  const [bg, tx] = SUBJECT_COLORS[lec.subject] || ['#f1f5f9','#64748b'];
- const resCount = ['bootcamp','bb','pathoma','physeo','sketchy'].reduce((s,k) => s + (lec[k]||[]).length, 0);
  return `<button class="lec-btn" data-idx="${i}" onclick="selectLecture(${i})">
  <div class="lec-class"><span style="display:inline-block;padding:1px 6px;border-radius:4px;background:${bg};color:${tx}">${lec.subject}</span> Class ${lec.classLabel}</div>
  <div class="lec-name">${lec.lecture}</div>
- <div class="lec-info">${lec.lecturer} &middot; ${resCount} resource mapping${resCount!==1?'s':''}</div>
+ ${lec.lecturer ? `<div class="lec-info">${lec.lecturer}</div>` : ''}
  </button>`;
  }).join('');
 }
@@ -537,7 +571,7 @@ function showResults() {
  <div class="rr-icon">${res.icon}</div>
  <div class="rr-name">${res.name}</div>
  <div class="rr-stats">
- ${selectedFields.has('card_count') ? `<div class="rr-stat"><strong>${totalCards.toLocaleString}</strong> cards</div>` : ''}
+ ${selectedFields.has('card_count') ? `<div class="rr-stat"><strong>${totalCards.toLocaleString()}</strong> cards</div>` : ''}
  ${res.hasLectures && sections.length > 0 ? `<div class="rr-stat"><strong>${totalSections}</strong> section${totalSections!==1?'s':''}</div>` : ''}
  ${!res.hasLectures ? '<div class="rr-stat" style="color:#92400e">Anki Only</div>' : ''}
  </div>
@@ -553,7 +587,7 @@ function showResults() {
  <div class="sc-meta">`;
 
  if (selectedFields.has('card_count')) {
- html += `<div class="sc-meta-item"><strong>${(sec.count||0).toLocaleString}</strong> Anki cards</div>`;
+ html += `<div class="sc-meta-item"><strong>${(sec.count||0).toLocaleString()}</strong> Anki cards</div>`;
  }
  if (selectedFields.has('mapped_lectures') && sec.subchapters) {
  html += `<div class="sc-meta-item">\u{1F4D6} ${sec.subchapters}</div>`;
@@ -594,7 +628,7 @@ function showResults() {
  if (selectedFields.has('card_count')) {
  html += `<table class="sub-table"><thead><tr><th>Chapter</th><th>Total Cards</th></tr></thead><tbody>`;
  for (const ch of ankiSections) {
- html += `<tr><td>${escapeHtml(ch.chapter)}</td><td class="cards-col">${ch.totalCards.toLocaleString}</td></tr>`;
+ html += `<tr><td>${escapeHtml(ch.chapter)}</td><td class="cards-col">${ch.totalCards.toLocaleString()}</td></tr>`;
  }
  html += `</tbody></table>`;
  }
@@ -638,14 +672,14 @@ function showResults() {
 function findAnkiTagsForSection(res, sec) {
  // Try to match section name to anki chapter data
  const keys = Array.isArray(res.ankiKey) ? res.ankiKey : [res.ankiKey];
- const sectionLower = (sec.section || '').toLowerCase;
+ const sectionLower = (sec.section || '').toLowerCase();
  let tags = [];
 
  for (const k of keys) {
  if (!ANKI[k]) continue;
  for (const [chName, chData] of Object.entries(ANKI[k])) {
  // Fuzzy match: check if chapter name keywords appear in section name
- const chLower = chName.toLowerCase.replace(/^\d+\s*/, '');
+ const chLower = chName.toLowerCase().replace(/^\d+\s*/, '');
  const secWords = sectionLower.replace(/ch\.?\s*\d+\s*[·\-]?\s*/i, '').replace(/sec\.?\s*\d+\s*[·\-]?\s*/i, '');
  const words = chLower.split(/\s+/).filter(w => w.length > 3);
  const matchScore = words.filter(w => secWords.includes(w)).length;
@@ -675,7 +709,7 @@ function toggleResult(el) {
 // ══════════════════════════════════════
 function exportExcel() {
  const lec = MAPPING[selectedLecture];
- const wb = XLSX.utils.book_new;
+ const wb = XLSX.utils.book_new();
 
  // Summary sheet
  const summaryRows = [
@@ -683,7 +717,7 @@ function exportExcel() {
  ['Lecture', `Class ${lec.classLabel}: ${lec.lecture}`],
  ['Subject', lec.subject],
  ['Lecturer', lec.lecturer],
- ['Export Date', new Date.toLocaleDateString],
+ ['Export Date', new Date().toLocaleDateString()],
  [],
  ['Resource', 'Section', 'Cards', 'Subchapters / Watch Time', 'Anki Tags']
  ];
@@ -750,7 +784,7 @@ function exportExcel() {
  }
  }
 
- const filename = `GI_Resource_Export_Class${lec.classLabel.replace(/[^\w]/g,'')}_${new Date.toISOString.slice(0,10)}.xlsx`;
+ const filename = `GI_Resource_Export_Class${lec.classLabel.replace(/[^\w]/g,'')}_${new Date().toISOString().slice(0,10)}.xlsx`;
  XLSX.writeFile(wb, filename);
  showToast('Excel file exported!');
 }
