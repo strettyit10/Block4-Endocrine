@@ -1146,6 +1146,122 @@ td { font-size: 0.9rem; vertical-align: top; }
  }
 }
 
+/* hoyadocs:mobile-friendly (v1) =====================================
+   Responsive polish for phones + small tablets. Added near the end so
+   these rules win the cascade against earlier layout defaults. */
+@media (max-width: 720px) {
+ /* Hero: stop reserving space for the absolute-positioned action
+    buttons and let them flow above the title. */
+ .hero { padding: 20px 18px; }
+ .hero-body { padding-right: 0; }
+ .hero-body .eyebrow { font-size: 0.7rem; }
+ .hero h1 { font-size: 1.7rem; line-height: 1.1; margin: 10px 0 8px; }
+ .hero p { font-size: 0.92rem; line-height: 1.55; }
+ .hero-actions {
+  position: static;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 8px;
+  margin-bottom: 14px;
+ }
+ .hero-actions .extended-explorer-btn {
+  flex: 1 1 auto;
+  justify-content: center;
+  padding: 8px 12px;
+  font-size: 0.72rem;
+ }
+
+ /* Detail shell: stack title/meta for narrow widths */
+ .detail-shell { padding: 0 0 18px; }
+ .detail-top {
+  padding: 16px;
+  margin: 0 0 14px;
+  border-radius: 0;
+ }
+ .detail-top-upper { flex-direction: column; align-items: stretch; gap: 10px; }
+ .detail-top-lower { flex-direction: column; align-items: flex-start; gap: 10px; }
+ .detail-meta { justify-items: flex-start; justify-content: flex-start; }
+
+ /* Cards */
+ .card { padding: 14px; border-radius: 18px; }
+ .card h3 { font-size: 0.98rem; }
+ .section-grid { gap: 12px; margin-top: 14px; }
+
+ /* Third-party resource rows */
+ .tp-res-row { padding: 10px 12px; border-radius: 10px; }
+ .tp-res-head { gap: 8px; }
+ .tp-res-label { font-size: 0.88rem; }
+ .tp-res-module { font-size: 0.82rem; min-width: 100%; order: 4; }
+ .tp-status-pill { font-size: 0.68rem; padding: 3px 10px; min-width: 64px; }
+ .tp-res-body { padding-left: 10px; margin-left: 4px; }
+ .tp-sub-row { padding: 6px 10px; font-size: 0.8rem; }
+ .tp-sub-label { min-width: 100%; }
+ .tp-sub-link { margin-left: 0; }
+
+ /* List + filter panel */
+ .list-head { padding: 14px 14px 10px; }
+ .list-head h2, .detail-shell h2 { font-size: 1.2rem; }
+ .list-head p { font-size: 0.82rem; }
+ .subject-chip { padding: 4px 9px; font-size: 0.68rem; }
+ .subject-chip .count { font-size: 0.62rem; }
+ .lecture-list { max-height: 52vh; }
+
+ /* Search input — preserve touch target */
+ .search-wrap input {
+  min-height: 52px;
+  font-size: 1rem;
+  padding: 12px 14px;
+  border-radius: 14px;
+ }
+
+ /* Toast spans the bottom of the screen rather than pinning to a corner */
+ .export-toast {
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  padding: 12px 16px;
+  text-align: center;
+  font-size: 0.84rem;
+ }
+
+ /* Footer rows stack on narrow screens */
+ .page-footer { flex-direction: column; align-items: flex-start; gap: 6px; text-align: left; }
+
+ /* UWorld QID table — scroll container can be less tall */
+ .qid-table-wrap { max-height: 70vh; }
+ .qid-box { font-size: 0.9rem; }
+}
+
+@media (max-width: 480px) {
+ .page { width: min(100% - 12px, 1400px); }
+ .hero { padding: 16px 14px; }
+ .hero h1 { font-size: 1.5rem; }
+ .hero p { font-size: 0.88rem; }
+ .hero-actions .extended-explorer-btn { flex: 1 1 100%; font-size: 0.72rem; }
+
+ .action-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+ .action-card { padding: 14px 6px 8px; }
+ .action-card strong { font-size: 0.74rem; }
+ .action-card span { font-size: 0.7rem; line-height: 1.35; }
+ .action-card .action-status { font-size: 0.42rem; padding: 2px 4px; }
+ .action-card .action-icon { font-size: 1rem; }
+
+ .card { padding: 12px; }
+ .detail-top { padding: 14px; }
+ .meta-pill, .export-btn { height: 28px; font-size: 0.68rem; padding: 0 10px; }
+ .lecture-item { padding: 10px; }
+ .lecture-item h3 { font-size: 0.86rem; }
+ .class-badge, .subject-tag { font-size: 0.62rem; padding: 3px 7px; }
+ th, td { padding: 8px; font-size: 0.82rem; }
+ .qid-box { padding: 10px 12px; font-size: 0.86rem; }
+ .toggle-btn { font-size: 0.76rem; padding: 6px 10px; }
+ .resource-status-row { gap: 6px; }
+ .resource-status { width: 34px; height: 26px; font-size: 0.66rem; }
+}
+
 </style>
 </head>
 <body>
