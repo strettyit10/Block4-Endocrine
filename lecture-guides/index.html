@@ -687,6 +687,82 @@
       .util-row { padding: 14px 14px; }
       .main-inner { padding: 24px 14px 60px; }
     }
+
+    /* Mobile topnav: hidden by default, shown on mobile */
+    #mobileTopnav { display: none; }
+
+    @media (max-width: 900px) {
+      #mobileTopnav { display: flex; }
+      .main { padding-top: 52px; }
+    }
+    @media (max-width: 480px) {
+      #mobileTopnav { height: 48px; }
+      .main { padding-top: 48px; }
+      .main-inner { padding: 20px 12px 70px; }
+    }
+
+    /* ══════════════════════════════════════
+       MOBILE HAMBURGER + DRAWER
+    ══════════════════════════════════════ */
+    .mob-menu-btn {
+      display: none;
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.85);
+      font-size: 1.1rem;
+      align-items: center; justify-content: center;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .mob-menu-btn:hover { background: rgba(255,255,255,0.18); }
+
+    .mob-drawer-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 450;
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(2px);
+      opacity: 0;
+      transition: opacity 0.22s;
+    }
+    .mob-drawer-overlay.open { opacity: 1; }
+
+    .mob-drawer {
+      position: fixed; top: 0; left: 0;
+      width: min(280px, 85vw); height: 100vh; z-index: 460;
+      background: var(--sb);
+      display: flex; flex-direction: column;
+      padding: 20px 12px 28px;
+      overflow-y: auto;
+      transform: translateX(-100%);
+      transition: transform 0.25s cubic-bezier(0.32,0,0.2,1);
+    }
+    .mob-drawer.open { transform: translateX(0); }
+
+    .mob-drawer-close {
+      align-self: flex-end; margin-bottom: 8px;
+      width: 32px; height: 32px; border-radius: 7px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.8); font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+    .mob-drawer-close:hover { background: rgba(255,255,255,0.18); }
+
+    @media (max-width: 900px) {
+      .mob-menu-btn { display: flex; }
+      .mob-drawer-overlay { display: block; }
+      .feedback-fab {
+        top: auto; bottom: 20px; right: 16px;
+        font-size: 0.74rem; padding: 8px 14px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      }
+      .topnav { padding-left: 12px; padding-right: 12px; gap: 10px; }
+      .tn-brand { margin-right: auto; }
+      .tn-right { margin-left: 0; display: flex; align-items: center; gap: 8px; }
+    }
   </style>
 <!-- hoyadocs:link-availability:css -->
 <style>
@@ -721,7 +797,56 @@
 </head>
 <body>
 
-  <!-- Feedback button fixed top-right -->
+  <!-- ══ MOBILE TOPNAV (hidden on desktop) ══════════════════════════════════ -->
+  <nav class="topnav" id="mobileTopnav" aria-label="Mobile navigation">
+    <button class="mob-menu-btn" id="mobMenuBtn" aria-label="Open navigation menu" aria-expanded="false" onclick="openMobDrawer()">☰</button>
+    <div class="tn-brand" style="margin-left:10px;">
+      <a class="tn-name" href="../index.html">HoyaDocs</a>
+      <div class="tn-block">Block 4 – Endocrine</div>
+    </div>
+    <div class="tn-right" style="margin-left:auto;">
+      <button class="dark-toggle" id="darkToggleMob" onclick="toggleDark()" aria-label="Toggle dark mode">🌙</button>
+    </div>
+  </nav>
+
+  <!-- ══ MOBILE DRAWER ═══════════════════════════════════════════════════════ -->
+  <div class="mob-drawer-overlay" id="mobOverlay" onclick="closeMobDrawer()"></div>
+  <div class="mob-drawer" id="mobDrawer" aria-hidden="true">
+    <button class="mob-drawer-close" onclick="closeMobDrawer()" aria-label="Close menu">✕</button>
+    <div class="sb-brand" style="margin-bottom:12px;">
+      <a class="sb-name" href="../index.html">HoyaDocs ↗</a>
+      <div class="sb-block">Block 4 - Endocrine</div>
+    </div>
+    <div class="sb-section-label">Lecture Tools</div>
+    <nav class="sb-nav">
+      <a class="sb-link" href="../active-recall-hub.html" onclick="closeMobDrawer()">
+        <span class="sb-link-icon sb-icon-amber">⭐</span>Active Recall Drill Hub
+      </a>
+    </nav>
+    <div class="sb-section-label" style="margin-top:14px;">Mapping Resources</div>
+    <nav class="sb-nav">
+      <a class="sb-link" href="../resource-mapping/end_resource-explorer.html" onclick="closeMobDrawer()">
+        <span class="sb-link-icon sb-icon-green">📚</span>Extended Resource Explorer
+      </a>
+      <a class="sb-link" href="../resource-mapping/end_resource-hub.html" onclick="closeMobDrawer()">
+        <span class="sb-link-icon sb-icon-purple">🗂</span>Resource Mapping Hub
+      </a>
+    </nav>
+    <div class="sb-spacer"></div>
+    <div class="sb-rule"></div>
+    <div class="sb-ext-label">Quick Access</div>
+    <a class="sb-ext-link" href="https://www.uworld.com/" target="_blank" rel="noopener">
+      <span>UWorld</span><span class="sb-ext-arrow">↗</span>
+    </a>
+    <a class="sb-ext-link" href="https://drive.google.com/" target="_blank" rel="noopener">
+      <span>Class Drive</span><span class="sb-ext-arrow">↗</span>
+    </a>
+    <a class="sb-ext-link" href="https://docs.google.com/spreadsheets/d/14WyUf7nLK21R5drauE0qpBrFZ-gNnyo6d4O1ymhvj4Y/edit?usp=sharing" target="_blank" rel="noopener">
+      <span>HoyaDocs Work In Progress</span><span class="sb-ext-arrow">↗</span>
+    </a>
+  </div>
+
+  <!-- Feedback button: bottom-right on mobile, top-right on desktop -->
   <a class="feedback-fab" href="https://forms.gle/382rWjcPXC1beo8G8" target="_blank" rel="noopener">
     💬 Feedback
   </a>
@@ -1324,12 +1449,44 @@
     const next = isDark ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem('theme', next);
-    document.getElementById('darkToggle').textContent = next === 'dark' ? '☀️' : '🌙';
+    const icon = next === 'dark' ? '☀️' : '🌙';
+    const dt = document.getElementById('darkToggle');
+    const dtm = document.getElementById('darkToggleMob');
+    if (dt) dt.textContent = icon;
+    if (dtm) dtm.textContent = icon;
   }
   (function(){
-    if(localStorage.getItem('theme') === 'dark')
-      document.getElementById('darkToggle').textContent = '☀️';
+    const icon = localStorage.getItem('theme') === 'dark' ? '☀️' : '🌙';
+    const dt = document.getElementById('darkToggle');
+    const dtm = document.getElementById('darkToggleMob');
+    if (dt) dt.textContent = icon;
+    if (dtm) dtm.textContent = icon;
   })();
+
+  /* ── MOBILE DRAWER ── */
+  function openMobDrawer() {
+    const drawer = document.getElementById('mobDrawer');
+    const overlay = document.getElementById('mobOverlay');
+    const btn = document.getElementById('mobMenuBtn');
+    drawer.classList.add('open');
+    overlay.classList.add('open');
+    drawer.setAttribute('aria-hidden', 'false');
+    btn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobDrawer() {
+    const drawer = document.getElementById('mobDrawer');
+    const overlay = document.getElementById('mobOverlay');
+    const btn = document.getElementById('mobMenuBtn');
+    drawer.classList.remove('open');
+    overlay.classList.remove('open');
+    drawer.setAttribute('aria-hidden', 'true');
+    btn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeMobDrawer();
+  });
 
   /* ── SEARCH ── */
   let activeFilter = 'all';
