@@ -231,9 +231,7 @@ button{font-family:inherit;cursor:pointer}
  <div class="topbar-title">Endocrine Resource Explorer</div>
  <div class="topbar-sub" style="font-size:.78rem;opacity:.85;margin-top:2px">Mapping v1.0 · 2026-04-21</div>
  <div class="topbar-right">
- <a class="back-link" href="https://hoyadocs.com/Block4-Endocrine/resource-mapping/end_mapping.html">3rd Party Resource Mapping</a>
  <a class="back-link" href="https://hoyadocs.com/Block4-Endocrine/resource-mapping/end_resource-hub.html">Per Lecture Resource Hub</a>
- <button class="dark-toggle" id="darkToggle" onclick="toggleDark">&#127769;</button>
  </div>
 </div>
 
@@ -374,15 +372,15 @@ function goStep(n) {
  if (sn === n) s.classList.add('active');
  else if (sn < n) s.classList.add('done');
  });
- if (n === 2) renderResources;
- if (n === 3) renderFields;
+ if (n === 2) renderResources();
+ if (n === 3) renderFields();
  window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
 // ══════════════════════════════════════
 // STEP 1: LECTURE SELECT
 // ══════════════════════════════════════
-function renderLectures {
+function renderLectures() {
  const grid = document.getElementById('lectureGrid');
  grid.innerHTML = MAPPING.map((lec, i) => {
  const [bg, tx] = SUBJECT_COLORS[lec.subject] || ['#f1f5f9','#64748b'];
@@ -397,7 +395,7 @@ function renderLectures {
 
 function selectLecture(idx) {
  selectedLecture = idx;
- selectedResources.clear;
+ selectedResources.clear();
  document.querySelectorAll('.lec-btn').forEach(b => b.classList.remove('selected'));
  document.querySelector(`.lec-btn[data-idx="${idx}"]`).classList.add('selected');
  document.getElementById('btnNext1').disabled = false;
@@ -406,7 +404,7 @@ function selectLecture(idx) {
 // ══════════════════════════════════════
 // STEP 2: RESOURCE SELECT
 // ══════════════════════════════════════
-function renderResources {
+function renderResources() {
  const lec = MAPPING[selectedLecture];
  const grid = document.getElementById('resourceGrid');
  grid.innerHTML = RESOURCES.map(res => {
@@ -433,7 +431,7 @@ function renderResources {
  <div class="res-type">${res.type}${sectionCount ? ' &middot; '+sectionCount+' section'+(sectionCount>1?'s':'') : ''}</div>
  </button>`;
  }).join('');
- updateNext2;
+ updateNext2();
 }
 
 function toggleResource(id) {
@@ -442,29 +440,29 @@ function toggleResource(id) {
  document.querySelectorAll('.res-btn').forEach(b => {
  b.classList.toggle('selected', selectedResources.has(b.dataset.res));
  });
- updateNext2;
+ updateNext2();
 }
 
-function selectAllResources {
+function selectAllResources() {
  document.querySelectorAll('.res-btn:not(.disabled)').forEach(b => {
  selectedResources.add(b.dataset.res);
  b.classList.add('selected');
  });
- updateNext2;
+ updateNext2();
 }
-function clearAllResources {
- selectedResources.clear;
+function clearAllResources() {
+ selectedResources.clear();
  document.querySelectorAll('.res-btn').forEach(b => b.classList.remove('selected'));
- updateNext2;
+ updateNext2();
 }
-function updateNext2 {
+function updateNext2() {
  document.getElementById('btnNext2').disabled = selectedResources.size === 0;
 }
 
 // ══════════════════════════════════════
 // STEP 3: FIELD SELECT
 // ══════════════════════════════════════
-function renderFields {
+function renderFields() {
  const grid = document.getElementById('fieldGrid');
  // Check if any selected resource has lectures
  const anyHasLectures = [...selectedResources].some(rid => {
@@ -481,7 +479,7 @@ function renderFields {
  <div class="field-desc">${f.desc}${disabled?' (N/A for selected resources)':''}</div>
  </button>`;
  }).join('');
- updateSubmit;
+ updateSubmit();
 }
 
 function toggleField(id) {
@@ -490,16 +488,16 @@ function toggleField(id) {
  document.querySelectorAll('.field-btn:not([disabled])').forEach(b => {
  b.classList.toggle('selected', selectedFields.has(b.dataset.field));
  });
- updateSubmit;
+ updateSubmit();
 }
-function updateSubmit {
+function updateSubmit() {
  document.getElementById('btnSubmit').disabled = selectedFields.size === 0;
 }
 
 // ══════════════════════════════════════
 // STEP 4: RESULTS
 // ══════════════════════════════════════
-function showResults {
+function showResults() {
  goStep(4);
  const lec = MAPPING[selectedLecture];
  document.getElementById('resultsTitle').textContent = `Class ${lec.classLabel}: ${lec.lecture}`;
@@ -675,7 +673,7 @@ function toggleResult(el) {
 // ══════════════════════════════════════
 // EXCEL EXPORT
 // ══════════════════════════════════════
-function exportExcel {
+function exportExcel() {
  const lec = MAPPING[selectedLecture];
  const wb = XLSX.utils.book_new;
 
@@ -765,10 +763,10 @@ function escapeHtml(str) {
 }
 
 function copyTag(el, tag) {
- navigator.clipboard.writeText(tag).then( => {
+ navigator.clipboard.writeText(tag).then(() => {
  el.classList.add('copied');
  showToast('Tag copied!');
- setTimeout( => el.classList.remove('copied'), 1500);
+ setTimeout(() => el.classList.remove('copied'), 1500);
  });
 }
 
@@ -776,10 +774,10 @@ function showToast(msg) {
  const t = document.getElementById('toast');
  t.textContent = msg;
  t.classList.add('show');
- setTimeout( => t.classList.remove('show'), 2000);
+ setTimeout(() => t.classList.remove('show'), 2000);
 }
 
-function toggleDark {
+function toggleDark() {
  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
  const next = isDark ? 'light' : 'dark';
  document.documentElement.setAttribute('data-theme', next);
@@ -788,10 +786,8 @@ function toggleDark {
 }
 
 // Init
-document.addEventListener('DOMContentLoaded',  => {
- const t = document.documentElement.getAttribute('data-theme');
- document.getElementById('darkToggle').textContent = t === 'dark' ? '\u2600\uFE0F' : '\u{1F319}';
- renderLectures;
+document.addEventListener('DOMContentLoaded', () => {
+ renderLectures();
 });
 </script>
 </body>
