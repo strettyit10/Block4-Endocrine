@@ -763,6 +763,147 @@
       .tn-brand { margin-right: auto; }
       .tn-right { margin-left: 0; display: flex; align-items: center; gap: 8px; }
     }
+
+    /* ══════════════════════════════════════
+       MOBILE-FRIENDLY REFINEMENTS
+    ══════════════════════════════════════ */
+
+    /* Prevent any element from causing horizontal scroll */
+    html, body { overflow-x: hidden; max-width: 100%; }
+
+    /* Long lecture titles should wrap, not push the row wider */
+    .util-text strong,
+    .util-text span,
+    .wf-title, .wf-desc,
+    .bcard-label, .bcard h3 {
+      word-wrap: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    @media (max-width: 760px) {
+      /* Workflow steps: shrink the giant number, tighten layout */
+      .workflow {
+        gap: 14px !important;
+        margin-top: 14px;
+      }
+      .wf-step { gap: 10px; }
+      .wf-num { font-size: 2.4rem; }
+      .wf-title { font-size: 0.92rem; }
+      .wf-desc  { font-size: 0.76rem; line-height: 1.45; }
+
+      /* Legend cards: tighten and rein in the watermark */
+      .res-grid { gap: 8px; margin-bottom: 8px; }
+      .bcard { padding: 10px 12px; }
+      .bcard-watermark { font-size: 1.8rem; bottom: -4px; right: 2px; }
+      .bcard-arrow { padding: 2px 0; }
+
+      /* Hero spacing tighter */
+      .hero { margin-bottom: 18px; padding-bottom: 18px; }
+      .hero-eyebrow { margin-bottom: 12px; }
+      .hero-title { margin-bottom: 14px; }
+      .hero-sub { font-size: 0.86rem; margin-bottom: 16px; }
+      .hero-note { margin-top: 10px; }
+      .hero-note-divider { margin: 14px 0; }
+
+      /* Search & filters */
+      .search-bar-wrap { margin-bottom: 18px; }
+      .filter-row { gap: 6px; }
+      .filter-pill { font-size: 0.74rem; padding: 5px 10px; }
+
+      /* Section dividers */
+      .section-divider { margin-bottom: 14px; }
+    }
+
+    @media (max-width: 700px) {
+      /* Stack action buttons horizontally to save vertical space and
+         release the fixed 92px width that was sized for full labels */
+      .row-actions {
+        flex-direction: row;
+        width: auto;
+        gap: 6px;
+        align-self: center;
+      }
+      .row-btn {
+        padding: 7px 9px;
+        min-width: 36px;
+        justify-content: center;
+        font-size: 1.05rem;
+      }
+      .util-row { gap: 10px; align-items: center; }
+      .util-icon { margin-top: 0; }
+    }
+
+    @media (max-width: 540px) {
+      /* Phones: compact cards, readable type */
+      .main-inner { padding: 18px 12px 64px; }
+      .hero-title { font-size: 2rem; line-height: 1.02; margin-bottom: 12px; }
+      .hero-sub { font-size: 0.84rem; }
+
+      /* Hub legend cards stack with comfortable padding */
+      .bcard { padding: 9px 10px; }
+      .bcard-icon { width: 28px; height: 28px; font-size: 0.85rem; }
+      .bcard-label { font-size: 0.92rem; }
+      .bcard h3 { font-size: 0.72rem; }
+
+      /* Lecture rows */
+      .util-row { padding: 12px 12px; }
+      .util-icon { width: 34px; height: 34px; font-size: 1rem; border-radius: 8px; }
+      .util-text { gap: 2px; }
+      .util-text strong { font-size: 0.88rem; line-height: 1.3; }
+      .util-text span { font-size: 0.74rem; }
+
+      /* Stats — give them breathing room */
+      .h-stat { padding: 14px 16px; gap: 10px; }
+      .h-stat-n { font-size: 1.7rem; }
+      .h-stat-l { font-size: 0.72rem; }
+
+      /* Section dividers */
+      .section-divider-text { font-size: 1rem; }
+
+      /* Hero-note callout cards */
+      .hni-title { font-size: 0.85rem; }
+      .hni-body-inner { font-size: 0.78rem; }
+
+      /* Workflow becomes tighter */
+      .wf-num { font-size: 2.1rem; }
+      .wf-title { font-size: 0.9rem; }
+      .wf-desc { font-size: 0.74rem; }
+
+      /* Mobile drawer: use a touch more screen */
+      .mob-drawer { width: min(300px, 88vw); padding: 16px 10px 24px; }
+
+      /* Feedback FAB: smaller so it doesn't crowd content */
+      .feedback-fab {
+        font-size: 0.7rem;
+        padding: 7px 12px;
+        bottom: 16px;
+        right: 12px;
+      }
+
+      /* Top brand area: keep block label from wrapping awkwardly */
+      .tn-name { font-size: 1.2rem; }
+      .tn-block { font-size: 0.66rem; }
+    }
+
+    @media (max-width: 380px) {
+      /* Very small phones: extra tightening */
+      .main-inner { padding: 14px 10px 60px; }
+      .hero-title { font-size: 1.8rem; }
+      .row-btn { padding: 6px 7px; min-width: 32px; font-size: 1rem; }
+      .util-row { padding: 11px 10px; gap: 9px; }
+      .util-icon { width: 32px; height: 32px; }
+      .util-text strong { font-size: 0.85rem; }
+      .filter-pill { font-size: 0.72rem; padding: 5px 9px; }
+      .section-divider-text { font-size: 0.95rem; }
+    }
+
+    /* Make tap targets feel right and prevent iOS double-tap zoom on inputs */
+    @media (hover: none) and (pointer: coarse) {
+      .row-btn, .filter-pill, .sb-link, .sb-ext-link,
+      .tn-link, .mob-menu-btn, .dark-toggle, .feedback-fab,
+      .hni-header { min-height: 36px; }
+      .search-bar { font-size: 16px; } /* avoids iOS auto-zoom on focus */
+    }
   </style>
 <!-- hoyadocs:link-availability:css -->
 <style>
